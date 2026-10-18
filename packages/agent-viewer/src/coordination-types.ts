@@ -21,21 +21,6 @@ export interface CoordinationStep {
   channel?: string;
 }
 
-export interface SignalBarrier {
-  type: 'signal';
-  name: string;
-  description?: string;
-}
-
-export interface QuorumBarrier {
-  type: 'quorum';
-  name: string;
-  required: number;
-  of: number;
-}
-
-export type Barrier = SignalBarrier | QuorumBarrier;
-
 export type SwimLanes = Record<string, CoordinationStep[]>;
 
 export interface MatchCase {
@@ -44,15 +29,14 @@ export interface MatchCase {
 }
 
 export interface MatchRouting {
-  type: 'match';
   expression: string;
   cases: MatchCase[];
 }
 
 export type PhaseItem =
-  | { type: 'step'; step: CoordinationStep; routing?: MatchRouting }
-  | { type: 'signal'; barrier: SignalBarrier }
-  | { type: 'quorum'; barrier: QuorumBarrier }
+  | ({ type: 'step'; routing?: MatchRouting } & CoordinationStep)
+  | { type: 'signal'; name: string; description?: string }
+  | { type: 'quorum'; name: string; required: number; of: number }
   | { type: 'parallel'; lanes: SwimLanes };
 
 export interface CoordinationPipeline {
