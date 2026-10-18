@@ -146,11 +146,18 @@
 <div id="viewer-section"></div>
 
 
+<!-- ═══════════════════════════════════════════════════════ -->
+<h2>5. Coordination Pipeline — Swim Lane View</h2>
+<h3>KYC verification pipeline: classify → extract → verify (parallel) → decide</h3>
+<div id="coordination-section"></div>
+
+
 <script type="module">
   import './src/eidos-view.ts';
   import './src/voting-view.ts';
   import './src/debate-view.ts';
   import './src/agent-viewer.ts';
+  import './src/coordination-pipeline-view.ts';
   import { parse } from 'yaml';
 
   // ── Syntax highlighting for YAML source ──
@@ -476,6 +483,118 @@ agents:
     breadcrumb: [pattern.name ?? 'Pattern', descriptor.name],
   };
   document.getElementById(`rendered-${vpId}`).appendChild(agentViewer);
+
+  // ═══════════════════════════════════════════════
+  // 5. Coordination Pipeline — Swim Lane View
+  // ═══════════════════════════════════════════════
+  const coordinationYaml = `
+name: kyc-verification
+description: "KYC verification pipeline: classify → extract → verify → decide"
+agentCount: 4
+barrierCount: 2
+channelCount: 1
+phases:
+  - type: step
+    step:
+      action: agent-delegate
+      target: doc-classifier
+      model: claude-sonnet-5
+      outputFormat: structured
+      params:
+        descriptor: document-classifier
+        params.documents: "\${params.applicationDocs}"
+        params.taxonomy: kyc-v3
+  - type: signal
+    barrier:
+      type: signal
+      name: docs-classified
+      description: fan-out to extractors
+  - type: parallel
+    lanes:
+      - name: identity-extractor
+        steps:
+          - action: agent-delegate
+            model: claude-opus-5
+            outputFormat: structured
+            drillDown: true
+            params:
+              descriptor: kyc-identity
+              docs: "\${from.identity_docs}"
+          - action: graphql
+            target: sanctions / screenEntity
+      - name: financial-extractor
+        steps:
+          - action: agent-delegate
+            model: claude-opus-5
+            outputFormat: structured
+            drillDown: true
+            params:
+              descriptor: kyc-financials
+              docs: "\${from.financial_docs}"
+          - action: rest
+            target: POST /api/aml/check
+      - name: address-verifier
+        steps:
+          - action: agent-delegate
+            model: claude-sonnet-5
+            outputFormat: structured
+            drillDown: true
+            params:
+              descriptor: kyc-address
+              docs: "\${from.address_docs}"
+          - action: mcp-call
+            target: geo-verify
+  - type: quorum
+    barrier:
+      type: quorum
+      name: extraction-complete
+      required: 2
+      of: 3
+  - type: step
+    step:
+      action: agent-delegate
+      target: risk-assessor
+      model: claude-opus-5
+      outputFormat: structured
+      drillDown: true
+      params:
+        descriptor: kyc-risk-decision
+        params.identity: "\${identity-extractor.result}"
+        params.financials: "\${financial-extractor.result}"
+        params.address: "\${address-verifier.result}"
+        params.riskPolicy: "\${params.riskTier}"
+    routing:
+      type: match
+      expression: "\${ risk-assessor.result.decision }"
+      cases:
+        - pattern: approve
+          step:
+            action: rest
+            target: POST /api/kyc/approve
+            channel: notify-compliance
+            icon: "✓"
+            iconColor: green
+        - pattern: escalate
+          step:
+            action: agent-delegate
+            target: senior-reviewer
+            model: claude-opus-5
+            icon: "⚠"
+            iconColor: amber
+        - pattern: reject
+          step:
+            action: rest
+            target: POST /api/kyc/reject
+            channel: notify-applicant
+            icon: "✕"
+            iconColor: red
+`;
+
+  renderComponentSection('coordination-section', coordinationYaml, (data) => {
+    const el = document.createElement('coordination-pipeline-view');
+    el.pipeline = data;
+    return el;
+  });
 </script>
 
 </body>

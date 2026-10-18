@@ -28,3 +28,19 @@ export type {
 
 export { AgentViewer } from './agent-viewer.js';
 export type { AgentTab, AgentViewerData } from './agent-viewer.js';
+
+export { CoordinationPipelineView } from './coordination-pipeline-view.js';
+export type {
+  CoordinationPipeline,
+  CoordinationStep,
+  CoordinationStepParams,
+  Barrier,
+  SignalBarrier,
+  QuorumBarrier,
+  SwimLane,
+  MatchCase,
+  MatchRouting,
+  PhaseItem,
+  ExpressionValue,
+  ExpressionType,
+} from './coordination-types.js';
