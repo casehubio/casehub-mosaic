@@ -37,7 +37,7 @@ export type {
   Barrier,
   SignalBarrier,
   QuorumBarrier,
-  SwimLane,
+  SwimLanes,
   MatchCase,
   MatchRouting,
   PhaseItem,

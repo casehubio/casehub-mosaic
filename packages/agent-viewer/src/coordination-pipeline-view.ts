@@ -5,7 +5,7 @@ import type {
   CoordinationStep,
   CoordinationStepParams,
   Barrier,
-  SwimLane,
+  SwimLanes,
   MatchRouting,
   MatchCase,
   PhaseItem,
@@ -441,20 +441,21 @@ export class CoordinationPipelineView extends LitElement {
     `;
   }
 
-  private renderSwimLanes(lanes: SwimLane[]): TemplateResult {
-    const cols = lanes.length;
+  private renderSwimLanes(lanes: SwimLanes): TemplateResult {
+    const entries = Object.entries(lanes);
+    const cols = entries.length;
     return html`
       <div class="swim-lanes" style="grid-template-columns: ${'1fr '.repeat(cols).trim()}">
-        ${lanes.map(lane => this.renderLane(lane))}
+        ${entries.map(([name, steps]) => this.renderLane(name, steps))}
       </div>
     `;
   }
 
-  private renderLane(lane: SwimLane): TemplateResult {
+  private renderLane(name: string, steps: CoordinationStep[]): TemplateResult {
     return html`
       <div class="swim-lane">
-        <div class="lane-name">${lane.name}</div>
-        ${lane.steps.map(step => html`
+        <div class="lane-name">${name}</div>
+        ${steps.map(step => html`
           <div class="lane-step">
             ${this.renderStepCard(step)}
             ${step.params ? html`
