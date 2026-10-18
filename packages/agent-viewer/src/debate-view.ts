@@ -274,6 +274,12 @@ export class DebateView extends LitElement {
     `;
   }
 
+  private static readonly ROUND_ACTIONS: string[][] = [
+    ['presents initial position', 'presents counter-position'],
+    ['rebuts with evidence', 'concedes partial point'],
+    ['refines argument', 'synthesises common ground'],
+  ];
+
   private renderRounds(): TemplateResult | typeof nothing {
     const agents = this.pattern.agents ?? [];
     const maxRounds = this.pattern.maxRounds;
@@ -284,10 +290,12 @@ export class DebateView extends LitElement {
       for (let a = 0; a < agents.length; a++) {
         const agent = agents[a]!;
         const color = DebateView.DEBATER_COLORS[a] ?? '#7f849c';
+        const action = DebateView.ROUND_ACTIONS[r - 1]?.[a] ?? '';
         entries.push(html`
           <div class="round-entry" style="border-left-color:${color}">
             <span class="round-label">Round ${r}</span>
             <span class="round-speaker" style="color:${color}">${agent.name}</span>
+            ${action ? html`<span class="round-capability">${action}</span>` : nothing}
           </div>
         `);
       }
