@@ -4,7 +4,6 @@ import type {
   CoordinationPipeline,
   CoordinationStep,
   CoordinationStepParams,
-  Barrier,
   SwimLanes,
   MatchRouting,
   MatchCase,
@@ -365,15 +364,15 @@ export class CoordinationPipelineView extends LitElement {
       case 'step':
         return html`
           <div class="phase-step">
-            ${this.renderStepCard(phase.step)}
-            ${phase.step.params ? this.renderParams(phase.step.params) : nothing}
+            ${this.renderStepCard(phase)}
+            ${phase.params ? this.renderParams(phase.params) : nothing}
             ${phase.routing ? this.renderMatchRouting(phase.routing) : nothing}
           </div>
         `;
       case 'signal':
-        return this.renderBarrier(phase.barrier);
+        return this.renderBarrier(phase);
       case 'quorum':
-        return this.renderBarrier(phase.barrier);
+        return this.renderBarrier(phase);
       case 'parallel':
         return this.renderSwimLanes(phase.lanes);
     }
@@ -424,17 +423,17 @@ export class CoordinationPipelineView extends LitElement {
     `;
   }
 
-  private renderBarrier(barrier: Barrier): TemplateResult {
-    const isSignal = barrier.type === 'signal';
+  private renderBarrier(phase: Extract<PhaseItem, { type: 'signal' }> | Extract<PhaseItem, { type: 'quorum' }>): TemplateResult {
+    const isSignal = phase.type === 'signal';
     const label = isSignal ? '◇ signal' : '▮ quorum';
-    const detail = barrier.type === 'quorum'
-      ? `required: ${barrier.required} of ${barrier.of}`
-      : (barrier as { description?: string }).description ?? '';
+    const detail = phase.type === 'quorum'
+      ? `required: ${phase.required} of ${phase.of}`
+      : phase.description ?? '';
 
     return html`
-      <div class="barrier-bar ${barrier.type}">
+      <div class="barrier-bar ${phase.type}">
         <span class="barrier-label">${label}</span>
-        <span class="barrier-name">${barrier.name}</span>
+        <span class="barrier-name">${phase.name}</span>
         <div class="barrier-line"></div>
         ${detail ? html`<span class="barrier-detail">${detail}</span>` : nothing}
       </div>

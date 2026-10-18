@@ -13,21 +13,20 @@ function kycPipeline(): CoordinationPipeline {
     phases: [
       {
         type: 'step',
-        step: {
-          action: 'agent-delegate',
-          target: 'doc-classifier',
-          model: 'claude-sonnet-5',
-          outputFormat: 'structured',
-          params: {
-            'descriptor': 'document-classifier',
-            'params.documents': '${params.applicationDocs}',
-            'params.taxonomy': 'kyc-v3',
-          },
+        action: 'agent-delegate',
+        target: 'doc-classifier',
+        model: 'claude-sonnet-5',
+        outputFormat: 'structured',
+        params: {
+          'descriptor': 'document-classifier',
+          'params.documents': '${params.applicationDocs}',
+          'params.taxonomy': 'kyc-v3',
         },
       },
       {
         type: 'signal',
-        barrier: { type: 'signal', name: 'docs-classified', description: 'fan-out to extractors' },
+        name: 'docs-classified',
+        description: 'fan-out to extractors',
       },
       {
         type: 'parallel',
@@ -66,26 +65,25 @@ function kycPipeline(): CoordinationPipeline {
       },
       {
         type: 'quorum',
-        barrier: { type: 'quorum', name: 'extraction-complete', required: 2, of: 3 },
+        name: 'extraction-complete',
+        required: 2,
+        of: 3,
       },
       {
         type: 'step',
-        step: {
-          action: 'agent-delegate',
-          target: 'risk-assessor',
-          model: 'claude-opus-5',
-          outputFormat: 'structured',
-          drillDown: true,
-          params: {
-            'descriptor': 'kyc-risk-decision',
-            'params.identity': '${identity-extractor.result}',
-            'params.financials': '${financial-extractor.result}',
-            'params.address': '${address-verifier.result}',
-            'params.riskPolicy': '${params.riskTier}',
-          },
+        action: 'agent-delegate',
+        target: 'risk-assessor',
+        model: 'claude-opus-5',
+        outputFormat: 'structured',
+        drillDown: true,
+        params: {
+          'descriptor': 'kyc-risk-decision',
+          'params.identity': '${identity-extractor.result}',
+          'params.financials': '${financial-extractor.result}',
+          'params.address': '${address-verifier.result}',
+          'params.riskPolicy': '${params.riskTier}',
         },
         routing: {
-          type: 'match',
           expression: '${ risk-assessor.result.decision }',
           cases: [
             {
