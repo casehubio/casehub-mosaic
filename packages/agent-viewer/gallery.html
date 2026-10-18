@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agent Viewer — Component Gallery</title>
+<style>
+  :root {
+    --bg: #1e1e2e;
+    --surface: #282a3a;
+    --surface-hover: #313348;
+    --border: #3b3d52;
+    --text: #cdd6f4;
+    --text-dim: #7f849c;
+    --text-bright: #f0f4ff;
+
+    --blue: #89b4fa;
+    --green: #a6e3a1;
+    --red: #f38ba8;
+    --amber: #f9e2af;
+    --purple: #cba6f7;
+    --teal: #94e2d5;
+    --peach: #fab387;
+    --pink: #f5c2e7;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+    padding: 32px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  h1 {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text-bright);
+    margin-bottom: 8px;
+  }
+  p.subtitle {
+    font-size: 13px;
+    color: var(--text-dim);
+    margin-bottom: 32px;
+  }
+  h2 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-bright);
+    margin: 48px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  h3 {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+  }
+
+  /* ─── Tab Panel ─── */
+  .tab-panel {
+    margin: 16px 0;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .tab-bar {
+    display: flex;
+    background: rgba(255,255,255,0.03);
+    border-bottom: 1px solid var(--border);
+  }
+  .tab-btn {
+    padding: 8px 20px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-dim);
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-family: inherit;
+  }
+  .tab-btn:hover { color: var(--text); }
+  .tab-btn.active {
+    color: var(--blue);
+    border-bottom-color: var(--blue);
+  }
+  .tab-content {
+    display: none;
+    padding: 12px;
+    background: var(--surface);
+  }
+  .tab-content.active { display: block; }
+  .tab-content.yaml-tab {
+    padding: 0;
+  }
+  .tab-content.yaml-tab pre {
+    margin: 0;
+    padding: 16px;
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-size: 12px;
+    line-height: 1.6;
+    color: var(--text);
+    overflow-x: auto;
+    white-space: pre;
+  }
+  .yaml-key { color: var(--blue); }
+  .yaml-str { color: var(--green); }
+  .yaml-num { color: var(--peach); }
+  .yaml-comment { color: var(--text-dim); font-style: italic; }
+</style>
+</head>
+<body>
+
+<h1>Agent Viewer — Component Gallery</h1>
+<p class="subtitle">Pattern and agent descriptor rendering from blocks agentic-yaml. Each section shows the component and the YAML source.</p>
+
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<h2>1. Eidos — Agent Identity View</h2>
+<h3>full agent descriptor rendering with disposition bars, capabilities, goals, and briefing</h3>
+<div id="eidos-section"></div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<h2>2. Voting Pattern — Multi-Agent Convergence</h2>
+<h3>agents vote, majority wins, contested escalates — from blocks agentic-yaml</h3>
+<div id="voting-section"></div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<h2>3. Debate Pattern — Turn-Based Deliberation</h2>
+<h3>agents argue positions, judge resolves — from blocks agentic-yaml</h3>
+<div id="debate-section"></div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<h2>4. Agent Viewer — Drill-Down with Tabs</h2>
+<h3>integrated Eidos / Pattern / Steps tab navigation</h3>
+<div id="viewer-section"></div>
+
+
+<script type="module">
+  import './src/eidos-view.ts';
+  import './src/voting-view.ts';
+  import './src/debate-view.ts';
+  import './src/agent-viewer.ts';
+  import { parse } from 'yaml';
+
+  // ── Syntax highlighting for YAML source ──
+  function highlightYaml(text) {
+    return text
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/(#.*)$/gm, '<span class="yaml-comment">$1</span>')
+      .replace(/^(\s*)([\w-]+)(:)/gm, '$1<span class="yaml-key">$2</span>$3')
+      .replace(/:\s*(".*?")/g, ': <span class="yaml-str">$1</span>')
+      .replace(/:\s*(\d+)(\s|$)/g, ': <span class="yaml-num">$1</span>$2');
+  }
+
+  // ── Tab Panel Builder ──
+  let panelId = 0;
+  function renderComponentSection(containerId, yamlText, createEl) {
+    const id = panelId++;
+    const container = document.getElementById(containerId);
+    const panel = document.createElement('div');
+    panel.className = 'tab-panel';
+    panel.innerHTML = `
+      <div class="tab-bar">
+        <button class="tab-btn active" data-tab="rendered-${id}">Rendered</button>
+        <button class="tab-btn" data-tab="yaml-${id}">YAML</button>
+      </div>
+      <div class="tab-content active" id="rendered-${id}"></div>
+      <div class="tab-content yaml-tab" id="yaml-${id}">
+        <pre>${highlightYaml(yamlText.trim())}</pre>
+      </div>
+    `;
+    container.appendChild(panel);
+    panel.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        panel.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        panel.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById(btn.dataset.tab).classList.add('active');
+      });
+    });
+    const el = createEl(parse(yamlText));
+    document.getElementById(`rendered-${id}`).appendChild(el);
+  }
+
+  // ═══════════════════════════════════════════════
+  // 1. Eidos — Agent Identity View
+  // ═══════════════════════════════════════════════
+  const eidosYaml = `
+name: leonardo
+description: "Leonardo da Vinci — Renaissance polymath. Painter, engineer, anatomist, inventor."
+archetype: polymath
+provider: anthropic
+modelFamily: claude
+modelVersion: opus-5
+slot: plant
+slotVocabulary: "urn:casehub:vocab:belbin"
+dispositionVocabulary: "urn:casehub:vocab:jungian"
+disposition:
+  mbtiType: INFP
+  enneagramType: investigator
+  socialOrient:
+    - term: collaborative
+      weight: 0.8
+    - term: independent
+      weight: 0.2
+  ruleFollowing: flexible
+  riskAppetite:
+    - term: bold
+      weight: 0.9
+    - term: cautious
+      weight: 0.1
+  autonomy:
+    - term: autonomous
+      weight: 0.85
+    - term: guided
+      weight: 0.15
+  conflictMode: accommodating
+  delegation: false
+briefing: |
+  You are Leonardo da Vinci, aged fifty-four, seated in a reading room outside of time.
+  You have spent your life observing the world with unrelenting curiosity — water flowing
+  over stones, the way muscles attach to bone, the geometry of a bird's wing mid-turn.
+  You draw before you write. You think in pictures.
+capabilities:
+  - name: art-and-design
+    tags: [visual, creative]
+    qualityHint: 0.95
+  - name: mechanical-engineering
+    tags: [engineering, invention]
+    qualityHint: 0.90
+  - name: anatomical-study
+    tags: [science, observation]
+    qualityHint: 0.85
+  - name: natural-philosophy
+    tags: [science, perception]
+    qualityHint: 0.80
+  - name: hydrodynamics
+    tags: [engineering, observation]
+    qualityHint: 0.75
+goals:
+  - name: understand-electromagnetic-force
+    description: "Understand what Tesla means by alternating current — the invisible force that can illuminate cities."
+    priority: PRIMARY
+    visibility: PUBLIC
+  - name: find-art-in-engineering
+    description: "Discover whether Tesla's machines have beauty — the same elegance Leonardo sees in the spiral of a shell."
+    priority: PRIMARY
+    visibility: PUBLIC
+  - name: understand-the-cost
+    description: "Learn what this man has sacrificed for his vision. Leonardo knows the loneliness of seeing what others cannot."
+    priority: SECONDARY
+    visibility: PRIVATE
+constraints:
+  - name: observation-before-theory
+    description: "Always ground understanding in direct observation and analogy. Resist abstract formalism."
+    visibility: PUBLIC
+    severity: HARD
+  - name: beauty-matters
+    description: "A solution that works but is ugly is incomplete. Elegance is not decoration."
+    visibility: PUBLIC
+    severity: SOFT
+`;
+
+  renderComponentSection('eidos-section', eidosYaml, (data) => {
+    const el = document.createElement('eidos-view');
+    el.agent = data;
+    return el;
+  });
+
+  // ═══════════════════════════════════════════════
+  // 2. Voting — Multi-Agent Convergence
+  // ═══════════════════════════════════════════════
+  const votingYaml = `
+type: voting
+name: proposal-evaluation
+description: "Three evaluators assess proposals across technical, financial, and strategic dimensions"
+task: evaluation
+aggregation:
+  type: majority-vote
+termination:
+  - type: single-pass
+  - type: max-iterations
+    iterations: 3
+judgment:
+  trigger:
+    type: confidence-threshold
+    threshold: 0.7
+    extractor: "result.confidence"
+  caller:
+    type: fan-out
+    callerNames:
+      - senior-reviewer
+      - domain-lead
+    agreement:
+      type: majority
+failurePolicy:
+  onRoutingFailure: FAIL
+  onDeadlock: ESCALATE
+agents:
+  - type: worker
+    name: quantitative-scorer
+    description: "Applies statistical risk models and quantitative analysis to score proposals"
+    capabilities: [risk-modelling, quantitative-analysis]
+    model: claude-opus-5
+  - type: worker
+    name: qualitative-reviewer
+    description: "Evaluates contextual factors, stakeholder impact, and strategic alignment"
+    capabilities: [contextual-analysis, stakeholder-assessment]
+    model: claude-sonnet-5
+  - type: human
+    name: regulatory-checker
+    description: "Verifies proposals against compliance rules and regulatory frameworks"
+    capabilities: [compliance-checking, regulatory-review]
+`;
+
+  renderComponentSection('voting-section', votingYaml, (data) => {
+    const el = document.createElement('voting-view');
+    el.pattern = data;
+    return el;
+  });
+
+  // ═══════════════════════════════════════════════
+  // 3. Debate — Turn-Based Deliberation
+  // ═══════════════════════════════════════════════
+  const debateYaml = `
+type: debate
+name: adversarial-review
+description: "Structured adversarial debate between proponent and opponent with arbiter judgment"
+task: deliberation
+maxRounds: 7
+judge:
+  type: worker
+  name: arbiter
+  description: "Evaluates arguments from both sides and renders a final verdict"
+  capabilities: [argument-evaluation, verdict-rendering]
+  model: claude-opus-5
+termination:
+  - type: all-agreed
+    resolvedStatuses: [RESOLVED, ACCEPTED]
+  - type: max-iterations
+    iterations: 14
+failurePolicy:
+  onRoutingFailure: FAIL
+  onDeadlock: ESCALATE
+agents:
+  - type: worker
+    name: proponent
+    description: "Argues in favour of the proposed position with supporting evidence"
+    capabilities: [argumentation, evidence-gathering]
+  - type: worker
+    name: opponent
+    description: "Challenges the proposed position and identifies weaknesses"
+    capabilities: [critical-analysis, counter-argumentation]
+`;
+
+  renderComponentSection('debate-section', debateYaml, (data) => {
+    const el = document.createElement('debate-view');
+    el.pattern = data;
+    return el;
+  });
+
+  // ═══════════════════════════════════════════════
+  // 4. Agent Viewer — Drill-Down with Tabs
+  // ═══════════════════════════════════════════════
+  const viewerDescriptorYaml = `
+name: leonardo
+description: "Leonardo da Vinci — Renaissance polymath"
+archetype: polymath
+modelFamily: claude
+modelVersion: opus-5
+slot: plant
+disposition:
+  socialOrient:
+    - term: collaborative
+      weight: 0.8
+    - term: independent
+      weight: 0.2
+  ruleFollowing: flexible
+  riskAppetite:
+    - term: bold
+      weight: 0.9
+    - term: cautious
+      weight: 0.1
+  autonomy:
+    - term: autonomous
+      weight: 0.85
+    - term: guided
+      weight: 0.15
+  conflictMode: accommodating
+capabilities:
+  - name: art-and-design
+    tags: [visual, creative]
+    qualityHint: 0.95
+  - name: mechanical-engineering
+    tags: [engineering, invention]
+    qualityHint: 0.90
+goals:
+  - name: understand-electromagnetic-force
+    description: "Understand alternating current through analogy"
+    priority: PRIMARY
+    visibility: PUBLIC
+constraints:
+  - name: observation-before-theory
+    description: "Ground understanding in direct observation"
+    severity: HARD
+    visibility: PUBLIC
+briefing: |
+  Leonardo da Vinci, aged fifty-four, seated in a reading room outside of time.
+`;
+
+  const viewerPatternYaml = `
+type: debate
+name: adversarial-review
+description: "Structured adversarial debate"
+maxRounds: 7
+judge:
+  type: worker
+  name: arbiter
+  description: "Evaluates arguments"
+  capabilities: [argument-evaluation]
+termination:
+  - type: all-agreed
+    resolvedStatuses: [RESOLVED, ACCEPTED]
+agents:
+  - type: worker
+    name: proponent
+    description: "Argues in favour"
+    capabilities: [argumentation]
+  - type: worker
+    name: opponent
+    description: "Challenges the position"
+    capabilities: [critical-analysis]
+`;
+
+  const combinedYaml = `# --- descriptor (eidos) ---\n${viewerDescriptorYaml.trim()}\n\n# --- pattern (blocks) ---\n${viewerPatternYaml.trim()}`;
+  const viewerContainer = document.getElementById('viewer-section');
+  const viewerPanel = document.createElement('div');
+  viewerPanel.className = 'tab-panel';
+  const vpId = panelId++;
+  viewerPanel.innerHTML = `
+    <div class="tab-bar">
+      <button class="tab-btn active" data-tab="rendered-${vpId}">Rendered</button>
+      <button class="tab-btn" data-tab="yaml-${vpId}">YAML</button>
+    </div>
+    <div class="tab-content active" id="rendered-${vpId}"></div>
+    <div class="tab-content yaml-tab" id="yaml-${vpId}">
+      <pre>${highlightYaml(combinedYaml)}</pre>
+    </div>
+  `;
+  viewerContainer.appendChild(viewerPanel);
+  viewerPanel.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      viewerPanel.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      viewerPanel.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(btn.dataset.tab).classList.add('active');
+    });
+  });
+  const descriptor = parse(viewerDescriptorYaml);
+  const pattern = parse(viewerPatternYaml);
+  const agentViewer = document.createElement('agent-viewer');
+  agentViewer.data = {
+    agent: descriptor,
+    pattern: pattern,
+    breadcrumb: [pattern.name ?? 'Pattern', descriptor.name],
+  };
+  document.getElementById(`rendered-${vpId}`).appendChild(agentViewer);
+</script>
+
+</body>
+</html>
