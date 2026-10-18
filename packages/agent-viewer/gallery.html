@@ -511,39 +511,36 @@ phases:
       description: fan-out to extractors
   - type: parallel
     lanes:
-      - name: identity-extractor
-        steps:
-          - action: agent-delegate
-            model: claude-opus-5
-            outputFormat: structured
-            drillDown: true
-            params:
-              descriptor: kyc-identity
-              docs: "\${from.identity_docs}"
-          - action: graphql
-            target: sanctions / screenEntity
-      - name: financial-extractor
-        steps:
-          - action: agent-delegate
-            model: claude-opus-5
-            outputFormat: structured
-            drillDown: true
-            params:
-              descriptor: kyc-financials
-              docs: "\${from.financial_docs}"
-          - action: rest
-            target: POST /api/aml/check
-      - name: address-verifier
-        steps:
-          - action: agent-delegate
-            model: claude-sonnet-5
-            outputFormat: structured
-            drillDown: true
-            params:
-              descriptor: kyc-address
-              docs: "\${from.address_docs}"
-          - action: mcp-call
-            target: geo-verify
+      identity-extractor:
+        - action: agent-delegate
+          model: claude-opus-5
+          outputFormat: structured
+          drillDown: true
+          params:
+            descriptor: kyc-identity
+            docs: "\${from.identity_docs}"
+        - action: graphql
+          target: sanctions / screenEntity
+      financial-extractor:
+        - action: agent-delegate
+          model: claude-opus-5
+          outputFormat: structured
+          drillDown: true
+          params:
+            descriptor: kyc-financials
+            docs: "\${from.financial_docs}"
+        - action: rest
+          target: POST /api/aml/check
+      address-verifier:
+        - action: agent-delegate
+          model: claude-sonnet-5
+          outputFormat: structured
+          drillDown: true
+          params:
+            descriptor: kyc-address
+            docs: "\${from.address_docs}"
+        - action: mcp-call
+          target: geo-verify
   - type: quorum
     barrier:
       type: quorum
