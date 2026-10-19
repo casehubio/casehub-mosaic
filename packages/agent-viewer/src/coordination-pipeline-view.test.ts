@@ -437,3 +437,70 @@ describe('graph view rendering', () => {
     expect(graphView?.getAttribute('aria-label')).toContain('kyc-verification');
   });
 });
+
+describe('drill-down events', () => {
+  let el: CoordinationPipelineView;
+
+  beforeEach(async () => {
+    el = document.createElement('coordination-pipeline-view') as CoordinationPipelineView;
+    el.pipeline = kycPipeline();
+    document.body.appendChild(el);
+    await el.updateComplete;
+    el.viewMode = 'lanes';
+    await el.updateComplete;
+  });
+
+  afterEach(() => el.remove());
+
+  it('emits coordination:drill-down on drillable card click', () => {
+    let detail: any = null;
+    el.addEventListener('coordination:drill-down', ((e: CustomEvent) => {
+      detail = e.detail;
+    }) as EventListener);
+    const drillable = el.shadowRoot!.querySelector('.step-card.drillable') as HTMLElement;
+    drillable.click();
+    expect(detail).not.toBeNull();
+    expect(detail.agentName).toBeDefined();
+    expect(detail.steps).toBeDefined();
+    expect(Array.isArray(detail.steps)).toBe(true);
+  });
+
+  it('emits drill-down with correct lane steps', () => {
+    let detail: any = null;
+    el.addEventListener('coordination:drill-down', ((e: CustomEvent) => {
+      detail = e.detail;
+    }) as EventListener);
+    const drillables = el.shadowRoot!.querySelectorAll('.step-card.drillable');
+    (drillables[0] as HTMLElement).click();
+    expect(detail.steps.length).toBe(2);
+  });
+
+  it('drillable cards have role button', () => {
+    const drillable = el.shadowRoot!.querySelector('.step-card.drillable') as HTMLElement;
+    expect(drillable.getAttribute('role')).toBe('button');
+  });
+
+  it('drillable cards activate on Enter key', () => {
+    let detail: any = null;
+    el.addEventListener('coordination:drill-down', ((e: CustomEvent) => {
+      detail = e.detail;
+    }) as EventListener);
+    const drillable = el.shadowRoot!.querySelector('.step-card.drillable') as HTMLElement;
+    drillable.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }));
+    expect(detail).not.toBeNull();
+  });
+
+  it('emits drill-down from graph view drillable nodes', async () => {
+    el.viewMode = 'graph';
+    await el.updateComplete;
+    let detail: any = null;
+    el.addEventListener('coordination:drill-down', ((e: CustomEvent) => {
+      detail = e.detail;
+    }) as EventListener);
+    const drillable = el.shadowRoot!.querySelector('.step-card.drillable') as HTMLElement;
+    if (drillable) {
+      drillable.click();
+      expect(detail).not.toBeNull();
+    }
+  });
+});

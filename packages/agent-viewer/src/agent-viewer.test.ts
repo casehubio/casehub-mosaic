@@ -1,5 +1,6 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import type { AgentViewerData } from './agent-viewer.js';
+import type { CoordinationStep } from './coordination-types.js';
 import './agent-viewer.js';
 import type { AgentViewer } from './agent-viewer.js';
 
@@ -82,6 +83,24 @@ describe('agent-viewer', () => {
     expect(el.shadowRoot!.querySelector('.breadcrumb')).toBeNull();
   });
 
+  it('emits viewer:breadcrumb-back on segment click', () => {
+    let detail: any = null;
+    el.addEventListener('viewer:breadcrumb-back', ((e: CustomEvent) => {
+      detail = e.detail;
+    }) as EventListener);
+    const segment = el.shadowRoot!.querySelector('.breadcrumb-segment') as HTMLElement;
+    segment.click();
+    expect(detail).not.toBeNull();
+    expect(detail.index).toBe(0);
+    expect(detail.segment).toBe('Pattern');
+  });
+
+  it('breadcrumb has navigation ARIA', () => {
+    const nav = el.shadowRoot!.querySelector('[role="navigation"]');
+    expect(nav).not.toBeNull();
+    expect(nav!.getAttribute('aria-label')).toBe('Breadcrumb');
+  });
+
   it('renders debate pattern in pattern tab', async () => {
     el.data = {
       ...fixture(),
@@ -101,5 +120,64 @@ describe('agent-viewer', () => {
     (tabs[1] as HTMLElement).click();
     await el.updateComplete;
     expect(el.shadowRoot!.querySelector('debate-view')).toBeTruthy();
+  });
+});
+
+function stepsFixture(): CoordinationStep[] {
+  return [
+    { action: 'agent-delegate', model: 'claude-opus-5', outputFormat: 'structured', drillDown: true,
+      params: { descriptor: 'kyc-identity', docs: '${from.identity_docs}' } },
+    { action: 'graphql', target: 'sanctions / screenEntity' },
+  ];
+}
+
+describe('steps tab', () => {
+  let el: AgentViewer;
+
+  beforeEach(async () => {
+    el = document.createElement('agent-viewer') as AgentViewer;
+    el.data = { ...fixture(), steps: stepsFixture() };
+    document.body.appendChild(el);
+    await el.updateComplete;
+  });
+
+  afterEach(() => el.remove());
+
+  it('shows Steps tab when steps data provided', () => {
+    const tabs = el.shadowRoot!.querySelectorAll('.tab');
+    expect(tabs.length).toBe(3);
+    expect(tabs[2]?.textContent).toBe('Steps');
+  });
+
+  it('hides Steps tab when no steps data', async () => {
+    el.data = { ...fixture(), steps: undefined };
+    await el.updateComplete;
+    const tabs = el.shadowRoot!.querySelectorAll('.tab');
+    expect(tabs.length).toBe(2);
+  });
+
+  it('renders step cards in Steps tab', async () => {
+    const tabs = el.shadowRoot!.querySelectorAll('.tab');
+    (tabs[2] as HTMLElement).click();
+    await el.updateComplete;
+    const cards = el.shadowRoot!.querySelectorAll('.step-card');
+    expect(cards.length).toBe(2);
+  });
+
+  it('renders action and target on step cards', async () => {
+    const tabs = el.shadowRoot!.querySelectorAll('.tab');
+    (tabs[2] as HTMLElement).click();
+    await el.updateComplete;
+    const actions = el.shadowRoot!.querySelectorAll('.step-action');
+    expect(actions[0]?.textContent).toBe('agent-delegate');
+    expect(actions[1]?.textContent).toBe('graphql');
+  });
+
+  it('renders model badge on step cards', async () => {
+    const tabs = el.shadowRoot!.querySelectorAll('.tab');
+    (tabs[2] as HTMLElement).click();
+    await el.updateComplete;
+    const badge = el.shadowRoot!.querySelector('.badge-model');
+    expect(badge?.textContent).toBe('claude-opus-5');
   });
 });

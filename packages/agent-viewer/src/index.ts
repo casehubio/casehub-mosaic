@@ -27,7 +27,7 @@ export type {
 } from './pattern-types.js';
 
 export { AgentViewer } from './agent-viewer.js';
-export type { AgentTab, AgentViewerData } from './agent-viewer.js';
+export type { AgentTab, AgentViewerData, BreadcrumbBackDetail } from './agent-viewer.js';
 
 export { CoordinationPipelineView } from './coordination-pipeline-view.js';
 export type {
@@ -40,6 +40,7 @@ export type {
   PhaseItem,
   ExpressionValue,
   ExpressionType,
+  DrillDownDetail,
 } from './coordination-types.js';
 
 export { assignTiers, detectPreferredView } from './coordination-graph-model.js';
