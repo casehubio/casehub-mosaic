@@ -1,7 +1,7 @@
 {
   "name": "@casehubio/blocks-ui-split-workbench",
   "version": "0.2.2",
-  "description": "DEPRECATED \u2014 migrated to @casehubio/pages-ui-components/split-workbench",
+  "description": "DEPRECATED — migrated to @casehubio/pages-ui-components/split-workbench",
   "repository": {
     "type": "git",
     "url": "https://github.com/casehubio/blocks-ui.git"

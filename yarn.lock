@@ -140,6 +140,17 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@casehubio/agent-viewer@workspace:packages/agent-viewer":
+  version: 0.0.0-use.local
+  resolution: "@casehubio/agent-viewer@workspace:packages/agent-viewer"
+  dependencies:
+    lit: "npm:^3.3.3"
+    rimraf: "npm:^6.1.0"
+    typescript: "npm:^5.6.0"
+    vitest: "npm:^3.0.0"
+  languageName: unknown
+  linkType: soft
+
 "@casehubio/avatar-step@workspace:*, @casehubio/avatar-step@workspace:components/avatar-step":
   version: 0.0.0-use.local
   resolution: "@casehubio/avatar-step@workspace:components/avatar-step"
