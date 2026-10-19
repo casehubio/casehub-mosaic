@@ -1,5 +1,7 @@
-import { LitElement, html, css, nothing, type TemplateResult } from 'lit';
+import { LitElement, html, css, nothing, type TemplateResult, type PropertyValues } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import { assignTiers, detectPreferredView } from './coordination-graph-model.js';
+import type { TierElement, GraphTier, GraphConnector, GraphNode } from './coordination-graph-model.js';
 import type {
   CoordinationPipeline,
   CoordinationStep,
@@ -32,6 +34,7 @@ const COLOR_MAP: Record<string, string> = {
 @customElement('coordination-pipeline-view')
 export class CoordinationPipelineView extends LitElement {
   @property({ attribute: false }) pipeline!: CoordinationPipeline;
+  @property() viewMode: 'lanes' | 'graph' = 'lanes';
 
   static override styles = css`
     :host {
@@ -68,6 +71,32 @@ export class CoordinationPipelineView extends LitElement {
       margin-left: auto;
       font-size: 11px;
       color: #585b70;
+    }
+
+    /* ─── View Toggle ─── */
+    .view-toggle {
+      display: flex;
+      gap: 0;
+      margin-left: auto;
+      margin-right: 8px;
+    }
+    .toggle-btn {
+      padding: 3px 10px;
+      font-size: 11px;
+      font-weight: 500;
+      border-radius: 4px;
+      cursor: pointer;
+      color: #585b70;
+      background: rgba(255, 255, 255, 0.04);
+      user-select: none;
+    }
+    .toggle-btn.active {
+      color: #89b4fa;
+      background: rgba(137, 180, 250, 0.12);
+      font-weight: 600;
+    }
+    .toggle-btn:hover:not(.active) {
+      color: #7f849c;
     }
 
     /* ─── Step Card ─── */
@@ -274,6 +303,106 @@ export class CoordinationPipelineView extends LitElement {
       margin-bottom: 8px;
     }
 
+    /* ─── Graph View ─── */
+    .graph-view {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      padding: 24px 32px;
+    }
+    .graph-tier {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      padding: 8px 0;
+      flex-wrap: wrap;
+    }
+    .graph-node-wrapper {
+      position: relative;
+    }
+    .graph-node-wrapper.decision-node .step-card {
+      border: 2px solid #f9e2af;
+    }
+    .graph-node-wrapper.outcome-node.green .step-card {
+      border-left: 3px solid #a6e3a1;
+      background: rgba(166, 227, 161, 0.08);
+    }
+    .graph-node-wrapper.outcome-node.amber .step-card {
+      border-left: 3px solid #f9e2af;
+      background: rgba(249, 226, 175, 0.08);
+    }
+    .graph-node-wrapper.outcome-node.red .step-card {
+      border-left: 3px solid #f38ba8;
+      background: rgba(243, 139, 168, 0.08);
+    }
+    .extra-steps {
+      display: block;
+      text-align: center;
+      font-size: 10px;
+      color: #585b70;
+      margin-top: 4px;
+    }
+    .graph-connector {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 4px 0;
+      gap: 4px;
+    }
+    .connector-chevron {
+      font-size: 10px;
+      color: #585b70;
+    }
+    .fan-out-labels {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+    }
+    .edge-label {
+      font-size: 10px;
+      color: #7f849c;
+      padding: 2px 8px;
+      background: rgba(255, 255, 255, 0.04);
+      border-radius: 3px;
+      font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    }
+    .graph-quorum {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      background: rgba(137, 180, 250, 0.06);
+      border: 1px dashed #89b4fa;
+      border-radius: 4px;
+    }
+    .quorum-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: #89b4fa;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .quorum-detail {
+      font-size: 11px;
+      color: #585b70;
+    }
+    .graph-signal {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 12px;
+    }
+    .signal-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: #cba6f7;
+    }
+    .signal-desc {
+      font-size: 11px;
+      color: #585b70;
+    }
+
     /* ─── Phase wrapper ─── */
     .phase-step {
       padding: 16px;
@@ -334,13 +463,104 @@ export class CoordinationPipelineView extends LitElement {
     }
   `;
 
+  override willUpdate(changed: PropertyValues) {
+    if (changed.has('pipeline') && this.pipeline) {
+      this.viewMode = detectPreferredView(this.pipeline.phases);
+    }
+  }
+
   override render() {
     if (!this.pipeline) return nothing;
     const p = this.pipeline;
     return html`
       ${this.renderHeader(p)}
-      ${p.phases.map(phase => this.renderPhase(phase))}
+      ${this.viewMode === 'graph' ? this.renderGraphView(p) : this.renderLanesView(p)}
     `;
+  }
+
+  private renderLanesView(p: CoordinationPipeline): TemplateResult {
+    return html`${p.phases.map(phase => this.renderPhase(phase))}`;
+  }
+
+  private renderGraphView(p: CoordinationPipeline): TemplateResult {
+    const elements = assignTiers(p.phases);
+    return html`
+      <div class="graph-view" role="img" aria-label="Pipeline topology: ${p.name}">
+        ${elements.map(el => el.kind === 'tier'
+          ? this._renderGraphTier(el)
+          : this._renderGraphConnector(el)
+        )}
+      </div>
+    `;
+  }
+
+  private _renderGraphTier(tier: GraphTier): TemplateResult {
+    return html`
+      <div class="graph-tier">
+        ${tier.nodes.map(node => this._renderGraphNode(node))}
+      </div>
+    `;
+  }
+
+  private _renderGraphNode(node: GraphNode): TemplateResult {
+    const colorClass = node.colorHint ? ` outcome-node ${node.colorHint}` : '';
+    const decisionClass = node.routing ? ' decision-node' : '';
+    return html`
+      <div class="graph-node-wrapper${colorClass}${decisionClass}">
+        ${this.renderStepCard(node.step)}
+        ${node.extraStepCount
+          ? html`<span class="extra-steps">+${node.extraStepCount} more</span>`
+          : nothing}
+      </div>
+    `;
+  }
+
+  private _renderGraphConnector(connector: GraphConnector): TemplateResult {
+    return html`
+      <div class="graph-connector ${connector.type}">
+        ${connector.type === 'flow' && connector.barrier
+          ? this._renderGraphBarrier(connector.barrier)
+          : connector.type === 'fan-out'
+            ? html`
+                <span class="connector-chevron">▼</span>
+                ${connector.barrier ? this._renderGraphBarrier(connector.barrier) : nothing}
+                <div class="fan-out-labels">
+                  ${connector.labels?.map(l => html`<span class="edge-label">${l}</span>`)}
+                </div>
+              `
+            : connector.type === 'fan-in'
+              ? html`
+                  ${connector.barrier ? this._renderGraphBarrier(connector.barrier) : nothing}
+                  <span class="connector-chevron">▼</span>
+                `
+              : html`<span class="connector-chevron">▼</span>`
+        }
+      </div>
+    `;
+  }
+
+  private _renderGraphBarrier(barrier: NonNullable<GraphConnector['barrier']>): TemplateResult {
+    if (barrier.type === 'quorum') {
+      return html`
+        <div class="graph-quorum">
+          <span class="quorum-label">QUORUM</span>
+          <span class="quorum-detail">${barrier.required} of ${barrier.of} required</span>
+        </div>
+      `;
+    }
+    return html`
+      <div class="graph-signal">
+        <span class="signal-label">◇ ${barrier.name}</span>
+        ${barrier.description ? html`<span class="signal-desc">${barrier.description}</span>` : nothing}
+      </div>
+    `;
+  }
+
+  private _handleToggleKey(e: KeyboardEvent) {
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+      e.preventDefault();
+      this.viewMode = this.viewMode === 'lanes' ? 'graph' : 'lanes';
+    }
   }
 
   private renderHeader(p: CoordinationPipeline): TemplateResult {
@@ -352,6 +572,18 @@ export class CoordinationPipelineView extends LitElement {
       <div class="pipeline-header">
         <span class="icon">⫘</span>
         <span class="title">${p.name}</span>
+        <div class="view-toggle" role="radiogroup" aria-label="View mode">
+          <span role="radio" aria-checked="${this.viewMode === 'lanes'}"
+                class="toggle-btn ${this.viewMode === 'lanes' ? 'active' : ''}"
+                @click="${() => { this.viewMode = 'lanes'; }}"
+                tabindex="${this.viewMode === 'lanes' ? '0' : '-1'}"
+                @keydown="${this._handleToggleKey}">Lanes</span>
+          <span role="radio" aria-checked="${this.viewMode === 'graph'}"
+                class="toggle-btn ${this.viewMode === 'graph' ? 'active' : ''}"
+                @click="${() => { this.viewMode = 'graph'; }}"
+                tabindex="${this.viewMode === 'graph' ? '0' : '-1'}"
+                @keydown="${this._handleToggleKey}">Graph</span>
+        </div>
         ${parts.length > 0
           ? html`<span class="meta">${parts.join(' · ')}</span>`
           : nothing}
