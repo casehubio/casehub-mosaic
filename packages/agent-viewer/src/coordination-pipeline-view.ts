@@ -10,6 +10,7 @@ import type {
   MatchRouting,
   MatchCase,
   PhaseItem,
+  DrillDownDetail,
 } from './coordination-types.js';
 import { parseExpression } from './coordination-types.js';
 
@@ -505,9 +506,10 @@ export class CoordinationPipelineView extends LitElement {
   private _renderGraphNode(node: GraphNode): TemplateResult {
     const colorClass = node.colorHint ? ` outcome-node ${node.colorHint}` : '';
     const decisionClass = node.routing ? ' decision-node' : '';
+    const drillCtx = node.laneName ? { name: node.laneName, steps: node.laneSteps ?? [node.step] } : { name: node.step.target ?? node.step.action, steps: [node.step] };
     return html`
       <div class="graph-node-wrapper${colorClass}${decisionClass}">
-        ${this.renderStepCard(node.step)}
+        ${this.renderStepCard(node.step, drillCtx)}
         ${node.extraStepCount
           ? html`<span class="extra-steps">+${node.extraStepCount} more</span>`
           : nothing}
@@ -596,7 +598,7 @@ export class CoordinationPipelineView extends LitElement {
       case 'step':
         return html`
           <div class="phase-step">
-            ${this.renderStepCard(phase)}
+            ${this.renderStepCard(phase, { name: phase.target ?? phase.action, steps: [phase] })}
             ${phase.params ? this.renderParams(phase.params) : nothing}
             ${phase.routing ? this.renderMatchRouting(phase.routing) : nothing}
           </div>
@@ -610,7 +612,7 @@ export class CoordinationPipelineView extends LitElement {
     }
   }
 
-  private renderStepCard(step: CoordinationStep): TemplateResult {
+  private renderStepCard(step: CoordinationStep, drillContext?: { name: string; steps: CoordinationStep[] }): TemplateResult {
     const actionDef = ACTION_ICONS[step.action] ?? { icon: '•', cssClass: 'default' };
     let iconClass = actionDef.cssClass;
     let iconChar = step.icon ?? actionDef.icon;
@@ -620,8 +622,18 @@ export class CoordinationPipelineView extends LitElement {
       iconClass = colorMap[step.iconColor] ?? iconClass;
     }
 
+    const canDrill = step.drillDown && drillContext;
+    const drillClick = canDrill ? () => this._emitDrillDown(drillContext.name, drillContext.steps) : undefined;
+    const drillKey = canDrill ? (e: KeyboardEvent) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); this._emitDrillDown(drillContext.name, drillContext.steps); }
+    } : undefined;
+
     return html`
-      <div class="step-card${step.drillDown ? ' drillable' : ''}">
+      <div class="step-card${step.drillDown ? ' drillable' : ''}"
+           role="${step.drillDown ? 'button' : nothing}"
+           tabindex="${step.drillDown ? '0' : nothing}"
+           @click="${drillClick ?? nothing}"
+           @keydown="${drillKey ?? nothing}">
         <div class="step-icon ${iconClass}">${iconChar}</div>
         <span class="step-action">${step.action}</span>
         ${step.target
@@ -635,6 +647,14 @@ export class CoordinationPipelineView extends LitElement {
         </span>
       </div>
     `;
+  }
+
+  private _emitDrillDown(agentName: string, steps: CoordinationStep[]) {
+    this.dispatchEvent(new CustomEvent('coordination:drill-down', {
+      bubbles: true,
+      composed: true,
+      detail: { agentName, steps } satisfies DrillDownDetail,
+    }));
   }
 
   private renderParams(params: CoordinationStepParams): TemplateResult {
@@ -688,7 +708,7 @@ export class CoordinationPipelineView extends LitElement {
         <div class="lane-name">${name}</div>
         ${steps.map(step => html`
           <div class="lane-step">
-            ${this.renderStepCard(step)}
+            ${this.renderStepCard(step, { name, steps })}
             ${step.params ? html`
               <div class="lane-params">
                 <div class="invoke-body">

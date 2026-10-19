@@ -5,6 +5,8 @@ export interface GraphNode {
   routing?: MatchRouting;
   colorHint?: 'green' | 'amber' | 'red';
   extraStepCount?: number;
+  laneName?: string;
+  laneSteps?: CoordinationStep[];
 }
 
 export interface GraphTier {
@@ -89,7 +91,7 @@ export function assignTiers(phases: PhaseItem[]): TierElement[] {
 
         const nodes: GraphNode[] = laneNames.map(name => {
           const steps = phase.lanes[name];
-          const node: GraphNode = { step: steps[0] };
+          const node: GraphNode = { step: steps[0], laneName: name, laneSteps: steps };
           if (steps.length > 1) {
             node.extraStepCount = steps.length - 1;
           }

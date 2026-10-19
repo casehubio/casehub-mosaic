@@ -48,6 +48,11 @@ export interface CoordinationPipeline {
   phases: PhaseItem[];
 }
 
+export interface DrillDownDetail {
+  agentName: string;
+  steps: CoordinationStep[];
+}
+
 export function parseExpression(raw: string): ExpressionValue {
   if (raw.startsWith('${params.'))
     return { raw, type: 'param' };
