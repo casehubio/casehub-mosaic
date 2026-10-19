@@ -45,3 +45,14 @@ export type {
 
 export { assignTiers, detectPreferredView } from './coordination-graph-model.js';
 export type { GraphNode, GraphTier, GraphConnector, TierElement } from './coordination-graph-model.js';
+
+export { CoordinationDiffView } from './coordination-diff-view.js';
+export { computeCoordinationDiff } from './coordination-diff-model.js';
+export type {
+  DiffStatus,
+  FieldChange,
+  DiffAnnotation,
+  AnnotatedPhaseItem,
+  DiffSummary,
+  DiffResult,
+} from './coordination-diff-types.js';
