@@ -129,6 +129,17 @@ function buildSummary(phases: AnnotatedPhaseItem[]): DiffSummary {
           } else {
             summary.details.push(`${name} modified`);
           }
+        } else if (phase.type === 'parallel' && diff.changes) {
+          for (const change of diff.changes) {
+            if (change.field.startsWith('lane.')) {
+              const laneName = change.field.slice(5);
+              if (change.oldValue === undefined) {
+                summary.details.push(`${laneName} added`);
+              } else {
+                summary.details.push(`${laneName} removed`);
+              }
+            }
+          }
         } else {
           summary.details.push(`${name} modified`);
         }

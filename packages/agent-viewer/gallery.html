@@ -633,5 +633,70 @@ phases:
   document.getElementById(`rendered-${ddId}`).appendChild(drilldownViewer);
 </script>
 
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- Agent Diff — Coordination Level                               -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+
+<h2>Agent Diff — Coordination Level</h2>
+<p class="description">Shows what changed when agents are added, removed, or modified in a pipeline.
+  New PEP screening agent added, quorum tightened 2/3 → 3/4, risk-assessor receives PEP result.</p>
+
+<coordination-diff-view id="diff-demo"></coordination-diff-view>
+
+<script type="module">
+import './src/coordination-diff-view.js';
+
+const diffOld = {
+  name: 'KYC Pipeline',
+  phases: [
+    { type: 'step', action: 'agent-delegate', target: 'doc-classifier', model: 'sonnet-5' },
+    { type: 'signal', name: 'docs-classified', description: 'fan-out to extractors' },
+    {
+      type: 'parallel',
+      lanes: {
+        'identity': [{ action: 'agent-delegate', target: 'id-extract' }],
+        'financial': [{ action: 'agent-delegate', target: 'fin-extract' }],
+        'address': [{ action: 'agent-delegate', target: 'addr-extract' }],
+      },
+    },
+    { type: 'quorum', name: 'extraction-complete', required: 2, of: 3 },
+    {
+      type: 'step', action: 'agent-delegate', target: 'risk-assessor',
+      model: 'opus-5', params: { descriptor: 'kyc-risk-decision' },
+    },
+  ],
+};
+
+const diffNew = {
+  name: 'KYC Pipeline',
+  phases: [
+    { type: 'step', action: 'agent-delegate', target: 'doc-classifier', model: 'sonnet-5' },
+    { type: 'signal', name: 'docs-classified', description: 'fan-out to extractors' },
+    {
+      type: 'parallel',
+      lanes: {
+        'identity': [{ action: 'agent-delegate', target: 'id-extract' }],
+        'financial': [{ action: 'agent-delegate', target: 'fin-extract' }],
+        'address': [{ action: 'agent-delegate', target: 'addr-extract' }],
+        'pep-screener': [{ action: 'agent-delegate', target: 'pep-screen' }],
+      },
+    },
+    { type: 'quorum', name: 'extraction-complete', required: 3, of: 4 },
+    {
+      type: 'step', action: 'agent-delegate', target: 'risk-assessor',
+      model: 'opus-5',
+      params: {
+        descriptor: 'kyc-risk-decision',
+        'params.pepResult': '${pep-screener.result}',
+      },
+    },
+  ],
+};
+
+const diffEl = document.getElementById('diff-demo');
+diffEl.oldPipeline = diffOld;
+diffEl.newPipeline = diffNew;
+</script>
+
 </body>
 </html>
