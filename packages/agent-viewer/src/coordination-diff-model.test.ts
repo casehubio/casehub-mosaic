@@ -45,6 +45,7 @@ describe('computeCoordinationDiff', () => {
     );
     expect(modified).toBeDefined();
     expect(modified!.diff.changes!.some(c => c.field === 'lane.pep-screener' && c.oldValue === undefined)).toBe(true);
+    expect(result.summary.details).toContain('pep-screener added');
   });
 
   it('detects removed step', () => {

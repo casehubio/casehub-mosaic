@@ -295,7 +295,31 @@ export class CoordinationDiffView extends LitElement {
   private _buildAnnotationMap(diff: DiffResult): Map<string, DiffAnnotation> {
     const map = new Map<string, DiffAnnotation>();
     for (const { phase, diff: annotation } of diff.phases) {
-      map.set(this._phaseNodeKey(phase), annotation);
+      if (phase.type === 'parallel' && annotation.status === 'modified' && annotation.changes) {
+        for (const change of annotation.changes) {
+          if (change.field.startsWith('lane.')) {
+            const laneName = change.field.slice(5);
+            const lanes = (phase as Extract<typeof phase, { type: 'parallel' }>).lanes;
+            const steps = lanes[laneName];
+            if (steps) {
+              const status = change.oldValue === undefined ? 'added' : 'removed';
+              for (const step of steps) {
+                map.set(`${step.action}:${step.target ?? ''}`, { status });
+              }
+            }
+          }
+        }
+        for (const [laneName, steps] of Object.entries((phase as Extract<typeof phase, { type: 'parallel' }>).lanes)) {
+          for (const step of steps) {
+            const key = `${step.action}:${step.target ?? ''}`;
+            if (!map.has(key)) {
+              map.set(key, { status: 'unchanged' });
+            }
+          }
+        }
+      } else {
+        map.set(this._phaseNodeKey(phase), annotation);
+      }
     }
     return map;
   }
