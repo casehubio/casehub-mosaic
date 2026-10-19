@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
-import type { CoordinationPipeline } from './coordination-types.js';
+import type { CoordinationPipeline, PhaseItem } from './coordination-types.js';
 import './coordination-pipeline-view.js';
 import type { CoordinationPipelineView } from './coordination-pipeline-view.js';
 
@@ -123,13 +123,15 @@ function kycPipeline(): CoordinationPipeline {
   };
 }
 
-describe('coordination-pipeline-view', () => {
+describe('coordination-pipeline-view (lanes)', () => {
   let el: CoordinationPipelineView;
 
   beforeEach(async () => {
     el = document.createElement('coordination-pipeline-view') as CoordinationPipelineView;
     el.pipeline = kycPipeline();
     document.body.appendChild(el);
+    await el.updateComplete;
+    el.viewMode = 'lanes';
     await el.updateComplete;
   });
 
@@ -293,5 +295,145 @@ describe('coordination-pipeline-view', () => {
 
     const thirdLaneActions = lanes[2]!.querySelectorAll('.step-action');
     expect(thirdLaneActions[1]?.textContent).toBe('mcp-call');
+  });
+});
+
+describe('viewMode and toggle', () => {
+  let el: CoordinationPipelineView;
+
+  beforeEach(async () => {
+    el = document.createElement('coordination-pipeline-view') as CoordinationPipelineView;
+    el.pipeline = kycPipeline();
+    document.body.appendChild(el);
+    await el.updateComplete;
+  });
+
+  afterEach(() => el.remove());
+
+  it('auto-detects graph mode for KYC pipeline (parallel + quorum)', () => {
+    expect(el.viewMode).toBe('graph');
+  });
+
+  it('renders toggle in header', () => {
+    const toggle = el.shadowRoot!.querySelector('.view-toggle');
+    expect(toggle).not.toBeNull();
+    const buttons = toggle!.querySelectorAll('[role="radio"]');
+    expect(buttons).toHaveLength(2);
+  });
+
+  it('toggle has correct ARIA attributes', () => {
+    const group = el.shadowRoot!.querySelector('[role="radiogroup"]');
+    expect(group).not.toBeNull();
+    const radios = el.shadowRoot!.querySelectorAll('[role="radio"]');
+    const active = Array.from(radios).find(r => r.getAttribute('aria-checked') === 'true');
+    expect(active?.textContent?.trim()).toBe('Graph');
+  });
+
+  it('switches to lanes view on toggle click', async () => {
+    const radios = el.shadowRoot!.querySelectorAll('[role="radio"]');
+    const lanesBtn = Array.from(radios).find(r => r.textContent?.trim() === 'Lanes');
+    (lanesBtn as HTMLElement).click();
+    await el.updateComplete;
+    expect(el.viewMode).toBe('lanes');
+    expect(el.shadowRoot!.querySelector('.swim-lanes')).not.toBeNull();
+  });
+
+  it('renders graph view container when in graph mode', () => {
+    expect(el.shadowRoot!.querySelector('.graph-view')).not.toBeNull();
+  });
+
+  it('does not render swim-lanes in graph mode', () => {
+    expect(el.shadowRoot!.querySelector('.swim-lanes')).toBeNull();
+  });
+
+  it('defaults to lanes for pipeline without parallel + quorum', async () => {
+    el.pipeline = {
+      name: 'simple',
+      phases: [
+        { type: 'step', action: 'agent-delegate', target: 'a' },
+        { type: 'step', action: 'rest', target: 'b' },
+      ],
+    };
+    await el.updateComplete;
+    expect(el.viewMode).toBe('lanes');
+    expect(el.shadowRoot!.querySelector('.graph-view')).toBeNull();
+  });
+});
+
+describe('graph view rendering', () => {
+  let el: CoordinationPipelineView;
+
+  beforeEach(async () => {
+    el = document.createElement('coordination-pipeline-view') as CoordinationPipelineView;
+    el.pipeline = kycPipeline();
+    document.body.appendChild(el);
+    await el.updateComplete;
+  });
+
+  afterEach(() => el.remove());
+
+  it('renders graph tiers as flex rows', () => {
+    const tiers = el.shadowRoot!.querySelectorAll('.graph-tier');
+    expect(tiers.length).toBeGreaterThanOrEqual(3);
+  });
+
+  it('renders classifier as single-node tier', () => {
+    const tiers = el.shadowRoot!.querySelectorAll('.graph-tier');
+    const firstTier = tiers[0];
+    const cards = firstTier.querySelectorAll('.step-card');
+    expect(cards).toHaveLength(1);
+    expect(cards[0].querySelector('.step-target')?.textContent).toBe('doc-classifier');
+  });
+
+  it('renders 3 parallel extractors in one tier', () => {
+    const tiers = el.shadowRoot!.querySelectorAll('.graph-tier');
+    const parallelTier = Array.from(tiers).find(t => t.querySelectorAll('.step-card').length === 3);
+    expect(parallelTier).not.toBeNull();
+  });
+
+  it('renders fan-out connector with lane name labels', () => {
+    const fanOut = el.shadowRoot!.querySelector('.graph-connector.fan-out');
+    expect(fanOut).not.toBeNull();
+    const labels = fanOut!.querySelectorAll('.edge-label');
+    expect(labels).toHaveLength(3);
+    expect(labels[0].textContent?.trim()).toBe('identity-extractor');
+    expect(labels[1].textContent?.trim()).toBe('financial-extractor');
+    expect(labels[2].textContent?.trim()).toBe('address-verifier');
+  });
+
+  it('renders fan-in connector with quorum barrier', () => {
+    const fanIn = el.shadowRoot!.querySelector('.graph-connector.fan-in');
+    expect(fanIn).not.toBeNull();
+    const quorum = fanIn!.querySelector('.graph-quorum');
+    expect(quorum).not.toBeNull();
+    expect(quorum!.textContent).toContain('QUORUM');
+    expect(quorum!.textContent).toContain('2 of 3');
+  });
+
+  it('renders outcome nodes with color-coded classes', () => {
+    const tiers = el.shadowRoot!.querySelectorAll('.graph-tier');
+    const lastTier = tiers[tiers.length - 1];
+    const outcomes = lastTier.querySelectorAll('.outcome-node');
+    expect(outcomes).toHaveLength(3);
+    expect(outcomes[0].classList.contains('green')).toBe(true);
+    expect(outcomes[1].classList.contains('amber')).toBe(true);
+    expect(outcomes[2].classList.contains('red')).toBe(true);
+  });
+
+  it('renders decision node with emphasis class', () => {
+    const decision = el.shadowRoot!.querySelector('.decision-node');
+    expect(decision).not.toBeNull();
+  });
+
+  it('renders extra step count badge for multi-step lanes', () => {
+    const badges = el.shadowRoot!.querySelectorAll('.extra-steps');
+    expect(badges.length).toBeGreaterThanOrEqual(3);
+    expect(badges[0].textContent?.trim()).toBe('+1 more');
+  });
+
+  it('graph view has correct ARIA', () => {
+    const graphView = el.shadowRoot!.querySelector('.graph-view');
+    expect(graphView?.getAttribute('role')).toBe('img');
+    expect(graphView?.getAttribute('aria-label')).toContain('kyc-verification');
   });
 });

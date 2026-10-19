@@ -41,3 +41,6 @@ export type {
   ExpressionValue,
   ExpressionType,
 } from './coordination-types.js';
+
+export { assignTiers, detectPreferredView } from './coordination-graph-model.js';
+export type { GraphNode, GraphTier, GraphConnector, TierElement } from './coordination-graph-model.js';
