@@ -13,6 +13,9 @@ export interface AgentRef {
   readonly id?: string;
   readonly type: AgentRefType;
   readonly name?: string;
+  readonly description?: string;
+  readonly capabilities?: string[];
+  readonly model?: string;
 }
 
 export interface AgentResult {

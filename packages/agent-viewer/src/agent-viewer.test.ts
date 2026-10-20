@@ -17,6 +17,7 @@ function fixture(): AgentViewerData {
       briefing: 'You are Leonardo da Vinci.',
     },
     pattern: {
+      category: 'deliberation',
       type: 'voting',
       name: 'proposal-evaluation',
       aggregation: { type: 'majority-vote' },
@@ -105,6 +106,7 @@ describe('agent-viewer', () => {
     el.data = {
       ...fixture(),
       pattern: {
+        category: 'deliberation',
         type: 'debate',
         name: 'adversarial-review',
         maxRounds: 7,
