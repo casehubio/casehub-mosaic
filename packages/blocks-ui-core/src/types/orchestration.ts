@@ -1,14 +1,16 @@
+import type { PatternCategoryName } from './patterns/categories.js';
+
 export type ExecutionState =
-  | 'IDLE' | 'RUNNING' | 'WAITING_FOR_AGENT'
-  | 'WAITING_FOR_EVENT' | 'COMPLETE' | 'FAULTED' | 'CANCELLED';
+  | 'idle' | 'running' | 'waiting-for-agent'
+  | 'waiting-for-event' | 'complete' | 'faulted' | 'cancelled';
 
-export type ExecutionResult = 'COMPLETED' | 'FAILED' | 'ESCALATED' | 'CANCELLED';
+export type ExecutionResult = 'completed' | 'failed' | 'escalated' | 'cancelled';
 
-export type AgentRefType = 'WORKER' | 'CHANNEL' | 'HUMAN' | 'EXTERNAL' | 'COMPOSED';
-export type AgentResultStatus = 'SUCCESS' | 'FAILURE' | 'TIMEOUT' | 'DECLINED';
+export type AgentRefType = 'worker' | 'channel' | 'human' | 'external' | 'composed';
+export type AgentResultStatus = 'success' | 'failure' | 'timeout' | 'declined';
 
 export interface AgentRef {
-  readonly id: string;
+  readonly id?: string;
   readonly type: AgentRefType;
   readonly name?: string;
 }
@@ -20,10 +22,6 @@ export interface AgentResult {
   readonly error?: string;
   readonly duration?: number;
 }
-
-export type PatternType =
-  | 'SEQUENCE' | 'PARALLEL' | 'LOOP' | 'CONDITIONAL'
-  | 'SUPERVISOR' | 'DEBATE' | 'VOTING' | 'HTN';
 
 export interface AggregationSpec {
   type: string;
@@ -37,9 +35,9 @@ export interface TerminationSpec {
   when?: string;
 }
 
-export type RoutingFailureAction = 'FAIL' | 'RETRY_BROADER' | 'ESCALATE';
-export type AggregationFailureAction = 'FAIL' | 'ESCALATE' | 'RETRY_DIFFERENT';
-export type BackoffStrategy = 'FIXED' | 'LINEAR' | 'EXPONENTIAL';
+export type RoutingFailureAction = 'fail' | 'retry-broader' | 'escalate';
+export type AggregationFailureAction = 'fail' | 'escalate' | 'retry-different';
+export type BackoffStrategy = 'fixed' | 'linear' | 'exponential';
 
 export interface AgentRetryPolicy {
   readonly maxRetries: number;
@@ -54,7 +52,7 @@ export interface FailurePolicy {
 }
 
 export interface ExecutionModel {
-  readonly pattern: PatternType;
+  readonly pattern: PatternCategoryName;
   readonly routingStrategy?: string;
   readonly decompositionStrategy?: string;
   readonly activationStrategy?: string;
@@ -64,39 +62,39 @@ export interface ExecutionModel {
 }
 
 export type OrchestrationEventType =
-  | 'EXECUTION_STARTED' | 'ROUTING_DECISION' | 'ACTIVATION_EVALUATED'
-  | 'AGENT_DISPATCHED' | 'AGENT_RESULT' | 'AGENT_FAILED'
-  | 'AGGREGATION_COMPLETED' | 'TERMINATION_EVALUATED' | 'EXECUTION_COMPLETED';
+  | 'execution-started' | 'routing-decision' | 'activation-evaluated'
+  | 'agent-dispatched' | 'agent-result' | 'agent-failed'
+  | 'aggregation-completed' | 'termination-evaluated' | 'execution-completed';
 
-export type RoutingOutcome = 'SELECTED' | 'UNRESOLVABLE' | 'ESCALATE';
-export type AggregationOutcome = 'RESOLVED' | 'PARTIAL' | 'DEADLOCKED';
-export type TerminationOutcome = 'CONTINUE' | 'COMPLETE' | 'FAILED' | 'ESCALATE';
+export type RoutingOutcome = 'selected' | 'unresolvable' | 'escalate';
+export type AggregationOutcome = 'resolved' | 'partial' | 'deadlocked';
+export type TerminationOutcome = 'continue' | 'complete' | 'failed' | 'escalate';
 
 export interface ExecutionStartedPayload {
-  readonly type: 'EXECUTION_STARTED';
+  readonly type: 'execution-started';
   readonly model: ExecutionModel;
 }
 
 export interface RoutingDecisionPayload {
-  readonly type: 'ROUTING_DECISION';
+  readonly type: 'routing-decision';
   readonly outcome: RoutingOutcome;
   readonly selectedAgents?: readonly AgentRef[];
   readonly reason?: string;
 }
 
 export interface ActivationPayload {
-  readonly type: 'ACTIVATION_EVALUATED';
+  readonly type: 'activation-evaluated';
   readonly conditionMet: boolean;
   readonly conditionExpression?: string;
 }
 
 export interface AgentDispatchPayload {
-  readonly type: 'AGENT_DISPATCHED';
+  readonly type: 'agent-dispatched';
   readonly agentRef: AgentRef;
 }
 
 export interface AgentResultPayload {
-  readonly type: 'AGENT_RESULT' | 'AGENT_FAILED';
+  readonly type: 'agent-result' | 'agent-failed';
   readonly agentRef: AgentRef;
   readonly status: AgentResultStatus;
   readonly detail?: string;
@@ -105,19 +103,19 @@ export interface AgentResultPayload {
 }
 
 export interface AggregationPayload {
-  readonly type: 'AGGREGATION_COMPLETED';
+  readonly type: 'aggregation-completed';
   readonly outcome: AggregationOutcome;
   readonly remainingCount?: number;
 }
 
 export interface TerminationPayload {
-  readonly type: 'TERMINATION_EVALUATED';
+  readonly type: 'termination-evaluated';
   readonly outcome: TerminationOutcome;
   readonly reason?: string;
 }
 
 export interface ExecutionCompletedPayload {
-  readonly type: 'EXECUTION_COMPLETED';
+  readonly type: 'execution-completed';
   readonly result: ExecutionResult;
   readonly reason?: string;
 }
