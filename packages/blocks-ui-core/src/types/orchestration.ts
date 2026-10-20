@@ -25,6 +25,18 @@ export type PatternType =
   | 'SEQUENCE' | 'PARALLEL' | 'LOOP' | 'CONDITIONAL'
   | 'SUPERVISOR' | 'DEBATE' | 'VOTING' | 'HTN';
 
+export interface AggregationSpec {
+  type: string;
+}
+
+export interface TerminationSpec {
+  type: string;
+  iterations?: number;
+  resolvedStatuses?: string[];
+  maxDisputeRounds?: number;
+  when?: string;
+}
+
 export type RoutingFailureAction = 'FAIL' | 'RETRY_BROADER' | 'ESCALATE';
 export type AggregationFailureAction = 'FAIL' | 'ESCALATE' | 'RETRY_DIFFERENT';
 export type BackoffStrategy = 'FIXED' | 'LINEAR' | 'EXPONENTIAL';
