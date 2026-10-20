@@ -294,6 +294,7 @@ constraints:
   // 2. Voting — Multi-Agent Convergence
   // ═══════════════════════════════════════════════
   const votingYaml = `
+category: deliberation
 type: voting
 name: proposal-evaluation
 description: "Three evaluators assess proposals across technical, financial, and strategic dimensions"
@@ -346,6 +347,7 @@ agents:
   // 3. Debate — Turn-Based Deliberation
   // ═══════════════════════════════════════════════
   const debateYaml = `
+category: deliberation
 type: debate
 name: adversarial-review
 description: "Structured adversarial debate between proponent and opponent with arbiter judgment"
@@ -432,6 +434,7 @@ briefing: |
 `;
 
   const viewerPatternYaml = `
+category: deliberation
 type: debate
 name: adversarial-review
 description: "Structured adversarial debate"

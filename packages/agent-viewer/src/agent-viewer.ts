@@ -1,7 +1,7 @@
 import { LitElement, html, css, nothing, type TemplateResult } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import type { AgentDescriptor } from './agent-types.js';
-import type { PatternSpec } from './pattern-types.js';
+import type { PatternCategory, DeliberationPatternCategory, OrchestrationPatternCategory } from '@casehubio/blocks-ui-core';
 import type { CoordinationStep } from './coordination-types.js';
 import './eidos-view.js';
 import './voting-view.js';
@@ -16,7 +16,7 @@ export interface BreadcrumbBackDetail {
 
 export interface AgentViewerData {
   agent: AgentDescriptor;
-  pattern?: PatternSpec;
+  pattern?: PatternCategory;
   breadcrumb?: string[];
   steps?: CoordinationStep[];
 }
@@ -262,13 +262,33 @@ export class AgentViewer extends LitElement {
   private renderPattern(): TemplateResult {
     const p = this.data.pattern;
     if (!p) return html`<div class="empty-state">No pattern data available</div>`;
+    switch (p.category) {
+      case 'orchestration':
+        return this.renderOrchestrationPattern(p);
+      case 'deliberation':
+        return this.renderDeliberationPattern(p);
+      case 'playbook':
+      case 'perception':
+      case 'communication':
+      case 'governance':
+      case 'optimisation':
+      case 'social':
+        return html`<div class="empty-state">${p.category}/${p.type} view not yet available</div>`;
+    }
+  }
+
+  private renderOrchestrationPattern(_p: OrchestrationPatternCategory): TemplateResult {
+    return html`<div class="empty-state">orchestration/${_p.type} view not yet available</div>`;
+  }
+
+  private renderDeliberationPattern(p: DeliberationPatternCategory): TemplateResult {
     switch (p.type) {
       case 'voting':
         return html`<voting-view .pattern=${p}></voting-view>`;
       case 'debate':
         return html`<debate-view .pattern=${p}></debate-view>`;
       default:
-        return html`<div class="empty-state">Pattern type "${p.type}" not yet supported</div>`;
+        return html`<div class="empty-state">deliberation/${p.type} not yet supported</div>`;
     }
   }
 }

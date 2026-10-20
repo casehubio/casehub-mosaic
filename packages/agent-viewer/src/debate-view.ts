@@ -1,11 +1,11 @@
 import { LitElement, html, css, nothing, type TemplateResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import type { PatternSpec } from './pattern-types.js';
+import type { DeliberationPatternCategory } from '@casehubio/blocks-ui-core';
 import './agent-card.js';
 
 @customElement('debate-view')
 export class DebateView extends LitElement {
-  @property({ attribute: false }) pattern!: PatternSpec;
+  @property({ attribute: false }) pattern!: DeliberationPatternCategory;
 
   static override styles = css`
     :host {
@@ -257,7 +257,7 @@ export class DebateView extends LitElement {
     `;
   }
 
-  private renderDebaterSlot(agent: import('./pattern-types.js').AgentRef, index: number): TemplateResult {
+  private renderDebaterSlot(agent: import('@casehubio/blocks-ui-core').AgentRef, index: number): TemplateResult {
     const color = DebateView.DEBATER_COLORS[index] ?? '#7f849c';
     const bg = DebateView.DEBATER_BGS[index] ?? 'transparent';
     const border = DebateView.DEBATER_BORDERS[index] ?? 'transparent';

@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
-import type { AgentRef } from './pattern-types.js';
+import type { AgentRef } from '@casehubio/blocks-ui-core';
 import './agent-card.js';
 import type { AgentCard } from './agent-card.js';
 
