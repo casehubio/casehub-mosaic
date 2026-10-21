@@ -4,7 +4,7 @@
   "description": "Decision narrative timeline — type-specific signal cards with trust pills, CBR badges, and deliberation indicators",
   "repository": {
     "type": "git",
-    "url": "https://github.com/casehubio/blocks-ui.git"
+    "url": "https://github.com/casehubio/casehub-mosaic.git"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"

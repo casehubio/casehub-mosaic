@@ -4,7 +4,7 @@
   "description": "Post-gate trust score delta — decision, attestation, trust before/after with compact mode",
   "repository": {
     "type": "git",
-    "url": "https://github.com/casehubio/blocks-ui.git"
+    "url": "https://github.com/casehubio/casehub-mosaic.git"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"

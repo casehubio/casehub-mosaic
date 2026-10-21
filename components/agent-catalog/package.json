@@ -5,7 +5,7 @@
   "main": "src/index.ts",
   "repository": {
     "type": "git",
-    "url": "https://github.com/casehubio/blocks-ui.git"
+    "url": "https://github.com/casehubio/casehub-mosaic.git"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"

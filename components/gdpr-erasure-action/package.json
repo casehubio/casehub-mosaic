@@ -4,7 +4,7 @@
   "description": "GDPR data erasure form — subject lookup, reason selection, confirmation dialog, receipt",
   "repository": {
     "type": "git",
-    "url": "https://github.com/casehubio/blocks-ui.git"
+    "url": "https://github.com/casehubio/casehub-mosaic.git"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
