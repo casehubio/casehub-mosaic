@@ -29,6 +29,10 @@
   "dependencies": {
     "@casehubio/mosaic-casehub-diagram": "workspace:*",
     "@casehubio/mosaic-core": "workspace:*",
+    "@casehubio/mosaic-diagram-workbench": "workspace:*",
+    "@casehubio/mosaic-graph-stencil-case": "workspace:*",
+    "@casehubio/mosaic-graph-stencil-swf": "workspace:*",
+    "@casehubio/mosaic-swf-diagram": "workspace:*",
     "@casehubio/pages-lsp": "*",
     "@casehubio/pages-schema": "*",
     "vscode-languageserver": "^10.0.0",

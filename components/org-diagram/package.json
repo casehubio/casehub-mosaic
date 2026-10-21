@@ -27,6 +27,7 @@
   "dependencies": {
     "@casehubio/graph-core": "*",
     "@casehubio/graph-renderer": "*",
+    "@casehubio/mosaic-agent-avatar-2d": "workspace:*",
     "@casehubio/mosaic-core": "workspace:*",
     "@casehubio/mosaic-graph-stencil-org": "workspace:*",
     "@casehubio/pages-data": "*",

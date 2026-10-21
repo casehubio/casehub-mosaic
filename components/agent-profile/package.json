@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "@casehubio/mosaic-agent-avatar-2d": "workspace:*",
+    "@casehubio/mosaic-avatar-step": "workspace:*",
     "@casehubio/mosaic-core": "workspace:*",
     "lit": "^3.2.1"
   },

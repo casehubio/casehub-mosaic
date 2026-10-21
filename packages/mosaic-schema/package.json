@@ -23,6 +23,9 @@
     "zod": "^3.23.0"
   },
   "devDependencies": {
+    "@casehubio/mosaic-agent-avatar-2d": "workspace:*",
+    "@casehubio/mosaic-agent-personality-workbench": "workspace:*",
+    "@casehubio/mosaic-agent-profile-panel": "workspace:*",
     "@casehubio/mosaic-approval-gate": "workspace:*",
     "@casehubio/mosaic-audit-trail-viewer": "workspace:*",
     "@casehubio/mosaic-blocks-dag-viewer": "workspace:*",
@@ -52,6 +55,7 @@
     "@casehubio/mosaic-list-pane": "workspace:*",
     "@casehubio/mosaic-notification-inbox": "workspace:*",
     "@casehubio/mosaic-orchestration-workbench": "workspace:*",
+    "@casehubio/mosaic-org-diagram": "workspace:*",
     "@casehubio/mosaic-preferences-editor": "workspace:*",
     "@casehubio/mosaic-reconciliation-status": "workspace:*",
     "@casehubio/mosaic-routing-rationale": "workspace:*",
