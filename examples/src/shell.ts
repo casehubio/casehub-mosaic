@@ -234,7 +234,7 @@ export class ExampleShell extends LitElement {
   override render() {
     return html`
       <nav class="sidebar">
-        <div class="sidebar-header">blocks-ui Examples</div>
+        <div class="sidebar-header">mosaic Examples</div>
         <div role="listbox" aria-label="Example pages" @keydown=${this._handleNavKeydown}>
         ${NAV.map(cat => html`
           <div class="category">${cat.label}</div>

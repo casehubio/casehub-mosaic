@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Pack all publishable @casehubio/blocks-ui-* packages into individual tarballs,
+# Pack all publishable @casehubio/mosaic-* packages into individual tarballs,
 # then unpack each into a flat directory structure for the Maven artifact.
 #
 # Yarn pack resolves workspace:* → real versions automatically.
@@ -15,7 +15,7 @@ REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 
 mkdir -p "$OUTPUT_DIR/tarballs"
 
-echo "=== Packing @casehubio/blocks-ui packages ==="
+echo "=== Packing @casehubio/mosaic packages ==="
 
 # Pack each non-private workspace package
 for pkg_json in "$REPO_ROOT"/packages/*/package.json "$REPO_ROOT"/components/*/package.json; do

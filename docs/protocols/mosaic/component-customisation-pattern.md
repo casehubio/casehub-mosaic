@@ -3,7 +3,7 @@ id: PP-20260713-8ea1af
 title: "Use typed config properties + render callbacks for domain customisation"
 type: rule
 scope: repo
-applies_to: "all blocks-ui components that allow domain-specific extension"
+applies_to: "all mosaic components that allow domain-specific extension"
 severity: important
 refs:
   - components/list-pane/src/list-pane.ts

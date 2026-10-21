@@ -3,7 +3,7 @@ id: PP-20260806-320d50
 title: "Stencil packages must not import from each other — use registry inversion"
 type: rule
 scope: repo
-applies_to: "all graph-stencil-* packages in blocks-ui"
+applies_to: "all graph-stencil-* packages in mosaic"
 severity: important
 refs:
   - packages/graph-stencil-case/src/thumbnail-registry.ts
