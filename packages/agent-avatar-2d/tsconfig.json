@@ -8,6 +8,6 @@
   },
   "include": ["src"],
   "references": [
-    { "path": "../blocks-ui-core" }
+    { "path": "../mosaic-core" }
   ]
 }

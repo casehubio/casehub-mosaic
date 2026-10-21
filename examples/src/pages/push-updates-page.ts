@@ -1,6 +1,6 @@
 import { LitElement, html, css, type TemplateResult } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
-import { formatTimestamp } from '../../../packages/blocks-ui-core/src/rendering/format-timestamp.js';
+import { formatTimestamp } from '../../../packages/mosaic-core/src/rendering/format-timestamp.js';
 
 interface SimulatedEvent {
   timestamp: string;

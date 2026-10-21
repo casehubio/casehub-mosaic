@@ -11,7 +11,7 @@
     "isolatedModules": true,
     "skipLibCheck": true,
     "paths": {
-      "@casehubio/mosaic-core": ["../packages/blocks-ui-core/src"],
+      "@casehubio/mosaic-core": ["../packages/mosaic-core/src"],
       "@casehubio/mosaic-work-item-row": ["../components/work-item-row/src"],
       "@casehubio/mosaic-work-item-inbox": ["../components/work-item-inbox/src"],
       "@casehubio/mosaic-work-item-detail": ["../components/work-item-detail/src"],

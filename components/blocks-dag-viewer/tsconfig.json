@@ -9,6 +9,6 @@
   "include": ["src"],
   "references": [
     { "path": "../../packages/graph-stencil-htn" },
-    { "path": "../../packages/blocks-ui-core" }
+    { "path": "../../packages/mosaic-core" }
   ]
 }

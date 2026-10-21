@@ -9,7 +9,7 @@ export default defineConfig({
     alias: [
       {
         find: '@casehubio/mosaic-core',
-        replacement: path.resolve(__dirname, '../../packages/blocks-ui-core/src'),
+        replacement: path.resolve(__dirname, '../../packages/mosaic-core/src'),
       },
       ...(existsSync(pagesPackage('pages-primitives'))
         ? [{ find: '@casehubio/pages-primitives', replacement: pagesPackage('pages-primitives') }]

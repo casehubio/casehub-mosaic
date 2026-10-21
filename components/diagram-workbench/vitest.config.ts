@@ -4,7 +4,7 @@ import path from 'path';
 export default defineConfig({
   resolve: {
     alias: [
-      { find: '@casehubio/mosaic-core', replacement: path.resolve(__dirname, '../../packages/blocks-ui-core/src') },
+      { find: '@casehubio/mosaic-core', replacement: path.resolve(__dirname, '../../packages/mosaic-core/src') },
       { find: '@casehubio/mosaic-casehub-diagram', replacement: path.resolve(__dirname, '../casehub-diagram/src/casehub-diagram.ts') },
       { find: '@casehubio/mosaic-swf-diagram', replacement: path.resolve(__dirname, '../swf-diagram/src/swf-diagram.ts') },
       { find: '@casehubio/pages-data', replacement: path.resolve(__dirname, '../../.casehub-packages/packages/pages-data/src') },
