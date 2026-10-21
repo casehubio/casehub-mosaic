@@ -1,6 +1,6 @@
 import { LitElement, html, css, nothing, type TemplateResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import type { DeliberationPatternCategory } from '@casehubio/blocks-ui-core';
+import type { DeliberationPatternCategory } from '@casehubio/mosaic-core';
 // flow is vertical through levels — CSS indicators, not SVG arrows
 import './agent-card.js';
 

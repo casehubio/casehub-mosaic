@@ -7,8 +7,8 @@ import {
   badgeStyles,
   roundDividerStyles,
   selectedHighlightStyles,
-} from '../../../packages/blocks-ui-core/src/rendering/index.js';
-import type { EntryCategory } from '../../../packages/blocks-ui-core/src/rendering/status-colours.js';
+} from '../../../packages/mosaic-core/src/rendering/index.js';
+import type { EntryCategory } from '../../../packages/mosaic-core/src/rendering/status-colours.js';
 
 const CATEGORIES: EntryCategory[] = ['neutral', 'success', 'warning', 'error', 'accent'];
 
@@ -56,7 +56,7 @@ export class RenderingPrimitivesPage extends LitElement {
     return html`
       <h2>Shared Rendering Primitives</h2>
       <p style="color: var(--pages-neutral-9, #888); font-size: 13px; margin: 0 0 16px;">
-        Extracted from debate-feed, conversation-viewer, and review-tracker into <code>blocks-ui-core/rendering/</code>.
+        Extracted from debate-feed, conversation-viewer, and review-tracker into <code>mosaic-core/rendering/</code>.
       </p>
 
       ${this._renderEntryCards()}

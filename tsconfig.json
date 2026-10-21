@@ -1,7 +1,7 @@
 {
   "files": [],
   "references": [
-    { "path": "packages/blocks-ui-core/tsconfig.build.json" },
+    { "path": "packages/mosaic-core/tsconfig.build.json" },
     { "path": "packages/graph-stencil-htn/tsconfig.build.json" },
     { "path": "components/approval-gate/tsconfig.build.json" },
     { "path": "components/audit-trail-viewer/tsconfig.build.json" },
@@ -36,7 +36,7 @@
     { "path": "components/execution-monitor/tsconfig.build.json" },
     { "path": "components/orchestration-workbench/tsconfig.build.json" },
     { "path": "components/conversation-viewer/tsconfig.build.json" },
-    { "path": "packages/blocks-ui-schema/tsconfig.build.json" },
+    { "path": "packages/mosaic-schema/tsconfig.build.json" },
     { "path": "packages/graph-stencil-org/tsconfig.build.json" },
     { "path": "components/org-diagram/tsconfig.build.json" },
     { "path": "components/evolution-config/tsconfig.build.json" },

@@ -1,6 +1,6 @@
 import { LitElement, html, css, nothing, type TemplateResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import type { DeliberationPatternCategory } from '@casehubio/blocks-ui-core';
+import type { DeliberationPatternCategory } from '@casehubio/mosaic-core';
 import './agent-card.js';
 
 @customElement('debate-view')
@@ -257,7 +257,7 @@ export class DebateView extends LitElement {
     `;
   }
 
-  private renderDebaterSlot(agent: import('@casehubio/blocks-ui-core').AgentRef, index: number): TemplateResult {
+  private renderDebaterSlot(agent: import('@casehubio/mosaic-core').AgentRef, index: number): TemplateResult {
     const color = DebateView.DEBATER_COLORS[index] ?? '#7f849c';
     const bg = DebateView.DEBATER_BGS[index] ?? 'transparent';
     const border = DebateView.DEBATER_BORDERS[index] ?? 'transparent';

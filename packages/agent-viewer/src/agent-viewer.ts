@@ -1,7 +1,7 @@
 import { LitElement, html, css, nothing, type TemplateResult } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import type { AgentDescriptor } from './agent-types.js';
-import type { PatternCategory, DeliberationPatternCategory, OrchestrationPatternCategory } from '@casehubio/blocks-ui-core';
+import type { PatternCategory, DeliberationPatternCategory, OrchestrationPatternCategory } from '@casehubio/mosaic-core';
 import type { CoordinationStep } from './coordination-types.js';
 import './eidos-view.js';
 import './voting-view.js';

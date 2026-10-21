@@ -7,5 +7,5 @@
     "useDefineForClassFields": false
   },
   "include": ["src"],
-  "references": [{ "path": "../../packages/blocks-ui-core" }]
+  "references": [{ "path": "../../packages/mosaic-core" }]
 }

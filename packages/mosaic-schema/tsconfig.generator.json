@@ -7,8 +7,8 @@
     "useDefineForClassFields": false,
     "paths": {
       "@casehubio/mosaic-*": ["../../components/*/src/index.ts"],
-      "@casehubio/mosaic-core": ["../blocks-ui-core/src/index.ts"],
-      "@casehubio/mosaic-core/*": ["../blocks-ui-core/src/*"]
+      "@casehubio/mosaic-core": ["../mosaic-core/src/index.ts"],
+      "@casehubio/mosaic-core/*": ["../mosaic-core/src/*"]
     }
   },
   "include": ["src"]

@@ -21,7 +21,7 @@ export default defineConfig({
   resolve: {
     alias: [
       { find: '@casehubio/mosaic-agent-avatar-2d', replacement: path.resolve(__dirname, '../../packages/agent-avatar-2d/src') },
-      { find: '@casehubio/mosaic-core', replacement: path.resolve(__dirname, '../../packages/blocks-ui-core/src') },
+      { find: '@casehubio/mosaic-core', replacement: path.resolve(__dirname, '../../packages/mosaic-core/src') },
       { find: '@casehubio/mosaic-graph-stencil-org', replacement: path.resolve(__dirname, '../../packages/graph-stencil-org/src') },
       { find: '@casehubio/pages-diagram-core', replacement: path.resolve(__dirname, '../../.casehub-packages/packages/pages-diagram-core/dist') },
       { find: '@casehubio/graph-core', replacement: path.resolve(__dirname, '../../.casehub-packages/packages/graph-core/dist') },
