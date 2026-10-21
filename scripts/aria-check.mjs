@@ -3,7 +3,7 @@ import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { join, relative } from 'node:path';
 
 const ROOT = new URL('..', import.meta.url).pathname.replace(/\/$/, '');
-const COMPONENT_DIRS = ['components', 'packages/blocks-ui-core/src'];
+const COMPONENT_DIRS = ['components', 'packages/mosaic-core/src'];
 
 const ARIA_PATTERNS = [
   /role[=:"']/,
