@@ -10,6 +10,20 @@
     "test": "vitest run"
   },
   "dependencies": {
+    "@casehubio/mosaic-approval-gate": "workspace:*",
+    "@casehubio/mosaic-blocks-timeline": "workspace:*",
+    "@casehubio/mosaic-case-explorer": "workspace:*",
+    "@casehubio/mosaic-channel-activity": "workspace:*",
+    "@casehubio/mosaic-core": "workspace:*",
+    "@casehubio/mosaic-document-workbench": "workspace:*",
+    "@casehubio/mosaic-graph-stencil-case": "workspace:*",
+    "@casehubio/mosaic-graph-stencil-htn": "workspace:*",
+    "@casehubio/mosaic-graph-stencil-org": "workspace:*",
+    "@casehubio/mosaic-graph-stencil-swf": "workspace:*",
+    "@casehubio/mosaic-kpi-metric-row": "workspace:*",
+    "@casehubio/mosaic-notification-inbox": "workspace:*",
+    "@casehubio/mosaic-preferences-editor": "workspace:*",
+    "@casehubio/mosaic-session-list": "workspace:*",
     "lit": "^3.0.0"
   },
   "devDependencies": {

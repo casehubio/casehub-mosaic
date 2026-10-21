@@ -15,7 +15,7 @@ function fixture(): DeliberationPatternCategory {
       { type: 'all-agreed', resolvedStatuses: ['RESOLVED', 'ACCEPTED'] },
       { type: 'max-iterations', iterations: 14 },
     ],
-    failurePolicy: { onRoutingFailure: 'FAIL', onDeadlock: 'ESCALATE' },
+    failurePolicy: { routingFailureAction: 'fail', aggregationFailureAction: 'escalate' },
     agents: [
       { type: 'worker', name: 'proponent', description: 'Argues in favour', capabilities: ['argumentation'] },
       { type: 'worker', name: 'opponent', description: 'Challenges the position', capabilities: ['critical-analysis'] },
@@ -84,8 +84,8 @@ describe('debate-view', () => {
   });
 
   it('renders failure policy', () => {
-    expect(el.shadowRoot!.textContent).toContain('FAIL');
-    expect(el.shadowRoot!.textContent).toContain('ESCALATE');
+    expect(el.shadowRoot!.textContent).toContain('fail');
+    expect(el.shadowRoot!.textContent).toContain('escalate');
   });
 
   it('renders judge model badge when present', async () => {

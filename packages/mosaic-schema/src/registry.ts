@@ -45,7 +45,6 @@ import type { CommitmentRangeBarProps, CommitmentTransitionBadgeProps } from '@c
 import type { OrgDiagramProps } from '@casehubio/mosaic-org-diagram';
 import type { DenyPatternEditorProps, WatchPatternEditorProps, GatePolicyEditorProps, EvolutionStreamsProps, EvolutionInboxProps } from '@casehubio/mosaic-evolution-config';
 import type { EvolutionWorkbenchProps } from '@casehubio/mosaic-evolution-workbench';
-import type { AgentDetailProps } from '@casehubio/mosaic-agent-detail';
 import type { AgentAvatarProps } from '@casehubio/mosaic-agent-avatar-2d';
 import type { AgentManifestEditorProps } from '@casehubio/agent-manifest-editor';
 import type { AgentProfilePanelProps } from '@casehubio/mosaic-agent-profile-panel';
@@ -114,7 +113,6 @@ export interface BlocksComponentRegistry {
   'blocks-evolution-workbench': EvolutionWorkbenchProps;
   'blocks-evolution-streams': EvolutionStreamsProps;
   'blocks-evolution-inbox': EvolutionInboxProps;
-  'blocks-agent-detail': AgentDetailProps;
   'agent-avatar': AgentAvatarProps;
   'agent-manifest-editor': AgentManifestEditorProps;
   'blocks-agent-profile-panel': AgentProfilePanelProps;

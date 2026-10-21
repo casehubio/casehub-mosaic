@@ -365,8 +365,8 @@ export class DebateView extends LitElement {
       cards.push(html`
         <div class="meta-card">
           <div class="section-label">Failure Policy</div>
-          ${fp.onRoutingFailure ? html`<div class="meta-detail">routing: ${fp.onRoutingFailure}</div>` : nothing}
-          ${fp.onDeadlock ? html`<div class="meta-detail">deadlock: ${fp.onDeadlock}</div>` : nothing}
+          ${fp.routingFailureAction ? html`<div class="meta-detail">routing: ${fp.routingFailureAction}</div>` : nothing}
+          ${fp.aggregationFailureAction ? html`<div class="meta-detail">deadlock: ${fp.aggregationFailureAction}</div>` : nothing}
         </div>
       `);
     }
