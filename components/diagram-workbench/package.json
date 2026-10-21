@@ -18,6 +18,8 @@
   "dependencies": {
     "@casehubio/mosaic-casehub-diagram": "workspace:*",
     "@casehubio/mosaic-core": "workspace:*",
+    "@casehubio/mosaic-graph-stencil-case": "workspace:*",
+    "@casehubio/mosaic-htn-diagram": "workspace:*",
     "@casehubio/mosaic-swf-diagram": "workspace:*",
     "@casehubio/pages-ui-components": "*",
     "lit": "^3.1.0"
