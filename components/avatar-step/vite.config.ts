@@ -4,7 +4,7 @@ import { resolve } from 'path';
 export default defineConfig({
   resolve: {
     alias: {
-      '@casehubio/agent-avatar-2d': resolve(__dirname, '../../packages/agent-avatar-2d/src/index.ts'),
+      '@casehubio/mosaic-agent-avatar-2d': resolve(__dirname, '../../packages/agent-avatar-2d/src/index.ts'),
     },
   },
   esbuild: {

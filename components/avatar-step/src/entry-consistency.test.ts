@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeAll, beforeEach, afterEach } from 'vitest';
-import { registerCollection, mythicCollection } from '@casehubio/agent-avatar-2d';
+import { registerCollection, mythicCollection } from '@casehubio/mosaic-agent-avatar-2d';
 import './avatar-step.js';
-import type { PersonalityProfile } from '@casehubio/blocks-ui-core';
+import type { PersonalityProfile } from '@casehubio/mosaic-core';
 
 type AvatarStepEl = HTMLElement & {
   updateComplete: Promise<boolean>;

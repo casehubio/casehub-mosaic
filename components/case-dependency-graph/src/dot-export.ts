@@ -1,5 +1,5 @@
 import type { GraphModel } from '@casehubio/graph-core';
-import { lookupRelationshipType } from '@casehubio/blocks-ui-core';
+import { lookupRelationshipType } from '@casehubio/mosaic-core';
 
 export function toDOT(model: GraphModel): string {
   const lines: string[] = ['digraph CaseDependencies {'];

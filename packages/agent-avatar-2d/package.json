@@ -1,5 +1,5 @@
 {
-  "name": "@casehubio/agent-avatar-2d",
+  "name": "@casehubio/mosaic-agent-avatar-2d",
   "version": "0.2.0",
   "description": "Archetype-driven 2D avatar system with composable SVG parts",
   "repository": {
@@ -26,7 +26,7 @@
     "clean": "rimraf dist"
   },
   "dependencies": {
-    "@casehubio/blocks-ui-core": "workspace:*",
+    "@casehubio/mosaic-core": "workspace:*",
     "lit": "^3.2.1"
   },
   "devDependencies": {

@@ -1,5 +1,5 @@
 {
-  "name": "@casehubio/blocks-ui-session-workbench",
+  "name": "@casehubio/mosaic-session-workbench",
   "version": "0.2.0",
   "type": "module",
   "main": "dist/index.js",
@@ -16,9 +16,9 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@casehubio/blocks-ui-core": "workspace:*",
-    "@casehubio/blocks-ui-session-detail": "workspace:*",
-    "@casehubio/blocks-ui-session-list": "workspace:*",
+    "@casehubio/mosaic-core": "workspace:*",
+    "@casehubio/mosaic-session-detail": "workspace:*",
+    "@casehubio/mosaic-session-list": "workspace:*",
     "@casehubio/pages-primitives": "*",
     "@casehubio/pages-ui-components": "*",
     "lit": "^3.1.0"

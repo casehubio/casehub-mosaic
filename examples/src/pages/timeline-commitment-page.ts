@@ -1,8 +1,8 @@
 import { LitElement, html, css } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import '@casehubio/blocks-ui-blocks-timeline';
-import { stateProgressionStrategy, linearResolveStatus } from '@casehubio/blocks-ui-blocks-timeline';
-import type { StageConfig } from '@casehubio/blocks-ui-blocks-timeline';
+import '@casehubio/mosaic-blocks-timeline';
+import { stateProgressionStrategy, linearResolveStatus } from '@casehubio/mosaic-blocks-timeline';
+import type { StageConfig } from '@casehubio/mosaic-blocks-timeline';
 
 @customElement('blocks-example-timeline-commitment')
 export class TimelineCommitmentPage extends LitElement {

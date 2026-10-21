@@ -1,7 +1,7 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { emitPagesEvent } from '@casehubio/pages-data';
-import '@casehubio/blocks-ui-core';
+import '@casehubio/mosaic-core';
 import '@casehubio/pages-viz';
 type FieldSchema = Record<string, unknown>;
 import type { ErasureReceipt } from './types.js';

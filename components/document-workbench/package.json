@@ -1,5 +1,5 @@
 {
-  "name": "@casehubio/blocks-ui-document-workbench",
+  "name": "@casehubio/mosaic-document-workbench",
   "version": "0.1.0",
   "description": "Document workbench panels — diff viewer, debate feed, review tracker, timeline, brainstorm",
   "repository": {
@@ -19,7 +19,7 @@
     "clean": "rimraf dist"
   },
   "dependencies": {
-    "@casehubio/blocks-ui-core": "workspace:*",
+    "@casehubio/mosaic-core": "workspace:*",
     "@casehubio/pages-data": "*",
     "lit": "^3.3.3"
   },

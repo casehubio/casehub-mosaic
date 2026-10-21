@@ -1,5 +1,5 @@
 {
-  "name": "@casehubio/blocks-ui-conversation-viewer",
+  "name": "@casehubio/mosaic-conversation-viewer",
   "version": "0.1.0",
   "description": "Conversation protocol viewer — convergence, epistemic status, common ground",
   "repository": {
@@ -19,8 +19,8 @@
     "clean": "rimraf dist"
   },
   "dependencies": {
-    "@casehubio/blocks-ui-commitment-viz": "workspace:*",
-    "@casehubio/blocks-ui-core": "workspace:*",
+    "@casehubio/mosaic-commitment-viz": "workspace:*",
+    "@casehubio/mosaic-core": "workspace:*",
     "@casehubio/pages-component": "*",
     "@casehubio/pages-primitives": "*",
     "@casehubio/pages-ui-components": "*",

@@ -1,5 +1,5 @@
 {
-  "name": "@casehubio/blocks-ui-org-diagram",
+  "name": "@casehubio/mosaic-org-diagram",
   "version": "0.1.0",
   "description": "Eidos org structure visual diagram editor",
   "repository": {
@@ -25,10 +25,10 @@
     "vitest": "^3.0.0"
   },
   "dependencies": {
-    "@casehubio/blocks-ui-core": "workspace:*",
     "@casehubio/graph-core": "*",
     "@casehubio/graph-renderer": "*",
-    "@casehubio/graph-stencil-org": "workspace:*",
+    "@casehubio/mosaic-core": "workspace:*",
+    "@casehubio/mosaic-graph-stencil-org": "workspace:*",
     "@casehubio/pages-data": "*",
     "@casehubio/pages-diagram-core": "*",
     "lit": "^3.3.3"

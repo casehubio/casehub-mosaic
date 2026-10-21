@@ -1,5 +1,5 @@
 {
-  "name": "@casehubio/blocks-ui-case-explorer",
+  "name": "@casehubio/mosaic-case-explorer",
   "version": "0.1.0",
   "description": "Composable case explorer — universal entity browser with registration, state/command SPI, and management actions",
   "repository": {
@@ -19,8 +19,8 @@
     "clean": "rimraf dist"
   },
   "dependencies": {
-    "@casehubio/blocks-ui-core": "workspace:*",
-    "@casehubio/blocks-ui-list-pane": "workspace:*",
+    "@casehubio/mosaic-core": "workspace:*",
+    "@casehubio/mosaic-list-pane": "workspace:*",
     "@casehubio/pages-component": "*",
     "@casehubio/pages-data": "*",
     "@casehubio/pages-primitives": "*",

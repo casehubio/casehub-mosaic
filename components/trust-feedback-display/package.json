@@ -1,5 +1,5 @@
 {
-  "name": "@casehubio/blocks-ui-trust-feedback-display",
+  "name": "@casehubio/mosaic-trust-feedback-display",
   "version": "0.2.2",
   "description": "Post-gate trust score delta — decision, attestation, trust before/after with compact mode",
   "repository": {
@@ -19,7 +19,7 @@
     "clean": "rimraf dist"
   },
   "dependencies": {
-    "@casehubio/blocks-ui-core": "workspace:*",
+    "@casehubio/mosaic-core": "workspace:*",
     "lit": "^3.2.1"
   },
   "devDependencies": {

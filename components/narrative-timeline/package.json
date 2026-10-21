@@ -1,5 +1,5 @@
 {
-  "name": "@casehubio/blocks-ui-narrative-timeline",
+  "name": "@casehubio/mosaic-narrative-timeline",
   "version": "0.1.0",
   "description": "Decision narrative timeline — type-specific signal cards with trust pills, CBR badges, and deliberation indicators",
   "repository": {
@@ -19,7 +19,7 @@
     "clean": "rimraf dist"
   },
   "dependencies": {
-    "@casehubio/blocks-ui-core": "workspace:*",
+    "@casehubio/mosaic-core": "workspace:*",
     "@casehubio/pages-component": "*",
     "@casehubio/pages-data": "*",
     "@casehubio/pages-primitives": "*",

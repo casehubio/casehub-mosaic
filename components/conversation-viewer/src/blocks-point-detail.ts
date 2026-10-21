@@ -1,10 +1,10 @@
 import { LitElement, html, css, nothing, type TemplateResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import '@casehubio/pages-ui-components';
-import { formatTimestamp, statusBorderColour, entryCardStyles, badgeStyles } from '@casehubio/blocks-ui-core';
-import type { EntryCategory } from '@casehubio/blocks-ui-core';
+import { formatTimestamp, statusBorderColour, entryCardStyles, badgeStyles } from '@casehubio/mosaic-core';
+import type { EntryCategory } from '@casehubio/mosaic-core';
 import type { ConversationPoint, ConversationEntry, SubTaskFinding, FlagEntry, ObligationChain } from './types.js';
-import '@casehubio/blocks-ui-core';
+import '@casehubio/mosaic-core';
 
 function entryTypeCategory(entryType: string): EntryCategory {
   switch (entryType) {

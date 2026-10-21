@@ -1,5 +1,5 @@
 {
-  "name": "@casehubio/blocks-ui-core",
+  "name": "@casehubio/mosaic-core",
   "version": "0.2.2",
   "description": "Core utilities for CaseHub UI blocks — theme, dataset helpers, event contracts",
   "repository": {

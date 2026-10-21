@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { toOrgGraph, registerOrgStencils, orgClassificationRules, sizingClassifier, orgLayoutRules, orgHardConstraints } from '@casehubio/graph-stencil-org';
+import { toOrgGraph, registerOrgStencils, orgClassificationRules, sizingClassifier, orgLayoutRules, orgHardConstraints } from '@casehubio/mosaic-graph-stencil-org';
 import { LayoutEngine } from '@casehubio/graph-renderer';
 import { computeElkLayout } from '@casehubio/graph-renderer/layout/elk-layout.js';
 import type { ElkLayoutOptions } from '@casehubio/graph-renderer/layout/elk-layout.js';

@@ -3,7 +3,7 @@ import { customElement, property, state } from 'lit/decorators.js';
 import {
   dagToGraph, dagToDecorations, registerHtnStencils,
   type DagPlanSnapshot, type DagResultSnapshot, type DagDispatchMode, type DagAdapterResult,
-} from '@casehubio/graph-stencil-htn';
+} from '@casehubio/mosaic-graph-stencil-htn';
 import type { NodeDecoration } from '@casehubio/graph-core';
 import { computeElkLayout, toReactFlowGraph } from '@casehubio/graph-renderer';
 import type { ElkLayoutResult } from '@casehubio/graph-renderer';
@@ -98,7 +98,7 @@ export class BlocksDagViewer extends LitElement {
     if (this.dagResult == null || this._adapterResult == null) {
       return { nodeCount: 0, completed: 0, running: 0, failed: 0 };
     }
-    const states = Object.values(this.dagResult.nodeStates) as import('@casehubio/graph-stencil-htn').NodeStateSnapshot[];
+    const states = Object.values(this.dagResult.nodeStates) as import('@casehubio/mosaic-graph-stencil-htn').NodeStateSnapshot[];
     return {
       nodeCount: this._adapterResult.model.nodes.length,
       completed: states.filter(s => s.kind === 'Completed').length,

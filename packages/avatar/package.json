@@ -1,5 +1,5 @@
 {
-  "name": "@casehubio/blocks-ui-avatar",
+  "name": "@casehubio/mosaic-avatar",
   "version": "0.1.0",
   "description": "Avatar speech pipeline — 3D TalkingHead face, streaming transcript, mic capture",
   "repository": {

@@ -1,4 +1,4 @@
-import type { ArchetypeFamily } from '@casehubio/agent-avatar-2d';
+import type { ArchetypeFamily } from '@casehubio/mosaic-agent-avatar-2d';
 import { PROFESSION_PRESETS } from './profession-presets.js';
 
 export type PersonalityFramework = 'mbti' | 'enneagram' | 'disc' | 'belbin' | 'sdi';

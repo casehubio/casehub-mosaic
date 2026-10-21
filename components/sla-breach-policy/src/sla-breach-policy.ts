@@ -1,7 +1,7 @@
 import { LitElement, html, css, nothing } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { pulseAnimation } from '@casehubio/pages-ui-tokens';
-import '@casehubio/blocks-ui-sla-indicator';
+import '@casehubio/mosaic-sla-indicator';
 import type { TierDefinition } from './types.js';
 
 export interface SlaBreachPolicyProps {

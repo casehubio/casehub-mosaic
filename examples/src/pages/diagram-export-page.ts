@@ -1,10 +1,10 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
-import { createSwfThumbnailRenderer, registerSwfStencils } from '@casehubio/graph-stencil-swf';
-import { registerThumbnailRenderer } from '@casehubio/graph-stencil-case';
-import '@casehubio/blocks-ui-casehub-diagram';
-import '@casehubio/blocks-ui-swf-diagram';
+import { createSwfThumbnailRenderer, registerSwfStencils } from '@casehubio/mosaic-graph-stencil-swf';
+import { registerThumbnailRenderer } from '@casehubio/mosaic-graph-stencil-case';
+import '@casehubio/mosaic-casehub-diagram';
+import '@casehubio/mosaic-swf-diagram';
 
 registerSwfStencils();
 registerThumbnailRenderer('swf', createSwfThumbnailRenderer());

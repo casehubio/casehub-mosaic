@@ -3,8 +3,8 @@ import { customElement, property, state } from 'lit/decorators.js';
 import { emitPagesEvent } from '@casehubio/pages-data';
 import { PagesConfirmDialog } from '@casehubio/pages-ui-components';
 import { FocusTrapMixin, LiveRegionMixin } from '@casehubio/pages-primitives/a11y';
-import type { WorkIdentity } from '@casehubio/blocks-ui-core';
-import '@casehubio/blocks-ui-sla-indicator';
+import type { WorkIdentity } from '@casehubio/mosaic-core';
+import '@casehubio/mosaic-sla-indicator';
 
 export const ApprovalGateTopics = {
   DECIDED: 'gate.decided',

@@ -1,5 +1,5 @@
 {
-  "name": "@casehubio/blocks-ui-agent-profile",
+  "name": "@casehubio/mosaic-agent-profile",
   "version": "0.1.0",
   "description": "Agent character sheet with disposition radar, capabilities, inline edit",
   "repository": {
@@ -19,8 +19,8 @@
     "clean": "rimraf dist"
   },
   "dependencies": {
-    "@casehubio/agent-avatar-2d": "workspace:*",
-    "@casehubio/blocks-ui-core": "workspace:*",
+    "@casehubio/mosaic-agent-avatar-2d": "workspace:*",
+    "@casehubio/mosaic-core": "workspace:*",
     "lit": "^3.2.1"
   },
   "devDependencies": {

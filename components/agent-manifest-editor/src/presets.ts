@@ -1,4 +1,4 @@
-import type { Manifest, ModelDescriptor, AliasDeclaration } from '@casehubio/blocks-ui-core';
+import type { Manifest, ModelDescriptor, AliasDeclaration } from '@casehubio/mosaic-core';
 
 export interface PresetTemplate {
   id: string;

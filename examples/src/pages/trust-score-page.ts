@@ -8,7 +8,7 @@ import { simulated } from '@casehubio/pages-data/dist/datasource/sources/simulat
 import { addRow } from '@casehubio/pages-data/dist/datasource/sources/simulated/mutations.js';
 import { createScenarioController } from '@casehubio/pages-data/dist/datasource/controller.js';
 import { ColumnType, columnId } from '@casehubio/pages-data/dist/dataset/types.js';
-import type { TrendPoint } from '@casehubio/blocks-ui-core';
+import type { TrendPoint } from '@casehubio/mosaic-core';
 import type { DataSource } from '@casehubio/pages-data/dist/datasource/types.js';
 import type { ExternalColumnDef } from '@casehubio/pages-data/dist/dataset/external/types.js';
 

@@ -1,8 +1,8 @@
 import { LitElement, html, css, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import type { FullAgentDescriptor, PersonalityProfile } from '@casehubio/blocks-ui-core';
-import { deriveDispositions, type AxisScore } from '@casehubio/avatar-step';
-import '@casehubio/agent-avatar-2d';
+import type { FullAgentDescriptor, PersonalityProfile } from '@casehubio/mosaic-core';
+import { deriveDispositions, type AxisScore } from '@casehubio/mosaic-avatar-step';
+import '@casehubio/mosaic-agent-avatar-2d';
 
 function radarPoint(cx: number, cy: number, r: number, index: number, total: number): [number, number] {
   const angle = (Math.PI * 2 * index) / total - Math.PI / 2;

@@ -1,5 +1,5 @@
 {
-  "name": "@casehubio/blocks-ui-compliance-summary",
+  "name": "@casehubio/mosaic-compliance-summary",
   "version": "0.2.2",
   "description": "Regulation compliance grid — status badges, evidence links via pages-table",
   "repository": {
@@ -19,7 +19,7 @@
     "clean": "rimraf dist"
   },
   "dependencies": {
-    "@casehubio/blocks-ui-core": "workspace:*",
+    "@casehubio/mosaic-core": "workspace:*",
     "@casehubio/pages-data": "*",
     "@casehubio/pages-table": "*",
     "lit": "^3.2.1"

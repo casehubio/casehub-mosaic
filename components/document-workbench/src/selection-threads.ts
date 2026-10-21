@@ -1,7 +1,7 @@
 import { LitElement, html, css, nothing } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
 import { onPagesEvent } from '@casehubio/pages-data';
-import { formatTimestamp } from '@casehubio/blocks-ui-core';
+import { formatTimestamp } from '@casehubio/mosaic-core';
 import type { ThreadStreamEntry, ThreadAnchor, ThreadInfo } from './types.js';
 
 const AGENT_LABELS: Record<string, string> = {

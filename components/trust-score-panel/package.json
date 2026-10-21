@@ -1,5 +1,5 @@
 {
-  "name": "@casehubio/blocks-ui-trust-score-panel",
+  "name": "@casehubio/mosaic-trust-score-panel",
   "version": "0.2.2",
   "description": "Agent trust score visualisation — Bayesian Beta scores, trend lines, per-capability breakdown",
   "repository": {
@@ -19,7 +19,7 @@
     "clean": "rimraf dist"
   },
   "dependencies": {
-    "@casehubio/blocks-ui-core": "workspace:*",
+    "@casehubio/mosaic-core": "workspace:*",
     "@casehubio/pages-data": "*",
     "@casehubio/pages-primitives": "*",
     "@casehubio/pages-table": "*",

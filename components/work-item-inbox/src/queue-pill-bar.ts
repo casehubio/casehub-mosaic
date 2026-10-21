@@ -6,7 +6,7 @@ import {
   type QueueSummaryEntry,
   type QueueScopeChangedPayload,
   WorkItemEventTopics,
-} from '@casehubio/blocks-ui-core';
+} from '@casehubio/mosaic-core';
 
 @customElement('blocks-queue-pill-bar')
 export class QueuePillBar extends LitElement {

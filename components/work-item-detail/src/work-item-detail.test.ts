@@ -1,8 +1,8 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
-import '@casehubio/blocks-ui-core'; // Ensure schema-form is registered
+import '@casehubio/mosaic-core'; // Ensure schema-form is registered
 import './work-item-detail.js';
 import type { WorkItemDetail } from './work-item-detail.js';
-import type { WorkItemResponse, WorkIdentity } from '@casehubio/blocks-ui-core';
+import type { WorkItemResponse, WorkIdentity } from '@casehubio/mosaic-core';
 
 describe('WorkItemDetail', () => {
   let element: WorkItemDetail;

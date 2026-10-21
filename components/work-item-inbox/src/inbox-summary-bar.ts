@@ -1,6 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import type { InboxSummary } from '@casehubio/blocks-ui-core';
+import type { InboxSummary } from '@casehubio/mosaic-core';
 
 export interface FilterClickDetail {
   type: 'overdue' | 'claimDeadlineBreached';

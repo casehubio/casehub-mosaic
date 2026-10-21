@@ -1,9 +1,9 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
 import { columnId } from '@casehubio/pages-data/dist/dataset/types.js';
-import '@casehubio/blocks-ui-case-explorer';
-import { caseInstanceType, workerType } from '@casehubio/blocks-ui-case-explorer';
-import type { EntityTypeRegistration, EntityListResponse, EntityInstance, EntityTreeNode } from '@casehubio/blocks-ui-case-explorer';
+import '@casehubio/mosaic-case-explorer';
+import { caseInstanceType, workerType } from '@casehubio/mosaic-case-explorer';
+import type { EntityTypeRegistration, EntityListResponse, EntityInstance, EntityTreeNode } from '@casehubio/mosaic-case-explorer';
 
 const MOCK_CASES: EntityInstance[] = [
   {

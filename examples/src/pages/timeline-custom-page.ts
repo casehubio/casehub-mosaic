@@ -1,7 +1,7 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
-import '@casehubio/blocks-ui-blocks-timeline';
-import type { EventTimelineNode, EventTimelineLayout, BlocksTimelineStrategy } from '@casehubio/blocks-ui-blocks-timeline';
+import '@casehubio/mosaic-blocks-timeline';
+import type { EventTimelineNode, EventTimelineLayout, BlocksTimelineStrategy } from '@casehubio/mosaic-blocks-timeline';
 import type { TemplateResult } from 'lit';
 
 interface DeployStage {

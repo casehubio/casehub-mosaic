@@ -1,5 +1,5 @@
 {
-  "name": "@casehubio/blocks-ui-evolution-workbench",
+  "name": "@casehubio/mosaic-evolution-workbench",
   "version": "0.1.0",
   "type": "module",
   "main": "dist/index.js",
@@ -12,13 +12,13 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@casehubio/blocks-ui-audit-trail-viewer": "workspace:*",
-    "@casehubio/blocks-ui-compliance-summary": "workspace:*",
-    "@casehubio/blocks-ui-core": "workspace:*",
-    "@casehubio/blocks-ui-detail-pane": "workspace:*",
-    "@casehubio/blocks-ui-evolution-config": "workspace:*",
-    "@casehubio/blocks-ui-kpi-metric-row": "workspace:*",
-    "@casehubio/blocks-ui-trust-score-panel": "workspace:*",
+    "@casehubio/mosaic-audit-trail-viewer": "workspace:*",
+    "@casehubio/mosaic-compliance-summary": "workspace:*",
+    "@casehubio/mosaic-core": "workspace:*",
+    "@casehubio/mosaic-detail-pane": "workspace:*",
+    "@casehubio/mosaic-evolution-config": "workspace:*",
+    "@casehubio/mosaic-kpi-metric-row": "workspace:*",
+    "@casehubio/mosaic-trust-score-panel": "workspace:*",
     "@casehubio/pages-component": "*",
     "@casehubio/pages-data": "*",
     "@casehubio/pages-primitives": "*",

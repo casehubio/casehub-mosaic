@@ -1,5 +1,5 @@
 {
-  "name": "@casehubio/blocks-ui-htn-diagram",
+  "name": "@casehubio/mosaic-htn-diagram",
   "version": "0.1.0",
   "description": "HTN decomposition tree diagram component",
   "repository": {
@@ -27,7 +27,7 @@
   "dependencies": {
     "@casehubio/graph-core": "*",
     "@casehubio/graph-renderer": "*",
-    "@casehubio/graph-stencil-htn": "workspace:*",
+    "@casehubio/mosaic-graph-stencil-htn": "workspace:*",
     "@casehubio/pages-diagram-core": "*",
     "lit": "^3.3.3"
   },

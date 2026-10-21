@@ -2,7 +2,7 @@ import type { ReactiveController, ReactiveControllerHost } from 'lit';
 import type { PushController, DatasetOp } from './push-controller.js';
 import type { ChannelStateController } from './channel-state-controller.js';
 import type { CommitmentState } from './types.js';
-import type { CommitmentRecord } from '@casehubio/blocks-ui-core';
+import type { CommitmentRecord } from '@casehubio/mosaic-core';
 import { ChannelEventTopics } from './events.js';
 import type { MessageSelectedPayload } from './events.js';
 

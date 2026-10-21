@@ -9,15 +9,15 @@ const profilePanelSrc = resolve(__dirname, 'components/agent-profile-panel/src/i
 export default defineConfig({
   resolve: {
     alias: [
-      { find: '@casehubio/agent-avatar-2d', replacement: avatarSrc },
-      { find: '@casehubio/avatar-step', replacement: avatarStepSrc },
-      { find: '@casehubio/agent-catalog', replacement: catalogSrc },
-      { find: '@casehubio/blocks-ui-agent-profile-panel', replacement: profilePanelSrc },
+      { find: '@casehubio/mosaic-agent-avatar-2d', replacement: avatarSrc },
+      { find: '@casehubio/mosaic-avatar-step', replacement: avatarStepSrc },
+      { find: '@casehubio/mosaic-agent-catalog', replacement: catalogSrc },
+      { find: '@casehubio/mosaic-agent-profile-panel', replacement: profilePanelSrc },
     ],
-    dedupe: ['@casehubio/agent-avatar-2d', 'lit', '@lit/reactive-element'],
+    dedupe: ['@casehubio/mosaic-agent-avatar-2d', 'lit', '@lit/reactive-element'],
   },
   optimizeDeps: {
-    exclude: ['@casehubio/agent-avatar-2d', '@casehubio/avatar-step', '@casehubio/agent-catalog', '@casehubio/blocks-ui-agent-profile-panel'],
+    exclude: ['@casehubio/mosaic-agent-avatar-2d', '@casehubio/mosaic-avatar-step', '@casehubio/mosaic-agent-catalog', '@casehubio/mosaic-agent-profile-panel'],
   },
   esbuild: {
     target: 'es2022',

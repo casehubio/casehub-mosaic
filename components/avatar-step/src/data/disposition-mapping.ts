@@ -1,4 +1,4 @@
-import type { PersonalityProfile } from '@casehubio/blocks-ui-core';
+import type { PersonalityProfile } from '@casehubio/mosaic-core';
 import type { BigFiveDimension, BigFivePole } from './compatibility-matrix.js';
 
 export type CanonicalAxis = 'socialOrientation' | 'ruleFollowing' | 'riskAppetite' | 'autonomy' | 'conflictMode';

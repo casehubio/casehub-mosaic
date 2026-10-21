@@ -1,5 +1,5 @@
 {
-  "name": "@casehubio/blocks-ui-blocks-timeline",
+  "name": "@casehubio/mosaic-blocks-timeline",
   "version": "0.2.2",
   "description": "Pluggable timeline — vertical, horizontal, compact layouts with strategy-based content",
   "repository": {
@@ -19,7 +19,7 @@
     "clean": "rimraf dist"
   },
   "dependencies": {
-    "@casehubio/blocks-ui-core": "workspace:*",
+    "@casehubio/mosaic-core": "workspace:*",
     "@casehubio/pages-data": "*",
     "@casehubio/pages-primitives": "*",
     "lit": "^3.2.0"

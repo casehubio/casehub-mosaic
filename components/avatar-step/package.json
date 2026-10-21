@@ -1,5 +1,5 @@
 {
-  "name": "@casehubio/avatar-step",
+  "name": "@casehubio/mosaic-avatar-step",
   "version": "0.0.1",
   "type": "module",
   "main": "src/index.ts",
@@ -11,8 +11,8 @@
     "registry": "https://npm.pkg.github.com"
   },
   "dependencies": {
-    "@casehubio/agent-avatar-2d": "workspace:*",
-    "@casehubio/blocks-ui-core": "workspace:*",
+    "@casehubio/mosaic-agent-avatar-2d": "workspace:*",
+    "@casehubio/mosaic-core": "workspace:*",
     "lit": "^3.0.0"
   },
   "devDependencies": {

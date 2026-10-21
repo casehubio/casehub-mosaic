@@ -1,5 +1,5 @@
 {
-  "name": "@casehubio/lsp-schemas",
+  "name": "@casehubio/mosaic-lsp-schemas",
   "version": "0.1.0",
   "description": "Domain YAML format schemas and wrapper LSP server for CaseHub",
   "repository": {
@@ -27,8 +27,8 @@
     "clean": "rimraf dist"
   },
   "dependencies": {
-    "@casehubio/blocks-ui-casehub-diagram": "workspace:*",
-    "@casehubio/blocks-ui-core": "workspace:*",
+    "@casehubio/mosaic-casehub-diagram": "workspace:*",
+    "@casehubio/mosaic-core": "workspace:*",
     "@casehubio/pages-lsp": "*",
     "@casehubio/pages-schema": "*",
     "vscode-languageserver": "^10.0.0",

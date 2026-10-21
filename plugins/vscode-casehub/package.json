@@ -43,7 +43,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@casehubio/lsp-schemas": "workspace:*",
+    "@casehubio/mosaic-lsp-schemas": "workspace:*",
     "vscode-languageclient": "^10.0.0"
   },
   "devDependencies": {

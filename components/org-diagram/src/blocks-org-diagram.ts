@@ -23,14 +23,14 @@ import {
   sizingClassifier,
   orgLayoutRules,
   orgHardConstraints,
-} from '@casehubio/graph-stencil-org';
+} from '@casehubio/mosaic-graph-stencil-org';
 import type {
   ArchetypeHint,
   OrgLayoutStrategy,
   AgentDescriptor,
   DerivedOrgData,
   FactBase,
-} from '@casehubio/graph-stencil-org';
+} from '@casehubio/mosaic-graph-stencil-org';
 import { computeElkLayout } from '@casehubio/graph-renderer';
 import type { ElkLayoutOptions, EditPolicy, GraphEdit } from '@casehubio/graph-renderer';
 import { emitPagesEvent } from '@casehubio/pages-data';
@@ -46,15 +46,15 @@ import './panels/tooltip.js';
 import './panels/edge-tooltip.js';
 import type { OrgTooltip } from './panels/tooltip.js';
 import type { OrgEdgeTooltip } from './panels/edge-tooltip.js';
-import type { OrgAgentNodeData } from '@casehubio/graph-stencil-org';
+import type { OrgAgentNodeData } from '@casehubio/mosaic-graph-stencil-org';
 import {
   mythicCollection,
   chibiCollection,
   neonCollection,
   simpsonsCollection,
   registerCollection,
-} from '@casehubio/agent-avatar-2d';
-import type { AvatarCollection } from '@casehubio/agent-avatar-2d';
+} from '@casehubio/mosaic-agent-avatar-2d';
+import type { AvatarCollection } from '@casehubio/mosaic-agent-avatar-2d';
 
 const orgEditPolicy = createOrgEditPolicy();
 

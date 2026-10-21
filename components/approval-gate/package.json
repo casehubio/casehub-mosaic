@@ -1,5 +1,5 @@
 {
-  "name": "@casehubio/blocks-ui-approval-gate",
+  "name": "@casehubio/mosaic-approval-gate",
   "version": "0.2.2",
   "type": "module",
   "main": "dist/index.js",
@@ -11,8 +11,8 @@
     "clean": "rimraf dist"
   },
   "dependencies": {
-    "@casehubio/blocks-ui-core": "workspace:*",
-    "@casehubio/blocks-ui-sla-indicator": "workspace:*",
+    "@casehubio/mosaic-core": "workspace:*",
+    "@casehubio/mosaic-sla-indicator": "workspace:*",
     "@casehubio/pages-primitives": "*",
     "lit": "^3.0.0"
   },

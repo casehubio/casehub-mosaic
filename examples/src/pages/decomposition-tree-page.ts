@@ -1,7 +1,7 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
-import '@casehubio/blocks-ui-blocks-decomposition-tree';
-import type { DecompositionSnapshot, NodeStateSnapshot } from '@casehubio/graph-stencil-htn';
+import '@casehubio/mosaic-blocks-decomposition-tree';
+import type { DecompositionSnapshot, NodeStateSnapshot } from '@casehubio/mosaic-graph-stencil-htn';
 import mockData from '../../mock-data/decomposition.json';
 
 @customElement('blocks-example-decomposition-tree')

@@ -1,6 +1,6 @@
 import { LitElement, html, css, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import type { WorkIdentity } from '@casehubio/blocks-ui-core';
+import type { WorkIdentity } from '@casehubio/mosaic-core';
 import '@casehubio/pages-viz';
 type FieldSchema = Record<string, unknown>;
 import type {

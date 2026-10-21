@@ -1,8 +1,8 @@
 import { LitElement, html, css } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import { createSwfThumbnailRenderer, registerSwfStencils } from '@casehubio/graph-stencil-swf';
-import { registerThumbnailRenderer } from '@casehubio/graph-stencil-case';
-import '@casehubio/blocks-ui-diagram-workbench';
+import { createSwfThumbnailRenderer, registerSwfStencils } from '@casehubio/mosaic-graph-stencil-swf';
+import { registerThumbnailRenderer } from '@casehubio/mosaic-graph-stencil-case';
+import '@casehubio/mosaic-diagram-workbench';
 
 registerSwfStencils();
 registerThumbnailRenderer('swf', createSwfThumbnailRenderer());

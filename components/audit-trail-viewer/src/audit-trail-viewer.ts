@@ -3,7 +3,7 @@ import { customElement, property, state } from 'lit/decorators.js';
 import { DataSourceAdapter } from '@casehubio/pages-component';
 import { renderPropertyTree, propertyTreeStyles } from '@casehubio/pages-ui-components';
 import { LiveRegionMixin } from '@casehubio/pages-primitives/a11y';
-import type { WorkIdentity } from '@casehubio/blocks-ui-core';
+import type { WorkIdentity } from '@casehubio/mosaic-core';
 import type { LedgerEntry, VerificationResult, Attestation } from './types.js';
 import '@casehubio/pages-ui-components/event-trail';
 import { columnId, ColumnType } from '@casehubio/pages-data';

@@ -1,7 +1,7 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
-import '@casehubio/blocks-ui-session-workbench';
-import type { SessionResponse } from '@casehubio/blocks-ui-session-list';
+import '@casehubio/mosaic-session-workbench';
+import type { SessionResponse } from '@casehubio/mosaic-session-list';
 
 const MOCK_SESSIONS: SessionResponse[] = [
   {

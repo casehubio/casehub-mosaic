@@ -1,6 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import '@casehubio/blocks-ui-orchestration-workbench';
+import '@casehubio/mosaic-orchestration-workbench';
 import mockData from '../../mock-data/execution.json';
 
 @customElement('blocks-example-orchestration-workbench')

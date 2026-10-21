@@ -1,7 +1,7 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
-import '@casehubio/blocks-ui-execution-monitor';
-import type { ExecutionSnapshot, ExecutionState } from '@casehubio/blocks-ui-core';
+import '@casehubio/mosaic-execution-monitor';
+import type { ExecutionSnapshot, ExecutionState } from '@casehubio/mosaic-core';
 import mockData from '../../mock-data/execution.json';
 
 const BASE_SNAPSHOT = mockData.snapshot as unknown as ExecutionSnapshot;

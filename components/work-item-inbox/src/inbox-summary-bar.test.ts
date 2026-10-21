@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
-import type { InboxSummary } from '@casehubio/blocks-ui-core';
+import type { InboxSummary } from '@casehubio/mosaic-core';
 import './inbox-summary-bar.js';
 
 const mockSummary: InboxSummary = {

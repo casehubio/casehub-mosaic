@@ -1,6 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
-import '@casehubio/blocks-ui-swf-diagram';
+import '@casehubio/mosaic-swf-diagram';
 
 const PIPELINE_YAML = `document:
   dsl: '1.0.3'

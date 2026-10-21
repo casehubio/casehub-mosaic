@@ -2,12 +2,12 @@ import { LitElement, html, css, nothing, type TemplateResult } from 'lit';
 import { html as staticHtml, unsafeStatic } from 'lit/static-html.js';
 import { customElement, property, state } from 'lit/decorators.js';
 import { onPagesEvent } from '@casehubio/pages-data';
-import type { CaseRuntimeState } from '@casehubio/graph-stencil-case';
-import { DIAGRAM_TAGS } from '@casehubio/blocks-ui-core';
+import type { CaseRuntimeState } from '@casehubio/mosaic-graph-stencil-case';
+import { DIAGRAM_TAGS } from '@casehubio/mosaic-core';
 
-import '@casehubio/blocks-ui-casehub-diagram';
-import '@casehubio/blocks-ui-swf-diagram';
-import '@casehubio/blocks-ui-htn-diagram';
+import '@casehubio/mosaic-casehub-diagram';
+import '@casehubio/mosaic-swf-diagram';
+import '@casehubio/mosaic-htn-diagram';
 
 interface DrillDownLevel {
   name: string;
