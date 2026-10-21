@@ -1,6 +1,6 @@
 import { LitElement, html, css, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import type { ModelDescriptor, ProviderDeclaration } from '@casehubio/blocks-ui-core';
+import type { ModelDescriptor, ProviderDeclaration } from '@casehubio/mosaic-core';
 import { getInferenceRanges, parseInferenceFromProperties, writeInferenceToProperties, getAuthPatterns, getDefaultAuthPattern } from './provider-defaults.js';
 import type { InferenceDefaults, ProviderInferenceRanges, AuthPattern, AuthField } from './provider-defaults.js';
 

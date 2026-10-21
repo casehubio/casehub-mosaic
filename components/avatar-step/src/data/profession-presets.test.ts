@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { PROFESSION_PRESETS, PROFESSION_LIST } from './profession-presets.js';
-import { ARCHETYPE_CONFIGS } from '@casehubio/agent-avatar-2d';
+import { ARCHETYPE_CONFIGS } from '@casehubio/mosaic-agent-avatar-2d';
 
 describe('PROFESSION_PRESETS', () => {
   it('has at least 5 professions', () => {

@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { toGraph } from '@casehubio/graph-stencil-case';
+import { toGraph } from '@casehubio/mosaic-graph-stencil-case';
 import { computeElkLayout, toReactFlowGraph, validateEdgeRouting } from '@casehubio/graph-renderer';
 
 function extractYaml(file: string): string {

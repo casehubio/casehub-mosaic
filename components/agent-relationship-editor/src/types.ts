@@ -1,4 +1,4 @@
-import type { AgentRelationship } from '@casehubio/graph-stencil-org';
+import type { AgentRelationship } from '@casehubio/mosaic-graph-stencil-org';
 
 export interface RelationshipChangeset {
   additions: AgentRelationship[];

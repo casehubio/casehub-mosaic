@@ -1,5 +1,5 @@
-import type { CommitmentRecord } from '@casehubio/blocks-ui-core';
-import { commitmentStateCategory, isTerminalCommitmentState } from '@casehubio/blocks-ui-core';
+import type { CommitmentRecord } from '@casehubio/mosaic-core';
+import { commitmentStateCategory, isTerminalCommitmentState } from '@casehubio/mosaic-core';
 import type { DecorableMessage, RangeDecoration } from './types.js';
 
 export function decorateCommitmentRanges(

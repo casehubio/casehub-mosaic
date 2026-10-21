@@ -112,7 +112,7 @@ jobs:
       - name: Publish Maven npm-packages artifact
         run: |
           mvn -f npm-packages/pom.xml --batch-mode install
-          mvn -f npm-packages/pom.xml --batch-mode deploy -DaltDeploymentRepository=github::https://maven.pkg.github.com/casehubio/blocks-ui -DaltSnapshotDeploymentRepository=github::https://maven.pkg.github.com/casehubio/blocks-ui
+          mvn -f npm-packages/pom.xml --batch-mode deploy -DaltDeploymentRepository=github::https://maven.pkg.github.com/casehubio/casehub-mosaic -DaltSnapshotDeploymentRepository=github::https://maven.pkg.github.com/casehubio/casehub-mosaic
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 

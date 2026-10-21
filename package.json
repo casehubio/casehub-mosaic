@@ -1,8 +1,8 @@
 {
-  "name": "casehub-blocks-ui",
+  "name": "casehub-mosaic",
   "version": "0.0.0",
-  "description": "Shared UI components for CaseHub applications — composed from casehub-pages primitives",
-  "repository": "https://github.com/casehubio/blocks-ui",
+  "description": "CaseHub Mosaic — shared visual layer composed from casehub-pages primitives",
+  "repository": "https://github.com/casehubio/casehub-mosaic",
   "author": "Mark Proctor",
   "license": "Apache-2.0",
   "private": true,
@@ -34,7 +34,7 @@
     "@casehubio/pages-document": "portal:./.casehub-packages/packages/pages-document"
   },
   "scripts": {
-    "build": "yarn workspaces foreach -A --topological run build && yarn workspace @casehubio/blocks-ui-schema run generate",
+    "build": "yarn workspaces foreach -A --topological run build && yarn workspace @casehubio/mosaic-schema run generate",
     "typecheck": "tsc --build",
     "test": "yarn workspaces foreach -A run test",
     "clean": "yarn workspaces foreach -A run clean",

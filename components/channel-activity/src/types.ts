@@ -14,7 +14,7 @@ export {
   type StateCategory,
   commitmentStateCategory,
   isTerminalCommitmentState,
-} from '@casehubio/blocks-ui-core';
+} from '@casehubio/mosaic-core';
 
 export const CHANNEL_SEMANTICS = [
   'APPEND', 'COLLECT', 'BARRIER', 'EPHEMERAL', 'LAST_WRITE',

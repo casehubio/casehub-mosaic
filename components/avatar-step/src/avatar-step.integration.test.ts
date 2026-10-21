@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeAll, beforeEach, afterEach } from 'vitest';
-import { registerCollection, mythicCollection, chibiCollection, simpsonsCollection, neonCollection } from '@casehubio/agent-avatar-2d';
+import { registerCollection, mythicCollection, chibiCollection, simpsonsCollection, neonCollection } from '@casehubio/mosaic-agent-avatar-2d';
 import './avatar-step.js';
 
 type AvatarStepEl = HTMLElement & {

@@ -1,5 +1,5 @@
 {
-  "name": "@casehubio/graph-stencil-swf",
+  "name": "@casehubio/mosaic-graph-stencil-swf",
   "version": "0.1.0",
   "description": "SWF domain adapter using @openworkflowspec/sdk for graph editor",
   "repository": {

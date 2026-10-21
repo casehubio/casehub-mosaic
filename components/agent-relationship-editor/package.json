@@ -1,5 +1,5 @@
 {
-  "name": "@casehubio/blocks-ui-agent-relationship-editor",
+  "name": "@casehubio/mosaic-agent-relationship-editor",
   "version": "0.1.0",
   "description": "Agent relationship table editor with grouped sections and changeset emission",
   "repository": {
@@ -19,10 +19,10 @@
     "clean": "rimraf dist"
   },
   "dependencies": {
-    "@casehubio/agent-avatar-2d": "workspace:*",
-    "@casehubio/blocks-ui-core": "workspace:*",
-    "@casehubio/blocks-ui-org-diagram": "workspace:*",
-    "@casehubio/graph-stencil-org": "workspace:*",
+    "@casehubio/mosaic-agent-avatar-2d": "workspace:*",
+    "@casehubio/mosaic-core": "workspace:*",
+    "@casehubio/mosaic-graph-stencil-org": "workspace:*",
+    "@casehubio/mosaic-org-diagram": "workspace:*",
     "lit": "^3.2.1"
   },
   "devDependencies": {

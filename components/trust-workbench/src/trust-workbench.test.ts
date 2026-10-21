@@ -20,8 +20,8 @@ Object.defineProperty(global, 'IntersectionObserver', { value: IntersectionObser
 
 import './trust-workbench.js';
 import type { RoutingDecisionSummary, RoutingDecisionDetail } from './types.js';
-import type { RoutingRationaleData, CandidateScore } from '@casehubio/blocks-ui-routing-rationale';
-import type { GateDecision } from '@casehubio/blocks-ui-trust-feedback-display';
+import type { RoutingRationaleData, CandidateScore } from '@casehubio/mosaic-routing-rationale';
+import type { GateDecision } from '@casehubio/mosaic-trust-feedback-display';
 
 type TrustWorkbenchEl = HTMLElement & {
   endpoint: string;

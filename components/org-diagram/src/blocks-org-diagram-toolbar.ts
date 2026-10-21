@@ -1,6 +1,6 @@
 import { LitElement, html, css, nothing } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import type { ArchetypeName, OrgLayoutStrategy } from '@casehubio/graph-stencil-org';
+import type { ArchetypeName, OrgLayoutStrategy } from '@casehubio/mosaic-graph-stencil-org';
 
 const ALL_STRATEGIES: OrgLayoutStrategy[] = [
   'star', 'tree', 'circular', 'layered', 'nested',

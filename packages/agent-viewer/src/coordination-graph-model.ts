@@ -40,6 +40,7 @@ export function assignTiers(phases: PhaseItem[]): TierElement[] {
 
   for (let i = 0; i < phases.length; i++) {
     const phase = phases[i];
+    if (!phase) continue;
     const lastElement = elements.length > 0 ? elements[elements.length - 1] : undefined;
 
     switch (phase.type) {
@@ -54,10 +55,12 @@ export function assignTiers(phases: PhaseItem[]): TierElement[] {
         elements.push({ kind: 'tier', nodes: [node] });
         if (phase.routing) {
           elements.push({ kind: 'connector', type: 'outcomes' });
-          const outcomeNodes: GraphNode[] = phase.routing.cases.map(c => ({
-            step: c.step,
-            colorHint: COLOR_HINT_MAP[c.pattern] ?? (c.step.iconColor as 'green' | 'amber' | 'red' | undefined),
-          }));
+          const outcomeNodes: GraphNode[] = phase.routing.cases.map(c => {
+            const hint = COLOR_HINT_MAP[c.pattern] ?? (c.step.iconColor as 'green' | 'amber' | 'red' | undefined);
+            const node: GraphNode = { step: c.step };
+            if (hint) node.colorHint = hint;
+            return node;
+          });
           elements.push({ kind: 'tier', nodes: outcomeNodes });
         }
         break;
@@ -70,7 +73,7 @@ export function assignTiers(phases: PhaseItem[]): TierElement[] {
           elements.push({
             kind: 'connector',
             type: 'flow',
-            barrier: { type: 'signal', name: phase.name, description: phase.description },
+            barrier: { type: 'signal', name: phase.name, ...(phase.description != null ? { description: phase.description } : {}) },
           });
         }
         break;
@@ -79,19 +82,19 @@ export function assignTiers(phases: PhaseItem[]): TierElement[] {
         const laneNames = Object.keys(phase.lanes);
         const prevPhase = i > 0 ? phases[i - 1] : undefined;
         const signalBarrier = prevPhase?.type === 'signal'
-          ? { type: 'signal' as const, name: prevPhase.name, description: prevPhase.description }
+          ? { type: 'signal' as const, name: prevPhase.name, ...(prevPhase.description != null ? { description: prevPhase.description } : {}) }
           : undefined;
 
         elements.push({
           kind: 'connector',
           type: 'fan-out',
           labels: laneNames,
-          barrier: signalBarrier,
+          ...(signalBarrier ? { barrier: signalBarrier } : {}),
         });
 
         const nodes: GraphNode[] = laneNames.map(name => {
-          const steps = phase.lanes[name];
-          const node: GraphNode = { step: steps[0], laneName: name, laneSteps: steps };
+          const steps = phase.lanes[name]!;
+          const node: GraphNode = { step: steps[0]!, laneName: name, laneSteps: steps };
           if (steps.length > 1) {
             node.extraStepCount = steps.length - 1;
           }

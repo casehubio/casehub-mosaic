@@ -146,7 +146,7 @@ describe("schema generator", () => {
   it("generated file is not stale", () => {
     const current = readFileSync(generatedPath, "utf-8");
     execSync(
-      "yarn workspace @casehubio/blocks-ui-schema run generate",
+      "yarn workspace @casehubio/mosaic-schema run generate",
       { stdio: "pipe" },
     );
     const regenerated = readFileSync(generatedPath, "utf-8");

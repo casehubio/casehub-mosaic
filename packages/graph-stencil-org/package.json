@@ -1,5 +1,5 @@
 {
-  "name": "@casehubio/graph-stencil-org",
+  "name": "@casehubio/mosaic-graph-stencil-org",
   "version": "0.1.0",
   "description": "Eidos org domain adapter and stencils for graph editor",
   "repository": {
@@ -25,10 +25,10 @@
     "vitest": "^3.0.0"
   },
   "dependencies": {
-    "@casehubio/agent-avatar-2d": "workspace:*",
-    "@casehubio/blocks-ui-core": "workspace:*",
     "@casehubio/graph-core": "*",
     "@casehubio/graph-renderer": "*",
+    "@casehubio/mosaic-agent-avatar-2d": "workspace:*",
+    "@casehubio/mosaic-core": "workspace:*",
     "@casehubio/pages-diagram-core": "*",
     "@casehubio/pages-lsp": "*",
     "lit-html": "^3.3.0",

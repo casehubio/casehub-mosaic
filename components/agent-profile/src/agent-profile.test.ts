@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import './agent-profile.js';
-import type { FullAgentDescriptor } from '@casehubio/blocks-ui-core';
+import type { FullAgentDescriptor } from '@casehubio/mosaic-core';
 
 const SAMPLE_DESCRIPTOR: FullAgentDescriptor = {
   agentId: 'agent-test-01',

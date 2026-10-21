@@ -4,7 +4,7 @@ import { LanguageClient, type LanguageClientOptions, type ServerOptions, Transpo
 let client: LanguageClient;
 
 export function activate(context: ExtensionContext) {
-  const serverModule = require.resolve('@casehubio/lsp-schemas/node');
+  const serverModule = require.resolve('@casehubio/mosaic-lsp-schemas/node');
   const serverOptions: ServerOptions = {
     run: { module: serverModule, transport: TransportKind.stdio },
     debug: { module: serverModule, transport: TransportKind.stdio },

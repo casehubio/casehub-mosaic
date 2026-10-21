@@ -1,6 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import type { WorkIdentity } from '@casehubio/blocks-ui-core';
+import type { WorkIdentity } from '@casehubio/mosaic-core';
 import './channel-preferences.js';
 import './mute-list.js';
 import './snooze-control.js';

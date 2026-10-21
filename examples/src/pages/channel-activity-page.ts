@@ -1,7 +1,7 @@
 import { LitElement, html, css, type TemplateResult } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
-import '@casehubio/blocks-ui-channel-activity';
-import type { QhorusMessage, QhorusChannel, ChannelMember, Reaction, QhorusTopic } from '@casehubio/blocks-ui-channel-activity';
+import '@casehubio/mosaic-channel-activity';
+import type { QhorusMessage, QhorusChannel, ChannelMember, Reaction, QhorusTopic } from '@casehubio/mosaic-channel-activity';
 
 const CHANNELS: QhorusChannel[] = [
   { id: 'ch-1', name: 'case-review', description: 'Case review discussion', semantic: 'DISCUSSION', paused: false },

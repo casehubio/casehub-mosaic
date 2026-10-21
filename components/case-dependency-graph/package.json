@@ -1,5 +1,5 @@
 {
-  "name": "@casehubio/blocks-ui-case-dependency-graph",
+  "name": "@casehubio/mosaic-case-dependency-graph",
   "version": "0.1.0",
   "type": "module",
   "main": "dist/index.js",
@@ -16,9 +16,9 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@casehubio/blocks-ui-core": "workspace:*",
     "@casehubio/graph-core": "*",
     "@casehubio/graph-renderer": "*",
+    "@casehubio/mosaic-core": "workspace:*",
     "@casehubio/pages-data": "*",
     "lit": "^3.1.0"
   },

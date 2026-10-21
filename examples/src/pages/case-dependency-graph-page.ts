@@ -1,6 +1,6 @@
 import { LitElement, html, css, nothing } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
-import { registerRelationshipType, lookupRelationshipType } from '@casehubio/blocks-ui-core';
+import { registerRelationshipType, lookupRelationshipType } from '@casehubio/mosaic-core';
 import '../../../components/case-dependency-graph/src/blocks-case-dependency-graph.js';
 import type { GraphModel, GraphNode } from '@casehubio/graph-core';
 

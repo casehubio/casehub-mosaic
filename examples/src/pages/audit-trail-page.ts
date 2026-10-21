@@ -1,7 +1,7 @@
 import { LitElement, html, css } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import type { WorkIdentity } from '@casehubio/blocks-ui-core';
-import '@casehubio/blocks-ui-audit-trail-viewer';
+import type { WorkIdentity } from '@casehubio/mosaic-core';
+import '@casehubio/mosaic-audit-trail-viewer';
 import mockEntries from '../../mock-data/ledger-entries.json';
 
 interface Attestation {

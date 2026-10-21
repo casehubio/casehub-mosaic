@@ -6,8 +6,8 @@ import type { TypedDataSet, TypedRow } from '@casehubio/pages-data';
 import { fromRows } from '@casehubio/pages-data';
 import { OUTCOME_COLUMNS, OUTCOME_TABLE_CONFIG, ID_COL } from './columns.js';
 import '@casehubio/pages-ui-components/split-workbench';
-import '@casehubio/blocks-ui-trust-score-panel';
-import '@casehubio/blocks-ui-list-pane';
+import '@casehubio/mosaic-trust-score-panel';
+import '@casehubio/mosaic-list-pane';
 
 const LANE_COLORS: Record<string, string> = {
   FAST_TRACK: 'var(--pages-success-9, #16a34a)',

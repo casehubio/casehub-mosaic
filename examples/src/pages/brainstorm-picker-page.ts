@@ -1,6 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import '@casehubio/blocks-ui-document-workbench';
+import '@casehubio/mosaic-document-workbench';
 
 @customElement('blocks-example-brainstorm-picker')
 export class BrainstormPickerPage extends LitElement {

@@ -1,7 +1,7 @@
 import { LitElement, html, css } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import '@casehubio/blocks-ui-blocks-plan-item-tree';
-import type { PlanItemDefinition } from '@casehubio/graph-stencil-htn';
+import '@casehubio/mosaic-blocks-plan-item-tree';
+import type { PlanItemDefinition } from '@casehubio/mosaic-graph-stencil-htn';
 import mockData from '../../mock-data/plan-item.json';
 
 @customElement('blocks-example-plan-item-tree')

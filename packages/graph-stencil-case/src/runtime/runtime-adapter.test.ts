@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 import { describe, it, expect } from 'vitest';
-import '@casehubio/blocks-ui-core';
+import '@casehubio/mosaic-core';
 import { toDecorations } from './runtime-adapter.js';
 import type { CaseRuntimeState, PlanItemSnapshot, TrustScoreSnapshot, AdaptiveDecisionSnapshot } from './types.js';
 

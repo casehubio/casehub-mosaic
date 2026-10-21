@@ -1,4 +1,4 @@
-export { type TrustLevel, trustLevelFromScore } from '@casehubio/blocks-ui-core';
+export { type TrustLevel, trustLevelFromScore } from '@casehubio/mosaic-core';
 
 /**
  * Maturity phase based on observation count

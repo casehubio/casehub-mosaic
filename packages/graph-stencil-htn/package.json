@@ -1,5 +1,5 @@
 {
-  "name": "@casehubio/graph-stencil-htn",
+  "name": "@casehubio/mosaic-graph-stencil-htn",
   "version": "0.1.0",
   "description": "HTN/DAG domain adapter and stencils for graph viewer",
   "repository": {
@@ -25,9 +25,9 @@
     "vitest": "^3.0.0"
   },
   "dependencies": {
-    "@casehubio/blocks-ui-core": "workspace:*",
     "@casehubio/graph-core": "*",
     "@casehubio/graph-renderer": "*",
+    "@casehubio/mosaic-core": "workspace:*",
     "@casehubio/pages-diagram-core": "*",
     "lit-html": "^3.3.0"
   },

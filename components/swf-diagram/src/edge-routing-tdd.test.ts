@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { toSwfGraph } from '@casehubio/graph-stencil-swf';
+import { toSwfGraph } from '@casehubio/mosaic-graph-stencil-swf';
 import { toReactFlowGraph, validateEdgeRouting } from '@casehubio/graph-renderer';
 import { computeSwfLayout } from './swf-layout.js';
 

@@ -1,14 +1,14 @@
 import { LitElement, html, css, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import type { PersonalityProfile } from '@casehubio/blocks-ui-core';
+import type { PersonalityProfile } from '@casehubio/mosaic-core';
 import { buildSummaryText, BIG_FIVE_DIMS, BIG_FIVE_LABELS } from '../../avatar-step/src/data/framework-descriptors.js';
 import { deriveDispositions, deriveTendencies, DISPOSITION_TIPS } from '../../avatar-step/src/data/disposition-mapping.js';
 import { ALL_FRAMEWORK_VALUES, getFrameworkProfile } from '../../avatar-step/src/data/compatibility-matrix.js';
 import type { PersonalityFramework, BigFiveDimension, BigFivePole } from '../../avatar-step/src/data/compatibility-matrix.js';
 import { FRAMEWORK_TOOLTIPS } from '../../avatar-step/src/data/framework-tooltips.js';
 import { PROFESSION_LIST, PROFESSION_PRESETS } from '../../avatar-step/src/data/profession-presets.js';
-import '@casehubio/agent-avatar-2d';
+import '@casehubio/mosaic-agent-avatar-2d';
 
 export interface AgentProfilePanelProps {
   profile: PersonalityProfile | null;

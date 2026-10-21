@@ -6,9 +6,9 @@
     "experimentalDecorators": true,
     "useDefineForClassFields": false,
     "paths": {
-      "@casehubio/blocks-ui-*": ["../../components/*/src/index.ts"],
-      "@casehubio/blocks-ui-core": ["../blocks-ui-core/src/index.ts"],
-      "@casehubio/blocks-ui-core/*": ["../blocks-ui-core/src/*"]
+      "@casehubio/mosaic-*": ["../../components/*/src/index.ts"],
+      "@casehubio/mosaic-core": ["../blocks-ui-core/src/index.ts"],
+      "@casehubio/mosaic-core/*": ["../blocks-ui-core/src/*"]
     }
   },
   "include": ["src"]

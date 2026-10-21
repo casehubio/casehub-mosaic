@@ -1,5 +1,5 @@
 {
-  "name": "@casehubio/blocks-ui-cluster-panel",
+  "name": "@casehubio/mosaic-cluster-panel",
   "version": "0.1.0",
   "description": "Cluster management panel — list, register, test connectivity, deregister",
   "repository": {
@@ -19,7 +19,7 @@
     "clean": "rimraf dist"
   },
   "dependencies": {
-    "@casehubio/blocks-ui-core": "workspace:*",
+    "@casehubio/mosaic-core": "workspace:*",
     "lit": "^3.2.1"
   },
   "devDependencies": {

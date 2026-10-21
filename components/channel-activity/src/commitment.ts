@@ -3,4 +3,4 @@ export {
   type CommitmentRecord,
   toCommitmentRecord,
   toCommitmentMap,
-} from '@casehubio/blocks-ui-core';
+} from '@casehubio/mosaic-core';

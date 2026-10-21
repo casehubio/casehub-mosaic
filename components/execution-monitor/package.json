@@ -1,5 +1,5 @@
 {
-  "name": "@casehubio/blocks-ui-execution-monitor",
+  "name": "@casehubio/mosaic-execution-monitor",
   "version": "0.1.0",
   "type": "module",
   "main": "dist/index.js",
@@ -16,7 +16,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@casehubio/blocks-ui-core": "workspace:*",
+    "@casehubio/mosaic-core": "workspace:*",
     "@casehubio/pages-data": "*",
     "@casehubio/pages-primitives": "*",
     "lit": "^3.1.0"

@@ -1,8 +1,8 @@
 import { LitElement, html, css, nothing } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
 import { onPagesEvent } from '@casehubio/pages-data';
-import { formatTimestamp, statusBorderColour, entryCardStyles, badgeStyles, roundDividerStyles } from '@casehubio/blocks-ui-core';
-import type { EntryCategory } from '@casehubio/blocks-ui-core';
+import { formatTimestamp, statusBorderColour, entryCardStyles, badgeStyles, roundDividerStyles } from '@casehubio/mosaic-core';
+import type { EntryCategory } from '@casehubio/mosaic-core';
 import type { DebateStreamEntry } from './types.js';
 
 const AGENT_LABELS: Record<string, string> = {

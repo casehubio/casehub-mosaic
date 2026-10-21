@@ -1,6 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import '@casehubio/blocks-ui-document-workbench';
+import '@casehubio/mosaic-document-workbench';
 import { MOCK_SNAPSHOTS } from '../../mock-data/document-workbench.js';
 
 @customElement('blocks-example-document-timeline')

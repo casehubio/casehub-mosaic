@@ -1,5 +1,5 @@
 {
-  "name": "@casehubio/blocks-ui-sla-breach-policy",
+  "name": "@casehubio/mosaic-sla-breach-policy",
   "version": "0.2.2",
   "description": "SLA breach escalation tiers — active tier highlighting, optional live countdown via sla-indicator",
   "repository": {
@@ -19,8 +19,8 @@
     "clean": "rimraf dist"
   },
   "dependencies": {
-    "@casehubio/blocks-ui-core": "workspace:*",
-    "@casehubio/blocks-ui-sla-indicator": "workspace:*",
+    "@casehubio/mosaic-core": "workspace:*",
+    "@casehubio/mosaic-sla-indicator": "workspace:*",
     "lit": "^3.2.1"
   },
   "devDependencies": {

@@ -1,4 +1,4 @@
-import type { DebateStreamEntry, Snapshot, BrainstormOptionData, DocEntry } from '@casehubio/blocks-ui-document-workbench';
+import type { DebateStreamEntry, Snapshot, BrainstormOptionData, DocEntry } from '@casehubio/mosaic-document-workbench';
 
 export const MOCK_ENTRIES: DebateStreamEntry[] = [
   { entryType: 'RAISE', content: 'The retry logic in §3.2 has no backoff — under load this will hammer the downstream service.', round: 1, agentRole: 'REV', timestamp: '2026-07-30T10:00:00Z', pointId: 'pt-1', priority: 'HIGH', scope: 'reliability', location: '§3.2' },

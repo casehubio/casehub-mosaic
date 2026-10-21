@@ -3,7 +3,7 @@ import type { EventTimelineNode, EventNodeStatus } from '@casehubio/pages-viz';
 import type { EventTimelineStrategy } from '@casehubio/pages-viz';
 import type {
   OrchestrationAuditEvent, OrchestrationEventType, OrchestrationPayload,
-} from '@casehubio/blocks-ui-core';
+} from '@casehubio/mosaic-core';
 
 const FILTER_MAP: Record<OrchestrationEventType, string> = {
   ROUTING_DECISION: 'routing',

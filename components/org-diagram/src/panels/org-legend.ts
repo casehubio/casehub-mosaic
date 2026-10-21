@@ -1,6 +1,6 @@
 import { LitElement, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { DEFAULT_KIND_PALETTE } from '@casehubio/graph-stencil-org';
+import { DEFAULT_KIND_PALETTE } from '@casehubio/mosaic-graph-stencil-org';
 
 @customElement('org-legend')
 export class OrgLegend extends LitElement {

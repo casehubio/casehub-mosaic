@@ -21,7 +21,7 @@ export default defineConfig({
   resolve: {
     alias: [
       { find: '@casehubio/pages-diagram-core', replacement: path.resolve(__dirname, '../../.casehub-packages/packages/pages-diagram-core/dist') },
-      { find: '@casehubio/graph-stencil-org', replacement: path.resolve(__dirname, '../../packages/graph-stencil-org/src') },
+      { find: '@casehubio/mosaic-graph-stencil-org', replacement: path.resolve(__dirname, '../../packages/graph-stencil-org/src') },
       { find: '@casehubio/graph-core', replacement: path.resolve(__dirname, '../../.casehub-packages/packages/graph-core/dist') },
       { find: /^@casehubio\/graph-renderer\/(.*)/, replacement: path.resolve(__dirname, '../../.casehub-packages/packages/graph-renderer/dist/$1') },
       { find: '@casehubio/graph-renderer', replacement: path.resolve(__dirname, '../../.casehub-packages/packages/graph-renderer/dist') },

@@ -1,6 +1,6 @@
 import { LitElement, html, css, type TemplateResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import type { WorkItemResponse, WorkItemLifecycleEvent } from '@casehubio/blocks-ui-core';
+import type { WorkItemResponse, WorkItemLifecycleEvent } from '@casehubio/mosaic-core';
 
 @customElement('blocks-detail-activity-tab')
 export class DetailActivityTab extends LitElement {

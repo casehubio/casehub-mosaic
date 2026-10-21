@@ -1,7 +1,7 @@
 import { LitElement, html, css, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { onPagesEvent } from '@casehubio/pages-data';
-import { selectedHighlightStyles } from '@casehubio/blocks-ui-core';
+import { selectedHighlightStyles } from '@casehubio/mosaic-core';
 import type { DebateStreamEntry } from './types.js';
 
 interface DerivedPoint {

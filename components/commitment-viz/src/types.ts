@@ -1,4 +1,4 @@
-import type { CommitmentState, CommitmentRecord, StateCategory, TransitionRecord } from '@casehubio/blocks-ui-core';
+import type { CommitmentState, CommitmentRecord, StateCategory, TransitionRecord } from '@casehubio/mosaic-core';
 
 export type { CommitmentState, CommitmentRecord, StateCategory, TransitionRecord };
 

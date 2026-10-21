@@ -7,8 +7,8 @@ import { PushMixin } from '@casehubio/pages-component';
 import type {
   ExecutionSnapshot, ExecutionState, AgentRef, AgentResult,
   ExecutionModel, PatternType,
-} from '@casehubio/blocks-ui-core';
-import '@casehubio/blocks-ui-core';
+} from '@casehubio/mosaic-core';
+import '@casehubio/mosaic-core';
 
 export const ExecutionMonitorTopics = {
   AGENT_SELECTED: 'execution.agent-selected',

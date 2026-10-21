@@ -1,5 +1,5 @@
 {
-  "name": "@casehubio/blocks-ui-case-flow-viewer",
+  "name": "@casehubio/mosaic-case-flow-viewer",
   "version": "0.1.0",
   "description": "Read-only case flow DAG viewer with runtime state",
   "repository": {
@@ -25,10 +25,10 @@
     "vitest": "^3.0.0"
   },
   "dependencies": {
-    "@casehubio/blocks-ui-core": "workspace:*",
     "@casehubio/graph-core": "*",
     "@casehubio/graph-renderer": "*",
-    "@casehubio/graph-stencil-case": "workspace:*",
+    "@casehubio/mosaic-core": "workspace:*",
+    "@casehubio/mosaic-graph-stencil-case": "workspace:*",
     "@casehubio/pages-data": "*",
     "@casehubio/pages-diagram-core": "*",
     "lit": "^3.3.3"

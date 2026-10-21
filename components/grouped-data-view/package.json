@@ -1,5 +1,5 @@
 {
-  "name": "@casehubio/blocks-ui-grouped-data-view",
+  "name": "@casehubio/mosaic-grouped-data-view",
   "version": "0.2.2",
   "description": "Grouped data view — items grouped by column key with per-group pages-table rendering",
   "repository": {
@@ -19,7 +19,7 @@
     "clean": "rimraf dist"
   },
   "dependencies": {
-    "@casehubio/blocks-ui-core": "workspace:*",
+    "@casehubio/mosaic-core": "workspace:*",
     "@casehubio/pages-component": "*",
     "@casehubio/pages-data": "*",
     "@casehubio/pages-table": "*",

@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import './manifest-provider-card.js';
-import type { ModelDescriptor } from '@casehubio/blocks-ui-core';
+import type { ModelDescriptor } from '@casehubio/mosaic-core';
 
 type CardEl = HTMLElement & {
   updateComplete: Promise<boolean>;

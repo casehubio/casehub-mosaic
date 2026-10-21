@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import './work-item-workbench';
 import type { WorkItemWorkbench } from './work-item-workbench';
-import type { WorkIdentity } from '@casehubio/blocks-ui-core';
+import type { WorkIdentity } from '@casehubio/mosaic-core';
 
 const localStorageMock = (() => {
   let store: Record<string, string> = {};

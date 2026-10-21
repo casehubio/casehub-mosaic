@@ -1,9 +1,9 @@
-import '@casehubio/blocks-ui-casehub-diagram';
-import '@casehubio/blocks-ui-swf-diagram';
-import '@casehubio/blocks-ui-diagram-workbench';
-import { DIAGRAM_TAGS } from '@casehubio/blocks-ui-core';
-import { registerSwfStencils, createSwfThumbnailRenderer } from '@casehubio/graph-stencil-swf';
-import { registerThumbnailRenderer } from '@casehubio/graph-stencil-case';
+import '@casehubio/mosaic-casehub-diagram';
+import '@casehubio/mosaic-swf-diagram';
+import '@casehubio/mosaic-diagram-workbench';
+import { DIAGRAM_TAGS } from '@casehubio/mosaic-core';
+import { registerSwfStencils, createSwfThumbnailRenderer } from '@casehubio/mosaic-graph-stencil-swf';
+import { registerThumbnailRenderer } from '@casehubio/mosaic-graph-stencil-case';
 
 registerSwfStencils();
 registerThumbnailRenderer('swf', createSwfThumbnailRenderer());

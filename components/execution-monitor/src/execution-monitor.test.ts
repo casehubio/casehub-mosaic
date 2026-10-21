@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import type { ExecutionSnapshot } from '@casehubio/blocks-ui-core';
+import type { ExecutionSnapshot } from '@casehubio/mosaic-core';
 
 const RUNNING_SNAPSHOT: ExecutionSnapshot = {
   executionId: 'exec1',

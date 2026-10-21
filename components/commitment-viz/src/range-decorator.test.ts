@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { decorateCommitmentRanges } from './range-decorator.js';
 import type { DecorableMessage } from './types.js';
-import type { CommitmentRecord } from '@casehubio/blocks-ui-core';
+import type { CommitmentRecord } from '@casehubio/mosaic-core';
 
 function msg(id: string, correlationId?: string): DecorableMessage {
   return { id, correlationId };

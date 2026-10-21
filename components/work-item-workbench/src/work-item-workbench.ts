@@ -1,10 +1,10 @@
 import { LitElement, html, css, type TemplateResult } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import type { WorkIdentity, UserSearchProvider } from '@casehubio/blocks-ui-core';
+import type { WorkIdentity, UserSearchProvider } from '@casehubio/mosaic-core';
 import { KeyboardShortcutMixin } from '@casehubio/pages-primitives/a11y';
 import '@casehubio/pages-ui-components/split-workbench';
-import '@casehubio/blocks-ui-work-item-inbox';
-import '@casehubio/blocks-ui-work-item-detail';
+import '@casehubio/mosaic-work-item-inbox';
+import '@casehubio/mosaic-work-item-detail';
 
 export interface WorkItemWorkbenchProps {
   identity: WorkIdentity;

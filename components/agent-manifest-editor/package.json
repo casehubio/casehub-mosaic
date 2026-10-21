@@ -1,5 +1,5 @@
 {
-  "name": "@casehubio/agent-manifest-editor",
+  "name": "@casehubio/mosaic-agent-manifest-editor",
   "version": "0.0.1",
   "type": "module",
   "main": "src/index.ts",
@@ -11,7 +11,7 @@
     "registry": "https://npm.pkg.github.com"
   },
   "dependencies": {
-    "@casehubio/blocks-ui-core": "workspace:*",
+    "@casehubio/mosaic-core": "workspace:*",
     "@casehubio/pages-data": "*",
     "lit": "^3.0.0"
   },

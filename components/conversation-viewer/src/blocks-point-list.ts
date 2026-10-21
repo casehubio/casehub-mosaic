@@ -2,8 +2,8 @@ import { LitElement, html, css, nothing, type TemplateResult } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { emitPagesEvent } from '@casehubio/pages-data';
 import { lookupStatus, stateCategoryStyles } from '@casehubio/pages-ui-components/status-badge';
-import { statusBorderColour, badgeStyles, roundDividerStyles, selectedHighlightStyles } from '@casehubio/blocks-ui-core';
-import type { EntryCategory } from '@casehubio/blocks-ui-core';
+import { statusBorderColour, badgeStyles, roundDividerStyles, selectedHighlightStyles } from '@casehubio/mosaic-core';
+import type { EntryCategory } from '@casehubio/mosaic-core';
 import type { ConversationPoint } from './types.js';
 
 const CATEGORY_MAP: Record<string, EntryCategory> = {

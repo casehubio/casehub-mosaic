@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
-import { registerCollection, mythicCollection, type AgentAvatar } from '@casehubio/agent-avatar-2d';
+import { registerCollection, mythicCollection, type AgentAvatar } from '@casehubio/mosaic-agent-avatar-2d';
 import './agent-catalog.js';
 
 type CatalogEl = HTMLElement & {

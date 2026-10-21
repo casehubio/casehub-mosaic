@@ -5,7 +5,7 @@ import '@casehubio/pages-ui-components';
 import type {
   DecompositionSnapshot, TaskNodeSnapshot, LeafTaskSnapshot,
   CompoundTaskSnapshot, DecompositionMethodSnapshot, NodeStateSnapshot,
-} from '@casehubio/graph-stencil-htn';
+} from '@casehubio/mosaic-graph-stencil-htn';
 import { emitPagesEvent } from '@casehubio/pages-data';
 
 export const STRATEGY_COLORS: Record<string, string> = {

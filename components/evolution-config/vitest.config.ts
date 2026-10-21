@@ -7,7 +7,7 @@ export default defineConfig({
     alias: [
       ...(existsSync(path.resolve(__dirname, '../../../pages/packages/pages-primitives/src')) ? [{ find: '@casehubio/pages-primitives', replacement: path.resolve(__dirname, '../../../pages/packages/pages-primitives/src') }] : []),
       ...(existsSync(path.resolve(__dirname, '../../../pages/packages/pages-table/src')) ? [{ find: '@casehubio/pages-table', replacement: path.resolve(__dirname, '../../../pages/packages/pages-table/src') }] : []),
-      { find: '@casehubio/blocks-ui-core', replacement: path.resolve(__dirname, '../../packages/blocks-ui-core/src') },
+      { find: '@casehubio/mosaic-core', replacement: path.resolve(__dirname, '../../packages/blocks-ui-core/src') },
       ...(existsSync(path.resolve(__dirname, '../../../pages/packages/pages-ui-tokens/src')) ? [{ find: '@casehubio/pages-ui-tokens', replacement: path.resolve(__dirname, '../../../pages/packages/pages-ui-tokens/src') }] : []),
       ...(existsSync(path.resolve(__dirname, '../../../pages/packages/pages-ui-components/src')) ? [{ find: '@casehubio/pages-ui-components', replacement: path.resolve(__dirname, '../../../pages/packages/pages-ui-components/src') }] : []),
       ...(existsSync(path.resolve(__dirname, '../../../pages/packages/pages-viz/src')) ? [{ find: '@casehubio/pages-viz', replacement: path.resolve(__dirname, '../../../pages/packages/pages-viz/src') }] : []),

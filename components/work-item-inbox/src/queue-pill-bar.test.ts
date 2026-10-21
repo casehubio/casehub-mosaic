@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import './queue-pill-bar.js';
-import type { QueueView, QueueSummaryEntry } from '@casehubio/blocks-ui-core';
+import type { QueueView, QueueSummaryEntry } from '@casehubio/mosaic-core';
 
 const QUEUES: QueueView[] = [
   { id: 'q1', name: 'Compliance', labelPattern: 'domain=compliance', scope: null },

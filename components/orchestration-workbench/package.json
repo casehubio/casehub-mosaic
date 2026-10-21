@@ -1,5 +1,5 @@
 {
-  "name": "@casehubio/blocks-ui-orchestration-workbench",
+  "name": "@casehubio/mosaic-orchestration-workbench",
   "version": "0.1.0",
   "type": "module",
   "main": "dist/index.js",
@@ -16,9 +16,9 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@casehubio/blocks-ui-blocks-timeline": "workspace:*",
-    "@casehubio/blocks-ui-core": "workspace:*",
-    "@casehubio/blocks-ui-execution-monitor": "workspace:*",
+    "@casehubio/mosaic-blocks-timeline": "workspace:*",
+    "@casehubio/mosaic-core": "workspace:*",
+    "@casehubio/mosaic-execution-monitor": "workspace:*",
     "@casehubio/pages-data": "*",
     "@casehubio/pages-primitives": "*",
     "@casehubio/pages-ui-components": "*",

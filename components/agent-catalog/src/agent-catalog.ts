@@ -1,8 +1,8 @@
 import { LitElement, html, css, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import '@casehubio/agent-avatar-2d';
-import { PROFESSION_LIST, buildSummaryText } from '@casehubio/avatar-step';
+import '@casehubio/mosaic-agent-avatar-2d';
+import { PROFESSION_LIST, buildSummaryText } from '@casehubio/mosaic-avatar-step';
 import { CATALOG_TEMPLATES, FEATURED_TEMPLATES, buildDescriptor } from './data/catalog-templates.js';
 import type { CatalogTemplate } from './data/catalog-templates.js';
 

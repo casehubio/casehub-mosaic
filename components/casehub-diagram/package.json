@@ -1,5 +1,5 @@
 {
-  "name": "@casehubio/blocks-ui-casehub-diagram",
+  "name": "@casehubio/mosaic-casehub-diagram",
   "version": "0.1.0",
   "description": "CaseHub visual diagram editor component",
   "repository": {
@@ -27,7 +27,7 @@
   "dependencies": {
     "@casehubio/graph-core": "*",
     "@casehubio/graph-renderer": "*",
-    "@casehubio/graph-stencil-case": "workspace:*",
+    "@casehubio/mosaic-graph-stencil-case": "workspace:*",
     "@casehubio/pages-diagram-core": "*",
     "lit": "^3.3.3",
     "yaml": "^2.7.0"
