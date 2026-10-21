@@ -50,7 +50,7 @@ yarn examples                     # Vite showcase dev server
 ```
 
 ### Layering Rule
-Components depend on `casehub-pages` packages but never on each other (except through `blocks-ui-core`). No circular dependencies. No domain-repo imports.
+Components depend on `casehub-pages` packages but never on each other (except through `mosaic-core`). No circular dependencies. No domain-repo imports.
 
 ---
 
@@ -68,7 +68,7 @@ Components depend on `casehub-pages` packages but never on each other (except th
 ├──────────────────────────────────────────────────────────┤
 │                   casehub-blocks-ui                        │
 │                                                           │
-│   blocks-ui-core ─── DataSourceMixin, TrendSourceMixin    │
+│   mosaic-core ─── DataSourceMixin, TrendSourceMixin    │
 │                      fetchSource, tokens, events          │
 │                                                           │
 │   24 components ─── work-*, channel-*, trust-*, case-*    │
@@ -145,7 +145,7 @@ Critical rule: **render callbacks use inline styles**, not CSS classes. Callback
 
 | Layer | Package | Responsibility |
 |---|---|---|
-| Core | `blocks-ui-core` | Tokens, DataSourceMixin + DataSourceAdapter, TrendSourceMixin, fetchSource, renderSparkline, event helpers, SharedTimerController, EventStreamController, blocks-confirm-dialog |
+| Core | `mosaic-core` | Tokens, DataSourceMixin + DataSourceAdapter, TrendSourceMixin, fetchSource, renderSparkline, event helpers, SharedTimerController, EventStreamController, blocks-confirm-dialog |
 
 ### Component Inventory
 

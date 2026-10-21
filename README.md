@@ -52,10 +52,10 @@ Domain-aware Web Components that multiple CaseHub applications reuse. Each compo
 
 | Component | Tag | Package | Description |
 |-----------|-----|---------|-------------|
-| Confirm Dialog | `<blocks-confirm-dialog>` | `@casehubio/blocks-ui-core` | Modal confirmation — heading, message, confirm/cancel with variant styling |
-| Schema Form | `<schema-form>` | `@casehubio/blocks-ui-core` | Dynamic form from JSON field schema — display and edit modes, extensible field registry |
+| Confirm Dialog | `<blocks-confirm-dialog>` | `@casehubio/mosaic-core` | Modal confirmation — heading, message, confirm/cancel with variant styling |
+| Schema Form | `<schema-form>` | `@casehubio/mosaic-core` | Dynamic form from JSON field schema — display and edit modes, extensible field registry |
 
-## Infrastructure (`@casehubio/blocks-ui-core`)
+## Infrastructure (`@casehubio/mosaic-core`)
 
 | Module | What it provides |
 |--------|-----------------|
