@@ -3,7 +3,7 @@ id: PP-20260930-501ce1
 title: "Custom events use component namespace prefixes"
 type: rule
 scope: repo
-applies_to: "All blocks-ui components that emit CustomEvents with bubbles: true, composed: true"
+applies_to: "All mosaic components that emit CustomEvents with bubbles: true, composed: true"
 severity: important
 refs:
   - components/agent-personality-workbench/src/agent-personality-workbench.ts

@@ -3,7 +3,7 @@ id: PP-20260903-79eda0
 title: "Diagram components compose shared pipeline pieces for read-only viewing"
 type: principle
 scope: repo
-applies_to: "all diagram components in blocks-ui (casehub-diagram, swf-diagram, blocks-case-flow-viewer, future diagram viewers)"
+applies_to: "all diagram components in mosaic (casehub-diagram, swf-diagram, blocks-case-flow-viewer, future diagram viewers)"
 severity: important
 refs:
   - components/case-flow-viewer/src/blocks-case-flow-viewer.ts

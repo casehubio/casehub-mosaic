@@ -1,4 +1,4 @@
-# casehub-blocks-ui — ARC42STORIES.MD
+# casehub-mosaic — ARC42STORIES.MD
 
 **Spec:** Arc42Stories v0.1
 **Profile:** Shared component library within the CaseHub platform
@@ -12,7 +12,7 @@
 
 ### Description
 
-`casehub-blocks-ui` is the shared UI component library for the CaseHub platform — the frontend parallel to `casehub-blocks` (shared Java coordination patterns). Each component consumes `casehub-pages` APIs (DataSourceController, pages-event, CSS tokens) but knows nothing about a specific app's domain model. Components work standalone in a test harness AND embedded via pages `hostPanel`.
+`casehub-mosaic` is the shared UI component library for the CaseHub platform — the frontend parallel to `casehub-blocks` (shared Java coordination patterns). Each component consumes `casehub-pages` APIs (DataSourceController, pages-event, CSS tokens) but knows nothing about a specific app's domain model. Components work standalone in a test harness AND embedded via pages `hostPanel`.
 
 The repo ships 27 components across work management, trust/compliance, communication, case exploration, session management, and notification domains — all framework-agnostic Web Components built with Lit.
 
@@ -22,7 +22,7 @@ The repo ships 27 components across work management, trust/compliance, communica
 |---|---|
 | Application developers | Compose domain UIs from shared components — no reimplementation of inbox, timeline, trust panels |
 | casehub-pages | Components validate pages' DataSourceController, pages-table, and event model at scale |
-| Platform architects | Component promotion pipeline — domain repos incubate, blocks-ui graduates |
+| Platform architects | Component promotion pipeline — domain repos incubate, mosaic graduates |
 
 ### Quality Goals
 
@@ -66,7 +66,7 @@ Components depend on `casehub-pages` packages but never on each other (except th
 │   import { CaseExplorer } from '@casehubio/...'           │
 │                                                           │
 ├──────────────────────────────────────────────────────────┤
-│                   casehub-blocks-ui                        │
+│                   casehub-mosaic                        │
 │                                                           │
 │   mosaic-core ─── DataSourceMixin, TrendSourceMixin    │
 │                      fetchSource, tokens, events          │
@@ -92,7 +92,7 @@ Components depend on `casehub-pages` packages but never on each other (except th
 └──────────────────────────────────────────────────────────┘
 ```
 
-**Boundary:** blocks-ui owns component rendering, data presentation, and user interaction. Data fetching is delegated to pages' DataSourceController. Domain logic (authentication, routing decisions, case lifecycle) belongs to backend services and application repos.
+**Boundary:** mosaic owns component rendering, data presentation, and user interaction. Data fetching is delegated to pages' DataSourceController. Domain logic (authentication, routing decisions, case lifecycle) belongs to backend services and application repos.
 
 ---
 
@@ -165,7 +165,7 @@ Critical rule: **render callbacks use inline styles**, not CSS classes. Callback
 
 ### The Promotion Pipeline
 
-Components are born in domain application repos, mature there, then get promoted to blocks-ui when a second app needs them. This is how the library grows:
+Components are born in domain application repos, mature there, then get promoted to mosaic when a second app needs them. This is how the library grows:
 
 - **Clinical promotion** (#38): similarity-panel, compliance-summary, trust-feedback-display, sla-breach-policy, gdpr-erasure-action — 5 components lifted from the clinical trials app
 - **Channel-activity promotion** (#39): 8 components lifted from the connectors repo's chat demo, renamed from `qhorus-*` to `channel-*`
@@ -228,7 +228,7 @@ The founding epic. Built the inbox, detail panel, queue board, and workbench. Es
 
 ### Chapter 2: Data Table
 
-**Status:** ✅ complete (in blocks-ui), migrated to pages
+**Status:** ✅ complete (in mosaic), migrated to pages
 
 Built pages-data-table (#22) with virtual scroll, pagination, sorting, filtering, selection, CSV export, tree/expandable rows. Then realised the layering violation — a generic table has no domain awareness — and migrated it to pages (#48). The blog "The Table Came Home" captures the moment: "generic UI primitives living in a domain-component repo."
 
@@ -304,7 +304,7 @@ Subscription editor and notification preferences UI. NotificationApi.getEventTyp
 | #35 | Cross-repo component migration tracking | ✅ done |
 | #36 | OpenClaw demo UI migration | ✅ done |
 | #41 | DevTown governance workbench migration | ✅ done |
-| #56 | App delivery — all blocks-ui work needed by consuming apps | ✅ done |
+| #56 | App delivery — all mosaic work needed by consuming apps | ✅ done |
 | #72 | Notification center frontend — bell icon, inbox dropdown, preferences | ✅ done |
 | #81 | Schema-form enhancements — real form capabilities | ✅ done |
 | #84 | Variable row heights with cell spanning | ✅ done |
@@ -322,7 +322,7 @@ Subscription editor and notification preferences UI. NotificationApi.getEventTyp
 | SSE and DataSource are orthogonal | SSE handles event-driven state machines with domain-specific routing. DataSource handles dataset snapshots. Components compose both, not choose one. |
 | Typed config + render callbacks, not slots | Slots create untyped extension points. Typed properties and callbacks give compile-time safety and sensible defaults. Slots reserved for layout shells only. |
 | Inline styles for cross-shadow rendering | Column renderer output lives in the consuming component's shadow DOM. CSS classes from the defining component don't follow. Inline styles are self-contained. |
-| Promotion over greenfield | Components mature in domain repos before graduating to blocks-ui. The second consumer triggers promotion. |
+| Promotion over greenfield | Components mature in domain repos before graduating to mosaic. The second consumer triggers promotion. |
 | Spec-driven development | Every component gets a design spec with adversarial review rounds (typically 3-7 rounds) before implementation begins. |
 | TypedDataSet everywhere | Raw JSON → extraction pipeline → TypedDataSet. No component handles raw JSON. The pipeline validates and types at the boundary. |
 | Single-grid table model | One CSS Grid with explicit cell placement. Rows as `display: contents` wrappers. Removes the constraint that every grid library works around — cells in different rows having no layout relationship. |
@@ -347,7 +347,7 @@ Subscription editor and notification preferences UI. NotificationApi.getEventTyp
 | Risk | Impact | Mitigation |
 |---|---|---|
 | pages-component source/dist mismatch | Vite dev server resolves TypeScript source, build resolves compiled dist — different module graphs | Vite aliases in showcase, documented workaround |
-| pages-modal duplicate CustomElementRegistry crash | esbuild bundles duplicate CustomElement registrations when pages-modal is imported from multiple entry points (#88) | ✅ Fixed — pages sub-path exports + blocks-ui narrowed imports to /a11y |
+| pages-modal duplicate CustomElementRegistry crash | esbuild bundles duplicate CustomElement registrations when pages-modal is imported from multiple entry points (#88) | ✅ Fixed — pages sub-path exports + mosaic narrowed imports to /a11y |
 | jsdom hides shadow DOM bugs | Tests pass but CSS scoping, scroll positioning, and popup placement fail in real browsers | Showcase app as visual regression baseline |
 | TypeScript project reference cascading failures | Upstream compilation error produces misleading "no exported member" errors in all downstream packages | Check `.d.ts` output existence, not error messages (blog: "The Build That Lied") |
 | Schema-form duplication with pages | Schema-form in pages duplicates 6 input components pages already had (#81) | Gap analysis complete, incremental fix planned |

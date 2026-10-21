@@ -1,6 +1,6 @@
 # casehub-mosaic — Contributor Guide
 
-> Internal architecture, extension points, and development conventions for contributors modifying or extending blocks-ui components.
+> Internal architecture, extension points, and development conventions for contributors modifying or extending mosaic components.
 
 **GitHub:** [casehubio/casehub-mosaic](https://github.com/casehubio/casehub-mosaic)
 
@@ -41,12 +41,12 @@ This project consumes frontend packages from casehub-pages via Yarn **portal** r
 |-----------|--------|-----------|
 | Consumes | casehub-pages | Yarn portal (`.casehub-packages/`) for dev; Maven SNAPSHOT (`META-INF/resources/`) for CI/apps |
 | Consumes | graph-core | Yarn portal (`.casehub-packages/packages/graph-core`) |
-| Publishes | blocks-ui components | Maven SNAPSHOT (`META-INF/resources/`) |
+| Publishes | mosaic components | Maven SNAPSHOT (`META-INF/resources/`) |
 
 Portal resolutions are declared in the root `package.json`:
 - `@casehubio/pages-component`, `@casehubio/pages-data`, `@casehubio/pages-primitives`, `@casehubio/pages-table`, `@casehubio/pages-ui-components`, `@casehubio/pages-ui-tokens`, `@casehubio/pages-viz`, `@casehubio/graph-core`
 
-**Local development:** after changing pages, run `yarn build && mvn install` in casehub-pages to publish the SNAPSHOT to `~/.m2`. After changing blocks-ui, run the same here so downstream apps pick up changes.
+**Local development:** after changing pages, run `yarn build && mvn install` in casehub-pages to publish the SNAPSHOT to `~/.m2`. After changing mosaic, run the same here so downstream apps pick up changes.
 
 **Do not use npm `file:` references for cross-repo dependencies** — they break in CI.
 
@@ -56,7 +56,7 @@ Portal resolutions are declared in the root `package.json`:
 
 ### mosaic-schema (`packages/mosaic-schema`)
 
-Auto-generated Zod schemas for all blocks-ui component properties. `BlocksComponentRegistry` in `src/registry.ts` maps element tag names to their Props interfaces. A ts-morph generator (`scripts/generate-schemas.ts`) reads the registry and produces `component-schemas.generated.ts` with per-component Zod schemas and a `blocksComponentSchemaMap`. The generator uses `tsconfig.generator.json` (with `paths` mapping packages to source) to resolve types without requiring a full build. Staleness test ensures generated schemas stay in sync. Registry completeness test ensures every `blocks-*` element has an entry.
+Auto-generated Zod schemas for all mosaic component properties. `BlocksComponentRegistry` in `src/registry.ts` maps element tag names to their Props interfaces. A ts-morph generator (`scripts/generate-schemas.ts`) reads the registry and produces `component-schemas.generated.ts` with per-component Zod schemas and a `blocksComponentSchemaMap`. The generator uses `tsconfig.generator.json` (with `paths` mapping packages to source) to resolve types without requiring a full build. Staleness test ensures generated schemas stay in sync. Registry completeness test ensures every `blocks-*` element has an entry.
 
 When adding a new component:
 1. Export a `FooProps` interface from the component's index.ts
@@ -66,7 +66,7 @@ When adding a new component:
 
 ### mosaic-core (`packages/mosaic-core`)
 
-Core shared utilities re-exported from pages and domain-specific to blocks-ui:
+Core shared utilities re-exported from pages and domain-specific to mosaic:
 
 **Tokens** (re-exported from pages-ui-tokens): `generateScale`, `SPACING_SCALE`, `TYPOGRAPHY`, `MOTION`, `RADIUS`, `ELEVATION_LIGHT`, `ELEVATION_DARK`, `DENSITY_COMPACT_OVERRIDES`, `applyTheme`, `registerTheme`, `getTheme`, `listThemes`.
 
@@ -344,7 +344,7 @@ All custom element tag names use the `blocks-` prefix (adopted in #94). When add
 
 ## Depended On By
 
-Application repos embed components via `hostPanel` + `registerPanel` in their pages dashboards. Each application's dashboard composes blocks-ui components into domain-specific layouts.
+Application repos embed components via `hostPanel` + `registerPanel` in their pages dashboards. Each application's dashboard composes mosaic components into domain-specific layouts.
 
 Key consumers by component:
 - **split-workbench + list-pane + detail-pane:** openclaw, devtown, aml, clinical, drafthouse, life, soc, ops
@@ -378,7 +378,7 @@ Test framework: Vitest with jsdom environment.
 
 ## Design Documents
 
-- [UI Architecture](https://raw.githubusercontent.com/casehubio/parent/main/docs/platform/ui-architecture.md) — pages, blocks-ui, app layering
+- [UI Architecture](https://raw.githubusercontent.com/casehubio/parent/main/docs/platform/ui-architecture.md) — pages, mosaic, app layering
 - [Platform Index](https://raw.githubusercontent.com/casehubio/parent/main/docs/INDEX.md) — discovery index
 - `docs/specs/` — design specs for individual features (23+ specs since July 2026)
 - `docs/plans/` — implementation plans
