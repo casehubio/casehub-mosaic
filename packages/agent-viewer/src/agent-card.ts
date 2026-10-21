@@ -1,6 +1,6 @@
 import { LitElement, html, css, nothing } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import type { AgentRef } from '@casehubio/blocks-ui-core';
+import type { AgentRef } from '@casehubio/mosaic-core';
 
 @customElement('agent-card')
 export class AgentCard extends LitElement {

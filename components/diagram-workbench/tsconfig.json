@@ -9,7 +9,7 @@
   },
   "include": ["src/**/*"],
   "references": [
-    { "path": "../../packages/blocks-ui-core" },
+    { "path": "../../packages/mosaic-core" },
     { "path": "../casehub-diagram" },
     { "path": "../swf-diagram" }
   ]

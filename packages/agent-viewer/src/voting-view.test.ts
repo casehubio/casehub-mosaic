@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
-import type { DeliberationPatternCategory } from '@casehubio/blocks-ui-core';
+import type { DeliberationPatternCategory } from '@casehubio/mosaic-core';
 import './voting-view.js';
 import type { VotingView } from './voting-view.js';
 

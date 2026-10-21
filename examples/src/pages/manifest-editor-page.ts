@@ -1,6 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
-import type { Manifest } from '../../../packages/blocks-ui-core/src/index.js';
+import type { Manifest } from '../../../packages/mosaic-core/src/index.js';
 import '../../../components/agent-manifest-editor/src/agent-manifest-editor.js';
 
 const SAMPLE_DATA: Manifest = {

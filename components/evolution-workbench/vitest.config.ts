@@ -7,7 +7,7 @@ export default defineConfig({
     alias: [
       ...(existsSync(path.resolve(__dirname, '../../../pages/packages/pages-primitives/src')) ? [{ find: '@casehubio/pages-primitives', replacement: path.resolve(__dirname, '../../../pages/packages/pages-primitives/src') }] : []),
       ...(existsSync(path.resolve(__dirname, '../../../pages/packages/pages-table/src')) ? [{ find: '@casehubio/pages-table', replacement: path.resolve(__dirname, '../../../pages/packages/pages-table/src') }] : []),
-      { find: '@casehubio/mosaic-core', replacement: path.resolve(__dirname, '../../packages/blocks-ui-core/src') },
+      { find: '@casehubio/mosaic-core', replacement: path.resolve(__dirname, '../../packages/mosaic-core/src') },
       { find: '@casehubio/mosaic-evolution-config', replacement: path.resolve(__dirname, '../evolution-config/src') },
       { find: '@casehubio/mosaic-detail-pane', replacement: path.resolve(__dirname, '../detail-pane/src') },
       { find: '@casehubio/mosaic-kpi-metric-row', replacement: path.resolve(__dirname, '../kpi-metric-row/src') },

@@ -29,7 +29,7 @@ export type {
   TerminationSpec,
   JudgmentSpec,
   FailurePolicy,
-} from '@casehubio/blocks-ui-core';
+} from '@casehubio/mosaic-core';
 
 export { AgentViewer } from './agent-viewer.js';
 export type { AgentTab, AgentViewerData, BreadcrumbBackDetail } from './agent-viewer.js';

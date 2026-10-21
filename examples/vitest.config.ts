@@ -4,7 +4,7 @@ import { resolve } from 'path';
 export default defineConfig({
   resolve: {
     alias: {
-      '@casehubio/mosaic-core': resolve(__dirname, '../packages/blocks-ui-core/src'),
+      '@casehubio/mosaic-core': resolve(__dirname, '../packages/mosaic-core/src'),
       '@casehubio/pages-table': resolve(__dirname, '../../pages/packages/pages-table/src'),
       '@casehubio/pages-primitives': resolve(__dirname, '../../pages/packages/pages-primitives/src'),
       '@casehubio/mosaic-notification-inbox': resolve(__dirname, '../components/notification-inbox/src'),

@@ -8,7 +8,7 @@
   },
   "include": ["src"],
   "references": [
-    { "path": "../../packages/blocks-ui-core" },
+    { "path": "../../packages/mosaic-core" },
     { "path": "../../packages/agent-avatar-2d" }
   ]
 }
