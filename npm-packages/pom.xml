@@ -12,7 +12,7 @@
     </parent>
 
     <artifactId>casehub-mosaic-npm</artifactId>
-    <version>0.3-SNAPSHOT</version>
+    <version>0.4-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>CaseHub Mosaic NPM Packages</name>
     <description>Packed @casehubio/mosaic-* npm packages with resolved versions — consumed by CaseHub apps via Maven</description>
