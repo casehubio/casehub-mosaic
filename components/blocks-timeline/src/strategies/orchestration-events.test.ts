@@ -33,8 +33,8 @@ describe('orchestrationEventsStrategy', () => {
   it('transformData extracts .content from paged response', () => {
     const paged = {
       content: [
-        makeEvent('EXECUTION_STARTED', { type: 'EXECUTION_STARTED', model: {
-          pattern: 'PARALLEL', failurePolicy: { routingFailureAction: 'FAIL', aggregationFailureAction: 'FAIL' },
+        makeEvent('execution-started', { type: 'execution-started', model: {
+          pattern: 'orchestration', failurePolicy: { routingFailureAction: 'fail', aggregationFailureAction: 'fail' },
         }}),
       ],
       page: 0, size: 20, totalElements: 1, totalPages: 1,
@@ -46,8 +46,8 @@ describe('orchestrationEventsStrategy', () => {
 
   it('transformData passes through plain array', () => {
     const events = [
-      makeEvent('EXECUTION_STARTED', { type: 'EXECUTION_STARTED', model: {
-        pattern: 'PARALLEL', failurePolicy: { routingFailureAction: 'FAIL', aggregationFailureAction: 'FAIL' },
+      makeEvent('execution-started', { type: 'execution-started', model: {
+        pattern: 'orchestration', failurePolicy: { routingFailureAction: 'fail', aggregationFailureAction: 'fail' },
       }}),
     ];
     const result = orchestrationEventsStrategy.transformData!(events);
@@ -56,8 +56,8 @@ describe('orchestrationEventsStrategy', () => {
 
   it('maps EXECUTION_STARTED to active node', () => {
     const events: OrchestrationAuditEvent[] = [
-      makeEvent('EXECUTION_STARTED', { type: 'EXECUTION_STARTED', model: {
-        pattern: 'PARALLEL', failurePolicy: { routingFailureAction: 'FAIL', aggregationFailureAction: 'FAIL' },
+      makeEvent('execution-started', { type: 'execution-started', model: {
+        pattern: 'orchestration', failurePolicy: { routingFailureAction: 'fail', aggregationFailureAction: 'fail' },
       }}),
     ];
     const nodes = orchestrationEventsStrategy.toNodes(events);
@@ -68,21 +68,21 @@ describe('orchestrationEventsStrategy', () => {
 
   it('maps ROUTING_DECISION SELECTED to completed', () => {
     const events: OrchestrationAuditEvent[] = [
-      makeEvent('ROUTING_DECISION', {
-        type: 'ROUTING_DECISION', outcome: 'SELECTED',
-        selectedAgents: [{ id: 'w1', type: 'WORKER', name: 'worker-1' }],
+      makeEvent('routing-decision', {
+        type: 'routing-decision', outcome: 'selected',
+        selectedAgents: [{ id: 'w1', type: 'worker', name: 'worker-1' }],
         reason: 'highest score',
       }),
     ];
     const nodes = orchestrationEventsStrategy.toNodes(events);
     expect(nodes[0].status).toBe('completed');
-    expect(nodes[0].label).toContain('SELECTED');
+    expect(nodes[0].label).toContain('selected');
   });
 
   it('maps ROUTING_DECISION UNRESOLVABLE to failed', () => {
     const events: OrchestrationAuditEvent[] = [
-      makeEvent('ROUTING_DECISION', {
-        type: 'ROUTING_DECISION', outcome: 'UNRESOLVABLE', reason: 'no candidates',
+      makeEvent('routing-decision', {
+        type: 'routing-decision', outcome: 'unresolvable', reason: 'no candidates',
       }),
     ];
     const nodes = orchestrationEventsStrategy.toNodes(events);
@@ -91,8 +91,8 @@ describe('orchestrationEventsStrategy', () => {
 
   it('maps AGENT_DISPATCHED to active', () => {
     const events: OrchestrationAuditEvent[] = [
-      makeEvent('AGENT_DISPATCHED', {
-        type: 'AGENT_DISPATCHED', agentRef: { id: 'w1', type: 'WORKER', name: 'worker-1' },
+      makeEvent('agent-dispatched', {
+        type: 'agent-dispatched', agentRef: { id: 'w1', type: 'worker', name: 'worker-1' },
       }),
     ];
     const nodes = orchestrationEventsStrategy.toNodes(events);
@@ -102,9 +102,9 @@ describe('orchestrationEventsStrategy', () => {
 
   it('maps AGENT_RESULT to completed', () => {
     const events: OrchestrationAuditEvent[] = [
-      makeEvent('AGENT_RESULT', {
-        type: 'AGENT_RESULT', agentRef: { id: 'w1', type: 'WORKER', name: 'worker-1' },
-        status: 'SUCCESS', duration: 1200,
+      makeEvent('agent-result', {
+        type: 'agent-result', agentRef: { id: 'w1', type: 'worker', name: 'worker-1' },
+        status: 'success', duration: 1200,
       }),
     ];
     const nodes = orchestrationEventsStrategy.toNodes(events);
@@ -113,9 +113,9 @@ describe('orchestrationEventsStrategy', () => {
 
   it('maps AGENT_FAILED to failed', () => {
     const events: OrchestrationAuditEvent[] = [
-      makeEvent('AGENT_FAILED', {
-        type: 'AGENT_FAILED', agentRef: { id: 'w1', type: 'WORKER' },
-        status: 'FAILURE', error: 'timeout',
+      makeEvent('agent-failed', {
+        type: 'agent-failed', agentRef: { id: 'w1', type: 'worker' },
+        status: 'failure', error: 'timeout',
       }),
     ];
     const nodes = orchestrationEventsStrategy.toNodes(events);
@@ -124,8 +124,8 @@ describe('orchestrationEventsStrategy', () => {
 
   it('maps ACTIVATION_EVALUATED met to completed', () => {
     const events: OrchestrationAuditEvent[] = [
-      makeEvent('ACTIVATION_EVALUATED', {
-        type: 'ACTIVATION_EVALUATED', conditionMet: true, conditionExpression: 'x > 0',
+      makeEvent('activation-evaluated', {
+        type: 'activation-evaluated', conditionMet: true, conditionExpression: 'x > 0',
       }),
     ];
     const nodes = orchestrationEventsStrategy.toNodes(events);
@@ -135,8 +135,8 @@ describe('orchestrationEventsStrategy', () => {
 
   it('maps ACTIVATION_EVALUATED unmet to skipped', () => {
     const events: OrchestrationAuditEvent[] = [
-      makeEvent('ACTIVATION_EVALUATED', {
-        type: 'ACTIVATION_EVALUATED', conditionMet: false,
+      makeEvent('activation-evaluated', {
+        type: 'activation-evaluated', conditionMet: false,
       }),
     ];
     const nodes = orchestrationEventsStrategy.toNodes(events);
@@ -145,8 +145,8 @@ describe('orchestrationEventsStrategy', () => {
 
   it('maps AGGREGATION_COMPLETED RESOLVED to completed', () => {
     const events: OrchestrationAuditEvent[] = [
-      makeEvent('AGGREGATION_COMPLETED', {
-        type: 'AGGREGATION_COMPLETED', outcome: 'RESOLVED',
+      makeEvent('aggregation-completed', {
+        type: 'aggregation-completed', outcome: 'resolved',
       }),
     ];
     const nodes = orchestrationEventsStrategy.toNodes(events);
@@ -155,8 +155,8 @@ describe('orchestrationEventsStrategy', () => {
 
   it('maps AGGREGATION_COMPLETED DEADLOCKED to failed', () => {
     const events: OrchestrationAuditEvent[] = [
-      makeEvent('AGGREGATION_COMPLETED', {
-        type: 'AGGREGATION_COMPLETED', outcome: 'DEADLOCKED',
+      makeEvent('aggregation-completed', {
+        type: 'aggregation-completed', outcome: 'deadlocked',
       }),
     ];
     const nodes = orchestrationEventsStrategy.toNodes(events);
@@ -165,8 +165,8 @@ describe('orchestrationEventsStrategy', () => {
 
   it('maps TERMINATION_EVALUATED COMPLETE to completed', () => {
     const events: OrchestrationAuditEvent[] = [
-      makeEvent('TERMINATION_EVALUATED', {
-        type: 'TERMINATION_EVALUATED', outcome: 'COMPLETE',
+      makeEvent('termination-evaluated', {
+        type: 'termination-evaluated', outcome: 'complete',
       }),
     ];
     const nodes = orchestrationEventsStrategy.toNodes(events);
@@ -175,8 +175,8 @@ describe('orchestrationEventsStrategy', () => {
 
   it('maps EXECUTION_COMPLETED with COMPLETED result to completed', () => {
     const events: OrchestrationAuditEvent[] = [
-      makeEvent('EXECUTION_COMPLETED', {
-        type: 'EXECUTION_COMPLETED', result: 'COMPLETED',
+      makeEvent('execution-completed', {
+        type: 'execution-completed', result: 'completed',
       }),
     ];
     const nodes = orchestrationEventsStrategy.toNodes(events);
@@ -185,8 +185,8 @@ describe('orchestrationEventsStrategy', () => {
 
   it('maps EXECUTION_COMPLETED with FAILED result to failed', () => {
     const events: OrchestrationAuditEvent[] = [
-      makeEvent('EXECUTION_COMPLETED', {
-        type: 'EXECUTION_COMPLETED', result: 'FAILED', reason: 'deadlock',
+      makeEvent('execution-completed', {
+        type: 'execution-completed', result: 'failed', reason: 'deadlock',
       }),
     ];
     const nodes = orchestrationEventsStrategy.toNodes(events);
@@ -195,8 +195,8 @@ describe('orchestrationEventsStrategy', () => {
 
   it('sets iteration category when iteration is present', () => {
     const events: OrchestrationAuditEvent[] = [
-      makeEvent('ROUTING_DECISION', {
-        type: 'ROUTING_DECISION', outcome: 'SELECTED',
+      makeEvent('routing-decision', {
+        type: 'routing-decision', outcome: 'selected',
       }, { iteration: 2 }),
     ];
     const nodes = orchestrationEventsStrategy.toNodes(events);
@@ -205,8 +205,8 @@ describe('orchestrationEventsStrategy', () => {
 
   it('sets category from filter mapping when no iteration', () => {
     const events: OrchestrationAuditEvent[] = [
-      makeEvent('AGGREGATION_COMPLETED', {
-        type: 'AGGREGATION_COMPLETED', outcome: 'RESOLVED',
+      makeEvent('aggregation-completed', {
+        type: 'aggregation-completed', outcome: 'resolved',
       }),
     ];
     const nodes = orchestrationEventsStrategy.toNodes(events);
@@ -216,22 +216,22 @@ describe('orchestrationEventsStrategy', () => {
 
 describe('orchestrationFilterCategory', () => {
   it('maps ROUTING_DECISION to routing', () => {
-    expect(orchestrationFilterCategory('ROUTING_DECISION')).toBe('routing');
+    expect(orchestrationFilterCategory('routing-decision')).toBe('routing');
   });
 
   it('maps AGENT_DISPATCHED to dispatch', () => {
-    expect(orchestrationFilterCategory('AGENT_DISPATCHED')).toBe('dispatch');
+    expect(orchestrationFilterCategory('agent-dispatched')).toBe('dispatch');
   });
 
   it('maps AGENT_RESULT to dispatch', () => {
-    expect(orchestrationFilterCategory('AGENT_RESULT')).toBe('dispatch');
+    expect(orchestrationFilterCategory('agent-result')).toBe('dispatch');
   });
 
   it('maps AGGREGATION_COMPLETED to aggregation', () => {
-    expect(orchestrationFilterCategory('AGGREGATION_COMPLETED')).toBe('aggregation');
+    expect(orchestrationFilterCategory('aggregation-completed')).toBe('aggregation');
   });
 
   it('maps EXECUTION_STARTED to termination', () => {
-    expect(orchestrationFilterCategory('EXECUTION_STARTED')).toBe('termination');
+    expect(orchestrationFilterCategory('execution-started')).toBe('termination');
   });
 });

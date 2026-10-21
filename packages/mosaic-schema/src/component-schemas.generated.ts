@@ -17,37 +17,43 @@ export const executionMonitorPropsSchema = z.object({
   executionId: z.string().optional(),
   data: z.object({
     executionId: z.string(),
-    state: z.enum(["IDLE", "RUNNING", "WAITING_FOR_AGENT", "WAITING_FOR_EVENT", "COMPLETE", "FAULTED", "CANCELLED"]),
+    state: z.enum(["idle", "running", "waiting-for-agent", "waiting-for-event", "complete", "faulted", "cancelled"]),
     model: z.object({
-      pattern: z.enum(["SEQUENCE", "PARALLEL", "LOOP", "CONDITIONAL", "SUPERVISOR", "DEBATE", "VOTING", "HTN"]),
+      pattern: z.enum(["playbook", "orchestration", "deliberation", "perception", "communication", "governance", "optimisation", "social"]),
       routingStrategy: z.string().optional(),
       decompositionStrategy: z.string().optional(),
       activationStrategy: z.string().optional(),
       aggregationStrategy: z.string().optional(),
       terminationStrategy: z.string().optional(),
       failurePolicy: z.object({
-        routingFailureAction: z.enum(["FAIL", "RETRY_BROADER", "ESCALATE"]),
-        aggregationFailureAction: z.enum(["FAIL", "ESCALATE", "RETRY_DIFFERENT"]),
+        routingFailureAction: z.enum(["fail", "retry-broader", "escalate"]),
+        aggregationFailureAction: z.enum(["fail", "escalate", "retry-different"]),
         agentRetryPolicy: z.object({
           maxRetries: z.number(),
-          backoffStrategy: z.enum(["FIXED", "LINEAR", "EXPONENTIAL"]),
+          backoffStrategy: z.enum(["fixed", "linear", "exponential"]),
           initialDelayMs: z.number().optional(),
         }).optional(),
       }),
     }),
-    result: z.enum(["CANCELLED", "COMPLETED", "FAILED", "ESCALATED"]).optional(),
+    result: z.enum(["cancelled", "completed", "failed", "escalated"]).optional(),
     activeAgents: z.array(z.object({
-        id: z.string(),
-        type: z.enum(["WORKER", "CHANNEL", "HUMAN", "EXTERNAL", "COMPOSED"]),
+        id: z.string().optional(),
+        type: z.enum(["worker", "channel", "human", "external", "composed"]),
         name: z.string().optional(),
+        description: z.string().optional(),
+        capabilities: z.array(z.string()).optional(),
+        model: z.string().optional(),
       })),
     completedAgents: z.array(z.object({
         agentRef: z.object({
-          id: z.string(),
-          type: z.enum(["WORKER", "CHANNEL", "HUMAN", "EXTERNAL", "COMPOSED"]),
+          id: z.string().optional(),
+          type: z.enum(["worker", "channel", "human", "external", "composed"]),
           name: z.string().optional(),
+          description: z.string().optional(),
+          capabilities: z.array(z.string()).optional(),
+          model: z.string().optional(),
         }),
-        status: z.enum(["SUCCESS", "FAILURE", "TIMEOUT", "DECLINED"]),
+        status: z.enum(["success", "failure", "timeout", "declined"]),
         detail: z.string().optional(),
         error: z.string().optional(),
         duration: z.number().optional(),
@@ -126,7 +132,7 @@ export const serviceCardPropsSchema = z.object({
       clusters: z.array(z.object({
           clusterId: z.string(),
           clusterName: z.string(),
-          status: z.enum(["converged", "provisioning", "faulted", "unknown"]),
+          status: z.enum(["faulted", "converged", "provisioning", "unknown"]),
           readyReplicas: z.number(),
           desiredReplicas: z.number(),
         })),
@@ -193,7 +199,7 @@ export const workItemRowPropsSchema = z.object({
     types: z.array(z.string()),
     category: z.union([z.null(), z.string()]),
     formKey: z.union([z.null(), z.string()]),
-    status: z.enum(["FAULTED", "CANCELLED", "COMPLETED", "ESCALATED", "PENDING", "ASSIGNED", "IN_PROGRESS", "REJECTED", "DELEGATED", "SUSPENDED", "EXPIRED", "OBSOLETE"]),
+    status: z.enum(["PENDING", "ASSIGNED", "IN_PROGRESS", "COMPLETED", "REJECTED", "FAULTED", "DELEGATED", "SUSPENDED", "CANCELLED", "EXPIRED", "ESCALATED", "OBSOLETE"]),
     priority: z.enum(["LOW", "MEDIUM", "HIGH", "URGENT"]),
     assigneeId: z.union([z.null(), z.string()]),
     owner: z.union([z.null(), z.string()]),
@@ -308,7 +314,7 @@ export const groupedDataViewPropsSchema = z.object({
   groupOrder: z.array(z.string()).optional(),
   groupConfig: z.object({
     size: z.number(),
-    "__@toStringTag@566": z.string(),
+    "__@toStringTag@572": z.string(),
   }).optional(),
   columnConfig: z.array(z.unknown()).optional(),
   columnRenderers: z.object({
@@ -371,7 +377,7 @@ export const workItemInboxPropsSchema = z.object({
         types: z.array(z.string()),
         category: z.union([z.null(), z.string()]),
         formKey: z.union([z.null(), z.string()]),
-        status: z.enum(["FAULTED", "CANCELLED", "COMPLETED", "ESCALATED", "PENDING", "ASSIGNED", "IN_PROGRESS", "REJECTED", "DELEGATED", "SUSPENDED", "EXPIRED", "OBSOLETE"]),
+        status: z.enum(["PENDING", "ASSIGNED", "IN_PROGRESS", "COMPLETED", "REJECTED", "FAULTED", "DELEGATED", "SUSPENDED", "CANCELLED", "EXPIRED", "ESCALATED", "OBSOLETE"]),
         priority: z.enum(["LOW", "MEDIUM", "HIGH", "URGENT"]),
         assigneeId: z.union([z.null(), z.string()]),
         owner: z.union([z.null(), z.string()]),
@@ -438,7 +444,7 @@ export const workItemDetailPropsSchema = z.object({
       types: z.array(z.string()),
       category: z.union([z.null(), z.string()]),
       formKey: z.union([z.null(), z.string()]),
-      status: z.enum(["FAULTED", "CANCELLED", "COMPLETED", "ESCALATED", "PENDING", "ASSIGNED", "IN_PROGRESS", "REJECTED", "DELEGATED", "SUSPENDED", "EXPIRED", "OBSOLETE"]),
+      status: z.enum(["PENDING", "ASSIGNED", "IN_PROGRESS", "COMPLETED", "REJECTED", "FAULTED", "DELEGATED", "SUSPENDED", "CANCELLED", "EXPIRED", "ESCALATED", "OBSOLETE"]),
       priority: z.enum(["LOW", "MEDIUM", "HIGH", "URGENT"]),
       assigneeId: z.union([z.null(), z.string()]),
       owner: z.union([z.null(), z.string()]),
@@ -657,7 +663,7 @@ export const conversationWorkbenchPropsSchema = z.object({
         pointId: z.string(),
         correlationId: z.string(),
         commitment: z.object({
-          state: z.enum(["FAILED", "DECLINED", "DELEGATED", "EXPIRED", "OPEN", "ACKNOWLEDGED", "FULFILLED"]),
+          state: z.enum(["DELEGATED", "EXPIRED", "OPEN", "ACKNOWLEDGED", "FULFILLED", "FAILED", "DECLINED"]),
           deadline: z.string().optional(),
           acknowledgedAt: z.string().optional(),
           resolvedAt: z.string().optional(),
@@ -665,8 +671,8 @@ export const conversationWorkbenchPropsSchema = z.object({
           updatedAt: z.string(),
         }),
         transitions: z.array(z.object({
-            from: z.enum(["FAILED", "DECLINED", "DELEGATED", "EXPIRED", "OPEN", "ACKNOWLEDGED", "FULFILLED"]),
-            to: z.enum(["FAILED", "DECLINED", "DELEGATED", "EXPIRED", "OPEN", "ACKNOWLEDGED", "FULFILLED"]),
+            from: z.enum(["DELEGATED", "EXPIRED", "OPEN", "ACKNOWLEDGED", "FULFILLED", "FAILED", "DECLINED"]),
+            to: z.enum(["DELEGATED", "EXPIRED", "OPEN", "ACKNOWLEDGED", "FULFILLED", "FAILED", "DECLINED"]),
             actor: z.string().optional(),
             timestamp: z.string(),
           })),
@@ -748,7 +754,7 @@ export const pointDetailPropsSchema = z.object({
       pointId: z.string(),
       correlationId: z.string(),
       commitment: z.object({
-        state: z.enum(["FAILED", "DECLINED", "DELEGATED", "EXPIRED", "OPEN", "ACKNOWLEDGED", "FULFILLED"]),
+        state: z.enum(["DELEGATED", "EXPIRED", "OPEN", "ACKNOWLEDGED", "FULFILLED", "FAILED", "DECLINED"]),
         deadline: z.string().optional(),
         acknowledgedAt: z.string().optional(),
         resolvedAt: z.string().optional(),
@@ -756,8 +762,8 @@ export const pointDetailPropsSchema = z.object({
         updatedAt: z.string(),
       }),
       transitions: z.array(z.object({
-          from: z.enum(["FAILED", "DECLINED", "DELEGATED", "EXPIRED", "OPEN", "ACKNOWLEDGED", "FULFILLED"]),
-          to: z.enum(["FAILED", "DECLINED", "DELEGATED", "EXPIRED", "OPEN", "ACKNOWLEDGED", "FULFILLED"]),
+          from: z.enum(["DELEGATED", "EXPIRED", "OPEN", "ACKNOWLEDGED", "FULFILLED", "FAILED", "DECLINED"]),
+          to: z.enum(["DELEGATED", "EXPIRED", "OPEN", "ACKNOWLEDGED", "FULFILLED", "FAILED", "DECLINED"]),
           actor: z.string().optional(),
           timestamp: z.string(),
         })),
@@ -963,12 +969,12 @@ export const caseFlowViewerPropsSchema = z.object({
       planItems: z.array(z.object({
           id: z.string(),
           bindingName: z.string(),
-          status: z.enum(["RUNNING", "FAULTED", "CANCELLED", "COMPLETED", "PENDING", "REJECTED", "DELEGATED", "SUSPENDED", "OBSOLETE"]),
+          status: z.enum(["PENDING", "COMPLETED", "REJECTED", "FAULTED", "DELEGATED", "SUSPENDED", "CANCELLED", "OBSOLETE", "RUNNING"]),
           createdAt: z.string(),
         })),
       milestones: z.array(z.object({
           name: z.string(),
-          status: z.enum(["COMPLETED", "PENDING", "ACTIVE"]),
+          status: z.enum(["PENDING", "COMPLETED", "ACTIVE"]),
         })),
       timestamp: z.string(),
       caseStatus: z.string().optional(),
@@ -1001,12 +1007,12 @@ export const diagramWorkbenchPropsSchema = z.object({
       planItems: z.array(z.object({
           id: z.string(),
           bindingName: z.string(),
-          status: z.enum(["RUNNING", "FAULTED", "CANCELLED", "COMPLETED", "PENDING", "REJECTED", "DELEGATED", "SUSPENDED", "OBSOLETE"]),
+          status: z.enum(["PENDING", "COMPLETED", "REJECTED", "FAULTED", "DELEGATED", "SUSPENDED", "CANCELLED", "OBSOLETE", "RUNNING"]),
           createdAt: z.string(),
         })),
       milestones: z.array(z.object({
           name: z.string(),
-          status: z.enum(["COMPLETED", "PENDING", "ACTIVE"]),
+          status: z.enum(["PENDING", "COMPLETED", "ACTIVE"]),
         })),
       timestamp: z.string(),
       caseStatus: z.string().optional(),
@@ -1067,7 +1073,7 @@ export const topologyViewerPropsSchema = z.object({
       services: z.array(z.object({
           id: z.string(),
           name: z.string(),
-          status: z.enum(["RUNNING", "FAULTED", "ABSENT", "DEGRADED", "DEPLOYING"]),
+          status: z.enum(["FAULTED", "RUNNING", "ABSENT", "DEGRADED", "DEPLOYING"]),
           replicas: z.number().optional(),
           image: z.string().optional(),
           type: z.string().optional(),
@@ -1111,7 +1117,7 @@ export const contributorWorkbenchPropsSchema = z.object({
 });
 
 export const commitmentRangeBarPropsSchema = z.object({
-  state: z.enum(["FAILED", "DECLINED", "DELEGATED", "EXPIRED", "OPEN", "ACKNOWLEDGED", "FULFILLED"]).optional(),
+  state: z.enum(["DELEGATED", "EXPIRED", "OPEN", "ACKNOWLEDGED", "FULFILLED", "FAILED", "DECLINED"]).optional(),
   createdAt: z.string().optional(),
   resolvedAt: z.string().optional(),
   acknowledgedAt: z.string().optional(),
@@ -1121,8 +1127,8 @@ export const commitmentRangeBarPropsSchema = z.object({
 
 export const commitmentTransitionBadgePropsSchema = z.object({
   transition: z.object({
-    from: z.enum(["FAILED", "DECLINED", "DELEGATED", "EXPIRED", "OPEN", "ACKNOWLEDGED", "FULFILLED"]),
-    to: z.enum(["FAILED", "DECLINED", "DELEGATED", "EXPIRED", "OPEN", "ACKNOWLEDGED", "FULFILLED"]),
+    from: z.enum(["DELEGATED", "EXPIRED", "OPEN", "ACKNOWLEDGED", "FULFILLED", "FAILED", "DECLINED"]),
+    to: z.enum(["DELEGATED", "EXPIRED", "OPEN", "ACKNOWLEDGED", "FULFILLED", "FAILED", "DECLINED"]),
     actor: z.string().optional(),
     timestamp: z.string(),
   }).optional(),
@@ -1389,8 +1395,6 @@ export const evolutionInboxPropsSchema = z.object({
   readonly: z.boolean().optional(),
 });
 
-export const agentDetailPropsSchema = z.object({});
-
 export const agentAvatarPropsSchema = z.object({
   archetype: z.object({
     family: z.string(),
@@ -1423,7 +1427,7 @@ export const agentProfilePanelPropsSchema = z.object({
     })]),
   locked: z.object({
     size: z.number(),
-    "__@toStringTag@566": z.string(),
+    "__@toStringTag@572": z.string(),
   }),
   showConfirmButton: z.boolean(),
   archetypeRoles: z.array(z.object({
@@ -1573,7 +1577,6 @@ export const blocksComponentSchemaMap: ReadonlyMap<string, z.ZodType> = new Map(
   ["blocks-evolution-workbench", evolutionWorkbenchPropsSchema] as [string, z.ZodType],
   ["blocks-evolution-streams", evolutionStreamsPropsSchema] as [string, z.ZodType],
   ["blocks-evolution-inbox", evolutionInboxPropsSchema] as [string, z.ZodType],
-  ["blocks-agent-detail", agentDetailPropsSchema] as [string, z.ZodType],
   ["agent-avatar", agentAvatarPropsSchema] as [string, z.ZodType],
   ["agent-manifest-editor", agentManifestEditorPropsSchema] as [string, z.ZodType],
   ["blocks-agent-profile-panel", agentProfilePanelPropsSchema] as [string, z.ZodType],

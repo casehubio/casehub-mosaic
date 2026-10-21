@@ -15,7 +15,7 @@ function fixture(): DeliberationPatternCategory {
       trigger: { type: 'confidence-threshold', threshold: 0.7 },
       caller: { type: 'fan-out', callerNames: ['senior-reviewer', 'domain-lead'] },
     },
-    failurePolicy: { onRoutingFailure: 'FAIL', onDeadlock: 'ESCALATE' },
+    failurePolicy: { routingFailureAction: 'fail', aggregationFailureAction: 'escalate' },
     agents: [
       { type: 'worker', name: 'quantitative-scorer', description: 'Statistical risk models', capabilities: ['risk-modelling'], model: 'claude-opus-5' },
       { type: 'worker', name: 'qualitative-reviewer', description: 'Contextual analysis', capabilities: ['contextual-analysis'], model: 'claude-sonnet-5' },
@@ -75,8 +75,8 @@ describe('voting-view', () => {
   });
 
   it('renders failure policy', () => {
-    expect(el.shadowRoot!.textContent).toContain('FAIL');
-    expect(el.shadowRoot!.textContent).toContain('ESCALATE');
+    expect(el.shadowRoot!.textContent).toContain('fail');
+    expect(el.shadowRoot!.textContent).toContain('escalate');
   });
 
   it('renders judgment card', () => {
