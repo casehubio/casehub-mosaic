@@ -1,9 +1,9 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
-import '../../../components/blocks-timeline/src/blocks-timeline.js';
-import { commitmentLifecycleStrategy } from '../../../components/blocks-timeline/src/strategies/commitment-lifecycle.js';
-import type { CommitmentLifecycleData } from '../../../components/blocks-timeline/src/strategies/commitment-lifecycle.js';
-import type { StageConfig } from '../../../components/blocks-timeline/src/types.js';
+import '../../../components/agency-timeline/src/agency-timeline.js';
+import { commitmentLifecycleStrategy } from '../../../components/agency-timeline/src/strategies/commitment-lifecycle.js';
+import type { CommitmentLifecycleData } from '../../../components/agency-timeline/src/strategies/commitment-lifecycle.js';
+import type { StageConfig } from '../../../components/agency-timeline/src/types.js';
 import commitmentData from '../../mock-data/commitments.json';
 
 const DEVTOWN_STAGES: StageConfig[] = [
@@ -40,7 +40,7 @@ export class CommitmentLifecyclePage extends LitElement {
 
     return html`
       <h2>Commitment Lifecycle (Timeline Strategy)</h2>
-      <p>Uses commitmentLifecycleStrategy() with blocks-timeline. OPEN → ACKNOWLEDGED → FULFILLED/FAILED/DECLINED/DELEGATED/EXPIRED (7-state model).</p>
+      <p>Uses commitmentLifecycleStrategy() with agency-timeline. OPEN → ACKNOWLEDGED → FULFILLED/FAILED/DECLINED/DELEGATED/EXPIRED (7-state model).</p>
 
       <div class="controls">
         <select @change=${(e: Event) => { this._selectedId = (e.target as HTMLSelectElement).value; }}>
@@ -53,10 +53,10 @@ export class CommitmentLifecyclePage extends LitElement {
       <h3>Default Stages (7-State Model)</h3>
       <div class="demo-section">
         ${commitment ? html`
-          <blocks-timeline
+          <agency-timeline
             .strategy=${commitmentLifecycleStrategy()}
             .data=${commitment}
-          ></blocks-timeline>
+          ></agency-timeline>
           ${commitment.messages?.length ? html`
             <div class="messages">
               <strong>Channel Messages</strong>
@@ -78,33 +78,33 @@ export class CommitmentLifecyclePage extends LitElement {
       <div class="demo-section" style="display: flex; flex-direction: column; gap: 16px;">
         <div>
           <strong style="font-size: 12px;">OPEN → DECLINED (skipping ACKNOWLEDGED)</strong>
-          <blocks-timeline
+          <agency-timeline
             .strategy=${commitmentLifecycleStrategy()}
             .data=${(commitmentData.commitments as CommitmentLifecycleData[]).find(c => c.id === 'commit-003')}
-          ></blocks-timeline>
+          ></agency-timeline>
         </div>
         <div>
           <strong style="font-size: 12px;">OPEN → DELEGATED (transfer — skipping ACKNOWLEDGED)</strong>
-          <blocks-timeline
+          <agency-timeline
             .strategy=${commitmentLifecycleStrategy()}
             .data=${(commitmentData.commitments as CommitmentLifecycleData[]).find(c => c.id === 'commit-005')}
-          ></blocks-timeline>
+          ></agency-timeline>
         </div>
         <div>
           <strong style="font-size: 12px;">OPEN → EXPIRED (timeout — skipping ACKNOWLEDGED)</strong>
-          <blocks-timeline
+          <agency-timeline
             .strategy=${commitmentLifecycleStrategy()}
             .data=${(commitmentData.commitments as CommitmentLifecycleData[]).find(c => c.id === 'commit-006')}
-          ></blocks-timeline>
+          ></agency-timeline>
         </div>
       </div>
 
       <h3>Custom Stages (DevTown Review)</h3>
       <div class="demo-section">
-        <blocks-timeline
+        <agency-timeline
           .strategy=${commitmentLifecycleStrategy({ stages: DEVTOWN_STAGES })}
           .data=${{ currentStage: 'REVIEWING', stages: [{ key: 'REQUESTED', status: 'completed', actor: 'dev-1', timestamp: '2026-07-14T10:00:00Z' }, { key: 'REVIEWING', status: 'active', actor: 'reviewer-1', timestamp: '2026-07-14T10:30:00Z' }] }}
-        ></blocks-timeline>
+        ></agency-timeline>
       </div>
     `;
   }

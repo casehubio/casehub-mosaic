@@ -9,8 +9,8 @@ export interface PlanModelDashboardProps {
   planModel: CasePlanModelSnapshot | null;
 }
 
-@customElement('blocks-plan-model-dashboard')
-export class BlocksPlanModelDashboard extends LitElement {
+@customElement('agency-plan-model-dashboard')
+export class AgencyPlanModelDashboard extends LitElement {
   @property({ type: Object }) planModel: CasePlanModelSnapshot | null = null;
 
   static override styles = css`

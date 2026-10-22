@@ -24,8 +24,8 @@ export interface PlanItemTreeProps {
   definition: PlanItemDefinition | null;
 }
 
-@customElement('blocks-plan-item-tree')
-export class BlocksPlanItemTree extends LitElement {
+@customElement('agency-plan-item-tree')
+export class AgencyPlanItemTree extends LitElement {
   @property({ type: Object }) definition: PlanItemDefinition | null = null;
   @property({ type: Object }) renderPrimitive?: (item: PrimitivePlanItem) => TemplateResult;
   @property({ type: Object }) renderCompound?: (item: CompoundPlanItem) => TemplateResult;

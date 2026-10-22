@@ -1,5 +1,5 @@
 {
-  "name": "@casehubio/mosaic-blocks-dag-viewer",
+  "name": "@casehubio/mosaic-agency-dag-viewer",
   "version": "0.1.0",
   "description": "Read-only DAG execution graph viewer with ELK layout",
   "repository": {

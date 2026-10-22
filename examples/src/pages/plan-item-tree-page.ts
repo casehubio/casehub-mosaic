@@ -1,6 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import '@casehubio/mosaic-blocks-plan-item-tree';
+import '@casehubio/mosaic-agency-plan-item-tree';
 import type { PlanItemDefinition } from '@casehubio/mosaic-graph-stencil-htn';
 import mockData from '../../mock-data/plan-item.json';
 
@@ -23,7 +23,7 @@ export class PlanItemTreePage extends LitElement {
         CompletionSemantics badges (All / M-of-N / FirstWins), DispatchMode pills
         (ORCHESTRATED / CHOREOGRAPHED), repeatable indicators, and entry/exit conditions.</p>
       <div class="tree-container">
-        <blocks-plan-item-tree .definition=${this._definition}></blocks-plan-item-tree>
+        <agency-plan-item-tree .definition=${this._definition}></agency-plan-item-tree>
       </div>
     `;
   }

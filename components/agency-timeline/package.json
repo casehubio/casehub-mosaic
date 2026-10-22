@@ -1,5 +1,5 @@
 {
-  "name": "@casehubio/mosaic-blocks-timeline",
+  "name": "@casehubio/mosaic-agency-timeline",
   "version": "0.2.2",
   "description": "Pluggable timeline — vertical, horizontal, compact layouts with strategy-based content",
   "repository": {

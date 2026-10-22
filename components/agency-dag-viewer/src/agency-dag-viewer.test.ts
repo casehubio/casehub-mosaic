@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 import { describe, it, expect } from 'vitest';
-import { BlocksDagViewer } from './blocks-dag-viewer.js';
+import { AgencyDagViewer } from './agency-dag-viewer.js';
 import type { DagPlanSnapshot } from '@casehubio/mosaic-graph-stencil-htn';
 
 function simplePlan(): DagPlanSnapshot {
@@ -13,21 +13,21 @@ function simplePlan(): DagPlanSnapshot {
   };
 }
 
-describe('BlocksDagViewer', () => {
+describe('AgencyDagViewer', () => {
   it('renders empty state when dagPlan is null', () => {
-    const el = new BlocksDagViewer();
+    const el = new AgencyDagViewer();
     expect(el.dagPlan).toBeNull();
   });
 
   it('stores dagPlan property', () => {
-    const el = new BlocksDagViewer();
+    const el = new AgencyDagViewer();
     el.dagPlan = simplePlan();
     expect(el.dagPlan).toBeDefined();
     expect(Object.keys(el.dagPlan!.nodes)).toHaveLength(2);
   });
 
   it('stores dagResult property', () => {
-    const el = new BlocksDagViewer();
+    const el = new AgencyDagViewer();
     el.dagResult = {
       nodeStates: { a: { kind: 'Completed' } },
       allSucceeded: true, elapsed: 'PT5S', timestamp: '2026-08-06T10:01:00Z',
@@ -36,24 +36,24 @@ describe('BlocksDagViewer', () => {
   });
 
   it('accepts dispatchMode as property', () => {
-    const el = new BlocksDagViewer();
+    const el = new AgencyDagViewer();
     el.dispatchMode = 'BARRIER';
     expect(el.dispatchMode).toBe('BARRIER');
   });
 
   it('defaults selectionTopic to dag-node', () => {
-    const el = new BlocksDagViewer();
+    const el = new AgencyDagViewer();
     expect(el.selectionTopic).toBe('dag-node');
   });
 
   it('accepts custom selectionTopic', () => {
-    const el = new BlocksDagViewer();
+    const el = new AgencyDagViewer();
     el.selectionTopic = 'my-topic';
     expect(el.selectionTopic).toBe('my-topic');
   });
 
   it('canvas area has role="img" and aria-label', async () => {
-    const el = new BlocksDagViewer();
+    const el = new AgencyDagViewer();
     document.body.appendChild(el);
     await (el as any).updateComplete;
     const canvas = el.shadowRoot!.querySelector('.canvas-area');

@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 import { describe, it, expect } from 'vitest';
-import { BlocksPlanItemTree, completionLabel, COMPLETION_COLORS } from './blocks-plan-item-tree.js';
+import { AgencyPlanItemTree, completionLabel, COMPLETION_COLORS } from './agency-plan-item-tree.js';
 import type { PrimitivePlanItem, CompoundPlanItem, PlanItemDefinition } from '@casehubio/mosaic-graph-stencil-htn';
 
 function primitive(id: string, name: string, executor = 'exec-1'): PrimitivePlanItem {
@@ -19,34 +19,34 @@ function compound(
   };
 }
 
-describe('BlocksPlanItemTree', () => {
+describe('AgencyPlanItemTree', () => {
   it('renders empty state when definition is null', () => {
-    const el = new BlocksPlanItemTree();
+    const el = new AgencyPlanItemTree();
     expect(el.definition).toBeNull();
   });
 
   it('stores definition property', () => {
-    const el = new BlocksPlanItemTree();
+    const el = new AgencyPlanItemTree();
     el.definition = primitive('p1', 'Task A');
     expect(el.definition!.kind).toBe('primitive');
   });
 
   it('stores renderPrimitive callback', () => {
-    const el = new BlocksPlanItemTree();
+    const el = new AgencyPlanItemTree();
     const cb = () => null as any;
     el.renderPrimitive = cb;
     expect(el.renderPrimitive).toBe(cb);
   });
 
   it('stores renderCompound callback', () => {
-    const el = new BlocksPlanItemTree();
+    const el = new AgencyPlanItemTree();
     const cb = () => null as any;
     el.renderCompound = cb;
     expect(el.renderCompound).toBe(cb);
   });
 
   it('accepts compound with nested children', () => {
-    const el = new BlocksPlanItemTree();
+    const el = new AgencyPlanItemTree();
     el.definition = compound('c1', 'Root', [
       primitive('p1', 'Child A'),
       compound('c2', 'Sub', [primitive('p2', 'Grandchild')]),

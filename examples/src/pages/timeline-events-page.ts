@@ -1,9 +1,9 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
-import '@casehubio/mosaic-blocks-timeline';
-import { eventChronologyStrategy } from '@casehubio/mosaic-blocks-timeline';
-import type { CaseEvent, PagedResponse, EventLogEntryResponse } from '@casehubio/mosaic-blocks-timeline';
-import type { EventTimelineLayout } from '@casehubio/mosaic-blocks-timeline';
+import '@casehubio/mosaic-agency-timeline';
+import { eventChronologyStrategy } from '@casehubio/mosaic-agency-timeline';
+import type { CaseEvent, PagedResponse, EventLogEntryResponse } from '@casehubio/mosaic-agency-timeline';
+import type { EventTimelineLayout } from '@casehubio/mosaic-agency-timeline';
 import mockEvents from '../../mock-data/case-events.json';
 
 @customElement('blocks-example-timeline-events')
@@ -68,11 +68,11 @@ export class TimelineEventsPage extends LitElement {
         </div>
 
         <div class="viewer-container">
-          <blocks-timeline
+          <agency-timeline
             .strategy=${eventChronologyStrategy()}
             .data=${mockEvents as CaseEvent[]}
             layout=${this._layout}
-          ></blocks-timeline>
+          ></agency-timeline>
         </div>
 
         <div class="info-panel">

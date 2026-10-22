@@ -9,7 +9,7 @@ import { computeElkLayout, toReactFlowGraph } from '@casehubio/graph-renderer';
 import type { ElkLayoutResult } from '@casehubio/graph-renderer';
 import { emitPagesEvent } from '@casehubio/pages-data';
 import '@casehubio/graph-renderer';
-import './blocks-dag-toolbar.js';
+import './agency-dag-toolbar.js';
 
 export interface DagViewerProps {
   dagPlan: DagPlanSnapshot | null;
@@ -18,8 +18,8 @@ export interface DagViewerProps {
   selectionTopic: string;
 }
 
-@customElement('blocks-dag-viewer')
-export class BlocksDagViewer extends LitElement {
+@customElement('agency-dag-viewer')
+export class AgencyDagViewer extends LitElement {
   @property({ type: Object }) dagPlan: DagPlanSnapshot | null = null;
   @property({ type: Object }) dagResult: DagResultSnapshot | null = null;
   @property({ type: String }) dispatchMode: DagDispatchMode | null = null;
@@ -121,7 +121,7 @@ export class BlocksDagViewer extends LitElement {
   override render() {
     const stats = this._computeStats();
     return html`
-      <blocks-dag-toolbar
+      <agency-dag-toolbar
         .dispatchMode=${this.dispatchMode}
         .nodeCount=${stats.nodeCount}
         .completedCount=${stats.completed}
@@ -129,7 +129,7 @@ export class BlocksDagViewer extends LitElement {
         .failedCount=${stats.failed}
         .elapsed=${this.dagResult?.elapsed ?? null}
         .resultTimestamp=${this.dagResult?.timestamp ?? null}
-      ></blocks-dag-toolbar>
+      ></agency-dag-toolbar>
       <div class="canvas-area" role="img" aria-label="DAG execution graph">
         ${this.dagPlan == null
           ? html`<div class="empty">No DAG plan loaded</div>`

@@ -1,11 +1,11 @@
 import { describe, it, expect, afterEach, vi } from 'vitest';
 import { html, render } from 'lit';
-import './blocks-timeline.js';
-import type { BlocksTimeline } from './blocks-timeline.js';
+import './agency-timeline.js';
+import type { AgencyTimeline } from './agency-timeline.js';
 import { eventChronologyStrategy } from './strategies/event-chronology.js';
 import { stateProgressionStrategy, linearResolveStatus } from './strategies/state-progression.js';
 import type { CaseEvent, PagedResponse, EventLogEntryResponse } from './strategies/event-chronology.js';
-import type { BlocksTimelineStrategy } from './types.js';
+import type { AgencyTimelineStrategy } from './types.js';
 import type { EventTimelineNode } from '@casehubio/pages-viz';
 
 async function fixture<T extends HTMLElement & { updateComplete: Promise<boolean> }>(
@@ -19,8 +19,8 @@ async function fixture<T extends HTMLElement & { updateComplete: Promise<boolean
   return element;
 }
 
-describe('BlocksTimeline', () => {
-  let element: BlocksTimeline;
+describe('AgencyTimeline', () => {
+  let element: AgencyTimeline;
 
   afterEach(() => {
     document.body.innerHTML = '';
@@ -36,7 +36,7 @@ describe('BlocksTimeline', () => {
 
   describe('element registration', () => {
     it('defines the custom element', () => {
-      const el = document.createElement('blocks-timeline');
+      const el = document.createElement('agency-timeline');
       expect(el).toBeInstanceOf(HTMLElement);
     });
   });
@@ -45,7 +45,7 @@ describe('BlocksTimeline', () => {
   describe('eventChronologyStrategy + vertical layout', () => {
     beforeEach(async () => {
       element = await fixture(html`
-        <blocks-timeline .strategy=${eventChronologyStrategy()} .data=${mockEvents} layout="vertical"></blocks-timeline>
+        <agency-timeline .strategy=${eventChronologyStrategy()} .data=${mockEvents} layout="vertical"></agency-timeline>
       `);
       await element.updateComplete;
     });
@@ -133,7 +133,7 @@ describe('BlocksTimeline', () => {
   describe('eventChronologyStrategy + horizontal layout', () => {
     beforeEach(async () => {
       element = await fixture(html`
-        <blocks-timeline .strategy=${eventChronologyStrategy()} .data=${mockEvents} layout="horizontal"></blocks-timeline>
+        <agency-timeline .strategy=${eventChronologyStrategy()} .data=${mockEvents} layout="horizontal"></agency-timeline>
       `);
       await element.updateComplete;
     });
@@ -174,7 +174,7 @@ describe('BlocksTimeline', () => {
   describe('eventChronologyStrategy + compact layout', () => {
     beforeEach(async () => {
       element = await fixture(html`
-        <blocks-timeline .strategy=${eventChronologyStrategy()} .data=${mockEvents} layout="compact"></blocks-timeline>
+        <agency-timeline .strategy=${eventChronologyStrategy()} .data=${mockEvents} layout="compact"></agency-timeline>
       `);
       await element.updateComplete;
     });
@@ -203,13 +203,13 @@ describe('BlocksTimeline', () => {
   describe('stateProgressionStrategy + horizontal layout (default)', () => {
     beforeEach(async () => {
       element = await fixture(html`
-        <blocks-timeline
+        <agency-timeline
           .strategy=${stateProgressionStrategy()}
           .data=${{ currentState: 'ACKNOWLEDGED', transitions: [
             { state: 'OPEN', actor: 'system', timestamp: '2026-01-01T00:00:00Z' },
             { state: 'ACKNOWLEDGED', actor: 'agent-1', timestamp: '2026-01-01T01:00:00Z' },
           ]}}
-        ></blocks-timeline>
+        ></agency-timeline>
       `);
       await element.updateComplete;
     });
@@ -243,7 +243,7 @@ describe('BlocksTimeline', () => {
   describe('stateProgressionStrategy + vertical layout', () => {
     beforeEach(async () => {
       element = await fixture(html`
-        <blocks-timeline
+        <agency-timeline
           .strategy=${stateProgressionStrategy()}
           .data=${{ currentState: 'FULFILLED', transitions: [
             { state: 'OPEN', timestamp: '2026-01-01T00:00:00Z' },
@@ -251,7 +251,7 @@ describe('BlocksTimeline', () => {
             { state: 'FULFILLED', timestamp: '2026-01-01T02:00:00Z' },
           ]}}
           layout="vertical"
-        ></blocks-timeline>
+        ></agency-timeline>
       `);
       await element.updateComplete;
     });
@@ -271,11 +271,11 @@ describe('BlocksTimeline', () => {
   describe('stateProgressionStrategy + compact layout', () => {
     beforeEach(async () => {
       element = await fixture(html`
-        <blocks-timeline
+        <agency-timeline
           .strategy=${stateProgressionStrategy()}
           .data=${{ currentState: 'OPEN' }}
           layout="compact"
-        ></blocks-timeline>
+        ></agency-timeline>
       `);
       await element.updateComplete;
     });
@@ -296,7 +296,7 @@ describe('BlocksTimeline', () => {
         { eventType: 'CASE_STARTED', streamType: 'CASE', timestamp: '2026-01-01T10:00:00Z', payload: {} },
       ];
       element = await fixture(html`
-        <blocks-timeline .strategy=${eventChronologyStrategy()} .data=${inlineData} layout="vertical"></blocks-timeline>
+        <agency-timeline .strategy=${eventChronologyStrategy()} .data=${inlineData} layout="vertical"></agency-timeline>
       `);
       await element.updateComplete;
       expect(element.shadowRoot!.querySelectorAll('[role="listitem"]').length).toBe(1);
@@ -307,7 +307,7 @@ describe('BlocksTimeline', () => {
         { eventType: 'CASE_STARTED', streamType: 'CASE', timestamp: '2026-01-01T10:00:00Z', payload: {} },
       ];
       element = await fixture(html`
-        <blocks-timeline .strategy=${eventChronologyStrategy()} .data=${data1} layout="vertical"></blocks-timeline>
+        <agency-timeline .strategy=${eventChronologyStrategy()} .data=${data1} layout="vertical"></agency-timeline>
       `);
       await element.updateComplete;
       expect(element.shadowRoot!.querySelectorAll('[role="listitem"]').length).toBe(1);
@@ -319,7 +319,7 @@ describe('BlocksTimeline', () => {
 
     it('recomputes nodes when strategy changes', async () => {
       element = await fixture(html`
-        <blocks-timeline .strategy=${eventChronologyStrategy()} .data=${mockEvents} layout="vertical"></blocks-timeline>
+        <agency-timeline .strategy=${eventChronologyStrategy()} .data=${mockEvents} layout="vertical"></agency-timeline>
       `);
       await element.updateComplete;
       expect(element.shadowRoot!.querySelectorAll('[role="listitem"]').length).toBe(5);
@@ -332,7 +332,7 @@ describe('BlocksTimeline', () => {
 
     it('renders empty when no data', async () => {
       element = await fixture(html`
-        <blocks-timeline .strategy=${eventChronologyStrategy()} layout="vertical"></blocks-timeline>
+        <agency-timeline .strategy=${eventChronologyStrategy()} layout="vertical"></agency-timeline>
       `);
       await element.updateComplete;
       expect(element.shadowRoot!.querySelectorAll('[role="listitem"]').length).toBe(0);
@@ -344,7 +344,7 @@ describe('BlocksTimeline', () => {
         page: 0, size: 20, totalElements: mockEvents.length, totalPages: 1,
       };
       element = await fixture(html`
-        <blocks-timeline .strategy=${eventChronologyStrategy()} .data=${paged} layout="vertical"></blocks-timeline>
+        <agency-timeline .strategy=${eventChronologyStrategy()} .data=${paged} layout="vertical"></agency-timeline>
       `);
       await element.updateComplete;
       expect(element.shadowRoot!.querySelectorAll('[role="listitem"]').length).toBe(5);
@@ -356,12 +356,12 @@ describe('BlocksTimeline', () => {
     it('component renderNode overrides strategy renderNode', async () => {
       const strategyRender = vi.fn(() => html`<span class="strat">s</span>`);
       const componentRender = vi.fn(() => html`<span class="comp">c</span>`);
-      const strategy: BlocksTimelineStrategy<CaseEvent[]> = {
+      const strategy: AgencyTimelineStrategy<CaseEvent[]> = {
         ...eventChronologyStrategy(),
         renderNode: strategyRender,
       };
       element = await fixture(html`
-        <blocks-timeline .strategy=${strategy} .data=${mockEvents} .renderNode=${componentRender} layout="vertical"></blocks-timeline>
+        <agency-timeline .strategy=${strategy} .data=${mockEvents} .renderNode=${componentRender} layout="vertical"></agency-timeline>
       `);
       await element.updateComplete;
       expect(componentRender).toHaveBeenCalled();
@@ -371,12 +371,12 @@ describe('BlocksTimeline', () => {
 
     it('strategy renderNode used when component has none', async () => {
       const strategyRender = vi.fn(() => html`<span class="strat">s</span>`);
-      const strategy: BlocksTimelineStrategy<CaseEvent[]> = {
+      const strategy: AgencyTimelineStrategy<CaseEvent[]> = {
         ...eventChronologyStrategy(),
         renderNode: strategyRender,
       };
       element = await fixture(html`
-        <blocks-timeline .strategy=${strategy} .data=${mockEvents} layout="vertical"></blocks-timeline>
+        <agency-timeline .strategy=${strategy} .data=${mockEvents} layout="vertical"></agency-timeline>
       `);
       await element.updateComplete;
       expect(strategyRender).toHaveBeenCalled();
@@ -385,7 +385,7 @@ describe('BlocksTimeline', () => {
 
     it('built-in default when neither provides renderNode', async () => {
       element = await fixture(html`
-        <blocks-timeline .strategy=${eventChronologyStrategy()} .data=${mockEvents} layout="vertical"></blocks-timeline>
+        <agency-timeline .strategy=${eventChronologyStrategy()} .data=${mockEvents} layout="vertical"></agency-timeline>
       `);
       await element.updateComplete;
       expect(element.shadowRoot!.querySelector('.node-dot')).toBeTruthy();
@@ -394,12 +394,12 @@ describe('BlocksTimeline', () => {
     it('component renderDetail overrides strategy renderDetail', async () => {
       const strategyDetail = vi.fn(() => html`<span class="strat-d">sd</span>`);
       const componentDetail = vi.fn(() => html`<span class="comp-d">cd</span>`);
-      const strategy: BlocksTimelineStrategy<CaseEvent[]> = {
+      const strategy: AgencyTimelineStrategy<CaseEvent[]> = {
         ...eventChronologyStrategy(),
         renderDetail: strategyDetail,
       };
       element = await fixture(html`
-        <blocks-timeline .strategy=${strategy} .data=${[mockEvents[0]!]} .renderDetail=${componentDetail} layout="vertical"></blocks-timeline>
+        <agency-timeline .strategy=${strategy} .data=${[mockEvents[0]!]} .renderDetail=${componentDetail} layout="vertical"></agency-timeline>
       `);
       await element.updateComplete;
       const expandBtn = element.shadowRoot!.querySelector('.expand-button') as HTMLElement;
@@ -415,7 +415,7 @@ describe('BlocksTimeline', () => {
   describe('filter behavior', () => {
     it('shows all categories initially when activeFilters not set', async () => {
       element = await fixture(html`
-        <blocks-timeline .strategy=${eventChronologyStrategy()} .data=${mockEvents} layout="vertical"></blocks-timeline>
+        <agency-timeline .strategy=${eventChronologyStrategy()} .data=${mockEvents} layout="vertical"></agency-timeline>
       `);
       await element.updateComplete;
       const chips = element.shadowRoot!.querySelectorAll('.filter-chip');
@@ -424,7 +424,7 @@ describe('BlocksTimeline', () => {
 
     it('accepts string[] as activeFilters', async () => {
       element = await fixture(html`
-        <blocks-timeline .strategy=${eventChronologyStrategy()} .data=${mockEvents} .activeFilters=${['CASE']} layout="vertical"></blocks-timeline>
+        <agency-timeline .strategy=${eventChronologyStrategy()} .data=${mockEvents} .activeFilters=${['CASE']} layout="vertical"></agency-timeline>
       `);
       await element.updateComplete;
       const nodes = element.shadowRoot!.querySelectorAll('[role="listitem"]');
@@ -433,7 +433,7 @@ describe('BlocksTimeline', () => {
 
     it('accepts Set<string> as activeFilters', async () => {
       element = await fixture(html`
-        <blocks-timeline .strategy=${eventChronologyStrategy()} .data=${mockEvents} .activeFilters=${new Set(['WORKER'])} layout="vertical"></blocks-timeline>
+        <agency-timeline .strategy=${eventChronologyStrategy()} .data=${mockEvents} .activeFilters=${new Set(['WORKER'])} layout="vertical"></agency-timeline>
       `);
       await element.updateComplete;
       const nodes = element.shadowRoot!.querySelectorAll('[role="listitem"]');
@@ -444,13 +444,13 @@ describe('BlocksTimeline', () => {
       const nodes: EventTimelineNode[] = [
         { key: 'n-0', label: 'No category', status: 'completed' },
       ];
-      const strategy: BlocksTimelineStrategy<EventTimelineNode[]> = {
+      const strategy: AgencyTimelineStrategy<EventTimelineNode[]> = {
         toNodes: (d) => [...d],
         defaultLayout: 'vertical',
         filterCategories: ['CASE'],
       };
       element = await fixture(html`
-        <blocks-timeline .strategy=${strategy} .data=${nodes} .activeFilters=${[]} layout="vertical"></blocks-timeline>
+        <agency-timeline .strategy=${strategy} .data=${nodes} .activeFilters=${[]} layout="vertical"></agency-timeline>
       `);
       await element.updateComplete;
       expect(element.shadowRoot!.querySelectorAll('[role="listitem"]').length).toBe(1);
@@ -458,7 +458,7 @@ describe('BlocksTimeline', () => {
 
     it('no filter UI when strategy has no filterCategories', async () => {
       element = await fixture(html`
-        <blocks-timeline .strategy=${stateProgressionStrategy()} .data=${{ currentState: 'OPEN' }}></blocks-timeline>
+        <agency-timeline .strategy=${stateProgressionStrategy()} .data=${{ currentState: 'OPEN' }}></agency-timeline>
       `);
       await element.updateComplete;
       expect(element.shadowRoot!.querySelector('.filter-bar')).toBeNull();
@@ -493,7 +493,7 @@ describe('BlocksTimeline', () => {
     it('fetches first page with page and size params', async () => {
       mockFetch.mockResolvedValueOnce(new Response(JSON.stringify(pagedResponse(0, 3))));
       element = await fixture(html`
-        <blocks-timeline .strategy=${eventChronologyStrategy()} endpoint="/api/events" .pageSize=${2} layout="vertical"></blocks-timeline>
+        <agency-timeline .strategy=${eventChronologyStrategy()} endpoint="/api/events" .pageSize=${2} layout="vertical"></agency-timeline>
       `);
       await new Promise(r => setTimeout(r, 50));
       await element.updateComplete;
@@ -505,7 +505,7 @@ describe('BlocksTimeline', () => {
     it('renders nodes from first page', async () => {
       mockFetch.mockResolvedValueOnce(new Response(JSON.stringify(pagedResponse(0, 3))));
       element = await fixture(html`
-        <blocks-timeline .strategy=${eventChronologyStrategy()} endpoint="/api/events" .pageSize=${2} layout="vertical"></blocks-timeline>
+        <agency-timeline .strategy=${eventChronologyStrategy()} endpoint="/api/events" .pageSize=${2} layout="vertical"></agency-timeline>
       `);
       await new Promise(r => setTimeout(r, 50));
       await element.updateComplete;
@@ -515,7 +515,7 @@ describe('BlocksTimeline', () => {
     it('shows Load more button when more pages exist', async () => {
       mockFetch.mockResolvedValueOnce(new Response(JSON.stringify(pagedResponse(0, 3))));
       element = await fixture(html`
-        <blocks-timeline .strategy=${eventChronologyStrategy()} endpoint="/api/events" .pageSize=${2} layout="vertical"></blocks-timeline>
+        <agency-timeline .strategy=${eventChronologyStrategy()} endpoint="/api/events" .pageSize=${2} layout="vertical"></agency-timeline>
       `);
       await new Promise(r => setTimeout(r, 50));
       await element.updateComplete;
@@ -525,7 +525,7 @@ describe('BlocksTimeline', () => {
     it('hides Load more button on last page', async () => {
       mockFetch.mockResolvedValueOnce(new Response(JSON.stringify(pagedResponse(0, 1))));
       element = await fixture(html`
-        <blocks-timeline .strategy=${eventChronologyStrategy()} endpoint="/api/events" .pageSize=${2} layout="vertical"></blocks-timeline>
+        <agency-timeline .strategy=${eventChronologyStrategy()} endpoint="/api/events" .pageSize=${2} layout="vertical"></agency-timeline>
       `);
       await new Promise(r => setTimeout(r, 50));
       await element.updateComplete;
@@ -535,7 +535,7 @@ describe('BlocksTimeline', () => {
     it('shows progress text with loaded and total counts', async () => {
       mockFetch.mockResolvedValueOnce(new Response(JSON.stringify(pagedResponse(0, 3))));
       element = await fixture(html`
-        <blocks-timeline .strategy=${eventChronologyStrategy()} endpoint="/api/events" .pageSize=${2} layout="vertical"></blocks-timeline>
+        <agency-timeline .strategy=${eventChronologyStrategy()} endpoint="/api/events" .pageSize=${2} layout="vertical"></agency-timeline>
       `);
       await new Promise(r => setTimeout(r, 50));
       await element.updateComplete;
@@ -547,7 +547,7 @@ describe('BlocksTimeline', () => {
         .mockResolvedValueOnce(new Response(JSON.stringify(pagedResponse(0, 2))))
         .mockResolvedValueOnce(new Response(JSON.stringify(pagedResponse(1, 2))));
       element = await fixture(html`
-        <blocks-timeline .strategy=${eventChronologyStrategy()} endpoint="/api/events" .pageSize=${2} layout="vertical"></blocks-timeline>
+        <agency-timeline .strategy=${eventChronologyStrategy()} endpoint="/api/events" .pageSize=${2} layout="vertical"></agency-timeline>
       `);
       await new Promise(r => setTimeout(r, 50));
       await element.updateComplete;
@@ -564,7 +564,7 @@ describe('BlocksTimeline', () => {
         .mockResolvedValueOnce(new Response(JSON.stringify(pagedResponse(0, 2))))
         .mockResolvedValueOnce(new Response(JSON.stringify(pagedResponse(1, 2))));
       element = await fixture(html`
-        <blocks-timeline .strategy=${eventChronologyStrategy()} endpoint="/api/events" .pageSize=${2} layout="vertical"></blocks-timeline>
+        <agency-timeline .strategy=${eventChronologyStrategy()} endpoint="/api/events" .pageSize=${2} layout="vertical"></agency-timeline>
       `);
       await new Promise(r => setTimeout(r, 50));
       await element.updateComplete;
@@ -578,7 +578,7 @@ describe('BlocksTimeline', () => {
     it('no Load more for non-paginating strategies', async () => {
       mockFetch.mockResolvedValueOnce(new Response(JSON.stringify({ currentState: 'OPEN' })));
       element = await fixture(html`
-        <blocks-timeline .strategy=${stateProgressionStrategy()} endpoint="/api/case" layout="horizontal"></blocks-timeline>
+        <agency-timeline .strategy=${stateProgressionStrategy()} endpoint="/api/case" layout="horizontal"></agency-timeline>
       `);
       await new Promise(r => setTimeout(r, 100));
       await element.updateComplete;
@@ -588,7 +588,7 @@ describe('BlocksTimeline', () => {
     it('no Load more in horizontal layout', async () => {
       mockFetch.mockResolvedValueOnce(new Response(JSON.stringify(pagedResponse(0, 3))));
       element = await fixture(html`
-        <blocks-timeline .strategy=${eventChronologyStrategy()} endpoint="/api/events" .pageSize=${2} layout="horizontal"></blocks-timeline>
+        <agency-timeline .strategy=${eventChronologyStrategy()} endpoint="/api/events" .pageSize=${2} layout="horizontal"></agency-timeline>
       `);
       await new Promise(r => setTimeout(r, 50));
       await element.updateComplete;
@@ -598,7 +598,7 @@ describe('BlocksTimeline', () => {
     it('no Load more in compact layout', async () => {
       mockFetch.mockResolvedValueOnce(new Response(JSON.stringify(pagedResponse(0, 3))));
       element = await fixture(html`
-        <blocks-timeline .strategy=${eventChronologyStrategy()} endpoint="/api/events" .pageSize=${2} layout="compact"></blocks-timeline>
+        <agency-timeline .strategy=${eventChronologyStrategy()} endpoint="/api/events" .pageSize=${2} layout="compact"></agency-timeline>
       `);
       await new Promise(r => setTimeout(r, 50));
       await element.updateComplete;
@@ -608,7 +608,7 @@ describe('BlocksTimeline', () => {
     it('passes headers to paginated fetch', async () => {
       mockFetch.mockResolvedValueOnce(new Response(JSON.stringify(pagedResponse(0, 1))));
       element = await fixture(html`
-        <blocks-timeline .strategy=${eventChronologyStrategy()} .headers=${{ 'X-Tenancy-ID': 't-1' }} endpoint="/api/events" .pageSize=${2} layout="vertical"></blocks-timeline>
+        <agency-timeline .strategy=${eventChronologyStrategy()} .headers=${{ 'X-Tenancy-ID': 't-1' }} endpoint="/api/events" .pageSize=${2} layout="vertical"></agency-timeline>
       `);
       await new Promise(r => setTimeout(r, 50));
       expect(mockFetch).toHaveBeenCalledWith(
@@ -620,7 +620,7 @@ describe('BlocksTimeline', () => {
     it('pageSize defaults to 20', async () => {
       mockFetch.mockResolvedValueOnce(new Response(JSON.stringify(pagedResponse(0, 1))));
       element = await fixture(html`
-        <blocks-timeline .strategy=${eventChronologyStrategy()} endpoint="/api/events" layout="vertical"></blocks-timeline>
+        <agency-timeline .strategy=${eventChronologyStrategy()} endpoint="/api/events" layout="vertical"></agency-timeline>
       `);
       await new Promise(r => setTimeout(r, 50));
       const url = mockFetch.mock.calls[0]![0] as string;
@@ -629,7 +629,7 @@ describe('BlocksTimeline', () => {
 
     it('data property bypasses paginated fetch', async () => {
       element = await fixture(html`
-        <blocks-timeline .strategy=${eventChronologyStrategy()} .data=${mockEvents} endpoint="/api/events" layout="vertical"></blocks-timeline>
+        <agency-timeline .strategy=${eventChronologyStrategy()} .data=${mockEvents} endpoint="/api/events" layout="vertical"></agency-timeline>
       `);
       await element.updateComplete;
       expect(element.shadowRoot!.querySelectorAll('[role="listitem"]').length).toBe(5);
@@ -642,7 +642,7 @@ describe('BlocksTimeline', () => {
         .mockResolvedValueOnce(new Response(JSON.stringify(pagedResponse(0, 2))))
         .mockReturnValueOnce(new Promise(r => { resolveSecond = r as any; }));
       element = await fixture(html`
-        <blocks-timeline .strategy=${eventChronologyStrategy()} endpoint="/api/events" .pageSize=${2} layout="vertical"></blocks-timeline>
+        <agency-timeline .strategy=${eventChronologyStrategy()} endpoint="/api/events" .pageSize=${2} layout="vertical"></agency-timeline>
       `);
       await new Promise(r => setTimeout(r, 50));
       await element.updateComplete;
@@ -662,7 +662,7 @@ describe('BlocksTimeline', () => {
   describe('loading and error states', () => {
     it('shows error when self-fetch endpoint fails', async () => {
       element = await fixture(html`
-        <blocks-timeline .strategy=${eventChronologyStrategy()} endpoint="/api/events" layout="vertical"></blocks-timeline>
+        <agency-timeline .strategy=${eventChronologyStrategy()} endpoint="/api/events" layout="vertical"></agency-timeline>
       `);
       await element.updateComplete;
       await new Promise(r => setTimeout(r, 10));
@@ -672,7 +672,7 @@ describe('BlocksTimeline', () => {
 
     it('shows error message when no inline data', async () => {
       element = await fixture(html`
-        <blocks-timeline .strategy=${eventChronologyStrategy()} layout="vertical"></blocks-timeline>
+        <agency-timeline .strategy=${eventChronologyStrategy()} layout="vertical"></agency-timeline>
       `);
       element.error = 'Network error';
       await element.updateComplete;
@@ -681,7 +681,7 @@ describe('BlocksTimeline', () => {
 
     it('inline data renders despite loading state', async () => {
       element = await fixture(html`
-        <blocks-timeline .strategy=${eventChronologyStrategy()} .data=${mockEvents} layout="vertical"></blocks-timeline>
+        <agency-timeline .strategy=${eventChronologyStrategy()} .data=${mockEvents} layout="vertical"></agency-timeline>
       `);
       element.loading = true;
       await element.updateComplete;
@@ -690,7 +690,7 @@ describe('BlocksTimeline', () => {
 
     it('inline data renders despite error state', async () => {
       element = await fixture(html`
-        <blocks-timeline .strategy=${eventChronologyStrategy()} .data=${mockEvents} layout="vertical"></blocks-timeline>
+        <agency-timeline .strategy=${eventChronologyStrategy()} .data=${mockEvents} layout="vertical"></agency-timeline>
       `);
       element.error = 'stale';
       await element.updateComplete;
@@ -706,12 +706,12 @@ describe('BlocksTimeline', () => {
       globalThis.fetch = mockFetch as any;
 
       element = await fixture(html`
-        <blocks-timeline
+        <agency-timeline
           .strategy=${eventChronologyStrategy()}
           .headers=${{ 'X-Tenancy-ID': 'tenant-1' }}
           endpoint="/api/events"
           layout="vertical"
-        ></blocks-timeline>
+        ></agency-timeline>
       `);
       await element.updateComplete;
       await new Promise(r => setTimeout(r, 50));
@@ -730,7 +730,7 @@ describe('BlocksTimeline', () => {
   describe('configure()', () => {
     it('maps identity to headers', async () => {
       element = await fixture(html`
-        <blocks-timeline .strategy=${eventChronologyStrategy()} layout="vertical"></blocks-timeline>
+        <agency-timeline .strategy=${eventChronologyStrategy()} layout="vertical"></agency-timeline>
       `);
       element.configure({
         identity: { userId: 'u', tenancyId: 'tenant-1', displayName: 'U', groups: [], roles: [] },
@@ -741,7 +741,7 @@ describe('BlocksTimeline', () => {
 
     it('clears headers when identity has no tenancyId', async () => {
       element = await fixture(html`
-        <blocks-timeline .strategy=${eventChronologyStrategy()} layout="vertical"></blocks-timeline>
+        <agency-timeline .strategy=${eventChronologyStrategy()} layout="vertical"></agency-timeline>
       `);
       element.configure({
         identity: { userId: 'u', displayName: 'U', groups: [], roles: [] },
@@ -755,7 +755,7 @@ describe('BlocksTimeline', () => {
   describe('layout switching', () => {
     it('uses strategy.defaultLayout when layout not set', async () => {
       element = await fixture(html`
-        <blocks-timeline .strategy=${eventChronologyStrategy()} .data=${mockEvents}></blocks-timeline>
+        <agency-timeline .strategy=${eventChronologyStrategy()} .data=${mockEvents}></agency-timeline>
       `);
       await element.updateComplete;
       expect(element.shadowRoot!.querySelector('[role="list"]')).toBeTruthy();
@@ -764,7 +764,7 @@ describe('BlocksTimeline', () => {
 
     it('layout prop overrides strategy default', async () => {
       element = await fixture(html`
-        <blocks-timeline .strategy=${eventChronologyStrategy()} .data=${mockEvents} layout="horizontal"></blocks-timeline>
+        <agency-timeline .strategy=${eventChronologyStrategy()} .data=${mockEvents} layout="horizontal"></agency-timeline>
       `);
       await element.updateComplete;
       expect(element.shadowRoot!.querySelector('[aria-orientation="horizontal"]')).toBeTruthy();
@@ -772,7 +772,7 @@ describe('BlocksTimeline', () => {
 
     it('switches layout dynamically', async () => {
       element = await fixture(html`
-        <blocks-timeline .strategy=${eventChronologyStrategy()} .data=${mockEvents} layout="vertical"></blocks-timeline>
+        <agency-timeline .strategy=${eventChronologyStrategy()} .data=${mockEvents} layout="vertical"></agency-timeline>
       `);
       await element.updateComplete;
       expect(element.shadowRoot!.querySelector('.timeline')).toBeTruthy();
@@ -784,7 +784,7 @@ describe('BlocksTimeline', () => {
 
     it('switches from compact to horizontal', async () => {
       element = await fixture(html`
-        <blocks-timeline .strategy=${stateProgressionStrategy()} .data=${{ currentState: 'OPEN' }} layout="compact"></blocks-timeline>
+        <agency-timeline .strategy=${stateProgressionStrategy()} .data=${{ currentState: 'OPEN' }} layout="compact"></agency-timeline>
       `);
       await element.updateComplete;
       expect(element.shadowRoot!.querySelector('.compact-strip')).toBeTruthy();
@@ -799,10 +799,10 @@ describe('BlocksTimeline', () => {
   describe('stateProgression with linearResolveStatus', () => {
     it('shows positional completion', async () => {
       element = await fixture(html`
-        <blocks-timeline
+        <agency-timeline
           .strategy=${stateProgressionStrategy({ resolveStatus: linearResolveStatus })}
           .data=${{ currentState: 'ACKNOWLEDGED' }}
-        ></blocks-timeline>
+        ></agency-timeline>
       `);
       await element.updateComplete;
       expect(element.shadowRoot!.querySelector('.stage-node--completed')).toBeTruthy();
@@ -815,7 +815,7 @@ describe('BlocksTimeline', () => {
   describe('terminal state rendering', () => {
     it('FULFILLED shows as completed', async () => {
       element = await fixture(html`
-        <blocks-timeline .strategy=${stateProgressionStrategy()} .data=${{ currentState: 'FULFILLED' }}></blocks-timeline>
+        <agency-timeline .strategy=${stateProgressionStrategy()} .data=${{ currentState: 'FULFILLED' }}></agency-timeline>
       `);
       await element.updateComplete;
       const nodes = element.shadowRoot!.querySelectorAll('.stage-node');
@@ -825,7 +825,7 @@ describe('BlocksTimeline', () => {
 
     it('DECLINED shows as failed', async () => {
       element = await fixture(html`
-        <blocks-timeline .strategy=${stateProgressionStrategy()} .data=${{ currentState: 'DECLINED' }}></blocks-timeline>
+        <agency-timeline .strategy=${stateProgressionStrategy()} .data=${{ currentState: 'DECLINED' }}></agency-timeline>
       `);
       await element.updateComplete;
       expect(element.shadowRoot!.querySelector('.stage-node--failed')).toBeTruthy();
@@ -833,7 +833,7 @@ describe('BlocksTimeline', () => {
 
     it('EXPIRED shows as failed', async () => {
       element = await fixture(html`
-        <blocks-timeline .strategy=${stateProgressionStrategy()} .data=${{ currentState: 'EXPIRED' }}></blocks-timeline>
+        <agency-timeline .strategy=${stateProgressionStrategy()} .data=${{ currentState: 'EXPIRED' }}></agency-timeline>
       `);
       await element.updateComplete;
       expect(element.shadowRoot!.querySelector('.stage-node--failed')).toBeTruthy();

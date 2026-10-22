@@ -7,7 +7,7 @@ export default defineConfig({
     alias: [
       ...(existsSync(path.resolve(__dirname, '../../../pages/packages/pages-primitives/src')) ? [{ find: '@casehubio/pages-primitives', replacement: path.resolve(__dirname, '../../../pages/packages/pages-primitives/src') }] : []),
       { find: '@casehubio/mosaic-core', replacement: path.resolve(__dirname, '../../packages/mosaic-core/src') },
-      { find: '@casehubio/mosaic-blocks-timeline', replacement: path.resolve(__dirname, '../blocks-timeline/src') },
+      { find: '@casehubio/mosaic-agency-timeline', replacement: path.resolve(__dirname, '../agency-timeline/src') },
       { find: '@casehubio/mosaic-execution-monitor', replacement: path.resolve(__dirname, '../execution-monitor/src') },
       { find: '@casehubio/mosaic-split-workbench', replacement: path.resolve(__dirname, '../split-workbench/src') },
       ...(existsSync(path.resolve(__dirname, '../../../pages/packages/pages-component/src')) ? [{ find: /^@casehubio\/pages-component\/dist\/(.*)/, replacement: path.resolve(__dirname, '../../../pages/packages/pages-component/src/$1') }] : []),

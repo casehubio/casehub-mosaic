@@ -1,2 +1,2 @@
-export { BlocksPlanModelDashboard } from './blocks-plan-model-dashboard.js';
-export type { PlanModelDashboardProps } from './blocks-plan-model-dashboard.js';
+export { AgencyPlanModelDashboard } from './agency-plan-model-dashboard.js';
+export type { PlanModelDashboardProps } from './agency-plan-model-dashboard.js';

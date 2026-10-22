@@ -2,8 +2,8 @@ import { LitElement, html, css } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import type { DagDispatchMode } from '@casehubio/mosaic-graph-stencil-htn';
 
-@customElement('blocks-dag-toolbar')
-export class BlocksDagToolbar extends LitElement {
+@customElement('agency-dag-toolbar')
+export class AgencyDagToolbar extends LitElement {
   @property({ type: String }) dispatchMode: DagDispatchMode | null = null;
   @property({ type: Number }) nodeCount = 0;
   @property({ type: Number }) completedCount = 0;

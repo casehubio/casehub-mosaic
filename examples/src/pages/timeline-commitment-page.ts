@@ -1,8 +1,8 @@
 import { LitElement, html, css } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import '@casehubio/mosaic-blocks-timeline';
-import { stateProgressionStrategy, linearResolveStatus } from '@casehubio/mosaic-blocks-timeline';
-import type { StageConfig } from '@casehubio/mosaic-blocks-timeline';
+import '@casehubio/mosaic-agency-timeline';
+import { stateProgressionStrategy, linearResolveStatus } from '@casehubio/mosaic-agency-timeline';
+import type { StageConfig } from '@casehubio/mosaic-agency-timeline';
 
 @customElement('blocks-example-timeline-commitment')
 export class TimelineCommitmentPage extends LitElement {
@@ -56,37 +56,37 @@ export class TimelineCommitmentPage extends LitElement {
         <h2>Fulfilled Commitment</h2>
         <p class="subtitle">OPEN → ACKNOWLEDGED → FULFILLED (success terminal)</p>
         <div class="viewer-container">
-          <blocks-timeline
+          <agency-timeline
             .strategy=${stateProgressionStrategy()}
             .data=${this._fulfilledData}
-          ></blocks-timeline>
+          ></agency-timeline>
         </div>
 
         <h2>Declined Commitment</h2>
         <p class="subtitle">OPEN → DECLINED (failure terminal, skips ACKNOWLEDGED)</p>
         <div class="viewer-container">
-          <blocks-timeline
+          <agency-timeline
             .strategy=${stateProgressionStrategy()}
             .data=${this._declinedData}
-          ></blocks-timeline>
+          ></agency-timeline>
         </div>
 
         <h2>Linear Pipeline (no transitions)</h2>
         <p class="subtitle">Uses linearResolveStatus — positional completion based on stage order</p>
         <div class="viewer-container">
-          <blocks-timeline
+          <agency-timeline
             .strategy=${stateProgressionStrategy({ resolveStatus: linearResolveStatus })}
             .data=${this._linearData}
-          ></blocks-timeline>
+          ></agency-timeline>
         </div>
 
         <h2>Custom Stages</h2>
         <p class="subtitle">Document approval pipeline: Draft → Submitted → Reviewed → Approved/Rejected</p>
         <div class="viewer-container">
-          <blocks-timeline
+          <agency-timeline
             .strategy=${stateProgressionStrategy({ stages: this._customStages })}
             .data=${this._customData}
-          ></blocks-timeline>
+          ></agency-timeline>
         </div>
 
         <div class="info-panel">

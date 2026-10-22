@@ -16,7 +16,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@casehubio/mosaic-blocks-timeline": "workspace:*",
+    "@casehubio/mosaic-agency-timeline": "workspace:*",
     "@casehubio/mosaic-core": "workspace:*",
     "@casehubio/mosaic-execution-monitor": "workspace:*",
     "@casehubio/pages-data": "*",

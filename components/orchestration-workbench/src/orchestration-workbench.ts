@@ -2,11 +2,11 @@ import { LitElement, html, css, type TemplateResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { LiveRegionMixin } from '@casehubio/pages-primitives/a11y';
 import { onPagesEvent } from '@casehubio/pages-data';
-import { orchestrationEventsStrategy } from '@casehubio/mosaic-blocks-timeline';
+import { orchestrationEventsStrategy } from '@casehubio/mosaic-agency-timeline';
 import type { ExecutionSnapshot, OrchestrationAuditEvent } from '@casehubio/mosaic-core';
 import '@casehubio/pages-ui-components/split-workbench';
 import '@casehubio/mosaic-execution-monitor';
-import '@casehubio/mosaic-blocks-timeline';
+import '@casehubio/mosaic-agency-timeline';
 
 export interface OrchestrationWorkbenchData {
   readonly snapshot: ExecutionSnapshot;
@@ -72,12 +72,12 @@ export class OrchestrationWorkbench extends LiveRegionMixin(LitElement) {
           ></blocks-execution-monitor>
         </div>
         <div slot="detail" class="timeline-panel">
-          <blocks-timeline
+          <agency-timeline
             .strategy=${orchestrationEventsStrategy}
             .endpoint=${timelineEndpoint}
             .data=${this.data?.events}
             layout="vertical"
-          ></blocks-timeline>
+          ></agency-timeline>
         </div>
       </pages-split-workbench>
     `;

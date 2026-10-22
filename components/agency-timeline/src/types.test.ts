@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import type { BlocksTimelineStrategy, StageConfig, PaginationMeta } from './types.js';
+import type { AgencyTimelineStrategy, StageConfig, PaginationMeta } from './types.js';
 import type { EventTimelineNode, EventNodeStatus, EventTimelineStrategy } from '@casehubio/pages-viz';
 import type { EventTimelineLayout } from '@casehubio/pages-component';
 
@@ -51,8 +51,8 @@ describe('types', () => {
     expect(meta.totalElements).toBe(100);
   });
 
-  it('BlocksTimelineStrategy extends EventTimelineStrategy with pagination', () => {
-    const strategy: BlocksTimelineStrategy<string[]> = {
+  it('AgencyTimelineStrategy extends EventTimelineStrategy with pagination', () => {
+    const strategy: AgencyTimelineStrategy<string[]> = {
       toNodes: (data) => data.map((d, i) => ({ key: String(i), label: d, status: 'pending' as const })),
       defaultLayout: 'vertical',
       supportsPagination: true,
@@ -66,8 +66,8 @@ describe('types', () => {
       .toEqual({ page: 1, totalPages: 3, totalElements: 60 });
   });
 
-  it('BlocksTimelineStrategy pagination fields are optional', () => {
-    const strategy: BlocksTimelineStrategy<string[]> = {
+  it('AgencyTimelineStrategy pagination fields are optional', () => {
+    const strategy: AgencyTimelineStrategy<string[]> = {
       toNodes: (data) => data.map((d, i) => ({ key: String(i), label: d, status: 'pending' as const })),
       defaultLayout: 'vertical',
     };

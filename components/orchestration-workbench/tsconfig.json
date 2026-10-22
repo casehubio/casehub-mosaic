@@ -10,7 +10,7 @@
   "include": ["src/**/*"],
   "references": [
     { "path": "../../packages/mosaic-core" },
-    { "path": "../blocks-timeline" },
+    { "path": "../agency-timeline" },
     { "path": "../execution-monitor" }
   ]
 }

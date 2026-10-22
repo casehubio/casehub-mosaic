@@ -18,7 +18,7 @@ export class OrchestrationWorkbenchPage extends LitElement {
   override render() {
     return html`
       <h2>Orchestration Workbench</h2>
-      <p>Composes execution-monitor (left) and blocks-timeline with orchestration-events strategy (right)
+      <p>Composes execution-monitor (left) and agency-timeline with orchestration-events strategy (right)
         in a split-workbench. Selection coordination between agent roster and audit event timeline.
         Shows the full claim adjudication execution with 17 audit events.</p>
       <div class="workbench-container">

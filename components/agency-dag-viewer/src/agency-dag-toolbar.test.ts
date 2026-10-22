@@ -1,16 +1,16 @@
 // @vitest-environment happy-dom
 import { describe, it, expect } from 'vitest';
-import { BlocksDagToolbar } from './blocks-dag-toolbar.js';
+import { AgencyDagToolbar } from './agency-dag-toolbar.js';
 
-describe('BlocksDagToolbar', () => {
+describe('AgencyDagToolbar', () => {
   it('stores dispatchMode property', () => {
-    const el = new BlocksDagToolbar();
+    const el = new AgencyDagToolbar();
     el.dispatchMode = 'STREAMING';
     expect(el.dispatchMode).toBe('STREAMING');
   });
 
   it('stores stat properties', () => {
-    const el = new BlocksDagToolbar();
+    const el = new AgencyDagToolbar();
     el.nodeCount = 5;
     el.completedCount = 2;
     el.runningCount = 1;
@@ -22,7 +22,7 @@ describe('BlocksDagToolbar', () => {
   });
 
   it('sets role="status" and aria-label on connect', () => {
-    const el = new BlocksDagToolbar();
+    const el = new AgencyDagToolbar();
     document.body.appendChild(el);
     expect(el.getAttribute('role')).toBe('status');
     expect(el.getAttribute('aria-label')).toBe('DAG execution status');
@@ -31,14 +31,14 @@ describe('BlocksDagToolbar', () => {
   });
 
   it('computes staleness from timestamp', () => {
-    const el = new BlocksDagToolbar();
+    const el = new AgencyDagToolbar();
     const old = new Date(Date.now() - 45_000).toISOString();
     expect(el._computeStaleness(old)).toBeGreaterThanOrEqual(44);
     expect(el._computeStaleness(old)).toBeLessThanOrEqual(46);
   });
 
   it('computes zero staleness for recent timestamp', () => {
-    const el = new BlocksDagToolbar();
+    const el = new AgencyDagToolbar();
     const recent = new Date(Date.now() - 2_000).toISOString();
     expect(el._computeStaleness(recent)).toBeLessThanOrEqual(3);
   });

@@ -1,6 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
-import '@casehubio/mosaic-blocks-decomposition-tree';
+import '@casehubio/mosaic-agency-decomposition-tree';
 import type { DecompositionSnapshot, NodeStateSnapshot } from '@casehubio/mosaic-graph-stencil-htn';
 import mockData from '../../mock-data/decomposition.json';
 
@@ -37,11 +37,11 @@ export class DecompositionTreePage extends LitElement {
         </button>
       </div>
       <div class="tree-container">
-        <blocks-decomposition-tree
+        <agency-decomposition-tree
           .decomposition=${this._decomposition}
           .nodeStates=${this._showStates ? this._nodeStates : undefined}
           selectionTopic="demo-decomposition"
-        ></blocks-decomposition-tree>
+        ></agency-decomposition-tree>
       </div>
     `;
   }

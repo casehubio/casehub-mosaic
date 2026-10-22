@@ -1,2 +1,2 @@
-export { BlocksDecompositionTree } from './blocks-decomposition-tree.js';
-export type { DecompositionTreeProps } from './blocks-decomposition-tree.js';
+export { AgencyDecompositionTree } from './agency-decomposition-tree.js';
+export type { DecompositionTreeProps } from './agency-decomposition-tree.js';
