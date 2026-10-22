@@ -142,6 +142,78 @@ __metadata:
   languageName: node
   linkType: soft
 
+"@casehubio/mosaic-agency-dag-viewer@workspace:*, @casehubio/mosaic-agency-dag-viewer@workspace:components/agency-dag-viewer":
+  version: 0.0.0-use.local
+  resolution: "@casehubio/mosaic-agency-dag-viewer@workspace:components/agency-dag-viewer"
+  dependencies:
+    "@casehubio/graph-core": "npm:*"
+    "@casehubio/graph-renderer": "npm:*"
+    "@casehubio/mosaic-core": "workspace:*"
+    "@casehubio/mosaic-graph-stencil-htn": "workspace:*"
+    jsdom: "npm:^29.1.1"
+    lit: "npm:^3.3.3"
+    rimraf: "npm:^6.1.0"
+    typescript: "npm:~5.8.0"
+    vitest: "npm:^3.0.0"
+  languageName: unknown
+  linkType: soft
+
+"@casehubio/mosaic-agency-decomposition-tree@workspace:*, @casehubio/mosaic-agency-decomposition-tree@workspace:components/agency-decomposition-tree":
+  version: 0.0.0-use.local
+  resolution: "@casehubio/mosaic-agency-decomposition-tree@workspace:components/agency-decomposition-tree"
+  dependencies:
+    "@casehubio/mosaic-core": "workspace:*"
+    "@casehubio/mosaic-graph-stencil-htn": "workspace:*"
+    jsdom: "npm:^29.1.1"
+    lit: "npm:^3.3.3"
+    rimraf: "npm:^6.1.0"
+    typescript: "npm:~5.8.0"
+    vitest: "npm:^3.0.0"
+  languageName: unknown
+  linkType: soft
+
+"@casehubio/mosaic-agency-plan-item-tree@workspace:*, @casehubio/mosaic-agency-plan-item-tree@workspace:components/agency-plan-item-tree":
+  version: 0.0.0-use.local
+  resolution: "@casehubio/mosaic-agency-plan-item-tree@workspace:components/agency-plan-item-tree"
+  dependencies:
+    "@casehubio/mosaic-core": "workspace:*"
+    "@casehubio/mosaic-graph-stencil-htn": "workspace:*"
+    jsdom: "npm:^29.1.1"
+    lit: "npm:^3.3.3"
+    rimraf: "npm:^6.1.0"
+    typescript: "npm:~5.8.0"
+    vitest: "npm:^3.0.0"
+  languageName: unknown
+  linkType: soft
+
+"@casehubio/mosaic-agency-plan-model-dashboard@workspace:*, @casehubio/mosaic-agency-plan-model-dashboard@workspace:components/agency-plan-model-dashboard":
+  version: 0.0.0-use.local
+  resolution: "@casehubio/mosaic-agency-plan-model-dashboard@workspace:components/agency-plan-model-dashboard"
+  dependencies:
+    "@casehubio/mosaic-core": "workspace:*"
+    "@casehubio/mosaic-graph-stencil-htn": "workspace:*"
+    jsdom: "npm:^29.1.1"
+    lit: "npm:^3.3.3"
+    rimraf: "npm:^6.1.0"
+    typescript: "npm:~5.8.0"
+    vitest: "npm:^3.0.0"
+  languageName: unknown
+  linkType: soft
+
+"@casehubio/mosaic-agency-timeline@workspace:*, @casehubio/mosaic-agency-timeline@workspace:components/agency-timeline":
+  version: 0.0.0-use.local
+  resolution: "@casehubio/mosaic-agency-timeline@workspace:components/agency-timeline"
+  dependencies:
+    "@casehubio/mosaic-core": "workspace:*"
+    "@casehubio/pages-data": "npm:*"
+    "@casehubio/pages-primitives": "npm:*"
+    lit: "npm:^3.2.0"
+    rimraf: "npm:^6.1.0"
+    typescript: "npm:~5.8.0"
+    vitest: "npm:^3.0.0"
+  languageName: unknown
+  linkType: soft
+
 "@casehubio/mosaic-agent-avatar-2d@workspace:*, @casehubio/mosaic-agent-avatar-2d@workspace:packages/agent-avatar-2d":
   version: 0.0.0-use.local
   resolution: "@casehubio/mosaic-agent-avatar-2d@workspace:packages/agent-avatar-2d"
@@ -303,78 +375,6 @@ __metadata:
     three: "npm:^0.180.0"
     typescript: "npm:~5.8.0"
     vitest: "npm:^4.1.9"
-  languageName: unknown
-  linkType: soft
-
-"@casehubio/mosaic-blocks-dag-viewer@workspace:*, @casehubio/mosaic-blocks-dag-viewer@workspace:components/blocks-dag-viewer":
-  version: 0.0.0-use.local
-  resolution: "@casehubio/mosaic-blocks-dag-viewer@workspace:components/blocks-dag-viewer"
-  dependencies:
-    "@casehubio/graph-core": "npm:*"
-    "@casehubio/graph-renderer": "npm:*"
-    "@casehubio/mosaic-core": "workspace:*"
-    "@casehubio/mosaic-graph-stencil-htn": "workspace:*"
-    jsdom: "npm:^29.1.1"
-    lit: "npm:^3.3.3"
-    rimraf: "npm:^6.1.0"
-    typescript: "npm:~5.8.0"
-    vitest: "npm:^3.0.0"
-  languageName: unknown
-  linkType: soft
-
-"@casehubio/mosaic-blocks-decomposition-tree@workspace:*, @casehubio/mosaic-blocks-decomposition-tree@workspace:components/blocks-decomposition-tree":
-  version: 0.0.0-use.local
-  resolution: "@casehubio/mosaic-blocks-decomposition-tree@workspace:components/blocks-decomposition-tree"
-  dependencies:
-    "@casehubio/mosaic-core": "workspace:*"
-    "@casehubio/mosaic-graph-stencil-htn": "workspace:*"
-    jsdom: "npm:^29.1.1"
-    lit: "npm:^3.3.3"
-    rimraf: "npm:^6.1.0"
-    typescript: "npm:~5.8.0"
-    vitest: "npm:^3.0.0"
-  languageName: unknown
-  linkType: soft
-
-"@casehubio/mosaic-blocks-plan-item-tree@workspace:*, @casehubio/mosaic-blocks-plan-item-tree@workspace:components/blocks-plan-item-tree":
-  version: 0.0.0-use.local
-  resolution: "@casehubio/mosaic-blocks-plan-item-tree@workspace:components/blocks-plan-item-tree"
-  dependencies:
-    "@casehubio/mosaic-core": "workspace:*"
-    "@casehubio/mosaic-graph-stencil-htn": "workspace:*"
-    jsdom: "npm:^29.1.1"
-    lit: "npm:^3.3.3"
-    rimraf: "npm:^6.1.0"
-    typescript: "npm:~5.8.0"
-    vitest: "npm:^3.0.0"
-  languageName: unknown
-  linkType: soft
-
-"@casehubio/mosaic-blocks-plan-model-dashboard@workspace:*, @casehubio/mosaic-blocks-plan-model-dashboard@workspace:components/blocks-plan-model-dashboard":
-  version: 0.0.0-use.local
-  resolution: "@casehubio/mosaic-blocks-plan-model-dashboard@workspace:components/blocks-plan-model-dashboard"
-  dependencies:
-    "@casehubio/mosaic-core": "workspace:*"
-    "@casehubio/mosaic-graph-stencil-htn": "workspace:*"
-    jsdom: "npm:^29.1.1"
-    lit: "npm:^3.3.3"
-    rimraf: "npm:^6.1.0"
-    typescript: "npm:~5.8.0"
-    vitest: "npm:^3.0.0"
-  languageName: unknown
-  linkType: soft
-
-"@casehubio/mosaic-blocks-timeline@workspace:*, @casehubio/mosaic-blocks-timeline@workspace:components/blocks-timeline":
-  version: 0.0.0-use.local
-  resolution: "@casehubio/mosaic-blocks-timeline@workspace:components/blocks-timeline"
-  dependencies:
-    "@casehubio/mosaic-core": "workspace:*"
-    "@casehubio/pages-data": "npm:*"
-    "@casehubio/pages-primitives": "npm:*"
-    lit: "npm:^3.2.0"
-    rimraf: "npm:^6.1.0"
-    typescript: "npm:~5.8.0"
-    vitest: "npm:^3.0.0"
   languageName: unknown
   linkType: soft
 
@@ -904,7 +904,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@casehubio/mosaic-orchestration-workbench@workspace:components/orchestration-workbench"
   dependencies:
-    "@casehubio/mosaic-blocks-timeline": "workspace:*"
+    "@casehubio/mosaic-agency-timeline": "workspace:*"
     "@casehubio/mosaic-core": "workspace:*"
     "@casehubio/mosaic-execution-monitor": "workspace:*"
     "@casehubio/pages-data": "npm:*"
@@ -983,16 +983,16 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@casehubio/mosaic-schema@workspace:packages/mosaic-schema"
   dependencies:
+    "@casehubio/mosaic-agency-dag-viewer": "workspace:*"
+    "@casehubio/mosaic-agency-decomposition-tree": "workspace:*"
+    "@casehubio/mosaic-agency-plan-item-tree": "workspace:*"
+    "@casehubio/mosaic-agency-plan-model-dashboard": "workspace:*"
+    "@casehubio/mosaic-agency-timeline": "workspace:*"
     "@casehubio/mosaic-agent-avatar-2d": "workspace:*"
     "@casehubio/mosaic-agent-personality-workbench": "workspace:*"
     "@casehubio/mosaic-agent-profile-panel": "workspace:*"
     "@casehubio/mosaic-approval-gate": "workspace:*"
     "@casehubio/mosaic-audit-trail-viewer": "workspace:*"
-    "@casehubio/mosaic-blocks-dag-viewer": "workspace:*"
-    "@casehubio/mosaic-blocks-decomposition-tree": "workspace:*"
-    "@casehubio/mosaic-blocks-plan-item-tree": "workspace:*"
-    "@casehubio/mosaic-blocks-plan-model-dashboard": "workspace:*"
-    "@casehubio/mosaic-blocks-timeline": "workspace:*"
     "@casehubio/mosaic-case-dependency-graph": "workspace:*"
     "@casehubio/mosaic-case-explorer": "workspace:*"
     "@casehubio/mosaic-case-flow-viewer": "workspace:*"
