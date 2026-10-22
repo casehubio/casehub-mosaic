@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { emitPagesEvent } from '@casehubio/pages-data';
 import type { ConversationState } from './types.js';
-import './blocks-conversation-workbench.js';
+import './agency-conversation-workbench.js';
 
 type WorkbenchElement = HTMLElement & {
   conversationState?: ConversationState;
@@ -39,12 +39,12 @@ const MOCK_STATE: ConversationState = {
 };
 
 function createElement(): WorkbenchElement {
-  const el = document.createElement('blocks-conversation-workbench') as WorkbenchElement;
+  const el = document.createElement('agency-conversation-workbench') as WorkbenchElement;
   document.body.appendChild(el);
   return el;
 }
 
-describe('blocks-conversation-workbench', () => {
+describe('agency-conversation-workbench', () => {
   beforeEach(() => { document.body.innerHTML = ''; });
 
   it('renders split-workbench', async () => {
@@ -59,7 +59,7 @@ describe('blocks-conversation-workbench', () => {
     const el = createElement();
     el.conversationState = MOCK_STATE;
     await el.updateComplete;
-    const indicator = el.shadowRoot?.querySelector('blocks-convergence-indicator');
+    const indicator = el.shadowRoot?.querySelector('agency-convergence-indicator');
     expect(indicator).toBeTruthy();
   });
 
@@ -67,7 +67,7 @@ describe('blocks-conversation-workbench', () => {
     const el = createElement();
     el.conversationState = MOCK_STATE;
     await el.updateComplete;
-    const list = el.shadowRoot?.querySelector('blocks-point-list');
+    const list = el.shadowRoot?.querySelector('agency-point-list');
     expect(list).toBeTruthy();
   });
 
@@ -75,9 +75,9 @@ describe('blocks-conversation-workbench', () => {
     const el = createElement();
     el.conversationState = MOCK_STATE;
     await el.updateComplete;
-    const panel = el.shadowRoot?.querySelector('blocks-common-ground-panel');
+    const panel = el.shadowRoot?.querySelector('agency-common-ground-panel');
     expect(panel).toBeTruthy();
-    const detail = el.shadowRoot?.querySelector('blocks-point-detail');
+    const detail = el.shadowRoot?.querySelector('agency-point-detail');
     expect(detail).toBeNull();
   });
 
@@ -90,9 +90,9 @@ describe('blocks-conversation-workbench', () => {
     emitPagesEvent(el, 'conversation-point:selected', { pointId: 'p1' });
     await el.updateComplete;
 
-    const detail = el.shadowRoot?.querySelector('blocks-point-detail');
+    const detail = el.shadowRoot?.querySelector('agency-point-detail');
     expect(detail).toBeTruthy();
-    const panel = el.shadowRoot?.querySelector('blocks-common-ground-panel');
+    const panel = el.shadowRoot?.querySelector('agency-common-ground-panel');
     expect(panel).toBeNull();
   });
 
@@ -107,7 +107,7 @@ describe('blocks-conversation-workbench', () => {
     emitPagesEvent(el, 'conversation-point:deselected', { pointId: 'p1' });
     await el.updateComplete;
 
-    const panel = el.shadowRoot?.querySelector('blocks-common-ground-panel');
+    const panel = el.shadowRoot?.querySelector('agency-common-ground-panel');
     expect(panel).toBeTruthy();
   });
 
@@ -123,7 +123,7 @@ describe('blocks-conversation-workbench', () => {
     el.conversationState = { ...MOCK_STATE, points: [MOCK_STATE.points[1]!] };
     await el.updateComplete;
 
-    const panel = el.shadowRoot?.querySelector('blocks-common-ground-panel');
+    const panel = el.shadowRoot?.querySelector('agency-common-ground-panel');
     expect(panel).toBeTruthy();
   });
 

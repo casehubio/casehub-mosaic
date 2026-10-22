@@ -21,7 +21,7 @@ export interface DiagramWorkbenchProps {
   runtimeState: CaseRuntimeState | null;
 }
 
-@customElement('blocks-diagram-workbench')
+@customElement('agency-diagram-workbench')
 export class DiagramWorkbench extends LitElement {
   @property() yaml = '';
   @property() src = '';
@@ -145,6 +145,6 @@ export class DiagramWorkbench extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'blocks-diagram-workbench': DiagramWorkbench;
+    'agency-diagram-workbench': DiagramWorkbench;
   }
 }

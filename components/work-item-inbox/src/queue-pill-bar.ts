@@ -8,7 +8,7 @@ import {
   WorkItemEventTopics,
 } from '@casehubio/mosaic-core';
 
-@customElement('blocks-queue-pill-bar')
+@customElement('agency-queue-pill-bar')
 export class QueuePillBar extends LitElement {
   @property({ type: String }) endpoint = '';
   @property({ type: Array }) queues: QueueView[] = [];

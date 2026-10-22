@@ -42,7 +42,7 @@ Domain-aware but app-agnostic — components know about trust scores, case timel
 | `kpi-metric-row` | KPI metric cards — responsive grid with sparklines, trends, status colours, density property | Stable |
 | `approval-gate` | Approval gate — structured decision point with quorum, evidence slots, SLA integration | Beta |
 | `audit-trail-viewer` | Audit trail viewer — ledger entries with pages-table, Merkle verification banner, attestations, filters, GDPR erasure handling | Beta |
-| `blocks-timeline` | CaseHub timeline — extends PagesEventTimeline with tenancy header mapping and domain strategies | Beta |
+| `agency-timeline` | CaseHub timeline — extends PagesEventTimeline with tenancy header mapping and domain strategies | Beta |
 | `trust-score-panel` | Agent trust score visualisation — Bayesian Beta scores, trend lines, per-capability breakdown | Beta |
 | `channel-activity` | Qhorus channel activity — message feed, channel nav, member panel, speech-act badges | Beta |
 | `commitment-viz` | Commitment lifecycle visualization — state pills, transition badges, range bars | Beta |
@@ -64,7 +64,7 @@ Domain-aware but app-agnostic — components know about trust scores, case timel
 | `conversation-viewer` | Conversation protocol viewer — convergence indicator, common ground panel, point list, point detail, conversation workbench. Structured deliberation UI with property-based data delivery. | Beta |
 | `casehub-diagram` | Visual diagram editor for CaseDefinition YAML — extends DiagramBaseMixin, case-specific palette, property panel with binding target selector + worker function type editor (agent/a2a/mcp/sequence/flow sub-forms, pop-out prompt dialog), structural editing, runtime overlay with status badges, worker inline expand | Beta |
 | `swf-diagram` | Standalone SWF workflow diagram — extends DiagramBaseMixin, schema-driven property editing, degraded mode banner. Read-only + property editing (no structural editing). | Beta |
-| `blocks-case-flow-viewer` | Read-only case flow DAG viewer — extends DiagramBaseMixin in readonly mode, composes toGraph + toDecorations from graph-stencil-case. Trust score pills, adaptive decision badges, parallel group ELK partitioning. Toolbar with stats, staleness, export. | Beta |
+| `agency-case-flow-viewer` | Read-only case flow DAG viewer — extends DiagramBaseMixin in readonly mode, composes toGraph + toDecorations from graph-stencil-case. Trust score pills, adaptive decision badges, parallel group ELK partitioning. Toolbar with stats, staleness, export. | Beta |
 | `work-item-row` | Single work item row (legacy — inbox now uses pages-table) | Deprecated |
 
 **Maturity levels:**
@@ -92,7 +92,7 @@ Grouped tabular data with configurable visual modes — three presets (sectioned
 
 ### channel-activity
 
-Qhorus channel activity — twelve sub-elements covering the full messaging lifecycle: feed (message grouping, threading, auto-scroll), individual messages, reactions, input with speech-act type selector, emoji picker, threaded replies, channel navigation (sidebar/dropdown modes), member panel with presence, topic bar, task/artifact/correlation panels. DOMPurify + marked for markdown rendering. Convenience wrapper: `<blocks-channel-activity>` composes nav + feed + input + topic-bar in split-workbench with a tabbed sidebar (members/tasks/artifacts/correlations). Accepts a `PushController` (transport-agnostic — SSE, WebSocket, or test stubs) and creates domain controllers internally. Three tiers: standalone, panel-hosted via `configure()`, inline data mode. Extension points: `formatSender`, `renderContent`, `renderContextHeader`, `renderError`, `allowedTypes`/`deniedTypes` filtering, `showCreate`/`showDelete` toggles.
+Qhorus channel activity — twelve sub-elements covering the full messaging lifecycle: feed (message grouping, threading, auto-scroll), individual messages, reactions, input with speech-act type selector, emoji picker, threaded replies, channel navigation (sidebar/dropdown modes), member panel with presence, topic bar, task/artifact/correlation panels. DOMPurify + marked for markdown rendering. Convenience wrapper: `<agency-channel-activity>` composes nav + feed + input + topic-bar in split-workbench with a tabbed sidebar (members/tasks/artifacts/correlations). Accepts a `PushController` (transport-agnostic — SSE, WebSocket, or test stubs) and creates domain controllers internally. Three tiers: standalone, panel-hosted via `configure()`, inline data mode. Extension points: `formatSender`, `renderContent`, `renderContextHeader`, `renderError`, `allowedTypes`/`deniedTypes` filtering, `showCreate`/`showDelete` toggles.
 
 ### notification-inbox
 
@@ -121,7 +121,7 @@ Built-in domains: `case`, `task`, `workitem`, `work`, `milestone`, `outcome`, `g
 
 Ledger entry viewer — pages-table rendering, Merkle verification banner, attestations, actor/type/date filters, GDPR erasure handling.
 
-### blocks-timeline
+### agency-timeline
 
 CaseHub timeline — extends `PagesEventTimeline` from `@casehubio/pages-viz`. Adds only `configure()` override for WorkIdentity tenancy header mapping. All generic timeline capabilities (self-fetch, pagination, layouts, rendering) are in PagesEventTimeline. Domain strategies: event chronology, state progression, commitment lifecycle, orchestration events.
 
@@ -164,11 +164,11 @@ Commitment lifecycle visualization — transition badges (`commitment-transition
 Conversation protocol viewer — structured deliberation UI rendering convergence state, epistemic common ground, and conversation points. The protocol lens over structured conversations that raw message feeds (channel-activity) and document-specific views (document-workbench) do not provide.
 
 Five components:
-- `<blocks-convergence-indicator>` — horizontal status bar showing convergence state (colour) and confidence (fill level). Sizes: `sm` (inline) and `md` (full with label).
-- `<blocks-common-ground-panel>` — three-column layout partitioning facts by epistemic status (Established / Pending / Disputed). Responsive collapse below 500px.
-- `<blocks-point-list>` — scrollable list of conversation points grouped by round, with single-selection via pages-event topics.
-- `<blocks-point-detail>` — thread view for a single point showing entry cards, sub-task findings, obligation chains (via commitment-viz), and flags.
-- `<blocks-conversation-workbench>` — convenience split-workbench wrapper composing all panels. Left: convergence indicator + point list. Right: point detail (when selected) or common ground panel (when not). KeyboardShortcutMixin (Escape deselects), LiveRegionMixin for accessibility, stale selection guard, `configure()` for hostPanel integration.
+- `<agency-convergence-indicator>` — horizontal status bar showing convergence state (colour) and confidence (fill level). Sizes: `sm` (inline) and `md` (full with label).
+- `<agency-common-ground-panel>` — three-column layout partitioning facts by epistemic status (Established / Pending / Disputed). Responsive collapse below 500px.
+- `<agency-point-list>` — scrollable list of conversation points grouped by round, with single-selection via pages-event topics.
+- `<agency-point-detail>` — thread view for a single point showing entry cards, sub-task findings, obligation chains (via commitment-viz), and flags.
+- `<agency-conversation-workbench>` — convenience split-workbench wrapper composing all panels. Left: convergence indicator + point list. Right: point detail (when selected) or common ground panel (when not). KeyboardShortcutMixin (Escape deselects), LiveRegionMixin for accessibility, stale selection guard, `configure()` for hostPanel integration.
 
 Data delivery is property-based (`conversationState: ConversationState`) — host app owns fetching. Extension points via render callbacks (`renderPoint`, `renderEntry`, `renderFact`) per PP-20260713-8ea1af.
 
@@ -254,7 +254,7 @@ registerThumbnailRenderer('swf', createSwfThumbnailRenderer());
 
 **Worker function types:** Worker stencils display a coloured badge indicating the function type (agent, flow, a2a, mcp, seq, ext). The property panel shows a function type selector and type-specific configuration forms when a worker node is selected. Supported types: Agent (prompt, model provider config), A2A (endpoint, skill, auth), MCP (stdio/HTTP transport, auth), Sequence (ordered worker list with drag-reorder), Flow (drill-down to SWF diagram). Unknown function keys render as read-only JSON. The `casehub-diagram-properties` component accepts `selectedType` and `workerNames` properties to enable the function section.
 
-### blocks-case-flow-viewer
+### agency-case-flow-viewer
 
 Read-only case flow DAG viewer — the viewer counterpart to `casehub-diagram`. Composes the same rendering pipeline (`toGraph`, `toDecorations`, case stencils, ELK layout, `pages-graph-canvas`) without the editor machinery.
 
@@ -272,11 +272,11 @@ Read-only case flow DAG viewer — the viewer counterpart to `casehub-diagram`. 
 **Usage:**
 
 ```html
-<blocks-case-flow-viewer
+<agency-case-flow-viewer
   src="/api/cases/${caseId}/definition"
   .runtimeState=${runtimeState}
   selection-topic="case-flow">
-</blocks-case-flow-viewer>
+</agency-case-flow-viewer>
 ```
 
 ---

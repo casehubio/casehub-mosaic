@@ -4,7 +4,7 @@ import '../../../components/compliance-summary/src/compliance-summary.js';
 import type { RequirementDefinition } from '../../../components/compliance-summary/src/types.js';
 import complianceData from '../../mock-data/compliance.json';
 
-@customElement('blocks-example-compliance-summary')
+@customElement('agency-example-compliance-summary')
 export class ComplianceSummaryPage extends LitElement {
   @state() private _eventLog: string[] = [];
 
@@ -36,14 +36,14 @@ export class ComplianceSummaryPage extends LitElement {
 
       <h3>Full Grid (All Status Values)</h3>
       <div class="demo-section" @pages-event=${this._handleEvent}>
-        <blocks-compliance-summary
+        <agency-compliance-summary
           .requirements=${complianceData.requirements as RequirementDefinition[]}
-        ></blocks-compliance-summary>
+        ></agency-compliance-summary>
       </div>
 
       <h3>Empty State</h3>
       <div class="demo-section">
-        <blocks-compliance-summary .requirements=${[]}></blocks-compliance-summary>
+        <agency-compliance-summary .requirements=${[]}></agency-compliance-summary>
       </div>
 
       ${this._eventLog.length > 0 ? html`

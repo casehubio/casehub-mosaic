@@ -21,11 +21,11 @@ function getStylesText(el: HTMLElement): string {
   return Array.from(styleTags).map(s => s.textContent ?? '').join(' ');
 }
 
-describe('blocks-sla-breach-policy', () => {
+describe('agency-sla-breach-policy', () => {
   let el: SlaBreachPolicyEl;
 
   beforeEach(() => {
-    el = document.createElement('blocks-sla-breach-policy') as SlaBreachPolicyEl;
+    el = document.createElement('agency-sla-breach-policy') as SlaBreachPolicyEl;
     document.body.appendChild(el);
   });
 
@@ -90,14 +90,14 @@ describe('blocks-sla-breach-policy', () => {
     el.tiers = SAMPLE_TIERS;
     el.deadline = new Date(Date.now() + 3600000).toISOString();
     await el.updateComplete;
-    const indicator = el.shadowRoot!.querySelector('blocks-sla-indicator');
+    const indicator = el.shadowRoot!.querySelector('agency-sla-indicator');
     expect(indicator).toBeTruthy();
   });
 
   it('does not render sla-indicator when no deadline', async () => {
     el.tiers = SAMPLE_TIERS;
     await el.updateComplete;
-    const indicator = el.shadowRoot!.querySelector('blocks-sla-indicator');
+    const indicator = el.shadowRoot!.querySelector('agency-sla-indicator');
     expect(indicator).toBeFalsy();
   });
 

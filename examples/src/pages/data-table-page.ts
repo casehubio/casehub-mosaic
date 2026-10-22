@@ -18,7 +18,7 @@ interface WorkItemRootResponse {
 
 
 
-@customElement('blocks-example-data-table')
+@customElement('agency-example-data-table')
 export class DataTablePage extends LitElement {
   @state() private items: WorkItemRootResponse[] = [];
   @state() private selectedKeys: string[] = [];

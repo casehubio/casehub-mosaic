@@ -268,7 +268,7 @@ definitions:
                   capability: adjuster-pool
 `;
 
-@customElement('blocks-example-diagram-workbench')
+@customElement('agency-example-diagram-workbench')
 export class DiagramWorkbenchPage extends LitElement {
   static override styles = css`
     :host { display: flex; flex-direction: column; height: 100%; padding: 24px; box-sizing: border-box; }
@@ -276,7 +276,7 @@ export class DiagramWorkbenchPage extends LitElement {
     p { color: var(--pages-neutral-11, #555); font-size: 14px; margin-bottom: 24px; }
     .workbench-container { flex: 1; min-height: 0; border: 1px solid var(--pages-neutral-5, #e0e0e0);
       border-radius: 6px; overflow: hidden; }
-    blocks-diagram-workbench { width: 100%; height: 100%; }
+    agency-diagram-workbench { width: 100%; height: 100%; }
   `;
 
   override render() {
@@ -286,7 +286,7 @@ export class DiagramWorkbenchPage extends LitElement {
         Workers with inline do: blocks and definitionRef (#routing-workflow) both drill down.
         The right pane renders the appropriate diagram type automatically.</p>
       <div class="workbench-container">
-        <blocks-diagram-workbench .yaml=${YAML}></blocks-diagram-workbench>
+        <agency-diagram-workbench .yaml=${YAML}></agency-diagram-workbench>
       </div>
     `;
   }
@@ -294,6 +294,6 @@ export class DiagramWorkbenchPage extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'blocks-example-diagram-workbench': DiagramWorkbenchPage;
+    'agency-example-diagram-workbench': DiagramWorkbenchPage;
   }
 }

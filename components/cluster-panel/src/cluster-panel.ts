@@ -21,7 +21,7 @@ export interface ClusterPanelProps {
   readonly: boolean;
 }
 
-@customElement('blocks-cluster-panel')
+@customElement('agency-cluster-panel')
 export class ClusterPanel extends LitElement {
   @property({ attribute: false }) data: ClusterInfo[] | null = null;
   @property() endpoint?: string;
@@ -222,6 +222,6 @@ export class ClusterPanel extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'blocks-cluster-panel': ClusterPanel;
+    'agency-cluster-panel': ClusterPanel;
   }
 }

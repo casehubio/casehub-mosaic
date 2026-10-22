@@ -81,11 +81,11 @@ function createMockApi(overrides: Partial<Record<string, unknown>> = {}) {
   } as unknown as NotificationApi;
 }
 
-describe('blocks-subscription-editor', () => {
+describe('agency-subscription-editor', () => {
   let el: SubscriptionEditor;
 
   beforeEach(async () => {
-    el = document.createElement('blocks-subscription-editor') as SubscriptionEditor;
+    el = document.createElement('agency-subscription-editor') as SubscriptionEditor;
     el.endpoint = 'http://localhost/api';
     el.api = createMockApi();
     document.body.appendChild(el);
@@ -143,7 +143,7 @@ describe('blocks-subscription-editor', () => {
 
   it('pre-populates form in edit mode', async () => {
     el.remove();
-    el = document.createElement('blocks-subscription-editor') as SubscriptionEditor;
+    el = document.createElement('agency-subscription-editor') as SubscriptionEditor;
     el.endpoint = 'http://localhost/api';
     el.api = createMockApi();
     el.subscription = mockSubscription;
@@ -229,7 +229,7 @@ describe('blocks-subscription-editor', () => {
 
   it('shows error on event types fetch failure', async () => {
     el.remove();
-    el = document.createElement('blocks-subscription-editor') as SubscriptionEditor;
+    el = document.createElement('agency-subscription-editor') as SubscriptionEditor;
     el.endpoint = 'http://localhost/api';
     el.api = createMockApi({
       getEventTypes: async () => { throw new Error('Network error'); },
@@ -246,7 +246,7 @@ describe('blocks-subscription-editor', () => {
     const delayedApi = createMockApi({
       getEventTypes: () => new Promise<EventTypeDescriptor[]>(resolve => { resolveTypes = resolve; }),
     });
-    el = document.createElement('blocks-subscription-editor') as SubscriptionEditor;
+    el = document.createElement('agency-subscription-editor') as SubscriptionEditor;
     el.endpoint = 'http://localhost/api';
     el.api = delayedApi;
     document.body.appendChild(el);

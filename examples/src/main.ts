@@ -78,7 +78,7 @@ async function bootstrap() {
   }
 
   app.textContent = '';
-  app.appendChild(document.createElement('blocks-example-shell'));
+  app.appendChild(document.createElement('agency-example-shell'));
 }
 
 bootstrap().catch(err => {

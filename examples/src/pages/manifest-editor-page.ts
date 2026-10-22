@@ -31,7 +31,7 @@ When presenting analysis:
 - Distinguish between observed facts and inferences
 - Suggest follow-up investigations for low-confidence findings`;
 
-@customElement('blocks-example-manifest-editor')
+@customElement('agency-example-manifest-editor')
 export class ManifestEditorPage extends LitElement {
   @state() private _devMode = false;
   @state() private _hasData = false;
@@ -105,6 +105,6 @@ export class ManifestEditorPage extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'blocks-example-manifest-editor': ManifestEditorPage;
+    'agency-example-manifest-editor': ManifestEditorPage;
   }
 }

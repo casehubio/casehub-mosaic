@@ -10,7 +10,7 @@ export interface DetailPaneProps {
   emptyMessage: string;
 }
 
-@customElement('blocks-detail-pane')
+@customElement('agency-detail-pane')
 export class DetailPane extends LiveRegionMixin(LitElement) {
   @property({ type: Array }) tabs: TabDefinition[] = [];
   @property({ type: String, attribute: 'selection-topic' }) selectionTopic = '';
@@ -223,6 +223,6 @@ export class DetailPane extends LiveRegionMixin(LitElement) {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'blocks-detail-pane': DetailPane;
+    'agency-detail-pane': DetailPane;
   }
 }

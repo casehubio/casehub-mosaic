@@ -9,7 +9,7 @@ interface SimulatedEvent {
   payload: string;
 }
 
-@customElement('blocks-example-push-updates')
+@customElement('agency-example-push-updates')
 export class PushUpdatesPage extends LitElement {
   @state() private _events: SimulatedEvent[] = [];
   @state() private _running = false;

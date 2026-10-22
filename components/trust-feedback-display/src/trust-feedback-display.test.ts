@@ -35,11 +35,11 @@ const NEUTRAL_DECISION: GateDecision = {
   dimension: 'operational',
 };
 
-describe('blocks-trust-feedback-display', () => {
+describe('agency-trust-feedback-display', () => {
   let el: TrustFeedbackDisplayEl;
 
   beforeEach(() => {
-    el = document.createElement('blocks-trust-feedback-display') as TrustFeedbackDisplayEl;
+    el = document.createElement('agency-trust-feedback-display') as TrustFeedbackDisplayEl;
     document.body.appendChild(el);
   });
 

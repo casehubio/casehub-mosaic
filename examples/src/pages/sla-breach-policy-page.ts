@@ -19,7 +19,7 @@ function futureISO(ms: number): string {
   return new Date(Date.now() + ms).toISOString();
 }
 
-@customElement('blocks-example-sla-breach-policy')
+@customElement('agency-example-sla-breach-policy')
 export class SlaBreachPolicyPage extends LitElement {
   @state() private _timeRemaining = 60;
   @state() private _showDeadline = true;
@@ -57,24 +57,24 @@ export class SlaBreachPolicyPage extends LitElement {
 
       <h3>Clinical Trial Tiers (with regulations)</h3>
       <div class="demo-section">
-        <blocks-sla-breach-policy
+        <agency-sla-breach-policy
           .tiers=${CLINICAL_TIERS}
           time-remaining="${this._timeRemaining}"
           .deadline=${this._showDeadline ? futureISO(this._timeRemaining * 360000) : ''}
-        ></blocks-sla-breach-policy>
+        ></agency-sla-breach-policy>
       </div>
 
       <h3>Simple Tiers (2 levels)</h3>
       <div class="demo-section">
-        <blocks-sla-breach-policy
+        <agency-sla-breach-policy
           .tiers=${SIMPLE_TIERS}
           time-remaining="${this._timeRemaining}"
-        ></blocks-sla-breach-policy>
+        ></agency-sla-breach-policy>
       </div>
 
       <h3>Empty State</h3>
       <div class="demo-section">
-        <blocks-sla-breach-policy></blocks-sla-breach-policy>
+        <agency-sla-breach-policy></agency-sla-breach-policy>
       </div>
     `;
   }

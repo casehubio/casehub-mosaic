@@ -55,8 +55,8 @@ export interface WorkerTaskPaneProps {
   showWorkspace: boolean;
 }
 
-@customElement('blocks-worker-task-pane')
-export class BlocksWorkerTaskPane extends WorkerTaskPaneBase {
+@customElement('agency-worker-task-pane')
+export class AgencyWorkerTaskPane extends WorkerTaskPaneBase {
   @property() layout: 'split' | 'stacked' = 'split';
   @property() endpoint = '';
   @property({ attribute: false }) data?: WorkerTaskResponse[];
@@ -187,7 +187,7 @@ export class BlocksWorkerTaskPane extends WorkerTaskPaneBase {
   override updated(changed: Map<string, unknown>): void {
     super.updated(changed);
     if (changed.has('_selectedItem')) {
-      const detailPane = this.shadowRoot?.querySelector('blocks-detail-pane') as any;
+      const detailPane = this.shadowRoot?.querySelector('agency-detail-pane') as any;
       if (detailPane && this._selectedItem) {
         detailPane._item = this._selectedItem;
         detailPane.requestUpdate();
@@ -223,7 +223,7 @@ export class BlocksWorkerTaskPane extends WorkerTaskPaneBase {
 
   private _renderListPane(): TemplateResult {
     return html`
-      <blocks-list-pane
+      <agency-list-pane
         .dataSet=${this._tableDataSet!}
         .columnConfig=${this.columnConfig ?? DEFAULT_COL_CONFIG}
         .columnRenderers=${this.columnRenderers}
@@ -231,7 +231,7 @@ export class BlocksWorkerTaskPane extends WorkerTaskPaneBase {
         selection-topic=${this.selectionTopic}
         empty-message="No tasks available"
         aria-busy=${this._loading ? 'true' : 'false'}
-      ></blocks-list-pane>
+      ></agency-list-pane>
     `;
   }
 
@@ -251,10 +251,10 @@ export class BlocksWorkerTaskPane extends WorkerTaskPaneBase {
   private _renderContextSection(): TemplateResult {
     return html`
       <div class="section context-container">
-        <blocks-detail-pane
+        <agency-detail-pane
           .tabs=${this.contextTabs}
           selection-topic=${this.selectionTopic}
-        ></blocks-detail-pane>
+        ></agency-detail-pane>
       </div>
     `;
   }
@@ -455,6 +455,6 @@ export class BlocksWorkerTaskPane extends WorkerTaskPaneBase {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'blocks-worker-task-pane': BlocksWorkerTaskPane;
+    'agency-worker-task-pane': AgencyWorkerTaskPane;
   }
 }

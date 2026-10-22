@@ -21,11 +21,11 @@ const SAMPLE_DATA: DimensionDashboardData = {
   ],
 };
 
-describe('blocks-dimension-dashboard', () => {
+describe('agency-dimension-dashboard', () => {
   let el: DimensionDashboardEl;
 
   beforeEach(() => {
-    el = document.createElement('blocks-dimension-dashboard') as DimensionDashboardEl;
+    el = document.createElement('agency-dimension-dashboard') as DimensionDashboardEl;
     document.body.appendChild(el);
   });
 

@@ -4,7 +4,7 @@ import type { ColumnRenderer, FilterDescriptor } from '../types.js';
 import { workerType } from '../presets.js';
 import '../entity-list.js';
 
-@customElement('blocks-worker-list')
+@customElement('agency-worker-list')
 export class WorkerList extends LitElement {
   @property({ type: String }) endpoint = '';
   @property({ attribute: false }) columnRenderers?: Record<string, ColumnRenderer>;
@@ -20,6 +20,6 @@ export class WorkerList extends LitElement {
 
   override render(): TemplateResult {
     const reg = { ...workerType({ listEndpoint: this.endpoint }), columnRenderers: this.columnRenderers, filters: this.filters };
-    return html`<blocks-entity-list .registration=${reg} selection-topic=${this.selectionTopic} .fetchFn=${this.fetchFn}></blocks-entity-list>`;
+    return html`<agency-entity-list .registration=${reg} selection-topic=${this.selectionTopic} .fetchFn=${this.fetchFn}></agency-entity-list>`;
   }
 }

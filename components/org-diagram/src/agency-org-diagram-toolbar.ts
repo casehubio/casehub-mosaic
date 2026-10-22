@@ -7,8 +7,8 @@ const ALL_STRATEGIES: OrgLayoutStrategy[] = [
   'hub-spoke', 'flow', 'radial', 'grid', 'force',
 ];
 
-@customElement('blocks-org-diagram-toolbar')
-export class BlocksOrgDiagramToolbar extends LitElement {
+@customElement('agency-org-diagram-toolbar')
+export class AgencyOrgDiagramToolbar extends LitElement {
   @property({ type: Boolean }) hasBackend = false;
   @property({ type: Boolean }) dirty = false;
   @property({ type: Boolean }) saving = false;

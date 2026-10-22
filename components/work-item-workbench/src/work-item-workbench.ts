@@ -11,7 +11,7 @@ export interface WorkItemWorkbenchProps {
   endpoint: string;
 }
 
-@customElement('blocks-work-item-workbench')
+@customElement('agency-work-item-workbench')
 export class WorkItemWorkbench extends KeyboardShortcutMixin(LitElement) {
   @property({ type: Object }) identity!: WorkIdentity;
   @property({ type: String }) endpoint = '';
@@ -143,15 +143,15 @@ export class WorkItemWorkbench extends KeyboardShortcutMixin(LitElement) {
   override render(): TemplateResult {
     return html`
       <pages-split-workbench selection-topic="work-item">
-        <blocks-work-item-inbox slot="list"
+        <agency-work-item-inbox slot="list"
           .endpoint=${this.endpoint}
           .identity=${this.identity}
-        ></blocks-work-item-inbox>
-        <blocks-work-item-detail slot="detail"
+        ></agency-work-item-inbox>
+        <agency-work-item-detail slot="detail"
           .endpoint=${this.endpoint}
           .identity=${this.identity}
           .userSearchProvider=${this.userSearchProvider}
-        ></blocks-work-item-detail>
+        ></agency-work-item-detail>
       </pages-split-workbench>
 
       ${this._renderKeyboardHints()}
@@ -205,6 +205,6 @@ export class WorkItemWorkbench extends KeyboardShortcutMixin(LitElement) {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'blocks-work-item-workbench': WorkItemWorkbench;
+    'agency-work-item-workbench': WorkItemWorkbench;
   }
 }

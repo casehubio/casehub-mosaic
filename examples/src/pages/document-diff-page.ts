@@ -3,7 +3,7 @@ import { customElement } from 'lit/decorators.js';
 import '@casehubio/mosaic-document-workbench';
 import { MOCK_DOC_A, MOCK_DOC_B } from '../../mock-data/document-workbench.js';
 
-@customElement('blocks-example-document-diff')
+@customElement('agency-example-document-diff')
 export class DocumentDiffPage extends LitElement {
   static override styles = css`
     :host { display: block; padding: 24px; }

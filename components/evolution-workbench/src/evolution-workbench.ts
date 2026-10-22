@@ -31,7 +31,7 @@ export interface EvolutionWorkbenchProps {
   gatePolicy?: GatePolicy;
 }
 
-@customElement('blocks-evolution-workbench')
+@customElement('agency-evolution-workbench')
 export class EvolutionWorkbench extends LitElement {
   @property({ type: String }) endpoint?: string;
   @property({ type: String }) caseId?: string;
@@ -230,12 +230,12 @@ export class EvolutionWorkbench extends LitElement {
   private _renderStreams() {
     return html`
       <div class="tab-content">
-        <blocks-evolution-streams
+        <agency-evolution-streams
           .endpoint=${this.endpoint}
           .caseId=${this.caseId}
           .tenancyId=${this.tenancyId}
           .streams=${this.streams}
-        ></blocks-evolution-streams>
+        ></agency-evolution-streams>
       </div>
     `;
   }
@@ -243,12 +243,12 @@ export class EvolutionWorkbench extends LitElement {
   private _renderInbox() {
     return html`
       <div class="tab-content">
-        <blocks-evolution-inbox
+        <agency-evolution-inbox
           .endpoint=${this.endpoint}
           .caseId=${this.caseId}
           .tenancyId=${this.tenancyId}
           .inbox=${this.inbox}
-        ></blocks-evolution-inbox>
+        ></agency-evolution-inbox>
       </div>
     `;
   }
@@ -257,9 +257,9 @@ export class EvolutionWorkbench extends LitElement {
     const auditEndpoint = this.endpoint ? `${this.endpoint}/audit` : undefined;
     return html`
       <div class="tab-content">
-        <blocks-audit-trail-viewer
+        <agency-audit-trail-viewer
           .endpoint=${auditEndpoint}
-        ></blocks-audit-trail-viewer>
+        ></agency-audit-trail-viewer>
       </div>
     `;
   }
@@ -268,32 +268,32 @@ export class EvolutionWorkbench extends LitElement {
     return html`
       <div class="tab-content">
         <div class="section-header">Deny Patterns</div>
-        <blocks-deny-pattern-editor
+        <agency-deny-pattern-editor
           .endpoint=${this.endpoint}
           .caseId=${this.caseId}
           .tenancyId=${this.tenancyId}
           .patterns=${this.denyPatterns}
           .streams=${this.streams}
-        ></blocks-deny-pattern-editor>
+        ></agency-deny-pattern-editor>
 
         <div class="section-header">Watch Patterns</div>
-        <blocks-watch-pattern-editor
+        <agency-watch-pattern-editor
           .endpoint=${this.endpoint}
           .caseId=${this.caseId}
           .tenancyId=${this.tenancyId}
           .patterns=${this.watchPatterns}
           .categories=${this.categories}
-        ></blocks-watch-pattern-editor>
+        ></agency-watch-pattern-editor>
 
         <div class="section-header">Gate Policy</div>
-        <blocks-gate-policy-editor
+        <agency-gate-policy-editor
           .endpoint=${this.endpoint}
           .caseId=${this.caseId}
           .tenancyId=${this.tenancyId}
           .stages=${this.stages}
           .policy=${this.gatePolicy}
           .streams=${this.streams}
-        ></blocks-gate-policy-editor>
+        ></agency-gate-policy-editor>
       </div>
     `;
   }
@@ -303,10 +303,10 @@ export class EvolutionWorkbench extends LitElement {
     if (!s) return html`<div class="tab-content"><div class="empty-tab">No health data available.</div></div>`;
     return html`
       <div class="tab-content">
-        <blocks-trust-score-panel
+        <agency-trust-score-panel
           .score=${s.healthScore}
           mode="full"
-        ></blocks-trust-score-panel>
+        ></agency-trust-score-panel>
       </div>
     `;
   }
@@ -321,10 +321,10 @@ export class EvolutionWorkbench extends LitElement {
     return html`
       <div class="summary">${this._renderSummary()}</div>
       <div class="tabs">
-        <blocks-detail-pane
+        <agency-detail-pane
           ?standalone=${true}
           .tabs=${allTabs}
-        ></blocks-detail-pane>
+        ></agency-detail-pane>
       </div>
     `;
   }
@@ -332,6 +332,6 @@ export class EvolutionWorkbench extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'blocks-evolution-workbench': EvolutionWorkbench;
+    'agency-evolution-workbench': EvolutionWorkbench;
   }
 }

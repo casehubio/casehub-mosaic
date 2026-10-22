@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import type { ConversationPoint, SubTaskFinding, FlagEntry, ObligationChain } from './types.js';
-import './blocks-point-detail.js';
+import './agency-point-detail.js';
 
 type DetailElement = HTMLElement & {
   point?: ConversationPoint;
@@ -38,12 +38,12 @@ const MOCK_OBLIGATIONS: ObligationChain[] = [
 ];
 
 function createElement(): DetailElement {
-  const el = document.createElement('blocks-point-detail') as DetailElement;
+  const el = document.createElement('agency-point-detail') as DetailElement;
   document.body.appendChild(el);
   return el;
 }
 
-describe('blocks-point-detail', () => {
+describe('agency-point-detail', () => {
   beforeEach(() => { document.body.innerHTML = ''; });
 
   it('renders nothing without point', async () => {

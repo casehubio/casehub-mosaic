@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import type { ConversationPoint } from './types.js';
-import './blocks-point-list.js';
+import './agency-point-list.js';
 
 type ListElement = HTMLElement & {
   points: ConversationPoint[];
@@ -34,12 +34,12 @@ const MOCK_POINTS: ConversationPoint[] = [
 ];
 
 function createElement(): ListElement {
-  const el = document.createElement('blocks-point-list') as ListElement;
+  const el = document.createElement('agency-point-list') as ListElement;
   document.body.appendChild(el);
   return el;
 }
 
-describe('blocks-point-list', () => {
+describe('agency-point-list', () => {
   beforeEach(() => { document.body.innerHTML = ''; });
 
   it('renders point rows', async () => {

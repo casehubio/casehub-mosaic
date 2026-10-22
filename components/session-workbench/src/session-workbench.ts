@@ -9,7 +9,7 @@ export interface SessionWorkbenchProps {
   endpoint: string;
 }
 
-@customElement('blocks-session-workbench')
+@customElement('agency-session-workbench')
 export class SessionWorkbench extends KeyboardShortcutMixin(LitElement) {
   @property({ type: String }) endpoint = '';
 
@@ -46,8 +46,8 @@ export class SessionWorkbench extends KeyboardShortcutMixin(LitElement) {
   override render(): TemplateResult {
     return html`
       <pages-split-workbench selection-topic="session">
-        <blocks-session-list slot="list" .endpoint=${this.endpoint}></blocks-session-list>
-        <blocks-session-detail slot="detail" .endpoint=${this.endpoint}></blocks-session-detail>
+        <agency-session-list slot="list" .endpoint=${this.endpoint}></agency-session-list>
+        <agency-session-detail slot="detail" .endpoint=${this.endpoint}></agency-session-detail>
       </pages-split-workbench>
       ${this._renderKeyboardHints()}
       ${this._showShortcutOverlay ? this._renderShortcutOverlay() : ''}
@@ -92,6 +92,6 @@ export class SessionWorkbench extends KeyboardShortcutMixin(LitElement) {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'blocks-session-workbench': SessionWorkbench;
+    'agency-session-workbench': SessionWorkbench;
   }
 }

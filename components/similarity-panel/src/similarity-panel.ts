@@ -48,7 +48,7 @@ export interface SimilarityPanelProps {
   emptyMessage: string;
 }
 
-@customElement('blocks-similarity-panel')
+@customElement('agency-similarity-panel')
 export class SimilarityPanel extends DataSourceMixin(LitElement) {
   @property({ type: String, reflect: true, attribute: 'aria-label' }) override ariaLabel: string | null = 'Similar cases';
   @property({ attribute: false }) data: Precedent[] | null = null;
@@ -125,6 +125,6 @@ export class SimilarityPanel extends DataSourceMixin(LitElement) {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'blocks-similarity-panel': SimilarityPanel;
+    'agency-similarity-panel': SimilarityPanel;
   }
 }

@@ -4,7 +4,7 @@ import '@casehubio/mosaic-agency-timeline';
 import { stateProgressionStrategy, linearResolveStatus } from '@casehubio/mosaic-agency-timeline';
 import type { StageConfig } from '@casehubio/mosaic-agency-timeline';
 
-@customElement('blocks-example-timeline-commitment')
+@customElement('agency-example-timeline-commitment')
 export class TimelineCommitmentPage extends LitElement {
   private _fulfilledData = {
     currentState: 'FULFILLED',

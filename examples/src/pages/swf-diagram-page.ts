@@ -513,7 +513,7 @@ const EXAMPLES: Record<string, { label: string; description: string; yaml: strin
   },
 };
 
-@customElement('blocks-example-swf-diagram')
+@customElement('agency-example-swf-diagram')
 export class SwfDiagramPage extends LitElement {
   @state() private _example = 'claim-review';
 
@@ -552,5 +552,5 @@ export class SwfDiagramPage extends LitElement {
 }
 
 declare global {
-  interface HTMLElementTagNameMap { 'blocks-example-swf-diagram': SwfDiagramPage; }
+  interface HTMLElementTagNameMap { 'agency-example-swf-diagram': SwfDiagramPage; }
 }

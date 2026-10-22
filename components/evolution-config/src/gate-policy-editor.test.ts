@@ -8,7 +8,7 @@ function createElement(
   policy?: GatePolicy,
   readonly = false,
 ): GatePolicyEditor {
-  const el = document.createElement('blocks-gate-policy-editor') as GatePolicyEditor;
+  const el = document.createElement('agency-gate-policy-editor') as GatePolicyEditor;
   if (stages) el.stages = stages;
   if (policy) el.policy = policy;
   el.readonly = readonly;
@@ -33,9 +33,9 @@ const SAMPLE_POLICY: GatePolicy = {
   gateTimeoutMinutes: 720,
 };
 
-describe('blocks-gate-policy-editor', () => {
+describe('agency-gate-policy-editor', () => {
   afterEach(() => {
-    document.body.querySelectorAll('blocks-gate-policy-editor').forEach(el => el.remove());
+    document.body.querySelectorAll('agency-gate-policy-editor').forEach(el => el.remove());
   });
 
   it('has correct ARIA attributes', async () => {

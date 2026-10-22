@@ -39,8 +39,8 @@ export {
 } from './worker-function/types.js';
 export { FUNCTION_TYPE_DEFAULTS, MCP_TRANSPORT_DEFAULTS, PROVIDER_DEFAULT } from './worker-function/defaults.js';
 export { milestoneSchema, goalSchema, subcaseSchema, bindingSchema, workerSchema } from './schemas/index.js';
-export { BlocksEnvMapEditorElement } from './editors/blocks-env-map-editor.js';
-export { BlocksSequenceEditorElement } from './editors/blocks-sequence-editor.js';
-export { BlocksSwfLinkElement } from './editors/blocks-swf-link.js';
+export { AgencyEnvMapEditorElement } from './editors/agency-env-map-editor.js';
+export { AgencySequenceEditorElement } from './editors/agency-sequence-editor.js';
+export { AgencySwfLinkElement } from './editors/agency-swf-link.js';
 export { createCaseEditPolicy } from './editing/case-edit-policy.js';
 export type { EditPolicy, StencilTypeInfo, DeleteStrategy } from '@casehubio/graph-renderer';

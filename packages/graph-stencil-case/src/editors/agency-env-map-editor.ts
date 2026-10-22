@@ -1,8 +1,8 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 
-@customElement('blocks-env-map-editor')
-export class BlocksEnvMapEditorElement extends LitElement {
+@customElement('agency-env-map-editor')
+export class AgencyEnvMapEditorElement extends LitElement {
   @property({ type: Object }) value: Record<string, string> = {};
 
   static override styles = css`
