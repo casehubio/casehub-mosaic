@@ -35,9 +35,9 @@
 4. Example pages: template references to the component tags
 
 **What does NOT change:**
-- npm package names (`@casehubio/blocks-ui-approval-gate` — already prefixed)
+- npm package names (`@casehubio/agency-ui-approval-gate` — already prefixed)
 - TypeScript class names (e.g., `ApprovalGate` stays)
-- Import paths (e.g., `import '@casehubio/blocks-ui-sla-indicator'` stays)
+- Import paths (e.g., `import '@casehubio/agency-ui-sla-indicator'` stays)
 - Example page tag names (e.g., `approval-gate-page` — app-level, not library)
 - Test fixtures (e.g., `test-tab-panel` — test-only)
 

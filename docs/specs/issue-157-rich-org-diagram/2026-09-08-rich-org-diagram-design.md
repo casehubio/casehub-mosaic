@@ -1,9 +1,9 @@
 # Rich Org Diagram — Design Spec
 
-**Issue:** casehubio/blocks-ui#157
+**Issue:** casehubio/agency-ui#157
 **Date:** 2026-09-08
 **Status:** Draft
-**Builds on:** casehubio/blocks-ui#155 (base org diagram — adapter, stencils, archetype detection, layout, editing)
+**Builds on:** casehubio/agency-ui#155 (base org diagram — adapter, stencils, archetype detection, layout, editing)
 
 ---
 
@@ -568,8 +568,8 @@ This type is defined in `graph-stencil-org/src/types.ts` alongside the existing 
 - `docs/specs/issue-155-org-diagram/2026-09-05-org-diagram-design.md` — base org diagram spec
 - `docs/specs/issue-155-org-diagram/decisions.md` — 15 prior decisions (D1-D15)
 - ReactFlow Edge API — label, labelBgStyle, labelBgPadding, labelBgBorderRadius
-- `casehubio/blocks-ui#157` — issue with full requirements
-- `casehubio/blocks-ui#157` comment — OrgDiagramData shape guidance
+- `casehubio/agency-ui#157` — issue with full requirements
+- `casehubio/agency-ui#157` comment — OrgDiagramData shape guidance
 
 ---
 
@@ -589,7 +589,7 @@ export interface OrgDiagramProps {
 }
 ```
 
-Add to registry in `packages/blocks-ui-schema/src/registry.ts`. Run `yarn workspace @casehubio/blocks-ui-schema run generate`.
+Add to registry in `packages/blocks-ui-schema/src/registry.ts`. Run `yarn workspace @casehubio/agency-ui-schema run generate`.
 
 ---
 

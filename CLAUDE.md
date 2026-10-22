@@ -16,7 +16,7 @@ Changelog: GitHub Releases
 
 ## What This Project Is
 
-Shared UI components for CaseHub applications — the UI parallel to [casehub-blocks](https://github.com/casehubio/blocks) (shared Java coordination patterns). Each component consumes `casehub-pages` APIs (`registerPanel`, `pages-event`, dataset contracts) but knows nothing about a specific app's domain model.
+Shared UI components for CaseHub applications — the UI parallel to [casehub-agency](https://github.com/casehubio/agency) (shared Java coordination patterns). Each component consumes `casehub-pages` APIs (`registerPanel`, `pages-event`, dataset contracts) but knows nothing about a specific app's domain model.
 
 TypeScript/Yarn workspace monorepo with TypeScript project references.
 

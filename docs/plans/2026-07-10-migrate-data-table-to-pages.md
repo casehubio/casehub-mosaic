@@ -174,7 +174,7 @@ Then copy each file individually.
 
 The test files import from relative paths like `'./roving-tabindex.js'` and `'./keyboard-shortcut.js'`. Verify these are correct in the new location (they should be — both source and test are in `src/a11y/`).
 
-Read each test file to check imports. If they import from `'@casehubio/blocks-ui-core'`, update to relative imports.
+Read each test file to check imports. If they import from `'@casehubio/agency-ui-core'`, update to relative imports.
 
 - [ ] **Step 7: Create barrel exports**
 
@@ -347,7 +347,7 @@ In `pages/packages/pages-data-table/src/pages-data-table.ts`, make two changes:
 
 1. Remove the import line:
    ```typescript
-   import { LiveRegionMixin } from '@casehubio/blocks-ui-core';
+   import { LiveRegionMixin } from '@casehubio/agency-ui-core';
    ```
 
 2. Change the class declaration from:
@@ -546,7 +546,7 @@ git -C /Users/mdproctor/claude/casehub/blocks-ui commit -m "refactor: remove a11
 
 For each consumer, the change pattern is:
 
-1. **Split the blocks-ui-core import:** Move mixin symbols (`LiveRegionMixin`, `FocusTrapMixin`, `KeyboardShortcutMixin`) to a new import from `@casehubio/pages-primitives`. Leave all other symbols on `@casehubio/blocks-ui-core`.
+1. **Split the blocks-ui-core import:** Move mixin symbols (`LiveRegionMixin`, `FocusTrapMixin`, `KeyboardShortcutMixin`) to a new import from `@casehubio/pages-primitives`. Leave all other symbols on `@casehubio/agency-ui-core`.
 
 2. **Add dependency** to `package.json`: `"@casehubio/pages-primitives": "^0.2.0"`
 
@@ -557,60 +557,60 @@ The exact import changes per file (use `ide_search_text` to locate, then edit):
 - [ ] **Step 1: work-item-inbox/src/work-item-inbox.ts**
 
 Split: move `LiveRegionMixin`, `KeyboardShortcutMixin` to `@casehubio/pages-primitives`.
-Keep on `@casehubio/blocks-ui-core`: `DataSourceMixin`, `emitPagesEvent`, `onPagesEvent`, etc.
+Keep on `@casehubio/agency-ui-core`: `DataSourceMixin`, `emitPagesEvent`, `onPagesEvent`, etc.
 
 - [ ] **Step 2: work-item-detail/src/work-item-detail.ts**
 
 Split: move `FocusTrapMixin`, `LiveRegionMixin` to `@casehubio/pages-primitives`.
-Keep on `@casehubio/blocks-ui-core`: `isTerminalStatus`, `onPagesEvent`, `WorkItemEventTopics`, `SchemaForm`.
+Keep on `@casehubio/agency-ui-core`: `isTerminalStatus`, `onPagesEvent`, `WorkItemEventTopics`, `SchemaForm`.
 
 - [ ] **Step 3: notification-inbox/src/notification-inbox.ts**
 
 Split: move `LiveRegionMixin`, `KeyboardShortcutMixin` to `@casehubio/pages-primitives`.
-Keep on `@casehubio/blocks-ui-core`: `DataSourceMixin`, `emitPagesEvent`, etc.
+Keep on `@casehubio/agency-ui-core`: `DataSourceMixin`, `emitPagesEvent`, etc.
 
 - [ ] **Step 4: notification-inbox/src/notification-bell.ts**
 
 Split: move `FocusTrapMixin`, `KeyboardShortcutMixin` to `@casehubio/pages-primitives`.
-Keep on `@casehubio/blocks-ui-core`: `WorkIdentity` type (or wherever else it imports from).
+Keep on `@casehubio/agency-ui-core`: `WorkIdentity` type (or wherever else it imports from).
 
 - [ ] **Step 5: approval-gate/src/approval-gate.ts**
 
 Split: move `FocusTrapMixin`, `LiveRegionMixin` to `@casehubio/pages-primitives`.
-Keep on `@casehubio/blocks-ui-core`: `emitPagesEvent`, `BlocksConfirmDialog`.
+Keep on `@casehubio/agency-ui-core`: `emitPagesEvent`, `BlocksConfirmDialog`.
 
 - [ ] **Step 6: detail-pane/src/detail-pane.ts**
 
 Split: move `LiveRegionMixin` to `@casehubio/pages-primitives`.
-Keep on `@casehubio/blocks-ui-core`: `onPagesEvent`.
+Keep on `@casehubio/agency-ui-core`: `onPagesEvent`.
 
 - [ ] **Step 7: kpi-metric-row/src/kpi-metric-row.ts**
 
 Split: move `LiveRegionMixin` to `@casehubio/pages-primitives`.
-Keep on `@casehubio/blocks-ui-core`: `emitPagesEvent`, `renderSparkline`.
+Keep on `@casehubio/agency-ui-core`: `emitPagesEvent`, `renderSparkline`.
 
 - [ ] **Step 8: trust-score-panel/src/trust-score-panel.ts**
 
-Change deep import `@casehubio/blocks-ui-core/mixins/live-region.js` to `@casehubio/pages-primitives`.
+Change deep import `@casehubio/agency-ui-core/mixins/live-region.js` to `@casehubio/pages-primitives`.
 
 - [ ] **Step 9: audit-trail-viewer/src/audit-trail-viewer.ts**
 
-Change deep import `@casehubio/blocks-ui-core/mixins/live-region.js` to `@casehubio/pages-primitives`.
+Change deep import `@casehubio/agency-ui-core/mixins/live-region.js` to `@casehubio/pages-primitives`.
 
 - [ ] **Step 10: case-timeline/src/case-timeline.ts**
 
 Split: move `LiveRegionMixin` to `@casehubio/pages-primitives`.
-Keep on `@casehubio/blocks-ui-core`: `DataSourceMixin`, `fetchSource`, `renderPropertyTree`, `propertyTreeStyles`, `WorkIdentity` type.
+Keep on `@casehubio/agency-ui-core`: `DataSourceMixin`, `fetchSource`, `renderPropertyTree`, `propertyTreeStyles`, `WorkIdentity` type.
 
 - [ ] **Step 11: split-workbench/src/split-workbench.ts**
 
 Split: move `LiveRegionMixin` to `@casehubio/pages-primitives`.
-Keep on `@casehubio/blocks-ui-core`: `onPagesEvent`, `emitPagesEvent`.
+Keep on `@casehubio/agency-ui-core`: `onPagesEvent`, `emitPagesEvent`.
 
 - [ ] **Step 12: work-item-workbench/src/work-item-workbench.ts**
 
 Split: move `KeyboardShortcutMixin` to `@casehubio/pages-primitives`.
-Keep remaining imports on `@casehubio/blocks-ui-core`.
+Keep remaining imports on `@casehubio/agency-ui-core`.
 
 - [ ] **Step 13: Add `@casehubio/pages-primitives` dependency to all 12 consumer package.json files**
 
@@ -671,48 +671,48 @@ git -C /Users/mdproctor/claude/casehub/blocks-ui commit -m "refactor: update a11
 
 For each consumer:
 
-1. **Change import path:** `@casehubio/blocks-ui-data-table` → `@casehubio/pages-data-table`
-2. **Update package.json:** Remove `"@casehubio/blocks-ui-data-table": "workspace:*"`, add `"@casehubio/pages-data-table": "^0.2.0"`
-3. **Update vitest alias:** `@casehubio/blocks-ui-data-table` → `@casehubio/pages-data-table` pointing to `../../../pages/packages/pages-data-table/src`
+1. **Change import path:** `@casehubio/agency-ui-data-table` → `@casehubio/pages-data-table`
+2. **Update package.json:** Remove `"@casehubio/agency-ui-data-table": "workspace:*"`, add `"@casehubio/pages-data-table": "^0.2.0"`
+3. **Update vitest alias:** `@casehubio/agency-ui-data-table` → `@casehubio/pages-data-table` pointing to `../../../pages/packages/pages-data-table/src`
 4. **Remove tsconfig reference** to `../data-table` (present in list-pane, notification-inbox, audit-trail-viewer, work-item-inbox; absent from trust-score-panel)
 
 - [ ] **Step 1: Update list-pane source + config**
 
 In `list-pane/src/list-pane.ts`:
-- `import '@casehubio/blocks-ui-data-table'` → `import '@casehubio/pages-data-table'`
-- `import type { ColumnDef } from '@casehubio/blocks-ui-data-table'` → `import type { ColumnDef } from '@casehubio/pages-data-table'`
+- `import '@casehubio/agency-ui-data-table'` → `import '@casehubio/pages-data-table'`
+- `import type { ColumnDef } from '@casehubio/agency-ui-data-table'` → `import type { ColumnDef } from '@casehubio/pages-data-table'`
 
-Update `list-pane/package.json`: remove `@casehubio/blocks-ui-data-table`, add `"@casehubio/pages-data-table": "^0.2.0"`.
+Update `list-pane/package.json`: remove `@casehubio/agency-ui-data-table`, add `"@casehubio/pages-data-table": "^0.2.0"`.
 
-Update `list-pane/vitest.config.ts`: change the `@casehubio/blocks-ui-data-table` alias to `@casehubio/pages-data-table` pointing to `../../../pages/packages/pages-data-table/src`.
+Update `list-pane/vitest.config.ts`: change the `@casehubio/agency-ui-data-table` alias to `@casehubio/pages-data-table` pointing to `../../../pages/packages/pages-data-table/src`.
 
 Update `list-pane/tsconfig.json`: remove `{ "path": "../data-table" }` from references.
 
 - [ ] **Step 2: Update audit-trail-viewer source + config**
 
 Same pattern. In `audit-trail-viewer/src/audit-trail-viewer.ts`:
-- Change both import lines from `@casehubio/blocks-ui-data-table` to `@casehubio/pages-data-table`
+- Change both import lines from `@casehubio/agency-ui-data-table` to `@casehubio/pages-data-table`
 
 Update package.json, vitest.config.ts, tsconfig.json as in Step 1.
 
 - [ ] **Step 3: Update notification-inbox source + config**
 
 Two source files: `notification-inbox.ts` and `subscription-list.ts`.
-- Change all `@casehubio/blocks-ui-data-table` imports to `@casehubio/pages-data-table`
+- Change all `@casehubio/agency-ui-data-table` imports to `@casehubio/pages-data-table`
 
 Update package.json, vitest.config.ts, tsconfig.json.
 
 - [ ] **Step 4: Update work-item-inbox source + config**
 
 In `work-item-inbox/src/work-item-inbox.ts`:
-- Change all `@casehubio/blocks-ui-data-table` imports to `@casehubio/pages-data-table`
+- Change all `@casehubio/agency-ui-data-table` imports to `@casehubio/pages-data-table`
 
 Update package.json, vitest.config.ts, tsconfig.json.
 
 - [ ] **Step 5: Update trust-score-panel source + config**
 
 In `trust-score-panel/src/trust-score-panel.ts`:
-- Change `@casehubio/blocks-ui-data-table` import to `@casehubio/pages-data-table`
+- Change `@casehubio/agency-ui-data-table` import to `@casehubio/pages-data-table`
 
 Update package.json, vitest.config.ts. trust-score-panel's tsconfig.json has NO reference to `../data-table` — skip tsconfig update.
 

@@ -13,7 +13,7 @@
 
 **Architecture:** `grouped-data-view` extends `DataSourceMixin(LitElement)`. It creates a `<pages-grouped-view>` child element in its shadow DOM and bridges the reactive Lit model to PagesElement's imperative setters. The wrapper converts a simple `groupBy` string to a `GroupingKey`, sorts data to ensure group adjacency, and applies per-group styling via a callback.
 
-**Tech Stack:** Lit 3, TypeScript, `@casehubio/pages-viz` (PagesGroupedView), `@casehubio/pages-data` (TypedDataSet, GroupingKey, fromRows), `@casehubio/pages-table` (TableColumnConfig, ColumnRenderer), `@casehubio/blocks-ui-core` (DataSourceMixin, emitPagesEvent), vitest + jsdom.
+**Tech Stack:** Lit 3, TypeScript, `@casehubio/pages-viz` (PagesGroupedView), `@casehubio/pages-data` (TypedDataSet, GroupingKey, fromRows), `@casehubio/pages-table` (TableColumnConfig, ColumnRenderer), `@casehubio/agency-ui-core` (DataSourceMixin, emitPagesEvent), vitest + jsdom.
 
 ## Global Constraints
 
@@ -43,12 +43,12 @@
 
 ```json
 {
-  "name": "@casehubio/blocks-ui-grouped-data-view",
+  "name": "@casehubio/agency-ui-grouped-data-view",
   "version": "0.2.2",
   "description": "Grouped data view — items grouped by column with per-group pages-table rendering",
   "repository": {
     "type": "git",
-    "url": "https://github.com/casehubio/blocks-ui.git"
+    "url": "https://github.com/casehubio/agency-ui.git"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
@@ -63,7 +63,7 @@
     "clean": "rimraf dist"
   },
   "dependencies": {
-    "@casehubio/blocks-ui-core": "workspace:*",
+    "@casehubio/agency-ui-core": "workspace:*",
     "@casehubio/pages-component": "^0.2.2",
     "@casehubio/pages-data": "^0.2.2",
     "@casehubio/pages-table": "^0.2.2",
@@ -114,7 +114,7 @@ export default defineConfig({
       ...(existsSync(path.resolve(__dirname, '../../../pages/packages/pages-primitives/src')) ? [{ find: '@casehubio/pages-primitives', replacement: path.resolve(__dirname, '../../../pages/packages/pages-primitives/src') }] : []),
       ...(existsSync(path.resolve(__dirname, '../../../pages/packages/pages-table/src')) ? [{ find: '@casehubio/pages-table', replacement: path.resolve(__dirname, '../../../pages/packages/pages-table/src') }] : []),
       ...(existsSync(path.resolve(__dirname, '../../../pages/packages/pages-viz/src')) ? [{ find: '@casehubio/pages-viz', replacement: path.resolve(__dirname, '../../../pages/packages/pages-viz/src') }] : []),
-      { find: '@casehubio/blocks-ui-core', replacement: path.resolve(__dirname, '../../packages/blocks-ui-core/src') },
+      { find: '@casehubio/agency-ui-core', replacement: path.resolve(__dirname, '../../packages/blocks-ui-core/src') },
       ...(existsSync(path.resolve(__dirname, '../../../pages/packages/pages-ui-tokens/src')) ? [{ find: '@casehubio/pages-ui-tokens', replacement: path.resolve(__dirname, '../../../pages/packages/pages-ui-tokens/src') }] : []),
       ...(existsSync(path.resolve(__dirname, '../../../pages/packages/pages-component/src')) ? [{ find: /^@casehubio\/pages-component\/dist\/(.*)/, replacement: path.resolve(__dirname, '../../../pages/packages/pages-component/src/$1') }] : []),
       ...(existsSync(path.resolve(__dirname, '../../../pages/packages/pages-component/src')) ? [{ find: '@casehubio/pages-component', replacement: path.resolve(__dirname, '../../../pages/packages/pages-component/src') }] : []),
@@ -162,7 +162,7 @@ export { GroupedDataViewTopics } from './types.js';
 
 - [ ] **Step 7: Install dependencies and verify build**
 
-Run: `yarn install && yarn workspace @casehubio/blocks-ui-grouped-data-view typecheck`
+Run: `yarn install && yarn workspace @casehubio/agency-ui-grouped-data-view typecheck`
 Expected: clean typecheck (types.ts and index.ts only)
 
 - [ ] **Step 8: Commit**
@@ -230,7 +230,7 @@ describe('_toGroupingKey', () => {
 
 - [ ] **Step 2: Run test to verify it fails**
 
-Run: `yarn workspace @casehubio/blocks-ui-grouped-data-view test`
+Run: `yarn workspace @casehubio/agency-ui-grouped-data-view test`
 Expected: FAIL — `grouped-data-view` element not defined
 
 - [ ] **Step 3: Write minimal grouped-data-view.ts with _toGroupingKey**
@@ -240,7 +240,7 @@ Create `components/grouped-data-view/src/grouped-data-view.ts`:
 ```typescript
 import { LitElement, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { DataSourceMixin } from '@casehubio/blocks-ui-core';
+import { DataSourceMixin } from '@casehubio/agency-ui-core';
 import type { ColumnId } from '@casehubio/pages-data/dist/dataset/types.js';
 import type { TypedDataSet } from '@casehubio/pages-data/dist/dataset/types.js';
 import type { GroupingKey } from '@casehubio/pages-data/dist/dataset/group.js';
@@ -304,7 +304,7 @@ export class GroupedDataView extends DataSourceMixin(LitElement) {
 
 - [ ] **Step 4: Run test to verify _toGroupingKey passes**
 
-Run: `yarn workspace @casehubio/blocks-ui-grouped-data-view test`
+Run: `yarn workspace @casehubio/agency-ui-grouped-data-view test`
 Expected: PASS
 
 - [ ] **Step 5: Write failing tests for _prepareDataSet**
@@ -400,7 +400,7 @@ describe('_prepareDataSet', () => {
 
 - [ ] **Step 6: Run tests to verify they pass**
 
-Run: `yarn workspace @casehubio/blocks-ui-grouped-data-view test`
+Run: `yarn workspace @casehubio/agency-ui-grouped-data-view test`
 Expected: ALL PASS
 
 - [ ] **Step 7: Update index.ts barrel export**
@@ -495,7 +495,7 @@ describe('grouped-data-view rendering', () => {
 
 - [ ] **Step 2: Run test to verify it fails**
 
-Run: `yarn workspace @casehubio/blocks-ui-grouped-data-view test`
+Run: `yarn workspace @casehubio/agency-ui-grouped-data-view test`
 Expected: FAIL — pages-grouped-view not created
 
 - [ ] **Step 3: Implement render pipeline**
@@ -505,7 +505,7 @@ Update `grouped-data-view.ts` — replace the `render()` method and add lifecycl
 ```typescript
 import { LitElement, html, css, type PropertyValues } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { DataSourceMixin, emitPagesEvent } from '@casehubio/blocks-ui-core';
+import { DataSourceMixin, emitPagesEvent } from '@casehubio/agency-ui-core';
 import type { ColumnId, TypedDataSet } from '@casehubio/pages-data/dist/dataset/types.js';
 import type { GroupingKey } from '@casehubio/pages-data/dist/dataset/group.js';
 import type { TableColumnConfig, ColumnRenderer, SelectionMode } from '@casehubio/pages-component';
@@ -673,7 +673,7 @@ export class GroupedDataView extends DataSourceMixin(LitElement) {
 
 - [ ] **Step 4: Run tests to verify rendering passes**
 
-Run: `yarn workspace @casehubio/blocks-ui-grouped-data-view test`
+Run: `yarn workspace @casehubio/agency-ui-grouped-data-view test`
 Expected: ALL PASS
 
 - [ ] **Step 5: Write failing tests for event capture**
@@ -746,7 +746,7 @@ describe('event capture', () => {
 
 - [ ] **Step 6: Run tests to verify events pass**
 
-Run: `yarn workspace @casehubio/blocks-ui-grouped-data-view test`
+Run: `yarn workspace @casehubio/agency-ui-grouped-data-view test`
 Expected: ALL PASS
 
 - [ ] **Step 7: Write failing tests for configure()**
@@ -786,7 +786,7 @@ describe('configure()', () => {
 
 - [ ] **Step 8: Run full test suite**
 
-Run: `yarn workspace @casehubio/blocks-ui-grouped-data-view test`
+Run: `yarn workspace @casehubio/agency-ui-grouped-data-view test`
 Expected: ALL PASS
 
 - [ ] **Step 9: Commit**
@@ -873,7 +873,7 @@ describe('DataSourceMixin integration', () => {
 
 - [ ] **Step 2: Run tests to verify they pass**
 
-Run: `yarn workspace @casehubio/blocks-ui-grouped-data-view test`
+Run: `yarn workspace @casehubio/agency-ui-grouped-data-view test`
 Expected: ALL PASS
 
 - [ ] **Step 3: Create mock data for showcase**
@@ -1030,7 +1030,7 @@ Expected: Clean
 
 - [ ] **Step 8: Start dev server and verify showcase visually**
 
-Run: `yarn workspace @casehubio/blocks-ui-examples dev`
+Run: `yarn workspace @casehubio/agency-ui-examples dev`
 Navigate to `#components/grouped-data-view` in the browser. Verify:
 - Sectioned view shows CRITICAL/HIGH/NORMAL sections with tables
 - Spreadsheet view shows inline group rows

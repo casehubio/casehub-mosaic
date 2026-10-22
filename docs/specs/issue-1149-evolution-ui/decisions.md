@@ -8,7 +8,7 @@
 - Two specs (editors + workbench) — unnecessary split; the workbench design depends on editor API contracts
 **Rationale:** The editors share a domain API layer, TypeScript types, and consumption model. A combined spec captures the shared pattern once and specialises per editor, ensuring consistency.
 **Trade-offs:** Larger spec document, but the design is more coherent.
-**Sources:** casehubio/blocks-ui#174 (epic), #175-#179 (issues)
+**Sources:** casehubio/agency-ui#174 (epic), #175-#179 (issues)
 **Exploration:** quick
 **Status:** captured
 

@@ -1,7 +1,7 @@
 # Org Diagram Layout Rule Engine — Design Spec
 
 **Date:** 2026-09-10
-**Issue:** casehubio/blocks-ui#157
+**Issue:** casehubio/agency-ui#157
 **Status:** Draft — brainstormed during visual QA session
 
 ## Motivation

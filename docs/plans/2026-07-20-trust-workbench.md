@@ -36,7 +36,7 @@
 
 **Interfaces:**
 - Produces: `trust:capability-selected` event topic (was `trust.capability-selected`)
-- Produces: `PHASE_STYLES` export from `@casehubio/blocks-ui-routing-rationale`
+- Produces: `PHASE_STYLES` export from `@casehubio/agency-ui-routing-rationale`
 
 - [ ] **Step 1: Migrate trust-score-panel event topic**
 
@@ -114,10 +114,10 @@ Create `components/trust-workbench/package.json`:
 
 ```json
 {
-  "name": "@casehubio/blocks-ui-trust-workbench",
+  "name": "@casehubio/agency-ui-trust-workbench",
   "version": "0.1.0",
   "description": "Composite trust visibility — score panel, routing history, feedback display",
-  "repository": { "type": "git", "url": "https://github.com/casehubio/blocks-ui.git" },
+  "repository": { "type": "git", "url": "https://github.com/casehubio/agency-ui.git" },
   "publishConfig": { "registry": "https://npm.pkg.github.com" },
   "type": "module",
   "main": "dist/index.js",
@@ -129,12 +129,12 @@ Create `components/trust-workbench/package.json`:
     "clean": "rimraf dist"
   },
   "dependencies": {
-    "@casehubio/blocks-ui-core": "workspace:*",
-    "@casehubio/blocks-ui-list-pane": "workspace:*",
-    "@casehubio/blocks-ui-routing-rationale": "workspace:*",
-    "@casehubio/blocks-ui-split-workbench": "workspace:*",
-    "@casehubio/blocks-ui-trust-feedback-display": "workspace:*",
-    "@casehubio/blocks-ui-trust-score-panel": "workspace:*",
+    "@casehubio/agency-ui-core": "workspace:*",
+    "@casehubio/agency-ui-list-pane": "workspace:*",
+    "@casehubio/agency-ui-routing-rationale": "workspace:*",
+    "@casehubio/agency-ui-split-workbench": "workspace:*",
+    "@casehubio/agency-ui-trust-feedback-display": "workspace:*",
+    "@casehubio/agency-ui-trust-score-panel": "workspace:*",
     "@casehubio/pages-data": "^0.2.2",
     "@casehubio/pages-primitives": "^0.2.2",
     "@casehubio/pages-table": "^0.2.2",
@@ -194,12 +194,12 @@ export default defineConfig({
     alias: [
       ...(existsSync(path.resolve(__dirname, '../../../pages/packages/pages-primitives/src')) ? [{ find: '@casehubio/pages-primitives', replacement: path.resolve(__dirname, '../../../pages/packages/pages-primitives/src') }] : []),
       ...(existsSync(path.resolve(__dirname, '../../../pages/packages/pages-table/src')) ? [{ find: '@casehubio/pages-table', replacement: path.resolve(__dirname, '../../../pages/packages/pages-table/src') }] : []),
-      { find: '@casehubio/blocks-ui-core', replacement: path.resolve(__dirname, '../../packages/blocks-ui-core/src') },
-      { find: '@casehubio/blocks-ui-split-workbench', replacement: path.resolve(__dirname, '../split-workbench/src') },
-      { find: '@casehubio/blocks-ui-trust-score-panel', replacement: path.resolve(__dirname, '../trust-score-panel/src') },
-      { find: '@casehubio/blocks-ui-list-pane', replacement: path.resolve(__dirname, '../list-pane/src') },
-      { find: '@casehubio/blocks-ui-routing-rationale', replacement: path.resolve(__dirname, '../routing-rationale/src') },
-      { find: '@casehubio/blocks-ui-trust-feedback-display', replacement: path.resolve(__dirname, '../trust-feedback-display/src') },
+      { find: '@casehubio/agency-ui-core', replacement: path.resolve(__dirname, '../../packages/blocks-ui-core/src') },
+      { find: '@casehubio/agency-ui-split-workbench', replacement: path.resolve(__dirname, '../split-workbench/src') },
+      { find: '@casehubio/agency-ui-trust-score-panel', replacement: path.resolve(__dirname, '../trust-score-panel/src') },
+      { find: '@casehubio/agency-ui-list-pane', replacement: path.resolve(__dirname, '../list-pane/src') },
+      { find: '@casehubio/agency-ui-routing-rationale', replacement: path.resolve(__dirname, '../routing-rationale/src') },
+      { find: '@casehubio/agency-ui-trust-feedback-display', replacement: path.resolve(__dirname, '../trust-feedback-display/src') },
       ...(existsSync(path.resolve(__dirname, '../../../pages/packages/pages-ui-tokens/src')) ? [{ find: '@casehubio/pages-ui-tokens', replacement: path.resolve(__dirname, '../../../pages/packages/pages-ui-tokens/src') }] : []),
       ...(existsSync(path.resolve(__dirname, '../../../pages/packages/pages-component/src')) ? [{ find: /^@casehubio\/pages-component\/dist\/(.*)/, replacement: path.resolve(__dirname, '../../../pages/packages/pages-component/src/$1') }] : []),
       ...(existsSync(path.resolve(__dirname, '../../../pages/packages/pages-component/src')) ? [{ find: '@casehubio/pages-component', replacement: path.resolve(__dirname, '../../../pages/packages/pages-component/src') }] : []),
@@ -228,8 +228,8 @@ export default defineConfig({
 Create `components/trust-workbench/src/types.ts`:
 
 ```typescript
-import type { RoutingRationaleData, CandidateScore } from '@casehubio/blocks-ui-routing-rationale';
-import type { GateDecision } from '@casehubio/blocks-ui-trust-feedback-display';
+import type { RoutingRationaleData, CandidateScore } from '@casehubio/agency-ui-routing-rationale';
+import type { GateDecision } from '@casehubio/agency-ui-trust-feedback-display';
 import type { TableColumnConfig, ColumnRenderer } from '@casehubio/pages-table';
 import type { ColumnId } from '@casehubio/pages-data/dist/dataset/types.js';
 import type { TemplateResult } from 'lit';
@@ -264,7 +264,7 @@ import { html } from 'lit';
 import { columnId, ColumnType } from '@casehubio/pages-data/dist/dataset/types.js';
 import type { CellValue, ColumnId } from '@casehubio/pages-data/dist/dataset/types.js';
 import type { TableColumnConfig, ColumnRenderer } from '@casehubio/pages-table';
-import { PHASE_STYLES } from '@casehubio/blocks-ui-routing-rationale';
+import { PHASE_STYLES } from '@casehubio/agency-ui-routing-rationale';
 import type { RoutingDecisionSummary } from './types.js';
 
 export const ID_COL = columnId('id');
@@ -401,8 +401,8 @@ Object.defineProperty(global, 'IntersectionObserver', { value: IntersectionObser
 
 import './trust-workbench.js';
 import type { RoutingDecisionSummary, RoutingDecisionDetail } from './types.js';
-import type { RoutingRationaleData, CandidateScore, RoutingPolicySummary } from '@casehubio/blocks-ui-routing-rationale';
-import type { GateDecision } from '@casehubio/blocks-ui-trust-feedback-display';
+import type { RoutingRationaleData, CandidateScore, RoutingPolicySummary } from '@casehubio/agency-ui-routing-rationale';
+import type { GateDecision } from '@casehubio/agency-ui-trust-feedback-display';
 
 type TrustWorkbenchEl = HTMLElement & {
   endpoint: string;
@@ -668,16 +668,16 @@ import { customElement, property, state } from 'lit/decorators.js';
 import { LiveRegionMixin, onPagesEvent } from '@casehubio/pages-primitives';
 import type { TableColumnConfig, ColumnRenderer } from '@casehubio/pages-table';
 import type { ColumnId, TypedRow } from '@casehubio/pages-data/dist/dataset/types.js';
-import type { RoutingRationaleData, CandidateScore } from '@casehubio/blocks-ui-routing-rationale';
-import type { GateDecision } from '@casehubio/blocks-ui-trust-feedback-display';
+import type { RoutingRationaleData, CandidateScore } from '@casehubio/agency-ui-routing-rationale';
+import type { GateDecision } from '@casehubio/agency-ui-trust-feedback-display';
 import { fromRows } from '@casehubio/pages-data/dist/dataset/conversion.js';
 import { ID_COL, ROUTING_HISTORY_COLUMNS, ROUTING_HISTORY_TABLE_CONFIG, DEFAULT_ROUTING_RENDERERS } from './columns.js';
 import type { RoutingDecisionSummary, RoutingDecisionDetail } from './types.js';
-import '@casehubio/blocks-ui-split-workbench';
-import '@casehubio/blocks-ui-trust-score-panel';
-import '@casehubio/blocks-ui-list-pane';
-import '@casehubio/blocks-ui-routing-rationale';
-import '@casehubio/blocks-ui-trust-feedback-display';
+import '@casehubio/agency-ui-split-workbench';
+import '@casehubio/agency-ui-trust-score-panel';
+import '@casehubio/agency-ui-list-pane';
+import '@casehubio/agency-ui-routing-rationale';
+import '@casehubio/agency-ui-trust-feedback-display';
 
 @customElement('trust-workbench')
 export class TrustWorkbench extends LiveRegionMixin(LitElement) {

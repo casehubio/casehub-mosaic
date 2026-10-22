@@ -1,6 +1,6 @@
 # Event Trail Extraction Design
 
-**Issue:** casehubio/blocks-ui#126
+**Issue:** casehubio/agency-ui#126
 **Date:** 2026-08-23
 **Covers:** blocks-ui#126, casehub-pages#354
 
@@ -390,7 +390,7 @@ export class AuditTrailViewer extends LiveRegionMixin(LitElement) {
 
 ## References
 
-- casehubio/blocks-ui#126 — primary issue
+- casehubio/agency-ui#126 — primary issue
 - casehubio/casehub-pages#354 — pages-filter-bar issue
 - casehubio/iot#103 — first external consumer (future)
 - casehubio/iot#95 — decision review that identified the extraction opportunity

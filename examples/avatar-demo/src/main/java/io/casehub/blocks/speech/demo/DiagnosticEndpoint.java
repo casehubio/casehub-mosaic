@@ -1,4 +1,4 @@
-package io.casehub.blocks.speech.demo;
+package io.casehub.agency.speech.demo;
 
 import io.casehub.platform.agent.AgentEvent;
 import io.casehub.platform.agent.AgentProvider;

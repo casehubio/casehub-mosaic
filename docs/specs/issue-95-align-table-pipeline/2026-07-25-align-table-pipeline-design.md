@@ -1,6 +1,6 @@
 # Align blocks-ui table components with pages pipeline
 
-**Issue:** casehubio/blocks-ui#95
+**Issue:** casehubio/agency-ui#95
 **Date:** 2026-07-25
 **Status:** Draft
 

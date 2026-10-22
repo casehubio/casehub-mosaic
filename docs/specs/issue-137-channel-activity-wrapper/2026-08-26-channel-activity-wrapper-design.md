@@ -1,7 +1,7 @@
 # Channel Activity Convenience Wrapper
 
 **Date:** 2026-08-26
-**Issue:** casehubio/blocks-ui#137
+**Issue:** casehubio/agency-ui#137
 **Status:** Approved
 
 ## Summary
@@ -429,4 +429,4 @@ components/channel-activity/src/
 - components/conversation-viewer/src/blocks-conversation-workbench.ts — double mixin (LiveRegion + KeyboardShortcut) pattern
 - components/channel-activity/src/channel-state-controller.ts — ReactiveController binding model
 - components/channel-activity/src/events.ts — 18 event topics requiring routing
-- casehubio/blocks-ui#137 — issue
+- casehubio/agency-ui#137 — issue

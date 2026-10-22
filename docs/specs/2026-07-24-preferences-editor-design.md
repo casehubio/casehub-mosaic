@@ -1,6 +1,6 @@
 # Preferences Editor — Design Spec
 
-**Issue:** casehubio/blocks-ui#92
+**Issue:** casehubio/agency-ui#92
 **Date:** 2026-07-24
 **Status:** Draft
 

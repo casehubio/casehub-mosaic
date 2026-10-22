@@ -1,6 +1,6 @@
-package io.casehub.blocks.speech.demo;
+package io.casehub.agency.speech.demo;
 
-import io.casehub.blocks.speech.demo.ModelProvisioningService.ModelStatus;
+import io.casehub.agency.speech.demo.ModelProvisioningService.ModelStatus;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

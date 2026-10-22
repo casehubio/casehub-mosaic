@@ -1,6 +1,6 @@
 # Donut Creek Full Cast Expansion — Design Spec
 
-**Issue:** casehubio/blocks-ui#167
+**Issue:** casehubio/agency-ui#167
 **Date:** 2026-09-27
 **Scope:** Expand 12 hand-drawn family leads to 48 unique Simpsons characters (4 per family)
 

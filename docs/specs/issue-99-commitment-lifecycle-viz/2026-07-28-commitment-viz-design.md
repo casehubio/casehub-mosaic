@@ -1,6 +1,6 @@
 # Commitment Lifecycle Visualization — Design Spec
 
-**Issue:** casehubio/blocks-ui#99 (primary), #24 (batched)
+**Issue:** casehubio/agency-ui#99 (primary), #24 (batched)
 **Branch:** issue-99-commitment-lifecycle-viz
 **Date:** 2026-07-28
 
@@ -65,7 +65,7 @@ This branch adds `packages/blocks-ui-core/src/types/commitment.ts` containing ty
 ### types.ts
 
 ```typescript
-import type { CommitmentState, CommitmentRecord, StateCategory } from '@casehubio/blocks-ui-core';
+import type { CommitmentState, CommitmentRecord, StateCategory } from '@casehubio/agency-ui-core';
 
 export type { CommitmentState, CommitmentRecord, StateCategory };
 
@@ -99,7 +99,7 @@ export interface RangeDecoration {
 
 Extracts the state → CSS colour mapping currently duplicated in `channel-message` and `channel-task-panel`. Uses `--pages-*` CSS custom properties. Exports:
 
-- `stateCategory` — re-exports `commitmentStateCategory` from `@casehubio/blocks-ui-core` (no reimplementation).
+- `stateCategory` — re-exports `commitmentStateCategory` from `@casehubio/agency-ui-core` (no reimplementation).
 - `stateCategoryStyles(category: StateCategory): StyleInfo` — returns a Lit `styleMap`-compatible object with `background` and `color` properties using `--pages-*` tokens. Used by pill, badge, and range-bar internally, and available to consumers who need inline styles for render callbacks (per protocol PP-20260713-8ea1af).
 
 ## Components

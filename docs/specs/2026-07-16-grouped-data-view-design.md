@@ -388,7 +388,7 @@ No content slots — group styling and column rendering via typed properties and
 
 ## Dependencies
 
-- `@casehubio/blocks-ui-core` — DataSourceMixin, emitPagesEvent
+- `@casehubio/agency-ui-core` — DataSourceMixin, emitPagesEvent
 - `@casehubio/pages-table` — TableColumnConfig, ColumnRenderer, SelectionMode, RowActivateDetail
 - `@casehubio/pages-viz` — PagesGroupedView (runtime composition via `document.createElement`)
 - `@casehubio/pages-component` — GroupedViewProps, RowStyleRule, GroupingKey

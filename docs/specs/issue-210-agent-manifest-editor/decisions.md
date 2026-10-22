@@ -7,7 +7,7 @@
 - Narrower scope omitting those features — would deviate from the parent spec
 **Rationale:** Both features (temperature/top-p/max-tokens sliders, system prompt preview) are explicitly listed in the parent epic spec and in issue #210's scope. This is not expanded scope — it is the defined scope.
 **Trade-offs:** None — implementing what was specified.
-**Sources:** casehubio/blocks-ui#210, parent epic spec §Component 1, parent epic spec §Scope
+**Sources:** casehubio/agency-ui#210, parent epic spec §Component 1, parent epic spec §Scope
 **Exploration:** quick
 **Status:** revised (R1-02: corrected misleading "expanded scope" framing)
 

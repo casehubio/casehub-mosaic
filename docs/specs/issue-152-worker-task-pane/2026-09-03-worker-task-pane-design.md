@@ -1,6 +1,6 @@
 # blocks-worker-task-pane — Design Spec
 
-**Issue:** casehubio/blocks-ui#152
+**Issue:** casehubio/agency-ui#152
 **Date:** 2026-09-03
 **Branch:** issue-152-worker-task-pane
 
@@ -409,7 +409,7 @@ Key decisions:
 ## References
 
 - [component-customisation-pattern protocol (PP-20260713-8ea1af)](/Users/mdproctor/claude/casehub/blocks-ui/docs/protocols/blocks-ui/component-customisation-pattern.md) — typed config + render callbacks, no slots for content
-- [Issue #152](https://github.com/casehubio/blocks-ui/issues/152) — original issue with API proposal and motivation
+- [Issue #152](https://github.com/casehubio/agency-ui/issues/152) — original issue with API proposal and motivation
 - [components/work-item-workbench/src/work-item-workbench.ts](/Users/mdproctor/claude/casehub/blocks-ui/components/work-item-workbench/src/work-item-workbench.ts) — convenience wrapper composition pattern
 - [components/work-item-inbox/src/work-item-inbox.ts](/Users/mdproctor/claude/casehub/blocks-ui/components/work-item-inbox/src/work-item-inbox.ts) — direct fetch + SSEManager pattern, identity filtering, TypedDataSet derivation via fromRows()
 - [components/channel-activity/src/blocks-channel-activity.ts](/Users/mdproctor/claude/casehub/blocks-ui/components/channel-activity/src/blocks-channel-activity.ts) — convenience wrapper composition, keyboard shortcuts
@@ -417,5 +417,5 @@ Key decisions:
 - [components/detail-pane/src/types.ts](/Users/mdproctor/claude/casehub/blocks-ui/components/detail-pane/src/types.ts) — TabDefinition interface (reused for contextTabs)
 - [components/list-pane/src/list-pane.ts](/Users/mdproctor/claude/casehub/blocks-ui/components/list-pane/src/list-pane.ts) — list-pane inline dataset mode (no endpoint → no fetch)
 - [@casehubio/pages-data SSEManager](/Users/mdproctor/claude/casehub/blocks-ui/.casehub-packages/packages/pages-data/src/sse/sse-manager.ts) — SSE subscription lifecycle
-- [Spec review R1](/Users/mdproctor/reviews/casehub-blocks-ui/issue-152-worker-task-pane-spec-20260903-212221/responses/reviewer-1.md) — light spec review, 14 findings addressed
-- [Decision review R1](/Users/mdproctor/reviews/casehub-blocks-ui/issue-152-worker-task-pane-decision-20260903-180640/responses/reviewer-1.md) — light decision review, revised D2–D6 and added D7–D9
+- [Spec review R1](/Users/mdproctor/reviews/casehub-agency-ui/issue-152-worker-task-pane-spec-20260903-212221/responses/reviewer-1.md) — light spec review, 14 findings addressed
+- [Decision review R1](/Users/mdproctor/reviews/casehub-agency-ui/issue-152-worker-task-pane-decision-20260903-180640/responses/reviewer-1.md) — light decision review, revised D2–D6 and added D7–D9

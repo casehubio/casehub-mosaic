@@ -1,6 +1,6 @@
 # Conversation Protocol Viewer — Design Spec
 
-**Issue:** casehubio/blocks-ui#110
+**Issue:** casehubio/agency-ui#110
 **Branch:** issue-110-conversation-protocol
 **Date:** 2026-08-07
 
@@ -8,7 +8,7 @@
 
 ## Summary
 
-Shared UI components for the `io.casehub.blocks.conversation` structured
+Shared UI components for the `io.casehub.agency.conversation` structured
 deliberation protocol. Renders convergence state, epistemic common ground,
 and conversation points — the protocol lens over structured conversations
 that raw message feeds (channel-activity) and document-specific views
@@ -62,7 +62,7 @@ status transitions, and point statuses — the UI renders these outputs.
 ## TypeScript Domain Types
 
 Types live in `blocks-ui-core` for cross-component reuse. They mirror the Java
-`io.casehub.blocks.conversation` package.
+`io.casehub.agency.conversation` package.
 
 ### Core types
 
@@ -507,7 +507,7 @@ convention of colon-delimited topic hierarchies (ARC42STORIES §8).
 
 ## Document-Workbench Generalization Path (#117)
 
-Not in scope for this implementation. Tracked as casehubio/blocks-ui#117.
+Not in scope for this implementation. Tracked as casehubio/agency-ui#117.
 The path:
 
 1. `debate-feed` → wraps `blocks-point-list` with `renderPoint` callback for

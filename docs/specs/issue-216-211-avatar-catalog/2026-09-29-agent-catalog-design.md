@@ -198,7 +198,7 @@ No duplication.
 |---|---|
 | `@casehubio/agent-avatar-2d` | AgentAvatar component, ARCHETYPE_CONFIGS |
 | `@casehubio/avatar-step` | PROFESSION_PRESETS, PROFESSION_LIST, PersonalityProfile, profile derivation, buildSummaryText |
-| `@casehubio/blocks-ui-core` | FullAgentDescriptor (evolved), Manifest types |
+| `@casehubio/agency-ui-core` | FullAgentDescriptor (evolved), Manifest types |
 
 ## Test Plan
 

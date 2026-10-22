@@ -1,6 +1,6 @@
 # Auto-generate Zod schemas for blocks-ui components
 
-Issue: casehubio/blocks-ui#156
+Issue: casehubio/agency-ui#156
 Date: 2026-09-07
 
 ## Problem
@@ -67,7 +67,7 @@ packages/blocks-ui-schema/
 
 **package.json:**
 - `dependencies`: zod, @casehubio/pages-data (for lookupSchema if needed)
-- `devDependencies`: @casehubio/blocks-ui-core (read-only, for type resolution), ts-morph, tsx
+- `devDependencies`: @casehubio/agency-ui-core (read-only, for type resolution), ts-morph, tsx
 - `scripts.generate`: `tsx scripts/generate-schemas.ts`
 - `scripts.build`: `yarn generate && tsc -p tsconfig.build.json`
 

@@ -1,4 +1,4 @@
-package io.casehub.blocksui;
+package io.casehub.agencyui;
 
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;

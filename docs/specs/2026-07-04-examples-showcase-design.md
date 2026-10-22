@@ -28,7 +28,7 @@ await initMockState();  // loads JSON files, populates in-memory state
 renderShell();           // components now safe to fetch
 ```
 
-Not a workspace package — a dev tool with its own `package.json` and `vite.config.ts`. The `examples/` directory is not a member of the root yarn workspaces (`packages/*`, `components/*`). Sibling package imports (`@casehubio/blocks-ui-core`, `@casehubio/blocks-ui-work-item-inbox`, etc.) are resolved exclusively via Vite `resolve.alias` entries that point to sibling source directories. No `workspace:*` or `file:` dependencies — `examples/package.json` lists only Vite, Lit, and dev tooling.
+Not a workspace package — a dev tool with its own `package.json` and `vite.config.ts`. The `examples/` directory is not a member of the root yarn workspaces (`packages/*`, `components/*`). Sibling package imports (`@casehubio/agency-ui-core`, `@casehubio/agency-ui-work-item-inbox`, etc.) are resolved exclusively via Vite `resolve.alias` entries that point to sibling source directories. No `workspace:*` or `file:` dependencies — `examples/package.json` lists only Vite, Lit, and dev tooling.
 
 ## Gallery Shell
 

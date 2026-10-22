@@ -13,7 +13,7 @@ Promote 5 clinical-local Lit web components to blocks-ui as shared platform comp
 - **No mixin property additions** — DataSourceMixin stays focused on the read pipeline (endpoint → source → sink → loading/error/dataSet). Non-tabular components store typed data privately (trust-score-panel pattern). Mutation is component-local.
 - **Foundation-first** — Add `createTypedFetchSource` utility and `EMPTY_DATASET` to blocks-ui-core, then build components on them.
 - **commitment-lifecycle is a strategy, not a component** — Per issue #58, add `commitmentLifecycleStrategy()` to blocks-timeline alongside `eventChronologyStrategy` and `stateProgressionStrategy`. This is NOT a new component.
-- **Separate packages** — Each component gets its own `components/<name>/` directory and `@casehubio/blocks-ui-<name>` package. Gap analysis assessed complementary pairs (trust-feedback-display / trust-score-panel, sla-breach-policy / sla-indicator, compliance-summary / audit-trail-viewer) and concluded SEPARATE for each.
+- **Separate packages** — Each component gets its own `components/<name>/` directory and `@casehubio/agency-ui-<name>` package. Gap analysis assessed complementary pairs (trust-feedback-display / trust-score-panel, sla-breach-policy / sla-indicator, compliance-summary / audit-trail-viewer) and concluded SEPARATE for each.
 - **Customisation protocol PP-20260713-8ea1af** — Typed config properties + render callbacks. No slots for content.
 
 ## Part 1: blocks-ui-core Additions
@@ -94,7 +94,7 @@ Consumer state distinctions:
 
 #### 3. Shared type exports
 
-Move `TrustLevel` type and `trustLevelFromScore()` function from `@casehubio/blocks-ui-trust-score-panel/types` to blocks-ui-core (per issue #60). Both trust-score-panel and trust-feedback-display need these; a cross-component dependency is wrong.
+Move `TrustLevel` type and `trustLevelFromScore()` function from `@casehubio/agency-ui-trust-score-panel/types` to blocks-ui-core (per issue #60). Both trust-score-panel and trust-feedback-display need these; a cross-component dependency is wrong.
 
 ```typescript
 export type TrustLevel = 'high' | 'adequate' | 'low' | 'none';
@@ -422,7 +422,7 @@ Three-phase form: input → confirmation → receipt.
 
 ```
 components/<name>/
-  package.json          @casehubio/blocks-ui-<name>
+  package.json          @casehubio/agency-ui-<name>
   tsconfig.json         extends ../../tsconfig.base.json, refs blocks-ui-core
   tsconfig.build.json   extends tsconfig.json, excludes tests
   vitest.config.ts      jsdom, conditional pages aliases
@@ -433,7 +433,7 @@ components/<name>/
     <name>.test.ts      tests
 ```
 
-Dependencies: `@casehubio/blocks-ui-core` (workspace:*), `lit`. Tabular components add `@casehubio/pages-data`, `@casehubio/pages-table`. sla-breach-policy adds `@casehubio/blocks-ui-sla-indicator`.
+Dependencies: `@casehubio/agency-ui-core` (workspace:*), `lit`. Tabular components add `@casehubio/pages-data`, `@casehubio/pages-table`. sla-breach-policy adds `@casehubio/agency-ui-sla-indicator`.
 
 **Strategy (not a separate package):** `commitmentLifecycleStrategy` lives in `components/blocks-timeline/src/strategies/commitment-lifecycle.ts` and is re-exported from the blocks-timeline package index.
 

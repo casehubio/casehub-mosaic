@@ -1,6 +1,6 @@
 # blocks-case-flow-viewer — Design Spec
 
-**Issue:** casehubio/blocks-ui#150
+**Issue:** casehubio/agency-ui#150
 **Date:** 2026-09-02
 **Branch:** issue-150-case-flow-viewer
 
@@ -256,4 +256,4 @@ The viewer and the editor share the same rendering pipeline and stencil registra
 - `.casehub-packages/packages/pages-diagram-core/src/diagram-base-mixin.ts` — DiagramBaseMixin
 - PP-20260806-320d50 — stencil package isolation protocol
 - PP-20260713-8ea1af — component customisation pattern protocol
-- casehubio/blocks-ui#150 — issue spec
+- casehubio/agency-ui#150 — issue spec

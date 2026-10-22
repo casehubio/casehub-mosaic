@@ -1,4 +1,4 @@
-package io.casehub.blocks.speech.demo;
+package io.casehub.agency.speech.demo;
 
 import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;

@@ -14,7 +14,7 @@
     <maven.compiler.release>22</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <quarkus.platform.version>3.32.2</quarkus.platform.version>
-    <casehub-blocks.version>0.3</casehub-blocks.version>
+    <casehub-agency.version>0.3</casehub-agency.version>
   </properties>
 
   <dependencyManagement>
@@ -32,18 +32,18 @@
   <dependencies>
     <dependency>
       <groupId>io.casehub</groupId>
-      <artifactId>casehub-blocks-speech-ws</artifactId>
-      <version>${casehub-blocks.version}</version>
+      <artifactId>casehub-agency-speech-ws</artifactId>
+      <version>${casehub-agency.version}</version>
     </dependency>
     <dependency>
       <groupId>io.casehub</groupId>
-      <artifactId>casehub-blocks-speech-sherpa</artifactId>
-      <version>${casehub-blocks.version}</version>
+      <artifactId>casehub-agency-speech-sherpa</artifactId>
+      <version>${casehub-agency.version}</version>
     </dependency>
     <dependency>
       <groupId>io.casehub</groupId>
       <artifactId>casehub-platform-agent-api</artifactId>
-      <version>${casehub-blocks.version}</version>
+      <version>${casehub-agency.version}</version>
     </dependency>
     <dependency>
       <groupId>io.smallrye.reactive</groupId>

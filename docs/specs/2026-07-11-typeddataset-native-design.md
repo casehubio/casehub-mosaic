@@ -1,6 +1,6 @@
 # TypedDataSet Native — Unified Data Pipeline
 
-**Issue:** [#49](https://github.com/casehubio/blocks-ui/issues/49)
+**Issue:** [#49](https://github.com/casehubio/agency-ui/issues/49)
 **Date:** 2026-07-11
 
 ## Problem
@@ -430,6 +430,6 @@ These observations should be captured as garden entries during implementation:
 **In scope:** Layers 1–6 above. The pipeline unification, contract fix, table redesign, and consumer migration.
 
 **Out of scope (follow-up issues):**
-- Recovering 43 old PagesTable tests for TypedDataSet integration ([#50](https://github.com/casehubio/blocks-ui/issues/50))
+- Recovering 43 old PagesTable tests for TypedDataSet integration ([#50](https://github.com/casehubio/agency-ui/issues/50))
 - `kpi-metric-row` and `case-timeline` TypedDataSet migration (they don't use data-table; separate issue)
 - Row/column spanning (#26) — orthogonal feature

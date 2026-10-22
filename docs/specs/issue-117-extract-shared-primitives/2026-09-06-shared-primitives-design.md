@@ -1,6 +1,6 @@
 # Extract Shared Debate/Conversation Rendering Primitives — Design Spec
 
-**Issue:** casehubio/blocks-ui#117
+**Issue:** casehubio/agency-ui#117
 **Date:** 2026-09-06
 **Branch:** issue-117-extract-shared-primitives
 
@@ -67,7 +67,7 @@ Returns CSS values using `--pages-*` custom properties with fallback hex values.
 All exported as Lit `CSSResult` tagged templates. Components spread them into `static styles`:
 
 ```typescript
-import { entryCardStyles, badgeStyles } from '@casehubio/blocks-ui-core';
+import { entryCardStyles, badgeStyles } from '@casehubio/agency-ui-core';
 
 static override styles = [entryCardStyles, badgeStyles, css`/* overrides */`];
 ```
@@ -170,14 +170,14 @@ Exact duplicate across review-tracker and point-list — no normalisation needed
 
 | Component | Current function | Migration |
 |-----------|-----------------|-----------|
-| `debate-feed.ts` | `_formatTimestamp` | `import { formatTimestamp } from '@casehubio/blocks-ui-core'` — default style |
+| `debate-feed.ts` | `_formatTimestamp` | `import { formatTimestamp } from '@casehubio/agency-ui-core'` — default style |
 | `blocks-point-detail.ts` | `_formatTimestamp` | Same — default style |
 | `selection-threads.ts` | `_formatTimestamp` | Same — default style, handle optional input |
 | `trust-workbench/columns.ts` | `formatTimestamp` | Same — default style |
 | `notification-inbox.ts` | `relativeTime` | `formatTimestamp(iso, { style: 'compact' })` |
 | `work-item-row.ts` | `relativeTime` | `formatTimestamp(iso, { style: 'compact' })` |
 | `commitment-transition-badge.ts` | `_formatRelativeTime` | `formatTimestamp(iso)` — default style |
-| `blocks-timeline/horizontal.ts` | `formatTimestamp` | `import { formatTimestamp } from '@casehubio/blocks-ui-core'` |
+| `blocks-timeline/horizontal.ts` | `formatTimestamp` | `import { formatTimestamp } from '@casehubio/agency-ui-core'` |
 | `blocks-timeline/compact.ts` | `formatTimestamp` | Same |
 | `blocks-timeline/vertical.ts` | `formatTimestamp` | Same |
 | `examples/data-table-page.ts` | `relativeTime` | `formatTimestamp(iso, { style: 'compact' })` |
@@ -252,7 +252,7 @@ See `decisions.md` — D1 (full unification), D2 (functions + shared CSS), D3 (o
 
 ## References
 
-- [Issue #117](https://github.com/casehubio/blocks-ui/issues/117) — original issue
+- [Issue #117](https://github.com/casehubio/agency-ui/issues/117) — original issue
 - [component-customisation-pattern protocol (PP-20260713-8ea1af)](/Users/mdproctor/claude/casehub/blocks-ui/docs/protocols/blocks-ui/component-customisation-pattern.md) — render callbacks preserved
 - [debate-feed.ts](/Users/mdproctor/claude/casehub/blocks-ui/components/document-workbench/src/debate-feed.ts) — entry card, badges, round dividers, formatTimestamp, status colours
 - [blocks-point-detail.ts](/Users/mdproctor/claude/casehub/blocks-ui/components/conversation-viewer/src/blocks-point-detail.ts) — entry card, badges, formatTimestamp, ENTRY_BORDER_COLOURS

@@ -171,9 +171,9 @@ A composition shell that places `casehub-diagram` on the left and `swf-diagram` 
 
 ### Dependencies
 
-- `@casehubio/blocks-ui-casehub-diagram`
-- `@casehubio/blocks-ui-swf-diagram`
-- `@casehubio/blocks-ui-split-workbench`
+- `@casehubio/agency-ui-casehub-diagram`
+- `@casehubio/agency-ui-swf-diagram`
+- `@casehubio/agency-ui-split-workbench`
 - `@casehubio/graph-stencil-case` (for thumbnail registration)
 - `@casehubio/graph-stencil-swf` (for stencil + thumbnail registration)
 
