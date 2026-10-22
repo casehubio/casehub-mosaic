@@ -338,9 +338,9 @@ describe('SwipeController', () => {
 
       await new Promise(r => setTimeout(r, 550));
       expect(events.length).toBe(1);
-      expect(events[0].detail.topic).toBe('context-menu');
-      expect(events[0].detail.payload.x).toBe(100);
-      expect(events[0].detail.payload.y).toBe(200);
+      expect(events[0]!.detail.topic).toBe('context-menu');
+      expect(events[0]!.detail.payload.x).toBe(100);
+      expect(events[0]!.detail.payload.y).toBe(200);
     });
 
     it('cancels long-press if touch moves more than 10px', async () => {
