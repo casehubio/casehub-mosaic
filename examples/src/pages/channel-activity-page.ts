@@ -118,7 +118,7 @@ function formatSender(sender: string, actorType: string): string {
   return sender;
 }
 
-@customElement('blocks-example-channel-activity')
+@customElement('agency-example-channel-activity')
 export class ChannelActivityPage extends LitElement {
   @state() private _selectedChannelId = 'ch-1';
   @state() private _viewMode: 'flat' | 'threaded' | 'topics' = 'flat';
@@ -159,34 +159,34 @@ export class ChannelActivityPage extends LitElement {
       <h3>Standard (sidebar nav, message counts, renderContent, formatSender, range highlighting)</h3>
       <p>INFORM messages get structured rendering via renderContent. Sender names are prefixed by actor type via formatSender. Message counts shown as badges. Delete/create use styled confirm dialogs instead of browser-native modals. Feed supports keyboard navigation (arrow keys) and screen reader announcements.</p>
       <div class="demo-container">
-        <blocks-channel-nav
+        <agency-channel-nav
           .channels=${CHANNELS}
           .selectedChannelId=${this._selectedChannelId}
           .messageCounts=${MESSAGE_COUNTS}
           @channel-select=${(e: CustomEvent) => { this._selectedChannelId = e.detail.channelId; }}
-        ></blocks-channel-nav>
+        ></agency-channel-nav>
         <div style="display:flex;flex-direction:column;overflow:hidden;">
-          <blocks-channel-feed
+          <agency-channel-feed
             .messages=${channelMessages}
             .reactions=${REACTIONS}
             .renderContent=${renderContent}
             .formatSender=${formatSender}
             .messageHighlights=${{ [channelMessages[0]?.id ?? '']: 'var(--pages-accent-3, #e0e7ff)', [channelMessages[1]?.id ?? '']: 'var(--pages-accent-3, #e0e7ff)' }}
-          ></blocks-channel-feed>
-          <blocks-channel-input
+          ></agency-channel-feed>
+          <agency-channel-input
             .channelId=${this._selectedChannelId}
-          ></blocks-channel-input>
+          ></agency-channel-input>
         </div>
-        <blocks-channel-member-panel
+        <agency-channel-member-panel
           .members=${channelMembers}
-        ></blocks-channel-member-panel>
+        ></agency-channel-member-panel>
       </div>
 
       <h3>Claudony mode (dropdown nav, no create/delete, message counts)</h3>
       <p>Compact dropdown layout for narrow panels. Create/delete disabled — channel lifecycle managed externally.</p>
       <div class="claudony-container">
         <div class="claudony-sidebar">
-          <blocks-channel-nav
+          <agency-channel-nav
             layout="dropdown"
             .channels=${CHANNELS}
             .selectedChannelId=${this._selectedChannelId}
@@ -194,25 +194,25 @@ export class ChannelActivityPage extends LitElement {
             .showCreate=${false}
             .showDelete=${false}
             @channel-select=${(e: CustomEvent) => { this._selectedChannelId = e.detail.channelId; }}
-          ></blocks-channel-nav>
+          ></agency-channel-nav>
         </div>
         <div style="display:flex;flex-direction:column;overflow:hidden;">
-          <blocks-channel-feed
+          <agency-channel-feed
             .messages=${channelMessages}
             .reactions=${REACTIONS}
             .renderContent=${renderContent}
             .formatSender=${formatSender}
-          ></blocks-channel-feed>
-          <blocks-channel-input
+          ></agency-channel-feed>
+          <agency-channel-input
             .channelId=${this._selectedChannelId}
-          ></blocks-channel-input>
+          ></agency-channel-input>
         </div>
       </div>
 
       <h3>Topic bar (pills, view mode toggle, archived toggle)</h3>
       <p>Horizontal scrollable topic pills with message counts. View mode toggle (flat/threaded/topics). Show-archived toggle reveals archived topics.</p>
       <div style="border:1px solid var(--pages-neutral-5,#e0e0e0);border-radius:8px;overflow:hidden;">
-        <blocks-channel-topic-bar
+        <agency-channel-topic-bar
           .topics=${TOPICS}
           .selectedTopicId=${this._selectedTopicId}
           .viewMode=${this._viewMode}
@@ -220,14 +220,14 @@ export class ChannelActivityPage extends LitElement {
             if (e.detail?.topic === 'channel:select-topic') this._selectedTopicId = e.detail.payload?.topicId ?? null;
             if (e.detail?.topic === 'channel:view-mode') this._viewMode = e.detail.payload?.mode ?? 'flat';
           }}
-        ></blocks-channel-topic-bar>
+        ></agency-channel-topic-bar>
       </div>
 
       <h3>Feed view modes (flat → threaded → topics)</h3>
       <p>Same messages rendered three ways. Use the topic bar above to switch modes — the feed below responds. Topic view groups messages by topic with section headers and state badges.</p>
       <div class="demo-container" style="grid-template-columns:1fr;">
         <div style="display:flex;flex-direction:column;overflow:hidden;">
-          <blocks-channel-topic-bar
+          <agency-channel-topic-bar
             .topics=${TOPICS}
             .selectedTopicId=${this._selectedTopicId}
             .viewMode=${this._viewMode}
@@ -235,21 +235,21 @@ export class ChannelActivityPage extends LitElement {
               if (e.detail?.topic === 'channel:select-topic') this._selectedTopicId = e.detail.payload?.topicId ?? null;
               if (e.detail?.topic === 'channel:view-mode') this._viewMode = e.detail.payload?.mode ?? 'flat';
             }}
-          ></blocks-channel-topic-bar>
-          <blocks-channel-feed
+          ></agency-channel-topic-bar>
+          <agency-channel-feed
             .messages=${topicMessages()}
             .topics=${TOPICS}
             .reactions=${REACTIONS}
             .viewMode=${this._viewMode}
             .renderContent=${renderContent}
             .formatSender=${formatSender}
-          ></blocks-channel-feed>
-          <blocks-channel-input
+          ></agency-channel-feed>
+          <agency-channel-input
             .channelId=${'ch-1'}
             .showTopicSelector=${true}
             .topics=${TOPICS}
             .topicId=${this._selectedTopicId ?? ''}
-          ></blocks-channel-input>
+          ></agency-channel-input>
         </div>
       </div>
 
@@ -257,10 +257,10 @@ export class ChannelActivityPage extends LitElement {
       <p>Groups COMMAND messages by commitment state. Overdue tasks highlighted. Click a row to emit message-selected.</p>
       <div class="panel-row" style="grid-template-columns:1fr;">
         <div class="panel-slot">
-          <blocks-channel-task-panel
+          <agency-channel-task-panel
             .messages=${TASK_PANEL_MESSAGES}
             .commitments=${this._taskPanelCommitments}
-          ></blocks-channel-task-panel>
+          ></agency-channel-task-panel>
         </div>
       </div>
 
@@ -268,7 +268,7 @@ export class ChannelActivityPage extends LitElement {
       <p>Shows the correlation chain for a selected message — connected by correlationId or inReplyTo. Duration between nodes displayed. Commitment transition badges (OPEN → ACKNOWLEDGED → FULFILLED) shown on connectors where state changes occurred.</p>
       <div class="panel-row" style="grid-template-columns:1fr;">
         <div class="panel-slot">
-          <blocks-channel-correlation-panel
+          <agency-channel-correlation-panel
             .messages=${CORRELATION_MESSAGES}
             .commitments=${new Map([['corr-demo', { state: 'FULFILLED', createdAt: '2026-07-20T10:00:00Z', acknowledgedAt: '2026-07-20T10:02:00Z', resolvedAt: '2026-07-20T10:15:00Z', updatedAt: '2026-07-20T10:15:00Z' }]])}
             .selectedMessageId=${this._correlationSelectedId}
@@ -277,7 +277,7 @@ export class ChannelActivityPage extends LitElement {
                 this._correlationSelectedId = e.detail.payload?.message?.id;
               }
             }}
-          ></blocks-channel-correlation-panel>
+          ></agency-channel-correlation-panel>
         </div>
       </div>
 
@@ -285,10 +285,10 @@ export class ChannelActivityPage extends LitElement {
       <p>Displays artifact content with back/forward navigation history. Card view for linked entities (CASE, WORK_ITEM). Content resolution via callback.</p>
       <div class="panel-row" style="grid-template-columns:1fr;">
         <div class="panel-slot" style="height:300px;">
-          <blocks-channel-artifact-panel
+          <agency-channel-artifact-panel
             .selectedArtefactRef=${this._selectedArtefactRef}
             .resolveArtifact=${RESOLVE_ARTIFACT}
-          ></blocks-channel-artifact-panel>
+          ></agency-channel-artifact-panel>
         </div>
       </div>
       <div style="display:flex;gap:8px;margin-top:8px;">

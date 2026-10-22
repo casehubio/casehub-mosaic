@@ -21,7 +21,7 @@ function installMockFetch(): void {
 
 installMockFetch();
 
-@customElement('blocks-example-contributor-workbench')
+@customElement('agency-example-contributor-workbench')
 export class ContributorWorkbenchPage extends LitElement {
   @state() private _actorId = 'contributor-chen-m';
 
@@ -51,13 +51,13 @@ export class ContributorWorkbenchPage extends LitElement {
         </select>
       </div>
       <div class="workbench-container">
-        <blocks-contributor-workbench endpoint="${MOCK_ENDPOINT}" actor-id="${this._actorId}">
-        </blocks-contributor-workbench>
+        <agency-contributor-workbench endpoint="${MOCK_ENDPOINT}" actor-id="${this._actorId}">
+        </agency-contributor-workbench>
       </div>
     `;
   }
 }
 
 declare global {
-  interface HTMLElementTagNameMap { 'blocks-example-contributor-workbench': ContributorWorkbenchPage; }
+  interface HTMLElementTagNameMap { 'agency-example-contributor-workbench': ContributorWorkbenchPage; }
 }

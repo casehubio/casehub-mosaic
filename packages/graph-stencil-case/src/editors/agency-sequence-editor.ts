@@ -1,8 +1,8 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 
-@customElement('blocks-sequence-editor')
-export class BlocksSequenceEditorElement extends LitElement {
+@customElement('agency-sequence-editor')
+export class AgencySequenceEditorElement extends LitElement {
   @property({ type: Array }) value: string[] = [];
 
   static override styles = css`

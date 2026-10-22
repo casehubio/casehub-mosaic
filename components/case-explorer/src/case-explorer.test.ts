@@ -54,7 +54,7 @@ describe('CaseExplorer', () => {
   };
 
   function createExplorer(types: readonly EntityTypeRegistration[] = [caseType, workerType]) {
-    const el = document.createElement('blocks-case-explorer') as any;
+    const el = document.createElement('agency-case-explorer') as any;
     el.entityTypes = types;
     el.fetchFn = fetchFn;
     document.body.appendChild(el);
@@ -89,7 +89,7 @@ describe('CaseExplorer', () => {
     const el = createExplorer();
     await el.updateComplete;
 
-    const entityList = el.shadowRoot!.querySelector('blocks-entity-list');
+    const entityList = el.shadowRoot!.querySelector('agency-entity-list');
     expect(entityList).toBeTruthy();
   });
 
@@ -98,7 +98,7 @@ describe('CaseExplorer', () => {
     const el = createExplorer();
     await el.updateComplete;
 
-    const entityDetail = el.shadowRoot!.querySelector('blocks-entity-detail');
+    const entityDetail = el.shadowRoot!.querySelector('agency-entity-detail');
     expect(entityDetail).toBeTruthy();
   });
 
@@ -130,7 +130,7 @@ describe('CaseExplorer', () => {
     await el.updateComplete;
 
     expect(tabs[1]!.getAttribute('aria-selected')).toBe('true');
-    const entityList = el.shadowRoot!.querySelector('blocks-entity-list') as any;
+    const entityList = el.shadowRoot!.querySelector('agency-entity-list') as any;
     expect(entityList.registration.type).toBe('worker');
   });
 
@@ -222,7 +222,7 @@ describe('CaseExplorer', () => {
     const detailFetchUrl = fetchFn.mock.calls[fetchCountAfterTree]![0] as string;
     expect(detailFetchUrl).not.toContain('/tree');
 
-    const tree = el.shadowRoot!.querySelector('blocks-entity-tree');
+    const tree = el.shadowRoot!.querySelector('agency-entity-tree');
     expect(tree).toBeTruthy();
 
     const prompt = el.shadowRoot!.querySelector('.tree-prompt');

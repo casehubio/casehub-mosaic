@@ -1,4 +1,4 @@
-export { BlocksWorkerTaskPane } from './worker-task-pane.js';
+export { AgencyWorkerTaskPane } from './worker-task-pane.js';
 export type {
   WorkspaceDefinition,
   WorkerTaskResponse,

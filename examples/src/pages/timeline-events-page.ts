@@ -6,7 +6,7 @@ import type { CaseEvent, PagedResponse, EventLogEntryResponse } from '@casehubio
 import type { EventTimelineLayout } from '@casehubio/mosaic-agency-timeline';
 import mockEvents from '../../mock-data/case-events.json';
 
-@customElement('blocks-example-timeline-events')
+@customElement('agency-example-timeline-events')
 export class TimelineEventsPage extends LitElement {
   @state() private _layout: EventTimelineLayout = 'vertical';
   private _originalFetch: typeof globalThis.fetch | null = null;

@@ -32,14 +32,14 @@ const SEED_TASKS: WorkerTaskResponse[] = [
 ];
 
 function createElement(data: WorkerTaskResponse[] = SEED_TASKS) {
-  const el = document.createElement('blocks-worker-task-pane') as any;
+  const el = document.createElement('agency-worker-task-pane') as any;
   el.data = data;
   el.selectionTopic = 'test-worker';
   document.body.appendChild(el);
   return el;
 }
 
-describe('blocks-worker-task-pane', () => {
+describe('agency-worker-task-pane', () => {
   let el: any;
 
   afterEach(() => {
@@ -56,7 +56,7 @@ describe('blocks-worker-task-pane', () => {
   it('renders list-pane with derived dataset from inline data', async () => {
     el = createElement();
     await el.updateComplete;
-    const listPane = el.shadowRoot!.querySelector('blocks-list-pane');
+    const listPane = el.shadowRoot!.querySelector('agency-list-pane');
     expect(listPane).toBeTruthy();
     expect(listPane!.dataSet).toBeTruthy();
     expect(listPane!.dataSet!.rows.length).toBe(3);
@@ -93,7 +93,7 @@ describe('blocks-worker-task-pane', () => {
     });
     vi.stubGlobal('fetch', mockFetch);
 
-    el = document.createElement('blocks-worker-task-pane') as any;
+    el = document.createElement('agency-worker-task-pane') as any;
     el.endpoint = '/api/worker-tasks';
     el.selectionTopic = 'test-worker';
     document.body.appendChild(el);
@@ -123,7 +123,7 @@ describe('blocks-worker-task-pane', () => {
     el.identity = { userId: 'user-1', displayName: 'Test', groups: ['entity-resolution'] };
     await el.updateComplete;
 
-    const listPane = el.shadowRoot!.querySelector('blocks-list-pane');
+    const listPane = el.shadowRoot!.querySelector('agency-list-pane');
     // Only task-1 matches entity-resolution group; task-2 has assigneeId=user-1 but wrong capability
     expect(listPane!.dataSet!.rows.length).toBe(1);
   });

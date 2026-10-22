@@ -64,7 +64,7 @@ export interface EvolutionInboxProps {
   readonly?: boolean;
 }
 
-@customElement('blocks-evolution-inbox')
+@customElement('agency-evolution-inbox')
 export class EvolutionInbox extends LitElement {
   @property({ type: String }) endpoint?: string;
   @property({ type: String }) caseId?: string;
@@ -266,6 +266,6 @@ export class EvolutionInbox extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'blocks-evolution-inbox': EvolutionInbox;
+    'agency-evolution-inbox': EvolutionInbox;
   }
 }

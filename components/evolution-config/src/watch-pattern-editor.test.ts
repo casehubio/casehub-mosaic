@@ -8,7 +8,7 @@ function createElement(
   categories?: readonly CategoryDescriptor[],
   readonly = false,
 ): WatchPatternEditor {
-  const el = document.createElement('blocks-watch-pattern-editor') as WatchPatternEditor;
+  const el = document.createElement('agency-watch-pattern-editor') as WatchPatternEditor;
   if (patterns) el.patterns = patterns;
   if (categories) el.categories = categories;
   el.readonly = readonly;
@@ -26,9 +26,9 @@ const SAMPLE_CATEGORIES: CategoryDescriptor[] = [
   { id: 'lint-fix', name: 'Lint Fix', description: 'Fix lint', domainId: 'code-evolution' },
 ];
 
-describe('blocks-watch-pattern-editor', () => {
+describe('agency-watch-pattern-editor', () => {
   afterEach(() => {
-    document.body.querySelectorAll('blocks-watch-pattern-editor').forEach(el => el.remove());
+    document.body.querySelectorAll('agency-watch-pattern-editor').forEach(el => el.remove());
   });
 
   it('has correct ARIA attributes', async () => {

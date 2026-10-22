@@ -5,4 +5,4 @@ import './pages/diagram-export-page.js';
 applyTheme('casehub-dark');
 
 const app = document.getElementById('app')!;
-app.appendChild(document.createElement('blocks-example-diagram-export'));
+app.appendChild(document.createElement('agency-example-diagram-export'));

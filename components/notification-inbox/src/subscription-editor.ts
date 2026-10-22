@@ -54,7 +54,7 @@ export interface SubscriptionEditorProps {
   identity?: WorkIdentity;
 }
 
-@customElement('blocks-subscription-editor')
+@customElement('agency-subscription-editor')
 export class SubscriptionEditor extends LitElement {
   @property({ type: String }) endpoint?: string;
   @property({ type: Object }) identity?: WorkIdentity;
@@ -352,6 +352,6 @@ export class SubscriptionEditor extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'blocks-subscription-editor': SubscriptionEditor;
+    'agency-subscription-editor': SubscriptionEditor;
   }
 }

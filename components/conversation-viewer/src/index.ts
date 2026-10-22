@@ -15,13 +15,13 @@ registerStatus('epistemic', 'PENDING',     { category: 'warning',  icon: '◐' }
 registerStatus('epistemic', 'DISPUTED',    { category: 'danger',   icon: '○' });
 
 export * from './types.js';
-export { ConvergenceIndicator } from './blocks-convergence-indicator.js';
-export { CommonGroundPanel } from './blocks-common-ground-panel.js';
-export { PointList } from './blocks-point-list.js';
-export { PointDetail } from './blocks-point-detail.js';
-export { ConversationWorkbench } from './blocks-conversation-workbench.js';
-export type { ConvergenceIndicatorProps } from './blocks-convergence-indicator.js';
-export type { CommonGroundPanelProps } from './blocks-common-ground-panel.js';
-export type { ConversationWorkbenchProps } from './blocks-conversation-workbench.js';
-export type { PointListProps } from './blocks-point-list.js';
-export type { PointDetailProps } from './blocks-point-detail.js';
+export { ConvergenceIndicator } from './agency-convergence-indicator.js';
+export { CommonGroundPanel } from './agency-common-ground-panel.js';
+export { PointList } from './agency-point-list.js';
+export { PointDetail } from './agency-point-detail.js';
+export { ConversationWorkbench } from './agency-conversation-workbench.js';
+export type { ConvergenceIndicatorProps } from './agency-convergence-indicator.js';
+export type { CommonGroundPanelProps } from './agency-common-ground-panel.js';
+export type { ConversationWorkbenchProps } from './agency-conversation-workbench.js';
+export type { PointListProps } from './agency-point-list.js';
+export type { PointDetailProps } from './agency-point-detail.js';

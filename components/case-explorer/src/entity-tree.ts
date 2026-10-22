@@ -12,7 +12,7 @@ export interface EntityTreeProps {
   selectionTopic: string;
 }
 
-@customElement('blocks-entity-tree')
+@customElement('agency-entity-tree')
 export class EntityTree extends LiveRegionMixin(LitElement) {
   @property({ attribute: false }) nodes: readonly EntityTreeNode[] = [];
   @property({ type: String, attribute: 'selection-topic' }) selectionTopic = '';

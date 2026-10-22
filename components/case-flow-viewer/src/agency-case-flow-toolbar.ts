@@ -1,8 +1,8 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 
-@customElement('blocks-case-flow-toolbar')
-export class BlocksCaseFlowToolbar extends LitElement {
+@customElement('agency-case-flow-toolbar')
+export class AgencyCaseFlowToolbar extends LitElement {
   @property({ type: Number }) nodeCount = 0;
   @property({ type: Number }) completedCount = 0;
   @property({ type: Number }) runningCount = 0;

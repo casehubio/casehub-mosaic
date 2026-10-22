@@ -20,7 +20,7 @@ const SAMPLE_ENTRIES = [
   { agent: 'Alice Chen', type: 'QUALIFY', content: 'Partial agreement — the third deposit may be payroll but the first two are suspicious. Proceeding with SAR for deposits 1 and 2.', category: 'accent' as EntryCategory, timestamp: new Date(Date.now() - 10_000).toISOString() },
 ];
 
-@customElement('blocks-example-rendering-primitives')
+@customElement('agency-example-rendering-primitives')
 export class RenderingPrimitivesPage extends LitElement {
   @state() private _selectedIndex = -1;
   @state() private _timestampStyle: 'conversational' | 'compact' = 'conversational';

@@ -5,7 +5,7 @@ import './evolution-workbench.js';
 import { EvolutionWorkbench } from './evolution-workbench.js';
 
 function createElement(): EvolutionWorkbench {
-  const el = document.createElement('blocks-evolution-workbench') as EvolutionWorkbench;
+  const el = document.createElement('agency-evolution-workbench') as EvolutionWorkbench;
   document.body.appendChild(el);
   return el;
 }
@@ -39,9 +39,9 @@ const SAMPLE_STAGES: StageDescriptor[] = [
 
 const SAMPLE_POLICY: GatePolicy = { modes: { 'pr-review': 'GATED' }, gateTimeoutMinutes: 720 };
 
-describe('blocks-evolution-workbench', () => {
+describe('agency-evolution-workbench', () => {
   afterEach(() => {
-    document.body.querySelectorAll('blocks-evolution-workbench').forEach(el => el.remove());
+    document.body.querySelectorAll('agency-evolution-workbench').forEach(el => el.remove());
   });
 
   it('has correct ARIA attributes', async () => {
@@ -76,7 +76,7 @@ describe('blocks-evolution-workbench', () => {
     const el = createElement();
     el.state = SAMPLE_STATE;
     await el.updateComplete;
-    const detailPane = el.shadowRoot!.querySelector('blocks-detail-pane');
+    const detailPane = el.shadowRoot!.querySelector('agency-detail-pane');
     expect(detailPane).not.toBeNull();
     expect((detailPane as any).standalone).toBe(true);
   });
@@ -85,7 +85,7 @@ describe('blocks-evolution-workbench', () => {
     const el = createElement();
     el.state = SAMPLE_STATE;
     await el.updateComplete;
-    const detailPane = el.shadowRoot!.querySelector('blocks-detail-pane') as any;
+    const detailPane = el.shadowRoot!.querySelector('agency-detail-pane') as any;
     const tabIds = detailPane.tabs.map((t: TabDefinition) => t.id);
     expect(tabIds).toContain('streams');
     expect(tabIds).toContain('inbox');
@@ -98,7 +98,7 @@ describe('blocks-evolution-workbench', () => {
     const el = createElement();
     el.state = SAMPLE_STATE;
     await el.updateComplete;
-    const detailPane = el.shadowRoot!.querySelector('blocks-detail-pane') as any;
+    const detailPane = el.shadowRoot!.querySelector('agency-detail-pane') as any;
     const builtInTabs = detailPane.tabs.filter(
       (t: TabDefinition) => ['streams', 'inbox', 'audit', 'config', 'health'].includes(t.id)
     );
@@ -113,7 +113,7 @@ describe('blocks-evolution-workbench', () => {
     el.state = SAMPLE_STATE;
     el.tabs = [{ id: 'trading-risk', label: 'Trading Risk', tagName: 'div', order: 30 }];
     await el.updateComplete;
-    const detailPane = el.shadowRoot!.querySelector('blocks-detail-pane') as any;
+    const detailPane = el.shadowRoot!.querySelector('agency-detail-pane') as any;
     const customTab = detailPane.tabs.find((t: TabDefinition) => t.id === 'trading-risk');
     expect(customTab.renderContent).toBeUndefined();
   });
@@ -123,7 +123,7 @@ describe('blocks-evolution-workbench', () => {
     el.state = SAMPLE_STATE;
     el.tabs = [{ id: 'trading-risk', label: 'Trading Risk', tagName: 'div', order: 30 }];
     await el.updateComplete;
-    const detailPane = el.shadowRoot!.querySelector('blocks-detail-pane') as any;
+    const detailPane = el.shadowRoot!.querySelector('agency-detail-pane') as any;
     const tabIds = detailPane.tabs.map((t: TabDefinition) => t.id);
     expect(tabIds).toContain('trading-risk');
     expect(tabIds.length).toBe(6); // 5 built-in + 1 custom

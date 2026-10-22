@@ -171,7 +171,7 @@ spec:
           - compliance-sub.complete
 `;
 
-@customElement('blocks-example-casehub-diagram')
+@customElement('agency-example-casehub-diagram')
 export class CasehubDiagramPage extends LitElement {
   static override styles = css`
     :host { display: flex; flex-direction: column; height: 100%; padding: 24px; box-sizing: border-box; }
@@ -197,5 +197,5 @@ export class CasehubDiagramPage extends LitElement {
 }
 
 declare global {
-  interface HTMLElementTagNameMap { 'blocks-example-casehub-diagram': CasehubDiagramPage; }
+  interface HTMLElementTagNameMap { 'agency-example-casehub-diagram': CasehubDiagramPage; }
 }

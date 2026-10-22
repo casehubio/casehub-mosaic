@@ -5,7 +5,7 @@ import { emitPagesEvent } from '@casehubio/pages-data';
 import { ChannelEventTopics } from './events.js';
 import '@casehubio/pages-ui-components';
 
-@customElement('blocks-channel-topic-bar')
+@customElement('agency-channel-topic-bar')
 export class ChannelTopicBarElement extends LitElement {
   @property({ type: Array }) topics: QhorusTopic[] = [];
   @property({ type: String }) selectedTopicId: string | null = null;
@@ -178,6 +178,6 @@ export class ChannelTopicBarElement extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'blocks-channel-topic-bar': ChannelTopicBarElement;
+    'agency-channel-topic-bar': ChannelTopicBarElement;
   }
 }

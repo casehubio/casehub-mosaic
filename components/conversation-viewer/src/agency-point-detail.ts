@@ -23,7 +23,7 @@ export interface PointDetailProps {
   obligations: ObligationChain[];
 }
 
-@customElement('blocks-point-detail')
+@customElement('agency-point-detail')
 export class PointDetail extends LitElement {
   @property({ attribute: false }) point?: ConversationPoint;
   @property({ attribute: false }) findings: SubTaskFinding[] = [];
@@ -171,6 +171,6 @@ export class PointDetail extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'blocks-point-detail': PointDetail;
+    'agency-point-detail': PointDetail;
   }
 }

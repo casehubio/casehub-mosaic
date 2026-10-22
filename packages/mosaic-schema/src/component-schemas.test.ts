@@ -15,7 +15,7 @@ describe("schema generator", () => {
     expect(content).toContain("AUTO-GENERATED");
   });
 
-  it("exports a schema for every BlocksComponentRegistry entry", () => {
+  it("exports a schema for every AgencyComponentRegistry entry", () => {
     const content = readFileSync(generatedPath, "utf-8");
     const expectedSchemas = [
       "slaIndicatorPropsSchema",
@@ -86,9 +86,9 @@ describe("schema generator", () => {
     expect(content).not.toContain("renderCandidate:");
   });
 
-  it("exports blocksComponentSchemaMap", () => {
+  it("exports agencyComponentSchemaMap", () => {
     const content = readFileSync(generatedPath, "utf-8");
-    expect(content).toContain("export const blocksComponentSchemaMap");
+    expect(content).toContain("export const agencyComponentSchemaMap");
   });
 
   it("generated schemas parse valid sla-indicator data", async () => {

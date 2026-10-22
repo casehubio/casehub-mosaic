@@ -1,32 +1,32 @@
 // @vitest-environment jsdom
 import { describe, it, expect } from 'vitest';
-import { BlocksCaseFlowViewer } from './blocks-case-flow-viewer.js';
+import { AgencyCaseFlowViewer } from './agency-case-flow-viewer.js';
 
-describe('BlocksCaseFlowViewer', () => {
+describe('AgencyCaseFlowViewer', () => {
   it('can be instantiated', () => {
-    const el = new BlocksCaseFlowViewer();
+    const el = new AgencyCaseFlowViewer();
     expect(el).toBeDefined();
   });
 
   it('sets readonly to true on connect', () => {
-    const el = new BlocksCaseFlowViewer();
+    const el = new AgencyCaseFlowViewer();
     document.body.appendChild(el);
     expect(el.readonly).toBe(true);
     el.remove();
   });
 
   it('defaults runtimeState to null', () => {
-    const el = new BlocksCaseFlowViewer();
+    const el = new AgencyCaseFlowViewer();
     expect(el.runtimeState).toBeNull();
   });
 
   it('defaults selectionTopic to empty', () => {
-    const el = new BlocksCaseFlowViewer();
+    const el = new AgencyCaseFlowViewer();
     expect(el.selectionTopic).toBe('');
   });
 
   it('accepts runtimeState property', () => {
-    const el = new BlocksCaseFlowViewer();
+    const el = new AgencyCaseFlowViewer();
     el.runtimeState = {
       planItems: [], milestones: [], timestamp: '2026-09-02T10:00:00Z',
     };
@@ -34,7 +34,7 @@ describe('BlocksCaseFlowViewer', () => {
   });
 
   it('sets aria-label on connect', () => {
-    const el = new BlocksCaseFlowViewer();
+    const el = new AgencyCaseFlowViewer();
     document.body.appendChild(el);
     expect(el.getAttribute('aria-label')).toBe('Case flow viewer');
     expect(el.getAttribute('role')).toBe('region');
@@ -44,7 +44,7 @@ describe('BlocksCaseFlowViewer', () => {
 
 describe('parallel groups', () => {
   it('maps parallelGroups to layout partition options', () => {
-    const el = new BlocksCaseFlowViewer();
+    const el = new AgencyCaseFlowViewer();
     el.runtimeState = {
       planItems: [],
       milestones: [],
@@ -59,7 +59,7 @@ describe('parallel groups', () => {
   });
 
   it('returns no partitions when parallelGroups is absent', () => {
-    const el = new BlocksCaseFlowViewer();
+    const el = new AgencyCaseFlowViewer();
     el.runtimeState = {
       planItems: [], milestones: [], timestamp: '2026-09-02T10:00:00Z',
     };
@@ -68,7 +68,7 @@ describe('parallel groups', () => {
   });
 
   it('returns no partitions when runtimeState is null', () => {
-    const el = new BlocksCaseFlowViewer();
+    const el = new AgencyCaseFlowViewer();
     const opts = (el as any)._layoutOptions();
     expect(opts.partitions).toBeUndefined();
   });

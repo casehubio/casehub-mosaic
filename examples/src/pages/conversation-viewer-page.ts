@@ -1,9 +1,9 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
 import { MOCK_CONVERSATION_STATE } from '../mock/conversation-state.js';
-import '../../../components/conversation-viewer/src/blocks-conversation-workbench.js';
+import '../../../components/conversation-viewer/src/agency-conversation-workbench.js';
 
-@customElement('blocks-example-conversation-viewer')
+@customElement('agency-example-conversation-viewer')
 export class ConversationViewerPage extends LitElement {
   @state() private _eventLog: string[] = [];
 
@@ -43,10 +43,10 @@ export class ConversationViewerPage extends LitElement {
       <p>Structured deliberation with convergence, epistemic common ground, and point tracking. Select a point to view its thread, findings, and obligations.</p>
 
       <div class="workbench-container">
-        <blocks-conversation-workbench
+        <agency-conversation-workbench
           .conversationState=${MOCK_CONVERSATION_STATE}
           selection-topic="conversation-point"
-        ></blocks-conversation-workbench>
+        ></agency-conversation-workbench>
       </div>
 
       ${this._eventLog.length > 0 ? html`
@@ -60,6 +60,6 @@ export class ConversationViewerPage extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'blocks-example-conversation-viewer': ConversationViewerPage;
+    'agency-example-conversation-viewer': ConversationViewerPage;
   }
 }

@@ -172,7 +172,7 @@ export const bindingSchema = {
       'x-group': 'Advanced',
       'x-order': 33,
       'x-visibility': 'advanced',
-      'x-editor-component': 'blocks-json-editor',
+      'x-editor-component': 'agency-json-editor',
       'x-help': 'Key-value pairs to write to case context before dispatching',
     },
     producedKeys: {

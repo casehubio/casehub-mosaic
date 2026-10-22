@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import type { CommonGroundState, GroundedFact } from './types.js';
-import './blocks-common-ground-panel.js';
+import './agency-common-ground-panel.js';
 
 type PanelElement = HTMLElement & {
   commonGround?: CommonGroundState;
@@ -18,12 +18,12 @@ const MOCK_FACTS: GroundedFact[] = [
 const MOCK_COMMON_GROUND: CommonGroundState = { facts: MOCK_FACTS };
 
 function createElement(): PanelElement {
-  const el = document.createElement('blocks-common-ground-panel') as PanelElement;
+  const el = document.createElement('agency-common-ground-panel') as PanelElement;
   document.body.appendChild(el);
   return el;
 }
 
-describe('blocks-common-ground-panel', () => {
+describe('agency-common-ground-panel', () => {
   beforeEach(() => { document.body.innerHTML = ''; });
 
   it('renders three columns', async () => {

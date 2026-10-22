@@ -39,7 +39,7 @@ export interface SessionListProps {
   endpoint: string;
 }
 
-@customElement('blocks-session-list')
+@customElement('agency-session-list')
 export class SessionList extends SessionListBase {
   @property({ type: String }) endpoint = '';
 
@@ -268,6 +268,6 @@ export class SessionList extends SessionListBase {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'blocks-session-list': SessionList;
+    'agency-session-list': SessionList;
   }
 }

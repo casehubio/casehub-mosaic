@@ -4,7 +4,7 @@ import { emitPagesEvent } from '@casehubio/pages-data';
 import { ChannelEventTopics } from './events.js';
 import type { QhorusMessage } from './types.js';
 
-@customElement('blocks-channel-hover-toolbar')
+@customElement('agency-channel-hover-toolbar')
 export class ChannelHoverToolbarElement extends LitElement {
   @property({ type: Object }) message?: QhorusMessage;
   @property({ type: String }) currentActorId = '';
@@ -184,6 +184,6 @@ export class ChannelHoverToolbarElement extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'blocks-channel-hover-toolbar': ChannelHoverToolbarElement;
+    'agency-channel-hover-toolbar': ChannelHoverToolbarElement;
   }
 }

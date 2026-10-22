@@ -12,12 +12,12 @@ type SlaIndicatorEl = HTMLElement & {
   configure: (props: Record<string, unknown>) => void;
 };
 
-describe('blocks-sla-indicator', () => {
+describe('agency-sla-indicator', () => {
   let el: SlaIndicatorEl;
 
   beforeEach(async () => {
     vi.useFakeTimers();
-    el = document.createElement('blocks-sla-indicator') as SlaIndicatorEl;
+    el = document.createElement('agency-sla-indicator') as SlaIndicatorEl;
     document.body.appendChild(el);
   });
 

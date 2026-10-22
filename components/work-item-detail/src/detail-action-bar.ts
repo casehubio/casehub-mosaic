@@ -2,7 +2,7 @@ import { LitElement, html, css, type TemplateResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import type { WorkItemResponse, WorkIdentity } from '@casehubio/mosaic-core';
 
-@customElement('blocks-detail-action-bar')
+@customElement('agency-detail-action-bar')
 export class DetailActionBar extends LitElement {
   @property({ type: Object }) workItem: WorkItemResponse | null = null;
   @property({ type: Object }) identity: WorkIdentity | null = null;
@@ -160,6 +160,6 @@ export class DetailActionBar extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'blocks-detail-action-bar': DetailActionBar;
+    'agency-detail-action-bar': DetailActionBar;
   }
 }

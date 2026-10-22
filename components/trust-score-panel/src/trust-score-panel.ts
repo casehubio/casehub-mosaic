@@ -30,7 +30,7 @@ export interface TrustScorePanelProps {
   trustLevel?: TrustLevel;
 }
 
-@customElement('blocks-trust-score-panel')
+@customElement('agency-trust-score-panel')
 export class TrustScorePanel extends TrendSourceMixin(DataSourceMixin(LiveRegionMixin(LitElement))) {
   @property({ type: String, attribute: 'actor-id' }) actorId?: string;
   @property({ type: String }) mode: 'full' | 'compact' = 'full';
@@ -396,6 +396,6 @@ export class TrustScorePanel extends TrendSourceMixin(DataSourceMixin(LiveRegion
 
 declare global {
   interface HTMLElementTagNameMap {
-    'blocks-trust-score-panel': TrustScorePanel;
+    'agency-trust-score-panel': TrustScorePanel;
   }
 }

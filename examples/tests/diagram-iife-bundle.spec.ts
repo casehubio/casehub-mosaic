@@ -88,7 +88,7 @@ test.describe('IIFE diagram bundle', () => {
     await page.waitForTimeout(1000);
     await page.addScriptTag({ content: `
       window._findDiagram = () => {
-        const wb = document.querySelector('blocks-diagram-workbench');
+        const wb = document.querySelector('agency-diagram-workbench');
         return wb?.shadowRoot?.querySelector('casehub-diagram') ?? document.querySelector('casehub-diagram');
       };
     `});
@@ -180,10 +180,10 @@ spec:
     await loadDiagram(page, yaml);
 
     const workbenchState = await page.evaluate(() => ({
-      workbenchExists: !!document.querySelector('blocks-diagram-workbench'),
-      workbenchRegistered: !!customElements.get('blocks-diagram-workbench'),
+      workbenchExists: !!document.querySelector('agency-diagram-workbench'),
+      workbenchRegistered: !!customElements.get('agency-diagram-workbench'),
     }));
-    expect(workbenchState.workbenchRegistered, 'blocks-diagram-workbench should be registered').toBe(true);
+    expect(workbenchState.workbenchRegistered, 'agency-diagram-workbench should be registered').toBe(true);
     expect(workbenchState.workbenchExists, 'case format should use diagram-workbench').toBe(true);
 
     const drillButton = page.locator('[data-id*="fraud-agent"] button[title="Drill down"]');
@@ -192,7 +192,7 @@ spec:
     await page.waitForTimeout(2000);
 
     const afterDrill = await page.evaluate(() => {
-      const wb = document.querySelector('blocks-diagram-workbench') as any;
+      const wb = document.querySelector('agency-diagram-workbench') as any;
       return {
         stackDepth: wb?._stack?.length ?? 0,
         hasSwfDiagram: !!document.querySelector('swf-diagram'),
@@ -688,7 +688,7 @@ spec:
     await page.waitForTimeout(3000);
 
     const drillState = await page.evaluate(() => {
-      const wb = document.querySelector('blocks-diagram-workbench') as any;
+      const wb = document.querySelector('agency-diagram-workbench') as any;
       const swf = wb?.shadowRoot?.querySelector('swf-diagram');
       return {
         stackDepth: wb?._stack?.length ?? 0,
@@ -704,7 +704,7 @@ spec:
 
     // Add a task to the SWF via palette
     const addedTask = await page.evaluate(async () => {
-      const wb = document.querySelector('blocks-diagram-workbench') as any;
+      const wb = document.querySelector('agency-diagram-workbench') as any;
       const swf = wb?.shadowRoot?.querySelector('swf-diagram') as any;
       if (!swf) return { error: 'no swf' };
 
@@ -756,7 +756,7 @@ spec:
 
     // Trigger picker in the SWF diagram
     const pickerResult = await page.evaluate(async () => {
-      const wb = document.querySelector('blocks-diagram-workbench') as any;
+      const wb = document.querySelector('agency-diagram-workbench') as any;
       const swf = wb?.shadowRoot?.querySelector('swf-diagram') as any;
       if (!swf) return { error: 'no swf diagram' };
 

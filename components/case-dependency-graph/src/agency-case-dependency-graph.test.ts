@@ -1,7 +1,7 @@
 // @vitest-environment jsdom
 import { describe, it, expect, afterEach } from 'vitest';
 import type { GraphModel } from '@casehubio/graph-core';
-import { BlocksCaseDependencyGraph } from './blocks-case-dependency-graph.js';
+import { AgencyCaseDependencyGraph } from './agency-case-dependency-graph.js';
 
 const SAMPLE_MODEL: GraphModel = {
   nodes: [
@@ -13,21 +13,21 @@ const SAMPLE_MODEL: GraphModel = {
   ],
 };
 
-describe('BlocksCaseDependencyGraph', () => {
+describe('AgencyCaseDependencyGraph', () => {
   it('has default properties', () => {
-    const el = new BlocksCaseDependencyGraph();
+    const el = new AgencyCaseDependencyGraph();
     expect(el.selectionTopic).toBe('case-graph');
     expect(el.graphData).toBeUndefined();
     expect(el.endpoint).toBeUndefined();
   });
 
   it('exportDOT returns empty string when no model', () => {
-    const el = new BlocksCaseDependencyGraph();
+    const el = new AgencyCaseDependencyGraph();
     expect(el.exportDOT()).toBe('');
   });
 
   it('exportDOT returns DOT string when model is set', () => {
-    const el = new BlocksCaseDependencyGraph();
+    const el = new AgencyCaseDependencyGraph();
     (el as any)._model = SAMPLE_MODEL;
     const dot = el.exportDOT();
     expect(dot).toContain('digraph');
@@ -36,7 +36,7 @@ describe('BlocksCaseDependencyGraph', () => {
   });
 
   it('_edgeTypeSummary computes counts', () => {
-    const el = new BlocksCaseDependencyGraph();
+    const el = new AgencyCaseDependencyGraph();
     (el as any)._model = SAMPLE_MODEL;
     const summary = (el as any)._edgeTypeSummary();
     expect(summary).toHaveLength(1);
@@ -49,7 +49,7 @@ describe('BlocksCaseDependencyGraph', () => {
       nodes: [{ id: 'a', type: 'case', properties: { label: 'A' } }],
       edges: [{ id: 'e1', type: 'parent_child', source: 'a', target: 'missing' }],
     };
-    const el = new BlocksCaseDependencyGraph();
+    const el = new AgencyCaseDependencyGraph();
     (el as any)._model = model;
     await (el as any)._buildGraph();
     expect((el as any)._edges).toHaveLength(0);

@@ -14,11 +14,11 @@ const SAMPLE_CLUSTERS: ClusterInfo[] = [
   { id: 'c2', name: 'prod-us', apiUrl: 'https://k8s-us.example.com', namespace: 'apps', type: 'OPENSHIFT', status: 'UNREACHABLE', applicationCount: 3 },
 ];
 
-describe('blocks-cluster-panel', () => {
+describe('agency-cluster-panel', () => {
   let el: ClusterPanelEl;
 
   beforeEach(() => {
-    el = document.createElement('blocks-cluster-panel') as ClusterPanelEl;
+    el = document.createElement('agency-cluster-panel') as ClusterPanelEl;
     document.body.appendChild(el);
   });
 

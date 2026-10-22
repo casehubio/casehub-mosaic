@@ -42,11 +42,11 @@ const SAMPLE_SNAPSHOT: ReconciliationSnapshot = {
   ],
 };
 
-describe('blocks-reconciliation-status', () => {
+describe('agency-reconciliation-status', () => {
   let el: ReconciliationStatusEl;
 
   beforeEach(() => {
-    el = document.createElement('blocks-reconciliation-status') as ReconciliationStatusEl;
+    el = document.createElement('agency-reconciliation-status') as ReconciliationStatusEl;
     document.body.appendChild(el);
   });
 

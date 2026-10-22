@@ -4,7 +4,7 @@ import '@casehubio/mosaic-agency-decomposition-tree';
 import type { DecompositionSnapshot, NodeStateSnapshot } from '@casehubio/mosaic-graph-stencil-htn';
 import mockData from '../../mock-data/decomposition.json';
 
-@customElement('blocks-example-decomposition-tree')
+@customElement('agency-example-decomposition-tree')
 export class DecompositionTreePage extends LitElement {
   @state() private _showStates = true;
 
@@ -49,6 +49,6 @@ export class DecompositionTreePage extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'blocks-example-decomposition-tree': DecompositionTreePage;
+    'agency-example-decomposition-tree': DecompositionTreePage;
   }
 }

@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test";
 
 async function navigateToPage(page: import("@playwright/test").Page, pageTitle: string) {
   await page.goto("/");
-  await page.waitForSelector("blocks-example-shell", { state: "attached" });
+  await page.waitForSelector("agency-example-shell", { state: "attached" });
   const navBtn = page.locator(`button.nav-item:has-text("${pageTitle}")`);
   await navBtn.click();
   await page.waitForTimeout(500);

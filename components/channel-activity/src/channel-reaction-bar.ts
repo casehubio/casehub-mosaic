@@ -12,7 +12,7 @@ interface GroupedReaction {
   readonly userReacted: boolean;
 }
 
-@customElement('blocks-channel-reaction-bar')
+@customElement('agency-channel-reaction-bar')
 export class ChannelReactionBarElement extends LitElement {
   @property({ type: Array }) reactions: Reaction[] = [];
   @property({ type: String }) messageId = '';
@@ -85,6 +85,6 @@ export class ChannelReactionBarElement extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'blocks-channel-reaction-bar': ChannelReactionBarElement;
+    'agency-channel-reaction-bar': ChannelReactionBarElement;
   }
 }

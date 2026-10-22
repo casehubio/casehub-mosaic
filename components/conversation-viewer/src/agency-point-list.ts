@@ -17,7 +17,7 @@ export interface PointListProps {
   selectionTopic: string;
 }
 
-@customElement('blocks-point-list')
+@customElement('agency-point-list')
 export class PointList extends LitElement {
   @property({ attribute: false }) points: ConversationPoint[] = [];
   @property({ type: Number }) currentRound = 0;
@@ -122,6 +122,6 @@ export class PointList extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'blocks-point-list': PointList;
+    'agency-point-list': PointList;
   }
 }

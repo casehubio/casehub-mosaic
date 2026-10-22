@@ -34,7 +34,7 @@ export interface GroupedDataViewProps {
   sortable: boolean;
 }
 
-@customElement('blocks-grouped-data-view')
+@customElement('agency-grouped-data-view')
 export class GroupedDataView extends DataSourceMixin(LitElement) {
   @property({ type: String, reflect: true, attribute: 'aria-label' }) override ariaLabel: string | null = 'Grouped data';
   @property({ type: String, attribute: 'group-by' }) groupBy = '';
@@ -183,6 +183,6 @@ export class GroupedDataView extends DataSourceMixin(LitElement) {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'blocks-grouped-data-view': GroupedDataView;
+    'agency-grouped-data-view': GroupedDataView;
   }
 }

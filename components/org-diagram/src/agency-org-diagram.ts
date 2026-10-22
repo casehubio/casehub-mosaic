@@ -37,7 +37,7 @@ import { emitPagesEvent } from '@casehubio/pages-data';
 import { DiagramBaseMixin } from '@casehubio/pages-diagram-core';
 import type { AdapterResult, LayoutResult } from '@casehubio/pages-diagram-core';
 import '@casehubio/graph-renderer';
-import './blocks-org-diagram-toolbar.js';
+import './agency-org-diagram-toolbar.js';
 import './panels/escalation-chain-panel.js';
 import './panels/supervision-chain-panel.js';
 import './panels/attestation-panel.js';
@@ -107,8 +107,8 @@ export interface OrgDiagramProps {
   collections?: string[];
 }
 
-@customElement('blocks-org-diagram')
-export class BlocksOrgDiagram extends DiagramBaseMixin(LitElement) {
+@customElement('agency-org-diagram')
+export class AgencyOrgDiagram extends DiagramBaseMixin(LitElement) {
   @property({ attribute: 'selection-topic' }) selectionTopic = '';
   @property() layoutStrategy: OrgLayoutStrategy | 'auto' = 'auto';
   @property({ type: Object }) agents: Record<string, AgentDescriptor> | undefined;
@@ -545,7 +545,7 @@ export class BlocksOrgDiagram extends DiagramBaseMixin(LitElement) {
 
     return html`
       <div style="display:flex;flex-direction:column;width:100%;height:100%;">
-        <blocks-org-diagram-toolbar
+        <agency-org-diagram-toolbar
           ?hasBackend=${this.backend != null}
           ?dirty=${this._isDirty}
           ?saving=${this._saving}
@@ -558,7 +558,7 @@ export class BlocksOrgDiagram extends DiagramBaseMixin(LitElement) {
           @toolbar-save=${() => this._save()}
           @toolbar-layout-change=${this._onLayoutChange}
           @toolbar-export=${(e: CustomEvent<{ format: 'svg' | 'png' }>) => this._exportDiagram(e.detail.format)}
-        ></blocks-org-diagram-toolbar>
+        ></agency-org-diagram-toolbar>
         <div style="display:flex;flex:1;overflow:hidden;">
           ${this._paletteOpen ? html`
             <div style="border-right:1px solid var(--pages-neutral-4,#e5e7eb);display:flex;flex-direction:column;overflow-y:auto;flex-shrink:0;">

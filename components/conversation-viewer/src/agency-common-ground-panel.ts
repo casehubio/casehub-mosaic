@@ -22,7 +22,7 @@ export interface CommonGroundPanelProps {
   factTopic: string;
 }
 
-@customElement('blocks-common-ground-panel')
+@customElement('agency-common-ground-panel')
 export class CommonGroundPanel extends LitElement {
   @property({ attribute: false }) commonGround?: CommonGroundState;
   @property({ type: String }) factTopic = 'common-ground-fact';
@@ -146,6 +146,6 @@ export class CommonGroundPanel extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'blocks-common-ground-panel': CommonGroundPanel;
+    'agency-common-ground-panel': CommonGroundPanel;
   }
 }

@@ -3,7 +3,7 @@ import { customElement, state } from 'lit/decorators.js';
 import type { WorkItemResponse } from '@casehubio/mosaic-core';
 import '@casehubio/mosaic-work-item-row';
 
-@customElement('blocks-example-row')
+@customElement('agency-example-row')
 export class RowPage extends LitElement {
   @state() private items: WorkItemResponse[] = [];
 
@@ -26,7 +26,7 @@ export class RowPage extends LitElement {
       <h2>Work Item Row</h2>
       <p>Shared row component used by the inbox and queue board. Shows priority border, status pill, category, and age.</p>
       <div class="rows">
-        ${this.items.map(item => html`<blocks-work-item-row .item=${item}></blocks-work-item-row>`)}
+        ${this.items.map(item => html`<agency-work-item-row .item=${item}></agency-work-item-row>`)}
       </div>
     `;
   }

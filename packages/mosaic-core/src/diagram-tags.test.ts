@@ -7,7 +7,7 @@ describe('DIAGRAM_TAGS', () => {
       case: 'casehub-diagram',
       swf: 'swf-diagram',
       htn: 'htn-diagram',
-      org: 'blocks-org-diagram',
+      org: 'agency-org-diagram',
     });
   });
 

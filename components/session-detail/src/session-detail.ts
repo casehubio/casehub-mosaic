@@ -23,7 +23,7 @@ export interface SessionDetailProps {
   eventsPushUrl: string;
 }
 
-@customElement('blocks-session-detail')
+@customElement('agency-session-detail')
 export class SessionDetail extends PushMixin(LitElement) {
   @property({ type: String }) endpoint = '';
   @property({ type: String }) sessionId: string | undefined;
@@ -255,6 +255,6 @@ export class SessionDetail extends PushMixin(LitElement) {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'blocks-session-detail': SessionDetail;
+    'agency-session-detail': SessionDetail;
   }
 }

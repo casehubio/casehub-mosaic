@@ -10,8 +10,8 @@
     "registry": "https://npm.pkg.github.com"
   },
   "type": "module",
-  "main": "dist/blocks-dag-viewer.js",
-  "types": "dist/blocks-dag-viewer.d.ts",
+  "main": "dist/agency-dag-viewer.js",
+  "types": "dist/agency-dag-viewer.d.ts",
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
     "typecheck": "tsc --noEmit",

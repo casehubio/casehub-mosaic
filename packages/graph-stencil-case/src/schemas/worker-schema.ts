@@ -53,7 +53,7 @@ export const workerSchema = {
             _type: { type: 'string', const: 'agent' },
             systemPrompt: {
               type: 'string',
-              'x-editor-component': 'blocks-prompt-editor',
+              'x-editor-component': 'agency-prompt-editor',
             },
             inputProjection: { type: 'string', 'x-display-hint': 'textarea' },
             outputProjection: { type: 'string', 'x-display-hint': 'textarea' },
@@ -78,7 +78,7 @@ export const workerSchema = {
             workflow: {
               type: 'object',
               readOnly: true,
-              'x-editor-component': 'blocks-swf-link',
+              'x-editor-component': 'agency-swf-link',
               'x-help': 'Edit via SWF drill-down',
             },
           },
@@ -110,7 +110,7 @@ export const workerSchema = {
                     command: { type: 'array', items: { type: 'string' } },
                     env: {
                       type: 'object',
-                      'x-editor-component': 'blocks-env-map-editor',
+                      'x-editor-component': 'agency-env-map-editor',
                       'x-help': 'KEY=VALUE environment variables',
                     },
                   },
@@ -136,7 +136,7 @@ export const workerSchema = {
             steps: {
               type: 'array',
               items: { type: 'string' },
-              'x-editor-component': 'blocks-sequence-editor',
+              'x-editor-component': 'agency-sequence-editor',
               'x-help': 'Ordered list of worker names',
             },
           },

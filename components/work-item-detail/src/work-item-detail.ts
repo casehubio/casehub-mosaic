@@ -56,7 +56,7 @@ export interface WorkItemDetailProps {
   data: WorkItemResponse | null;
 }
 
-@customElement('blocks-work-item-detail')
+@customElement('agency-work-item-detail')
 export class WorkItemDetail extends LiveRegionMixin(FocusTrapMixin(LitElement)) {
   @property({ type: String }) endpoint: string | null = null;
   @property({ type: String }) workItemId: string | null = null;
@@ -476,7 +476,7 @@ export class WorkItemDetail extends LiveRegionMixin(FocusTrapMixin(LitElement)) 
 
     return html`
       ${this._renderHeader(workItem)}
-      ${isTerminal ? this._renderTerminalBanner(workItem) : html`<blocks-detail-action-bar .workItem="${workItem}" .identity="${this.identity}" @action-click="${this._handleAction}"></blocks-detail-action-bar>`}
+      ${isTerminal ? this._renderTerminalBanner(workItem) : html`<agency-detail-action-bar .workItem="${workItem}" .identity="${this.identity}" @action-click="${this._handleAction}"></agency-detail-action-bar>`}
       ${this._renderTabs()}
       ${this._renderTabPanels(workItem)}
       ${this._showEscalateDialog ? this._renderEscalateDialog() : ''}
@@ -575,11 +575,11 @@ export class WorkItemDetail extends LiveRegionMixin(FocusTrapMixin(LitElement)) 
           aria-labelledby="tab-activity"
           aria-hidden="${this._activeTab !== 'activity'}"
         >
-          <blocks-detail-activity-tab
+          <agency-detail-activity-tab
             .workItem="${workItem}"
             .events="${this._events}"
             @add-note="${this._handleAddNote}"
-          ></blocks-detail-activity-tab>
+          ></agency-detail-activity-tab>
         </div>
         <div
           id="tabpanel-relations"
@@ -589,7 +589,7 @@ export class WorkItemDetail extends LiveRegionMixin(FocusTrapMixin(LitElement)) 
           aria-labelledby="tab-relations"
           aria-hidden="${this._activeTab !== 'relations'}"
         >
-          <blocks-detail-relations-tab .workItem="${workItem}" .relations="${this._relations}"></blocks-detail-relations-tab>
+          <agency-detail-relations-tab .workItem="${workItem}" .relations="${this._relations}"></agency-detail-relations-tab>
         </div>
       </div>
     `;
@@ -1160,6 +1160,6 @@ export class WorkItemDetail extends LiveRegionMixin(FocusTrapMixin(LitElement)) 
 
 declare global {
   interface HTMLElementTagNameMap {
-    'blocks-work-item-detail': WorkItemDetail;
+    'agency-work-item-detail': WorkItemDetail;
   }
 }

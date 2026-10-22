@@ -22,7 +22,7 @@ export interface ExecutionMonitorProps {
   staleThresholdMs: number;
 }
 
-@customElement('blocks-execution-monitor')
+@customElement('agency-execution-monitor')
 export class ExecutionMonitor extends PushMixin(LiveRegionMixin(LitElement)) {
   @property({ type: String }) endpoint?: string;
   @property({ type: String, attribute: 'execution-id' }) executionId?: string;
@@ -224,6 +224,6 @@ export class ExecutionMonitor extends PushMixin(LiveRegionMixin(LitElement)) {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'blocks-execution-monitor': ExecutionMonitor;
+    'agency-execution-monitor': ExecutionMonitor;
   }
 }

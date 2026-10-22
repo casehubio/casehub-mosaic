@@ -7,7 +7,7 @@ export interface TrustFeedbackDisplayProps {
   compact: boolean;
 }
 
-@customElement('blocks-trust-feedback-display')
+@customElement('agency-trust-feedback-display')
 export class TrustFeedbackDisplay extends LitElement {
   @property({ attribute: false }) gateDecision: GateDecision | null = null;
   @property({ type: Boolean }) compact = false;
@@ -138,6 +138,6 @@ export class TrustFeedbackDisplay extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'blocks-trust-feedback-display': TrustFeedbackDisplay;
+    'agency-trust-feedback-display': TrustFeedbackDisplay;
   }
 }

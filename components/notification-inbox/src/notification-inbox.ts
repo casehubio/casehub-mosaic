@@ -84,7 +84,7 @@ export interface NotificationInboxProps {
   identity?: WorkIdentity;
 }
 
-@customElement('blocks-notification-inbox')
+@customElement('agency-notification-inbox')
 export class NotificationInbox extends NotificationInboxBase {
   @property({ type: String }) endpoint?: string;
   @property({ type: Array }) data?: Notification[];
@@ -1004,6 +1004,6 @@ export class NotificationInbox extends NotificationInboxBase {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'blocks-notification-inbox': NotificationInbox;
+    'agency-notification-inbox': NotificationInbox;
   }
 }

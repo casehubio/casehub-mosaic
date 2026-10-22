@@ -15,7 +15,7 @@ const SNOOZE_SCHEMA: FieldSchema = {
   required: ['until'],
 };
 
-@customElement('blocks-snooze-control')
+@customElement('agency-snooze-control')
 export class SnoozeControl extends LitElement {
   @property({ type: String }) endpoint?: string;
   @property({ type: Object }) identity?: WorkIdentity;
@@ -181,6 +181,6 @@ export class SnoozeControl extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'blocks-snooze-control': SnoozeControl;
+    'agency-snooze-control': SnoozeControl;
   }
 }

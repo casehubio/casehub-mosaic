@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import type { ConvergenceSignal } from './types.js';
-import './blocks-convergence-indicator.js';
+import './agency-convergence-indicator.js';
 
 type IndicatorElement = HTMLElement & {
   signal?: ConvergenceSignal;
@@ -9,12 +9,12 @@ type IndicatorElement = HTMLElement & {
 };
 
 function createElement(): IndicatorElement {
-  const el = document.createElement('blocks-convergence-indicator') as IndicatorElement;
+  const el = document.createElement('agency-convergence-indicator') as IndicatorElement;
   document.body.appendChild(el);
   return el;
 }
 
-describe('blocks-convergence-indicator', () => {
+describe('agency-convergence-indicator', () => {
   beforeEach(() => {
     document.body.innerHTML = '';
   });

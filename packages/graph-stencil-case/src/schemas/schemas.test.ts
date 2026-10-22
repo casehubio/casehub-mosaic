@@ -203,7 +203,7 @@ describe('worker-schema', () => {
     const props = workerSchema.properties as Record<string, any>;
     const agentBranch = props.functionType.oneOf.find((b: any) => b.properties._type.const === 'agent');
     expect(agentBranch.properties.systemPrompt).toBeDefined();
-    expect(agentBranch.properties.systemPrompt['x-editor-component']).toBe('blocks-prompt-editor');
+    expect(agentBranch.properties.systemPrompt['x-editor-component']).toBe('agency-prompt-editor');
   });
 
   it('agent branch has model with oneOf and x-discriminator for 5 providers', () => {
@@ -236,10 +236,10 @@ describe('worker-schema', () => {
     expect(a2aBranch.properties.endpoint.format).toBe('uri');
   });
 
-  it('do branch has x-editor-component blocks-swf-link', () => {
+  it('do branch has x-editor-component agency-swf-link', () => {
     const props = workerSchema.properties as Record<string, any>;
     const doBranch = props.functionType.oneOf.find((b: any) => b.properties._type.const === 'do');
-    expect(doBranch.properties.workflow['x-editor-component']).toBe('blocks-swf-link');
+    expect(doBranch.properties.workflow['x-editor-component']).toBe('agency-swf-link');
   });
 
   it('sequence branch has items type string', () => {

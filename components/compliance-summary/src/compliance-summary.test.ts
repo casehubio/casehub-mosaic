@@ -18,12 +18,12 @@ const SAMPLE_REQUIREMENTS: RequirementDefinition[] = [
 
 let originalFetch: typeof globalThis.fetch;
 
-describe('blocks-compliance-summary', () => {
+describe('agency-compliance-summary', () => {
   let el: ComplianceSummaryEl;
 
   beforeEach(() => {
     originalFetch = globalThis.fetch;
-    el = document.createElement('blocks-compliance-summary') as ComplianceSummaryEl;
+    el = document.createElement('agency-compliance-summary') as ComplianceSummaryEl;
     document.body.appendChild(el);
   });
 

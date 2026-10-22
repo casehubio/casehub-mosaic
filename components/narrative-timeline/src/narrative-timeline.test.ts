@@ -26,11 +26,11 @@ const STEP: StepDecisionSummary = {
   ],
 };
 
-describe('blocks-narrative-timeline', () => {
+describe('agency-narrative-timeline', () => {
   let el: NarrativeTimelineElement;
 
   beforeEach(() => {
-    el = document.createElement('blocks-narrative-timeline') as NarrativeTimelineElement;
+    el = document.createElement('agency-narrative-timeline') as NarrativeTimelineElement;
     document.body.appendChild(el);
   });
 

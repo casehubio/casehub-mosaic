@@ -20,7 +20,7 @@ export interface ContributorWorkbenchProps {
   actorId: string;
 }
 
-@customElement('blocks-contributor-workbench')
+@customElement('agency-contributor-workbench')
 export class ContributorWorkbench extends LiveRegionMixin(LitElement) {
   @property({ type: String }) endpoint = '';
   @property({ type: String, attribute: 'actor-id' }) actorId = '';
@@ -187,11 +187,11 @@ export class ContributorWorkbench extends LiveRegionMixin(LitElement) {
         </span>
         <div class="intake-reason">${cls.classificationReason}</div>
       </div>
-      <blocks-trust-score-panel
+      <agency-trust-score-panel
         mode="compact"
         .endpoint=${this.endpoint}
         actor-id=${this.actorId}
-      ></blocks-trust-score-panel>
+      ></agency-trust-score-panel>
       ${this._renderDimensions()}
     `;
   }
@@ -222,19 +222,19 @@ export class ContributorWorkbench extends LiveRegionMixin(LitElement) {
       return html`<div class="detail-empty">No outcome history</div>`;
     }
     return html`
-      <blocks-list-pane
+      <agency-list-pane
         selection-topic="contributor-outcome"
         .dataSet=${this._outcomeDataSet}
         .columnConfig=${OUTCOME_TABLE_CONFIG}
         .getRowKey=${(row: TypedRow) => row.text(ID_COL)}
         empty-message="No outcome history"
-      ></blocks-list-pane>
+      ></agency-list-pane>
     `;
   }
 }
 
 declare global {
   interface HTMLElementTagNameMap {
-    'blocks-contributor-workbench': ContributorWorkbench;
+    'agency-contributor-workbench': ContributorWorkbench;
   }
 }

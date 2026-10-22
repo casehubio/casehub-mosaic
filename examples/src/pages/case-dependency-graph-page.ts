@@ -1,7 +1,7 @@
 import { LitElement, html, css, nothing } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
 import { registerRelationshipType, lookupRelationshipType } from '@casehubio/mosaic-core';
-import '../../../components/case-dependency-graph/src/blocks-case-dependency-graph.js';
+import '../../../components/case-dependency-graph/src/agency-case-dependency-graph.js';
 import type { GraphModel, GraphNode } from '@casehubio/graph-core';
 
 registerRelationshipType('blocks', {
@@ -57,7 +57,7 @@ function getRelationships(id: string): Array<{ targetId: string; targetLabel: st
   return rels;
 }
 
-@customElement('blocks-example-case-dependency-graph')
+@customElement('agency-example-case-dependency-graph')
 export class CaseDependencyGraphPage extends LitElement {
   @state() private _selectedCase: CaseDetail | null = null;
 
@@ -109,7 +109,7 @@ export class CaseDependencyGraphPage extends LitElement {
 
   private _navigateTo(id: string): void {
     if (CASE_DETAILS[id]) this._selectedCase = CASE_DETAILS[id];
-    const graph = this.shadowRoot?.querySelector('blocks-case-dependency-graph') as any;
+    const graph = this.shadowRoot?.querySelector('agency-case-dependency-graph') as any;
     if (graph?.focusNode) graph.focusNode(id);
   }
 
@@ -173,10 +173,10 @@ export class CaseDependencyGraphPage extends LitElement {
 
       <div class="workbench">
         <div class="graph-pane">
-          <blocks-case-dependency-graph
+          <agency-case-dependency-graph
             .graphData=${SAMPLE_GRAPH}
             selection-topic="case-graph"
-          ></blocks-case-dependency-graph>
+          ></agency-case-dependency-graph>
         </div>
         <div class="detail-pane">
           ${this._renderDetail()}
@@ -188,6 +188,6 @@ export class CaseDependencyGraphPage extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'blocks-example-case-dependency-graph': CaseDependencyGraphPage;
+    'agency-example-case-dependency-graph': CaseDependencyGraphPage;
   }
 }

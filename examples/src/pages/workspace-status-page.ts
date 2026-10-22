@@ -2,7 +2,7 @@ import { LitElement, html, css } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import '@casehubio/mosaic-document-workbench';
 
-@customElement('blocks-example-workspace-status')
+@customElement('agency-example-workspace-status')
 export class WorkspaceStatusPage extends LitElement {
   static override styles = css`
     :host { display: block; padding: 24px; }

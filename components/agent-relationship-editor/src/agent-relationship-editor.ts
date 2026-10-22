@@ -379,7 +379,7 @@ export class AgentRelationshipEditor extends LitElement {
 
       ${this._viewTab === 'diagram' ? html`
         <div role="tabpanel" id="panel-diagram" aria-labelledby="tab-diagram">
-          <blocks-org-diagram readonly .yaml=${this._effectiveYaml} .agents=${this.agents} .selectionTopic=${'relationship-editor:diagram:agent-selected'}></blocks-org-diagram>
+          <agency-org-diagram readonly .yaml=${this._effectiveYaml} .agents=${this.agents} .selectionTopic=${'relationship-editor:diagram:agent-selected'}></agency-org-diagram>
         </div>
       ` : html`
         <div role="tabpanel" id="panel-table" aria-labelledby="tab-table">

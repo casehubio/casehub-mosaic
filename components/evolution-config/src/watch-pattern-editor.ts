@@ -56,7 +56,7 @@ interface FormData {
 
 const EMPTY_FORM: FormData = { category: '', areaId: '', targetPattern: '', minEstimatedSize: '' };
 
-@customElement('blocks-watch-pattern-editor')
+@customElement('agency-watch-pattern-editor')
 export class WatchPatternEditor extends LitElement {
   @property({ type: String }) endpoint?: string;
   @property({ type: String }) caseId?: string;
@@ -318,6 +318,6 @@ export class WatchPatternEditor extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'blocks-watch-pattern-editor': WatchPatternEditor;
+    'agency-watch-pattern-editor': WatchPatternEditor;
   }
 }

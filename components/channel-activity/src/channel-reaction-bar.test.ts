@@ -11,9 +11,9 @@ function makeReactions(specs: Array<[string, string[]]>): Reaction[] {
 
 afterEach(() => { document.body.innerHTML = ''; });
 
-describe('blocks-channel-reaction-bar', () => {
+describe('agency-channel-reaction-bar', () => {
   it('renders grouped reaction pills', async () => {
-    const el = document.createElement('blocks-channel-reaction-bar') as any;
+    const el = document.createElement('agency-channel-reaction-bar') as any;
     el.reactions = makeReactions([['👍', ['a', 'b']], ['❤️', ['a']]]);
     el.messageId = 'msg-1';
     document.body.appendChild(el);
@@ -28,7 +28,7 @@ describe('blocks-channel-reaction-bar', () => {
   });
 
   it('highlights pills where current user reacted', async () => {
-    const el = document.createElement('blocks-channel-reaction-bar') as any;
+    const el = document.createElement('agency-channel-reaction-bar') as any;
     el.reactions = makeReactions([['👍', ['me', 'other']]]);
     el.messageId = 'msg-1';
     el.currentActorId = 'me';
@@ -40,7 +40,7 @@ describe('blocks-channel-reaction-bar', () => {
   });
 
   it('emits channel:react on click when not reacted', async () => {
-    const el = document.createElement('blocks-channel-reaction-bar') as any;
+    const el = document.createElement('agency-channel-reaction-bar') as any;
     el.reactions = makeReactions([['👍', ['other']]]);
     el.messageId = 'msg-1';
     el.currentActorId = 'me';
@@ -57,7 +57,7 @@ describe('blocks-channel-reaction-bar', () => {
   });
 
   it('emits channel:unreact on click when already reacted', async () => {
-    const el = document.createElement('blocks-channel-reaction-bar') as any;
+    const el = document.createElement('agency-channel-reaction-bar') as any;
     el.reactions = makeReactions([['👍', ['me']]]);
     el.messageId = 'msg-1';
     el.currentActorId = 'me';
@@ -72,7 +72,7 @@ describe('blocks-channel-reaction-bar', () => {
   });
 
   it('does not render add-reaction button', async () => {
-    const el = document.createElement('blocks-channel-reaction-bar') as any;
+    const el = document.createElement('agency-channel-reaction-bar') as any;
     el.reactions = [];
     el.messageId = 'msg-1';
     document.body.appendChild(el);
@@ -83,7 +83,7 @@ describe('blocks-channel-reaction-bar', () => {
   });
 
   it('renders nothing when reactions array is empty', async () => {
-    const el = document.createElement('blocks-channel-reaction-bar') as any;
+    const el = document.createElement('agency-channel-reaction-bar') as any;
     el.reactions = [];
     el.messageId = 'msg-1';
     document.body.appendChild(el);

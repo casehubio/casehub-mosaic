@@ -3,7 +3,7 @@ import { customElement } from 'lit/decorators.js';
 import '@casehubio/mosaic-document-workbench';
 import { MOCK_SNAPSHOTS } from '../../mock-data/document-workbench.js';
 
-@customElement('blocks-example-document-timeline')
+@customElement('agency-example-document-timeline')
 export class DocumentTimelinePage extends LitElement {
   static override styles = css`
     :host { display: block; padding: 24px; }

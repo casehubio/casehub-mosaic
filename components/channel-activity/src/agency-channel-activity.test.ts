@@ -1,12 +1,12 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
-import './blocks-channel-activity.js';
+import './agency-channel-activity.js';
 
-describe('blocks-channel-activity', () => {
+describe('agency-channel-activity', () => {
   let el: HTMLElement;
 
   beforeEach(() => {
     document.body.innerHTML = '';
-    el = document.createElement('blocks-channel-activity');
+    el = document.createElement('agency-channel-activity');
     document.body.appendChild(el);
   });
 
@@ -20,13 +20,13 @@ describe('blocks-channel-activity', () => {
     const workbench = sr.querySelector('pages-split-workbench');
     expect(workbench).toBeTruthy();
     expect(workbench!.getAttribute('selection-topic')).toBe('channel');
-    const nav = sr.querySelector('blocks-channel-nav');
+    const nav = sr.querySelector('agency-channel-nav');
     expect(nav).toBeTruthy();
-    const feed = sr.querySelector('blocks-channel-feed');
+    const feed = sr.querySelector('agency-channel-feed');
     expect(feed).toBeTruthy();
-    const input = sr.querySelector('blocks-channel-input');
+    const input = sr.querySelector('agency-channel-input');
     expect(input).toBeTruthy();
-    const topicBar = sr.querySelector('blocks-channel-topic-bar');
+    const topicBar = sr.querySelector('agency-channel-topic-bar');
     expect(topicBar).toBeTruthy();
   });
 
@@ -46,7 +46,7 @@ describe('blocks-channel-activity', () => {
   it('passes channelNavLayout to channel-nav', async () => {
     (el as any).channelNavLayout = 'dropdown';
     await (el as any).updateComplete;
-    const nav = el.shadowRoot!.querySelector('blocks-channel-nav') as any;
+    const nav = el.shadowRoot!.querySelector('agency-channel-nav') as any;
     expect(nav.layout).toBe('dropdown');
   });
 
@@ -77,9 +77,9 @@ describe('blocks-channel-activity', () => {
     (el as any).channels = [{ id: 'ch1', name: 'General' }];
     (el as any).messages = [{ id: 'm1', channelId: 'ch1', content: 'hello', sender: 'alice' }];
     await (el as any).updateComplete;
-    const nav = el.shadowRoot!.querySelector('blocks-channel-nav') as any;
+    const nav = el.shadowRoot!.querySelector('agency-channel-nav') as any;
     expect(nav.channels.length).toBe(1);
-    const feed = el.shadowRoot!.querySelector('blocks-channel-feed') as any;
+    const feed = el.shadowRoot!.querySelector('agency-channel-feed') as any;
     expect(feed.messages.length).toBe(1);
   });
 });

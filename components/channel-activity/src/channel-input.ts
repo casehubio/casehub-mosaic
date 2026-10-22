@@ -5,7 +5,7 @@ import { ChannelEventTopics } from './events.js';
 import { MESSAGE_TYPES, type MessageType, type QhorusTopic, type QhorusMessage } from './types.js';
 import '@casehubio/pages-ui-components';
 
-@customElement('blocks-channel-input')
+@customElement('agency-channel-input')
 export class ChannelInputElement extends LitElement {
   @property({ type: String }) channelId = '';
   @property({ type: Object }) replyTo?: { messageId: string; senderName: string } | undefined;
@@ -314,6 +314,6 @@ export class ChannelInputElement extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'blocks-channel-input': ChannelInputElement;
+    'agency-channel-input': ChannelInputElement;
   }
 }

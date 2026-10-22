@@ -10,8 +10,8 @@
     "registry": "https://npm.pkg.github.com"
   },
   "type": "module",
-  "main": "dist/blocks-decomposition-tree.js",
-  "types": "dist/blocks-decomposition-tree.d.ts",
+  "main": "dist/agency-decomposition-tree.js",
+  "types": "dist/agency-decomposition-tree.d.ts",
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
     "typecheck": "tsc --noEmit",

@@ -3,7 +3,7 @@ import { customElement, state } from 'lit/decorators.js';
 import { registerCollection, mythicCollection, chibiCollection, neonCollection } from '../../../packages/agent-avatar-2d/src/index.js';
 import '../../../components/avatar-step/src/avatar-step.js';
 
-@customElement('blocks-example-avatar-step')
+@customElement('agency-example-avatar-step')
 export class AvatarStepPage extends LitElement {
   @state() private _eventLog: string[] = [];
 
@@ -69,6 +69,6 @@ export class AvatarStepPage extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'blocks-example-avatar-step': AvatarStepPage;
+    'agency-example-avatar-step': AvatarStepPage;
   }
 }

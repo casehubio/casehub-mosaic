@@ -10,8 +10,8 @@
     "registry": "https://npm.pkg.github.com"
   },
   "type": "module",
-  "main": "dist/blocks-case-flow-viewer.js",
-  "types": "dist/blocks-case-flow-viewer.d.ts",
+  "main": "dist/agency-case-flow-viewer.js",
+  "types": "dist/agency-case-flow-viewer.d.ts",
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
     "typecheck": "tsc --noEmit",

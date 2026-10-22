@@ -27,7 +27,7 @@ export interface ServiceCardProps {
   endpoint?: string;
 }
 
-@customElement('blocks-service-card')
+@customElement('agency-service-card')
 export class ServiceCard extends LitElement {
   @property({ attribute: false }) data: ServiceCardData | null = null;
   @property() endpoint?: string;
@@ -186,6 +186,6 @@ export class ServiceCard extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'blocks-service-card': ServiceCard;
+    'agency-service-card': ServiceCard;
   }
 }

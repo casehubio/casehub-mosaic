@@ -16,7 +16,7 @@ const commitmentMap = new Map<string, CommitmentRecord>(Object.entries(commitmen
 const decorations = decorateCommitmentRanges(messages, commitmentMap);
 const decoratedIds = new Set(decorations.flatMap(d => d.messageIds));
 
-@customElement('blocks-example-commitment-viz')
+@customElement('agency-example-commitment-viz')
 export class CommitmentVizPage extends LitElement {
   static override styles = css`
     :host { display: block; padding: 24px; }
@@ -125,6 +125,6 @@ export class CommitmentVizPage extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'blocks-example-commitment-viz': CommitmentVizPage;
+    'agency-example-commitment-viz': CommitmentVizPage;
   }
 }

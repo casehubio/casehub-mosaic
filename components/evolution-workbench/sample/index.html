@@ -8,7 +8,7 @@
     body { margin: 0; font-family: system-ui, sans-serif; background: #f8f8f8; }
     .container { max-width: 1200px; margin: 0 auto; height: 100vh; display: flex; flex-direction: column; }
     h1 { padding: 16px 24px; margin: 0; font-size: 18px; border-bottom: 1px solid #e0e0e0; background: white; }
-    blocks-evolution-workbench { flex: 1; background: white; }
+    agency-evolution-workbench { flex: 1; background: white; }
   </style>
   <script type="module">
     import {
@@ -49,7 +49,7 @@
     customElements.define('sample-trading-risk-panel', SampleTradingRiskPanel);
 
     // Configure workbench with inline data + domain extension tab
-    const workbench = document.querySelector('blocks-evolution-workbench');
+    const workbench = document.querySelector('agency-evolution-workbench');
     workbench.configure({
       state: sampleState,
       streams: sampleStreams,
@@ -68,7 +68,7 @@
 <body>
   <div class="container">
     <h1>Evolution Workbench — Sample Page</h1>
-    <blocks-evolution-workbench></blocks-evolution-workbench>
+    <agency-evolution-workbench></agency-evolution-workbench>
   </div>
 </body>
 </html>

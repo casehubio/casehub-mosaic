@@ -6,7 +6,7 @@ import { computeElkLayout, toReactFlowGraph } from '@casehubio/graph-renderer';
 import type { ElkLayoutResult } from '@casehubio/graph-renderer';
 import { toDOT } from './dot-export.js';
 import type { FilterChangePayload } from './types.js';
-import './blocks-dependency-toolbar.js';
+import './agency-dependency-toolbar.js';
 import '@casehubio/graph-renderer';
 
 type RfNode = ReturnType<typeof toReactFlowGraph>['nodes'][number];
@@ -17,8 +17,8 @@ export interface CaseDependencyGraphProps {
   selectionTopic: string;
 }
 
-@customElement('blocks-case-dependency-graph')
-export class BlocksCaseDependencyGraph extends LitElement {
+@customElement('agency-case-dependency-graph')
+export class AgencyCaseDependencyGraph extends LitElement {
   @property({ type: String }) endpoint: string | undefined;
   @property({ attribute: false }) graphData: GraphModel | undefined;
   @property({ attribute: 'selection-topic' }) selectionTopic = 'case-graph';
@@ -175,12 +175,12 @@ export class BlocksCaseDependencyGraph extends LitElement {
     const ariaLabel = `Case dependency graph: ${nodeCount} case${nodeCount !== 1 ? 's' : ''}, ${edgeCount} relationship${edgeCount !== 1 ? 's' : ''}`;
 
     return html`
-      <blocks-dependency-toolbar
+      <agency-dependency-toolbar
         .edgeTypes=${this._edgeTypeSummary()}
         .selectedTypes=${this._selectedTypes}
         .nodeCount=${nodeCount}
         .edgeCount=${edgeCount}
-      ></blocks-dependency-toolbar>
+      ></agency-dependency-toolbar>
       <div class="canvas-area">
         <pages-graph-canvas
           .nodes=${this._nodes}

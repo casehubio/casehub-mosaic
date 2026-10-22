@@ -9,10 +9,10 @@ import type {
   GroundedFact, ConversationEntry,
 } from './types.js';
 import '@casehubio/pages-ui-components/split-workbench';
-import './blocks-convergence-indicator.js';
-import './blocks-point-list.js';
-import './blocks-point-detail.js';
-import './blocks-common-ground-panel.js';
+import './agency-convergence-indicator.js';
+import './agency-point-list.js';
+import './agency-point-detail.js';
+import './agency-common-ground-panel.js';
 
 export interface ConversationWorkbenchProps {
   conversationState?: ConversationState;
@@ -20,7 +20,7 @@ export interface ConversationWorkbenchProps {
   factTopic: string;
 }
 
-@customElement('blocks-conversation-workbench')
+@customElement('agency-conversation-workbench')
 export class ConversationWorkbench extends KeyboardShortcutMixin(LiveRegionMixin(LitElement)) {
   @property({ attribute: false }) conversationState?: ConversationState;
   @property({ type: String, attribute: 'selection-topic' }) selectionTopic = 'conversation-point';
@@ -41,12 +41,12 @@ export class ConversationWorkbench extends KeyboardShortcutMixin(LiveRegionMixin
     :host { display: block; height: 100%; font-family: var(--pages-font-family, system-ui); }
     pages-split-workbench { height: 100%; }
     .left-panel { display: flex; flex-direction: column; height: 100%; overflow: hidden; }
-    .left-panel blocks-convergence-indicator {
+    .left-panel agency-convergence-indicator {
       flex-shrink: 0; position: sticky; top: 0; z-index: 1;
       background: var(--pages-neutral-1, #fafafa);
       border-bottom: 1px solid var(--pages-neutral-4, #d4d4d4);
     }
-    .left-panel blocks-point-list { flex: 1; overflow: hidden; }
+    .left-panel agency-point-list { flex: 1; overflow: hidden; }
     .detail-panel { height: 100%; overflow: hidden; }
   `;
 
@@ -126,16 +126,16 @@ export class ConversationWorkbench extends KeyboardShortcutMixin(LiveRegionMixin
     return html`
       <pages-split-workbench selection-topic=${this.selectionTopic}>
         <div slot="list" class="left-panel">
-          <blocks-convergence-indicator
+          <agency-convergence-indicator
             .signal=${this.conversationState?.convergence}
             size="sm"
-          ></blocks-convergence-indicator>
-          <blocks-point-list
+          ></agency-convergence-indicator>
+          <agency-point-list
             .points=${this.conversationState?.points ?? []}
             .currentRound=${this.conversationState?.currentRound ?? 0}
             .selectionTopic=${this.selectionTopic}
             .renderPoint=${this.renderPoint}
-          ></blocks-point-list>
+          ></agency-point-list>
         </div>
         <div slot="detail" class="detail-panel">
           ${this._renderRightPane()}
@@ -147,27 +147,27 @@ export class ConversationWorkbench extends KeyboardShortcutMixin(LiveRegionMixin
   private _renderRightPane(): TemplateResult {
     if (this._selectedPoint) {
       return html`
-        <blocks-point-detail
+        <agency-point-detail
           .point=${this._selectedPoint}
           .findings=${this._filteredFindings}
           .flags=${this._filteredFlags}
           .obligations=${this._filteredObligations}
           .renderEntry=${this.renderEntry}
-        ></blocks-point-detail>
+        ></agency-point-detail>
       `;
     }
     return html`
-      <blocks-common-ground-panel
+      <agency-common-ground-panel
         .commonGround=${this.conversationState?.commonGround}
         .factTopic=${this.factTopic}
         .renderFact=${this.renderFact}
-      ></blocks-common-ground-panel>
+      ></agency-common-ground-panel>
     `;
   }
 }
 
 declare global {
   interface HTMLElementTagNameMap {
-    'blocks-conversation-workbench': ConversationWorkbench;
+    'agency-conversation-workbench': ConversationWorkbench;
   }
 }

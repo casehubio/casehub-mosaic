@@ -22,7 +22,7 @@ export interface EntityListProps {
   pageSize: number;
 }
 
-@customElement('blocks-entity-list')
+@customElement('agency-entity-list')
 export class EntityList extends LiveRegionMixin(LitElement) {
   @property({ attribute: false }) registration?: EntityTypeRegistration;
   @property({ type: String }) endpoint = '';
@@ -125,7 +125,7 @@ export class EntityList extends LiveRegionMixin(LitElement) {
           <button @click=${() => this._fetchEntities()}>Retry</button>
         </div>
       ` : nothing}
-      <blocks-list-pane
+      <agency-list-pane
         .dataSet=${this._dataSet}
         .columnConfig=${[{ id: ENTITY_ID_COLUMN, visible: false }, ...reg.columnConfig]}
         .columnRenderers=${reg.columnRenderers ? new Map(Object.entries(reg.columnRenderers)) : undefined}
@@ -134,7 +134,7 @@ export class EntityList extends LiveRegionMixin(LitElement) {
         .pageSize=${this.pageSize}
         selection-topic=${this.selectionTopic ? `${this.selectionTopic}:_internal` : ''}
         @row-activate=${this._onRowActivate}
-      ></blocks-list-pane>
+      ></agency-list-pane>
       ${this._nextCursor ? html`
         <div class="load-more">
           <button @click=${() => this._loadMore()} ?disabled=${this._loading}>Load more</button>

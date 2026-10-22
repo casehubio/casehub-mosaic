@@ -12,7 +12,7 @@ export interface ListPaneProps {
   pageSize: number;
 }
 
-@customElement('blocks-list-pane')
+@customElement('agency-list-pane')
 export class ListPane extends PushMixin(DataSourceMixin(LitElement)) {
   @property({ attribute: false }) columnConfig?: readonly TableColumnConfig[];
   @property({ attribute: false }) columnRenderers?: ReadonlyMap<ColumnId, ColumnRenderer>;
@@ -111,6 +111,6 @@ export class ListPane extends PushMixin(DataSourceMixin(LitElement)) {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'blocks-list-pane': ListPane;
+    'agency-list-pane': ListPane;
   }
 }

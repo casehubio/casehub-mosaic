@@ -130,7 +130,7 @@ async function createElement(opts: {
   mockFetch?: typeof fetch;
   sseManager?: MockSSEManager;
 }): Promise<NotificationInbox> {
-  const el = document.createElement('blocks-notification-inbox') as NotificationInbox;
+  const el = document.createElement('agency-notification-inbox') as NotificationInbox;
   if (opts.data) el.data = opts.data;
   if (opts.endpoint) el.endpoint = opts.endpoint;
   if (opts.mockFetch) el.fetchFn = opts.mockFetch;
@@ -141,7 +141,7 @@ async function createElement(opts: {
   return el;
 }
 
-describe('blocks-notification-inbox', () => {
+describe('agency-notification-inbox', () => {
   let mockSSE: MockSSEManager;
 
   beforeEach(() => {
@@ -439,8 +439,8 @@ describe('blocks-notification-inbox', () => {
     expect(readCalls.length).toBe(2);
   });
 
-  // --- 14. Batch dismiss shows BlocksConfirmDialog before execution ---
-  it('batch dismiss shows BlocksConfirmDialog before execution', async () => {
+  // --- 14. Batch dismiss shows AgencyConfirmDialog before execution ---
+  it('batch dismiss shows AgencyConfirmDialog before execution', async () => {
     const el = await createElement({ data: MOCK_NOTIFICATIONS });
     await el.updateComplete;
 
@@ -567,7 +567,7 @@ describe('blocks-notification-inbox', () => {
 
   describe('column layout', () => {
     it('status column width accommodates its header or hides it', async () => {
-      const el = document.createElement('blocks-notification-inbox') as NotificationInbox;
+      const el = document.createElement('agency-notification-inbox') as NotificationInbox;
       el.data = [makeNotification()];
       document.body.appendChild(el);
       await (el as any).updateComplete;
@@ -586,7 +586,7 @@ describe('blocks-notification-inbox', () => {
     });
 
     it('age column width fits short date text without overflow', async () => {
-      const el = document.createElement('blocks-notification-inbox') as NotificationInbox;
+      const el = document.createElement('agency-notification-inbox') as NotificationInbox;
       el.data = [makeNotification()];
       document.body.appendChild(el);
       await (el as any).updateComplete;
@@ -605,14 +605,14 @@ describe('blocks-notification-inbox', () => {
 
   describe('ARIA', () => {
     it('has aria-label on host', () => {
-      const el = document.createElement('blocks-notification-inbox') as NotificationInbox;
+      const el = document.createElement('agency-notification-inbox') as NotificationInbox;
       document.body.appendChild(el);
       expect(el.getAttribute('aria-label')).toBe('Notification inbox');
       el.remove();
     });
 
     it('has aria-live on inbox container', async () => {
-      const el = document.createElement('blocks-notification-inbox') as NotificationInbox;
+      const el = document.createElement('agency-notification-inbox') as NotificationInbox;
       document.body.appendChild(el);
       await (el as any).updateComplete;
       const container = el.shadowRoot!.querySelector('.inbox-container');

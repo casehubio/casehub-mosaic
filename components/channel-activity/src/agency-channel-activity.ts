@@ -42,8 +42,8 @@ export interface ChannelActivityProps {
   showDelete: boolean;
 }
 
-@customElement('blocks-channel-activity')
-export class BlocksChannelActivityElement extends Base {
+@customElement('agency-channel-activity')
+export class AgencyChannelActivityElement extends Base {
   @property({ type: String, attribute: 'selection-topic' }) selectionTopic = 'channel';
   @property({ type: String }) channelNavLayout: 'sidebar' | 'dropdown' = 'sidebar';
   @property({ type: Boolean }) sidebarOpen = false;
@@ -253,17 +253,17 @@ export class BlocksChannelActivityElement extends Base {
   };
 
   private static readonly SIDEBAR_TABS = [
-    { id: 'members', label: 'Members', tagName: 'blocks-channel-member-panel' },
-    { id: 'tasks', label: 'Tasks', tagName: 'blocks-channel-task-panel' },
-    { id: 'artifacts', label: 'Artifacts', tagName: 'blocks-channel-artifact-panel' },
-    { id: 'links', label: 'Links', tagName: 'blocks-channel-correlation-panel' },
+    { id: 'members', label: 'Members', tagName: 'agency-channel-member-panel' },
+    { id: 'tasks', label: 'Tasks', tagName: 'agency-channel-task-panel' },
+    { id: 'artifacts', label: 'Artifacts', tagName: 'agency-channel-artifact-panel' },
+    { id: 'links', label: 'Links', tagName: 'agency-channel-correlation-panel' },
   ] as const;
 
   private _renderSidebar(): TemplateResult | typeof nothing {
     return html`
       <div class="sidebar" id="sidebar" ?hidden=${!this.sidebarOpen}>
         <div class="sidebar-tabs" role="tablist" aria-label="Panel tabs">
-          ${BlocksChannelActivityElement.SIDEBAR_TABS.map(tab => html`
+          ${AgencyChannelActivityElement.SIDEBAR_TABS.map(tab => html`
             <button class="sidebar-tab" role="tab"
               aria-selected=${this._activeSidebarTab === tab.id}
               aria-controls="sidebar-panel-${tab.id}"
@@ -281,7 +281,7 @@ export class BlocksChannelActivityElement extends Base {
   }
 
   private _renderSidebarPanel(): TemplateResult {
-    const tab = BlocksChannelActivityElement.SIDEBAR_TABS.find(t => t.id === this._activeSidebarTab);
+    const tab = AgencyChannelActivityElement.SIDEBAR_TABS.find(t => t.id === this._activeSidebarTab);
     if (!tab) return html``;
     let panel = this._sidebarPanels.get(tab.id);
     if (!panel) {
@@ -336,22 +336,22 @@ export class BlocksChannelActivityElement extends Base {
             ☰ Panels
           </button>
         </span>
-        <blocks-channel-nav slot="list"
+        <agency-channel-nav slot="list"
           .channels=${this._navChannels}
           .channelTree=${this._navChannelTree}
           .layout=${this.channelNavLayout}
           .selectedChannelId=${this._selectedChannelId}
           .showCreate=${this.showCreate}
           .showDelete=${this.showDelete}>
-        </blocks-channel-nav>
+        </agency-channel-nav>
         <div slot="detail" class="detail-area">
           <div class="main-column">
-            <blocks-channel-topic-bar
+            <agency-channel-topic-bar
               .topics=${this._feedTopics}
               .selectedTopicId=${this._selectedTopicId}
               .viewMode=${this.viewMode}>
-            </blocks-channel-topic-bar>
-            <blocks-channel-feed
+            </agency-channel-topic-bar>
+            <agency-channel-feed
               .messages=${this._feedMessages}
               .reactions=${this._feedReactions}
               .channelId=${this._selectedChannelId}
@@ -368,8 +368,8 @@ export class BlocksChannelActivityElement extends Base {
               .renderContextHeader=${this.renderContextHeader}
               .renderContent=${this.renderContent}
               .formatSender=${this.formatSender}>
-            </blocks-channel-feed>
-            <blocks-channel-input
+            </agency-channel-feed>
+            <agency-channel-input
               .channelId=${this._selectedChannelId}
               .replyTo=${this._replyTo}
               .showTypeSelector=${this.showTypeSelector}
@@ -380,7 +380,7 @@ export class BlocksChannelActivityElement extends Base {
               .allowedTypes=${this.allowedTypes}
               .deniedTypes=${this.deniedTypes}
               .renderError=${this.renderError}>
-            </blocks-channel-input>
+            </agency-channel-input>
           </div>
           ${this._renderSidebar()}
         </div>
@@ -390,5 +390,5 @@ export class BlocksChannelActivityElement extends Base {
 }
 
 declare global {
-  interface HTMLElementTagNameMap { 'blocks-channel-activity': BlocksChannelActivityElement; }
+  interface HTMLElementTagNameMap { 'agency-channel-activity': AgencyChannelActivityElement; }
 }

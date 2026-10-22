@@ -30,7 +30,7 @@ const LANE_CONFIG: Map<string, GroupStyleConfig> = new Map([
   ['NORMAL', { className: 'lane-normal', icon: '🟢', label: 'Normal' }],
 ]);
 
-@customElement('blocks-example-grouped-data-view')
+@customElement('agency-example-grouped-data-view')
 export class GroupedDataViewPage extends LitElement {
   @state() private _eventLog: string[] = [];
   @state() private _dataSet: TypedDataSet;
@@ -66,27 +66,27 @@ export class GroupedDataViewPage extends LitElement {
 
       <h3>Sectioned with Lane Styling</h3>
       <div class="demo-section" @pages-event=${this._handleEvent}>
-        <blocks-grouped-data-view
+        <agency-grouped-data-view
           group-by="lane"
           .groupOrder=${['CRITICAL', 'HIGH', 'NORMAL']}
           .groupConfig=${LANE_CONFIG}
           .dataSet=${this._dataSet}
           sortable
-        ></blocks-grouped-data-view>
+        ></agency-grouped-data-view>
       </div>
 
       <h3>Spreadsheet Preset</h3>
       <div class="demo-section">
-        <blocks-grouped-data-view
+        <agency-grouped-data-view
           group-by="lane"
           preset="spreadsheet"
           .dataSet=${this._dataSet}
-        ></blocks-grouped-data-view>
+        ></agency-grouped-data-view>
       </div>
 
       <h3>Empty State</h3>
       <div class="demo-section">
-        <blocks-grouped-data-view group-by="lane"></blocks-grouped-data-view>
+        <agency-grouped-data-view group-by="lane"></agency-grouped-data-view>
       </div>
 
       ${this._eventLog.length > 0 ? html`

@@ -42,7 +42,7 @@ spec:
         instructions: Validate input
 `;
 
-@customElement('blocks-example-diagram-export')
+@customElement('agency-example-diagram-export')
 export class DiagramExportPage extends LitElement {
   @state() private _yaml = PLACEHOLDER;
   @state() private _diagramType: 'case' | 'swf' = 'case';
@@ -161,5 +161,5 @@ export class DiagramExportPage extends LitElement {
 }
 
 declare global {
-  interface HTMLElementTagNameMap { 'blocks-example-diagram-export': DiagramExportPage; }
+  interface HTMLElementTagNameMap { 'agency-example-diagram-export': DiagramExportPage; }
 }

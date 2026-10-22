@@ -56,7 +56,7 @@ Portal resolutions are declared in the root `package.json`:
 
 ### mosaic-schema (`packages/mosaic-schema`)
 
-Auto-generated Zod schemas for all mosaic component properties. `BlocksComponentRegistry` in `src/registry.ts` maps element tag names to their Props interfaces. A ts-morph generator (`scripts/generate-schemas.ts`) reads the registry and produces `component-schemas.generated.ts` with per-component Zod schemas and a `blocksComponentSchemaMap`. The generator uses `tsconfig.generator.json` (with `paths` mapping packages to source) to resolve types without requiring a full build. Staleness test ensures generated schemas stay in sync. Registry completeness test ensures every `blocks-*` element has an entry.
+Auto-generated Zod schemas for all mosaic component properties. `AgencyComponentRegistry` in `src/registry.ts` maps element tag names to their Props interfaces. A ts-morph generator (`scripts/generate-schemas.ts`) reads the registry and produces `component-schemas.generated.ts` with per-component Zod schemas and an `agencyComponentSchemaMap`. The generator uses `tsconfig.generator.json` (with `paths` mapping packages to source) to resolve types without requiring a full build. Staleness test ensures generated schemas stay in sync. Registry completeness test ensures every `agency-*` element has an entry.
 
 When adding a new component:
 1. Export a `FooProps` interface from the component's index.ts
@@ -85,7 +85,7 @@ import { registerStatus } from '@casehubio/casehub-mosaic-core';
 registerStatus('myDomain', 'ACTIVE', { category: 'info', icon: '◉', pulse: true });
 ```
 
-**UI components**: `StatusBadge` (`<status-badge>`, generic status pill for all domains — #109), `PagesConfirmDialog` (re-exported from `@casehubio/pages-ui-components` as `BlocksConfirmDialog` for backward compat), `CommitmentStatePill` (`<commitment-state-pill>`, deprecated — delegates to status-badge), `stateCategoryStyles` + `CategoryStyle`.
+**UI components**: `StatusBadge` (`<status-badge>`, generic status pill for all domains — #109), `PagesConfirmDialog` (re-exported from `@casehubio/pages-ui-components` as `AgencyConfirmDialog` for backward compat), `CommitmentStatePill` (`<commitment-state-pill>`, deprecated — delegates to status-badge), `stateCategoryStyles` + `CategoryStyle`.
 
 **Utilities** (re-exported from pages): `SharedTimerController` (`subscribe`/`unsubscribe` from `@casehubio/pages-component`), `pulseAnimation` CSS (from `@casehubio/pages-ui-tokens`), `DatasetContract` (from `@casehubio/pages-data`).
 
@@ -116,7 +116,7 @@ Shared diagram orchestration extracted from casehub-diagram (#106). Exports:
 - `registerPropertySchema(nodeType, schema)` / `getPropertySchema(nodeType)` — schema registry (Map-based). `_updateSelectedNode()` uses registry lookup. Each stencil package registers schemas in its `register*Stencils()` function.
 - `DiagramToolbar` — base toolbar (save/dirty indicator)
 - `DiagramProperties` — generic schema-driven property panel with `renderPropertyForm`
-- Custom editor stubs: `BlocksPromptEditorElement` (textarea), `BlocksJsonEditorElement` (readonly JSON display) — for `x-editor-component` fields
+- Custom editor stubs: `AgencyPromptEditorElement` (textarea), `AgencyJsonEditorElement` (readonly JSON display) — for `x-editor-component` fields
 - Form utilities: `fieldTypeFor`, `validateField`, `renderNestedGroup`, `renderTriggerEditor`
 
 ### graph-stencil-swf (`packages/graph-stencil-swf`)
@@ -140,19 +140,19 @@ HTN/DAG domain adapter for the DAG execution viewer and decomposition tree (epic
 - `toDecoration(domain, state)` → `NodeDecoration` — local duplicate of graph-stencil-case's decoration function (parallel packages, no cross-dependency)
 - Types: `TaskNodeSnapshot` (LeafTask/CompoundTask), `DecompositionSnapshot`, `DagPlanSnapshot`, `DagNodeSnapshot`, `DagResultSnapshot`, `NodeStateKind` (6 variants), `PlanItemDefinition` (Primitive/Compound), `CasePlanModelSnapshot`
 
-### blocks-dag-viewer (`components/blocks-dag-viewer`)
+### agency-dag-viewer (`components/agency-dag-viewer`)
 
 Read-only DAG execution graph viewer. Wraps `pages-graph-canvas` with ELK layout. Property-based data delivery (`dagPlan`, `dagResult`, `dispatchMode`). Toolbar with dispatch mode badge, summary stats, staleness timer. Decoration-only update path skips ELK when only `dagResult` changes. Node selection via `selectionTopic` with `taskId` payload for tree ↔ DAG coordination.
 
-### blocks-decomposition-tree (`components/blocks-decomposition-tree`)
+### agency-decomposition-tree (`components/agency-decomposition-tree`)
 
 HTN decomposition tree — recursive ARIA tree for `CompoundTask → DecompositionMethod → children`. 8 strategy badge colours + unknown fallback, guard label display, `selectedMethodIndex` highlighting, `nodeStates`-driven status badges on leaves. Render callbacks (`renderLeaf`, `renderMethod`) per component-customisation protocol. Shared `selectionTopic` with DAG viewer for coordination.
 
-### blocks-plan-item-tree (`components/blocks-plan-item-tree`)
+### agency-plan-item-tree (`components/agency-plan-item-tree`)
 
 PlanItemDefinition tree — recursive ARIA tree for Primitive/Compound plan item hierarchy. `CompletionSemantics` badges (All/M-of-N/FirstWins), `DispatchMode` pills (ORCHESTRATED/CHOREOGRAPHED), repeatable indicators, entry condition display. Render callbacks (`renderPrimitive`, `renderCompound`).
 
-### blocks-plan-model-dashboard (`components/blocks-plan-model-dashboard`)
+### agency-plan-model-dashboard (`components/agency-plan-model-dashboard`)
 
 CasePlanModel dashboard — card-based grid layout showing agenda (table with status badges), focus area with rationale, resource budget key-value pairs, sub-case list with case status, compound definition progress bars. Consumes `CasePlanModelSnapshot` as a single property.
 
@@ -204,7 +204,7 @@ Approval gate — structured decision point with quorum, evidence slots, SLA int
 
 Audit trail viewer — ledger entries with data-table, Merkle verification banner, attestations, actor/type/date filters, GDPR erasure handling.
 
-### blocks-timeline (`components/blocks-timeline`)
+### agency-timeline (`components/agency-timeline`)
 
 Pluggable timeline — strategy-based content (event chronology, state progression, commitment lifecycle), three layouts (vertical, horizontal, compact), render callback resolution (component > strategy > default), temporal weighting, staggered axis labels, strategy-declared pagination (load-more in vertical layout, bypasses DataSourceMixin for raw JSON access). Replaces case-timeline.
 
@@ -276,7 +276,7 @@ Domain types live in `mosaic-core` (`types/conversation.ts`): `EpistemicStatus`,
 
 Status registrations (`conversation` and `epistemic` domains) execute at module scope in `index.ts` as top-level side effects.
 
-Workbench internals: `_selectedPointId` tracks selection. `willUpdate` derives `_selectedPoint`, filtered findings/flags/obligations by point ID. Stale selection guard clears `_selectedPointId` and emits deselection when the selected point disappears from `conversationState`. Right pane swaps between `blocks-point-detail` (selected) and `blocks-common-ground-panel` (deselected).
+Workbench internals: `_selectedPointId` tracks selection. `willUpdate` derives `_selectedPoint`, filtered findings/flags/obligations by point ID. Stale selection guard clears `_selectedPointId` and emits deselection when the selected point disappears from `conversationState`. Right pane swaps between `agency-point-detail` (selected) and `agency-common-ground-panel` (deselected).
 
 Extension points per PP-20260713-8ea1af: `renderPoint`, `renderEntry`, `renderFact` callbacks with inline styles. Generalization path for document-workbench tracked as #117.
 
@@ -336,9 +336,9 @@ The `<select>` element inside Shadow DOM can silently reset to the first option 
 
 Yarn portal resolutions in root `package.json` must match the actual directory structure in `.casehub-packages/`. If a new pages package is added upstream, add a corresponding portal resolution here or the build will fail with unresolved peer dependencies.
 
-### blocks- prefix convention
+### agency- prefix convention
 
-All custom element tag names use the `blocks-` prefix (adopted in #94). When adding new components, register with `@customElement('blocks-<name>')`. The document-workbench panels are an exception — they use unprefixed names (`<debate-feed>`, `<document-diff>`, etc.) because they predate the convention.
+All custom element tag names use the `agency-` prefix (renamed from `blocks-` in #279). When adding new components, register with `@customElement('agency-<name>')`. The document-workbench panels are an exception — they use unprefixed names (`<debate-feed>`, `<document-diff>`, etc.) because they predate the convention.
 
 ---
 
@@ -352,7 +352,7 @@ Key consumers by component:
 - **channel-activity:** drafthouse, claudony, devtown, clinical
 - **notification-inbox:** all applications (platform-level feature)
 - **audit-trail-viewer:** aml, clinical, devtown, life, soc
-- **blocks-timeline:** aml, clinical, life, ops, drafthouse, devtown
+- **agency-timeline:** aml, clinical, life, ops, drafthouse, devtown
 - **trust-score-panel:** aml, devtown, clinical, life, ops
 - **document-workbench:** drafthouse (document review workflow)
 

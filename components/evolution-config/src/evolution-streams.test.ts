@@ -4,7 +4,7 @@ import './evolution-streams.js';
 import type { EvolutionStreams } from './evolution-streams.js';
 
 function createElement(streams?: ImprovementStreamView[]): EvolutionStreams {
-  const el = document.createElement('blocks-evolution-streams') as EvolutionStreams;
+  const el = document.createElement('agency-evolution-streams') as EvolutionStreams;
   if (streams) el.streams = streams;
   document.body.appendChild(el);
   return el;
@@ -31,9 +31,9 @@ const SAMPLE_STREAMS: ImprovementStreamView[] = [
   },
 ];
 
-describe('blocks-evolution-streams', () => {
+describe('agency-evolution-streams', () => {
   afterEach(() => {
-    document.body.querySelectorAll('blocks-evolution-streams').forEach(el => el.remove());
+    document.body.querySelectorAll('agency-evolution-streams').forEach(el => el.remove());
   });
 
   it('has correct ARIA attributes', async () => {

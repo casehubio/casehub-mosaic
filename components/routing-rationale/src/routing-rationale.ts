@@ -117,7 +117,7 @@ export interface RoutingRationaleProps {
   capabilityLabel?: string;
 }
 
-@customElement('blocks-routing-rationale')
+@customElement('agency-routing-rationale')
 export class RoutingRationale extends DataSourceMixin(LiveRegionMixin(LitElement)) {
   @property({ attribute: false }) data: RoutingRationaleData | null = null;
   @property({ type: String, attribute: 'score-label' }) scoreLabel = 'Trust Score';
@@ -266,6 +266,6 @@ export class RoutingRationale extends DataSourceMixin(LiveRegionMixin(LitElement
 
 declare global {
   interface HTMLElementTagNameMap {
-    'blocks-routing-rationale': RoutingRationale;
+    'agency-routing-rationale': RoutingRationale;
   }
 }

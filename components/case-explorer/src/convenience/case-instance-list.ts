@@ -4,7 +4,7 @@ import type { ColumnRenderer, FilterDescriptor } from '../types.js';
 import { caseInstanceType } from '../presets.js';
 import '../entity-list.js';
 
-@customElement('blocks-case-instance-list')
+@customElement('agency-case-instance-list')
 export class CaseInstanceList extends LitElement {
   @property({ type: String }) endpoint = '';
   @property({ attribute: false }) columnRenderers?: Record<string, ColumnRenderer>;
@@ -20,6 +20,6 @@ export class CaseInstanceList extends LitElement {
 
   override render(): TemplateResult {
     const reg = { ...caseInstanceType({ listEndpoint: this.endpoint }), columnRenderers: this.columnRenderers, filters: this.filters };
-    return html`<blocks-entity-list .registration=${reg} selection-topic=${this.selectionTopic} .fetchFn=${this.fetchFn}></blocks-entity-list>`;
+    return html`<agency-entity-list .registration=${reg} selection-topic=${this.selectionTopic} .fetchFn=${this.fetchFn}></agency-entity-list>`;
   }
 }

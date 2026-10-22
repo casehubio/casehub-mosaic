@@ -40,7 +40,7 @@ export interface TopologyViewerProps {
   selectionTopic: string;
 }
 
-@customElement('blocks-topology-viewer')
+@customElement('agency-topology-viewer')
 export class TopologyViewer extends PushMixin(LitElement) {
   @property({ attribute: false }) data: TopologySnapshot | null = null;
   @property() endpoint?: string;
@@ -236,6 +236,6 @@ export class TopologyViewer extends PushMixin(LitElement) {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'blocks-topology-viewer': TopologyViewer;
+    'agency-topology-viewer': TopologyViewer;
   }
 }

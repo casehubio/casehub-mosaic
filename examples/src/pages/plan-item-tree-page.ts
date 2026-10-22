@@ -4,7 +4,7 @@ import '@casehubio/mosaic-agency-plan-item-tree';
 import type { PlanItemDefinition } from '@casehubio/mosaic-graph-stencil-htn';
 import mockData from '../../mock-data/plan-item.json';
 
-@customElement('blocks-example-plan-item-tree')
+@customElement('agency-example-plan-item-tree')
 export class PlanItemTreePage extends LitElement {
   private _definition = mockData.definition as unknown as PlanItemDefinition;
 
@@ -31,6 +31,6 @@ export class PlanItemTreePage extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'blocks-example-plan-item-tree': PlanItemTreePage;
+    'agency-example-plan-item-tree': PlanItemTreePage;
   }
 }

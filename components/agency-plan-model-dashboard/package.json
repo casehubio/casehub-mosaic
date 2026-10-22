@@ -10,8 +10,8 @@
     "registry": "https://npm.pkg.github.com"
   },
   "type": "module",
-  "main": "dist/blocks-plan-model-dashboard.js",
-  "types": "dist/blocks-plan-model-dashboard.d.ts",
+  "main": "dist/agency-plan-model-dashboard.js",
+  "types": "dist/agency-plan-model-dashboard.d.ts",
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
     "typecheck": "tsc --noEmit",

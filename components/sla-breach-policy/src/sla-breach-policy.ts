@@ -10,7 +10,7 @@ export interface SlaBreachPolicyProps {
   deadline: string;
 }
 
-@customElement('blocks-sla-breach-policy')
+@customElement('agency-sla-breach-policy')
 export class SlaBreachPolicy extends LitElement {
   @property({ attribute: false }) tiers: TierDefinition[] = [];
   @property({ type: Number, attribute: 'time-remaining' }) timeRemaining = 0;
@@ -92,7 +92,7 @@ export class SlaBreachPolicy extends LitElement {
     return html`
       ${this.deadline ? html`
         <div class="header">
-          <blocks-sla-indicator .deadline=${this.deadline} compact></blocks-sla-indicator>
+          <agency-sla-indicator .deadline=${this.deadline} compact></agency-sla-indicator>
         </div>
       ` : nothing}
       <div class="tier-list" role="list">
@@ -116,6 +116,6 @@ export class SlaBreachPolicy extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'blocks-sla-breach-policy': SlaBreachPolicy;
+    'agency-sla-breach-policy': SlaBreachPolicy;
   }
 }

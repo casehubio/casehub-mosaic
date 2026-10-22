@@ -26,13 +26,13 @@ const testTabs: TabDefinition[] = [
 ];
 
 function createElement(topic = 'test'): DetailPaneEl {
-  const el = document.createElement('blocks-detail-pane') as DetailPaneEl;
+  const el = document.createElement('agency-detail-pane') as DetailPaneEl;
   el.selectionTopic = topic;
   el.tabs = testTabs;
   return el;
 }
 
-describe('blocks-detail-pane', () => {
+describe('agency-detail-pane', () => {
   let el: DetailPaneEl;
 
   afterEach(() => {
@@ -341,7 +341,7 @@ describe('blocks-detail-pane', () => {
 
   describe('renderContent callback', () => {
     it('renders content from renderContent callback when present', async () => {
-      el = document.createElement('blocks-detail-pane') as DetailPaneEl;
+      el = document.createElement('agency-detail-pane') as DetailPaneEl;
       el.tabs = [
         {
           id: 'custom', label: 'Custom', tagName: 'div', order: 0,
@@ -358,7 +358,7 @@ describe('blocks-detail-pane', () => {
     });
 
     it('falls back to tagName when renderContent is absent', async () => {
-      el = document.createElement('blocks-detail-pane') as DetailPaneEl;
+      el = document.createElement('agency-detail-pane') as DetailPaneEl;
       el.tabs = [
         { id: 'fallback', label: 'Fallback', tagName: 'test-tab-panel', order: 0 },
       ];
@@ -373,7 +373,7 @@ describe('blocks-detail-pane', () => {
 
     it('passes item to renderContent callback', async () => {
       let receivedItem: unknown = null;
-      el = document.createElement('blocks-detail-pane') as DetailPaneEl;
+      el = document.createElement('agency-detail-pane') as DetailPaneEl;
       el.tabs = [
         {
           id: 'custom', label: 'Custom', tagName: 'div', order: 0,
@@ -397,7 +397,7 @@ describe('blocks-detail-pane', () => {
 
   describe('standalone mode', () => {
     it('renders tabs without selection when standalone is true', async () => {
-      el = document.createElement('blocks-detail-pane') as DetailPaneEl;
+      el = document.createElement('agency-detail-pane') as DetailPaneEl;
       (el as any).standalone = true;
       el.tabs = testTabs;
       document.body.appendChild(el);
@@ -409,7 +409,7 @@ describe('blocks-detail-pane', () => {
     });
 
     it('activates first tab in standalone mode', async () => {
-      el = document.createElement('blocks-detail-pane') as DetailPaneEl;
+      el = document.createElement('agency-detail-pane') as DetailPaneEl;
       (el as any).standalone = true;
       el.tabs = testTabs;
       document.body.appendChild(el);

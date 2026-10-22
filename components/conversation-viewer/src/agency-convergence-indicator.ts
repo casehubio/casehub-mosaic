@@ -19,7 +19,7 @@ export interface ConvergenceIndicatorProps {
   size: 'sm' | 'md';
 }
 
-@customElement('blocks-convergence-indicator')
+@customElement('agency-convergence-indicator')
 export class ConvergenceIndicator extends LitElement {
   @property({ attribute: false }) signal?: ConvergenceSignal;
   @property({ type: String }) size: 'sm' | 'md' = 'md';
@@ -83,6 +83,6 @@ export class ConvergenceIndicator extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'blocks-convergence-indicator': ConvergenceIndicator;
+    'agency-convergence-indicator': ConvergenceIndicator;
   }
 }

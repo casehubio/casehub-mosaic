@@ -4,7 +4,7 @@ import './deny-pattern-editor.js';
 import type { DenyPatternEditor } from './deny-pattern-editor.js';
 
 function createElement(patterns?: DenyPatternView, readonly = false): DenyPatternEditor {
-  const el = document.createElement('blocks-deny-pattern-editor') as DenyPatternEditor;
+  const el = document.createElement('agency-deny-pattern-editor') as DenyPatternEditor;
   if (patterns) el.patterns = patterns;
   el.readonly = readonly;
   document.body.appendChild(el);
@@ -19,9 +19,9 @@ const SAMPLE_VIEW: DenyPatternView = {
   ],
 };
 
-describe('blocks-deny-pattern-editor', () => {
+describe('agency-deny-pattern-editor', () => {
   afterEach(() => {
-    document.body.querySelectorAll('blocks-deny-pattern-editor').forEach(el => el.remove());
+    document.body.querySelectorAll('agency-deny-pattern-editor').forEach(el => el.remove());
   });
 
   it('has correct ARIA attributes', async () => {

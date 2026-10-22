@@ -27,7 +27,7 @@ const RESULT_SCENARIOS: Record<string, Record<string, { kind: string; reason?: s
   },
 };
 
-@customElement('blocks-example-dag-viewer')
+@customElement('agency-example-dag-viewer')
 export class DagViewerPage extends LitElement {
   @state() private _scenario: keyof typeof RESULT_SCENARIOS = 'mid-flight';
   @state() private _dispatchMode: DagDispatchMode = 'STREAMING';
@@ -83,5 +83,5 @@ export class DagViewerPage extends LitElement {
 }
 
 declare global {
-  interface HTMLElementTagNameMap { 'blocks-example-dag-viewer': DagViewerPage; }
+  interface HTMLElementTagNameMap { 'agency-example-dag-viewer': DagViewerPage; }
 }

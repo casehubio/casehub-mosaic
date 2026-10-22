@@ -72,7 +72,7 @@ export interface AuditTrailViewerProps {
   actorId?: string;
 }
 
-@customElement('blocks-audit-trail-viewer')
+@customElement('agency-audit-trail-viewer')
 export class AuditTrailViewer extends LiveRegionMixin(LitElement) {
   @property({ type: String }) endpoint?: string;
   @property({ type: Object }) identity?: WorkIdentity;
@@ -307,6 +307,6 @@ export class AuditTrailViewer extends LiveRegionMixin(LitElement) {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'blocks-audit-trail-viewer': AuditTrailViewer;
+    'agency-audit-trail-viewer': AuditTrailViewer;
   }
 }

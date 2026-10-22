@@ -38,7 +38,7 @@ export interface DenyPatternEditorProps {
   readonly?: boolean;
 }
 
-@customElement('blocks-deny-pattern-editor')
+@customElement('agency-deny-pattern-editor')
 export class DenyPatternEditor extends LitElement {
   @property({ type: String }) endpoint?: string;
   @property({ type: String }) caseId?: string;
@@ -287,6 +287,6 @@ export class DenyPatternEditor extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'blocks-deny-pattern-editor': DenyPatternEditor;
+    'agency-deny-pattern-editor': DenyPatternEditor;
   }
 }
