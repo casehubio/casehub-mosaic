@@ -472,7 +472,7 @@ time, readOnly skip, and recursive nested/array validation."
 
 ### Task 2: blocks-ui Type Updates, Event Topics, Dependencies
 
-**Repo:** `casehub-agency-ui` (`/Users/mdproctor/claude/casehub/worktrees/12/blocks-ui`)
+**Repo:** `casehub-blocks-ui` (`/Users/mdproctor/claude/casehub/worktrees/12/blocks-ui`)
 
 **Files:**
 - Modify: `components/notification-inbox/src/types.ts`
@@ -599,7 +599,7 @@ event topics for preferences/mute/snooze. Wires pages-form dependency."
 
 ### Task 3: Subscription Editor
 
-**Repo:** `casehub-agency-ui`
+**Repo:** `casehub-blocks-ui`
 
 **Files:**
 - Create: `components/notification-inbox/src/subscription-editor.ts`
@@ -875,7 +875,7 @@ selects. Uses pages-schema-form for rendering."
 
 ### Task 4: Channel Preferences
 
-**Repo:** `casehub-agency-ui`
+**Repo:** `casehub-blocks-ui`
 
 **Files:**
 - Create: `components/notification-inbox/src/channel-preferences.ts`
@@ -919,7 +919,7 @@ Component structure:
 
 ### Task 5: Mute List
 
-**Repo:** `casehub-agency-ui`
+**Repo:** `casehub-blocks-ui`
 
 **Files:**
 - Create: `components/notification-inbox/src/mute-list.ts`
@@ -958,7 +958,7 @@ Component structure:
 
 ### Task 6: Snooze Control
 
-**Repo:** `casehub-agency-ui`
+**Repo:** `casehub-blocks-ui`
 
 **Files:**
 - Create: `components/notification-inbox/src/snooze-control.ts`
@@ -993,7 +993,7 @@ Simplest component — two render paths based on snooze state.
 
 ### Task 7: Notification Preferences Container
 
-**Repo:** `casehub-agency-ui`
+**Repo:** `casehub-blocks-ui`
 
 **Files:**
 - Create: `components/notification-inbox/src/notification-preferences.ts`
@@ -1023,7 +1023,7 @@ Pure layout container — three `<section>` elements with headings, each renderi
 
 ### Task 8: GDPR Erasure Action Migration
 
-**Repo:** `casehub-agency-ui`
+**Repo:** `casehub-blocks-ui`
 
 **Files:**
 - Modify: `components/gdpr-erasure-action/src/gdpr-erasure-action.ts`
