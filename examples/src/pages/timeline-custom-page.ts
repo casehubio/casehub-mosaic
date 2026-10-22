@@ -1,7 +1,7 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
-import '@casehubio/mosaic-blocks-timeline';
-import type { EventTimelineNode, EventTimelineLayout, BlocksTimelineStrategy } from '@casehubio/mosaic-blocks-timeline';
+import '@casehubio/mosaic-agency-timeline';
+import type { EventTimelineNode, EventTimelineLayout, AgencyTimelineStrategy } from '@casehubio/mosaic-agency-timeline';
 import type { TemplateResult } from 'lit';
 
 interface DeployStage {
@@ -12,7 +12,7 @@ interface DeployStage {
   startedAt?: string;
 }
 
-function deployPipelineStrategy(): BlocksTimelineStrategy<DeployStage[]> {
+function deployPipelineStrategy(): AgencyTimelineStrategy<DeployStage[]> {
   return {
     toNodes(data: DeployStage[]): EventTimelineNode[] {
       return data.map((stage, i) => ({
@@ -98,23 +98,23 @@ export class TimelineCustomPage extends LitElement {
         <h2>With Custom Render Callbacks</h2>
         <p class="subtitle">Component-level renderNode and renderDetail override the built-in default</p>
         <div class="viewer-container">
-          <blocks-timeline
+          <agency-timeline
             .strategy=${deployPipelineStrategy()}
             .data=${mockPipeline}
             layout=${this._layout}
             .renderNode=${this._customRenderNode}
             .renderDetail=${this._customRenderDetail}
-          ></blocks-timeline>
+          ></agency-timeline>
         </div>
 
         <h2>Same Strategy, Built-in Rendering</h2>
         <p class="subtitle">No render callbacks — uses the built-in numbered circles / vertical nodes</p>
         <div class="viewer-container">
-          <blocks-timeline
+          <agency-timeline
             .strategy=${deployPipelineStrategy()}
             .data=${mockPipeline}
             layout=${this._layout}
-          ></blocks-timeline>
+          ></agency-timeline>
         </div>
 
         <div class="info-panel">

@@ -1,6 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
-import '@casehubio/mosaic-blocks-dag-viewer';
+import '@casehubio/mosaic-agency-dag-viewer';
 import type { DagPlanSnapshot, DagResultSnapshot, DagDispatchMode } from '@casehubio/mosaic-graph-stencil-htn';
 import mockData from '../../mock-data/dag-plan.json';
 
@@ -75,8 +75,8 @@ export class DagViewerPage extends LitElement {
         </select>
       </div>
       <div class="viewer-container">
-        <blocks-dag-viewer .dagPlan=${this._dagPlan} .dagResult=${this._dagResult}
-          .dispatchMode=${this._dispatchMode} selectionTopic="demo-dag"></blocks-dag-viewer>
+        <agency-dag-viewer .dagPlan=${this._dagPlan} .dagResult=${this._dagResult}
+          .dispatchMode=${this._dispatchMode} selectionTopic="demo-dag"></agency-dag-viewer>
       </div>
     `;
   }

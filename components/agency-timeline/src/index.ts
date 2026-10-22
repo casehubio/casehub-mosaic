@@ -1,5 +1,5 @@
-export { BlocksTimeline } from './blocks-timeline.js';
-export type { BlocksTimelineStrategy, StageConfig } from './types.js';
+export { AgencyTimeline } from './agency-timeline.js';
+export type { AgencyTimelineStrategy, StageConfig } from './types.js';
 export type { EventTimelineNode, EventNodeStatus, EventTimelineStrategy, PaginationMeta } from '@casehubio/pages-viz';
 export type { EventTimelineLayout } from '@casehubio/pages-component';
 export { stateProgressionStrategy, linearResolveStatus, QHORUS_STAGES } from './strategies/state-progression.js';

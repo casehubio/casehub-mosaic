@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@casehubio/mosaic-approval-gate": "workspace:*",
-    "@casehubio/mosaic-blocks-timeline": "workspace:*",
+    "@casehubio/mosaic-agency-timeline": "workspace:*",
     "@casehubio/mosaic-case-explorer": "workspace:*",
     "@casehubio/mosaic-channel-activity": "workspace:*",
     "@casehubio/mosaic-core": "workspace:*",

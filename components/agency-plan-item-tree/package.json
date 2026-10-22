@@ -1,5 +1,5 @@
 {
-  "name": "@casehubio/mosaic-blocks-plan-item-tree",
+  "name": "@casehubio/mosaic-agency-plan-item-tree",
   "version": "0.1.0",
   "description": "PlanItemDefinition tree with CompletionSemantics badges and DispatchMode pills",
   "repository": {

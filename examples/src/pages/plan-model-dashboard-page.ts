@@ -1,6 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import '@casehubio/mosaic-blocks-plan-model-dashboard';
+import '@casehubio/mosaic-agency-plan-model-dashboard';
 import type { CasePlanModelSnapshot } from '@casehubio/mosaic-graph-stencil-htn';
 import mockData from '../../mock-data/plan-model.json';
 
@@ -22,7 +22,7 @@ export class PlanModelDashboardPage extends LitElement {
       <p>CasePlanModel dashboard — card-based grid showing agenda table with status badges,
         focus area with rationale, resource budget, sub-case list, and compound definition progress bars.</p>
       <div class="dashboard-container">
-        <blocks-plan-model-dashboard .planModel=${this._planModel}></blocks-plan-model-dashboard>
+        <agency-plan-model-dashboard .planModel=${this._planModel}></agency-plan-model-dashboard>
       </div>
     `;
   }

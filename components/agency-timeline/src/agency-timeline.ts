@@ -2,8 +2,8 @@ import { customElement } from 'lit/decorators.js';
 import { PagesEventTimeline } from '@casehubio/pages-viz';
 import type { WorkIdentity } from '@casehubio/mosaic-core';
 
-@customElement('blocks-timeline')
-export class BlocksTimeline extends PagesEventTimeline {
+@customElement('agency-timeline')
+export class AgencyTimeline extends PagesEventTimeline {
   override configure(props: Record<string, unknown>): void {
     if (props.identity !== undefined) {
       const id = props.identity as WorkIdentity;
@@ -15,6 +15,6 @@ export class BlocksTimeline extends PagesEventTimeline {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'blocks-timeline': BlocksTimeline;
+    'agency-timeline': AgencyTimeline;
   }
 }

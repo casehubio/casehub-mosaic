@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 import { describe, it, expect } from 'vitest';
-import { BlocksPlanModelDashboard } from './blocks-plan-model-dashboard.js';
+import { AgencyPlanModelDashboard } from './agency-plan-model-dashboard.js';
 import type { CasePlanModelSnapshot } from '@casehubio/mosaic-graph-stencil-htn';
 
 function emptyModel(): CasePlanModelSnapshot {
@@ -34,20 +34,20 @@ function fullModel(): CasePlanModelSnapshot {
   };
 }
 
-describe('BlocksPlanModelDashboard', () => {
+describe('AgencyPlanModelDashboard', () => {
   it('renders empty state when planModel is null', () => {
-    const el = new BlocksPlanModelDashboard();
+    const el = new AgencyPlanModelDashboard();
     expect(el.planModel).toBeNull();
   });
 
   it('stores planModel property', () => {
-    const el = new BlocksPlanModelDashboard();
+    const el = new AgencyPlanModelDashboard();
     el.planModel = emptyModel();
     expect(el.planModel!.caseId).toBe('case-1');
   });
 
   it('accepts model with empty collections', () => {
-    const el = new BlocksPlanModelDashboard();
+    const el = new AgencyPlanModelDashboard();
     el.planModel = emptyModel();
     expect(el.planModel!.agenda).toHaveLength(0);
     expect(el.planModel!.subCases).toHaveLength(0);
@@ -55,7 +55,7 @@ describe('BlocksPlanModelDashboard', () => {
   });
 
   it('accepts full model with all fields', () => {
-    const el = new BlocksPlanModelDashboard();
+    const el = new AgencyPlanModelDashboard();
     el.planModel = fullModel();
     expect(el.planModel!.agenda).toHaveLength(2);
     expect(el.planModel!.focus).toBe('identity-verification');
@@ -67,7 +67,7 @@ describe('BlocksPlanModelDashboard', () => {
   });
 
   it('renders cards with role="region" and aria-label', async () => {
-    const el = new BlocksPlanModelDashboard();
+    const el = new AgencyPlanModelDashboard();
     el.planModel = fullModel();
     document.body.appendChild(el);
     await (el as any).updateComplete;
@@ -82,7 +82,7 @@ describe('BlocksPlanModelDashboard', () => {
   });
 
   it('renders compound progress with role="progressbar"', async () => {
-    const el = new BlocksPlanModelDashboard();
+    const el = new AgencyPlanModelDashboard();
     el.planModel = fullModel();
     document.body.appendChild(el);
     await (el as any).updateComplete;

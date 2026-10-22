@@ -1,6 +1,6 @@
 import type { EventTimelineStrategy } from '@casehubio/pages-viz';
 
-export type BlocksTimelineStrategy<T = unknown> = EventTimelineStrategy<T>;
+export type AgencyTimelineStrategy<T = unknown> = EventTimelineStrategy<T>;
 
 export type { PaginationMeta } from '@casehubio/pages-viz';
 

@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 import { describe, it, expect } from 'vitest';
-import { BlocksDecompositionTree, STRATEGY_COLORS } from './blocks-decomposition-tree.js';
+import { AgencyDecompositionTree, STRATEGY_COLORS } from './agency-decomposition-tree.js';
 import type {
   DecompositionSnapshot, LeafTaskSnapshot, CompoundTaskSnapshot,
   DecompositionMethodSnapshot, NodeStateSnapshot,
@@ -33,46 +33,46 @@ function snap(root: LeafTaskSnapshot | CompoundTaskSnapshot): DecompositionSnaps
   return { root, timestamp: '2026-08-06T10:00:00Z' };
 }
 
-describe('BlocksDecompositionTree', () => {
+describe('AgencyDecompositionTree', () => {
   it('renders empty state when decomposition is null', () => {
-    const el = new BlocksDecompositionTree();
+    const el = new AgencyDecompositionTree();
     expect(el.decomposition).toBeNull();
   });
 
   it('stores decomposition property', () => {
-    const el = new BlocksDecompositionTree();
+    const el = new AgencyDecompositionTree();
     el.decomposition = snap(leaf('a', 'Test'));
     expect(el.decomposition!.root.kind).toBe('leaf');
   });
 
   it('stores nodeStates property', () => {
-    const el = new BlocksDecompositionTree();
+    const el = new AgencyDecompositionTree();
     const states: Record<string, NodeStateSnapshot> = { 'a': { kind: 'Completed' } };
     el.nodeStates = states;
     expect(el.nodeStates!['a']!.kind).toBe('Completed');
   });
 
   it('stores renderLeaf callback', () => {
-    const el = new BlocksDecompositionTree();
+    const el = new AgencyDecompositionTree();
     const cb = () => null as any;
     el.renderLeaf = cb;
     expect(el.renderLeaf).toBe(cb);
   });
 
   it('stores renderMethod callback', () => {
-    const el = new BlocksDecompositionTree();
+    const el = new AgencyDecompositionTree();
     const cb = () => null as any;
     el.renderMethod = cb;
     expect(el.renderMethod).toBe(cb);
   });
 
   it('defaults selectionTopic to dag-node', () => {
-    const el = new BlocksDecompositionTree();
+    const el = new AgencyDecompositionTree();
     expect(el.selectionTopic).toBe('dag-node');
   });
 
   it('accepts custom selectionTopic', () => {
-    const el = new BlocksDecompositionTree();
+    const el = new AgencyDecompositionTree();
     el.selectionTopic = 'custom';
     expect(el.selectionTopic).toBe('custom');
   });

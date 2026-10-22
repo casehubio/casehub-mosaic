@@ -27,7 +27,7 @@ Chosen option: **Option C**, because it provides deterministic composition with 
 ### Positive Consequences
 
 * Generic engine in pages/graph-renderer — reusable by case, SWF, and future diagram types
-* Domain layer (blocks-ui) is thin — sizing classifier + node-type bindings
+* Domain layer (mosaic) is thin — sizing classifier + node-type bindings
 * Explain mode provides debug visibility into which rules fired and why
 * Hard constraints verify layout correctness independently of which rules produced it
 

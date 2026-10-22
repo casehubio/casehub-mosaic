@@ -25,8 +25,8 @@ export interface DecompositionTreeProps {
   selectionTopic: string;
 }
 
-@customElement('blocks-decomposition-tree')
-export class BlocksDecompositionTree extends LitElement {
+@customElement('agency-decomposition-tree')
+export class AgencyDecompositionTree extends LitElement {
   @property({ type: Object }) decomposition: DecompositionSnapshot | null = null;
   @property({ type: Object }) nodeStates?: Record<string, NodeStateSnapshot>;
   @property({ type: Object }) renderLeaf?: (node: LeafTaskSnapshot) => TemplateResult;
