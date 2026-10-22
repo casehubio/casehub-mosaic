@@ -163,7 +163,7 @@ for (const prop of registryType.getProperties()) {
 const mapEntries = schemaNames
   .map(({ key, camelName }) => `  ["${key}", ${camelName}] as [string, z.ZodType]`)
   .join(",\n");
-output.push(`export const blocksComponentSchemaMap: ReadonlyMap<string, z.ZodType> = new Map([
+output.push(`export const agencyComponentSchemaMap: ReadonlyMap<string, z.ZodType> = new Map([
 ${mapEntries},
 ]);
 `);

@@ -86,9 +86,9 @@ describe("schema generator", () => {
     expect(content).not.toContain("renderCandidate:");
   });
 
-  it("exports blocksComponentSchemaMap", () => {
+  it("exports agencyComponentSchemaMap", () => {
     const content = readFileSync(generatedPath, "utf-8");
-    expect(content).toContain("export const blocksComponentSchemaMap");
+    expect(content).toContain("export const agencyComponentSchemaMap");
   });
 
   it("generated schemas parse valid sla-indicator data", async () => {

@@ -56,7 +56,7 @@ Portal resolutions are declared in the root `package.json`:
 
 ### mosaic-schema (`packages/mosaic-schema`)
 
-Auto-generated Zod schemas for all mosaic component properties. `AgencyComponentRegistry` in `src/registry.ts` maps element tag names to their Props interfaces. A ts-morph generator (`scripts/generate-schemas.ts`) reads the registry and produces `component-schemas.generated.ts` with per-component Zod schemas and a `blocksComponentSchemaMap`. The generator uses `tsconfig.generator.json` (with `paths` mapping packages to source) to resolve types without requiring a full build. Staleness test ensures generated schemas stay in sync. Registry completeness test ensures every `blocks-*` element has an entry.
+Auto-generated Zod schemas for all mosaic component properties. `AgencyComponentRegistry` in `src/registry.ts` maps element tag names to their Props interfaces. A ts-morph generator (`scripts/generate-schemas.ts`) reads the registry and produces `component-schemas.generated.ts` with per-component Zod schemas and an `agencyComponentSchemaMap`. The generator uses `tsconfig.generator.json` (with `paths` mapping packages to source) to resolve types without requiring a full build. Staleness test ensures generated schemas stay in sync. Registry completeness test ensures every `agency-*` element has an entry.
 
 When adding a new component:
 1. Export a `FooProps` interface from the component's index.ts
@@ -336,9 +336,9 @@ The `<select>` element inside Shadow DOM can silently reset to the first option 
 
 Yarn portal resolutions in root `package.json` must match the actual directory structure in `.casehub-packages/`. If a new pages package is added upstream, add a corresponding portal resolution here or the build will fail with unresolved peer dependencies.
 
-### blocks- prefix convention
+### agency- prefix convention
 
-All custom element tag names use the `blocks-` prefix (adopted in #94). When adding new components, register with `@customElement('blocks-<name>')`. The document-workbench panels are an exception — they use unprefixed names (`<debate-feed>`, `<document-diff>`, etc.) because they predate the convention.
+All custom element tag names use the `agency-` prefix (renamed from `blocks-` in #279). When adding new components, register with `@customElement('agency-<name>')`. The document-workbench panels are an exception — they use unprefixed names (`<debate-feed>`, `<document-diff>`, etc.) because they predate the convention.
 
 ---
 

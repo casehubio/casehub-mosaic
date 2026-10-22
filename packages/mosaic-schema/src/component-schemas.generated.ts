@@ -1514,7 +1514,7 @@ export const agentPersonalityWorkbenchPropsSchema = z.object({
   }).optional(),
 });
 
-export const blocksComponentSchemaMap: ReadonlyMap<string, z.ZodType> = new Map([
+export const agencyComponentSchemaMap: ReadonlyMap<string, z.ZodType> = new Map([
   ["agency-sla-indicator", slaIndicatorPropsSchema] as [string, z.ZodType],
   ["agency-execution-monitor", executionMonitorPropsSchema] as [string, z.ZodType],
   ["agency-kpi-metric-row", kpiMetricRowPropsSchema] as [string, z.ZodType],
