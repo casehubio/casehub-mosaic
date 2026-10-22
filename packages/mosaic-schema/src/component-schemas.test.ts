@@ -15,7 +15,7 @@ describe("schema generator", () => {
     expect(content).toContain("AUTO-GENERATED");
   });
 
-  it("exports a schema for every BlocksComponentRegistry entry", () => {
+  it("exports a schema for every AgencyComponentRegistry entry", () => {
     const content = readFileSync(generatedPath, "utf-8");
     const expectedSchemas = [
       "slaIndicatorPropsSchema",

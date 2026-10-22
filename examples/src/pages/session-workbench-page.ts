@@ -156,7 +156,7 @@ const MOCK_HEALTHS: Record<string, Array<{ port: number; up: boolean; responseMs
 
 let nextId = 100;
 
-@customElement('blocks-example-session-workbench')
+@customElement('agency-example-session-workbench')
 export class ExampleSessionWorkbench extends LitElement {
   @state() private _sessions = [...MOCK_SESSIONS];
   @state() private _eventLog: string[] = [];
@@ -262,7 +262,7 @@ export class ExampleSessionWorkbench extends LitElement {
       <p>Claudony worker session management — list, spawn, restart, delete. Detail tabs: Terminal, Git, Health, Events.</p>
 
       <div class="workbench-container">
-        <blocks-session-workbench endpoint="/api/sessions"></blocks-session-workbench>
+        <agency-session-workbench endpoint="/api/sessions"></agency-session-workbench>
       </div>
 
       <div class="event-log">

@@ -21,7 +21,7 @@ export interface DimensionDashboardProps {
   compact: boolean;
 }
 
-@customElement('blocks-dimension-dashboard')
+@customElement('agency-dimension-dashboard')
 export class DimensionDashboard extends LitElement {
   @property({ attribute: false }) data: DimensionDashboardData | null = null;
   @property() endpoint?: string;
@@ -175,6 +175,6 @@ export class DimensionDashboard extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'blocks-dimension-dashboard': DimensionDashboard;
+    'agency-dimension-dashboard': DimensionDashboard;
   }
 }

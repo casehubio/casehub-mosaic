@@ -62,11 +62,11 @@ function createMockApi(overrides: Partial<Record<string, unknown>> = {}) {
   } as unknown as NotificationApi;
 }
 
-describe('blocks-channel-preferences', () => {
+describe('agency-channel-preferences', () => {
   let el: ChannelPreferences;
 
   beforeEach(async () => {
-    el = document.createElement('blocks-channel-preferences') as ChannelPreferences;
+    el = document.createElement('agency-channel-preferences') as ChannelPreferences;
     el.endpoint = 'http://localhost/api';
     el.api = createMockApi();
     document.body.appendChild(el);
@@ -133,7 +133,7 @@ describe('blocks-channel-preferences', () => {
 
   it('shows error on fetch failure', async () => {
     el.remove();
-    el = document.createElement('blocks-channel-preferences') as ChannelPreferences;
+    el = document.createElement('agency-channel-preferences') as ChannelPreferences;
     el.endpoint = 'http://localhost/api';
     el.api = createMockApi({
       getChannels: async () => { throw new Error('Network error'); },

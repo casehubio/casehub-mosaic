@@ -29,7 +29,7 @@ export interface KpiMetricRowProps {
   refreshInterval: number | null;
 }
 
-@customElement('blocks-kpi-metric-row')
+@customElement('agency-kpi-metric-row')
 export class KpiMetricRow extends PushMixin(LiveRegionMixin(LitElement)) {
   @property({ type: Array }) metrics: MetricDefinition[] = [];
   @property({ type: String }) endpoint: string | null = null;
@@ -324,6 +324,6 @@ export class KpiMetricRow extends PushMixin(LiveRegionMixin(LitElement)) {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'blocks-kpi-metric-row': KpiMetricRow;
+    'agency-kpi-metric-row': KpiMetricRow;
   }
 }

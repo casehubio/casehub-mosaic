@@ -21,7 +21,7 @@ function makeMessage(overrides: Partial<QhorusMessage> = {}): QhorusMessage {
 }
 
 async function renderMessage(props: Record<string, unknown> = {}): Promise<HTMLElement> {
-  const el = document.createElement('blocks-channel-message') as any;
+  const el = document.createElement('agency-channel-message') as any;
   el.message = makeMessage(props.message as any);
   if (props.reactions) el.reactions = props.reactions;
   if (props.showSpeechAct !== undefined) el.showSpeechAct = props.showSpeechAct;
@@ -40,7 +40,7 @@ afterEach(() => {
   document.body.innerHTML = '';
 });
 
-describe('blocks-channel-message', () => {
+describe('agency-channel-message', () => {
   it('renders sender name', async () => {
     const el = await renderMessage();
     const shadow = el.shadowRoot!;
@@ -128,7 +128,7 @@ describe('blocks-channel-message', () => {
   });
 
   it('renders nothing when message is not set', async () => {
-    const el = document.createElement('blocks-channel-message') as any;
+    const el = document.createElement('agency-channel-message') as any;
     document.body.appendChild(el);
     await el.updateComplete;
     expect(el.shadowRoot!.querySelector('.message-header')).toBeNull();
@@ -136,7 +136,7 @@ describe('blocks-channel-message', () => {
 
   it('renders channel-reaction-bar', async () => {
     const el = await renderMessage();
-    const bar = el.shadowRoot!.querySelector('blocks-channel-reaction-bar');
+    const bar = el.shadowRoot!.querySelector('agency-channel-reaction-bar');
     expect(bar).toBeTruthy();
   });
 

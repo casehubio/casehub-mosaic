@@ -1,21 +1,21 @@
 // @vitest-environment jsdom
 import { describe, it, expect } from 'vitest';
-import { BlocksEnvMapEditorElement } from './blocks-env-map-editor.js';
-import { BlocksSequenceEditorElement } from './blocks-sequence-editor.js';
-import { BlocksSwfLinkElement } from './blocks-swf-link.js';
+import { AgencyEnvMapEditorElement } from './agency-env-map-editor.js';
+import { AgencySequenceEditorElement } from './agency-sequence-editor.js';
+import { AgencySwfLinkElement } from './agency-swf-link.js';
 
-describe('blocks-env-map-editor', () => {
+describe('agency-env-map-editor', () => {
   it('is registered as a custom element', () => {
-    expect(customElements.get('blocks-env-map-editor')).toBe(BlocksEnvMapEditorElement);
+    expect(customElements.get('agency-env-map-editor')).toBe(AgencyEnvMapEditorElement);
   });
 
   it('has a value property defaulting to empty object', () => {
-    const el = new BlocksEnvMapEditorElement();
+    const el = new AgencyEnvMapEditorElement();
     expect(el.value).toEqual({});
   });
 
   it('has aria-label on textarea', async () => {
-    const el = new BlocksEnvMapEditorElement();
+    const el = new AgencyEnvMapEditorElement();
     document.body.appendChild(el);
     await el.updateComplete;
     const textarea = el.shadowRoot!.querySelector('textarea');
@@ -24,13 +24,13 @@ describe('blocks-env-map-editor', () => {
   });
 });
 
-describe('blocks-sequence-editor', () => {
+describe('agency-sequence-editor', () => {
   it('is registered as a custom element', () => {
-    expect(customElements.get('blocks-sequence-editor')).toBe(BlocksSequenceEditorElement);
+    expect(customElements.get('agency-sequence-editor')).toBe(AgencySequenceEditorElement);
   });
 
   it('renders worker names as list items', async () => {
-    const el = new BlocksSequenceEditorElement();
+    const el = new AgencySequenceEditorElement();
     el.value = ['worker-a', 'worker-b'];
     document.body.appendChild(el);
     await el.updateComplete;
@@ -42,13 +42,13 @@ describe('blocks-sequence-editor', () => {
   });
 });
 
-describe('blocks-swf-link', () => {
+describe('agency-swf-link', () => {
   it('is registered as a custom element', () => {
-    expect(customElements.get('blocks-swf-link')).toBe(BlocksSwfLinkElement);
+    expect(customElements.get('agency-swf-link')).toBe(AgencySwfLinkElement);
   });
 
   it('renders drill-down link with aria-label', async () => {
-    const el = new BlocksSwfLinkElement();
+    const el = new AgencySwfLinkElement();
     document.body.appendChild(el);
     await el.updateComplete;
     const link = el.shadowRoot!.querySelector('a');

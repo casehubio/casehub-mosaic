@@ -21,7 +21,7 @@ export interface TrustWorkbenchProps {
   actorId: string;
 }
 
-@customElement('blocks-trust-workbench')
+@customElement('agency-trust-workbench')
 export class TrustWorkbench extends LiveRegionMixin(LitElement) {
   @property({ type: String }) endpoint = '';
   @property({ type: String, attribute: 'actor-id' }) actorId = '';
@@ -209,12 +209,12 @@ export class TrustWorkbench extends LiveRegionMixin(LitElement) {
     return html`
       <pages-split-workbench selection-topic="trust-routing">
         <div slot="list" class="left-panel">
-          <blocks-trust-score-panel
+          <agency-trust-score-panel
             mode="full"
             .endpoint=${this.endpoint}
             actor-id=${this.actorId}
-          ></blocks-trust-score-panel>
-          <blocks-list-pane
+          ></agency-trust-score-panel>
+          <agency-list-pane
             selection-topic="trust-routing"
             .endpoint=${this._listEndpoint}
             .dataSet=${this._listDataSet}
@@ -222,7 +222,7 @@ export class TrustWorkbench extends LiveRegionMixin(LitElement) {
             .columnRenderers=${this.routingColumnRenderers ?? DEFAULT_ROUTING_RENDERERS}
             .getRowKey=${(row: TypedRow) => row.text(ID_COL)}
             empty-message="No routing decisions"
-          ></blocks-list-pane>
+          ></agency-list-pane>
         </div>
         <div slot="detail" class="detail-panel">
           ${this._renderDetail()}
@@ -247,16 +247,16 @@ export class TrustWorkbench extends LiveRegionMixin(LitElement) {
       return html`<div class="detail-empty">Select a routing decision to view details</div>`;
     }
     return html`
-      <blocks-routing-rationale
+      <agency-routing-rationale
         .data=${this._routingDetail}
         .renderCandidate=${this.renderCandidate}
-      ></blocks-routing-rationale>
+      ></agency-routing-rationale>
       ${this._feedbackEntries.length > 0 ? html`
         <section class="feedback-section">
           <h3>Feedback</h3>
           <div class="feedback-list">
             ${this._feedbackEntries.map(fb => html`
-              <blocks-trust-feedback-display compact .gateDecision=${fb}></blocks-trust-feedback-display>
+              <agency-trust-feedback-display compact .gateDecision=${fb}></agency-trust-feedback-display>
             `)}
           </div>
         </section>
@@ -267,6 +267,6 @@ export class TrustWorkbench extends LiveRegionMixin(LitElement) {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'blocks-trust-workbench': TrustWorkbench;
+    'agency-trust-workbench': TrustWorkbench;
   }
 }

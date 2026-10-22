@@ -169,14 +169,14 @@ describe('agent-relationship-editor', () => {
   });
 
   describe('diagram tab', () => {
-    it('renders blocks-org-diagram with readonly when diagram tab is active', async () => {
+    it('renders agency-org-diagram with readonly when diagram tab is active', async () => {
       await el.updateComplete;
       const diagramTab = Array.from(el.shadowRoot!.querySelectorAll('[role="tab"]'))
         .find(t => t.textContent!.trim() === 'Diagram') as HTMLElement;
       diagramTab.click();
       await el.updateComplete;
 
-      const diagram = el.shadowRoot!.querySelector('blocks-org-diagram');
+      const diagram = el.shadowRoot!.querySelector('agency-org-diagram');
       expect(diagram).toBeTruthy();
       expect(diagram!.hasAttribute('readonly')).toBe(true);
     });
@@ -200,7 +200,7 @@ describe('agent-relationship-editor', () => {
       diagramTab.click();
       await el.updateComplete;
 
-      const diagram = el.shadowRoot!.querySelector('blocks-org-diagram') as any;
+      const diagram = el.shadowRoot!.querySelector('agency-org-diagram') as any;
       expect(diagram).toBeTruthy();
       expect(diagram.yaml).toBeTruthy();
       expect(diagram.yaml).toContain('alice');
@@ -214,7 +214,7 @@ describe('agent-relationship-editor', () => {
       diagramTab.click();
       await el.updateComplete;
 
-      const diagram = el.shadowRoot!.querySelector('blocks-org-diagram') as any;
+      const diagram = el.shadowRoot!.querySelector('agency-org-diagram') as any;
       expect(diagram.agents).toEqual({ alice: { profession: 'Engineer' } });
     });
   });

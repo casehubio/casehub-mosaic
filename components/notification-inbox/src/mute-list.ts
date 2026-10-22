@@ -56,7 +56,7 @@ const ADD_SCHEMA: FieldSchema = {
   required: ['scope', 'scopeId'],
 };
 
-@customElement('blocks-mute-list')
+@customElement('agency-mute-list')
 export class MuteList extends LitElement {
   @property({ type: String }) endpoint?: string;
   @property({ type: Object }) identity?: WorkIdentity;
@@ -283,6 +283,6 @@ export class MuteList extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'blocks-mute-list': MuteList;
+    'agency-mute-list': MuteList;
   }
 }

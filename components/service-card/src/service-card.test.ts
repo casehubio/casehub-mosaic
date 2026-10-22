@@ -20,11 +20,11 @@ const SAMPLE_DATA: ServiceCardData = {
   ],
 };
 
-describe('blocks-service-card', () => {
+describe('agency-service-card', () => {
   let el: ServiceCardEl;
 
   beforeEach(() => {
-    el = document.createElement('blocks-service-card') as ServiceCardEl;
+    el = document.createElement('agency-service-card') as ServiceCardEl;
     document.body.appendChild(el);
   });
 

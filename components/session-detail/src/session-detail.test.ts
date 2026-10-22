@@ -10,14 +10,14 @@ type SessionDetailEl = HTMLElement & {
   _events: Array<{ timestamp: string; type: string; data: string }>;
 };
 
-describe('blocks-session-detail', () => {
+describe('agency-session-detail', () => {
   let el: SessionDetailEl;
 
   beforeEach(async () => {
     vi.stubGlobal('fetch', vi.fn().mockResolvedValue({
       ok: true, text: () => Promise.resolve('$ echo hello\nhello\n$'),
     }));
-    el = document.createElement('blocks-session-detail') as SessionDetailEl;
+    el = document.createElement('agency-session-detail') as SessionDetailEl;
     el.endpoint = '/api/sessions';
     document.body.appendChild(el);
     await el.updateComplete;

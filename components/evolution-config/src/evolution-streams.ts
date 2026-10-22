@@ -49,7 +49,7 @@ export interface EvolutionStreamsProps {
   readonly?: boolean;
 }
 
-@customElement('blocks-evolution-streams')
+@customElement('agency-evolution-streams')
 export class EvolutionStreams extends LitElement {
   @property({ type: String }) endpoint?: string;
   @property({ type: String }) caseId?: string;
@@ -222,6 +222,6 @@ export class EvolutionStreams extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'blocks-evolution-streams': EvolutionStreams;
+    'agency-evolution-streams': EvolutionStreams;
   }
 }

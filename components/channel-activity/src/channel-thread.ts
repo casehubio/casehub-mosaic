@@ -5,7 +5,7 @@ import type { QhorusMessage, CommitmentState, Reaction, ActorType } from './type
 import './channel-message.js';
 import '@casehubio/pages-ui-components';
 
-@customElement('blocks-channel-thread')
+@customElement('agency-channel-thread')
 export class ChannelThreadElement extends LitElement {
   @property({ type: Object }) rootMessage!: QhorusMessage;
   @property({ type: Array }) replies: QhorusMessage[] = [];
@@ -84,12 +84,12 @@ export class ChannelThreadElement extends LitElement {
 
     return html`
       <div class="root-message ${this.selectedMessageId === this.rootMessage.id ? 'selected' : ''}">
-        <blocks-channel-message .message=${this.rootMessage}
+        <agency-channel-message .message=${this.rootMessage}
                         .reactions=${this.reactions.filter(r => r.messageId === this.rootMessage.id)}
                         .commitmentState=${this.commitmentState}
                         .renderContent=${this.renderContent}
                         .formatSender=${this.formatSender}
-                        .currentActorId=${this.currentActorId}></blocks-channel-message>
+                        .currentActorId=${this.currentActorId}></agency-channel-message>
       </div>
       ${this.replies.length > 0 ? html`
         <div class="thread-header">
@@ -106,11 +106,11 @@ export class ChannelThreadElement extends LitElement {
         ${!this.collapsed ? html`
           ${this.replies.map(r => html`
             <div class="reply ${this.selectedMessageId === r.id ? 'selected' : ''}">
-              <blocks-channel-message .message=${r}
+              <agency-channel-message .message=${r}
                               .reactions=${this.reactions.filter(rx => rx.messageId === r.id)}
                               .renderContent=${this.renderContent}
                               .formatSender=${this.formatSender}
-                              .currentActorId=${this.currentActorId}></blocks-channel-message>
+                              .currentActorId=${this.currentActorId}></agency-channel-message>
             </div>
           `)}
         ` : nothing}
@@ -121,6 +121,6 @@ export class ChannelThreadElement extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'blocks-channel-thread': ChannelThreadElement;
+    'agency-channel-thread': ChannelThreadElement;
   }
 }

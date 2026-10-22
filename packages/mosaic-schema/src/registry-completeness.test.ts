@@ -3,7 +3,7 @@ import { readFileSync } from "fs";
 import { resolve } from "path";
 
 describe("registry completeness", () => {
-  it("every blocks-* custom element has a registry entry", () => {
+  it("every agency-* custom element has a registry entry", () => {
     const generatedPath = resolve(__dirname, "component-schemas.generated.ts");
     const generated = readFileSync(generatedPath, "utf-8");
 

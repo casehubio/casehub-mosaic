@@ -332,7 +332,7 @@ const ARCHETYPES: Record<string, { yaml: string; agents?: Record<string, AgentDe
   'Pipeline': { yaml: PIPELINE },
 };
 
-@customElement('blocks-example-org-diagram')
+@customElement('agency-example-org-diagram')
 export class OrgDiagramPage extends LitElement {
   @state() private _yaml = GASTOWN;
   @state() private _agents: Record<string, AgentDescriptor> | undefined = GASTOWN_AGENTS;
@@ -346,7 +346,7 @@ export class OrgDiagramPage extends LitElement {
       border-radius: 4px; background: var(--pages-surface-color, #fff); }
     .diagram-container { flex: 1; min-height: 0; border: 1px solid var(--pages-neutral-5, #e0e0e0);
       border-radius: 6px; overflow: hidden; }
-    blocks-org-diagram { width: 100%; height: 100%; }
+    agency-org-diagram { width: 100%; height: 100%; }
   `;
 
   override render() {
@@ -366,12 +366,12 @@ export class OrgDiagramPage extends LitElement {
         </select>
       </div>
       <div class="diagram-container">
-        <blocks-org-diagram .yaml=${this._yaml} .agents=${this._agents}></blocks-org-diagram>
+        <agency-org-diagram .yaml=${this._yaml} .agents=${this._agents}></agency-org-diagram>
       </div>
     `;
   }
 }
 
 declare global {
-  interface HTMLElementTagNameMap { 'blocks-example-org-diagram': OrgDiagramPage; }
+  interface HTMLElementTagNameMap { 'agency-example-org-diagram': OrgDiagramPage; }
 }

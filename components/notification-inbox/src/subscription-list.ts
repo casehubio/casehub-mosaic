@@ -40,7 +40,7 @@ const SUB_COL_CONFIG: readonly TableColumnConfig[] = [
 
 // --- Component ---
 
-@customElement('blocks-subscription-list')
+@customElement('agency-subscription-list')
 export class SubscriptionList extends LitElement {
   @property({ type: String }) endpoint?: string;
   @property({ type: Object }) identity?: WorkIdentity;
@@ -423,13 +423,13 @@ export class SubscriptionList extends LitElement {
 
     return html`
       <div class="editor-section">
-        <blocks-subscription-editor
+        <agency-subscription-editor
           .subscription=${subscription}
           .endpoint=${this.endpoint}
           .identity=${this.identity}
           @save=${this.handleEditorSave}
           @cancel=${this.handleEditorClose}
-        ></blocks-subscription-editor>
+        ></agency-subscription-editor>
       </div>
     `;
   }
@@ -464,6 +464,6 @@ export class SubscriptionList extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'blocks-subscription-list': SubscriptionList;
+    'agency-subscription-list': SubscriptionList;
   }
 }

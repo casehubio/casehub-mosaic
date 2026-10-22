@@ -1,22 +1,22 @@
 import { describe, it, expect, afterEach } from 'vitest';
-import './blocks-dependency-toolbar.js';
+import './agency-dependency-toolbar.js';
 
-describe('blocks-dependency-toolbar', () => {
+describe('agency-dependency-toolbar', () => {
   afterEach(() => { document.body.innerHTML = ''; });
 
   it('registers as a custom element', () => {
-    expect(customElements.get('blocks-dependency-toolbar')).toBeDefined();
+    expect(customElements.get('agency-dependency-toolbar')).toBeDefined();
   });
 
   it('sets role="toolbar" and aria-label on connect', async () => {
-    const el = document.createElement('blocks-dependency-toolbar');
+    const el = document.createElement('agency-dependency-toolbar');
     document.body.appendChild(el);
     expect(el.getAttribute('role')).toBe('toolbar');
     expect(el.getAttribute('aria-label')).toBe('Dependency graph filters');
   });
 
   it('renders edge type checkboxes', async () => {
-    const el = document.createElement('blocks-dependency-toolbar') as any;
+    const el = document.createElement('agency-dependency-toolbar') as any;
     el.edgeTypes = [
       { type: 'parent_child', count: 3 },
       { type: 'supersedes', count: 1 },
@@ -32,7 +32,7 @@ describe('blocks-dependency-toolbar', () => {
   });
 
   it('renders stats', async () => {
-    const el = document.createElement('blocks-dependency-toolbar') as any;
+    const el = document.createElement('agency-dependency-toolbar') as any;
     el.edgeTypes = [];
     el.selectedTypes = new Set();
     el.nodeCount = 12;
@@ -46,7 +46,7 @@ describe('blocks-dependency-toolbar', () => {
   });
 
   it('renders refresh and export buttons', async () => {
-    const el = document.createElement('blocks-dependency-toolbar') as any;
+    const el = document.createElement('agency-dependency-toolbar') as any;
     el.edgeTypes = [];
     el.selectedTypes = new Set();
     document.body.appendChild(el);

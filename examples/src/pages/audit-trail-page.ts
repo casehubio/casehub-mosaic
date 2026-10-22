@@ -24,7 +24,7 @@ interface VerificationResult {
   redactedCount?: number;
 }
 
-@customElement('blocks-example-audit-trail')
+@customElement('agency-example-audit-trail')
 export class AuditTrailPage extends LitElement {
   private _originalFetch: typeof globalThis.fetch | null = null;
 
@@ -104,7 +104,7 @@ export class AuditTrailPage extends LitElement {
   }
 
   protected override firstUpdated(): void {
-    const viewer = this.shadowRoot?.querySelector('blocks-audit-trail-viewer') as any;
+    const viewer = this.shadowRoot?.querySelector('agency-audit-trail-viewer') as any;
     if (viewer) {
       viewer.configure({
         endpoint: '/api/mock',
@@ -129,7 +129,7 @@ export class AuditTrailPage extends LitElement {
         </div>
 
         <div class="viewer-container">
-          <blocks-audit-trail-viewer subject-id="case-123"></blocks-audit-trail-viewer>
+          <agency-audit-trail-viewer subject-id="case-123"></agency-audit-trail-viewer>
         </div>
 
         <div class="info-panel">

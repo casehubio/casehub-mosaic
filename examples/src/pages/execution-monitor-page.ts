@@ -14,7 +14,7 @@ function withState(s: ExecutionState, result?: string): ExecutionSnapshot {
   } as unknown as ExecutionSnapshot;
 }
 
-@customElement('blocks-example-execution-monitor')
+@customElement('agency-example-execution-monitor')
 export class ExecutionMonitorPage extends LitElement {
   @state() private _state: ExecutionState = 'RUNNING';
 
@@ -58,12 +58,12 @@ export class ExecutionMonitorPage extends LitElement {
         </select>
       </div>
       <div class="monitor-container">
-        <blocks-execution-monitor .data=${this._snapshot}></blocks-execution-monitor>
+        <agency-execution-monitor .data=${this._snapshot}></agency-execution-monitor>
       </div>
     `;
   }
 }
 
 declare global {
-  interface HTMLElementTagNameMap { 'blocks-example-execution-monitor': ExecutionMonitorPage; }
+  interface HTMLElementTagNameMap { 'agency-example-execution-monitor': ExecutionMonitorPage; }
 }

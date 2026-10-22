@@ -4,7 +4,7 @@ import '@casehubio/mosaic-agency-plan-model-dashboard';
 import type { CasePlanModelSnapshot } from '@casehubio/mosaic-graph-stencil-htn';
 import mockData from '../../mock-data/plan-model.json';
 
-@customElement('blocks-example-plan-model-dashboard')
+@customElement('agency-example-plan-model-dashboard')
 export class PlanModelDashboardPage extends LitElement {
   private _planModel = mockData.planModel as unknown as CasePlanModelSnapshot;
 
@@ -30,6 +30,6 @@ export class PlanModelDashboardPage extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'blocks-example-plan-model-dashboard': PlanModelDashboardPage;
+    'agency-example-plan-model-dashboard': PlanModelDashboardPage;
   }
 }

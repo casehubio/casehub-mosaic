@@ -23,11 +23,11 @@ const SAMPLE_TOPOLOGY: TopologySnapshot = {
   ],
 };
 
-describe('blocks-topology-viewer', () => {
+describe('agency-topology-viewer', () => {
   let el: TopologyViewerEl;
 
   beforeEach(() => {
-    el = document.createElement('blocks-topology-viewer') as TopologyViewerEl;
+    el = document.createElement('agency-topology-viewer') as TopologyViewerEl;
     document.body.appendChild(el);
   });
 

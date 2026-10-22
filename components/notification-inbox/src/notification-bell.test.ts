@@ -49,7 +49,7 @@ class MockSSEManager {
   }
 }
 
-describe('blocks-notification-bell', () => {
+describe('agency-notification-bell', () => {
   let mockSSEManager: MockSSEManager;
   let mockFetch: ReturnType<typeof vi.fn>;
 
@@ -68,7 +68,7 @@ describe('blocks-notification-bell', () => {
       json: async () => ({ count: 0 }),
     });
 
-    const el = fixture(document.createElement('blocks-notification-bell')) as NotificationBell;
+    const el = fixture(document.createElement('agency-notification-bell')) as NotificationBell;
     el.endpoint = 'http://localhost:8080';
     el.fetchFn = mockFetch;
 
@@ -87,7 +87,7 @@ describe('blocks-notification-bell', () => {
       json: async () => ({ count: 5 }),
     });
 
-    const el = fixture(document.createElement('blocks-notification-bell')) as NotificationBell;
+    const el = fixture(document.createElement('agency-notification-bell')) as NotificationBell;
     el.endpoint = 'http://localhost:8080';
     el.fetchFn = mockFetch;
 
@@ -105,7 +105,7 @@ describe('blocks-notification-bell', () => {
       json: async () => ({ count: 150 }),
     });
 
-    const el = fixture(document.createElement('blocks-notification-bell')) as NotificationBell;
+    const el = fixture(document.createElement('agency-notification-bell')) as NotificationBell;
     el.endpoint = 'http://localhost:8080';
     el.fetchFn = mockFetch;
 
@@ -123,7 +123,7 @@ describe('blocks-notification-bell', () => {
       json: async () => ({ count: 0 }),
     });
 
-    const el = fixture(document.createElement('blocks-notification-bell')) as NotificationBell;
+    const el = fixture(document.createElement('agency-notification-bell')) as NotificationBell;
     el.endpoint = 'http://localhost:8080';
     el.fetchFn = mockFetch;
 
@@ -154,7 +154,7 @@ describe('blocks-notification-bell', () => {
       json: async () => ({ count: 0 }),
     });
 
-    const el = fixture(document.createElement('blocks-notification-bell')) as NotificationBell;
+    const el = fixture(document.createElement('agency-notification-bell')) as NotificationBell;
     el.endpoint = 'http://localhost:8080';
     el.fetchFn = mockFetch;
 
@@ -172,7 +172,7 @@ describe('blocks-notification-bell', () => {
   });
 
   it('has pushUrl and pushTopics properties and no SSEManager', async () => {
-    const el = fixture(document.createElement('blocks-notification-bell')) as NotificationBell;
+    const el = fixture(document.createElement('agency-notification-bell')) as NotificationBell;
     el.endpoint = 'http://localhost:8080';
     el.fetchFn = mockFetch;
     await el.updateComplete;
@@ -188,7 +188,7 @@ describe('blocks-notification-bell', () => {
       json: async () => ({ count: 5 }),
     });
 
-    const el = fixture(document.createElement('blocks-notification-bell')) as NotificationBell;
+    const el = fixture(document.createElement('agency-notification-bell')) as NotificationBell;
     el.endpoint = 'http://localhost:8080';
     el.fetchFn = mockFetch;
     await el.updateComplete;
@@ -202,7 +202,7 @@ describe('blocks-notification-bell', () => {
       json: async () => ({ count: 3 }),
     });
 
-    const el = fixture(document.createElement('blocks-notification-bell')) as NotificationBell;
+    const el = fixture(document.createElement('agency-notification-bell')) as NotificationBell;
     el.endpoint = 'http://localhost:8080';
     el.fetchFn = mockFetch;
 
@@ -219,7 +219,7 @@ describe('blocks-notification-bell', () => {
       json: async () => ({ count: 0 }),
     });
 
-    const el = fixture(document.createElement('blocks-notification-bell')) as NotificationBell;
+    const el = fixture(document.createElement('agency-notification-bell')) as NotificationBell;
     el.endpoint = 'http://localhost:8080';
     el.fetchFn = mockFetch;
 

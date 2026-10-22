@@ -64,7 +64,7 @@ export interface SlaIndicatorProps {
   compact: boolean;
 }
 
-@customElement('blocks-sla-indicator')
+@customElement('agency-sla-indicator')
 export class SlaIndicator extends LitElement {
   @property({ type: String }) deadline = '';
   @property({ type: Number, attribute: 'sla-window' }) slaWindow: number | null = null;
@@ -231,6 +231,6 @@ export class SlaIndicator extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'blocks-sla-indicator': SlaIndicator;
+    'agency-sla-indicator': SlaIndicator;
   }
 }

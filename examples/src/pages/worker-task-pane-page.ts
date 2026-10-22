@@ -166,7 +166,7 @@ const CONTEXT_TABS: TabDefinition[] = [
   { id: 'history', label: 'History', tagName: 'stub-context-history' },
 ];
 
-@customElement('blocks-example-worker-task-pane')
+@customElement('agency-example-worker-task-pane')
 export class WorkerTaskPanePage extends LitElement {
   @state() private _layout: 'split' | 'stacked' = 'split';
   @state() private _showContext = true;
@@ -227,7 +227,7 @@ export class WorkerTaskPanePage extends LitElement {
           Enable Claim</label>
       </div>
       <div class="pane-container">
-        <blocks-worker-task-pane
+        <agency-worker-task-pane
           .layout=${this._layout}
           .data=${SEED_TASKS}
           .workspaces=${WORKSPACES}
@@ -238,7 +238,7 @@ export class WorkerTaskPanePage extends LitElement {
           ?show-workspace=${this._showWorkspace}
           claim-endpoint=${this._claimEnabled ? '/api/mock-claim' : ''}
           selection-topic="demo-worker-task"
-        ></blocks-worker-task-pane>
+        ></agency-worker-task-pane>
       </div>
       ${this._eventLog.length ? html`<div class="event-log">${this._eventLog.map(l => html`<div>${l}</div>`)}</div>` : ''}
     `;

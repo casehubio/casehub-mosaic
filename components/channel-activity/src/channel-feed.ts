@@ -20,9 +20,9 @@ const CURSOR_STORAGE_KEY = 'channel-activity.cursors';
 
 const ChannelFeedBase = RovingTabindexMixin(KeyboardShortcutMixin(LiveRegionMixin(FocusTrapMixin(LitElement))));
 
-@customElement('blocks-channel-feed')
+@customElement('agency-channel-feed')
 export class ChannelFeedElement extends ChannelFeedBase {
-  override rovingSelector = '.message-item, blocks-channel-thread';
+  override rovingSelector = '.message-item, agency-channel-thread';
   override rovingDirection: RovingDirection = 'vertical';
 
   @property({ type: Array }) messages: QhorusMessage[] = [];
@@ -361,7 +361,7 @@ export class ChannelFeedElement extends ChannelFeedBase {
       target.scrollIntoView?.({ block: 'nearest', behavior: 'smooth' });
       return;
     }
-    const thread = feed.querySelector(`blocks-channel-thread[data-contains~="${this.selectedMessageId}"]`) as HTMLElement | null;
+    const thread = feed.querySelector(`agency-channel-thread[data-contains~="${this.selectedMessageId}"]`) as HTMLElement | null;
     if (thread) {
       thread.scrollIntoView?.({ block: 'nearest', behavior: 'smooth' });
     }
@@ -452,10 +452,10 @@ export class ChannelFeedElement extends ChannelFeedBase {
       <div class="hover-toolbar-anchor"
         @mouseenter=${this._onToolbarEnter}
         @mouseleave=${this._onToolbarLeave}>
-        <blocks-channel-hover-toolbar
+        <agency-channel-hover-toolbar
           .message=${msg}
           .currentActorId=${this.currentActorId ?? ''}>
-        </blocks-channel-hover-toolbar>
+        </agency-channel-hover-toolbar>
       </div>
     `;
   }
@@ -530,14 +530,14 @@ export class ChannelFeedElement extends ChannelFeedBase {
                   @mouseenter=${() => this._onMessageEnter(msg.id)}
                   @mouseleave=${() => this._onMessageLeave()}>
                   ${this._renderHoverToolbar(msg)}
-                  <blocks-channel-message .message=${msg}
+                  <agency-channel-message .message=${msg}
                                   .reactions=${reactionIndex.get(msg.id) ?? []}
                                   .showActorBadge=${group.messages.indexOf(msg) === 0}
                                   .channelName=${this.channelName}
                                   .renderContent=${this.renderContent}
                                   .formatSender=${this.formatSender}
                                   .currentActorId=${this.currentActorId}>
-                  </blocks-channel-message>
+                  </agency-channel-message>
                 </div>
               `)}
             </div>
@@ -560,7 +560,7 @@ export class ChannelFeedElement extends ChannelFeedBase {
             @mouseenter=${() => this._onMessageEnter(msg.id)}
             @mouseleave=${() => this._onMessageLeave()}>
             ${this._renderHoverToolbar(msg)}
-            <blocks-channel-thread class=${this.selectedMessageId === msg.id || repliesByParent.get(msg.id)!.some(r => r.id === this.selectedMessageId) ? 'selected' : ''}
+            <agency-channel-thread class=${this.selectedMessageId === msg.id || repliesByParent.get(msg.id)!.some(r => r.id === this.selectedMessageId) ? 'selected' : ''}
                            .rootMessage=${msg}
                            .replies=${repliesByParent.get(msg.id)!}
                            .reactions=${this._threadReactions(msg.id, repliesByParent.get(msg.id)!, reactionIndex)}
@@ -570,14 +570,14 @@ export class ChannelFeedElement extends ChannelFeedBase {
                            .currentActorId=${this.currentActorId}
                            data-message-id=${msg.id}
                            data-contains=${repliesByParent.get(msg.id)!.map(r => r.id).join(' ')}>
-            </blocks-channel-thread>
+            </agency-channel-thread>
           </div>
         ` : html`
           <div class="${this._messageItemClasses(msg)}" data-message-id=${msg.id} tabindex="-1" style=${this._highlightStyle(msg)}
             @mouseenter=${() => this._onMessageEnter(msg.id)}
             @mouseleave=${() => this._onMessageLeave()}>
             ${this._renderHoverToolbar(msg)}
-            <blocks-channel-message .message=${msg}
+            <agency-channel-message .message=${msg}
                             .reactions=${reactionIndex.get(msg.id) ?? []}
                             .showActorBadge=${group.messages.indexOf(msg) === 0}
                             .channelName=${this.channelName}
@@ -585,7 +585,7 @@ export class ChannelFeedElement extends ChannelFeedBase {
                             .renderContent=${this.renderContent}
                             .formatSender=${this.formatSender}
                             .currentActorId=${this.currentActorId}>
-            </blocks-channel-message>
+            </agency-channel-message>
           </div>
         `)}
       </div>
@@ -595,6 +595,6 @@ export class ChannelFeedElement extends ChannelFeedBase {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'blocks-channel-feed': ChannelFeedElement;
+    'agency-channel-feed': ChannelFeedElement;
   }
 }

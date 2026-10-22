@@ -3,8 +3,8 @@ import { customElement, property } from 'lit/decorators.js';
 import { emitPagesEvent } from '@casehubio/pages-data';
 import { lookupRelationshipType } from '@casehubio/mosaic-core';
 
-@customElement('blocks-dependency-toolbar')
-export class BlocksDependencyToolbar extends LitElement {
+@customElement('agency-dependency-toolbar')
+export class AgencyDependencyToolbar extends LitElement {
   @property({ attribute: false }) edgeTypes: Array<{ type: string; count: number }> = [];
   @property({ attribute: false }) selectedTypes: Set<string> = new Set();
   @property({ type: Number }) nodeCount = 0;

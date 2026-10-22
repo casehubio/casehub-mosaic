@@ -16,7 +16,7 @@ export interface GdprErasureActionProps {
   reasonOptions: string[];
 }
 
-@customElement('blocks-gdpr-erasure-action')
+@customElement('agency-gdpr-erasure-action')
 export class GdprErasureAction extends LitElement {
   @property({ type: String }) endpoint = '';
   @property({ type: String, attribute: 'subject-label' }) subjectLabel = 'Subject';
@@ -266,6 +266,6 @@ export class GdprErasureAction extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'blocks-gdpr-erasure-action': GdprErasureAction;
+    'agency-gdpr-erasure-action': GdprErasureAction;
   }
 }

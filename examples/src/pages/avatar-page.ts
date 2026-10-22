@@ -4,7 +4,7 @@ import type { ConversationTurn } from '../../../packages/avatar/src/types.js';
 import '../../../packages/avatar/src/casehub-transcript.js';
 import '../../../packages/avatar/src/casehub-speech.js';
 
-@customElement('blocks-example-avatar')
+@customElement('agency-example-avatar')
 export class AvatarPage extends LitElement {
   @state() private _turns: ConversationTurn[] = [
     { role: 'user', text: 'Hello, can you hear me?', status: 'final' },
