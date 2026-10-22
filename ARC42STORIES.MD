@@ -145,7 +145,7 @@ Critical rule: **render callbacks use inline styles**, not CSS classes. Callback
 
 | Layer | Package | Responsibility |
 |---|---|---|
-| Core | `mosaic-core` | Tokens, DataSourceMixin + DataSourceAdapter, TrendSourceMixin, fetchSource, renderSparkline, event helpers, SharedTimerController, EventStreamController, blocks-confirm-dialog |
+| Core | `mosaic-core` | Tokens, DataSourceMixin + DataSourceAdapter, TrendSourceMixin, fetchSource, renderSparkline, event helpers, SharedTimerController, EventStreamController, agency-confirm-dialog |
 
 ### Component Inventory
 
@@ -158,9 +158,9 @@ Critical rule: **render callbacks use inline styles**, not CSS classes. Callback
 | Communication | channel-activity (8 sub-components) | Message feed with sender grouping and threading, channel nav, member panel, emoji reactions, topic bar, view modes |
 | Case Exploration | case-explorer (entity-list, entity-detail, entity-tree, entity-command-bar) | Registration-based entity types, cursor-aware fetch, three-tier renderer resolution, lazy-loading tree, breadcrumbs |
 | Notification | notification-inbox (bell, inbox, subscription-list) | Unread badge, tabs/filters/SSE, subscription CRUD |
-| Data Display | blocks-timeline, grouped-data-view, kpi-metric-row, similarity-panel | Pluggable timeline strategies, grouped tables, metric cards with sparklines |
-| Diagram & Graph | casehub-diagram, swf-diagram, blocks-case-flow-viewer, blocks-dag-viewer, diagram-workbench | Case/SWF editors (DiagramBaseMixin), read-only viewers, ELK layout, graph-stencil-case/swf/htn adapters |
-| Orchestration | execution-monitor, orchestration-workbench, blocks-decomposition-tree, blocks-plan-item-tree, blocks-plan-model-dashboard | SSE execution state, agent roster, HTN decomposition tree, plan item hierarchy, case plan model dashboard |
+| Data Display | agency-timeline, grouped-data-view, kpi-metric-row, similarity-panel | Pluggable timeline strategies, grouped tables, metric cards with sparklines |
+| Diagram & Graph | casehub-diagram, swf-diagram, agency-case-flow-viewer, agency-dag-viewer, diagram-workbench | Case/SWF editors (DiagramBaseMixin), read-only viewers, ELK layout, graph-stencil-case/swf/htn adapters |
+| Orchestration | execution-monitor, orchestration-workbench, agency-decomposition-tree, agency-plan-item-tree, agency-plan-model-dashboard | SSE execution state, agent roster, HTN decomposition tree, plan item hierarchy, case plan model dashboard |
 | Governance | approval-gate, gdpr-erasure-action | Structured decision point with quorum, three-phase erasure form |
 
 ### The Promotion Pipeline
@@ -213,7 +213,7 @@ CI: `publish-packages.yml` with `repository_dispatch` trigger (#1). Each compone
 | Visual tokens | `--pages-*` CSS custom properties from pages-ui-tokens — no hardcoded colours |
 | Sparklines | Shared SVG sparkline renderer in core — gradient fill, configurable dimensions, reused by kpi-metric-row and trust-score-panel |
 | Timer management | SharedTimerController — single shared 1s interval for all sla-indicator instances, not one per component |
-| Confirmation | blocks-confirm-dialog — reusable confirmation with persistent mode and reason field, used by approval-gate and gdpr-erasure-action |
+| Confirmation | agency-confirm-dialog — reusable confirmation with persistent mode and reason field, used by approval-gate and gdpr-erasure-action |
 | Event topics | Colon-delimited hierarchies (`work:item:selected`), segment-level wildcard matching from pages |
 
 ---
@@ -366,7 +366,7 @@ Subscription editor and notification preferences UI. NotificationApi.getEventTyp
 | `SharedTimerController` | Single shared 1Hz interval for all sla-indicator instances — avoids N timers for N components |
 | `EventStreamController` | Lit ReactiveController for SSE event streams — domain-specific routing, orthogonal to DataSourceMixin |
 | `pages-event` | DOM custom event for inter-component communication — `composed: true` crosses shadow DOM boundaries |
-| `blocks-confirm-dialog` | Reusable confirmation dialog with persistent mode and reason field |
+| `agency-confirm-dialog` | Reusable confirmation dialog with persistent mode and reason field |
 | `split-workbench` | Generic split-pane layout shell — accepts any children via named slots (list, detail, header) |
 | `NavigationController` | State manager for case-explorer — breadcrumbs, drill-down, view mode, entity type selection |
 | `PP-20260713-8ea1af` | Component customisation protocol — typed config, render callbacks, factory overrides, inline styles |
