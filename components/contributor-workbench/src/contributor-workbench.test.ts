@@ -51,7 +51,7 @@ const SAMPLE_DETAIL: ContributorDetail = {
 
 let originalFetch: typeof globalThis.fetch;
 
-describe('blocks-contributor-workbench', () => {
+describe('agency-contributor-workbench', () => {
   let el: ContributorWorkbenchEl;
 
   beforeEach(() => {
@@ -59,7 +59,7 @@ describe('blocks-contributor-workbench', () => {
     globalThis.fetch = vi.fn().mockResolvedValue(
       new Response(JSON.stringify(SAMPLE_DETAIL), { status: 200 })
     ) as unknown as typeof fetch;
-    el = document.createElement('blocks-contributor-workbench') as ContributorWorkbenchEl;
+    el = document.createElement('agency-contributor-workbench') as ContributorWorkbenchEl;
     el.endpoint = '/api/governance';
     el.actorId = 'contributor-1';
   });
@@ -118,7 +118,7 @@ describe('blocks-contributor-workbench', () => {
       await el.updateComplete;
       await vi.waitFor(() => expect(el._detail).toBeTruthy(), { timeout: 2000 });
       await el.updateComplete;
-      const panel = el.shadowRoot!.querySelector('blocks-trust-score-panel');
+      const panel = el.shadowRoot!.querySelector('agency-trust-score-panel');
       expect(panel).toBeTruthy();
       expect(panel!.getAttribute('mode')).toBe('compact');
     });

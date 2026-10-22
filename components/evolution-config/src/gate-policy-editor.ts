@@ -19,7 +19,7 @@ interface DomainGroup {
   stages: StageDescriptor[];
 }
 
-@customElement('blocks-gate-policy-editor')
+@customElement('agency-gate-policy-editor')
 export class GatePolicyEditor extends LitElement {
   @property({ type: String }) endpoint?: string;
   @property({ type: String }) caseId?: string;
@@ -333,6 +333,6 @@ export class GatePolicyEditor extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'blocks-gate-policy-editor': GatePolicyEditor;
+    'agency-gate-policy-editor': GatePolicyEditor;
   }
 }

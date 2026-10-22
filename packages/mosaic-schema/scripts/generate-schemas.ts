@@ -123,7 +123,7 @@ const registryFile = project.getSourceFileOrThrow(
   resolve(__dirname, "../src/registry.ts"),
 );
 
-const registry = registryFile.getInterfaceOrThrow("BlocksComponentRegistry");
+const registry = registryFile.getInterfaceOrThrow("AgencyComponentRegistry");
 const registryType = registry.getType();
 
 const output: string[] = [HEADER];
@@ -163,7 +163,7 @@ for (const prop of registryType.getProperties()) {
 const mapEntries = schemaNames
   .map(({ key, camelName }) => `  ["${key}", ${camelName}] as [string, z.ZodType]`)
   .join(",\n");
-output.push(`export const blocksComponentSchemaMap: ReadonlyMap<string, z.ZodType> = new Map([
+output.push(`export const agencyComponentSchemaMap: ReadonlyMap<string, z.ZodType> = new Map([
 ${mapEntries},
 ]);
 `);

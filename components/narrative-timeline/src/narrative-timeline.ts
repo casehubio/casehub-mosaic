@@ -21,7 +21,7 @@ const SIGNAL_COLORS: Record<string, string> = {
   STEP_OUTCOME: 'var(--pages-neutral-9, #737373)',
 };
 
-@customElement('blocks-narrative-timeline')
+@customElement('agency-narrative-timeline')
 export class NarrativeTimeline extends DataSourceMixin(LitElement) {
   @property({ type: String, reflect: true, attribute: 'aria-label' })
   override ariaLabel: string | null = 'Decision narrative';
@@ -242,6 +242,6 @@ export class NarrativeTimeline extends DataSourceMixin(LitElement) {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'blocks-narrative-timeline': NarrativeTimeline;
+    'agency-narrative-timeline': NarrativeTimeline;
   }
 }

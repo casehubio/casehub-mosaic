@@ -112,7 +112,7 @@ function createMockApi(overrides: Partial<Record<keyof NotificationApi, unknown>
   } as unknown as NotificationApi;
 }
 
-describe('blocks-subscription-list', () => {
+describe('agency-subscription-list', () => {
   let container: HTMLElement;
 
   beforeEach(() => {
@@ -125,7 +125,7 @@ describe('blocks-subscription-list', () => {
   });
 
   it('fetches and renders subscriptions on connect', async () => {
-    const el = await createComponent('<blocks-subscription-list endpoint="http://localhost/api"></blocks-subscription-list>');
+    const el = await createComponent('<agency-subscription-list endpoint="http://localhost/api"></agency-subscription-list>');
 
     // Override API with mock
     el.api = createMockApi();
@@ -140,7 +140,7 @@ describe('blocks-subscription-list', () => {
   });
 
   it('shows subscription name, event type pill, constraint count per row', async () => {
-    const el = await createComponent('<blocks-subscription-list endpoint="http://localhost/api"></blocks-subscription-list>');
+    const el = await createComponent('<agency-subscription-list endpoint="http://localhost/api"></agency-subscription-list>');
 
     el.api = createMockApi();
     await el.connectedCallback();
@@ -156,7 +156,7 @@ describe('blocks-subscription-list', () => {
   });
 
   it('toggles subscription enabled state via API', async () => {
-    const el = await createComponent('<blocks-subscription-list endpoint="http://localhost/api"></blocks-subscription-list>');
+    const el = await createComponent('<agency-subscription-list endpoint="http://localhost/api"></agency-subscription-list>');
 
     let enabledCalled = false;
     let disabledCalled = false;
@@ -188,7 +188,7 @@ describe('blocks-subscription-list', () => {
   });
 
   it('opens subscription-editor in create mode on New button', async () => {
-    const el = await createComponent('<blocks-subscription-list endpoint="http://localhost/api"></blocks-subscription-list>');
+    const el = await createComponent('<agency-subscription-list endpoint="http://localhost/api"></agency-subscription-list>');
 
     el.api = createMockApi();
     await el.connectedCallback();
@@ -202,13 +202,13 @@ describe('blocks-subscription-list', () => {
 
     expect(el.editing).toBe('new');
 
-    const editor = el.shadowRoot!.querySelector('blocks-subscription-editor');
+    const editor = el.shadowRoot!.querySelector('agency-subscription-editor');
     expect(editor).toBeTruthy();
     expect((editor as any)!.subscription).toBeUndefined();
   });
 
   it('opens subscription-editor in edit mode on Edit button', async () => {
-    const el = await createComponent('<blocks-subscription-list endpoint="http://localhost/api"></blocks-subscription-list>');
+    const el = await createComponent('<agency-subscription-list endpoint="http://localhost/api"></agency-subscription-list>');
 
     el.api = createMockApi();
     await el.connectedCallback();
@@ -221,13 +221,13 @@ describe('blocks-subscription-list', () => {
 
     expect(el.editing).toBe('sub-1');
 
-    const editor = el.shadowRoot!.querySelector('blocks-subscription-editor');
+    const editor = el.shadowRoot!.querySelector('agency-subscription-editor');
     expect(editor).toBeTruthy();
     expect((editor as any)!.subscription?.id).toBe('sub-1');
   });
 
-  it('shows BlocksConfirmDialog before delete', async () => {
-    const el = await createComponent('<blocks-subscription-list endpoint="http://localhost/api"></blocks-subscription-list>');
+  it('shows AgencyConfirmDialog before delete', async () => {
+    const el = await createComponent('<agency-subscription-list endpoint="http://localhost/api"></agency-subscription-list>');
 
     el.api = createMockApi();
     await el.connectedCallback();
@@ -245,7 +245,7 @@ describe('blocks-subscription-list', () => {
   });
 
   it('deletes subscription after confirmation', async () => {
-    const el = await createComponent('<blocks-subscription-list endpoint="http://localhost/api"></blocks-subscription-list>');
+    const el = await createComponent('<agency-subscription-list endpoint="http://localhost/api"></agency-subscription-list>');
 
     let deleteCalled = false;
     el.api = createMockApi({
@@ -277,7 +277,7 @@ describe('blocks-subscription-list', () => {
   it('shows system subscriptions as read-only with System badge', async () => {
     // System subscriptions have a distinct visual marker (future feature)
     // For now, this test is a placeholder since all subscriptions are personal
-    const el = await createComponent('<blocks-subscription-list endpoint="http://localhost/api"></blocks-subscription-list>');
+    const el = await createComponent('<agency-subscription-list endpoint="http://localhost/api"></agency-subscription-list>');
 
     el.api = createMockApi();
     await el.connectedCallback();
@@ -289,7 +289,7 @@ describe('blocks-subscription-list', () => {
   });
 
   it('emits subscription.deleted event on delete', async () => {
-    const el = await createComponent('<blocks-subscription-list endpoint="http://localhost/api"></blocks-subscription-list>');
+    const el = await createComponent('<agency-subscription-list endpoint="http://localhost/api"></agency-subscription-list>');
 
     el.api = createMockApi();
     await el.connectedCallback();

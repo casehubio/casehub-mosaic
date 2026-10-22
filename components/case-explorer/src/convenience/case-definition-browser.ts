@@ -5,7 +5,7 @@ import { caseDefinitionType } from '../presets.js';
 import '../entity-list.js';
 import '../entity-detail.js';
 
-@customElement('blocks-case-definition-browser')
+@customElement('agency-case-definition-browser')
 export class CaseDefinitionBrowser extends LitElement {
   @property({ type: String }) endpoint = '';
   @property({ attribute: false }) columnRenderers?: Record<string, ColumnRenderer>;
@@ -22,8 +22,8 @@ export class CaseDefinitionBrowser extends LitElement {
   override render(): TemplateResult {
     const reg = { ...caseDefinitionType({ listEndpoint: this.endpoint }), columnRenderers: this.columnRenderers, filters: this.filters };
     return html`
-      <blocks-entity-list .registration=${reg} selection-topic=${this.selectionTopic} .fetchFn=${this.fetchFn}></blocks-entity-list>
-      <blocks-entity-detail .registration=${reg} selection-topic=${this.selectionTopic} .fetchFn=${this.fetchFn}></blocks-entity-detail>
+      <agency-entity-list .registration=${reg} selection-topic=${this.selectionTopic} .fetchFn=${this.fetchFn}></agency-entity-list>
+      <agency-entity-detail .registration=${reg} selection-topic=${this.selectionTopic} .fetchFn=${this.fetchFn}></agency-entity-detail>
     `;
   }
 }

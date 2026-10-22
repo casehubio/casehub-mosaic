@@ -6,5 +6,5 @@
 | [diagram-viewer-composition.md](diagram-viewer-composition.md) | Diagram viewers compose shared pipeline pieces independently — no extraction or duplication from editors | All diagram components |
 | [node-decoration-runtime-boundary.md](node-decoration-runtime-boundary.md) | Runtime visual state in NodeDecoration, not GraphNode.properties | All graph-stencil-* packages and NodeDecoration consumers |
 | [stencil-package-isolation.md](stencil-package-isolation.md) | Stencil packages must not import from each other — use registry inversion | All graph-stencil-* packages |
-| [component-registry-props.md](component-registry-props.md) | Export Props interface and register in BlocksComponentRegistry | Any new blocks-* component |
+| [component-registry-props.md](component-registry-props.md) | Export Props interface and register in AgencyComponentRegistry | Any new agency-* component |
 | [custom-event-namespace-prefix.md](custom-event-namespace-prefix.md) | Custom events use component namespace prefixes to prevent cross-component collisions | All components emitting bubbling composed events |

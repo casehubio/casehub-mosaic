@@ -16,7 +16,7 @@ export interface NotificationBellProps {
   open: boolean;
 }
 
-@customElement('blocks-notification-bell')
+@customElement('agency-notification-bell')
 export class NotificationBell extends PushMixin(KeyboardShortcutMixin(FocusTrapMixin(LitElement))) {
   @property({ type: String }) endpoint?: string;
   @property({ type: Object }) identity?: WorkIdentity;
@@ -212,11 +212,11 @@ export class NotificationBell extends PushMixin(KeyboardShortcutMixin(FocusTrapM
       ${this.open
         ? html`
             <div class="dropdown" role="dialog" aria-label="Notification inbox">
-              <blocks-notification-inbox
+              <agency-notification-inbox
                 .endpoint=${this.endpoint}
                 .identity=${this.identity}
                 .fetchFn=${this.fetchFn}
-              ></blocks-notification-inbox>
+              ></agency-notification-inbox>
             </div>
           `
         : ''}
@@ -226,6 +226,6 @@ export class NotificationBell extends PushMixin(KeyboardShortcutMixin(FocusTrapM
 
 declare global {
   interface HTMLElementTagNameMap {
-    'blocks-notification-bell': NotificationBell;
+    'agency-notification-bell': NotificationBell;
   }
 }

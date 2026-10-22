@@ -45,7 +45,7 @@ function mockFetchFail(status: number): ReturnType<typeof vi.fn> {
 let originalFetch: typeof globalThis.fetch;
 
 function createElement(opts: Partial<{ endpoint: string; topic: string }> = {}): ListPaneEl {
-  const el = document.createElement('blocks-list-pane') as ListPaneEl;
+  const el = document.createElement('agency-list-pane') as ListPaneEl;
   if (opts.endpoint !== undefined) el.endpoint = opts.endpoint;
   else el.endpoint = '/api/items';
   el.selectionTopic = opts.topic ?? 'test';
@@ -64,7 +64,7 @@ async function flush(): Promise<void> {
   await new Promise(r => setTimeout(r, 20));
 }
 
-describe('blocks-list-pane', () => {
+describe('agency-list-pane', () => {
   let el: ListPaneEl;
 
   beforeEach(() => {
@@ -105,7 +105,7 @@ describe('blocks-list-pane', () => {
     it('does not fetch when endpoint is not set', async () => {
       const fetchFn = mockFetch();
       globalThis.fetch = fetchFn as unknown as typeof fetch;
-      el = document.createElement('blocks-list-pane') as ListPaneEl;
+      el = document.createElement('agency-list-pane') as ListPaneEl;
       el.getRowKey = (row: TypedRow) => {
         const cell = row.cell(columnId('id'));
         return cell.type === 'NULL' ? '' : String((cell as { value: unknown }).value);
@@ -117,14 +117,14 @@ describe('blocks-list-pane', () => {
     });
 
     it('shows empty message when no data', async () => {
-      el = document.createElement('blocks-list-pane') as ListPaneEl;
+      el = document.createElement('agency-list-pane') as ListPaneEl;
       document.body.appendChild(el);
       await el.updateComplete;
       expect(el.shadowRoot!.textContent).toContain('No items found');
     });
 
     it('shows custom empty message', async () => {
-      el = document.createElement('blocks-list-pane') as ListPaneEl;
+      el = document.createElement('agency-list-pane') as ListPaneEl;
       el.emptyMessage = 'Nothing here';
       document.body.appendChild(el);
       await el.updateComplete;
@@ -293,7 +293,7 @@ describe('blocks-list-pane', () => {
     });
 
     it('empty state has role=status', async () => {
-      el = document.createElement('blocks-list-pane') as ListPaneEl;
+      el = document.createElement('agency-list-pane') as ListPaneEl;
       document.body.appendChild(el);
       await el.updateComplete;
       const status = el.shadowRoot!.querySelector('[role="status"]');
@@ -320,7 +320,7 @@ describe('blocks-list-pane', () => {
 
   describe('push support', () => {
     it('has pushUrl and pushTopics properties defaulting to empty', async () => {
-      el = document.createElement('blocks-list-pane') as unknown as ListPaneEl;
+      el = document.createElement('agency-list-pane') as unknown as ListPaneEl;
       document.body.appendChild(el);
       await el.updateComplete;
       expect(el.pushUrl).toBe('');
@@ -328,7 +328,7 @@ describe('blocks-list-pane', () => {
     });
 
     it('does not create EventStreamController when pushUrl is empty', async () => {
-      el = document.createElement('blocks-list-pane') as unknown as ListPaneEl;
+      el = document.createElement('agency-list-pane') as unknown as ListPaneEl;
       el.pushTopics = ['items:*'];
       document.body.appendChild(el);
       await el.updateComplete;
@@ -336,7 +336,7 @@ describe('blocks-list-pane', () => {
     });
 
     it('does not create EventStreamController when pushTopics is empty', async () => {
-      el = document.createElement('blocks-list-pane') as unknown as ListPaneEl;
+      el = document.createElement('agency-list-pane') as unknown as ListPaneEl;
       el.pushUrl = 'ws://localhost/api/push';
       document.body.appendChild(el);
       await el.updateComplete;

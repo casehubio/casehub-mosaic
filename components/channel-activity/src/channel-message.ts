@@ -21,7 +21,7 @@ import { emitPagesEvent } from '@casehubio/pages-data';
 import { ChannelEventTopics } from './events.js';
 import '@casehubio/pages-ui-components';
 
-@customElement('blocks-channel-message')
+@customElement('agency-channel-message')
 export class ChannelMessageElement extends LitElement {
   @property({ type: Object }) message!: QhorusMessage;
   @property({ type: Array }) reactions: Reaction[] = [];
@@ -351,7 +351,7 @@ export class ChannelMessageElement extends LitElement {
         </div>
       ` : nothing}
       ${this._expanded ? this._renderExpanded() : nothing}
-      <blocks-channel-reaction-bar .reactions=${this.reactions} .messageId=${m.id} .currentActorId=${this.currentActorId}></blocks-channel-reaction-bar>
+      <agency-channel-reaction-bar .reactions=${this.reactions} .messageId=${m.id} .currentActorId=${this.currentActorId}></agency-channel-reaction-bar>
       </div>
     `;
   }
@@ -372,6 +372,6 @@ export class ChannelMessageElement extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'blocks-channel-message': ChannelMessageElement;
+    'agency-channel-message': ChannelMessageElement;
   }
 }

@@ -2,8 +2,8 @@ import { LitElement, html, css } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import { emitPagesEvent } from '@casehubio/pages-data';
 
-@customElement('blocks-swf-link')
-export class BlocksSwfLinkElement extends LitElement {
+@customElement('agency-swf-link')
+export class AgencySwfLinkElement extends LitElement {
   static override styles = css`
     :host { display: block; }
     a { font-size: 13px; color: var(--pages-accent-9, #2563eb); cursor: pointer; text-decoration: none; }

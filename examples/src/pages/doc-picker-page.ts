@@ -3,7 +3,7 @@ import { customElement } from 'lit/decorators.js';
 import '@casehubio/mosaic-document-workbench';
 import { MOCK_DOCUMENTS } from '../../mock-data/document-workbench.js';
 
-@customElement('blocks-example-doc-picker')
+@customElement('agency-example-doc-picker')
 export class DocPickerPage extends LitElement {
   static override styles = css`
     :host { display: block; padding: 24px; }

@@ -3,7 +3,7 @@ import { customElement } from 'lit/decorators.js';
 import '@casehubio/mosaic-orchestration-workbench';
 import mockData from '../../mock-data/execution.json';
 
-@customElement('blocks-example-orchestration-workbench')
+@customElement('agency-example-orchestration-workbench')
 export class OrchestrationWorkbenchPage extends LitElement {
   private _data = mockData as unknown as { snapshot: unknown; events: unknown[] };
 
@@ -22,13 +22,13 @@ export class OrchestrationWorkbenchPage extends LitElement {
         in a split-workbench. Selection coordination between agent roster and audit event timeline.
         Shows the full claim adjudication execution with 17 audit events.</p>
       <div class="workbench-container">
-        <blocks-orchestration-workbench .data=${this._data} selectionTopic="demo-orchestration">
-        </blocks-orchestration-workbench>
+        <agency-orchestration-workbench .data=${this._data} selectionTopic="demo-orchestration">
+        </agency-orchestration-workbench>
       </div>
     `;
   }
 }
 
 declare global {
-  interface HTMLElementTagNameMap { 'blocks-example-orchestration-workbench': OrchestrationWorkbenchPage; }
+  interface HTMLElementTagNameMap { 'agency-example-orchestration-workbench': OrchestrationWorkbenchPage; }
 }

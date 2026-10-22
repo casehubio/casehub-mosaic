@@ -3,10 +3,10 @@ id: PP-20260903-79eda0
 title: "Diagram components compose shared pipeline pieces for read-only viewing"
 type: principle
 scope: repo
-applies_to: "all diagram components in mosaic (casehub-diagram, swf-diagram, blocks-case-flow-viewer, future diagram viewers)"
+applies_to: "all diagram components in mosaic (casehub-diagram, swf-diagram, agency-case-flow-viewer, future diagram viewers)"
 severity: important
 refs:
-  - components/case-flow-viewer/src/blocks-case-flow-viewer.ts
+  - components/case-flow-viewer/src/agency-case-flow-viewer.ts
   - components/casehub-diagram/src/casehub-diagram.ts
 violation_hint: "A new viewer component duplicates rendering logic from an editor, or an editor is wrapped/hidden rather than composed from shared pipeline pieces"
 created: 2026-09-03

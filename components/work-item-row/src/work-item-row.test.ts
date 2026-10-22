@@ -46,11 +46,11 @@ const mockItem: WorkItemResponse = {
   statusNote: null,
 };
 
-describe('blocks-work-item-row', () => {
+describe('agency-work-item-row', () => {
   let el: HTMLElement & { item: WorkItemResponse };
 
   beforeEach(async () => {
-    el = document.createElement('blocks-work-item-row') as any;
+    el = document.createElement('agency-work-item-row') as any;
     el.item = mockItem;
     document.body.appendChild(el);
     await (el as any).updateComplete;

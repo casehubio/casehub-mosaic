@@ -38,7 +38,7 @@ function createDiagramElement(tag: string): HTMLElement {
   if (!tag) return;
 
   const useWorkbench = format === 'case';
-  const elementTag = useWorkbench ? 'blocks-diagram-workbench' : tag;
+  const elementTag = useWorkbench ? 'agency-diagram-workbench' : tag;
 
   if (!activeElement || activeElement.tagName.toLowerCase() !== elementTag) {
     activeElement = createDiagramElement(elementTag);

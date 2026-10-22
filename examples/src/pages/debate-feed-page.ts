@@ -3,7 +3,7 @@ import { customElement } from 'lit/decorators.js';
 import '@casehubio/mosaic-document-workbench';
 import { MOCK_ENTRIES } from '../../mock-data/document-workbench.js';
 
-@customElement('blocks-example-debate-feed')
+@customElement('agency-example-debate-feed')
 export class DebateFeedPage extends LitElement {
   static override styles = css`
     :host { display: block; padding: 24px; }

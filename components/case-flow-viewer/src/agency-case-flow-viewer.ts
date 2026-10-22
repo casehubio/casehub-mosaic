@@ -11,15 +11,15 @@ import { emitPagesEvent } from '@casehubio/pages-data';
 import { toReactFlowGraph } from '@casehubio/graph-renderer';
 import type { ElkLayoutOptions } from '@casehubio/graph-renderer';
 import '@casehubio/graph-renderer';
-import './blocks-case-flow-toolbar.js';
+import './agency-case-flow-toolbar.js';
 
 export interface CaseFlowViewerProps {
   runtimeState: CaseRuntimeState | null;
   selectionTopic: string;
 }
 
-@customElement('blocks-case-flow-viewer')
-export class BlocksCaseFlowViewer extends DiagramBaseMixin(LitElement) {
+@customElement('agency-case-flow-viewer')
+export class AgencyCaseFlowViewer extends DiagramBaseMixin(LitElement) {
   @property({ attribute: false }) runtimeState: CaseRuntimeState | null = null;
   @property({ attribute: 'selection-topic' }) selectionTopic = '';
 
@@ -53,7 +53,7 @@ export class BlocksCaseFlowViewer extends DiagramBaseMixin(LitElement) {
   }
 
   protected _applyPropertyEdit(): string {
-    throw new Error('BlocksCaseFlowViewer is read-only');
+    throw new Error('AgencyCaseFlowViewer is read-only');
   }
 
   protected _emptyTemplate(): string | null {
@@ -113,7 +113,7 @@ export class BlocksCaseFlowViewer extends DiagramBaseMixin(LitElement) {
         .empty { display: flex; align-items: center; justify-content: center;
           height: 100%; color: var(--pages-text-tertiary, #999); font-style: italic; }
       </style>
-      <blocks-case-flow-toolbar
+      <agency-case-flow-toolbar
         .nodeCount=${stats.nodeCount}
         .completedCount=${stats.completed}
         .runningCount=${stats.running}
@@ -122,7 +122,7 @@ export class BlocksCaseFlowViewer extends DiagramBaseMixin(LitElement) {
         .resultTimestamp=${this.runtimeState?.timestamp ?? null}
         @export-svg=${() => this._exportDiagram('svg')}
         @export-png=${() => this._exportDiagram('png')}
-      ></blocks-case-flow-toolbar>
+      ></agency-case-flow-toolbar>
       <div class="canvas-area" role="img" aria-label="Case flow diagram">
         ${this._error
           ? this._renderError()

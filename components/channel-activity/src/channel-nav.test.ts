@@ -4,7 +4,7 @@ import type { QhorusChannel } from './types.js';
 import type { ChannelTree } from './channel-state-controller.js';
 import { ChannelEventTopics } from './events.js';
 
-describe('blocks-channel-nav', () => {
+describe('agency-channel-nav', () => {
   let el: HTMLElement;
 
   afterEach(() => {
@@ -13,7 +13,7 @@ describe('blocks-channel-nav', () => {
   });
 
   it('renders list of channels with names', async () => {
-    el = document.createElement('blocks-channel-nav');
+    el = document.createElement('agency-channel-nav');
     const channels: QhorusChannel[] = [
       { id: 'ch1', name: 'General', semantic: 'APPEND', paused: false },
       { id: 'ch2', name: 'Urgent', semantic: 'COLLECT', paused: false },
@@ -29,7 +29,7 @@ describe('blocks-channel-nav', () => {
   });
 
   it('highlights selected channel', async () => {
-    el = document.createElement('blocks-channel-nav');
+    el = document.createElement('agency-channel-nav');
     (el as any).channels = [
       { id: 'ch1', name: 'General', semantic: 'APPEND', paused: false },
       { id: 'ch2', name: 'Urgent', semantic: 'COLLECT', paused: false },
@@ -45,7 +45,7 @@ describe('blocks-channel-nav', () => {
   });
 
   it('emits channel:selected on channel click', async () => {
-    el = document.createElement('blocks-channel-nav');
+    el = document.createElement('agency-channel-nav');
     (el as any).channels = [{ id: 'ch1', name: 'General', semantic: 'APPEND', paused: false }];
     document.body.appendChild(el);
     await (el as any).updateComplete;
@@ -60,7 +60,7 @@ describe('blocks-channel-nav', () => {
   });
 
   it('opens delete dialog on delete click', async () => {
-    el = document.createElement('blocks-channel-nav');
+    el = document.createElement('agency-channel-nav');
     (el as any).channels = [{ id: 'ch1', name: 'General', semantic: 'APPEND', paused: false }];
     document.body.appendChild(el);
     await (el as any).updateComplete;
@@ -76,7 +76,7 @@ describe('blocks-channel-nav', () => {
   });
 
   it('emits channel:delete on dialog confirm', async () => {
-    el = document.createElement('blocks-channel-nav');
+    el = document.createElement('agency-channel-nav');
     (el as any).channels = [{ id: 'ch1', name: 'General', semantic: 'APPEND', paused: false }];
     document.body.appendChild(el);
     await (el as any).updateComplete;
@@ -96,7 +96,7 @@ describe('blocks-channel-nav', () => {
   });
 
   it('closes delete dialog on cancel without emitting', async () => {
-    el = document.createElement('blocks-channel-nav');
+    el = document.createElement('agency-channel-nav');
     (el as any).channels = [{ id: 'ch1', name: 'General', semantic: 'APPEND', paused: false }];
     document.body.appendChild(el);
     await (el as any).updateComplete;
@@ -116,7 +116,7 @@ describe('blocks-channel-nav', () => {
   });
 
   it('opens create dialog on create click', async () => {
-    el = document.createElement('blocks-channel-nav');
+    el = document.createElement('agency-channel-nav');
     document.body.appendChild(el);
     await (el as any).updateComplete;
 
@@ -131,7 +131,7 @@ describe('blocks-channel-nav', () => {
   });
 
   it('emits channel:create with name from dialog confirm', async () => {
-    el = document.createElement('blocks-channel-nav');
+    el = document.createElement('agency-channel-nav');
     document.body.appendChild(el);
     await (el as any).updateComplete;
 
@@ -150,7 +150,7 @@ describe('blocks-channel-nav', () => {
   });
 
   it('does not emit create when dialog cancelled', async () => {
-    el = document.createElement('blocks-channel-nav');
+    el = document.createElement('agency-channel-nav');
     document.body.appendChild(el);
     await (el as any).updateComplete;
 
@@ -169,7 +169,7 @@ describe('blocks-channel-nav', () => {
   });
 
   it('navigates channels with arrow keys and Enter', async () => {
-    el = document.createElement('blocks-channel-nav');
+    el = document.createElement('agency-channel-nav');
     (el as any).channels = [
       { id: 'ch1', name: 'General', semantic: 'APPEND', paused: false },
       { id: 'ch2', name: 'Urgent', semantic: 'COLLECT', paused: false },
@@ -195,7 +195,7 @@ describe('blocks-channel-nav', () => {
   });
 
   it('handles empty channel list without crashing', async () => {
-    el = document.createElement('blocks-channel-nav');
+    el = document.createElement('agency-channel-nav');
     (el as any).channels = [];
     document.body.appendChild(el);
     await (el as any).updateComplete;
@@ -210,7 +210,7 @@ describe('blocks-channel-nav', () => {
   // --- showCreate / showDelete toggles (#64) ---
 
   it('hides create button when showCreate=false', async () => {
-    el = document.createElement('blocks-channel-nav');
+    el = document.createElement('agency-channel-nav');
     (el as any).showCreate = false;
     document.body.appendChild(el);
     await (el as any).updateComplete;
@@ -219,7 +219,7 @@ describe('blocks-channel-nav', () => {
   });
 
   it('shows create button by default', async () => {
-    el = document.createElement('blocks-channel-nav');
+    el = document.createElement('agency-channel-nav');
     document.body.appendChild(el);
     await (el as any).updateComplete;
 
@@ -227,7 +227,7 @@ describe('blocks-channel-nav', () => {
   });
 
   it('hides delete buttons when showDelete=false', async () => {
-    el = document.createElement('blocks-channel-nav');
+    el = document.createElement('agency-channel-nav');
     (el as any).channels = [{ id: 'ch1', name: 'General', semantic: 'APPEND', paused: false }];
     (el as any).showDelete = false;
     document.body.appendChild(el);
@@ -237,7 +237,7 @@ describe('blocks-channel-nav', () => {
   });
 
   it('shows delete buttons by default', async () => {
-    el = document.createElement('blocks-channel-nav');
+    el = document.createElement('agency-channel-nav');
     (el as any).channels = [{ id: 'ch1', name: 'General', semantic: 'APPEND', paused: false }];
     document.body.appendChild(el);
     await (el as any).updateComplete;
@@ -248,7 +248,7 @@ describe('blocks-channel-nav', () => {
   // --- unread count badges ---
 
   it('displays unread count badge from channel.unreadCount', async () => {
-    el = document.createElement('blocks-channel-nav');
+    el = document.createElement('agency-channel-nav');
     (el as any).channels = [
       { id: 'ch1', name: 'General', semantic: 'APPEND', paused: false, unreadCount: 42 },
       { id: 'ch2', name: 'Urgent', semantic: 'COLLECT', paused: false, unreadCount: 0 },
@@ -262,7 +262,7 @@ describe('blocks-channel-nav', () => {
   });
 
   it('does not display count badge when unreadCount is zero or absent', async () => {
-    el = document.createElement('blocks-channel-nav');
+    el = document.createElement('agency-channel-nav');
     (el as any).channels = [
       { id: 'ch1', name: 'General', semantic: 'APPEND', paused: false },
     ];
@@ -275,7 +275,7 @@ describe('blocks-channel-nav', () => {
   // --- layout: dropdown (#64) ---
 
   it('renders as custom dropdown in dropdown mode', async () => {
-    el = document.createElement('blocks-channel-nav');
+    el = document.createElement('agency-channel-nav');
     (el as any).channels = [
       { id: 'ch1', name: 'General', semantic: 'APPEND', paused: false },
       { id: 'ch2', name: 'Urgent', semantic: 'COLLECT', paused: false },
@@ -299,7 +299,7 @@ describe('blocks-channel-nav', () => {
   });
 
   it('emits channel:selected on dropdown option click', async () => {
-    el = document.createElement('blocks-channel-nav');
+    el = document.createElement('agency-channel-nav');
     (el as any).channels = [
       { id: 'ch1', name: 'General', semantic: 'APPEND', paused: false },
       { id: 'ch2', name: 'Urgent', semantic: 'COLLECT', paused: false },
@@ -323,7 +323,7 @@ describe('blocks-channel-nav', () => {
   });
 
   it('reflects selectedChannelId in dropdown trigger', async () => {
-    el = document.createElement('blocks-channel-nav');
+    el = document.createElement('agency-channel-nav');
     (el as any).channels = [
       { id: 'ch1', name: 'General', semantic: 'APPEND', paused: false },
       { id: 'ch2', name: 'Urgent', semantic: 'COLLECT', paused: false },
@@ -338,7 +338,7 @@ describe('blocks-channel-nav', () => {
   });
 
   it('shows unread counts in dropdown options', async () => {
-    el = document.createElement('blocks-channel-nav');
+    el = document.createElement('agency-channel-nav');
     (el as any).channels = [
       { id: 'ch1', name: 'General', semantic: 'APPEND', paused: false, unreadCount: 7 },
     ];
@@ -357,7 +357,7 @@ describe('blocks-channel-nav', () => {
   });
 
   it('closes dropdown on Escape', async () => {
-    el = document.createElement('blocks-channel-nav');
+    el = document.createElement('agency-channel-nav');
     (el as any).channels = [{ id: 'ch1', name: 'General', semantic: 'APPEND', paused: false }];
     (el as any).layout = 'dropdown';
     document.body.appendChild(el);
@@ -374,7 +374,7 @@ describe('blocks-channel-nav', () => {
   });
 
   it('hides create and delete in dropdown mode regardless of toggle values', async () => {
-    el = document.createElement('blocks-channel-nav');
+    el = document.createElement('agency-channel-nav');
     (el as any).channels = [{ id: 'ch1', name: 'General', semantic: 'APPEND', paused: false }];
     (el as any).layout = 'dropdown';
     (el as any).showCreate = true;
@@ -387,7 +387,7 @@ describe('blocks-channel-nav', () => {
   });
 
   it('renders sidebar by default', async () => {
-    el = document.createElement('blocks-channel-nav');
+    el = document.createElement('agency-channel-nav');
     (el as any).channels = [{ id: 'ch1', name: 'General', semantic: 'APPEND', paused: false }];
     document.body.appendChild(el);
     await (el as any).updateComplete;
@@ -427,7 +427,7 @@ describe('blocks-channel-nav', () => {
     }
 
     it('renders ungrouped channels and space groups', async () => {
-      el = document.createElement('blocks-channel-nav');
+      el = document.createElement('agency-channel-nav');
       (el as any).channelTree = makeTree();
       document.body.appendChild(el);
       await (el as any).updateComplete;
@@ -443,7 +443,7 @@ describe('blocks-channel-nav', () => {
     });
 
     it('shows unread badge on space header', async () => {
-      el = document.createElement('blocks-channel-nav');
+      el = document.createElement('agency-channel-nav');
       (el as any).channelTree = makeTree();
       document.body.appendChild(el);
       await (el as any).updateComplete;
@@ -455,7 +455,7 @@ describe('blocks-channel-nav', () => {
     });
 
     it('hides unread badge when space unread is 0', async () => {
-      el = document.createElement('blocks-channel-nav');
+      el = document.createElement('agency-channel-nav');
       const tree = makeTree();
       tree.spaces[0]!.channels.forEach(ch => (ch as any).unreadCount = 0);
       (tree.spaces[0] as any).unreadCount = 0;
@@ -468,7 +468,7 @@ describe('blocks-channel-nav', () => {
     });
 
     it('collapses space group on header click', async () => {
-      el = document.createElement('blocks-channel-nav');
+      el = document.createElement('agency-channel-nav');
       (el as any).channelTree = makeTree();
       document.body.appendChild(el);
       await (el as any).updateComplete;
@@ -485,7 +485,7 @@ describe('blocks-channel-nav', () => {
     });
 
     it('selects channel within space group', async () => {
-      el = document.createElement('blocks-channel-nav');
+      el = document.createElement('agency-channel-nav');
       (el as any).channelTree = makeTree();
       document.body.appendChild(el);
       await (el as any).updateComplete;
@@ -502,7 +502,7 @@ describe('blocks-channel-nav', () => {
     });
 
     it('renders space filter dropdown with all spaces', async () => {
-      el = document.createElement('blocks-channel-nav');
+      el = document.createElement('agency-channel-nav');
       (el as any).channelTree = makeTree();
       document.body.appendChild(el);
       await (el as any).updateComplete;
@@ -517,7 +517,7 @@ describe('blocks-channel-nav', () => {
     });
 
     it('filters to selected space channels plus ungrouped', async () => {
-      el = document.createElement('blocks-channel-nav');
+      el = document.createElement('agency-channel-nav');
       (el as any).channelTree = makeTree();
       document.body.appendChild(el);
       await (el as any).updateComplete;
@@ -536,7 +536,7 @@ describe('blocks-channel-nav', () => {
     });
 
     it('resets to all spaces when All Spaces selected', async () => {
-      el = document.createElement('blocks-channel-nav');
+      el = document.createElement('agency-channel-nav');
       (el as any).channelTree = makeTree();
       document.body.appendChild(el);
       await (el as any).updateComplete;
@@ -555,7 +555,7 @@ describe('blocks-channel-nav', () => {
     });
 
     it('falls back to flat mode when channelTree absent', async () => {
-      el = document.createElement('blocks-channel-nav');
+      el = document.createElement('agency-channel-nav');
       (el as any).channels = [{ id: 'ch1', name: 'General', semantic: 'APPEND', paused: false }];
       document.body.appendChild(el);
       await (el as any).updateComplete;
@@ -567,7 +567,7 @@ describe('blocks-channel-nav', () => {
 
   describe('displayOrder sorting', () => {
     it('renders channels in displayOrder when tree is pre-sorted', async () => {
-      el = document.createElement('blocks-channel-nav');
+      el = document.createElement('agency-channel-nav');
       (el as any).channelTree = {
         ungrouped: [],
         spaces: [{
@@ -630,7 +630,7 @@ describe('blocks-channel-nav', () => {
     };
 
     it('shows space context menu on right-click of space header', async () => {
-      el = document.createElement('blocks-channel-nav');
+      el = document.createElement('agency-channel-nav');
       (el as any).channelTree = mockTree;
       document.body.appendChild(el);
       await (el as any).updateComplete;
@@ -648,7 +648,7 @@ describe('blocks-channel-nav', () => {
     });
 
     it('shows channel context menu with Move to Space submenu', async () => {
-      el = document.createElement('blocks-channel-nav');
+      el = document.createElement('agency-channel-nav');
       (el as any).channelTree = mockTree;
       document.body.appendChild(el);
       await (el as any).updateComplete;
@@ -668,7 +668,7 @@ describe('blocks-channel-nav', () => {
     });
 
     it('dismisses context menu on outside click', async () => {
-      el = document.createElement('blocks-channel-nav');
+      el = document.createElement('agency-channel-nav');
       (el as any).channelTree = mockTree;
       document.body.appendChild(el);
       await (el as any).updateComplete;
@@ -687,7 +687,7 @@ describe('blocks-channel-nav', () => {
     });
 
     it('emits space:rename on inline rename Enter', async () => {
-      el = document.createElement('blocks-channel-nav');
+      el = document.createElement('agency-channel-nav');
       (el as any).channelTree = mockTree;
       document.body.appendChild(el);
       await (el as any).updateComplete;
@@ -716,7 +716,7 @@ describe('blocks-channel-nav', () => {
     });
 
     it('emits space:create on create space dialog confirm', async () => {
-      el = document.createElement('blocks-channel-nav');
+      el = document.createElement('agency-channel-nav');
       (el as any).channelTree = mockTree;
       document.body.appendChild(el);
       await (el as any).updateComplete;
@@ -738,7 +738,7 @@ describe('blocks-channel-nav', () => {
     });
 
     it('emits space:delete after delete confirmation', async () => {
-      el = document.createElement('blocks-channel-nav');
+      el = document.createElement('agency-channel-nav');
       (el as any).channelTree = mockTree;
       document.body.appendChild(el);
       await (el as any).updateComplete;
@@ -763,7 +763,7 @@ describe('blocks-channel-nav', () => {
     });
 
     it('emits channel:create with spaceId for Create Channel Here', async () => {
-      el = document.createElement('blocks-channel-nav');
+      el = document.createElement('agency-channel-nav');
       (el as any).channelTree = mockTree;
       document.body.appendChild(el);
       await (el as any).updateComplete;
@@ -790,7 +790,7 @@ describe('blocks-channel-nav', () => {
     });
 
     it('emits channel:move-to-space on submenu click', async () => {
-      el = document.createElement('blocks-channel-nav');
+      el = document.createElement('agency-channel-nav');
       (el as any).channelTree = mockTree;
       document.body.appendChild(el);
       await (el as any).updateComplete;
@@ -813,7 +813,7 @@ describe('blocks-channel-nav', () => {
     });
 
     it('renders + Create Space button in tree mode', async () => {
-      el = document.createElement('blocks-channel-nav');
+      el = document.createElement('agency-channel-nav');
       (el as any).channelTree = mockTree;
       document.body.appendChild(el);
       await (el as any).updateComplete;
@@ -847,7 +847,7 @@ describe('blocks-channel-nav', () => {
     };
 
     it('sets draggable on channel items in tree mode', async () => {
-      el = document.createElement('blocks-channel-nav');
+      el = document.createElement('agency-channel-nav');
       (el as any).channelTree = dndTree;
       document.body.appendChild(el);
       await (el as any).updateComplete;
@@ -859,7 +859,7 @@ describe('blocks-channel-nav', () => {
     });
 
     it('adds dragging class on dragstart', async () => {
-      el = document.createElement('blocks-channel-nav');
+      el = document.createElement('agency-channel-nav');
       (el as any).channelTree = dndTree;
       document.body.appendChild(el);
       await (el as any).updateComplete;
@@ -875,7 +875,7 @@ describe('blocks-channel-nav', () => {
     });
 
     it('clears dragging state on dragend', async () => {
-      el = document.createElement('blocks-channel-nav');
+      el = document.createElement('agency-channel-nav');
       (el as any).channelTree = dndTree;
       document.body.appendChild(el);
       await (el as any).updateComplete;
@@ -894,7 +894,7 @@ describe('blocks-channel-nav', () => {
     });
 
     it('highlights space header as drop target', async () => {
-      el = document.createElement('blocks-channel-nav');
+      el = document.createElement('agency-channel-nav');
       (el as any).channelTree = dndTree;
       document.body.appendChild(el);
       await (el as any).updateComplete;
@@ -909,7 +909,7 @@ describe('blocks-channel-nav', () => {
     });
 
     it('shows empty ungrouped drop zone during drag when all channels are in spaces', async () => {
-      el = document.createElement('blocks-channel-nav');
+      el = document.createElement('agency-channel-nav');
       (el as any).channelTree = {
         ungrouped: [],
         spaces: dndTree.spaces,

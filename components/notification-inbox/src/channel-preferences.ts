@@ -80,7 +80,7 @@ interface FormData {
   };
 }
 
-@customElement('blocks-channel-preferences')
+@customElement('agency-channel-preferences')
 export class ChannelPreferences extends LitElement {
   @property({ type: String }) endpoint?: string;
   @property({ type: Object }) identity?: WorkIdentity;
@@ -344,6 +344,6 @@ export class ChannelPreferences extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'blocks-channel-preferences': ChannelPreferences;
+    'agency-channel-preferences': ChannelPreferences;
   }
 }

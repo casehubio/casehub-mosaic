@@ -7,7 +7,7 @@ export interface WorkItemRowProps {
   item: WorkItemResponse;
 }
 
-@customElement('blocks-work-item-row')
+@customElement('agency-work-item-row')
 export class WorkItemRow extends LitElement {
   @property({ type: Object }) item!: WorkItemResponse;
 

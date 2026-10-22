@@ -22,7 +22,7 @@ export interface ReconciliationStatusProps {
   endpoint?: string;
 }
 
-@customElement('blocks-reconciliation-status')
+@customElement('agency-reconciliation-status')
 export class ReconciliationStatus extends PushMixin(LitElement) {
   @property({ attribute: false }) data: ReconciliationSnapshot | null = null;
   @property() endpoint?: string;
@@ -221,6 +221,6 @@ export class ReconciliationStatus extends PushMixin(LitElement) {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'blocks-reconciliation-status': ReconciliationStatus;
+    'agency-reconciliation-status': ReconciliationStatus;
   }
 }

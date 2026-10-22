@@ -25,5 +25,5 @@ export * from './commitment.js';
 export { ChannelTaskPanelElement } from './channel-task-panel.js';
 export { ChannelCorrelationPanelElement } from './channel-correlation-panel.js';
 export { ChannelArtifactPanelElement } from './channel-artifact-panel.js';
-export { BlocksChannelActivityElement } from './blocks-channel-activity.js';
-export type { ChannelActivityProps } from './blocks-channel-activity.js';
+export { AgencyChannelActivityElement } from './agency-channel-activity.js';
+export type { ChannelActivityProps } from './agency-channel-activity.js';

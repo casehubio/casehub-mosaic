@@ -2,7 +2,7 @@ import { LitElement, html, css, type TemplateResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import type { WorkItemResponse, WorkItemLifecycleEvent } from '@casehubio/mosaic-core';
 
-@customElement('blocks-detail-activity-tab')
+@customElement('agency-detail-activity-tab')
 export class DetailActivityTab extends LitElement {
   @property({ type: Object }) workItem: WorkItemResponse | null = null;
   @property({ type: Array }) events: readonly WorkItemLifecycleEvent[] = [];
@@ -255,6 +255,6 @@ export class DetailActivityTab extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'blocks-detail-activity-tab': DetailActivityTab;
+    'agency-detail-activity-tab': DetailActivityTab;
   }
 }

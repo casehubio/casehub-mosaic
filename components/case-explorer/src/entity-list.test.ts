@@ -44,7 +44,7 @@ describe('EntityList', () => {
   };
 
   function createList(reg: EntityTypeRegistration = testRegistration) {
-    const el = document.createElement('blocks-entity-list') as any;
+    const el = document.createElement('agency-entity-list') as any;
     el.registration = reg;
     el.fetchFn = fetchFn;
     el.selectionTopic = 'case';
@@ -70,7 +70,7 @@ describe('EntityList', () => {
     await new Promise(r => setTimeout(r, 0));
     await el.updateComplete;
 
-    const listPane = el.shadowRoot!.querySelector('blocks-list-pane');
+    const listPane = el.shadowRoot!.querySelector('agency-list-pane');
     expect(listPane).toBeTruthy();
     expect(listPane!.dataSet).toBeTruthy();
     expect(listPane!.dataSet!.rows.length).toBe(1);
@@ -128,7 +128,7 @@ describe('EntityList', () => {
 
     expect(fetchFn).toHaveBeenCalledTimes(2);
     expect(fetchFn.mock.calls[1]![0]).toContain('cursor=cursor-page-2');
-    const listPane = el.shadowRoot!.querySelector('blocks-list-pane');
+    const listPane = el.shadowRoot!.querySelector('agency-list-pane');
     expect(listPane!.dataSet!.rows.length).toBe(2);
   });
 
@@ -201,7 +201,7 @@ describe('EntityList', () => {
     await new Promise(r => setTimeout(r, 0));
     await el.updateComplete;
 
-    const listPane = el.shadowRoot!.querySelector('blocks-list-pane') as any;
+    const listPane = el.shadowRoot!.querySelector('agency-list-pane') as any;
     const rowKeyFn = listPane.getRowKey;
     expect(rowKeyFn).toBeTruthy();
 
@@ -234,7 +234,7 @@ describe('EntityList', () => {
       if (e.detail?.topic === 'case:selected') events.push(e);
     }) as EventListener);
 
-    const listPane = el.shadowRoot!.querySelector('blocks-list-pane') as any;
+    const listPane = el.shadowRoot!.querySelector('agency-list-pane') as any;
     const secondRow = listPane.dataSet!.rows[1];
     listPane.dispatchEvent(new CustomEvent('row-activate', {
       detail: { row: secondRow, key: 'c2' },
@@ -267,7 +267,7 @@ describe('EntityList', () => {
       if (e.detail?.topic === 'case:selected') events.push(e);
     }) as EventListener);
 
-    const listPane = el.shadowRoot!.querySelector('blocks-list-pane') as any;
+    const listPane = el.shadowRoot!.querySelector('agency-list-pane') as any;
     const secondRow = listPane.dataSet!.rows[1];
     listPane.dispatchEvent(new CustomEvent('row-activate', {
       detail: { row: secondRow, key: 'c2' },

@@ -7,7 +7,7 @@ export interface FilterClickDetail {
   value: string | null;
 }
 
-@customElement('blocks-inbox-summary-bar')
+@customElement('agency-inbox-summary-bar')
 export class InboxSummaryBar extends LitElement {
   @property({ type: Object }) summary: InboxSummary | null = null;
   @property({ type: Boolean }) overdueActive = false;
@@ -148,6 +148,6 @@ export class InboxSummaryBar extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'blocks-inbox-summary-bar': InboxSummaryBar;
+    'agency-inbox-summary-bar': InboxSummaryBar;
   }
 }

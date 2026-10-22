@@ -1,13 +1,13 @@
 import { describe, it, expect } from 'vitest';
-import './blocks-org-diagram-toolbar.js';
+import './agency-org-diagram-toolbar.js';
 
-describe('blocks-org-diagram-toolbar', () => {
+describe('agency-org-diagram-toolbar', () => {
   it('registers as custom element', () => {
-    expect(customElements.get('blocks-org-diagram-toolbar')).toBeDefined();
+    expect(customElements.get('agency-org-diagram-toolbar')).toBeDefined();
   });
 
   it('renders with ARIA', async () => {
-    const el = document.createElement('blocks-org-diagram-toolbar') as any;
+    const el = document.createElement('agency-org-diagram-toolbar') as any;
     el.unitCount = 3;
     el.agentCount = 7;
     el.relationshipCount = 5;
@@ -32,7 +32,7 @@ describe('blocks-org-diagram-toolbar', () => {
   });
 
   it('emits toolbar-layout-change on select', async () => {
-    const el = document.createElement('blocks-org-diagram-toolbar') as any;
+    const el = document.createElement('agency-org-diagram-toolbar') as any;
     document.body.appendChild(el);
     await el.updateComplete;
 
@@ -50,7 +50,7 @@ describe('blocks-org-diagram-toolbar', () => {
   });
 
   it('disables save when not dirty', async () => {
-    const el = document.createElement('blocks-org-diagram-toolbar') as any;
+    const el = document.createElement('agency-org-diagram-toolbar') as any;
     el.hasBackend = true;
     el.dirty = false;
     document.body.appendChild(el);

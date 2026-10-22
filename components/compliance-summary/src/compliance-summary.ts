@@ -49,7 +49,7 @@ export interface ComplianceSummaryProps {
   requirements: RequirementDefinition[] | null;
 }
 
-@customElement('blocks-compliance-summary')
+@customElement('agency-compliance-summary')
 export class ComplianceSummary extends DataSourceMixin(LitElement) {
   @property({ type: String, reflect: true, attribute: 'aria-label' }) override ariaLabel: string | null = 'Compliance status';
   @property({ attribute: false }) requirements: RequirementDefinition[] | null = null;
@@ -126,6 +126,6 @@ export class ComplianceSummary extends DataSourceMixin(LitElement) {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'blocks-compliance-summary': ComplianceSummary;
+    'agency-compliance-summary': ComplianceSummary;
   }
 }

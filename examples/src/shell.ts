@@ -108,7 +108,7 @@ const NAV: NavCategory[] = [
 ];
 
 
-@customElement('blocks-example-shell')
+@customElement('agency-example-shell')
 export class ExampleShell extends LitElement {
   @state() private currentPage = '';
   @state() private theme: 'light' | 'dark' = 'dark';
@@ -265,66 +265,66 @@ export class ExampleShell extends LitElement {
 
   private renderPage() {
     switch (this.currentPage) {
-      case '#components/row': return html`<blocks-example-row></blocks-example-row>`;
-      case '#components/inbox': return html`<blocks-example-inbox></blocks-example-inbox>`;
-      case '#components/detail': return html`<blocks-example-detail></blocks-example-detail>`;
-      case '#components/queue': return html`<blocks-example-queue-inbox></blocks-example-queue-inbox>`;
-      case '#components/sla-indicator': return html`<blocks-example-sla-indicator></blocks-example-sla-indicator>`;
-      case '#components/kpi-metric-row': return html`<blocks-example-kpi-metric-row></blocks-example-kpi-metric-row>`;
-      case '#components/approval-gate': return html`<blocks-example-approval-gate></blocks-example-approval-gate>`;
-      case '#components/confirm-dialog': return html`<blocks-example-confirm-dialog></blocks-example-confirm-dialog>`;
-      case '#components/data-table': return html`<blocks-example-data-table></blocks-example-data-table>`;
-      case '#components/notifications': return html`<blocks-example-notification></blocks-example-notification>`;
-      case '#components/audit-trail': return html`<blocks-example-audit-trail></blocks-example-audit-trail>`;
-      case '#components/timeline-events': return html`<blocks-example-timeline-events></blocks-example-timeline-events>`;
-      case '#components/timeline-commitment': return html`<blocks-example-timeline-commitment></blocks-example-timeline-commitment>`;
-      case '#components/timeline-custom': return html`<blocks-example-timeline-custom></blocks-example-timeline-custom>`;
+      case '#components/row': return html`<agency-example-row></agency-example-row>`;
+      case '#components/inbox': return html`<agency-example-inbox></agency-example-inbox>`;
+      case '#components/detail': return html`<agency-example-detail></agency-example-detail>`;
+      case '#components/queue': return html`<agency-example-queue-inbox></agency-example-queue-inbox>`;
+      case '#components/sla-indicator': return html`<agency-example-sla-indicator></agency-example-sla-indicator>`;
+      case '#components/kpi-metric-row': return html`<agency-example-kpi-metric-row></agency-example-kpi-metric-row>`;
+      case '#components/approval-gate': return html`<agency-example-approval-gate></agency-example-approval-gate>`;
+      case '#components/confirm-dialog': return html`<agency-example-confirm-dialog></agency-example-confirm-dialog>`;
+      case '#components/data-table': return html`<agency-example-data-table></agency-example-data-table>`;
+      case '#components/notifications': return html`<agency-example-notification></agency-example-notification>`;
+      case '#components/audit-trail': return html`<agency-example-audit-trail></agency-example-audit-trail>`;
+      case '#components/timeline-events': return html`<agency-example-timeline-events></agency-example-timeline-events>`;
+      case '#components/timeline-commitment': return html`<agency-example-timeline-commitment></agency-example-timeline-commitment>`;
+      case '#components/timeline-custom': return html`<agency-example-timeline-custom></agency-example-timeline-custom>`;
 
-      case '#components/trust-score': return html`<blocks-example-trust-score></blocks-example-trust-score>`;
-      case '#components/channel-activity': return html`<blocks-example-channel-activity></blocks-example-channel-activity>`;
-      case '#components/commitment-lifecycle': return html`<blocks-example-commitment-lifecycle></blocks-example-commitment-lifecycle>`;
-      case '#components/similarity-panel': return html`<blocks-example-similarity-panel></blocks-example-similarity-panel>`;
-      case '#components/trust-feedback': return html`<blocks-example-trust-feedback></blocks-example-trust-feedback>`;
-      case '#components/compliance-summary': return html`<blocks-example-compliance-summary></blocks-example-compliance-summary>`;
-      case '#components/gdpr-erasure': return html`<blocks-example-gdpr-erasure></blocks-example-gdpr-erasure>`;
-      case '#components/sla-breach-policy': return html`<blocks-example-sla-breach-policy></blocks-example-sla-breach-policy>`;
-      case '#components/grouped-data-view': return html`<blocks-example-grouped-data-view></blocks-example-grouped-data-view>`;
-      case '#components/case-explorer': return html`<blocks-example-case-explorer></blocks-example-case-explorer>`;
-      case '#components/preferences-editor': return html`<blocks-example-preferences-editor></blocks-example-preferences-editor>`;
-      case '#components/session-workbench': return html`<blocks-example-session-workbench></blocks-example-session-workbench>`;
-      case '#components/commitment-viz': return html`<blocks-example-commitment-viz></blocks-example-commitment-viz>`;
-      case '#components/case-dependency-graph': return html`<blocks-example-case-dependency-graph></blocks-example-case-dependency-graph>`;
-      case '#composed/workbench': return html`<blocks-example-workbench></blocks-example-workbench>`;
-      case '#composed/trust-workbench': return html`<blocks-example-trust-workbench></blocks-example-trust-workbench>`;
-      case '#composed/conversation-viewer': return html`<blocks-example-conversation-viewer></blocks-example-conversation-viewer>`;
-      case '#composed/worker-task-pane': return html`<blocks-example-worker-task-pane></blocks-example-worker-task-pane>`;
-      case '#composed/rendering-primitives': return html`<blocks-example-rendering-primitives></blocks-example-rendering-primitives>`;
-      case '#composed/push-updates': return html`<blocks-example-push-updates></blocks-example-push-updates>`;
-      case '#components/avatar': return html`<blocks-example-avatar></blocks-example-avatar>`;
-      case '#components/contributor-workbench': return html`<blocks-example-contributor-workbench></blocks-example-contributor-workbench>`;
-      case '#orchestration/decomposition-tree': return html`<blocks-example-decomposition-tree></blocks-example-decomposition-tree>`;
-      case '#orchestration/plan-item-tree': return html`<blocks-example-plan-item-tree></blocks-example-plan-item-tree>`;
-      case '#orchestration/plan-model-dashboard': return html`<blocks-example-plan-model-dashboard></blocks-example-plan-model-dashboard>`;
-      case '#orchestration/dag-viewer': return html`<blocks-example-dag-viewer></blocks-example-dag-viewer>`;
-      case '#orchestration/execution-monitor': return html`<blocks-example-execution-monitor></blocks-example-execution-monitor>`;
-      case '#orchestration/orchestration-workbench': return html`<blocks-example-orchestration-workbench></blocks-example-orchestration-workbench>`;
-      case '#diagrams/casehub-diagram': return html`<blocks-example-casehub-diagram></blocks-example-casehub-diagram>`;
-      case '#diagrams/swf-diagram': return html`<blocks-example-swf-diagram></blocks-example-swf-diagram>`;
-      case '#diagrams/diagram-workbench': return html`<blocks-example-diagram-workbench></blocks-example-diagram-workbench>`;
-      case '#diagrams/diagram-export': return html`<blocks-example-diagram-export></blocks-example-diagram-export>`;
-      case '#diagrams/org-diagram': return html`<blocks-example-org-diagram></blocks-example-org-diagram>`;
-      case '#document-workbench/document-diff': return html`<blocks-example-document-diff></blocks-example-document-diff>`;
-      case '#document-workbench/debate-feed': return html`<blocks-example-debate-feed></blocks-example-debate-feed>`;
-      case '#document-workbench/review-tracker': return html`<blocks-example-review-tracker></blocks-example-review-tracker>`;
-      case '#document-workbench/document-timeline': return html`<blocks-example-document-timeline></blocks-example-document-timeline>`;
-      case '#document-workbench/context-gauge': return html`<blocks-example-context-gauge></blocks-example-context-gauge>`;
-      case '#document-workbench/doc-picker': return html`<blocks-example-doc-picker></blocks-example-doc-picker>`;
-      case '#document-workbench/brainstorm-options': return html`<blocks-example-brainstorm-options></blocks-example-brainstorm-options>`;
-      case '#document-workbench/brainstorm-picker': return html`<blocks-example-brainstorm-picker></blocks-example-brainstorm-picker>`;
-      case '#document-workbench/workspace-status': return html`<blocks-example-workspace-status></blocks-example-workspace-status>`;
-      case '#agent-setup/avatar-step': return html`<blocks-example-avatar-step></blocks-example-avatar-step>`;
-      case '#agent-setup/manifest-editor': return html`<blocks-example-manifest-editor></blocks-example-manifest-editor>`;
-      default: return html`<blocks-example-workbench></blocks-example-workbench>`;
+      case '#components/trust-score': return html`<agency-example-trust-score></agency-example-trust-score>`;
+      case '#components/channel-activity': return html`<agency-example-channel-activity></agency-example-channel-activity>`;
+      case '#components/commitment-lifecycle': return html`<agency-example-commitment-lifecycle></agency-example-commitment-lifecycle>`;
+      case '#components/similarity-panel': return html`<agency-example-similarity-panel></agency-example-similarity-panel>`;
+      case '#components/trust-feedback': return html`<agency-example-trust-feedback></agency-example-trust-feedback>`;
+      case '#components/compliance-summary': return html`<agency-example-compliance-summary></agency-example-compliance-summary>`;
+      case '#components/gdpr-erasure': return html`<agency-example-gdpr-erasure></agency-example-gdpr-erasure>`;
+      case '#components/sla-breach-policy': return html`<agency-example-sla-breach-policy></agency-example-sla-breach-policy>`;
+      case '#components/grouped-data-view': return html`<agency-example-grouped-data-view></agency-example-grouped-data-view>`;
+      case '#components/case-explorer': return html`<agency-example-case-explorer></agency-example-case-explorer>`;
+      case '#components/preferences-editor': return html`<agency-example-preferences-editor></agency-example-preferences-editor>`;
+      case '#components/session-workbench': return html`<agency-example-session-workbench></agency-example-session-workbench>`;
+      case '#components/commitment-viz': return html`<agency-example-commitment-viz></agency-example-commitment-viz>`;
+      case '#components/case-dependency-graph': return html`<agency-example-case-dependency-graph></agency-example-case-dependency-graph>`;
+      case '#composed/workbench': return html`<agency-example-workbench></agency-example-workbench>`;
+      case '#composed/trust-workbench': return html`<agency-example-trust-workbench></agency-example-trust-workbench>`;
+      case '#composed/conversation-viewer': return html`<agency-example-conversation-viewer></agency-example-conversation-viewer>`;
+      case '#composed/worker-task-pane': return html`<agency-example-worker-task-pane></agency-example-worker-task-pane>`;
+      case '#composed/rendering-primitives': return html`<agency-example-rendering-primitives></agency-example-rendering-primitives>`;
+      case '#composed/push-updates': return html`<agency-example-push-updates></agency-example-push-updates>`;
+      case '#components/avatar': return html`<agency-example-avatar></agency-example-avatar>`;
+      case '#components/contributor-workbench': return html`<agency-example-contributor-workbench></agency-example-contributor-workbench>`;
+      case '#orchestration/decomposition-tree': return html`<agency-example-decomposition-tree></agency-example-decomposition-tree>`;
+      case '#orchestration/plan-item-tree': return html`<agency-example-plan-item-tree></agency-example-plan-item-tree>`;
+      case '#orchestration/plan-model-dashboard': return html`<agency-example-plan-model-dashboard></agency-example-plan-model-dashboard>`;
+      case '#orchestration/dag-viewer': return html`<agency-example-dag-viewer></agency-example-dag-viewer>`;
+      case '#orchestration/execution-monitor': return html`<agency-example-execution-monitor></agency-example-execution-monitor>`;
+      case '#orchestration/orchestration-workbench': return html`<agency-example-orchestration-workbench></agency-example-orchestration-workbench>`;
+      case '#diagrams/casehub-diagram': return html`<agency-example-casehub-diagram></agency-example-casehub-diagram>`;
+      case '#diagrams/swf-diagram': return html`<agency-example-swf-diagram></agency-example-swf-diagram>`;
+      case '#diagrams/diagram-workbench': return html`<agency-example-diagram-workbench></agency-example-diagram-workbench>`;
+      case '#diagrams/diagram-export': return html`<agency-example-diagram-export></agency-example-diagram-export>`;
+      case '#diagrams/org-diagram': return html`<agency-example-org-diagram></agency-example-org-diagram>`;
+      case '#document-workbench/document-diff': return html`<agency-example-document-diff></agency-example-document-diff>`;
+      case '#document-workbench/debate-feed': return html`<agency-example-debate-feed></agency-example-debate-feed>`;
+      case '#document-workbench/review-tracker': return html`<agency-example-review-tracker></agency-example-review-tracker>`;
+      case '#document-workbench/document-timeline': return html`<agency-example-document-timeline></agency-example-document-timeline>`;
+      case '#document-workbench/context-gauge': return html`<agency-example-context-gauge></agency-example-context-gauge>`;
+      case '#document-workbench/doc-picker': return html`<agency-example-doc-picker></agency-example-doc-picker>`;
+      case '#document-workbench/brainstorm-options': return html`<agency-example-brainstorm-options></agency-example-brainstorm-options>`;
+      case '#document-workbench/brainstorm-picker': return html`<agency-example-brainstorm-picker></agency-example-brainstorm-picker>`;
+      case '#document-workbench/workspace-status': return html`<agency-example-workspace-status></agency-example-workspace-status>`;
+      case '#agent-setup/avatar-step': return html`<agency-example-avatar-step></agency-example-avatar-step>`;
+      case '#agent-setup/manifest-editor': return html`<agency-example-manifest-editor></agency-example-manifest-editor>`;
+      default: return html`<agency-example-workbench></agency-example-workbench>`;
     }
   }
 }

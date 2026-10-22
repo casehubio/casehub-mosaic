@@ -19,7 +19,7 @@ export interface OrchestrationWorkbenchProps {
   selectionTopic: string;
 }
 
-@customElement('blocks-orchestration-workbench')
+@customElement('agency-orchestration-workbench')
 export class OrchestrationWorkbench extends LiveRegionMixin(LitElement) {
   @property({ type: String }) endpoint = '';
   @property({ type: String, attribute: 'execution-id' }) executionId?: string;
@@ -64,12 +64,12 @@ export class OrchestrationWorkbench extends LiveRegionMixin(LitElement) {
     return html`
       <pages-split-workbench selection-topic=${this.selectionTopic}>
         <div slot="list" class="monitor-panel">
-          <blocks-execution-monitor
+          <agency-execution-monitor
             .endpoint=${monitorEndpoint}
             execution-id=${this.executionId ?? ''}
             .data=${this.data?.snapshot}
             selection-topic=${this.selectionTopic}
-          ></blocks-execution-monitor>
+          ></agency-execution-monitor>
         </div>
         <div slot="detail" class="timeline-panel">
           <agency-timeline
@@ -86,6 +86,6 @@ export class OrchestrationWorkbench extends LiveRegionMixin(LitElement) {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'blocks-orchestration-workbench': OrchestrationWorkbench;
+    'agency-orchestration-workbench': OrchestrationWorkbench;
   }
 }

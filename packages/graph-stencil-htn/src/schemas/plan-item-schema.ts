@@ -78,7 +78,7 @@ export const compoundPlanItemSchema = {
       'x-group': 'Advanced',
       'x-order': 31,
       'x-visibility': 'advanced',
-      'x-editor-component': 'blocks-json-editor',
+      'x-editor-component': 'agency-json-editor',
       'x-help': 'Binding name → Participation (PARTICIPANT / COMPANION)',
     },
   },

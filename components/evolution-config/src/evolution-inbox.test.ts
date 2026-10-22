@@ -4,7 +4,7 @@ import './evolution-inbox.js';
 import type { EvolutionInbox } from './evolution-inbox.js';
 
 function createElement(inbox?: ConductorInboxEntry[]): EvolutionInbox {
-  const el = document.createElement('blocks-evolution-inbox') as EvolutionInbox;
+  const el = document.createElement('agency-evolution-inbox') as EvolutionInbox;
   if (inbox) el.inbox = inbox;
   document.body.appendChild(el);
   return el;
@@ -44,9 +44,9 @@ const SAMPLE_INBOX: ConductorInboxEntry[] = [
   },
 ];
 
-describe('blocks-evolution-inbox', () => {
+describe('agency-evolution-inbox', () => {
   afterEach(() => {
-    document.body.querySelectorAll('blocks-evolution-inbox').forEach(el => el.remove());
+    document.body.querySelectorAll('agency-evolution-inbox').forEach(el => el.remove());
   });
 
   it('has correct ARIA attributes', async () => {

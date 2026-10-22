@@ -3,7 +3,7 @@ import { customElement, property, state } from 'lit/decorators.js';
 import type { ArtefactRef, ResolvedArtifact } from './types.js';
 import '@casehubio/pages-ui-components';
 
-@customElement('blocks-channel-artifact-panel')
+@customElement('agency-channel-artifact-panel')
 export class ChannelArtifactPanelElement extends LitElement {
   @property({ type: Object }) selectedArtefactRef?: ArtefactRef;
   @property({ attribute: false }) resolveArtifact?: (ref: ArtefactRef) => Promise<ResolvedArtifact>;
@@ -259,6 +259,6 @@ export class ChannelArtifactPanelElement extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'blocks-channel-artifact-panel': ChannelArtifactPanelElement;
+    'agency-channel-artifact-panel': ChannelArtifactPanelElement;
   }
 }

@@ -25,7 +25,7 @@ const MOCK_SESSIONS: SessionResponse[] = [
   },
 ];
 
-describe('blocks-session-list', () => {
+describe('agency-session-list', () => {
   let el: SessionListEl;
 
   beforeEach(async () => {
@@ -33,7 +33,7 @@ describe('blocks-session-list', () => {
       ok: true,
       json: () => Promise.resolve(MOCK_SESSIONS),
     }));
-    el = document.createElement('blocks-session-list') as SessionListEl;
+    el = document.createElement('agency-session-list') as SessionListEl;
     el.endpoint = '/api/sessions';
     document.body.appendChild(el);
     await el.updateComplete;

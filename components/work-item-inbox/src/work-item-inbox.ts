@@ -87,7 +87,7 @@ export interface WorkItemInboxProps {
   mode: InboxMode;
 }
 
-@customElement('blocks-work-item-inbox')
+@customElement('agency-work-item-inbox')
 export class WorkItemInbox extends WorkItemInboxBase {
   @property({ type: Object }) identity!: WorkIdentity;
   @property({ type: String }) endpoint?: string;
@@ -1118,7 +1118,7 @@ export class WorkItemInbox extends WorkItemInboxBase {
 
   private _renderQueuePillBar() {
     return html`
-      <blocks-queue-pill-bar
+      <agency-queue-pill-bar
         .endpoint="${this.endpoint}"
         .selectedQueueId="${this._queueScope?.queue.id ?? null}"
         .selectedQueueCount="${this._queueScope?.items.length ?? null}"
@@ -1127,7 +1127,7 @@ export class WorkItemInbox extends WorkItemInboxBase {
             this._handleQueueScopeChanged(e.detail.payload);
           }
         }}"
-      ></blocks-queue-pill-bar>
+      ></agency-queue-pill-bar>
     `;
   }
 
@@ -1167,7 +1167,7 @@ export class WorkItemInbox extends WorkItemInboxBase {
   private renderSummaryBar() {
     return html`
       <div class="summary-bar">
-        <blocks-inbox-summary-bar
+        <agency-inbox-summary-bar
           .summary="${this.summary}"
           .visibleTotal=${this.getTabItems().length}
           .visibleOverdue=${this.getTabOverdueCount()}
@@ -1176,7 +1176,7 @@ export class WorkItemInbox extends WorkItemInboxBase {
           .claimBreachActive=${this.claimBreachFilter}
           .hideClaimBreach=${this.activeTab !== 'claimable'}
           @filter-click="${this.handleSummaryFilterClick}"
-        ></blocks-inbox-summary-bar>
+        ></agency-inbox-summary-bar>
       </div>
     `;
   }
@@ -1185,14 +1185,14 @@ export class WorkItemInbox extends WorkItemInboxBase {
     const { statusCounts, priorityCounts } = this._computeFilterCounts();
     return html`
       <div class="filter-bar">
-        <blocks-inbox-filter-bar
+        <agency-inbox-filter-bar
           .activeStatusFilters="${this.statusFilter}"
           .activePriorityFilters="${this.priorityFilter}"
           .statusCounts="${statusCounts}"
           .priorityCounts="${priorityCounts}"
           @filter-change="${this.handleFilterChange}"
           @clear-filters="${this.handleClearFilters}"
-        ></blocks-inbox-filter-bar>
+        ></agency-inbox-filter-bar>
       </div>
     `;
   }
@@ -1284,7 +1284,7 @@ export class WorkItemInbox extends WorkItemInboxBase {
     return html`
       <div class="inbox-container">
         ${this._renderQueuePillBar()}
-        ${this._queueScope ? html`<blocks-scope-context-bar .queue="${this._queueScope.queue}" @scope-clear="${this._handleScopeClear}"></blocks-scope-context-bar>` : ''}
+        ${this._queueScope ? html`<agency-scope-context-bar .queue="${this._queueScope.queue}" @scope-clear="${this._handleScopeClear}"></agency-scope-context-bar>` : ''}
         ${this.renderTabs()}
         ${this.renderSummaryBar()}
         ${this.renderFilterBar()}
@@ -1311,6 +1311,6 @@ export class WorkItemInbox extends WorkItemInboxBase {
 
 declare global {
   interface HTMLElementTagNameMap {
-    'blocks-work-item-inbox': WorkItemInbox;
+    'agency-work-item-inbox': WorkItemInbox;
   }
 }

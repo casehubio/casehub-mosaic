@@ -20,7 +20,7 @@ function makeMessage(overrides: Partial<QhorusMessage> = {}): QhorusMessage {
 }
 
 async function renderToolbar(props: { message?: Partial<QhorusMessage>; currentActorId?: string } = {}): Promise<HTMLElement> {
-  const el = document.createElement('blocks-channel-hover-toolbar') as any;
+  const el = document.createElement('agency-channel-hover-toolbar') as any;
   el.message = makeMessage(props.message);
   el.currentActorId = props.currentActorId ?? 'alice';
   document.body.appendChild(el);
@@ -30,7 +30,7 @@ async function renderToolbar(props: { message?: Partial<QhorusMessage>; currentA
 
 afterEach(() => { document.body.innerHTML = ''; });
 
-describe('blocks-channel-hover-toolbar', () => {
+describe('agency-channel-hover-toolbar', () => {
   it('renders three action buttons', async () => {
     const el = await renderToolbar();
     const buttons = el.shadowRoot!.querySelectorAll('.toolbar-btn');

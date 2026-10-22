@@ -13,7 +13,7 @@ export interface CaseExplorerProps {
   entityTypes: readonly EntityTypeRegistration[];
 }
 
-@customElement('blocks-case-explorer')
+@customElement('agency-case-explorer')
 export class CaseExplorer extends LiveRegionMixin(LitElement) {
   @property({ attribute: false }) entityTypes: readonly EntityTypeRegistration[] = [];
   @property({ attribute: false }) fetchFn: typeof fetch = fetch;
@@ -149,14 +149,14 @@ export class CaseExplorer extends LiveRegionMixin(LitElement) {
           <pages-split-workbench selection-topic=${this._selectionTopic}>
             <div slot="list">
               ${navState.viewMode === 'list' && currentReg
-                ? html`<blocks-entity-list .registration=${currentReg} .fetchFn=${this.fetchFn} selection-topic=${this._selectionTopic}></blocks-entity-list>`
+                ? html`<agency-entity-list .registration=${currentReg} .fetchFn=${this.fetchFn} selection-topic=${this._selectionTopic}></agency-entity-list>`
                 : nothing}
               ${navState.viewMode === 'tree'
                 ? this._renderTreePanel(navState)
                 : nothing}
             </div>
             <div slot="detail">
-              <blocks-entity-detail .registration=${currentReg} .fetchFn=${this.fetchFn} selection-topic=${this._selectionTopic}></blocks-entity-detail>
+              <agency-entity-detail .registration=${currentReg} .fetchFn=${this.fetchFn} selection-topic=${this._selectionTopic}></agency-entity-detail>
             </div>
           </pages-split-workbench>
         </div>
@@ -233,7 +233,7 @@ export class CaseExplorer extends LiveRegionMixin(LitElement) {
       return html`<div class="tree-prompt">Loading hierarchy...</div>`;
     }
 
-    return html`<blocks-entity-tree .nodes=${this._treeNodes} selection-topic=${this._selectionTopic} .fetchFn=${this.fetchFn}></blocks-entity-tree>`;
+    return html`<agency-entity-tree .nodes=${this._treeNodes} selection-topic=${this._selectionTopic} .fetchFn=${this.fetchFn}></agency-entity-tree>`;
   }
 
   private async _fetchTreeData(rootId: string): Promise<void> {
