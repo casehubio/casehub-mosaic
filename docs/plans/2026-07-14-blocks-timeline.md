@@ -13,7 +13,7 @@
 
 **Architecture:** Three-layer design: component (DataSourceMixin + orchestration + ARIA) → strategy (data mapping + default renderers) → layout renderer (DOM structure + connectors + animation). Render resolution: component callback > strategy renderer > built-in default.
 
-**Tech Stack:** Lit 3, TypeScript, `@casehubio/blocks-ui-core` (DataSourceMixin, fetchSource, renderPropertyTree), `@casehubio/pages-primitives` (LiveRegionMixin, emitPagesEvent), vitest + jsdom.
+**Tech Stack:** Lit 3, TypeScript, `@casehubio/agency-ui-core` (DataSourceMixin, fetchSource, renderPropertyTree), `@casehubio/pages-primitives` (LiveRegionMixin, emitPagesEvent), vitest + jsdom.
 
 ## Global Constraints
 
@@ -45,12 +45,12 @@
 
 ```json
 {
-  "name": "@casehubio/blocks-ui-blocks-timeline",
+  "name": "@casehubio/agency-ui-blocks-timeline",
   "version": "0.1.0",
   "description": "Pluggable timeline — vertical, horizontal, compact layouts with strategy-based content",
   "repository": {
     "type": "git",
-    "url": "https://github.com/casehubio/blocks-ui.git"
+    "url": "https://github.com/casehubio/agency-ui.git"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
@@ -65,7 +65,7 @@
     "clean": "rimraf dist"
   },
   "dependencies": {
-    "@casehubio/blocks-ui-core": "workspace:*",
+    "@casehubio/agency-ui-core": "workspace:*",
     "@casehubio/pages-primitives": "^0.2.0",
     "@casehubio/pages-data": "^0.2.1",
     "lit": "^3.2.0"
@@ -124,7 +124,7 @@ export default defineConfig({
     alias: [
       { find: '@casehubio/pages-primitives', replacement: path.resolve(__dirname, '../../../pages/packages/pages-primitives/src') },
       { find: '@casehubio/pages-table', replacement: path.resolve(__dirname, '../../../pages/packages/pages-table/src') },
-      { find: '@casehubio/blocks-ui-core', replacement: path.resolve(__dirname, '../../packages/blocks-ui-core/src') },
+      { find: '@casehubio/agency-ui-core', replacement: path.resolve(__dirname, '../../packages/blocks-ui-core/src') },
       { find: '@casehubio/pages-ui-tokens', replacement: path.resolve(__dirname, '../../../pages/packages/pages-ui-tokens/src') },
       { find: /^@casehubio\/pages-component\/dist\/(.*)/, replacement: path.resolve(__dirname, '../../../pages/packages/pages-component/src/$1') },
       { find: '@casehubio/pages-component', replacement: path.resolve(__dirname, '../../../pages/packages/pages-component/src') },
@@ -1177,7 +1177,7 @@ git commit -m "feat(blocks-timeline): vertical, horizontal, compact layout rende
 - Modify: `components/blocks-timeline/src/index.ts`
 
 **Interfaces:**
-- Consumes: `TimelineNode`, `Layout`, `TimelineStrategy` from `types.ts`; renderers from Task 4; strategies from Tasks 2–3; `DataSourceMixin`, `fetchSource` from `@casehubio/blocks-ui-core`; `LiveRegionMixin`, `emitPagesEvent` from `@casehubio/pages-primitives`/`pages-component`
+- Consumes: `TimelineNode`, `Layout`, `TimelineStrategy` from `types.ts`; renderers from Task 4; strategies from Tasks 2–3; `DataSourceMixin`, `fetchSource` from `@casehubio/agency-ui-core`; `LiveRegionMixin`, `emitPagesEvent` from `@casehubio/pages-primitives`/`pages-component`
 - Produces: `BlocksTimeline` custom element `<blocks-timeline>` — used by Tasks 7–9 (examples)
 
 This is the orchestrating component. It:
@@ -1803,7 +1803,7 @@ Use `ide_refactor_safe_delete` for the component file, then remove the directory
 
 - [ ] **Step 3: Update examples vite.config.ts**
 
-Replace the `@casehubio/blocks-ui-case-timeline` alias with `@casehubio/blocks-ui-blocks-timeline` pointing to `../components/blocks-timeline/src`.
+Replace the `@casehubio/agency-ui-case-timeline` alias with `@casehubio/agency-ui-blocks-timeline` pointing to `../components/blocks-timeline/src`.
 
 - [ ] **Step 4: Update examples shell.ts**
 

@@ -1,7 +1,7 @@
 # Channel Activity — Promote Connectors Chat Primitives to blocks-ui
 
 **Date:** 2026-07-13
-**Issue:** casehubio/blocks-ui#39 (parent: #35)
+**Issue:** casehubio/agency-ui#39 (parent: #35)
 **Status:** Approved
 
 ## Summary
@@ -91,13 +91,13 @@ separate deployable module — no longer embedded inside connectors' Maven build
 | `chat-demo` webui build (package.json, vite, etc.) | Chat app module | Entire frontend build |
 
 The chat app module's final home (standalone repo, connectors submodule, or
-claudony) is deferred (tracked: casehubio/blocks-ui#TBD — file before
+claudony) is deferred (tracked: casehubio/agency-ui#TBD — file before
 implementation begins). During implementation, it lives as a standalone
 directory at `connectors/chat-app/` — a sibling to `chat-demo/` that is not
 part of the Maven build (no `pom.xml`). It has its own `package.json`,
 `vite.config.ts`, and build scripts. This is the temporary buildable location
 until a permanent home is decided. It depends on
-`@casehubio/blocks-ui-channel-activity` and connectors' backend.
+`@casehubio/agency-ui-channel-activity` and connectors' backend.
 
 ### What Stays in Connectors
 
@@ -118,8 +118,8 @@ that need the chat backend without inheriting a UI build.
 
 ```
 blocks-ui/components/channel-activity/
-├── package.json              @casehubio/blocks-ui-channel-activity
-│                             dependencies: @casehubio/blocks-ui-core, lit,
+├── package.json              @casehubio/agency-ui-channel-activity
+│                             dependencies: @casehubio/agency-ui-core, lit,
 │                             marked, dompurify, emoji-picker-element
 ├── src/
 │   ├── types.ts              QhorusMessage, QhorusChannel, MessageType, etc.
@@ -374,7 +374,7 @@ pulling in UI code or npm tooling.
 ### Chat App Module
 
 The extracted workbench imports all UI primitives from
-`@casehubio/blocks-ui-channel-activity`. It owns the app shell (responsive
+`@casehubio/agency-ui-channel-activity`. It owns the app shell (responsive
 three-panel layout, WebSocket connection, REST calls) and delegates all
 message/channel/member rendering to the shared blocks-ui components.
 
@@ -402,7 +402,7 @@ this convention — no changes needed.
 Epic #35's Cross-Repo Overlap Watch identifies `<channel-feed>` as a shared
 pattern across OpenClaw, Clinical (audit trail), and DevTown (event stream).
 
-OpenClaw's `<channel-feed>` (117 lines, casehubio/blocks-ui#36) is a
+OpenClaw's `<channel-feed>` (117 lines, casehubio/agency-ui#36) is a
 simplified chronological message stream with role attribution and auto-scroll.
 It is planned to become a *consumer* of blocks-ui's `<channel-feed>` — not a
 competing implementation. The OpenClaw migration plan (Phase 1) registers its

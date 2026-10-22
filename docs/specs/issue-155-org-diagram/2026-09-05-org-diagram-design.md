@@ -1,6 +1,6 @@
 # Eidos Org Structure Diagram — Design Spec
 
-**Issue:** casehubio/blocks-ui#155
+**Issue:** casehubio/agency-ui#155
 **Date:** 2026-09-05
 **Status:** Draft
 
@@ -540,4 +540,4 @@ Move `GitHubBackend` and `GitHubBackendConfig` from `pages-diagram-core/src/gith
 - `GE-20260801-36b9fa` — Cytoscape.js limitation (custom node shapes)
 - `GE-20260809-2cbc61` — ReactFlow vs D3 for force-directed (static ELK force is fine)
 - `examples/src/pages/diagram-export-page.ts` — YAML syntax highlighting overlay technique (highlightYaml, transparent textarea over highlighted pre)
-- `casehubio/blocks-ui#155` — issue description with acceptance criteria
+- `casehubio/agency-ui#155` — issue description with acceptance criteria

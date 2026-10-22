@@ -1,7 +1,7 @@
 # HTN Decomposition Tree & DAG Plan Visualiser
 
 **Date:** 2026-08-06
-**Issue:** casehubio/blocks-ui#107
+**Issue:** casehubio/agency-ui#107
 **Status:** Approved
 **Branch:** `issue-107-htn-dag-visualiser`
 
@@ -75,7 +75,7 @@ interface CompoundTaskSnapshot {
   // Source: engine decomposition runtime (not on CompoundTask directly).
   // Requires engine to track which method was selected during decomposition.
   // When absent, all methods display at equal opacity (no selection highlight).
-  // See casehubio/blocks-ui#116.
+  // See casehubio/agency-ui#116.
 }
 
 interface DecompositionMethodSnapshot {
@@ -556,7 +556,7 @@ components/blocks-decomposition-tree/
 
 `toDecoration(domain, state)` and `BADGE_COLORS` currently live in `graph-stencil-case/src/runtime/decoration.ts`. graph-stencil-htn needs the same function but should not depend on graph-stencil-case (parallel packages) or push graph concerns into blocks-ui-core (#109 explicitly decided against this — `NodeDecoration` is defined in `@casehubio/graph-core`, which blocks-ui-core does not depend on).
 
-**Action:** Duplicate `toDecoration` and `BADGE_COLORS` in `graph-stencil-htn/src/runtime/decoration.ts`. The function is 15 lines of pure logic; the colour map is 9 lines. Both import `lookupStatus` from `@casehubio/blocks-ui-core` and `NodeDecoration` from `@casehubio/graph-core` — the same dependencies graph-stencil-case uses.
+**Action:** Duplicate `toDecoration` and `BADGE_COLORS` in `graph-stencil-htn/src/runtime/decoration.ts`. The function is 15 lines of pure logic; the colour map is 9 lines. Both import `lookupStatus` from `@casehubio/agency-ui-core` and `NodeDecoration` from `@casehubio/graph-core` — the same dependencies graph-stencil-case uses.
 
 This preserves layering: blocks-ui-core stays graph-unaware, graph-stencil-case and graph-stencil-htn remain parallel peers, and the duplication is trivially small.
 

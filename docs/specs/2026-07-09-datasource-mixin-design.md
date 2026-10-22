@@ -322,7 +322,7 @@ triggers a re-fetch with fresh headers.
 ### list-pane (simple — mixin, no overrides)
 
 ```typescript
-import { DataSourceMixin, emitPagesEvent, onPagesEvent } from '@casehubio/blocks-ui-core';
+import { DataSourceMixin, emitPagesEvent, onPagesEvent } from '@casehubio/agency-ui-core';
 
 @customElement('list-pane')
 export class ListPane extends DataSourceMixin(LitElement) {

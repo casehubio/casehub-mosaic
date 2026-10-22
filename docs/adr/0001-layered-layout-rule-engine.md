@@ -60,4 +60,4 @@ Chosen option: **Option C**, because it provides deterministic composition with 
 
 ## Links
 
-* [Issue #157](https://github.com/casehubio/blocks-ui/issues/157) — Rich org diagram
+* [Issue #157](https://github.com/casehubio/agency-ui/issues/157) — Rich org diagram

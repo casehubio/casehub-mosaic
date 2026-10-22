@@ -1,6 +1,6 @@
 # Worker Function Drill-Down — Design Spec
 
-**Issue:** casehubio/blocks-ui#108
+**Issue:** casehubio/agency-ui#108
 **Branch:** issue-108-worker-function-drill-down
 **Date:** 2026-08-11
 

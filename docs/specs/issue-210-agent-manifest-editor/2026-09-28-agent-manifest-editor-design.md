@@ -629,8 +629,8 @@ packages/blocks-ui-core/src/types/
 
 ## References
 
-- casehubio/blocks-ui#210 — this issue
-- casehubio/blocks-ui#166 — parent epic (agent setup wizard)
+- casehubio/agency-ui#210 — this issue
+- casehubio/agency-ui#166 — parent epic (agent setup wizard)
 - Parent epic spec: `specs/agent-setup-wizard/2026-09-20-agent-setup-wizard-design.md`
   (on issue-166-agent-setup-wizard branch)
 - Parent epic decisions: `specs/agent-setup-wizard/decisions.md` — D2 (preset

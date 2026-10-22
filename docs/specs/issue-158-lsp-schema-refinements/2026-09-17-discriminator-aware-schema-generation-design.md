@@ -1,6 +1,6 @@
 # Design: Discriminator-Aware Schema Generation for Narrowed LSP Completion
 
-**Issue:** casehubio/blocks-ui#158
+**Issue:** casehubio/agency-ui#158
 **Date:** 2026-09-17
 **Branch:** issue-158-lsp-schema-refinements
 
@@ -85,7 +85,7 @@ This design replaces the dead code:
 | `Binding` | `capability`, `subCase`, `humanTask` | key-presence |
 | `Trigger` | `contextChange`, `cloudEvent`, `schedule`, `scopeActivated` | key-presence |
 
-The issue body lists 5 discriminated unions (adding WorkerFunction, McpTransport, ModelProvider), but these types aren't part of the CaseDefinition YAML schema type tree. They exist in `graph-stencil-case/src/worker-function/types.ts`, which is a separate type hierarchy not reachable from the `CaseHub` root type that the generator walks. Tracked in casehubio/blocks-ui#TBD-worker-function-discriminators.
+The issue body lists 5 discriminated unions (adding WorkerFunction, McpTransport, ModelProvider), but these types aren't part of the CaseDefinition YAML schema type tree. They exist in `graph-stencil-case/src/worker-function/types.ts`, which is a separate type hierarchy not reachable from the `CaseHub` root type that the generator walks. Tracked in casehubio/agency-ui#TBD-worker-function-discriminators.
 
 ### Org Discriminators
 
@@ -392,7 +392,7 @@ The existing staleness test pattern (compare generated output against fresh gene
 - **variantDispatchers wiring** — not needed. The `FormatRegistration.variantDispatchers` field and `SchemaRegistry.getVariantSchema()` are dead infrastructure never invoked by the completion pipeline. The enhanced narrowing algorithm makes them redundant. (Whether to remove the dead infrastructure is a separate cleanup decision.)
 - **JSON manifest files** — not created. TypeScript configs replace the dead `case-definition.json`.
 - **SWF schema restructuring** — SWF already has unions. The narrowing fix benefits SWF automatically.
-- **WorkerFunction/McpTransport/ModelProvider discriminators** — these types aren't part of the CaseDefinition YAML schema type tree. They exist in the diagram editor's worker-function module. Tracked in casehubio/blocks-ui#TBD-worker-function-discriminators.
+- **WorkerFunction/McpTransport/ModelProvider discriminators** — these types aren't part of the CaseDefinition YAML schema type tree. They exist in the diagram editor's worker-function module. Tracked in casehubio/agency-ui#TBD-worker-function-discriminators.
 - **Zod v4 migration** — tracked separately in casehubio/casehub-pages#451. This work uses stable APIs (`z.union()`, `z.object()`, `.extend()`) that are identical across v3 and v4.
 - **pages-lsp narrowing algorithm fix** — tracked as casehubio/casehub-pages#TBD-narrowing-fix. Independently deployable from the union schema generation (see §Narrowing Algorithm Enhancement for deployment ordering).
 

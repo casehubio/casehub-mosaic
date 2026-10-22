@@ -1,6 +1,6 @@
 # trust-workbench — composite trust visibility component
 
-**Issue:** casehubio/blocks-ui#89
+**Issue:** casehubio/agency-ui#89
 **Date:** 2026-07-20
 **Status:** Design approved
 
@@ -250,7 +250,7 @@ When `routingDetailResolver` is set, the workbench calls the resolver instead of
 
 ```
 components/trust-workbench/
-  package.json            @casehubio/blocks-ui-trust-workbench
+  package.json            @casehubio/agency-ui-trust-workbench
   tsconfig.json
   vitest.config.ts
   src/

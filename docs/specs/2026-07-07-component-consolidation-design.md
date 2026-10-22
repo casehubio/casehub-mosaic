@@ -519,13 +519,13 @@ Extends `LiveRegionMixin(DataEndpointMixin(LitElement))`.
 
 | Component | Depends on |
 |-----------|-----------|
-| DataEndpointMixin | `@casehubio/pages-data` (SSEManager), `@casehubio/blocks-ui-core` (WorkIdentity) |
+| DataEndpointMixin | `@casehubio/pages-data` (SSEManager), `@casehubio/agency-ui-core` (WorkIdentity) |
 | #29 text filter | No new dependencies |
 | #24/#25 kpi density/reactive | No new dependencies |
 | #18 relations | No new dependencies |
-| #9 audit-trail-viewer | DataEndpointMixin, `@casehubio/blocks-ui-data-table` |
+| #9 audit-trail-viewer | DataEndpointMixin, `@casehubio/agency-ui-data-table` |
 | #10 case-timeline | DataEndpointMixin |
-| #11 trust-score-panel | DataEndpointMixin, `@casehubio/blocks-ui-data-table`, `@casehubio/pages-viz` (line chart) |
+| #11 trust-score-panel | DataEndpointMixin, `@casehubio/agency-ui-data-table`, `@casehubio/pages-viz` (line chart) |
 
 ## Backend dependencies
 

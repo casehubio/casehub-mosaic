@@ -1,6 +1,6 @@
 # Queue Board UX Redesign — Navigation Pattern and Constrained Filter Pills
 
-**Issue:** casehubio/blocks-ui#20
+**Issue:** casehubio/agency-ui#20
 **Date:** 2026-07-05
 
 ---
@@ -228,7 +228,7 @@ The fix is to make `shouldBeVisible` tab-independent. An item belongs in `this.i
 
 When a queue is active, the inbox SSE handler continues to manage `this.items` (the inbox data) — changes to `this.items` don't affect the current view because the rendering source is `queueScope.items`. Queue items are managed by the queue SSE handler (ADDED/REMOVED/CHANGED events on `/queues/{id}/events`).
 
-**Note (issue #19):** The existing queue-board's SSE handler checks `event.type === 'work-item.lifecycle'` which never matches — `SSEManager` sets `event.type` from the parsed JSON data's `.type` field (a `WorkEventType` value like `'CREATED'`). The new implementation must parse `event.data` to determine event type, matching the pattern in `work-item-inbox.ts:354-357`. See casehubio/blocks-ui#19.
+**Note (issue #19):** The existing queue-board's SSE handler checks `event.type === 'work-item.lifecycle'` which never matches — `SSEManager` sets `event.type` from the parsed JSON data's `.type` field (a `WorkEventType` value like `'CREATED'`). The new implementation must parse `event.data` to determine event type, matching the pattern in `work-item-inbox.ts:354-357`. See casehubio/agency-ui#19.
 
 ## Accessibility
 
@@ -263,7 +263,7 @@ When a queue is active, the inbox SSE handler continues to manage `this.items` (
 
 ## Deferred Items
 
-The following pre-existing issues (casehubio/blocks-ui#16) overlap with files modified by this spec but are not addressed here:
+The following pre-existing issues (casehubio/agency-ui#16) overlap with files modified by this spec but are not addressed here:
 
 - **Workbench container queries missing `container-type`** — the workbench is modified (removing Queues tab) but the CSS fix is orthogonal. Deferred to #16.
 - **Hardcoded spacing in filter-bar and summary-bar** — filter-bar is extended with count properties but spacing fixes are a separate concern. Deferred to #16.

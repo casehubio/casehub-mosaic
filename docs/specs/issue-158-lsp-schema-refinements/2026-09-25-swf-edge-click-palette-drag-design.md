@@ -1,6 +1,6 @@
 # SWF Edge Click Picker and Palette Drag-to-Canvas
 
-**Issue:** casehubio/blocks-ui#173
+**Issue:** casehubio/agency-ui#173
 **Branch:** issue-158-lsp-schema-refinements
 **Date:** 2026-09-25
 
@@ -230,4 +230,4 @@ bar toggles).
 - GraphCanvas.ts:361-379 — palette drop handler with getAddPlacement
 - D10: Edge-click type filtering (decisions.md)
 - D11: Picker positioning on edge click (decisions.md)
-- casehubio/blocks-ui#170 — stack-column layout (related, separate issue)
+- casehubio/agency-ui#170 — stack-column layout (related, separate issue)

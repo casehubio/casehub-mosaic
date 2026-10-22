@@ -1,6 +1,6 @@
 # pages-data-table Design Spec
 
-**Issue:** casehubio/blocks-ui#22
+**Issue:** casehubio/agency-ui#22
 **Date:** 2026-07-06
 **Status:** Approved
 
@@ -304,7 +304,7 @@ This scroll-into-view behavior is imperative — the keyboard handler sets `scro
 
 ```
 components/data-table/
-  package.json            # @casehubio/blocks-ui-data-table
+  package.json            # @casehubio/agency-ui-data-table
   tsconfig.json
   src/
     pages-data-table.ts
@@ -317,7 +317,7 @@ components/data-table/
     index.ts
 ```
 
-Dependencies: `lit`, `@casehubio/blocks-ui-core`. No pages-runtime, pages-data, or domain dependencies.
+Dependencies: `lit`, `@casehubio/agency-ui-core`. No pages-runtime, pages-data, or domain dependencies.
 
 ## Motivating Example: Inbox Refactor
 

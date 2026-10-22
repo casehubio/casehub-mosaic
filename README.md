@@ -2,7 +2,7 @@
 
 Shared UI components for CaseHub applications — composed from [casehub-pages](https://github.com/casehubio/casehub-pages) primitives.
 
-Domain-aware Web Components that multiple CaseHub applications reuse. Each component consumes `casehub-pages` APIs (`registerPanel`, `pages-event`, dataset contracts) but knows nothing about a specific app's domain model. The UI parallel to [casehub-blocks](https://github.com/casehubio/blocks) (shared Java coordination patterns).
+Domain-aware Web Components that multiple CaseHub applications reuse. Each component consumes `casehub-pages` APIs (`registerPanel`, `pages-event`, dataset contracts) but knows nothing about a specific app's domain model. The UI parallel to [casehub-agency](https://github.com/casehubio/agency) (shared Java coordination patterns).
 
 ## Components
 
@@ -98,4 +98,4 @@ The examples app showcases every component with mock data and interactive contro
 
 - [PLATFORM.md](https://raw.githubusercontent.com/casehubio/parent/main/docs/PLATFORM.md) — full platform architecture
 - [casehub-pages](https://github.com/casehubio/casehub-pages) — pages framework
-- [casehub-blocks](https://github.com/casehubio/blocks) — shared Java coordination patterns
+- [casehub-agency](https://github.com/casehubio/agency) — shared Java coordination patterns

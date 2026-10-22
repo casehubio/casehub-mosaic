@@ -12,7 +12,7 @@ Build order: #8 → #12 → #13 → #16 (bottom-up by dependency — #13 consume
 
 ## 1. `<sla-indicator>` (#8)
 
-**Package:** `@casehubio/blocks-ui-sla-indicator`
+**Package:** `@casehubio/agency-ui-sla-indicator`
 **Directory:** `components/sla-indicator/`
 
 ### Properties
@@ -75,7 +75,7 @@ configure(props: { deadline?: string; slaWindow?: number | null; warningThreshol
 
 ## 2. `<kpi-metric-row>` (#12)
 
-**Package:** `@casehubio/blocks-ui-kpi-metric-row`
+**Package:** `@casehubio/agency-ui-kpi-metric-row`
 **Directory:** `components/kpi-metric-row/`
 
 ### Properties
@@ -152,16 +152,16 @@ configure(props: { metrics?: MetricDefinition[]; endpoint?: string | null; colum
 
 ## 3. `<approval-gate>` (#13)
 
-**Package:** `@casehubio/blocks-ui-approval-gate`
+**Package:** `@casehubio/agency-ui-approval-gate`
 **Directory:** `components/approval-gate/`
 
 ### Dependencies
 
-- `"@casehubio/blocks-ui-sla-indicator": "workspace:*"` in `package.json`
-- `"@casehubio/blocks-ui-core": "workspace:*"` in `package.json`
+- `"@casehubio/agency-ui-sla-indicator": "workspace:*"` in `package.json`
+- `"@casehubio/agency-ui-core": "workspace:*"` in `package.json`
 - TypeScript project reference to `../../components/sla-indicator` in `tsconfig.json`
 - TypeScript project reference to `../../packages/blocks-ui-core` in `tsconfig.json`
-- Source import: `import '@casehubio/blocks-ui-sla-indicator'` (side-effect registration)
+- Source import: `import '@casehubio/agency-ui-sla-indicator'` (side-effect registration)
 
 ### Properties
 

@@ -1,6 +1,6 @@
 # Runtime State Badges — Design Spec
 
-**Issue:** casehubio/blocks-ui#109
+**Issue:** casehubio/agency-ui#109
 **Date:** 2026-08-05
 **Branch:** issue-109-runtime-state-badges
 
@@ -279,13 +279,13 @@ The conversion from `StatusDescriptor` → `NodeDecoration` is thin and properly
 belongs in the graph-aware package.
 
 ```typescript
-import { lookupStatus } from '@casehubio/blocks-ui-core';
+import { lookupStatus } from '@casehubio/agency-ui-core';
 import type { NodeDecoration } from '@casehubio/graph-core';
 
 export function toDecoration(domain: string, state: string): NodeDecoration;
 ```
 
-This adds `@casehubio/blocks-ui-core` as a dependency of `graph-stencil-case`
+This adds `@casehubio/agency-ui-core` as a dependency of `graph-stencil-case`
 (correct direction: specific depends on generic). blocks-ui-core exports
 `lookupStatus()` from the registry; graph-stencil-case consumes it.
 

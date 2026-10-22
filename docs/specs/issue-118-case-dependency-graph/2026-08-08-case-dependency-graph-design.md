@@ -1,6 +1,6 @@
 # Case Dependency Graph — Design Spec
 
-**Issue:** casehubio/blocks-ui#118
+**Issue:** casehubio/agency-ui#118
 **Date:** 2026-08-08
 **Status:** Reviewed (light — coherence, structure, robustness, cross-cutting)
 
@@ -82,7 +82,7 @@ Edge `type` is looked up in the relationship type registry. Edge `id` can be `${
 Lives in **blocks-ui-core** alongside `registerStatus`/`lookupStatus`. Same pattern — module-level registry, no deregistration (matches status registry precedent).
 
 ```typescript
-// In @casehubio/blocks-ui-core
+// In @casehubio/agency-ui-core
 
 interface RelationshipTypeDescriptor {
   color: string;
@@ -107,7 +107,7 @@ Built-in types (registered at module load, not on component connection):
 Consuming apps register additional types:
 
 ```typescript
-import { registerRelationshipType } from '@casehubio/blocks-ui-core';
+import { registerRelationshipType } from '@casehubio/agency-ui-core';
 
 registerRelationshipType('blocks', {
   color: '#ef4444', style: 'solid', directed: true, label: 'Blocks'
@@ -143,7 +143,7 @@ components/case-dependency-graph/
 
 - `lit` — component framework
 - `d3-force`, `d3-selection`, `d3-zoom`, `d3-drag` — force simulation + SVG rendering (tree-shakeable D3 modules, not the full d3 bundle)
-- `@casehubio/blocks-ui-core` — status registry, relationship type registry, event helpers, pages-ui-tokens
+- `@casehubio/agency-ui-core` — status registry, relationship type registry, event helpers, pages-ui-tokens
 - `@casehubio/graph-core` — `GraphModel`, `GraphNode`, `GraphEdge` types
 
 ### Data delivery — dual mode

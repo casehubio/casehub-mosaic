@@ -1,7 +1,7 @@
 # Wire Pages Palette Components and Make All Diagrams Editable
 
 **Date:** 2026-08-27
-**Issue:** casehubio/blocks-ui#140
+**Issue:** casehubio/agency-ui#140
 **Status:** Draft
 
 ## Summary
@@ -278,7 +278,7 @@ with undo tracking and `_fullRender`.
 
 Modeling the binding target type as a proper `x-discriminator` in the
 binding schema (for consistency with `functionType` and `on`) is deferred
-to casehubio/blocks-ui#144.
+to casehubio/agency-ui#144.
 
 ### Trigger Type Switching
 
@@ -553,14 +553,14 @@ panes.
 
 Each deferred item is captured as a GitHub issue:
 
-- **Drag-to-canvas** (casehubio/blocks-ui#141) — pages-diagram-palette
+- **Drag-to-canvas** (casehubio/agency-ui#141) — pages-diagram-palette
   is click-to-add only; drag-to-canvas requires ReactFlowApp `onPaneClick`
   + coordinate transform via ViewportBridge. Issue #140's acceptance
   criteria updated from "drag-to-add" to "click-to-add" accordingly.
-- **Edge reconnection and deletion UX** (casehubio/blocks-ui#142) —
+- **Edge reconnection and deletion UX** (casehubio/agency-ui#142) —
   EditPolicy supports it but requires ReactFlowApp `onReconnect` callback
   wiring.
-- **Context menus** (casehubio/blocks-ui#143) — EditPolicy supports
+- **Context menus** (casehubio/agency-ui#143) — EditPolicy supports
   `getInsertableTypes` for edge splitting but requires right-click menu
   component.
 
@@ -569,7 +569,7 @@ Each deferred item is captured as a GitHub issue:
 - casehubio/casehub-pages#373 — pages-property-palette (PropertyPaletteSource SPI)
 - casehubio/casehub-pages#378 — diagram editing infrastructure (EditPolicy, GraphEdit, applyGraphEdit)
 - casehubio/casehub-pages#380 — pages-diagram-palette (PaletteItem, pages-palette-select)
-- casehubio/blocks-ui#136 — property schemas (registerPropertySchema, all schemas)
+- casehubio/agency-ui#136 — property schemas (registerPropertySchema, all schemas)
 - packages/diagram-core/src/diagram-base-mixin.ts — _updateSelectedNode, _handlePropertyChange
 - packages/diagram-core/src/form/ — old form utilities (to be removed)
 - components/casehub-diagram/src/casehub-diagram-palette.ts — old palette (to be removed)

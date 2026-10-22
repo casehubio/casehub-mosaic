@@ -1,6 +1,6 @@
 # Evolution Conductor UI — Operational Completeness
 
-**Epic:** casehubio/blocks-ui#188
+**Epic:** casehubio/agency-ui#188
 **Branch:** issue-188-evolution-conductor-operational
 **Date:** 2026-09-28
 
@@ -82,7 +82,7 @@ In detail-pane's render method, when the active tab has `renderContent`, call it
 ### 2. blocks-evolution-streams
 
 **Tag:** `blocks-evolution-streams`
-**Package:** `@casehubio/blocks-ui-evolution-config`
+**Package:** `@casehubio/agency-ui-evolution-config`
 **File:** `components/evolution-config/src/evolution-streams.ts`
 
 **Props:**
@@ -117,7 +117,7 @@ In detail-pane's render method, when the active tab has `renderContent`, call it
 ### 3. blocks-evolution-inbox
 
 **Tag:** `blocks-evolution-inbox`
-**Package:** `@casehubio/blocks-ui-evolution-config`
+**Package:** `@casehubio/agency-ui-evolution-config`
 **File:** `components/evolution-config/src/evolution-inbox.ts`
 
 **Props:**
@@ -290,7 +290,7 @@ New components register in `BlocksComponentRegistry`:
 - `blocks-evolution-streams` → `EvolutionStreamsProps`
 - `blocks-evolution-inbox` → `EvolutionInboxProps`
 
-Run `yarn workspace @casehubio/blocks-ui-schema run generate` after adding entries.
+Run `yarn workspace @casehubio/agency-ui-schema run generate` after adding entries.
 
 ## References
 

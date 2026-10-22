@@ -1,6 +1,6 @@
 # Evolution Conductor UI — Design Spec
 
-**Epic:** casehubio/blocks-ui#174
+**Epic:** casehubio/agency-ui#174
 **Parent epic:** casehubio/engine#1149
 **Issues:** #175 (deny-pattern-editor), #176 (watch-pattern-editor), #177 (gate-policy-editor), #178 (evolution-workbench), #179 (sample page)
 **Decisions:** D1–D5 in `decisions.md`
@@ -615,7 +615,7 @@ Add all new elements to `BlocksComponentRegistry` in `packages/blocks-ui-schema/
 'blocks-evolution-workbench': EvolutionWorkbenchProps,
 ```
 
-Run `yarn workspace @casehubio/blocks-ui-schema run generate` to produce Zod schemas.
+Run `yarn workspace @casehubio/agency-ui-schema run generate` to produce Zod schemas.
 
 ## References
 

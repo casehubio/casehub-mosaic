@@ -103,7 +103,7 @@ Custom element name stays `<pages-data-table>` (already correct).
 ### A11y mixin consumers in blocks-ui
 
 Each consumer splits its blocks-ui-core import: mixin symbols come from
-`@casehubio/pages-primitives`, everything else stays on `@casehubio/blocks-ui-core`.
+`@casehubio/pages-primitives`, everything else stays on `@casehubio/agency-ui-core`.
 
 **LiveRegionMixin** (10 consumers after data-table removal):
 
@@ -142,7 +142,7 @@ Each consumer splits its blocks-ui-core import: mixin symbols come from
 
 ### Data table consumers in blocks-ui
 
-All 5 change `@casehubio/blocks-ui-data-table` → `@casehubio/pages-data-table`:
+All 5 change `@casehubio/agency-ui-data-table` → `@casehubio/pages-data-table`:
 
 | Component | Imports |
 |-----------|---------|
@@ -172,7 +172,7 @@ Each component that gains a direct import from a pages package needs:
 For `@casehubio/pages-data-table` (new package):
 1. `"@casehubio/pages-data-table": "^0.2.0"` in consumer `package.json`
 2. Vitest alias: `@casehubio/pages-data-table` → `../../../pages/packages/pages-data-table/src`
-3. Remove `@casehubio/blocks-ui-data-table` workspace dependency
+3. Remove `@casehubio/agency-ui-data-table` workspace dependency
 4. Remove tsconfig project reference `{ "path": "../data-table" }` (present in
    `list-pane`, `notification-inbox`, `audit-trail-viewer`, `work-item-inbox`;
    absent from `trust-score-panel`)

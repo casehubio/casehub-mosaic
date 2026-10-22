@@ -363,8 +363,8 @@ Update existing tests in `gdpr-erasure-action.test.ts` to verify the schema-form
 | Repo | Change | Reason |
 |------|--------|--------|
 | casehub-pages (`pages-form`) | Add `oneOf`, `format: 'time'`, `readOnly`, recursive validation to `FieldSchema` + renderers + validation | Schema improvements needed by blocks-ui consumers |
-| casehub-blocks-ui | New components + gdpr migration | This spec |
-| casehub-blocks-ui (`notification-inbox`) | Add `@casehubio/pages-form` to `dependencies` | New dependency for `<pages-schema-form>` |
-| casehub-blocks-ui (`gdpr-erasure-action`) | Add `@casehubio/pages-form` to `dependencies` | New dependency for `<pages-schema-form>` |
+| casehub-agency-ui | New components + gdpr migration | This spec |
+| casehub-agency-ui (`notification-inbox`) | Add `@casehubio/pages-form` to `dependencies` | New dependency for `<pages-schema-form>` |
+| casehub-agency-ui (`gdpr-erasure-action`) | Add `@casehubio/pages-form` to `dependencies` | New dependency for `<pages-schema-form>` |
 
 No backend changes. All APIs are stable and tested. Frontend `types.ts` updates (adding `DigestScheduleWeeklyAt`, `DigestGroupBy`, `QuietHoursAction`, `ENTITY_WATCHERS` to `TargetType`) are part of this spec's implementation — they align the frontend types with the existing backend API.

@@ -153,7 +153,7 @@ function renderToString(result: ReturnType<typeof html>): string {
 
 - [ ] **Step 2: Run tests to verify they fail**
 
-Run: `cd /Users/mdproctor/claude/casehub/blocks-ui && yarn workspace @casehubio/blocks-ui-core exec vitest run src/sparkline/render-sparkline.test.ts`
+Run: `cd /Users/mdproctor/claude/casehub/blocks-ui && yarn workspace @casehubio/agency-ui-core exec vitest run src/sparkline/render-sparkline.test.ts`
 Expected: FAIL — module not found
 
 - [ ] **Step 3: Implement renderSparkline**
@@ -248,7 +248,7 @@ export * from './sparkline/index.js';
 
 - [ ] **Step 5: Run tests to verify they pass**
 
-Run: `cd /Users/mdproctor/claude/casehub/blocks-ui && yarn workspace @casehubio/blocks-ui-core exec vitest run src/sparkline/render-sparkline.test.ts`
+Run: `cd /Users/mdproctor/claude/casehub/blocks-ui && yarn workspace @casehubio/agency-ui-core exec vitest run src/sparkline/render-sparkline.test.ts`
 Expected: all PASS
 
 - [ ] **Step 6: Commit**
@@ -386,7 +386,7 @@ describe('extractTrendPoints', () => {
 
 - [ ] **Step 2: Run tests to verify they fail**
 
-Run: `cd /Users/mdproctor/claude/casehub/blocks-ui && yarn workspace @casehubio/blocks-ui-core exec vitest run src/data-source/trend-types.test.ts`
+Run: `cd /Users/mdproctor/claude/casehub/blocks-ui && yarn workspace @casehubio/agency-ui-core exec vitest run src/data-source/trend-types.test.ts`
 Expected: FAIL — module not found
 
 - [ ] **Step 3: Implement TrendPoint and extractTrendPoints**
@@ -428,7 +428,7 @@ export { type TrendPoint, extractTrendPoints } from './trend-types.js';
 
 - [ ] **Step 5: Run tests to verify they pass**
 
-Run: `cd /Users/mdproctor/claude/casehub/blocks-ui && yarn workspace @casehubio/blocks-ui-core exec vitest run src/data-source/trend-types.test.ts`
+Run: `cd /Users/mdproctor/claude/casehub/blocks-ui && yarn workspace @casehubio/agency-ui-core exec vitest run src/data-source/trend-types.test.ts`
 Expected: all PASS
 
 - [ ] **Step 6: Commit**
@@ -729,7 +729,7 @@ describe('TrendSourceMixin', () => {
 
 - [ ] **Step 2: Run tests to verify they fail**
 
-Run: `cd /Users/mdproctor/claude/casehub/blocks-ui && yarn workspace @casehubio/blocks-ui-core exec vitest run src/data-source/trend-source-mixin.test.ts`
+Run: `cd /Users/mdproctor/claude/casehub/blocks-ui && yarn workspace @casehubio/agency-ui-core exec vitest run src/data-source/trend-source-mixin.test.ts`
 Expected: FAIL — module not found
 
 - [ ] **Step 3: Implement TrendSourceMixin**
@@ -818,12 +818,12 @@ export { TrendSourceMixin } from './trend-source-mixin.js';
 
 - [ ] **Step 5: Run tests to verify they pass**
 
-Run: `cd /Users/mdproctor/claude/casehub/blocks-ui && yarn workspace @casehubio/blocks-ui-core exec vitest run src/data-source/trend-source-mixin.test.ts`
+Run: `cd /Users/mdproctor/claude/casehub/blocks-ui && yarn workspace @casehubio/agency-ui-core exec vitest run src/data-source/trend-source-mixin.test.ts`
 Expected: all PASS
 
 - [ ] **Step 6: Run all blocks-ui-core tests**
 
-Run: `cd /Users/mdproctor/claude/casehub/blocks-ui && yarn workspace @casehubio/blocks-ui-core test`
+Run: `cd /Users/mdproctor/claude/casehub/blocks-ui && yarn workspace @casehubio/agency-ui-core test`
 Expected: all PASS (no regressions)
 
 - [ ] **Step 7: Commit**
@@ -845,12 +845,12 @@ git -C /Users/mdproctor/claude/casehub/blocks-ui commit -m "feat(blocks-ui-core)
 
 **Interfaces:**
 - Consumes: `renderSparkline`, `SparklineOptions` from
-  `@casehubio/blocks-ui-core`
+  `@casehubio/agency-ui-core`
 - Produces: no API changes
 
 - [ ] **Step 1: Run existing kpi-metric-row tests as baseline**
 
-Run: `cd /Users/mdproctor/claude/casehub/blocks-ui && yarn workspace @casehubio/blocks-ui-kpi-metric-row test`
+Run: `cd /Users/mdproctor/claude/casehub/blocks-ui && yarn workspace @casehubio/agency-ui-kpi-metric-row test`
 Expected: all PASS (baseline)
 
 - [ ] **Step 2: Remove local renderSparkline function**
@@ -859,7 +859,7 @@ In `components/kpi-metric-row/src/kpi-metric-row.ts`:
 
 1. Add import at top:
    ```typescript
-   import { renderSparkline } from '@casehubio/blocks-ui-core';
+   import { renderSparkline } from '@casehubio/agency-ui-core';
    ```
 
 2. Delete the local `renderSparkline` function (lines 21–48) using
@@ -874,7 +874,7 @@ In `components/kpi-metric-row/src/kpi-metric-row.ts`:
 
 - [ ] **Step 3: Run kpi-metric-row tests**
 
-Run: `cd /Users/mdproctor/claude/casehub/blocks-ui && yarn workspace @casehubio/blocks-ui-kpi-metric-row test`
+Run: `cd /Users/mdproctor/claude/casehub/blocks-ui && yarn workspace @casehubio/agency-ui-kpi-metric-row test`
 Expected: all PASS (behavioral parity + gradient ID fix)
 
 - [ ] **Step 4: Commit**
@@ -897,7 +897,7 @@ git -C /Users/mdproctor/claude/casehub/blocks-ui commit -m "refactor(kpi-metric-
 **Interfaces:**
 - Consumes:
   - `TrendSourceMixin`, `renderSparkline`, `TrendPoint` from
-    `@casehubio/blocks-ui-core`
+    `@casehubio/agency-ui-core`
   - `trustLevelFromScore` from `./types.js`
 - Produces: trust-score-panel gains `trendSource`, `trendData`,
   `maxTrendPoints` properties via mixin
@@ -1013,7 +1013,7 @@ describe('Trend Section', () => {
 
 - [ ] **Step 2: Run tests to verify they fail**
 
-Run: `cd /Users/mdproctor/claude/casehub/blocks-ui && yarn workspace @casehubio/blocks-ui-trust-score-panel test`
+Run: `cd /Users/mdproctor/claude/casehub/blocks-ui && yarn workspace @casehubio/agency-ui-trust-score-panel test`
 Expected: new trend tests FAIL (trendData property not on element yet)
 
 - [ ] **Step 3: Add TrendSourceMixin and TRUST_LEVEL_COLORS**
@@ -1022,7 +1022,7 @@ Modify `components/trust-score-panel/src/trust-score-panel.ts`:
 
 1. Update class declaration — add `TrendSourceMixin`:
    ```typescript
-   import { DataSourceMixin, TrendSourceMixin, renderSparkline } from '@casehubio/blocks-ui-core';
+   import { DataSourceMixin, TrendSourceMixin, renderSparkline } from '@casehubio/agency-ui-core';
 
    export class TrustScorePanel extends TrendSourceMixin(DataSourceMixin(LiveRegionMixin(LitElement)))
    ```
@@ -1087,7 +1087,7 @@ Modify `components/trust-score-panel/src/trust-score-panel.ts`:
 
 - [ ] **Step 4: Run tests to verify they pass**
 
-Run: `cd /Users/mdproctor/claude/casehub/blocks-ui && yarn workspace @casehubio/blocks-ui-trust-score-panel test`
+Run: `cd /Users/mdproctor/claude/casehub/blocks-ui && yarn workspace @casehubio/agency-ui-trust-score-panel test`
 Expected: all PASS (existing + new trend tests)
 
 - [ ] **Step 5: Commit**
@@ -1113,7 +1113,7 @@ git -C /Users/mdproctor/claude/casehub/blocks-ui commit -m "feat(trust-score-pan
   - `createScenarioController` from `@casehubio/pages-data`
   - `addRow` from `@casehubio/pages-data`
   - `ColumnType`, `columnId` from `@casehubio/pages-data`
-  - `TrendPoint` from `@casehubio/blocks-ui-core`
+  - `TrendPoint` from `@casehubio/agency-ui-core`
 - Produces: visual demo (manual verification only)
 
 - [ ] **Step 1: Check pages-data dependency in examples**
@@ -1133,7 +1133,7 @@ In `examples/src/pages/trust-score-page.ts`:
    import { addRow } from '@casehubio/pages-data/dist/datasource/sources/simulated/mutations.js';
    import { createScenarioController } from '@casehubio/pages-data/dist/datasource/controller.js';
    import { ColumnType, columnId } from '@casehubio/pages-data/dist/dataset/types.js';
-   import type { TrendPoint } from '@casehubio/blocks-ui-core';
+   import type { TrendPoint } from '@casehubio/agency-ui-core';
    import type { ExternalColumnDef } from '@casehubio/pages-data/dist/dataset/external/types.js';
    ```
 

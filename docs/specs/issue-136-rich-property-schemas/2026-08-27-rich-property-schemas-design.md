@@ -1,7 +1,7 @@
 # Rich Domain Property Schemas for All Diagram Types
 
 **Date:** 2026-08-27 (revised after light design review)
-**Issue:** casehubio/blocks-ui#136
+**Issue:** casehubio/agency-ui#136
 **Status:** Approved
 
 ## Summary
@@ -404,4 +404,4 @@ packages/graph-stencil-htn/src/
 - docs/specs/issue-108-worker-function-drill-down/2026-08-11-worker-function-drill-down-design.md — prior decision on schema-drivability (superseded by this spec)
 - docs/protocols/blocks-ui/stencil-package-isolation.md — stencil packages stay siloed
 - Design review R1-01 through R1-15 — findings that drove this revision
-- casehubio/blocks-ui#136
+- casehubio/agency-ui#136

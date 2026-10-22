@@ -60,7 +60,7 @@ describe('WorkItemEventTopics', () => {
 
 - [ ] **Step 2: Run test to verify it fails**
 
-Run: `yarn workspace @casehubio/blocks-ui-core run test -- --run src/types/events.test.ts`
+Run: `yarn workspace @casehubio/agency-ui-core run test -- --run src/types/events.test.ts`
 Expected: FAIL — `QUEUE_SCOPE_CHANGED` not defined, `QUEUE_SELECTED` still exists
 
 - [ ] **Step 3: Update event topics**
@@ -118,7 +118,7 @@ export type { InboxMode, QueueScope, QueueSummaryEntry } from './work-item.js';
 
 - [ ] **Step 6: Run test to verify it passes**
 
-Run: `yarn workspace @casehubio/blocks-ui-core run test`
+Run: `yarn workspace @casehubio/agency-ui-core run test`
 Expected: ALL PASS
 
 - [ ] **Step 7: Commit**
@@ -182,7 +182,7 @@ it('renders priority counts', async () => {
 
 - [ ] **Step 2: Run tests to verify they fail**
 
-Run: `yarn workspace @casehubio/blocks-ui-work-item-inbox run test -- --run src/inbox-filter-bar.test.ts`
+Run: `yarn workspace @casehubio/agency-ui-work-item-inbox run test -- --run src/inbox-filter-bar.test.ts`
 Expected: FAIL — `statusCounts` property doesn't exist
 
 - [ ] **Step 3: Add count properties and disabled styling**
@@ -241,7 +241,7 @@ Add CSS for count:
 
 - [ ] **Step 4: Run tests to verify they pass**
 
-Run: `yarn workspace @casehubio/blocks-ui-work-item-inbox run test -- --run src/inbox-filter-bar.test.ts`
+Run: `yarn workspace @casehubio/agency-ui-work-item-inbox run test -- --run src/inbox-filter-bar.test.ts`
 Expected: ALL PASS
 
 - [ ] **Step 5: Commit**
@@ -260,7 +260,7 @@ git -C /Users/mdproctor/claude/casehub/blocks-ui commit -m "feat(filter-bar): ad
 - Create: `components/work-item-inbox/src/queue-pill-bar.test.ts`
 
 **Interfaces:**
-- Consumes: `QueueView` from `@casehubio/blocks-ui-core`, `QueueSummaryEntry` from `@casehubio/blocks-ui-core`, `emitPagesEvent` from `@casehubio/pages-component`, `WorkItemEventTopics` from `@casehubio/blocks-ui-core`
+- Consumes: `QueueView` from `@casehubio/agency-ui-core`, `QueueSummaryEntry` from `@casehubio/agency-ui-core`, `emitPagesEvent` from `@casehubio/pages-component`, `WorkItemEventTopics` from `@casehubio/agency-ui-core`
 - Produces: `QueuePillBar` custom element (`<queue-pill-bar>`). Properties: `endpoint: string`, `queues: QueueView[]`, `summaries: QueueSummaryEntry[]`, `selectedQueueId: string | null`, `selectedQueueCount: number | null` (reactive count from inbox). Emits `pages-event` with topic `queue.scope-changed` and `QueueScopeChangedPayload`. Fetches `GET /queues` and `GET /queues/summary`. 30-second polling for summary refresh.
 
 - [ ] **Step 1: Write failing tests**
@@ -270,7 +270,7 @@ Create `components/work-item-inbox/src/queue-pill-bar.test.ts`:
 ```typescript
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import './queue-pill-bar.js';
-import type { QueueView, QueueSummaryEntry } from '@casehubio/blocks-ui-core';
+import type { QueueView, QueueSummaryEntry } from '@casehubio/agency-ui-core';
 
 const QUEUES: QueueView[] = [
   { id: 'q1', name: 'Compliance', labelPattern: 'domain=compliance', scope: null },
@@ -356,7 +356,7 @@ describe('queue-pill-bar', () => {
 
 - [ ] **Step 2: Run test to verify it fails**
 
-Run: `yarn workspace @casehubio/blocks-ui-work-item-inbox run test -- --run src/queue-pill-bar.test.ts`
+Run: `yarn workspace @casehubio/agency-ui-work-item-inbox run test -- --run src/queue-pill-bar.test.ts`
 Expected: FAIL — module not found
 
 - [ ] **Step 3: Implement queue-pill-bar**
@@ -372,7 +372,7 @@ import {
   type QueueScopeChangedPayload,
   emitPagesEvent,
   WorkItemEventTopics,
-} from '@casehubio/blocks-ui-core';
+} from '@casehubio/agency-ui-core';
 
 @customElement('queue-pill-bar')
 export class QueuePillBar extends LitElement {
@@ -556,7 +556,7 @@ export class QueuePillBar extends LitElement {
 
 - [ ] **Step 4: Run tests to verify they pass**
 
-Run: `yarn workspace @casehubio/blocks-ui-work-item-inbox run test -- --run src/queue-pill-bar.test.ts`
+Run: `yarn workspace @casehubio/agency-ui-work-item-inbox run test -- --run src/queue-pill-bar.test.ts`
 Expected: ALL PASS
 
 - [ ] **Step 5: Commit**
@@ -575,7 +575,7 @@ git -C /Users/mdproctor/claude/casehub/blocks-ui commit -m "feat(inbox): queue p
 - Create: `components/work-item-inbox/src/scope-context-bar.test.ts`
 
 **Interfaces:**
-- Consumes: `QueueView` from `@casehubio/blocks-ui-core`
+- Consumes: `QueueView` from `@casehubio/agency-ui-core`
 - Produces: `ScopeContextBar` custom element (`<scope-context-bar>`). Properties: `queue: QueueView | null`. Emits `scope-clear` event on clear button click.
 
 - [ ] **Step 1: Write failing tests**
@@ -585,7 +585,7 @@ Create `components/work-item-inbox/src/scope-context-bar.test.ts`:
 ```typescript
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import './scope-context-bar.js';
-import type { QueueView } from '@casehubio/blocks-ui-core';
+import type { QueueView } from '@casehubio/agency-ui-core';
 
 describe('scope-context-bar', () => {
   let el: HTMLElement & { queue: QueueView | null };
@@ -640,7 +640,7 @@ describe('scope-context-bar', () => {
 
 - [ ] **Step 2: Run test to verify it fails**
 
-Run: `yarn workspace @casehubio/blocks-ui-work-item-inbox run test -- --run src/scope-context-bar.test.ts`
+Run: `yarn workspace @casehubio/agency-ui-work-item-inbox run test -- --run src/scope-context-bar.test.ts`
 Expected: FAIL — module not found
 
 - [ ] **Step 3: Implement scope-context-bar**
@@ -650,7 +650,7 @@ Create `components/work-item-inbox/src/scope-context-bar.ts`:
 ```typescript
 import { LitElement, html, css, nothing } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import type { QueueView } from '@casehubio/blocks-ui-core';
+import type { QueueView } from '@casehubio/agency-ui-core';
 
 @customElement('scope-context-bar')
 export class ScopeContextBar extends LitElement {
@@ -741,7 +741,7 @@ export class ScopeContextBar extends LitElement {
 
 - [ ] **Step 4: Run tests to verify they pass**
 
-Run: `yarn workspace @casehubio/blocks-ui-work-item-inbox run test -- --run src/scope-context-bar.test.ts`
+Run: `yarn workspace @casehubio/agency-ui-work-item-inbox run test -- --run src/scope-context-bar.test.ts`
 Expected: ALL PASS
 
 - [ ] **Step 5: Commit**
@@ -760,7 +760,7 @@ git -C /Users/mdproctor/claude/casehub/blocks-ui commit -m "feat(inbox): scope c
 - Modify: `components/work-item-inbox/src/work-item-inbox.test.ts`
 
 **Interfaces:**
-- Consumes: `InboxMode` from `@casehubio/blocks-ui-core` (Task 1)
+- Consumes: `InboxMode` from `@casehubio/agency-ui-core` (Task 1)
 - Produces: Updated `WorkItemInbox` with three tabs (my-work, claimable, all). Fixed `handleItemAppears` that is tab-independent. Updated `getTabItems()` and `getFilteredItems()` supporting `'all'` mode.
 
 - [ ] **Step 1: Write failing tests for All tab**
@@ -804,7 +804,7 @@ it('does not remove items from data array when All tab is active', async () => {
 
 - [ ] **Step 3: Run tests to verify they fail**
 
-Run: `yarn workspace @casehubio/blocks-ui-work-item-inbox run test`
+Run: `yarn workspace @casehubio/agency-ui-work-item-inbox run test`
 Expected: FAIL — only 2 tabs rendered, All tab not found
 
 - [ ] **Step 4: Add All tab and fix handleItemAppears**
@@ -813,7 +813,7 @@ In `components/work-item-inbox/src/work-item-inbox.ts`:
 
 Change `InboxMode` import and `activeTab` type:
 ```typescript
-import type { InboxMode } from '@casehubio/blocks-ui-core';
+import type { InboxMode } from '@casehubio/agency-ui-core';
 // Change: @state() private activeTab: InboxMode = 'my-work';
 ```
 
@@ -882,7 +882,7 @@ Update `renderSummaryBar()` to hide claim breach on All tab (same as My Work):
 
 - [ ] **Step 5: Run tests to verify they pass**
 
-Run: `yarn workspace @casehubio/blocks-ui-work-item-inbox run test`
+Run: `yarn workspace @casehubio/agency-ui-work-item-inbox run test`
 Expected: ALL PASS
 
 - [ ] **Step 6: Commit**
@@ -902,7 +902,7 @@ git -C /Users/mdproctor/claude/casehub/blocks-ui commit -m "feat(inbox): All tab
 - Modify: `components/work-item-inbox/src/index.ts`
 
 **Interfaces:**
-- Consumes: `QueuePillBar` from Task 3, `ScopeContextBar` from Task 4, `QueueScope` from Task 1, `QueueScopeChangedPayload` from Task 1, `WorkItemEventTopics.QUEUE_SCOPE_CHANGED` from Task 1, `onPagesEvent` from `@casehubio/blocks-ui-core`
+- Consumes: `QueuePillBar` from Task 3, `ScopeContextBar` from Task 4, `QueueScope` from Task 1, `QueueScopeChangedPayload` from Task 1, `WorkItemEventTopics.QUEUE_SCOPE_CHANGED` from Task 1, `onPagesEvent` from `@casehubio/agency-ui-core`
 - Produces: Updated `WorkItemInbox` that: (a) renders queue pill bar above tabs, (b) renders scope context bar when queue active, (c) fetches queue items on queue selection with AbortController, (d) builds QueueScope, (e) switches filter pipeline source, (f) computes status/priority counts for filter bar, (g) handles error states
 
 - [ ] **Step 1: Write failing tests for queue scope integration**
@@ -947,7 +947,7 @@ describe('queue scope', () => {
 
 - [ ] **Step 2: Run tests to verify they fail**
 
-Run: `yarn workspace @casehubio/blocks-ui-work-item-inbox run test`
+Run: `yarn workspace @casehubio/agency-ui-work-item-inbox run test`
 Expected: FAIL — no queue-pill-bar in render tree
 
 - [ ] **Step 3: Implement queue scope integration**
@@ -958,7 +958,7 @@ Add imports:
 ```typescript
 import './queue-pill-bar.js';
 import './scope-context-bar.js';
-import type { QueueScope, QueueScopeChangedPayload } from '@casehubio/blocks-ui-core';
+import type { QueueScope, QueueScopeChangedPayload } from '@casehubio/agency-ui-core';
 ```
 
 Add state:
@@ -1208,7 +1208,7 @@ export { ScopeContextBar } from './scope-context-bar.js';
 
 - [ ] **Step 4: Run all inbox tests**
 
-Run: `yarn workspace @casehubio/blocks-ui-work-item-inbox run test`
+Run: `yarn workspace @casehubio/agency-ui-work-item-inbox run test`
 Expected: ALL PASS
 
 - [ ] **Step 5: Commit**
@@ -1227,7 +1227,7 @@ git -C /Users/mdproctor/claude/casehub/blocks-ui commit -m "feat(inbox): queue s
 - Modify: `components/work-item-inbox/src/work-item-inbox.test.ts`
 
 **Interfaces:**
-- Consumes: `QueueScope` from Task 1, `SSEManager` from `@casehubio/blocks-ui-core`, `WorkItemQueueEvent` from `@casehubio/blocks-ui-core`
+- Consumes: `QueueScope` from Task 1, `SSEManager` from `@casehubio/agency-ui-core`, `WorkItemQueueEvent` from `@casehubio/agency-ui-core`
 - Produces: Updated `WorkItemInbox` with queue SSE stream lifecycle. Opens `/queues/{id}/events` on queue selection, closes on deselection. Handles `ADDED`/`REMOVED`/`CHANGED` events to update `QueueScope.items`.
 
 - [ ] **Step 1: Write failing tests for queue SSE lifecycle**
@@ -1263,7 +1263,7 @@ describe('queue SSE lifecycle', () => {
 
 - [ ] **Step 2: Run tests to verify they fail**
 
-Run: `yarn workspace @casehubio/blocks-ui-work-item-inbox run test`
+Run: `yarn workspace @casehubio/agency-ui-work-item-inbox run test`
 Expected: FAIL — `_subscribeQueueSSE` not defined
 
 - [ ] **Step 3: Implement queue SSE lifecycle**
@@ -1371,7 +1371,7 @@ this._unsubscribeQueueSSE();
 
 - [ ] **Step 4: Run all tests**
 
-Run: `yarn workspace @casehubio/blocks-ui-work-item-inbox run test`
+Run: `yarn workspace @casehubio/agency-ui-work-item-inbox run test`
 Expected: ALL PASS
 
 - [ ] **Step 5: Commit**
@@ -1417,7 +1417,7 @@ it('always renders work-item-inbox in left panel', async () => {
 
 - [ ] **Step 2: Run tests to verify they fail**
 
-Run: `yarn workspace @casehubio/blocks-ui-work-item-workbench run test`
+Run: `yarn workspace @casehubio/agency-ui-work-item-workbench run test`
 Expected: FAIL — Queues tab still exists, queue-board still renders
 
 - [ ] **Step 3: Simplify workbench**
@@ -1432,7 +1432,7 @@ Remove `LeftPanelView` type and `_leftPanel` state:
 
 Remove queue-board import:
 ```typescript
-// DELETE: import '@casehubio/blocks-ui-queue-board';
+// DELETE: import '@casehubio/agency-ui-queue-board';
 ```
 
 Remove queue event subscriptions from `_subscribeToEvents()`:
@@ -1458,7 +1458,7 @@ Remove the tabs CSS rules and the `_renderQueues()` method.
 
 - [ ] **Step 4: Run tests to verify they pass**
 
-Run: `yarn workspace @casehubio/blocks-ui-work-item-workbench run test`
+Run: `yarn workspace @casehubio/agency-ui-work-item-workbench run test`
 Expected: ALL PASS
 
 - [ ] **Step 5: Commit**
@@ -1518,8 +1518,8 @@ Create `examples/src/pages/queue-inbox-page.ts`:
 ```typescript
 import { LitElement, html, css } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import type { WorkIdentity } from '@casehubio/blocks-ui-core';
-import '@casehubio/blocks-ui-work-item-inbox';
+import type { WorkIdentity } from '@casehubio/agency-ui-core';
+import '@casehubio/agency-ui-work-item-inbox';
 
 const IDENTITY: WorkIdentity = {
   userId: 'demo-user',
@@ -1558,7 +1558,7 @@ Delete `examples/src/pages/queue-page.ts`.
 
 - [ ] **Step 6: Build and verify examples**
 
-Run: `yarn workspace @casehubio/blocks-ui-examples run build`
+Run: `yarn workspace @casehubio/agency-ui-examples run build`
 Expected: Build succeeds
 
 - [ ] **Step 7: Commit**
@@ -1587,7 +1587,7 @@ Edit root `package.json`: remove `"components/queue-board"` from the `workspaces
 
 - [ ] **Step 2: Remove queue-board dependency from workbench**
 
-Edit `components/work-item-workbench/package.json`: remove `"@casehubio/blocks-ui-queue-board": "workspace:*"` from dependencies.
+Edit `components/work-item-workbench/package.json`: remove `"@casehubio/agency-ui-queue-board": "workspace:*"` from dependencies.
 
 - [ ] **Step 3: Delete queue-board directory**
 

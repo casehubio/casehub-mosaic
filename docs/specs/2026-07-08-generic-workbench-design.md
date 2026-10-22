@@ -49,7 +49,7 @@ All existing call sites use the constants — the migration is a constant-value 
 
 ## Components
 
-### `<split-workbench>` — `@casehubio/blocks-ui-split-workbench`
+### `<split-workbench>` — `@casehubio/agency-ui-split-workbench`
 
 Pure layout shell. Knows nothing about its children.
 
@@ -97,7 +97,7 @@ Pure layout shell. Knows nothing about its children.
 - Two split-workbenches with **different** `selection-topic` values are fully isolated — different topic prefixes produce different event strings.
 - All events emit on `document` — there is no DOM-scoped event isolation. This matches the pages-event protocol (global coordination).
 
-### `<list-pane>` — `@casehubio/blocks-ui-list-pane`
+### `<list-pane>` — `@casehubio/agency-ui-list-pane`
 
 Generic list wrapping `<pages-data-table>` with filter bar, pagination, and single-selection.
 
@@ -131,7 +131,7 @@ Generic list wrapping `<pages-data-table>` with filter bar, pagination, and sing
 - Endpoint guard uses `this.endpoint == null` (not `!this.endpoint`) to allow empty-string endpoints per GE-20260706-b2804c — this is now handled by the DataEndpointMixin prerequisite fix
 - **Focus restoration (mobile):** Tracks the last activated row index (updated on each `row-activate` event from data-table). `:host` sets `tabindex="-1"` to receive programmatic focus from split-workbench. On focus, delegates to `pages-data-table` to focus the tracked row. Note: data-table's `_focusRowIndex` only tracks keyboard navigation — mouse/touch clicks do not update it. list-pane must track the activated row index independently.
 
-### `<detail-pane>` — `@casehubio/blocks-ui-detail-pane`
+### `<detail-pane>` — `@casehubio/agency-ui-detail-pane`
 
 Generic tabbed detail container. Tabs configured via property array — no registry, no singleton, no global state.
 
@@ -256,7 +256,7 @@ This eliminates duplicated split-pane logic immediately. The divider and respons
 
 ### Step 2 — Migrate AML to consume blocks-ui components
 
-1. Add `@casehubio/blocks-ui-split-workbench`, `@casehubio/blocks-ui-list-pane`, `@casehubio/blocks-ui-detail-pane` as dependencies
+1. Add `@casehubio/agency-ui-split-workbench`, `@casehubio/agency-ui-list-pane`, `@casehubio/agency-ui-detail-pane` as dependencies
 2. Replace local `<case-workbench>` usage in `aml-app.ts`:
 
 ```html

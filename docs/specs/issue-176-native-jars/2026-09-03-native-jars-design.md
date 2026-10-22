@@ -1,7 +1,7 @@
 # Platform-Specific Maven JARs for Native Lib Bundling
 
-**Issue:** casehubio/blocks#176
-**Parent:** casehubio/blocks#174 (Zero-Install Speech Experience)
+**Issue:** casehubio/agency#176
+**Parent:** casehubio/agency#174 (Zero-Install Speech Experience)
 **Date:** 2026-09-03
 
 ## Summary
@@ -135,7 +135,7 @@ the platform ID varying:
           <phase>generate-resources</phase>
           <goals><goal>java</goal></goals>
           <configuration>
-            <mainClass>io.casehub.blocks.speech.sherpa.NativePackager</mainClass>
+            <mainClass>io.casehub.agency.speech.sherpa.NativePackager</mainClass>
             <arguments>
               <argument>osx-arm64</argument>
             </arguments>
@@ -226,7 +226,7 @@ Changes:
 - [SherpaLibrary.java] — existing 3-tier loading
 - [Provisioner.java] — download, extract, cache, file locking
 - [GE-20260831-f91b16] — JarURLConnection gotcha: use JarFile directly for classpath extraction
-- [casehubio/blocks#174] — parent epic: Zero-Install Speech Experience
-- [casehubio/blocks#176] — this issue
+- [casehubio/agency#174] — parent epic: Zero-Install Speech Experience
+- [casehubio/agency#176] — this issue
 - Netty native transports — pattern reference for separate platform artifactIds
 - SQLite JDBC — pattern reference for classpath extraction to temp/cache

@@ -427,7 +427,7 @@ Entity type registrations declare available filters. Explorer renders filter con
 Standard casehub entity types ship as importable factory functions that return `EntityTypeRegistration` with sensible defaults. Apps call them and override:
 
 ```typescript
-import { caseInstanceType, workerType } from '@casehubio/blocks-ui-case-explorer';
+import { caseInstanceType, workerType } from '@casehubio/agency-ui-case-explorer';
 
 const myWorkerType = {
   ...workerType({ listEndpoint: '/api/workers' }),

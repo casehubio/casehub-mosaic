@@ -1,6 +1,6 @@
 # Trust Score Trend Sparkline Design
 
-**Issue:** casehubio/blocks-ui#45
+**Issue:** casehubio/agency-ui#45
 **Date:** 2026-07-10
 **Status:** Approved
 
@@ -175,7 +175,7 @@ when multiple sparklines render on the same page.
 ### kpi-metric-row migration
 
 Replace local `renderSparkline()` with import from
-`@casehubio/blocks-ui-core`. Pass `{ width: 48, height: 20 }` to
+`@casehubio/agency-ui-core`. Pass `{ width: 48, height: 20 }` to
 preserve current dimensions.
 
 **Bug fix:** the shared renderer generates unique gradient IDs per
