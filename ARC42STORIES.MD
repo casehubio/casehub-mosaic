@@ -12,7 +12,7 @@
 
 ### Description
 
-`casehub-mosaic` is the shared UI component library for the CaseHub platform — the frontend parallel to `casehub-blocks` (shared Java coordination patterns). Each component consumes `casehub-pages` APIs (DataSourceController, pages-event, CSS tokens) but knows nothing about a specific app's domain model. Components work standalone in a test harness AND embedded via pages `hostPanel`.
+`casehub-mosaic` is the shared UI component library for the CaseHub platform — the frontend parallel to `casehub-agency` (shared Java coordination patterns). Each component consumes `casehub-pages` APIs (DataSourceController, pages-event, CSS tokens) but knows nothing about a specific app's domain model. Components work standalone in a test harness AND embedded via pages `hostPanel`.
 
 The repo ships 27 components across work management, trust/compliance, communication, case exploration, session management, and notification domains — all framework-agnostic Web Components built with Lit.
 
@@ -254,7 +254,7 @@ The architectural pivot. Four issues that form one story:
 
 **Status:** ✅ complete — #55, #57, #58
 
-Replaced the domain-specific case-timeline with blocks-timeline — a strategy-based architecture supporting event chronology, state progression, and commitment lifecycle strategies. Three layouts (vertical, horizontal, compact). Later added pagination (#57) that bypasses DataSourceMixin for raw JSON access.
+Replaced the domain-specific case-timeline with agency-timeline — a strategy-based architecture supporting event chronology, state progression, and commitment lifecycle strategies. Three layouts (vertical, horizontal, compact). Later added pagination (#57) that bypasses DataSourceMixin for raw JSON access.
 
 ### Chapter 6: Component Promotion
 
