@@ -262,13 +262,13 @@ export class SwipeController implements ReactiveController {
     const windowMs = 100;
     const recent = this._samples.filter(s => now - s.t <= windowMs);
     if (recent.length < 2) {
-      const first = this._samples[0];
-      const last = this._samples[this._samples.length - 1];
+      const first = this._samples[0]!;
+      const last = this._samples[this._samples.length - 1]!;
       const dt = last.t - first.t;
       return dt >= 5 ? Math.abs(last.x - first.x) / dt : 0;
     }
-    const first = recent[0];
-    const last = recent[recent.length - 1];
+    const first = recent[0]!;
+    const last = recent[recent.length - 1]!;
     const dt = last.t - first.t;
     return dt >= 5 ? Math.abs(last.x - first.x) / dt : 0;
   }

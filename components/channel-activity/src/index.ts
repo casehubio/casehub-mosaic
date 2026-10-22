@@ -27,3 +27,8 @@ export { ChannelCorrelationPanelElement } from './channel-correlation-panel.js';
 export { ChannelArtifactPanelElement } from './channel-artifact-panel.js';
 export { AgencyChannelActivityElement } from './agency-channel-activity.js';
 export type { ChannelActivityProps } from './agency-channel-activity.js';
+export { ConversationWorkbenchElement } from './conversation-workbench.js';
+export type { ConversationWorkbenchConfig, LayoutState } from './conversation-workbench.js';
+export { SwipeController } from './swipe-controller.js';
+export type { SwipeOptions } from './swipe-controller.js';
+export { MQ_TABLET, MQ_DESKTOP } from './responsive.js';
