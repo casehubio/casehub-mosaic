@@ -264,5 +264,5 @@ See `decisions.md` for the full log. Key revisions after spec review:
 - [SSEManager](/Users/mdproctor/claude/casehub/blocks-ui/.casehub-packages/packages/pages-data/src/sse/sse-manager.ts) — being eliminated
 - [ARC42STORIES.MD §6](/Users/mdproctor/claude/casehub/blocks-ui/ARC42STORIES.MD) — "SSE and DataSource are orthogonal"
 - [work-item-inbox SSE handlers](/Users/mdproctor/claude/casehub/blocks-ui/components/work-item-inbox/src/work-item-inbox.ts:472-623) — domain logic preserved
-- [Spec review R1](/Users/mdproctor/reviews/casehub-blocks-ui/issue-153-push-update-support-spec-20260904-151403/responses/reviewer-1.md) — 13 findings, revised architecture
+- [Spec review R1](/Users/mdproctor/reviews/casehub-mosaic/issue-153-push-update-support-spec-20260904-151403/responses/reviewer-1.md) — 13 findings, revised architecture
 - [Issue #153](https://github.com/casehubio/agency-ui/issues/153) — original issue
