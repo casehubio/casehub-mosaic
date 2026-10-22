@@ -8,7 +8,7 @@
 
 ## Summary
 
-Shared UI components for the `io.casehub.agency.conversation` structured
+Shared UI components for the `io.casehub.agency.deliberation.conversation` structured
 deliberation protocol. Renders convergence state, epistemic common ground,
 and conversation points — the protocol lens over structured conversations
 that raw message feeds (channel-activity) and document-specific views
@@ -62,7 +62,7 @@ status transitions, and point statuses — the UI renders these outputs.
 ## TypeScript Domain Types
 
 Types live in `blocks-ui-core` for cross-component reuse. They mirror the Java
-`io.casehub.agency.conversation` package.
+`io.casehub.agency.deliberation.conversation` package.
 
 ### Core types
 

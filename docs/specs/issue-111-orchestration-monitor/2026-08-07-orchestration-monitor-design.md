@@ -6,7 +6,7 @@
 
 ## Summary
 
-UI representation for the `io.casehub.agency.agentic` orchestration framework (~80 Java source files). Two fundamentally different data flows — live execution state (SSE push) and historical audit trail (REST pull) — become separate, composable components joined by an orchestration workbench.
+UI representation for the `io.casehub.agency.core` orchestration framework (~80 Java source files). Two fundamentally different data flows — live execution state (SSE push) and historical audit trail (REST pull) — become separate, composable components joined by an orchestration workbench.
 
 ## Architecture: Extend blocks-ui-core + two new components
 
@@ -18,7 +18,7 @@ UI representation for the `io.casehub.agency.agentic` orchestration framework (~
 
 ## 1. Domain Types (`blocks-ui-core/src/types/orchestration.ts`)
 
-TypeScript types mirroring the Java `io.casehub.agency.agentic` domain model.
+TypeScript types mirroring the Java `io.casehub.agency.core` domain model.
 
 ### Execution lifecycle
 
