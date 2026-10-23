@@ -31,7 +31,8 @@
     "@casehubio/pages-schema": "portal:./.casehub-packages/packages/pages-schema",
     "@casehubio/yaml-core": "portal:./.casehub-packages/packages/yaml-core",
     "@casehubio/pages-aria": "portal:./.casehub-packages/packages/pages-aria",
-    "@casehubio/pages-document": "portal:./.casehub-packages/packages/pages-document"
+    "@casehubio/pages-document": "portal:./.casehub-packages/packages/pages-document",
+    "@casehubio/pages-tsconfig": "portal:./build-support/pages-tsconfig"
   },
   "scripts": {
     "build": "yarn workspaces foreach -A --topological run build && yarn workspace @casehubio/mosaic-schema run generate",
@@ -43,5 +44,8 @@
   },
   "dependencies": {
     "@tisoap/react-flow-smart-edge": "^5.0.0"
+  },
+  "devDependencies": {
+    "@casehubio/pages-tsconfig": "portal:./build-support/pages-tsconfig"
   }
 }
