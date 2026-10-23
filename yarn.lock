@@ -1415,6 +1415,12 @@ __metadata:
   languageName: node
   linkType: soft
 
+"@casehubio/pages-tsconfig@portal:./build-support/pages-tsconfig::locator=casehub-mosaic%40workspace%3A.":
+  version: 0.0.0-use.local
+  resolution: "@casehubio/pages-tsconfig@portal:./build-support/pages-tsconfig::locator=casehub-mosaic%40workspace%3A."
+  languageName: node
+  linkType: soft
+
 "@casehubio/pages-ui-components@portal:./.casehub-packages/packages/pages-ui-components::locator=casehub-mosaic%40workspace%3A.":
   version: 0.0.0-use.local
   resolution: "@casehubio/pages-ui-components@portal:./.casehub-packages/packages/pages-ui-components::locator=casehub-mosaic%40workspace%3A."
@@ -4116,6 +4122,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "casehub-mosaic@workspace:."
   dependencies:
+    "@casehubio/pages-tsconfig": "portal:./build-support/pages-tsconfig"
     "@tisoap/react-flow-smart-edge": "npm:^5.0.0"
   languageName: unknown
   linkType: soft
