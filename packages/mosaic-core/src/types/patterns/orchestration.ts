@@ -1,4 +1,8 @@
-import type { AgentRef, FailurePolicy, AggregationSpec, TerminationSpec } from '../orchestration.js';
+import type {
+  AgentRefSpec, FailurePolicySpec, AggregationSpec, TerminationSpec,
+  RoutingSpec, DecompositionSpec, ActivationSpec, GovernanceSpec,
+  JudgmentSpecDef,
+} from '../orchestration.js';
 
 export type OrchestrationPatternType =
   'supervisor' | 'choreography' | 'saga' | 'decomposition';
@@ -8,10 +12,14 @@ export interface OrchestrationPatternCategory {
   type: OrchestrationPatternType;
   name?: string;
   description?: string;
-  agents?: AgentRef[];
-  routing?: { type: string; guard?: string };
-  decomposition?: { strategy: string };
+  task?: string;
+  agents?: AgentRefSpec[];
+  routing?: RoutingSpec;
+  decomposition?: DecompositionSpec;
+  activation?: ActivationSpec;
   aggregation?: AggregationSpec;
   termination?: TerminationSpec[];
-  failurePolicy?: FailurePolicy;
+  judgment?: JudgmentSpecDef;
+  governance?: GovernanceSpec;
+  failurePolicy?: FailurePolicySpec;
 }

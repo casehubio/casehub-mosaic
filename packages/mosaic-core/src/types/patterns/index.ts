@@ -6,6 +6,13 @@ export * from './orchestration.js';
 export * from './deliberation.js';
 export * from './normalize.js';
 
+export type {
+  RoutingSpec, DecompositionSpec, ActivationSpec, GovernanceSpec,
+  AgentRefSpec, BaseAgentRefSpec, FailurePolicySpec, JudgmentSpecDef,
+  JudgmentTriggerSpec, JudgmentCallerSpec, AgreementSpec, TaskNodeSpec,
+  PatternDefinitionRef,
+} from '../orchestration.js';
+
 import type { PlaybookPatternCategory } from '@casehubio/yaml-core/patterns';
 import type { OrchestrationPatternCategory } from './orchestration.js';
 import type { DeliberationPatternCategory } from './deliberation.js';
