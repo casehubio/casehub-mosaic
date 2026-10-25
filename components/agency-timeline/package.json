@@ -1,7 +1,7 @@
 {
   "name": "@casehubio/mosaic-agency-timeline",
   "version": "0.2.2",
-  "description": "Pluggable timeline — vertical, horizontal, compact layouts with strategy-based content",
+  "description": "Pluggable timeline \u2014 vertical, horizontal, compact layouts with strategy-based content",
   "repository": {
     "type": "git",
     "url": "https://github.com/casehubio/casehub-mosaic.git"
@@ -29,5 +29,9 @@
     "typescript": "~5.8.0",
     "vitest": "^3.0.0"
   },
-  "license": "Apache-2.0"
+  "license": "Apache-2.0",
+  "files": [
+    "dist",
+    "package.json"
+  ]
 }

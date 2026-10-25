@@ -12,5 +12,9 @@
   "deprecated": "Use @casehubio/pages-ui-components/event-trail instead",
   "type": "module",
   "license": "Apache-2.0",
-  "main": "dist/index.js"
+  "main": "dist/index.js",
+  "files": [
+    "dist",
+    "package.json"
+  ]
 }

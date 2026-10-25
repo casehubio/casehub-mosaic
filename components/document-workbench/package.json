@@ -1,7 +1,7 @@
 {
   "name": "@casehubio/mosaic-document-workbench",
   "version": "0.1.0",
-  "description": "Document workbench panels — diff viewer, debate feed, review tracker, timeline, brainstorm",
+  "description": "Document workbench panels \u2014 diff viewer, debate feed, review tracker, timeline, brainstorm",
   "repository": {
     "type": "git",
     "url": "https://github.com/casehubio/casehub-mosaic.git"
@@ -39,5 +39,9 @@
     "typescript": "~5.8.0",
     "vitest": "^4.1.9"
   },
-  "license": "Apache-2.0"
+  "license": "Apache-2.0",
+  "files": [
+    "dist",
+    "package.json"
+  ]
 }

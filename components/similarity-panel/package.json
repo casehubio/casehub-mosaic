@@ -1,7 +1,7 @@
 {
   "name": "@casehubio/mosaic-similarity-panel",
   "version": "0.2.2",
-  "description": "Similar past cases — similarity scores, outcomes, resolution times via pages-table",
+  "description": "Similar past cases \u2014 similarity scores, outcomes, resolution times via pages-table",
   "repository": {
     "type": "git",
     "url": "https://github.com/casehubio/casehub-mosaic.git"
@@ -29,5 +29,9 @@
     "typescript": "~5.8.0",
     "vitest": "^3.0.0"
   },
-  "license": "Apache-2.0"
+  "license": "Apache-2.0",
+  "files": [
+    "dist",
+    "package.json"
+  ]
 }

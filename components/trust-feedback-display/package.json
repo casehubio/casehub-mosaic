@@ -1,7 +1,7 @@
 {
   "name": "@casehubio/mosaic-trust-feedback-display",
   "version": "0.2.2",
-  "description": "Post-gate trust score delta — decision, attestation, trust before/after with compact mode",
+  "description": "Post-gate trust score delta \u2014 decision, attestation, trust before/after with compact mode",
   "repository": {
     "type": "git",
     "url": "https://github.com/casehubio/casehub-mosaic.git"
@@ -27,5 +27,9 @@
     "typescript": "~5.8.0",
     "vitest": "^3.0.0"
   },
-  "license": "Apache-2.0"
+  "license": "Apache-2.0",
+  "files": [
+    "dist",
+    "package.json"
+  ]
 }
