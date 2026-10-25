@@ -1,13 +1,14 @@
 import type { AgencyCategoryName } from './categories.js';
-import type { AgentRef, FailurePolicy } from '../orchestration.js';
+import type { AgentRefSpec, FailurePolicySpec } from '../orchestration.js';
 
 export interface BasePatternCategory {
   category: AgencyCategoryName;
   type: string;
   name?: string;
   description?: string;
-  agents?: AgentRef[];
-  failurePolicy?: FailurePolicy;
+  task?: string;
+  agents?: AgentRefSpec[];
+  failurePolicy?: FailurePolicySpec;
 }
 
 export interface PerceptionPatternCategory extends BasePatternCategory {

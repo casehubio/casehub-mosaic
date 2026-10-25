@@ -1,37 +1,27 @@
-import type { AgentRef, FailurePolicy, AggregationSpec, TerminationSpec } from '../orchestration.js';
+import type {
+  AgentRefSpec, FailurePolicySpec, AggregationSpec, TerminationSpec,
+  RoutingSpec, DecompositionSpec, ActivationSpec, GovernanceSpec,
+  JudgmentSpecDef,
+} from '../orchestration.js';
 
 export type DeliberationPatternType =
   'voting' | 'debate' | 'negotiation' | 'coalition' | 'normative';
-
-export interface JudgmentTrigger {
-  type: string;
-  threshold?: number;
-  extractor?: string;
-  every?: number;
-}
-
-export interface JudgmentCaller {
-  type: string;
-  callerName?: string;
-  callerNames?: string[];
-  agreement?: { type: string };
-}
-
-export interface JudgmentSpec {
-  trigger: JudgmentTrigger;
-  caller: JudgmentCaller;
-}
 
 export interface DeliberationPatternCategory {
   category: 'deliberation';
   type: DeliberationPatternType;
   name?: string;
   description?: string;
-  agents?: AgentRef[];
-  judgment?: JudgmentSpec;
+  task?: string;
+  agents?: AgentRefSpec[];
+  judgment?: JudgmentSpecDef;
   maxRounds?: number;
-  judge?: AgentRef;
+  judge?: AgentRefSpec;
+  routing?: RoutingSpec;
+  decomposition?: DecompositionSpec;
+  activation?: ActivationSpec;
   aggregation?: AggregationSpec;
   termination?: TerminationSpec[];
-  failurePolicy?: FailurePolicy;
+  governance?: GovernanceSpec;
+  failurePolicy?: FailurePolicySpec;
 }

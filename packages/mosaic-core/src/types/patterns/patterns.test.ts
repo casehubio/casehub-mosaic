@@ -7,6 +7,9 @@ import type {
   DeliberationPatternCategory,
   PerceptionPatternCategory,
 } from './index.js';
+import type {
+  RoutingSpec, AggregationSpec, TerminationSpec, DecompositionSpec,
+} from '../orchestration.js';
 import { normalizePatternType } from './normalize.js';
 
 describe('pattern category hierarchy', () => {
@@ -43,12 +46,12 @@ describe('pattern category hierarchy', () => {
       name: 'risk-vote',
       maxRounds: 3,
       judgment: {
-        trigger: { type: 'confidence-threshold', threshold: 0.8 },
-        caller: { type: 'fan-out' },
+        trigger: { type: 'confidenceThreshold', threshold: 0.8 },
+        caller: { type: 'fanOut' },
       },
     };
     expect(p.maxRounds).toBe(3);
-    expect(p.judgment!.trigger.type).toBe('confidence-threshold');
+    expect(p.judgment!.trigger!.type).toBe('confidenceThreshold');
   });
 
   it('PatternCategory union narrows on category field', () => {
@@ -70,6 +73,41 @@ describe('pattern category hierarchy', () => {
       name: 'doc-summary',
     };
     expect(p.category).toBe('perception');
+  });
+});
+
+describe('sub-spec discriminated unions', () => {
+  it('RoutingSpec discriminates on type field', () => {
+    const r: RoutingSpec = { type: 'first-match' };
+    expect(r.type).toBe('first-match');
+  });
+
+  it('AggregationSpec discriminates on type field', () => {
+    const a: AggregationSpec = { type: 'collect-all' };
+    expect(a.type).toBe('collect-all');
+  });
+
+  it('TerminationSpec discriminates on type field', () => {
+    const t: TerminationSpec = { type: 'goal-reached' };
+    expect(t.type).toBe('goal-reached');
+  });
+
+  it('DecompositionSpec discriminates on type field', () => {
+    const d: DecompositionSpec = { type: 'llm' };
+    expect(d.type).toBe('llm');
+  });
+
+  it('OrchestrationPatternCategory uses typed routing and decomposition', () => {
+    const p: OrchestrationPatternCategory = {
+      category: 'orchestration',
+      type: 'supervisor',
+      name: 'risk-supervisor',
+      routing: { type: 'first-match' },
+      decomposition: { type: 'static' },
+      aggregation: { type: 'collect-all' },
+      termination: [{ type: 'max-iterations' }],
+    };
+    expect(p.routing!.type).toBe('first-match');
   });
 });
 
