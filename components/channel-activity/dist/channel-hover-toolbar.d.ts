@@ -12,6 +12,7 @@ export declare class ChannelHoverToolbarElement extends LitElement {
     private get _isSystemMessage();
     render(): typeof nothing | import("lit-html").TemplateResult<1>;
     private _onReact;
+    private _positionPicker;
     private _onEmojiSelected;
     private _onReply;
     private _toggleOverflow;
