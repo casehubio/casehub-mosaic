@@ -32,5 +32,9 @@
     "@casehubio/pages-diagram-core": "*",
     "lit": "^3.3.3"
   },
-  "license": "Apache-2.0"
+  "license": "Apache-2.0",
+  "files": [
+    "dist",
+    "package.json"
+  ]
 }

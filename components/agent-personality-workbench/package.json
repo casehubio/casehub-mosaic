@@ -23,5 +23,9 @@
   },
   "scripts": {
     "test": "vitest run"
-  }
+  },
+  "files": [
+    "dist",
+    "package.json"
+  ]
 }

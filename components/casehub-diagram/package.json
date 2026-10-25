@@ -33,5 +33,9 @@
     "lit": "^3.3.3",
     "yaml": "^2.7.0"
   },
-  "license": "Apache-2.0"
+  "license": "Apache-2.0",
+  "files": [
+    "dist",
+    "package.json"
+  ]
 }

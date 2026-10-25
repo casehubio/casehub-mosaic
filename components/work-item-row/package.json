@@ -23,5 +23,9 @@
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
-  }
+  },
+  "files": [
+    "dist",
+    "package.json"
+  ]
 }

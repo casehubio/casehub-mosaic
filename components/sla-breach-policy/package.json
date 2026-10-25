@@ -1,7 +1,7 @@
 {
   "name": "@casehubio/mosaic-sla-breach-policy",
   "version": "0.2.2",
-  "description": "SLA breach escalation tiers — active tier highlighting, optional live countdown via sla-indicator",
+  "description": "SLA breach escalation tiers \u2014 active tier highlighting, optional live countdown via sla-indicator",
   "repository": {
     "type": "git",
     "url": "https://github.com/casehubio/casehub-mosaic.git"
@@ -28,5 +28,9 @@
     "typescript": "~5.8.0",
     "vitest": "^3.0.0"
   },
-  "license": "Apache-2.0"
+  "license": "Apache-2.0",
+  "files": [
+    "dist",
+    "package.json"
+  ]
 }
