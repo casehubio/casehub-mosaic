@@ -1,0 +1,116 @@
+{
+  "enriched_memories": 92,
+  "pad_coverage": 92,
+  "occ_emotions": {
+    "total": 22,
+    "present": 20,
+    "missing": [
+      "gloating",
+      "happy-for"
+    ],
+    "coverage_pct": 90.9,
+    "counts": {
+      "admiration": 35,
+      "anger": 27,
+      "disgust": 5,
+      "distress": 48,
+      "fear": 26,
+      "gratification": 14,
+      "gratitude": 11,
+      "hate": 4,
+      "hope": 30,
+      "interest": 39,
+      "joy": 24,
+      "love": 12,
+      "pride": 44,
+      "relief": 13,
+      "remorse": 13,
+      "reproach": 12,
+      "resentment": 11,
+      "shame": 26,
+      "sorry-for": 2,
+      "surprise": 7
+    }
+  },
+  "action_tendencies": {
+    "total": 9,
+    "present": 8,
+    "missing": [
+      "interruption"
+    ],
+    "coverage_pct": 88.9,
+    "counts": {
+      "antagonism": 37,
+      "approach": 68,
+      "attendance": 69,
+      "avoidance": 33,
+      "dominance": 52,
+      "nonattendance": 18,
+      "rejection": 15,
+      "submission": 34
+    }
+  },
+  "drive_axes": {
+    "total": 4,
+    "present": 4,
+    "missing": [],
+    "coverage_pct": 100.0,
+    "counts": {
+      "affiliation": 92,
+      "autonomy": 92,
+      "competence": 92,
+      "curiosity": 92
+    }
+  },
+  "sec_dimensions": {
+    "total": 8,
+    "present": 8,
+    "missing": [],
+    "coverage_pct": 100.0,
+    "counts": {
+      "adjustability": 90,
+      "conduciveness": 90,
+      "controllability": 90,
+      "external_standards": 90,
+      "internal_standards": 90,
+      "novelty": 90,
+      "relevance": 92,
+      "urgency": 90
+    }
+  },
+  "sub_thought_types": {
+    "total": 7,
+    "present": 7,
+    "missing": [],
+    "coverage_pct": 100.0,
+    "counts": {
+      "affect-observation": 75,
+      "association": 92,
+      "causal-inference": 75,
+      "concern": 92,
+      "evaluative": 92,
+      "intention": 92,
+      "self-reflection": 75
+    }
+  },
+  "cognitive_distortions": {
+    "total": 12,
+    "present": 12,
+    "missing": [],
+    "coverage_pct": 100.0,
+    "counts": {
+      "all_or_nothing": 62,
+      "catastrophizing": 30,
+      "disqualifying_positive": 9,
+      "emotional_reasoning": 38,
+      "fortune_telling": 15,
+      "labelling": 10,
+      "magnification": 19,
+      "mental_filter": 11,
+      "mind_reading": 24,
+      "overgeneralization": 23,
+      "personalization": 42,
+      "should_statements": 15
+    }
+  }
+}

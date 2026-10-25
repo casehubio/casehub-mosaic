@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cognitive Workbench</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #0f1117; --surface: #1a1d27; --surface-2: #232733;
+    --border: #2d3142; --text: #e4e6eb; --text-muted: #8b8fa3;
+    --accent: #6366f1;
+    --person: #f472b6; --goal: #34d399; --activity: #60a5fa;
+    --place: #fbbf24; --project: #a78bfa; --concept: #fb923c;
+    --pad-p: #34d399; --pad-a: #f97316; --pad-d: #6366f1;
+    --font: system-ui, -apple-system, sans-serif;
+  }
+  body { font-family: var(--font); background: var(--bg); color: var(--text); height: 100vh; display: flex; flex-direction: column; }
+  .header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 20px; border-bottom: 1px solid var(--border); background: var(--surface);
+  }
+  .header h1 { font-size: 16px; font-weight: 600; }
+  .header .status { font-size: 12px; color: var(--text-muted); }
+  .main { display: flex; flex: 1; overflow: hidden; }
+  .sidebar {
+    width: 220px; border-right: 1px solid var(--border); background: var(--surface);
+    overflow-y: auto;
+  }
+  .sidebar h2 { font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); padding: 12px 16px 6px; }
+  .sg-item {
+    padding: 8px 16px; cursor: pointer; font-size: 13px; display: flex; align-items: center; gap: 8px;
+    border-left: 3px solid transparent; transition: background 0.1s;
+  }
+  .sg-item:hover { background: var(--surface-2); }
+  .sg-item.active { background: var(--surface-2); border-left-color: var(--accent); }
+  .sg-item .badge {
+    font-size: 10px; background: var(--surface-2); padding: 1px 6px; border-radius: 10px;
+    color: var(--text-muted); margin-left: auto;
+  }
+  .sg-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .graph-area { flex: 1; position: relative; overflow: hidden; cursor: grab; display: flex; flex-direction: column; }
+  .graph-area.panning { cursor: grabbing; }
+  .graph-area svg { width: 100%; flex: 1; }
+  .graph-area svg text { fill: var(--text); font-size: 11px; pointer-events: none; }
+  .graph-area svg .edge { stroke: var(--border); stroke-width: 1.5; stroke-opacity: 0.6; marker-end: url(#arrowhead); }
+  .graph-area svg .edge-label { fill: var(--text-muted); font-size: 9px; }
+  .graph-area svg .node { cursor: pointer; }
+  .graph-area svg .node circle { stroke-width: 2; transition: r 0.15s, stroke-width 0.15s; }
+  .graph-area svg .node:hover circle { r: 24; }
+  .graph-area svg .node.selected circle { r: 22; stroke-width: 3; stroke: rgba(255,255,255,0.5) !important; filter: drop-shadow(0 0 4px rgba(255,255,255,0.3)); }
+  .graph-area svg .node.selected.fresh circle { animation: node-breathe 1.2s ease-in-out 3; }
+  .graph-area svg .node.selected text { font-weight: 600; }
+  @keyframes node-breathe {
+    0%, 100% { stroke-width: 3; filter: drop-shadow(0 0 4px rgba(255,255,255,0.3)); }
+    50% { stroke-width: 4; filter: drop-shadow(0 0 8px rgba(255,255,255,0.45)); }
+  }
+  .pad-pill { display: inline-flex; gap: 4px; font-size: 10px; font-family: monospace; }
+  .pad-pill span { padding: 1px 4px; border-radius: 3px; }
+  .pad-p { background: rgba(52,211,153,0.15); color: var(--pad-p); }
+  .pad-a { background: rgba(249,115,22,0.15); color: var(--pad-a); }
+  .pad-d { background: rgba(99,102,241,0.15); color: var(--pad-d); }
+  .detail-panel {
+    width: 340px; border-left: 1px solid var(--border); background: var(--surface);
+    display: flex; flex-direction: column; overflow-y: auto;
+  }
+  .detail-panel.empty { align-items: center; justify-content: center; color: var(--text-muted); font-size: 13px; }
+  .detail-header { padding: 16px; border-bottom: 1px solid var(--border); border-left: 4px solid transparent; }
+  .detail-header.selected { border-left-width: 4px; }
+  .detail-header h3 { font-size: 15px; font-weight: 600; margin-bottom: 4px; display: flex; align-items: center; gap: 8px; }
+  .selected-indicator { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; animation: pulse 2s ease-in-out infinite; box-shadow: 0 0 8px currentColor; }
+  @keyframes pulse { 0%, 100% { opacity: 1; box-shadow: 0 0 8px currentColor; } 50% { opacity: 0.5; box-shadow: 0 0 2px currentColor; } }
+  .detail-header .type-badge {
+    display: inline-block; font-size: 10px; text-transform: uppercase; letter-spacing: 0.04em;
+    padding: 2px 8px; border-radius: 4px; font-weight: 600;
+  }
+  .detail-section { padding: 12px 16px; border-bottom: 1px solid var(--border); }
+  .detail-section h4 { font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-muted); margin-bottom: 8px; }
+  .detail-section .edge-item { font-size: 12px; padding: 4px 0; display: flex; gap: 8px; }
+  .detail-section .edge-type { color: var(--accent); font-weight: 500; min-width: 100px; }
+  .detail-section .prop-row { font-size: 12px; display: flex; gap: 8px; padding: 2px 0; }
+  .detail-section .prop-key { color: var(--text-muted); min-width: 80px; }
+  .status-bar {
+    display: flex; align-items: center; gap: 20px;
+    padding: 6px 20px; border-top: 1px solid var(--border); background: var(--surface);
+    font-size: 11px; color: var(--text-muted);
+  }
+  .ws-indicator { display: flex; align-items: center; gap: 4px; }
+  .ws-dot { width: 6px; height: 6px; border-radius: 50%; }
+  .ws-dot.connected { background: var(--pad-p); }
+  .ws-dot.disconnected { background: #ef4444; }
+
+  /* View toggle */
+  .view-toggle {
+    display: flex; gap: 2px; background: var(--surface-2); border-radius: 6px; padding: 2px;
+  }
+  .view-toggle button {
+    background: none; border: none; color: var(--text-muted); font-size: 12px;
+    padding: 4px 12px; border-radius: 4px; cursor: pointer; font-family: var(--font);
+  }
+  .view-toggle button.active { background: var(--accent); color: white; }
+
+  /* Memory navigator */
+  .memory-view { flex: 1; overflow-y: auto; display: none; padding: 0; }
+  .memory-view.visible { display: flex; flex-direction: column; }
+  .memory-filters {
+    display: flex; gap: 8px; padding: 12px 16px; border-bottom: 1px solid var(--border);
+    flex-wrap: wrap; align-items: center;
+  }
+  .domain-chip {
+    font-size: 11px; padding: 4px 10px; border-radius: 12px; cursor: pointer;
+    border: 1px solid var(--border); background: none; color: var(--text-muted);
+    font-family: var(--font); transition: all 0.15s;
+  }
+  .domain-chip.active { border-color: var(--accent); color: var(--accent); background: rgba(99,102,241,0.1); }
+  .domain-chip .count { margin-left: 4px; opacity: 0.6; }
+  .memory-list { flex: 1; overflow-y: auto; padding: 8px 0; }
+  .memory-card {
+    padding: 12px 16px; border-bottom: 1px solid var(--border);
+    cursor: pointer; transition: background 0.1s;
+  }
+  .memory-card:hover { background: var(--surface-2); }
+  .memory-card .domain-label {
+    font-size: 10px; text-transform: uppercase; letter-spacing: 0.04em;
+    color: var(--accent); font-weight: 600; margin-bottom: 4px;
+  }
+  .memory-card .memory-text { font-size: 13px; line-height: 1.5; font-style: italic; }
+  .memory-card .memory-meta {
+    display: flex; gap: 12px; margin-top: 6px; font-size: 11px; color: var(--text-muted);
+  }
+  .memory-card .attr-tag {
+    background: var(--surface-2); padding: 1px 6px; border-radius: 3px; font-size: 10px;
+  }
+  .memory-card .pad-mini { font-family: monospace; font-size: 10px; }
+  .domain-experience { color: var(--activity); }
+  .domain-relationship { color: var(--person); }
+  .domain-reflection { color: var(--project); }
+  .domain-mood { color: var(--pad-p); }
+
+  /* Cognitive detail sections */
+  .cog-section { margin-top: 8px; }
+  .cog-toggle {
+    font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em;
+    color: var(--text-muted); cursor: pointer; display: flex; align-items: center; gap: 4px;
+    padding: 6px 0; border: none; background: none; font-family: var(--font); width: 100%;
+  }
+  .cog-toggle:hover { color: var(--text); }
+  .cog-toggle .arrow { transition: transform 0.15s; font-size: 9px; }
+  .cog-toggle .arrow.open { transform: rotate(90deg); }
+  .cog-body { display: none; padding: 4px 0 8px; }
+  .cog-body.open { display: block; }
+  .emotion-grid { display: flex; flex-wrap: wrap; gap: 4px; }
+  .emotion-pill {
+    font-size: 10px; padding: 2px 7px; border-radius: 10px; font-family: monospace;
+    background: rgba(56,189,248,0.12); color: #38bdf8; white-space: nowrap; cursor: pointer;
+  }
+  .emotion-pill:hover { filter: brightness(1.3); }
+  .emotion-pill.high { background: rgba(56,189,248,0.2); color: #38bdf8; }
+  .emotion-pill.mid { background: rgba(56,189,248,0.15); color: #7dd3fc; }
+  .emotion-pill.low { background: rgba(56,189,248,0.08); color: #bae6fd; }
+  .tendency-pill {
+    font-size: 10px; padding: 2px 7px; border-radius: 10px; cursor: pointer;
+    background: rgba(52,211,153,0.12); color: var(--pad-p); font-family: monospace;
+  }
+  .tendency-pill:hover { filter: brightness(1.3); }
+  .distortion-pill {
+    font-size: 10px; padding: 2px 7px; border-radius: 10px; cursor: pointer;
+    background: rgba(239,68,68,0.12); color: #f87171; font-family: monospace;
+  }
+  .distortion-pill:hover { filter: brightness(1.3); }
+  .sec-bar { display: flex; align-items: center; gap: 6px; font-size: 11px; padding: 2px 0; }
+  .sec-label { min-width: 110px; color: var(--text-muted); font-size: 10px; }
+  .sec-track { flex: 1; height: 6px; background: var(--surface-2); border-radius: 3px; position: relative; }
+  .sec-fill { height: 100%; border-radius: 3px; background: var(--accent); }
+  .sec-val { font-size: 10px; font-family: monospace; min-width: 30px; text-align: right; }
+  .drive-row { display: flex; align-items: center; gap: 8px; font-size: 11px; padding: 2px 0; }
+  .drive-label { min-width: 80px; color: var(--text-muted); font-size: 10px; }
+  .drive-bar { flex: 1; height: 6px; background: var(--surface-2); border-radius: 3px; position: relative; overflow: hidden; }
+  .drive-fill { height: 100%; border-radius: 3px; }
+  .drive-fill.positive { background: var(--pad-p); }
+  .drive-fill.negative { background: #f87171; }
+  .drive-val { font-size: 10px; font-family: monospace; min-width: 35px; text-align: right; }
+  .sub-thought { font-size: 11px; padding: 3px 0; display: flex; gap: 6px; }
+  .sub-thought-type { color: var(--accent); font-weight: 500; min-width: 100px; font-size: 10px; }
+  .memory-card .cog-summary { display: flex; flex-wrap: wrap; gap: 3px; margin-top: 4px; }
+
+  /* Navigable entity links */
+  .entity-link {
+    color: var(--text); cursor: pointer; text-decoration: none;
+    border-bottom: 1px dotted rgba(99,102,241,0.5);
+    transition: border-color 0.15s, color 0.15s;
+  }
+  .entity-link:hover { color: var(--accent); border-bottom-color: var(--accent); border-bottom-style: solid; }
+
+  /* Section visibility filter bar */
+  .section-filters {
+    display: flex; flex-wrap: wrap; gap: 4px; padding: 10px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-filter {
+    font-size: 10px; padding: 3px 8px; border-radius: 10px; cursor: pointer;
+    border: 1px solid var(--border); background: none; color: var(--text-muted);
+    font-family: var(--font); transition: all 0.15s; display: flex; align-items: center; gap: 4px;
+  }
+  .section-filter.active { border-color: var(--accent); color: var(--accent); background: rgba(99,102,241,0.1); }
+  .section-filter .check { font-size: 9px; }
+
+  /* Personality view */
+  .personality-view { flex: 1; overflow-y: auto; display: none; padding: 0; }
+  .personality-view.visible { display: flex; flex-direction: column; }
+  .personality-content { flex: 1; overflow-y: auto; padding: 16px 20px; display: flex; flex-direction: column; gap: 16px; }
+  .personality-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+    padding: 16px; display: flex; flex-direction: column; gap: 10px;
+  }
+  .personality-card h3 {
+    font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em;
+    color: var(--text-muted); margin: 0;
+  }
+  .axis-row {
+    display: flex; align-items: center; gap: 8px; font-size: 12px; padding: 4px 0;
+  }
+  .axis-label { min-width: 110px; color: var(--text-muted); font-size: 11px; }
+  .axis-value {
+    font-weight: 600; font-size: 12px; padding: 2px 10px; border-radius: 4px;
+    background: rgba(99,102,241,0.1); color: var(--accent);
+  }
+  .weight-row {
+    display: flex; align-items: center; gap: 8px; font-size: 12px; padding: 3px 0;
+  }
+  .weight-label { min-width: 120px; color: var(--text-muted); font-size: 11px; }
+  .weight-track { flex: 1; height: 8px; background: var(--surface-2); border-radius: 4px; overflow: hidden; }
+  .weight-fill { height: 100%; border-radius: 4px; transition: width 0.3s; }
+  .weight-val { font-size: 11px; font-family: monospace; min-width: 35px; text-align: right; }
+  .personality-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 900px) { .personality-grid { grid-template-columns: 1fr; } }
+  .personality-empty {
+    flex: 1; display: flex; align-items: center; justify-content: center;
+    color: var(--text-muted); font-size: 13px; padding: 40px;
+  }
+
+  /* Ego view controls */
+  .ego-bar {
+    display: flex; align-items: center; gap: 12px; padding: 8px 16px;
+    background: var(--surface); border-bottom: 1px solid var(--border); font-size: 12px;
+  }
+  .ego-bar label { color: var(--text-muted); }
+  .ego-bar input[type=range] { width: 80px; accent-color: var(--accent); }
+  .ego-bar .ego-exit {
+    font-size: 11px; padding: 3px 10px; border-radius: 4px; cursor: pointer;
+    border: 1px solid var(--border); background: none; color: var(--text-muted);
+    font-family: var(--font); margin-left: auto;
+  }
+  .ego-bar .ego-exit:hover { border-color: var(--accent); color: var(--accent); }
+  .ego-bar .ego-label { color: var(--accent); font-weight: 600; }
+
+  /* Reference overlay */
+  .ref-overlay {
+    padding: 10px 16px; border-bottom: 1px solid var(--border);
+    background: rgba(99,102,241,0.04); font-size: 12px; line-height: 1.5;
+    border-left: 3px solid rgba(99,102,241,0.3); position: relative;
+  }
+  .ref-overlay .ref-badge {
+    font-size: 9px; text-transform: uppercase; letter-spacing: 0.05em;
+    color: rgba(99,102,241,0.6); font-weight: 600; margin-bottom: 4px;
+  }
+  .ref-overlay .ref-desc { color: var(--text); margin-bottom: 4px; }
+  .ref-overlay .ref-ctx { color: var(--text-muted); font-style: italic; }
+  .ref-overlay .ref-source { font-size: 10px; color: var(--text-muted); margin-top: 4px; opacity: 0.6; }
+
+  /* Brain region pill filters */
+  .brain-pill {
+    padding: 8px 16px; cursor: pointer; font-size: 13px; display: flex;
+    align-items: center; gap: 8px; border-left: 3px solid transparent;
+    transition: background 0.1s;
+  }
+  .brain-pill:hover { background: var(--surface-2); }
+  .brain-pill.active { background: var(--surface-2); border-left-color: var(--accent); }
+  .pill-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .pill-text { display: flex; flex-direction: column; flex: 1; min-width: 0; }
+  .pill-label { font-size: 12px; }
+  .pill-sub { font-size: 10px; color: var(--text-muted); }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>Cognitive Workbench</h1>
+  <div class="view-toggle">
+    <button class="active" onclick="switchView('graph')">Graph</button>
+    <button onclick="switchView('brain')">Brain</button>
+    <button onclick="switchView('graph3d')">3D</button>
+    <button onclick="switchView('memories')">Memories</button>
+    <button onclick="switchView('personality')">Personality</button>
+  </div>
+  <div class="status" id="stats"></div>
+</div>
+<div class="main">
+  <div class="sidebar" id="sidebar"><h2>Subgraphs</h2></div>
+  <div class="sidebar" id="brainSidebar" style="display:none"></div>
+  <div class="graph-area" id="graphArea">
+    <div class="ego-bar" id="egoBar" style="display:none">
+      <span class="ego-label" id="egoName"></span>
+      <label>Depth:</label>
+      <input type="range" min="1" max="3" value="1" id="egoDepth" oninput="updateEgoDepth(this.value)">
+      <span id="egoDepthVal">1</span>
+      <span id="egoStats" style="color:var(--text-muted)"></span>
+      <button class="ego-exit" onclick="exitEgo()">Back to subgraph</button>
+    </div>
+    <svg id="graphSvg">
+      <defs>
+        <marker id="arrowhead" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
+          <polygon points="0 0, 10 3.5, 0 7" fill="var(--border)" fill-opacity="0.6"/>
+        </marker>
+      </defs>
+      <g id="graphGroup"></g>
+    </svg>
+  </div>
+  <div id="graph3dWrapper" style="display:none; flex:1; min-width:0; overflow:hidden; position:relative; flex-direction:column;">
+    <div class="ego-bar" id="ego3dBar">
+      <button class="ego-exit" id="ego3dBack" onclick="egoBack3d()" disabled style="font-size:11px;padding:3px 8px;border-radius:4px;cursor:pointer;border:1px solid var(--border);background:none;color:var(--text-muted);font-family:var(--font)">&#8592; Back</button>
+      <button class="ego-exit" id="ego3dRoot" onclick="egoResetRoot3d()" disabled style="font-size:11px;padding:3px 8px;border-radius:4px;cursor:pointer;border:1px solid var(--border);background:none;color:var(--text-muted);font-family:var(--font)">&#8962; Root</button>
+      <span id="ego3dBreadcrumb" style="font-size:12px;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;"></span>
+      <span id="ego3dStats" style="color:var(--text-muted);font-size:11px;"></span>
+      <button id="capsToggleBtn" onclick="setCapsVisible(!capsVisible)" style="font-size:11px;padding:3px 10px;border-radius:4px;cursor:pointer;border:1px solid var(--border);background:none;color:var(--text-muted);font-family:var(--font)">Show CAPS</button>
+      <button id="capsOrphanBtn" onclick="toggleCapsOrphans()" style="display:none;font-size:11px;padding:3px 10px;border-radius:4px;cursor:pointer;border:1px solid var(--border);background:none;color:var(--text-muted);font-family:var(--font)">Show orphans (0)</button>
+      <button class="caps-layout-btn" data-mode="interleaved" onclick="toggleCapsLayout('interleaved')" style="font-size:11px;padding:3px 10px;border-radius:4px;cursor:pointer;border:1px solid var(--border);background:none;color:var(--text-muted);font-family:var(--font)">Interleaved</button>
+      <button class="caps-layout-btn active" data-mode="inner" onclick="toggleCapsLayout('inner')" style="font-size:11px;padding:3px 10px;border-radius:4px;cursor:pointer;border:1px solid var(--border);background:none;color:var(--text-muted);font-family:var(--font)">Inner Shell</button>
+    </div>
+    <div id="graph3dArea" style="flex:1; overflow:hidden;"></div>
+    <div id="evalPanel" style="background:var(--surface);border-top:1px solid var(--border);padding:12px 16px;">
+      <div style="display:flex;gap:8px;align-items:flex-end;">
+        <textarea id="evalInput" rows="2" placeholder="Describe a scenario..."
+          style="flex:1;background:var(--surface-2);border:1px solid var(--border);color:var(--text);padding:8px;border-radius:4px;font-family:var(--font);font-size:13px;resize:none;"></textarea>
+        <button id="evalBtn" onclick="evaluateScenario()" style="padding:6px 16px;background:var(--accent);color:white;border:none;border-radius:4px;cursor:pointer;font-family:var(--font);">Evaluate</button>
+        <button id="commitBtn" onclick="commitEvaluation()" disabled style="padding:6px 16px;background:var(--surface-2);color:var(--text-muted);border:1px solid var(--border);border-radius:4px;cursor:pointer;font-family:var(--font);">Commit</button>
+      </div>
+      <div id="evalStatus" style="font-size:11px;color:var(--text-muted);margin-top:4px;"></div>
+    </div>
+  </div>
+  <div id="brainWrapper" style="display:none; flex:1; min-width:0; overflow:hidden; position:relative; flex-direction:column;">
+    <div class="ego-bar" id="brainBar">
+      <button id="backToBrainBtn" onclick="returnToBrain()" style="display:none;font-size:11px;padding:3px 10px;border-radius:4px;cursor:pointer;border:1px solid var(--border);background:none;color:var(--text-muted);font-family:var(--font)">&#8592; Brain</button>
+      <span style="font-size:12px;color:var(--accent);font-weight:600;">Brain</span>
+      <span id="brainStats" style="color:var(--text-muted);font-size:11px;flex:1;text-align:right;"></span>
+    </div>
+    <div id="brainArea" style="flex:1; overflow:hidden;"></div>
+  </div>
+  <div class="memory-view" id="memoryView">
+    <div class="memory-filters" id="memoryFilters"></div>
+    <div class="memory-list" id="memoryList"></div>
+  </div>
+  <div class="personality-view" id="personalityView">
+    <div class="personality-content" id="personalityContent">
+      <div class="personality-empty">Loading personality data...</div>
+    </div>
+  </div>
+  <div class="detail-panel empty" id="detailPanel">Select a node to inspect</div>
+</div>
+<div class="status-bar">
+  <div class="ws-indicator">
+    <div class="ws-dot disconnected" id="wsDot"></div>
+    <span id="wsStatus">Disconnected</span>
+  </div>
+  <span id="mutationCount">Mutations: 0</span>
+</div>
+<script src="https://unpkg.com/3d-force-graph"></script>
+<script src="workbench.js"></script>
+<script src="graph2d.js"></script>
+<script src="graph3d.js"></script>
+<script src="evaluation.js"></script>
+<script src="brain-data.js"></script>
+<script src="brain-regions.js"></script>
+<script src="brain3d.js"></script>
+<script type="module" src="brain-mesh.js"></script>
+</body>
+</html>

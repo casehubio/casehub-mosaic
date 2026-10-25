@@ -1,0 +1,7168 @@
+{
+  "stats": {
+    "total_entities": 152,
+    "total_temporal": 78,
+    "total_noun_chunks": 1206,
+    "by_type": {
+      "organisation": 30,
+      "person": 43,
+      "group": 17,
+      "place": 20,
+      "unknown": 26,
+      "work-of-art": 12,
+      "activity": 1,
+      "project": 3
+    },
+    "by_tier": {
+      "central": 23,
+      "supporting": 53,
+      "peripheral": 76
+    }
+  },
+  "entities": {
+    "frida": {
+      "canonical": "Frida",
+      "type": "organisation",
+      "spacy_label": "ORG",
+      "mentions": 64,
+      "passages": [
+        "p-002",
+        "p-003",
+        "p-004",
+        "p-005",
+        "p-006",
+        "p-007",
+        "p-008",
+        "p-009",
+        "p-010",
+        "p-011",
+        "p-012",
+        "p-013",
+        "p-014",
+        "p-015",
+        "p-016"
+      ],
+      "aliases": [
+        "Frida"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-002",
+          "start_char": 549,
+          "end_char": 554
+        },
+        {
+          "passage_id": "p-002",
+          "start_char": 728,
+          "end_char": 733
+        },
+        {
+          "passage_id": "p-002",
+          "start_char": 916,
+          "end_char": 921
+        },
+        {
+          "passage_id": "p-002",
+          "start_char": 1134,
+          "end_char": 1139
+        },
+        {
+          "passage_id": "p-002",
+          "start_char": 1724,
+          "end_char": 1729
+        },
+        {
+          "passage_id": "p-002",
+          "start_char": 1907,
+          "end_char": 1912
+        },
+        {
+          "passage_id": "p-002",
+          "start_char": 1929,
+          "end_char": 1934
+        },
+        {
+          "passage_id": "p-002",
+          "start_char": 2335,
+          "end_char": 2340
+        },
+        {
+          "passage_id": "p-002",
+          "start_char": 2723,
+          "end_char": 2728
+        },
+        {
+          "passage_id": "p-003",
+          "start_char": 3098,
+          "end_char": 3103
+        },
+        {
+          "passage_id": "p-003",
+          "start_char": 3611,
+          "end_char": 3616
+        },
+        {
+          "passage_id": "p-003",
+          "start_char": 3872,
+          "end_char": 3877
+        },
+        {
+          "passage_id": "p-003",
+          "start_char": 4530,
+          "end_char": 4535
+        },
+        {
+          "passage_id": "p-003",
+          "start_char": 5070,
+          "end_char": 5075
+        },
+        {
+          "passage_id": "p-004",
+          "start_char": 5630,
+          "end_char": 5635
+        },
+        {
+          "passage_id": "p-004",
+          "start_char": 5812,
+          "end_char": 5817
+        },
+        {
+          "passage_id": "p-004",
+          "start_char": 6207,
+          "end_char": 6212
+        },
+        {
+          "passage_id": "p-004",
+          "start_char": 6500,
+          "end_char": 6505
+        },
+        {
+          "passage_id": "p-005",
+          "start_char": 8130,
+          "end_char": 8135
+        },
+        {
+          "passage_id": "p-005",
+          "start_char": 8975,
+          "end_char": 8980
+        },
+        {
+          "passage_id": "p-005",
+          "start_char": 9646,
+          "end_char": 9651
+        },
+        {
+          "passage_id": "p-005",
+          "start_char": 10028,
+          "end_char": 10033
+        },
+        {
+          "passage_id": "p-006",
+          "start_char": 11127,
+          "end_char": 11132
+        },
+        {
+          "passage_id": "p-006",
+          "start_char": 11382,
+          "end_char": 11387
+        },
+        {
+          "passage_id": "p-006",
+          "start_char": 12092,
+          "end_char": 12097
+        },
+        {
+          "passage_id": "p-006",
+          "start_char": 12513,
+          "end_char": 12518
+        },
+        {
+          "passage_id": "p-006",
+          "start_char": 13107,
+          "end_char": 13112
+        },
+        {
+          "passage_id": "p-007",
+          "start_char": 13531,
+          "end_char": 13536
+        },
+        {
+          "passage_id": "p-007",
+          "start_char": 14927,
+          "end_char": 14932
+        },
+        {
+          "passage_id": "p-007",
+          "start_char": 15341,
+          "end_char": 15346
+        },
+        {
+          "passage_id": "p-008",
+          "start_char": 17227,
+          "end_char": 17232
+        },
+        {
+          "passage_id": "p-008",
+          "start_char": 17459,
+          "end_char": 17464
+        },
+        {
+          "passage_id": "p-008",
+          "start_char": 17684,
+          "end_char": 17689
+        },
+        {
+          "passage_id": "p-009",
+          "start_char": 19786,
+          "end_char": 19791
+        },
+        {
+          "passage_id": "p-009",
+          "start_char": 20596,
+          "end_char": 20601
+        },
+        {
+          "passage_id": "p-009",
+          "start_char": 20827,
+          "end_char": 20832
+        },
+        {
+          "passage_id": "p-009",
+          "start_char": 21150,
+          "end_char": 21155
+        },
+        {
+          "passage_id": "p-009",
+          "start_char": 21468,
+          "end_char": 21473
+        },
+        {
+          "passage_id": "p-009",
+          "start_char": 21671,
+          "end_char": 21676
+        },
+        {
+          "passage_id": "p-009",
+          "start_char": 23165,
+          "end_char": 23170
+        },
+        {
+          "passage_id": "p-010",
+          "start_char": 23801,
+          "end_char": 23806
+        },
+        {
+          "passage_id": "p-010",
+          "start_char": 24015,
+          "end_char": 24020
+        },
+        {
+          "passage_id": "p-010",
+          "start_char": 24897,
+          "end_char": 24902
+        },
+        {
+          "passage_id": "p-011",
+          "start_char": 26159,
+          "end_char": 26164
+        },
+        {
+          "passage_id": "p-011",
+          "start_char": 26300,
+          "end_char": 26305
+        },
+        {
+          "passage_id": "p-011",
+          "start_char": 26496,
+          "end_char": 26501
+        },
+        {
+          "passage_id": "p-011",
+          "start_char": 26594,
+          "end_char": 26599
+        },
+        {
+          "passage_id": "p-011",
+          "start_char": 26725,
+          "end_char": 26730
+        },
+        {
+          "passage_id": "p-011",
+          "start_char": 26917,
+          "end_char": 26922
+        },
+        {
+          "passage_id": "p-011",
+          "start_char": 26979,
+          "end_char": 26984
+        },
+        {
+          "passage_id": "p-011",
+          "start_char": 28223,
+          "end_char": 28228
+        },
+        {
+          "passage_id": "p-011",
+          "start_char": 28888,
+          "end_char": 28893
+        },
+        {
+          "passage_id": "p-012",
+          "start_char": 29410,
+          "end_char": 29415
+        },
+        {
+          "passage_id": "p-012",
+          "start_char": 29552,
+          "end_char": 29557
+        },
+        {
+          "passage_id": "p-012",
+          "start_char": 29934,
+          "end_char": 29939
+        },
+        {
+          "passage_id": "p-012",
+          "start_char": 29972,
+          "end_char": 29977
+        },
+        {
+          "passage_id": "p-013",
+          "start_char": 32356,
+          "end_char": 32361
+        },
+        {
+          "passage_id": "p-014",
+          "start_char": 34947,
+          "end_char": 34952
+        },
+        {
+          "passage_id": "p-015",
+          "start_char": 37495,
+          "end_char": 37500
+        },
+        {
+          "passage_id": "p-015",
+          "start_char": 37585,
+          "end_char": 37590
+        },
+        {
+          "passage_id": "p-016",
+          "start_char": 40181,
+          "end_char": 40186
+        },
+        {
+          "passage_id": "p-016",
+          "start_char": 40854,
+          "end_char": 40859
+        },
+        {
+          "passage_id": "p-016",
+          "start_char": 41346,
+          "end_char": 41351
+        },
+        {
+          "passage_id": "p-016",
+          "start_char": 41538,
+          "end_char": 41543
+        }
+      ],
+      "depth_tier": "central",
+      "prominence_score": 94
+    },
+    "diego": {
+      "canonical": "Diego",
+      "type": "person",
+      "spacy_label": "PERSON",
+      "mentions": 35,
+      "passages": [
+        "p-006",
+        "p-007",
+        "p-008",
+        "p-009",
+        "p-011",
+        "p-012",
+        "p-013",
+        "p-015"
+      ],
+      "aliases": [
+        "Diego"
+      ],
+      "confidence": 1.0,
+      "positions": [
+        {
+          "passage_id": "p-006",
+          "start_char": 11001,
+          "end_char": 11006
+        },
+        {
+          "passage_id": "p-006",
+          "start_char": 11041,
+          "end_char": 11046
+        },
+        {
+          "passage_id": "p-006",
+          "start_char": 11214,
+          "end_char": 11219
+        },
+        {
+          "passage_id": "p-006",
+          "start_char": 11652,
+          "end_char": 11657
+        },
+        {
+          "passage_id": "p-006",
+          "start_char": 12765,
+          "end_char": 12770
+        },
+        {
+          "passage_id": "p-006",
+          "start_char": 13232,
+          "end_char": 13237
+        },
+        {
+          "passage_id": "p-007",
+          "start_char": 13411,
+          "end_char": 13416
+        },
+        {
+          "passage_id": "p-007",
+          "start_char": 14849,
+          "end_char": 14854
+        },
+        {
+          "passage_id": "p-007",
+          "start_char": 15916,
+          "end_char": 15921
+        },
+        {
+          "passage_id": "p-007",
+          "start_char": 16373,
+          "end_char": 16378
+        },
+        {
+          "passage_id": "p-008",
+          "start_char": 17249,
+          "end_char": 17254
+        },
+        {
+          "passage_id": "p-008",
+          "start_char": 17724,
+          "end_char": 17729
+        },
+        {
+          "passage_id": "p-008",
+          "start_char": 17833,
+          "end_char": 17838
+        },
+        {
+          "passage_id": "p-008",
+          "start_char": 18240,
+          "end_char": 18245
+        },
+        {
+          "passage_id": "p-008",
+          "start_char": 18569,
+          "end_char": 18574
+        },
+        {
+          "passage_id": "p-008",
+          "start_char": 19322,
+          "end_char": 19327
+        },
+        {
+          "passage_id": "p-009",
+          "start_char": 19841,
+          "end_char": 19846
+        },
+        {
+          "passage_id": "p-009",
+          "start_char": 20586,
+          "end_char": 20591
+        },
+        {
+          "passage_id": "p-009",
+          "start_char": 21756,
+          "end_char": 21761
+        },
+        {
+          "passage_id": "p-009",
+          "start_char": 23315,
+          "end_char": 23320
+        },
+        {
+          "passage_id": "p-009",
+          "start_char": 23346,
+          "end_char": 23351
+        },
+        {
+          "passage_id": "p-009",
+          "start_char": 23552,
+          "end_char": 23557
+        },
+        {
+          "passage_id": "p-009",
+          "start_char": 23618,
+          "end_char": 23623
+        },
+        {
+          "passage_id": "p-011",
+          "start_char": 26169,
+          "end_char": 26174
+        },
+        {
+          "passage_id": "p-011",
+          "start_char": 26350,
+          "end_char": 26355
+        },
+        {
+          "passage_id": "p-011",
+          "start_char": 26928,
+          "end_char": 26933
+        },
+        {
+          "passage_id": "p-011",
+          "start_char": 26990,
+          "end_char": 26995
+        },
+        {
+          "passage_id": "p-011",
+          "start_char": 27853,
+          "end_char": 27858
+        },
+        {
+          "passage_id": "p-011",
+          "start_char": 28408,
+          "end_char": 28413
+        },
+        {
+          "passage_id": "p-011",
+          "start_char": 28799,
+          "end_char": 28804
+        },
+        {
+          "passage_id": "p-012",
+          "start_char": 29420,
+          "end_char": 29425
+        },
+        {
+          "passage_id": "p-012",
+          "start_char": 29516,
+          "end_char": 29521
+        },
+        {
+          "passage_id": "p-012",
+          "start_char": 31317,
+          "end_char": 31322
+        },
+        {
+          "passage_id": "p-013",
+          "start_char": 33202,
+          "end_char": 33207
+        },
+        {
+          "passage_id": "p-015",
+          "start_char": 38578,
+          "end_char": 38583
+        }
+      ],
+      "depth_tier": "central",
+      "prominence_score": 51
+    },
+    "mexican": {
+      "canonical": "Mexican",
+      "type": "group",
+      "spacy_label": "NORP",
+      "mentions": 19,
+      "passages": [
+        "p-003",
+        "p-005",
+        "p-006",
+        "p-009",
+        "p-010",
+        "p-011",
+        "p-012",
+        "p-013",
+        "p-016"
+      ],
+      "aliases": [
+        "Mexican"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-003",
+          "start_char": 3544,
+          "end_char": 3551
+        },
+        {
+          "passage_id": "p-005",
+          "start_char": 9545,
+          "end_char": 9552
+        },
+        {
+          "passage_id": "p-005",
+          "start_char": 9834,
+          "end_char": 9841
+        },
+        {
+          "passage_id": "p-006",
+          "start_char": 12376,
+          "end_char": 12383
+        },
+        {
+          "passage_id": "p-009",
+          "start_char": 20132,
+          "end_char": 20139
+        },
+        {
+          "passage_id": "p-009",
+          "start_char": 20382,
+          "end_char": 20389
+        },
+        {
+          "passage_id": "p-009",
+          "start_char": 20807,
+          "end_char": 20814
+        },
+        {
+          "passage_id": "p-009",
+          "start_char": 22983,
+          "end_char": 22990
+        },
+        {
+          "passage_id": "p-010",
+          "start_char": 24848,
+          "end_char": 24855
+        },
+        {
+          "passage_id": "p-010",
+          "start_char": 25099,
+          "end_char": 25106
+        },
+        {
+          "passage_id": "p-010",
+          "start_char": 25120,
+          "end_char": 25127
+        },
+        {
+          "passage_id": "p-010",
+          "start_char": 25139,
+          "end_char": 25146
+        },
+        {
+          "passage_id": "p-010",
+          "start_char": 25630,
+          "end_char": 25637
+        },
+        {
+          "passage_id": "p-011",
+          "start_char": 27634,
+          "end_char": 27641
+        },
+        {
+          "passage_id": "p-012",
+          "start_char": 29803,
+          "end_char": 29810
+        },
+        {
+          "passage_id": "p-012",
+          "start_char": 31206,
+          "end_char": 31213
+        },
+        {
+          "passage_id": "p-012",
+          "start_char": 32200,
+          "end_char": 32207
+        },
+        {
+          "passage_id": "p-013",
+          "start_char": 34009,
+          "end_char": 34016
+        },
+        {
+          "passage_id": "p-016",
+          "start_char": 42267,
+          "end_char": 42274
+        }
+      ],
+      "depth_tier": "central",
+      "prominence_score": 37
+    },
+    "mexico": {
+      "canonical": "Mexico",
+      "type": "place",
+      "spacy_label": "GPE",
+      "mentions": 15,
+      "passages": [
+        "p-002",
+        "p-003",
+        "p-007",
+        "p-008",
+        "p-009",
+        "p-010",
+        "p-015",
+        "p-016"
+      ],
+      "aliases": [
+        "Mexico"
+      ],
+      "confidence": 1.0,
+      "positions": [
+        {
+          "passage_id": "p-002",
+          "start_char": 474,
+          "end_char": 480
+        },
+        {
+          "passage_id": "p-002",
+          "start_char": 2224,
+          "end_char": 2230
+        },
+        {
+          "passage_id": "p-002",
+          "start_char": 3000,
+          "end_char": 3006
+        },
+        {
+          "passage_id": "p-003",
+          "start_char": 3188,
+          "end_char": 3194
+        },
+        {
+          "passage_id": "p-003",
+          "start_char": 4205,
+          "end_char": 4211
+        },
+        {
+          "passage_id": "p-007",
+          "start_char": 13584,
+          "end_char": 13590
+        },
+        {
+          "passage_id": "p-008",
+          "start_char": 17060,
+          "end_char": 17066
+        },
+        {
+          "passage_id": "p-009",
+          "start_char": 20546,
+          "end_char": 20552
+        },
+        {
+          "passage_id": "p-009",
+          "start_char": 21439,
+          "end_char": 21445
+        },
+        {
+          "passage_id": "p-009",
+          "start_char": 23580,
+          "end_char": 23586
+        },
+        {
+          "passage_id": "p-010",
+          "start_char": 24574,
+          "end_char": 24580
+        },
+        {
+          "passage_id": "p-010",
+          "start_char": 25536,
+          "end_char": 25542
+        },
+        {
+          "passage_id": "p-015",
+          "start_char": 37528,
+          "end_char": 37534
+        },
+        {
+          "passage_id": "p-015",
+          "start_char": 38544,
+          "end_char": 38550
+        },
+        {
+          "passage_id": "p-016",
+          "start_char": 42021,
+          "end_char": 42027
+        }
+      ],
+      "depth_tier": "central",
+      "prominence_score": 31
+    },
+    "first": {
+      "canonical": "first",
+      "type": "unknown",
+      "spacy_label": "ORDINAL",
+      "mentions": 13,
+      "passages": [
+        "p-003",
+        "p-004",
+        "p-005",
+        "p-006",
+        "p-007",
+        "p-009",
+        "p-010",
+        "p-015"
+      ],
+      "aliases": [
+        "first"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-003",
+          "start_char": 3435,
+          "end_char": 3440
+        },
+        {
+          "passage_id": "p-003",
+          "start_char": 4951,
+          "end_char": 4956
+        },
+        {
+          "passage_id": "p-004",
+          "start_char": 6653,
+          "end_char": 6658
+        },
+        {
+          "passage_id": "p-004",
+          "start_char": 6804,
+          "end_char": 6809
+        },
+        {
+          "passage_id": "p-004",
+          "start_char": 7867,
+          "end_char": 7872
+        },
+        {
+          "passage_id": "p-005",
+          "start_char": 9029,
+          "end_char": 9034
+        },
+        {
+          "passage_id": "p-006",
+          "start_char": 11699,
+          "end_char": 11704
+        },
+        {
+          "passage_id": "p-006",
+          "start_char": 13245,
+          "end_char": 13250
+        },
+        {
+          "passage_id": "p-007",
+          "start_char": 13565,
+          "end_char": 13570
+        },
+        {
+          "passage_id": "p-009",
+          "start_char": 21878,
+          "end_char": 21883
+        },
+        {
+          "passage_id": "p-010",
+          "start_char": 24814,
+          "end_char": 24819
+        },
+        {
+          "passage_id": "p-015",
+          "start_char": 37503,
+          "end_char": 37508
+        },
+        {
+          "passage_id": "p-015",
+          "start_char": 38438,
+          "end_char": 38443
+        }
+      ],
+      "depth_tier": "central",
+      "prominence_score": 29
+    },
+    "european": {
+      "canonical": "European",
+      "type": "group",
+      "spacy_label": "NORP",
+      "mentions": 13,
+      "passages": [
+        "p-005",
+        "p-006",
+        "p-009",
+        "p-010",
+        "p-011",
+        "p-012",
+        "p-013"
+      ],
+      "aliases": [
+        "European"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-005",
+          "start_char": 8578,
+          "end_char": 8586
+        },
+        {
+          "passage_id": "p-006",
+          "start_char": 12207,
+          "end_char": 12215
+        },
+        {
+          "passage_id": "p-009",
+          "start_char": 20108,
+          "end_char": 20116
+        },
+        {
+          "passage_id": "p-009",
+          "start_char": 22386,
+          "end_char": 22394
+        },
+        {
+          "passage_id": "p-009",
+          "start_char": 22790,
+          "end_char": 22798
+        },
+        {
+          "passage_id": "p-009",
+          "start_char": 22938,
+          "end_char": 22946
+        },
+        {
+          "passage_id": "p-010",
+          "start_char": 25028,
+          "end_char": 25036
+        },
+        {
+          "passage_id": "p-010",
+          "start_char": 25072,
+          "end_char": 25080
+        },
+        {
+          "passage_id": "p-010",
+          "start_char": 25810,
+          "end_char": 25818
+        },
+        {
+          "passage_id": "p-010",
+          "start_char": 25898,
+          "end_char": 25906
+        },
+        {
+          "passage_id": "p-011",
+          "start_char": 26896,
+          "end_char": 26904
+        },
+        {
+          "passage_id": "p-012",
+          "start_char": 31231,
+          "end_char": 31239
+        },
+        {
+          "passage_id": "p-013",
+          "start_char": 34125,
+          "end_char": 34133
+        }
+      ],
+      "depth_tier": "central",
+      "prominence_score": 27
+    },
+    "la casa azul": {
+      "canonical": "La Casa Azul",
+      "type": "organisation",
+      "spacy_label": "ORG",
+      "mentions": 11,
+      "passages": [
+        "p-002",
+        "p-004",
+        "p-005",
+        "p-009",
+        "p-012",
+        "p-015",
+        "p-016"
+      ],
+      "aliases": [
+        "La Casa Azul"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-002",
+          "start_char": 395,
+          "end_char": 407
+        },
+        {
+          "passage_id": "p-004",
+          "start_char": 6838,
+          "end_char": 6850
+        },
+        {
+          "passage_id": "p-005",
+          "start_char": 10525,
+          "end_char": 10537
+        },
+        {
+          "passage_id": "p-009",
+          "start_char": 20605,
+          "end_char": 20617
+        },
+        {
+          "passage_id": "p-012",
+          "start_char": 29439,
+          "end_char": 29451
+        },
+        {
+          "passage_id": "p-012",
+          "start_char": 29532,
+          "end_char": 29544
+        },
+        {
+          "passage_id": "p-012",
+          "start_char": 30957,
+          "end_char": 30969
+        },
+        {
+          "passage_id": "p-015",
+          "start_char": 37872,
+          "end_char": 37884
+        },
+        {
+          "passage_id": "p-016",
+          "start_char": 40705,
+          "end_char": 40717
+        },
+        {
+          "passage_id": "p-016",
+          "start_char": 41904,
+          "end_char": 41916
+        },
+        {
+          "passage_id": "p-016",
+          "start_char": 41937,
+          "end_char": 41949
+        }
+      ],
+      "depth_tier": "central",
+      "prominence_score": 25
+    },
+    "one": {
+      "canonical": "one",
+      "type": "unknown",
+      "spacy_label": "CARDINAL",
+      "mentions": 11,
+      "passages": [
+        "p-003",
+        "p-007",
+        "p-011",
+        "p-012",
+        "p-014",
+        "p-016"
+      ],
+      "aliases": [
+        "One",
+        "one"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-003",
+          "start_char": 3204,
+          "end_char": 3207
+        },
+        {
+          "passage_id": "p-007",
+          "start_char": 14758,
+          "end_char": 14761
+        },
+        {
+          "passage_id": "p-011",
+          "start_char": 26764,
+          "end_char": 26767
+        },
+        {
+          "passage_id": "p-011",
+          "start_char": 26878,
+          "end_char": 26881
+        },
+        {
+          "passage_id": "p-012",
+          "start_char": 31696,
+          "end_char": 31699
+        },
+        {
+          "passage_id": "p-014",
+          "start_char": 36041,
+          "end_char": 36044
+        },
+        {
+          "passage_id": "p-016",
+          "start_char": 40589,
+          "end_char": 40592
+        },
+        {
+          "passage_id": "p-016",
+          "start_char": 40605,
+          "end_char": 40608
+        },
+        {
+          "passage_id": "p-016",
+          "start_char": 40619,
+          "end_char": 40622
+        },
+        {
+          "passage_id": "p-016",
+          "start_char": 40632,
+          "end_char": 40635
+        },
+        {
+          "passage_id": "p-016",
+          "start_char": 41768,
+          "end_char": 41771
+        }
+      ],
+      "depth_tier": "central",
+      "prominence_score": 23
+    },
+    "mexico city": {
+      "canonical": "Mexico City",
+      "type": "place",
+      "spacy_label": "GPE",
+      "mentions": 7,
+      "passages": [
+        "p-002",
+        "p-004",
+        "p-008",
+        "p-014",
+        "p-015",
+        "p-016"
+      ],
+      "aliases": [
+        "Mexico City"
+      ],
+      "confidence": 1.0,
+      "positions": [
+        {
+          "passage_id": "p-002",
+          "start_char": 268,
+          "end_char": 279
+        },
+        {
+          "passage_id": "p-004",
+          "start_char": 5745,
+          "end_char": 5756
+        },
+        {
+          "passage_id": "p-004",
+          "start_char": 6549,
+          "end_char": 6560
+        },
+        {
+          "passage_id": "p-008",
+          "start_char": 18459,
+          "end_char": 18470
+        },
+        {
+          "passage_id": "p-014",
+          "start_char": 35441,
+          "end_char": 35452
+        },
+        {
+          "passage_id": "p-015",
+          "start_char": 37572,
+          "end_char": 37583
+        },
+        {
+          "passage_id": "p-016",
+          "start_char": 41408,
+          "end_char": 41419
+        }
+      ],
+      "depth_tier": "central",
+      "prominence_score": 19
+    },
+    "cristina": {
+      "canonical": "Cristina",
+      "type": "person",
+      "spacy_label": "PERSON",
+      "mentions": 6,
+      "passages": [
+        "p-002",
+        "p-008"
+      ],
+      "aliases": [
+        "Cristina"
+      ],
+      "confidence": 1.0,
+      "positions": [
+        {
+          "passage_id": "p-002",
+          "start_char": 1040,
+          "end_char": 1048
+        },
+        {
+          "passage_id": "p-008",
+          "start_char": 17300,
+          "end_char": 17308
+        },
+        {
+          "passage_id": "p-008",
+          "start_char": 17560,
+          "end_char": 17568
+        },
+        {
+          "passage_id": "p-008",
+          "start_char": 17757,
+          "end_char": 17765
+        },
+        {
+          "passage_id": "p-008",
+          "start_char": 18767,
+          "end_char": 18775
+        },
+        {
+          "passage_id": "p-008",
+          "start_char": 18845,
+          "end_char": 18853
+        }
+      ],
+      "depth_tier": "central",
+      "prominence_score": 10
+    },
+    "two": {
+      "canonical": "Two",
+      "type": "unknown",
+      "spacy_label": "CARDINAL",
+      "mentions": 5,
+      "passages": [
+        "p-004",
+        "p-006",
+        "p-008",
+        "p-011"
+      ],
+      "aliases": [
+        "Two",
+        "two"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-004",
+          "start_char": 6048,
+          "end_char": 6051
+        },
+        {
+          "passage_id": "p-006",
+          "start_char": 11183,
+          "end_char": 11186
+        },
+        {
+          "passage_id": "p-008",
+          "start_char": 17139,
+          "end_char": 17142
+        },
+        {
+          "passage_id": "p-011",
+          "start_char": 26818,
+          "end_char": 26821
+        },
+        {
+          "passage_id": "p-011",
+          "start_char": 29134,
+          "end_char": 29137
+        }
+      ],
+      "depth_tier": "central",
+      "prominence_score": 13
+    },
+    "tehuana": {
+      "canonical": "Tehuana",
+      "type": "person",
+      "spacy_label": "PERSON",
+      "mentions": 5,
+      "passages": [
+        "p-007",
+        "p-008",
+        "p-010",
+        "p-011",
+        "p-015"
+      ],
+      "aliases": [
+        "Tehuana"
+      ],
+      "confidence": 1.0,
+      "positions": [
+        {
+          "passage_id": "p-007",
+          "start_char": 13790,
+          "end_char": 13797
+        },
+        {
+          "passage_id": "p-008",
+          "start_char": 17812,
+          "end_char": 17819
+        },
+        {
+          "passage_id": "p-010",
+          "start_char": 25667,
+          "end_char": 25674
+        },
+        {
+          "passage_id": "p-011",
+          "start_char": 26959,
+          "end_char": 26966
+        },
+        {
+          "passage_id": "p-015",
+          "start_char": 38061,
+          "end_char": 38068
+        }
+      ],
+      "depth_tier": "central",
+      "prominence_score": 15
+    },
+    "three": {
+      "canonical": "three",
+      "type": "unknown",
+      "spacy_label": "CARDINAL",
+      "mentions": 4,
+      "passages": [
+        "p-004",
+        "p-005",
+        "p-016"
+      ],
+      "aliases": [
+        "three"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-004",
+          "start_char": 5918,
+          "end_char": 5923
+        },
+        {
+          "passage_id": "p-004",
+          "start_char": 6132,
+          "end_char": 6137
+        },
+        {
+          "passage_id": "p-005",
+          "start_char": 10144,
+          "end_char": 10149
+        },
+        {
+          "passage_id": "p-016",
+          "start_char": 40569,
+          "end_char": 40574
+        }
+      ],
+      "depth_tier": "central",
+      "prominence_score": 10
+    },
+    "second": {
+      "canonical": "second",
+      "type": "unknown",
+      "spacy_label": "ORDINAL",
+      "mentions": 4,
+      "passages": [
+        "p-006",
+        "p-007",
+        "p-011",
+        "p-014"
+      ],
+      "aliases": [
+        "second"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-006",
+          "start_char": 13263,
+          "end_char": 13269
+        },
+        {
+          "passage_id": "p-007",
+          "start_char": 14952,
+          "end_char": 14958
+        },
+        {
+          "passage_id": "p-011",
+          "start_char": 28334,
+          "end_char": 28340
+        },
+        {
+          "passage_id": "p-014",
+          "start_char": 36157,
+          "end_char": 36163
+        }
+      ],
+      "depth_tier": "central",
+      "prominence_score": 12
+    },
+    "breton": {
+      "canonical": "Breton",
+      "type": "person",
+      "spacy_label": "PERSON",
+      "mentions": 4,
+      "passages": [
+        "p-009",
+        "p-010"
+      ],
+      "aliases": [
+        "Breton"
+      ],
+      "confidence": 1.0,
+      "positions": [
+        {
+          "passage_id": "p-009",
+          "start_char": 22074,
+          "end_char": 22080
+        },
+        {
+          "passage_id": "p-009",
+          "start_char": 22701,
+          "end_char": 22707
+        },
+        {
+          "passage_id": "p-010",
+          "start_char": 23857,
+          "end_char": 23863
+        },
+        {
+          "passage_id": "p-010",
+          "start_char": 23932,
+          "end_char": 23938
+        }
+      ],
+      "depth_tier": "central",
+      "prominence_score": 8
+    },
+    "coyoac\u00e1n": {
+      "canonical": "Coyoac\u00e1n",
+      "type": "place",
+      "spacy_label": "GPE",
+      "mentions": 3,
+      "passages": [
+        "p-002",
+        "p-006"
+      ],
+      "aliases": [
+        "Coyoac\u00e1n"
+      ],
+      "confidence": 1.0,
+      "positions": [
+        {
+          "passage_id": "p-002",
+          "start_char": 258,
+          "end_char": 266
+        },
+        {
+          "passage_id": "p-002",
+          "start_char": 1333,
+          "end_char": 1341
+        },
+        {
+          "passage_id": "p-006",
+          "start_char": 10827,
+          "end_char": 10835
+        }
+      ],
+      "depth_tier": "central",
+      "prominence_score": 7
+    },
+    "matilde": {
+      "canonical": "Matilde",
+      "type": "person",
+      "spacy_label": "PERSON",
+      "mentions": 3,
+      "passages": [
+        "p-002"
+      ],
+      "aliases": [
+        "Matilde"
+      ],
+      "confidence": 1.0,
+      "positions": [
+        {
+          "passage_id": "p-002",
+          "start_char": 842,
+          "end_char": 849
+        },
+        {
+          "passage_id": "p-002",
+          "start_char": 996,
+          "end_char": 1003
+        },
+        {
+          "passage_id": "p-002",
+          "start_char": 2665,
+          "end_char": 2672
+        }
+      ],
+      "depth_tier": "supporting",
+      "prominence_score": 5
+    },
+    "los cachuchas": {
+      "canonical": "Los Cachuchas",
+      "type": "place",
+      "spacy_label": "GPE",
+      "mentions": 3,
+      "passages": [
+        "p-003",
+        "p-004",
+        "p-005"
+      ],
+      "aliases": [
+        "Los Cachuchas"
+      ],
+      "confidence": 1.0,
+      "positions": [
+        {
+          "passage_id": "p-003",
+          "start_char": 3327,
+          "end_char": 3340
+        },
+        {
+          "passage_id": "p-004",
+          "start_char": 6946,
+          "end_char": 6959
+        },
+        {
+          "passage_id": "p-005",
+          "start_char": 9733,
+          "end_char": 9746
+        }
+      ],
+      "depth_tier": "central",
+      "prominence_score": 9
+    },
+    "diego rivera": {
+      "canonical": "Diego Rivera",
+      "type": "organisation",
+      "spacy_label": "ORG",
+      "mentions": 3,
+      "passages": [
+        "p-003",
+        "p-005"
+      ],
+      "aliases": [
+        "Diego Rivera"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-003",
+          "start_char": 3806,
+          "end_char": 3818
+        },
+        {
+          "passage_id": "p-003",
+          "start_char": 4866,
+          "end_char": 4878
+        },
+        {
+          "passage_id": "p-005",
+          "start_char": 10117,
+          "end_char": 10129
+        }
+      ],
+      "depth_tier": "central",
+      "prominence_score": 7
+    },
+    "half": {
+      "canonical": "half",
+      "type": "unknown",
+      "spacy_label": "CARDINAL",
+      "mentions": 3,
+      "passages": [
+        "p-003",
+        "p-009"
+      ],
+      "aliases": [
+        "half"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-003",
+          "start_char": 4071,
+          "end_char": 4075
+        },
+        {
+          "passage_id": "p-003",
+          "start_char": 4082,
+          "end_char": 4086
+        },
+        {
+          "passage_id": "p-009",
+          "start_char": 21646,
+          "end_char": 21650
+        }
+      ],
+      "depth_tier": "central",
+      "prominence_score": 7
+    },
+    "american": {
+      "canonical": "American",
+      "type": "group",
+      "spacy_label": "NORP",
+      "mentions": 3,
+      "passages": [
+        "p-007",
+        "p-009"
+      ],
+      "aliases": [
+        "American"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-007",
+          "start_char": 13666,
+          "end_char": 13674
+        },
+        {
+          "passage_id": "p-007",
+          "start_char": 13754,
+          "end_char": 13762
+        },
+        {
+          "passage_id": "p-009",
+          "start_char": 23065,
+          "end_char": 23073
+        }
+      ],
+      "depth_tier": "central",
+      "prominence_score": 7
+    },
+    "san \u00e1ngel": {
+      "canonical": "San \u00c1ngel",
+      "type": "place",
+      "spacy_label": "GPE",
+      "mentions": 3,
+      "passages": [
+        "p-008",
+        "p-012"
+      ],
+      "aliases": [
+        "San \u00c1ngel"
+      ],
+      "confidence": 1.0,
+      "positions": [
+        {
+          "passage_id": "p-008",
+          "start_char": 17101,
+          "end_char": 17110
+        },
+        {
+          "passage_id": "p-008",
+          "start_char": 18399,
+          "end_char": 18408
+        },
+        {
+          "passage_id": "p-012",
+          "start_char": 29499,
+          "end_char": 29508
+        }
+      ],
+      "depth_tier": "central",
+      "prominence_score": 7
+    },
+    "trotsky": {
+      "canonical": "Trotsky",
+      "type": "person",
+      "spacy_label": "PERSON",
+      "mentions": 3,
+      "passages": [
+        "p-009",
+        "p-011"
+      ],
+      "aliases": [
+        "Trotsky"
+      ],
+      "confidence": 1.0,
+      "positions": [
+        {
+          "passage_id": "p-009",
+          "start_char": 20619,
+          "end_char": 20626
+        },
+        {
+          "passage_id": "p-009",
+          "start_char": 20865,
+          "end_char": 20872
+        },
+        {
+          "passage_id": "p-011",
+          "start_char": 26551,
+          "end_char": 26558
+        }
+      ],
+      "depth_tier": "central",
+      "prominence_score": 7
+    },
+    "new york": {
+      "canonical": "New York",
+      "type": "place",
+      "spacy_label": "GPE",
+      "mentions": 3,
+      "passages": [
+        "p-009",
+        "p-014"
+      ],
+      "aliases": [
+        "New York"
+      ],
+      "confidence": 1.0,
+      "positions": [
+        {
+          "passage_id": "p-009",
+          "start_char": 21577,
+          "end_char": 21585
+        },
+        {
+          "passage_id": "p-009",
+          "start_char": 23126,
+          "end_char": 23134
+        },
+        {
+          "passage_id": "p-014",
+          "start_char": 34992,
+          "end_char": 35000
+        }
+      ],
+      "depth_tier": "central",
+      "prominence_score": 7
+    },
+    "paris": {
+      "canonical": "Paris",
+      "type": "place",
+      "spacy_label": "GPE",
+      "mentions": 3,
+      "passages": [
+        "p-010"
+      ],
+      "aliases": [
+        "Paris"
+      ],
+      "confidence": 1.0,
+      "positions": [
+        {
+          "passage_id": "p-010",
+          "start_char": 23820,
+          "end_char": 23825
+        },
+        {
+          "passage_id": "p-010",
+          "start_char": 24453,
+          "end_char": 24458
+        },
+        {
+          "passage_id": "p-010",
+          "start_char": 25384,
+          "end_char": 25389
+        }
+      ],
+      "depth_tier": "supporting",
+      "prominence_score": 5
+    },
+    "louvre": {
+      "canonical": "Louvre",
+      "type": "person",
+      "spacy_label": "PERSON",
+      "mentions": 3,
+      "passages": [
+        "p-010"
+      ],
+      "aliases": [
+        "Louvre"
+      ],
+      "confidence": 1.0,
+      "positions": [
+        {
+          "passage_id": "p-010",
+          "start_char": 24740,
+          "end_char": 24746
+        },
+        {
+          "passage_id": "p-010",
+          "start_char": 24876,
+          "end_char": 24882
+        },
+        {
+          "passage_id": "p-010",
+          "start_char": 25166,
+          "end_char": 25172
+        }
+      ],
+      "depth_tier": "supporting",
+      "prominence_score": 5
+    },
+    "four": {
+      "canonical": "four",
+      "type": "unknown",
+      "spacy_label": "CARDINAL",
+      "mentions": 2,
+      "passages": [
+        "p-002",
+        "p-015"
+      ],
+      "aliases": [
+        "four"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-002",
+          "start_char": 939,
+          "end_char": 943
+        },
+        {
+          "passage_id": "p-015",
+          "start_char": 37833,
+          "end_char": 37837
+        }
+      ],
+      "depth_tier": "supporting",
+      "prominence_score": 6
+    },
+    "marx": {
+      "canonical": "Marx",
+      "type": "person",
+      "spacy_label": "PERSON",
+      "mentions": 2,
+      "passages": [
+        "p-003",
+        "p-012"
+      ],
+      "aliases": [
+        "Marx"
+      ],
+      "confidence": 1.0,
+      "positions": [
+        {
+          "passage_id": "p-003",
+          "start_char": 3477,
+          "end_char": 3481
+        },
+        {
+          "passage_id": "p-012",
+          "start_char": 31873,
+          "end_char": 31877
+        }
+      ],
+      "depth_tier": "supporting",
+      "prominence_score": 6
+    },
+    "preparatoria": {
+      "canonical": "Preparatoria",
+      "type": "place",
+      "spacy_label": "GPE",
+      "mentions": 2,
+      "passages": [
+        "p-003"
+      ],
+      "aliases": [
+        "Preparatoria"
+      ],
+      "confidence": 1.0,
+      "positions": [
+        {
+          "passage_id": "p-003",
+          "start_char": 3779,
+          "end_char": 3791
+        },
+        {
+          "passage_id": "p-003",
+          "start_char": 5152,
+          "end_char": 5164
+        }
+      ],
+      "depth_tier": "supporting",
+      "prominence_score": 4
+    },
+    "frida kahlo": {
+      "canonical": "Frida Kahlo",
+      "type": "person",
+      "spacy_label": "PERSON",
+      "mentions": 2,
+      "passages": [
+        "p-004",
+        "p-015"
+      ],
+      "aliases": [
+        "Frida Kahlo"
+      ],
+      "confidence": 1.0,
+      "positions": [
+        {
+          "passage_id": "p-004",
+          "start_char": 7240,
+          "end_char": 7251
+        },
+        {
+          "passage_id": "p-015",
+          "start_char": 38630,
+          "end_char": 38641
+        }
+      ],
+      "depth_tier": "supporting",
+      "prominence_score": 6
+    },
+    "communist": {
+      "canonical": "Communist",
+      "type": "group",
+      "spacy_label": "NORP",
+      "mentions": 2,
+      "passages": [
+        "p-006",
+        "p-016"
+      ],
+      "aliases": [
+        "Communist"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-006",
+          "start_char": 13032,
+          "end_char": 13041
+        },
+        {
+          "passage_id": "p-016",
+          "start_char": 41450,
+          "end_char": 41459
+        }
+      ],
+      "depth_tier": "supporting",
+      "prominence_score": 6
+    },
+    "san francisco": {
+      "canonical": "San Francisco",
+      "type": "place",
+      "spacy_label": "GPE",
+      "mentions": 2,
+      "passages": [
+        "p-007",
+        "p-011"
+      ],
+      "aliases": [
+        "San Francisco"
+      ],
+      "confidence": 1.0,
+      "positions": [
+        {
+          "passage_id": "p-007",
+          "start_char": 14230,
+          "end_char": 14243
+        },
+        {
+          "passage_id": "p-011",
+          "start_char": 28840,
+          "end_char": 28853
+        }
+      ],
+      "depth_tier": "supporting",
+      "prominence_score": 6
+    },
+    "henry ford hospital": {
+      "canonical": "Henry Ford Hospital",
+      "type": "person",
+      "spacy_label": "PERSON",
+      "mentions": 2,
+      "passages": [
+        "p-007",
+        "p-013"
+      ],
+      "aliases": [
+        "Henry Ford Hospital"
+      ],
+      "confidence": 1.0,
+      "positions": [
+        {
+          "passage_id": "p-007",
+          "start_char": 15670,
+          "end_char": 15689
+        },
+        {
+          "passage_id": "p-013",
+          "start_char": 34643,
+          "end_char": 34662
+        }
+      ],
+      "depth_tier": "supporting",
+      "prominence_score": 6
+    },
+    "natalia": {
+      "canonical": "Natalia",
+      "type": "place",
+      "spacy_label": "GPE",
+      "mentions": 2,
+      "passages": [
+        "p-009"
+      ],
+      "aliases": [
+        "Natalia"
+      ],
+      "confidence": 1.0,
+      "positions": [
+        {
+          "passage_id": "p-009",
+          "start_char": 20520,
+          "end_char": 20527
+        },
+        {
+          "passage_id": "p-009",
+          "start_char": 21120,
+          "end_char": 21127
+        }
+      ],
+      "depth_tier": "supporting",
+      "prominence_score": 4
+    },
+    "stalin": {
+      "canonical": "Stalin",
+      "type": "person",
+      "spacy_label": "PERSON",
+      "mentions": 2,
+      "passages": [
+        "p-009",
+        "p-012"
+      ],
+      "aliases": [
+        "Stalin"
+      ],
+      "confidence": 1.0,
+      "positions": [
+        {
+          "passage_id": "p-009",
+          "start_char": 20645,
+          "end_char": 20651
+        },
+        {
+          "passage_id": "p-012",
+          "start_char": 31619,
+          "end_char": 31625
+        }
+      ],
+      "depth_tier": "supporting",
+      "prominence_score": 6
+    },
+    "parisian": {
+      "canonical": "Parisian",
+      "type": "group",
+      "spacy_label": "NORP",
+      "mentions": 2,
+      "passages": [
+        "p-009",
+        "p-010"
+      ],
+      "aliases": [
+        "Parisian"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-009",
+          "start_char": 23017,
+          "end_char": 23025
+        },
+        {
+          "passage_id": "p-010",
+          "start_char": 24262,
+          "end_char": 24270
+        }
+      ],
+      "depth_tier": "supporting",
+      "prominence_score": 6
+    },
+    "nickolas muray": {
+      "canonical": "Nickolas Muray",
+      "type": "person",
+      "spacy_label": "PERSON",
+      "mentions": 2,
+      "passages": [
+        "p-009",
+        "p-010"
+      ],
+      "aliases": [
+        "Nickolas Muray"
+      ],
+      "confidence": 1.0,
+      "positions": [
+        {
+          "passage_id": "p-009",
+          "start_char": 23087,
+          "end_char": 23101
+        },
+        {
+          "passage_id": "p-010",
+          "start_char": 24085,
+          "end_char": 24099
+        }
+      ],
+      "depth_tier": "supporting",
+      "prominence_score": 6
+    },
+    "muray": {
+      "canonical": "Muray",
+      "type": "person",
+      "spacy_label": "PERSON",
+      "mentions": 2,
+      "passages": [
+        "p-009"
+      ],
+      "aliases": [
+        "Muray"
+      ],
+      "confidence": 1.0,
+      "positions": [
+        {
+          "passage_id": "p-009",
+          "start_char": 23213,
+          "end_char": 23218
+        },
+        {
+          "passage_id": "p-009",
+          "start_char": 23657,
+          "end_char": 23662
+        }
+      ],
+      "depth_tier": "supporting",
+      "prominence_score": 4
+    },
+    "the two fridas": {
+      "canonical": "The Two Fridas",
+      "type": "work-of-art",
+      "spacy_label": "WORK_OF_ART",
+      "mentions": 2,
+      "passages": [
+        "p-011",
+        "p-013"
+      ],
+      "aliases": [
+        "The Two Fridas"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-011",
+          "start_char": 26740,
+          "end_char": 26754
+        },
+        {
+          "passage_id": "p-013",
+          "start_char": 34556,
+          "end_char": 34570
+        }
+      ],
+      "depth_tier": "supporting",
+      "prominence_score": 6
+    },
+    "self-portrait": {
+      "canonical": "Self-Portrait",
+      "type": "work-of-art",
+      "spacy_label": "WORK_OF_ART",
+      "mentions": 2,
+      "passages": [
+        "p-011",
+        "p-014"
+      ],
+      "aliases": [
+        "Self-Portrait"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-011",
+          "start_char": 27503,
+          "end_char": 27516
+        },
+        {
+          "passage_id": "p-014",
+          "start_char": 36383,
+          "end_char": 36396
+        }
+      ],
+      "depth_tier": "supporting",
+      "prominence_score": 6
+    },
+    "juan farill": {
+      "canonical": "Juan Farill",
+      "type": "person",
+      "spacy_label": "PERSON",
+      "mentions": 2,
+      "passages": [
+        "p-011",
+        "p-014"
+      ],
+      "aliases": [
+        "Juan Farill"
+      ],
+      "confidence": 1.0,
+      "positions": [
+        {
+          "passage_id": "p-011",
+          "start_char": 28300,
+          "end_char": 28311
+        },
+        {
+          "passage_id": "p-014",
+          "start_char": 36095,
+          "end_char": 36106
+        }
+      ],
+      "depth_tier": "supporting",
+      "prominence_score": 6
+    },
+    "the broken column": {
+      "canonical": "The Broken Column",
+      "type": "work-of-art",
+      "spacy_label": "WORK_OF_ART",
+      "mentions": 2,
+      "passages": [
+        "p-012",
+        "p-013"
+      ],
+      "aliases": [
+        "The Broken Column"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-012",
+          "start_char": 30261,
+          "end_char": 30278
+        },
+        {
+          "passage_id": "p-013",
+          "start_char": 34599,
+          "end_char": 34616
+        }
+      ],
+      "depth_tier": "supporting",
+      "prominence_score": 6
+    },
+    "marxism will give health": {
+      "canonical": "Marxism Will Give Health",
+      "type": "work-of-art",
+      "spacy_label": "WORK_OF_ART",
+      "mentions": 2,
+      "passages": [
+        "p-012",
+        "p-015"
+      ],
+      "aliases": [
+        "Marxism Will Give Health"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-012",
+          "start_char": 31806,
+          "end_char": 31830
+        },
+        {
+          "passage_id": "p-015",
+          "start_char": 39572,
+          "end_char": 39596
+        }
+      ],
+      "depth_tier": "supporting",
+      "prominence_score": 6
+    },
+    "magdalena carmen": {
+      "canonical": "Magdalena Carmen",
+      "type": "organisation",
+      "spacy_label": "ORG",
+      "mentions": 1,
+      "passages": [
+        "p-002"
+      ],
+      "aliases": [
+        "Magdalena Carmen"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-002",
+          "start_char": 193,
+          "end_char": 209
+        }
+      ],
+      "depth_tier": "supporting",
+      "prominence_score": 3
+    },
+    "frida kahlo calder\u00f3n": {
+      "canonical": "Frida Kahlo Calder\u00f3n",
+      "type": "person",
+      "spacy_label": "PERSON",
+      "mentions": 1,
+      "passages": [
+        "p-002"
+      ],
+      "aliases": [
+        "Frida Kahlo Calder\u00f3n"
+      ],
+      "confidence": 1.0,
+      "positions": [
+        {
+          "passage_id": "p-002",
+          "start_char": 210,
+          "end_char": 230
+        }
+      ],
+      "depth_tier": "supporting",
+      "prominence_score": 3
+    },
+    "guillermo kahlo": {
+      "canonical": "Guillermo Kahlo",
+      "type": "person",
+      "spacy_label": "PERSON",
+      "mentions": 1,
+      "passages": [
+        "p-002"
+      ],
+      "aliases": [
+        "Guillermo Kahlo"
+      ],
+      "confidence": 1.0,
+      "positions": [
+        {
+          "passage_id": "p-002",
+          "start_char": 305,
+          "end_char": 320
+        }
+      ],
+      "depth_tier": "supporting",
+      "prominence_score": 3
+    },
+    "german": {
+      "canonical": "German",
+      "type": "group",
+      "spacy_label": "NORP",
+      "mentions": 1,
+      "passages": [
+        "p-002"
+      ],
+      "aliases": [
+        "German"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-002",
+          "start_char": 423,
+          "end_char": 429
+        }
+      ],
+      "depth_tier": "supporting",
+      "prominence_score": 3
+    },
+    "matilde calder\u00f3n": {
+      "canonical": "Matilde Calder\u00f3n",
+      "type": "person",
+      "spacy_label": "PERSON",
+      "mentions": 1,
+      "passages": [
+        "p-002"
+      ],
+      "aliases": [
+        "Matilde Calder\u00f3n"
+      ],
+      "confidence": 1.0,
+      "positions": [
+        {
+          "passage_id": "p-002",
+          "start_char": 601,
+          "end_char": 617
+        }
+      ],
+      "depth_tier": "supporting",
+      "prominence_score": 3
+    },
+    "gonz\u00e1lez": {
+      "canonical": "Gonz\u00e1lez",
+      "type": "person",
+      "spacy_label": "PERSON",
+      "mentions": 1,
+      "passages": [
+        "p-002"
+      ],
+      "aliases": [
+        "Gonz\u00e1lez"
+      ],
+      "confidence": 1.0,
+      "positions": [
+        {
+          "passage_id": "p-002",
+          "start_char": 620,
+          "end_char": 628
+        }
+      ],
+      "depth_tier": "supporting",
+      "prominence_score": 3
+    },
+    "catholic": {
+      "canonical": "Catholic",
+      "type": "group",
+      "spacy_label": "NORP",
+      "mentions": 1,
+      "passages": [
+        "p-002"
+      ],
+      "aliases": [
+        "Catholic"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-002",
+          "start_char": 643,
+          "end_char": 651
+        }
+      ],
+      "depth_tier": "supporting",
+      "prominence_score": 3
+    },
+    "spanish": {
+      "canonical": "Spanish",
+      "type": "group",
+      "spacy_label": "NORP",
+      "mentions": 1,
+      "passages": [
+        "p-002"
+      ],
+      "aliases": [
+        "Spanish"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-002",
+          "start_char": 676,
+          "end_char": 683
+        }
+      ],
+      "depth_tier": "supporting",
+      "prominence_score": 3
+    },
+    "third": {
+      "canonical": "third",
+      "type": "unknown",
+      "spacy_label": "ORDINAL",
+      "mentions": 1,
+      "passages": [
+        "p-002"
+      ],
+      "aliases": [
+        "third"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-002",
+          "start_char": 930,
+          "end_char": 935
+        }
+      ],
+      "depth_tier": "supporting",
+      "prominence_score": 3
+    },
+    "adriana": {
+      "canonical": "Adriana",
+      "type": "organisation",
+      "spacy_label": "ORG",
+      "mentions": 1,
+      "passages": [
+        "p-002"
+      ],
+      "aliases": [
+        "Adriana"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-002",
+          "start_char": 1008,
+          "end_char": 1015
+        }
+      ],
+      "depth_tier": "supporting",
+      "prominence_score": 3
+    },
+    "guillermo": {
+      "canonical": "Guillermo",
+      "type": "person",
+      "spacy_label": "PERSON",
+      "mentions": 1,
+      "passages": [
+        "p-002"
+      ],
+      "aliases": [
+        "Guillermo"
+      ],
+      "confidence": 1.0,
+      "positions": [
+        {
+          "passage_id": "p-002",
+          "start_char": 2253,
+          "end_char": 2262
+        }
+      ],
+      "depth_tier": "supporting",
+      "prominence_score": 3
+    },
+    "the mexican revolution": {
+      "canonical": "The Mexican Revolution",
+      "type": "activity",
+      "spacy_label": "EVENT",
+      "mentions": 1,
+      "passages": [
+        "p-002"
+      ],
+      "aliases": [
+        "The Mexican Revolution"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-002",
+          "start_char": 2533,
+          "end_char": 2555
+        }
+      ],
+      "depth_tier": "supporting",
+      "prominence_score": 3
+    },
+    "emiliano zapata's": {
+      "canonical": "Emiliano Zapata's",
+      "type": "person",
+      "spacy_label": "PERSON",
+      "mentions": 1,
+      "passages": [
+        "p-002"
+      ],
+      "aliases": [
+        "Emiliano Zapata's"
+      ],
+      "confidence": 1.0,
+      "positions": [
+        {
+          "passage_id": "p-002",
+          "start_char": 2695,
+          "end_char": 2712
+        }
+      ],
+      "depth_tier": "supporting",
+      "prominence_score": 3
+    },
+    "the escuela nacional preparatoria": {
+      "canonical": "the Escuela Nacional Preparatoria",
+      "type": "organisation",
+      "spacy_label": "ORG",
+      "mentions": 1,
+      "passages": [
+        "p-003"
+      ],
+      "aliases": [
+        "the Escuela Nacional Preparatoria"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-003",
+          "start_char": 3112,
+          "end_char": 3145
+        }
+      ],
+      "depth_tier": "supporting",
+      "prominence_score": 3
+    },
+    "only thirty-five": {
+      "canonical": "only thirty-five",
+      "type": "unknown",
+      "spacy_label": "CARDINAL",
+      "mentions": 1,
+      "passages": [
+        "p-003"
+      ],
+      "aliases": [
+        "only thirty-five"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-003",
+          "start_char": 3211,
+          "end_char": 3227
+        }
+      ],
+      "depth_tier": "supporting",
+      "prominence_score": 3
+    },
+    "two thousand": {
+      "canonical": "two thousand",
+      "type": "unknown",
+      "spacy_label": "CARDINAL",
+      "mentions": 1,
+      "passages": [
+        "p-003"
+      ],
+      "aliases": [
+        "two thousand"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-003",
+          "start_char": 3240,
+          "end_char": 3252
+        }
+      ],
+      "depth_tier": "supporting",
+      "prominence_score": 3
+    },
+    "g\u00f3mez arias": {
+      "canonical": "G\u00f3mez Arias",
+      "type": "person",
+      "spacy_label": "PERSON",
+      "mentions": 1,
+      "passages": [
+        "p-003"
+      ],
+      "aliases": [
+        "G\u00f3mez Arias"
+      ],
+      "confidence": 1.0,
+      "positions": [
+        {
+          "passage_id": "p-003",
+          "start_char": 3407,
+          "end_char": 3418
+        }
+      ],
+      "depth_tier": "supporting",
+      "prominence_score": 3
+    },
+    "hegel": {
+      "canonical": "Hegel",
+      "type": "person",
+      "spacy_label": "PERSON",
+      "mentions": 1,
+      "passages": [
+        "p-003"
+      ],
+      "aliases": [
+        "Hegel"
+      ],
+      "confidence": 1.0,
+      "positions": [
+        {
+          "passage_id": "p-003",
+          "start_char": 3470,
+          "end_char": 3475
+        }
+      ],
+      "depth_tier": "supporting",
+      "prominence_score": 3
+    },
+    "spengler": {
+      "canonical": "Spengler",
+      "type": "person",
+      "spacy_label": "PERSON",
+      "mentions": 1,
+      "passages": [
+        "p-003"
+      ],
+      "aliases": [
+        "Spengler"
+      ],
+      "confidence": 1.0,
+      "positions": [
+        {
+          "passage_id": "p-003",
+          "start_char": 3487,
+          "end_char": 3495
+        }
+      ],
+      "depth_tier": "supporting",
+      "prominence_score": 3
+    },
+    "creation": {
+      "canonical": "Creation",
+      "type": "work-of-art",
+      "spacy_label": "WORK_OF_ART",
+      "mentions": 1,
+      "passages": [
+        "p-003"
+      ],
+      "aliases": [
+        "Creation"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-003",
+          "start_char": 3833,
+          "end_char": 3841
+        }
+      ],
+      "depth_tier": "supporting",
+      "prominence_score": 3
+    },
+    "the young communist league": {
+      "canonical": "the Young Communist League",
+      "type": "organisation",
+      "spacy_label": "ORG",
+      "mentions": 1,
+      "passages": [
+        "p-003"
+      ],
+      "aliases": [
+        "the Young Communist League"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-003",
+          "start_char": 5213,
+          "end_char": 5239
+        }
+      ],
+      "depth_tier": "supporting",
+      "prominence_score": 3
+    },
+    "cuauhtemotzin": {
+      "canonical": "Cuauhtemotzin",
+      "type": "organisation",
+      "spacy_label": "ORG",
+      "mentions": 1,
+      "passages": [
+        "p-004"
+      ],
+      "aliases": [
+        "Cuauhtemotzin"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-004",
+          "start_char": 5710,
+          "end_char": 5723
+        }
+      ],
+      "depth_tier": "supporting",
+      "prominence_score": 3
+    },
+    "cinco de mayo": {
+      "canonical": "Cinco de Mayo",
+      "type": "organisation",
+      "spacy_label": "ORG",
+      "mentions": 1,
+      "passages": [
+        "p-004"
+      ],
+      "aliases": [
+        "Cinco de Mayo"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-004",
+          "start_char": 5728,
+          "end_char": 5741
+        }
+      ],
+      "depth_tier": "supporting",
+      "prominence_score": 3
+    },
+    "eleven": {
+      "canonical": "eleven",
+      "type": "unknown",
+      "spacy_label": "CARDINAL",
+      "mentions": 1,
+      "passages": [
+        "p-004"
+      ],
+      "aliases": [
+        "eleven"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-004",
+          "start_char": 5990,
+          "end_char": 5996
+        }
+      ],
+      "depth_tier": "supporting",
+      "prominence_score": 3
+    },
+    "the red cross hospital": {
+      "canonical": "the Red Cross Hospital",
+      "type": "organisation",
+      "spacy_label": "ORG",
+      "mentions": 1,
+      "passages": [
+        "p-004"
+      ],
+      "aliases": [
+        "the Red Cross Hospital"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-004",
+          "start_char": 6523,
+          "end_char": 6545
+        }
+      ],
+      "depth_tier": "supporting",
+      "prominence_score": 3
+    },
+    "more than thirty": {
+      "canonical": "more than thirty",
+      "type": "unknown",
+      "spacy_label": "CARDINAL",
+      "mentions": 1,
+      "passages": [
+        "p-004"
+      ],
+      "aliases": [
+        "more than thirty"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-004",
+          "start_char": 6662,
+          "end_char": 6678
+        }
+      ],
+      "depth_tier": "supporting",
+      "prominence_score": 3
+    },
+    "europe": {
+      "canonical": "Europe",
+      "type": "place",
+      "spacy_label": "LOC",
+      "mentions": 1,
+      "passages": [
+        "p-005"
+      ],
+      "aliases": [
+        "Europe"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-005",
+          "start_char": 8967,
+          "end_char": 8973
+        }
+      ],
+      "depth_tier": "supporting",
+      "prominence_score": 3
+    },
+    "italian": {
+      "canonical": "Italian",
+      "type": "group",
+      "spacy_label": "NORP",
+      "mentions": 1,
+      "passages": [
+        "p-005"
+      ],
+      "aliases": [
+        "Italian"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-005",
+          "start_char": 9882,
+          "end_char": 9889
+        }
+      ],
+      "depth_tier": "supporting",
+      "prominence_score": 3
+    },
+    "tina modotti": {
+      "canonical": "Tina Modotti",
+      "type": "person",
+      "spacy_label": "PERSON",
+      "mentions": 1,
+      "passages": [
+        "p-005"
+      ],
+      "aliases": [
+        "Tina Modotti"
+      ],
+      "confidence": 1.0,
+      "positions": [
+        {
+          "passage_id": "p-005",
+          "start_char": 9908,
+          "end_char": 9920
+        }
+      ],
+      "depth_tier": "supporting",
+      "prominence_score": 3
+    },
+    "modotti": {
+      "canonical": "Modotti",
+      "type": "person",
+      "spacy_label": "PERSON",
+      "mentions": 1,
+      "passages": [
+        "p-005"
+      ],
+      "aliases": [
+        "Modotti"
+      ],
+      "confidence": 1.0,
+      "positions": [
+        {
+          "passage_id": "p-005",
+          "start_char": 10015,
+          "end_char": 10022
+        }
+      ],
+      "depth_tier": "supporting",
+      "prominence_score": 3
+    },
+    "the communist party's": {
+      "canonical": "the Communist Party's",
+      "type": "organisation",
+      "spacy_label": "ORG",
+      "mentions": 1,
+      "passages": [
+        "p-005"
+      ],
+      "aliases": [
+        "the Communist Party's"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-005",
+          "start_char": 10051,
+          "end_char": 10072
+        }
+      ],
+      "depth_tier": "supporting",
+      "prominence_score": 3
+    },
+    "the ministry of education": {
+      "canonical": "the Ministry of Education",
+      "type": "organisation",
+      "spacy_label": "ORG",
+      "mentions": 1,
+      "passages": [
+        "p-005"
+      ],
+      "aliases": [
+        "the Ministry of Education"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-005",
+          "start_char": 10179,
+          "end_char": 10204
+        }
+      ],
+      "depth_tier": "supporting",
+      "prominence_score": 3
+    },
+    "twenty-two": {
+      "canonical": "twenty-two",
+      "type": "unknown",
+      "spacy_label": "CARDINAL",
+      "mentions": 1,
+      "passages": [
+        "p-006"
+      ],
+      "aliases": [
+        "twenty-two"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-006",
+          "start_char": 10845,
+          "end_char": 10855
+        }
+      ],
+      "depth_tier": "supporting",
+      "prominence_score": 3
+    },
+    "forty-two": {
+      "canonical": "forty-two",
+      "type": "unknown",
+      "spacy_label": "CARDINAL",
+      "mentions": 1,
+      "passages": [
+        "p-006"
+      ],
+      "aliases": [
+        "forty-two"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-006",
+          "start_char": 10864,
+          "end_char": 10873
+        }
+      ],
+      "depth_tier": "peripheral",
+      "prominence_score": 3
+    },
+    "lupe mar\u00edn": {
+      "canonical": "Lupe Mar\u00edn",
+      "type": "person",
+      "spacy_label": "PERSON",
+      "mentions": 1,
+      "passages": [
+        "p-006"
+      ],
+      "aliases": [
+        "Lupe Mar\u00edn"
+      ],
+      "confidence": 1.0,
+      "positions": [
+        {
+          "passage_id": "p-006",
+          "start_char": 11057,
+          "end_char": 11067
+        }
+      ],
+      "depth_tier": "peripheral",
+      "prominence_score": 3
+    },
+    "edward weston": {
+      "canonical": "Edward Weston",
+      "type": "person",
+      "spacy_label": "PERSON",
+      "mentions": 1,
+      "passages": [
+        "p-006"
+      ],
+      "aliases": [
+        "Edward Weston"
+      ],
+      "confidence": 1.0,
+      "positions": [
+        {
+          "passage_id": "p-006",
+          "start_char": 12940,
+          "end_char": 12953
+        }
+      ],
+      "depth_tier": "peripheral",
+      "prominence_score": 3
+    },
+    "jean charlot": {
+      "canonical": "Jean Charlot",
+      "type": "person",
+      "spacy_label": "PERSON",
+      "mentions": 1,
+      "passages": [
+        "p-006"
+      ],
+      "aliases": [
+        "Jean Charlot"
+      ],
+      "confidence": 1.0,
+      "positions": [
+        {
+          "passage_id": "p-006",
+          "start_char": 12967,
+          "end_char": 12979
+        }
+      ],
+      "depth_tier": "peripheral",
+      "prominence_score": 3
+    },
+    "julien levy": {
+      "canonical": "Julien Levy",
+      "type": "person",
+      "spacy_label": "PERSON",
+      "mentions": 1,
+      "passages": [
+        "p-006"
+      ],
+      "aliases": [
+        "Julien Levy"
+      ],
+      "confidence": 1.0,
+      "positions": [
+        {
+          "passage_id": "p-006",
+          "start_char": 12996,
+          "end_char": 13007
+        }
+      ],
+      "depth_tier": "peripheral",
+      "prominence_score": 3
+    },
+    "the san francisco stock exchange": {
+      "canonical": "the San Francisco Stock Exchange",
+      "type": "organisation",
+      "spacy_label": "ORG",
+      "mentions": 1,
+      "passages": [
+        "p-007"
+      ],
+      "aliases": [
+        "the San Francisco Stock Exchange"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-007",
+          "start_char": 13458,
+          "end_char": 13490
+        }
+      ],
+      "depth_tier": "peripheral",
+      "prominence_score": 3
+    },
+    "the california school of fine arts": {
+      "canonical": "the California School of Fine Arts",
+      "type": "organisation",
+      "spacy_label": "ORG",
+      "mentions": 1,
+      "passages": [
+        "p-007"
+      ],
+      "aliases": [
+        "the California School of Fine Arts"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-007",
+          "start_char": 13495,
+          "end_char": 13529
+        }
+      ],
+      "depth_tier": "peripheral",
+      "prominence_score": 3
+    },
+    "pre-columbian": {
+      "canonical": "pre-Columbian",
+      "type": "group",
+      "spacy_label": "NORP",
+      "mentions": 1,
+      "passages": [
+        "p-007"
+      ],
+      "aliases": [
+        "pre-Columbian"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-007",
+          "start_char": 13810,
+          "end_char": 13823
+        }
+      ],
+      "depth_tier": "peripheral",
+      "prominence_score": 3
+    },
+    "the united states": {
+      "canonical": "the United States",
+      "type": "place",
+      "spacy_label": "GPE",
+      "mentions": 1,
+      "passages": [
+        "p-007"
+      ],
+      "aliases": [
+        "the United States"
+      ],
+      "confidence": 1.0,
+      "positions": [
+        {
+          "passage_id": "p-007",
+          "start_char": 13992,
+          "end_char": 14009
+        }
+      ],
+      "depth_tier": "peripheral",
+      "prominence_score": 3
+    },
+    "americans": {
+      "canonical": "Americans",
+      "type": "group",
+      "spacy_label": "NORP",
+      "mentions": 1,
+      "passages": [
+        "p-007"
+      ],
+      "aliases": [
+        "Americans"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-007",
+          "start_char": 14056,
+          "end_char": 14065
+        }
+      ],
+      "depth_tier": "peripheral",
+      "prominence_score": 3
+    },
+    "leo eloesser": {
+      "canonical": "Leo Eloesser",
+      "type": "person",
+      "spacy_label": "PERSON",
+      "mentions": 1,
+      "passages": [
+        "p-007"
+      ],
+      "aliases": [
+        "Leo Eloesser"
+      ],
+      "confidence": 1.0,
+      "positions": [
+        {
+          "passage_id": "p-007",
+          "start_char": 14256,
+          "end_char": 14268
+        }
+      ],
+      "depth_tier": "peripheral",
+      "prominence_score": 3
+    },
+    "portrait of dr leo eloesser": {
+      "canonical": "Portrait of Dr Leo Eloesser",
+      "type": "work-of-art",
+      "spacy_label": "WORK_OF_ART",
+      "mentions": 1,
+      "passages": [
+        "p-007"
+      ],
+      "aliases": [
+        "Portrait of Dr Leo Eloesser"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-007",
+          "start_char": 14721,
+          "end_char": 14748
+        }
+      ],
+      "depth_tier": "peripheral",
+      "prominence_score": 3
+    },
+    "detroit": {
+      "canonical": "Detroit",
+      "type": "place",
+      "spacy_label": "GPE",
+      "mentions": 1,
+      "passages": [
+        "p-007"
+      ],
+      "aliases": [
+        "Detroit"
+      ],
+      "confidence": 1.0,
+      "positions": [
+        {
+          "passage_id": "p-007",
+          "start_char": 14834,
+          "end_char": 14841
+        }
+      ],
+      "depth_tier": "peripheral",
+      "prominence_score": 3
+    },
+    "the detroit institute of arts": {
+      "canonical": "the Detroit Institute of Arts",
+      "type": "organisation",
+      "spacy_label": "ORG",
+      "mentions": 1,
+      "passages": [
+        "p-007"
+      ],
+      "aliases": [
+        "the Detroit Institute of Arts"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-007",
+          "start_char": 14896,
+          "end_char": 14925
+        }
+      ],
+      "depth_tier": "peripheral",
+      "prominence_score": 3
+    },
+    "the henry ford hospital": {
+      "canonical": "the Henry Ford Hospital",
+      "type": "place",
+      "spacy_label": "FAC",
+      "mentions": 1,
+      "passages": [
+        "p-007"
+      ],
+      "aliases": [
+        "the Henry Ford Hospital"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-007",
+          "start_char": 15219,
+          "end_char": 15242
+        }
+      ],
+      "depth_tier": "peripheral",
+      "prominence_score": 3
+    },
+    "six": {
+      "canonical": "six",
+      "type": "unknown",
+      "spacy_label": "CARDINAL",
+      "mentions": 1,
+      "passages": [
+        "p-007"
+      ],
+      "aliases": [
+        "six"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-007",
+          "start_char": 15824,
+          "end_char": 15827
+        }
+      ],
+      "depth_tier": "peripheral",
+      "prominence_score": 3
+    },
+    "juan o'gorman": {
+      "canonical": "Juan O'Gorman",
+      "type": "person",
+      "spacy_label": "PERSON",
+      "mentions": 1,
+      "passages": [
+        "p-008"
+      ],
+      "aliases": [
+        "Juan O'Gorman"
+      ],
+      "confidence": 1.0,
+      "positions": [
+        {
+          "passage_id": "p-008",
+          "start_char": 17123,
+          "end_char": 17136
+        }
+      ],
+      "depth_tier": "peripheral",
+      "prominence_score": 3
+    },
+    "a few small nips": {
+      "canonical": "A Few Small Nips",
+      "type": "work-of-art",
+      "spacy_label": "WORK_OF_ART",
+      "mentions": 1,
+      "passages": [
+        "p-008"
+      ],
+      "aliases": [
+        "A Few Small Nips"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-008",
+          "start_char": 17859,
+          "end_char": 17875
+        }
+      ],
+      "depth_tier": "peripheral",
+      "prominence_score": 3
+    },
+    "isamu noguchi": {
+      "canonical": "Isamu Noguchi",
+      "type": "person",
+      "spacy_label": "PERSON",
+      "mentions": 1,
+      "passages": [
+        "p-008"
+      ],
+      "aliases": [
+        "Isamu Noguchi"
+      ],
+      "confidence": 1.0,
+      "positions": [
+        {
+          "passage_id": "p-008",
+          "start_char": 19193,
+          "end_char": 19206
+        }
+      ],
+      "depth_tier": "peripheral",
+      "prominence_score": 3
+    },
+    "chavela vargas": {
+      "canonical": "Chavela Vargas",
+      "type": "person",
+      "spacy_label": "PERSON",
+      "mentions": 1,
+      "passages": [
+        "p-008"
+      ],
+      "aliases": [
+        "Chavela Vargas"
+      ],
+      "confidence": 1.0,
+      "positions": [
+        {
+          "passage_id": "p-008",
+          "start_char": 19439,
+          "end_char": 19453
+        }
+      ],
+      "depth_tier": "peripheral",
+      "prominence_score": 3
+    },
+    "georgia o'keeffe": {
+      "canonical": "Georgia O'Keeffe",
+      "type": "person",
+      "spacy_label": "PERSON",
+      "mentions": 1,
+      "passages": [
+        "p-008"
+      ],
+      "aliases": [
+        "Georgia O'Keeffe"
+      ],
+      "confidence": 1.0,
+      "positions": [
+        {
+          "passage_id": "p-008",
+          "start_char": 19478,
+          "end_char": 19494
+        }
+      ],
+      "depth_tier": "peripheral",
+      "prominence_score": 3
+    },
+    "fulang-chang": {
+      "canonical": "Fulang-Chang",
+      "type": "person",
+      "spacy_label": "PERSON",
+      "mentions": 1,
+      "passages": [
+        "p-009"
+      ],
+      "aliases": [
+        "Fulang-Chang"
+      ],
+      "confidence": 1.0,
+      "positions": [
+        {
+          "passage_id": "p-009",
+          "start_char": 20163,
+          "end_char": 20175
+        }
+      ],
+      "depth_tier": "peripheral",
+      "prominence_score": 3
+    },
+    "leon trotsky": {
+      "canonical": "Leon Trotsky",
+      "type": "person",
+      "spacy_label": "PERSON",
+      "mentions": 1,
+      "passages": [
+        "p-009"
+      ],
+      "aliases": [
+        "Leon Trotsky"
+      ],
+      "confidence": 1.0,
+      "positions": [
+        {
+          "passage_id": "p-009",
+          "start_char": 20494,
+          "end_char": 20506
+        }
+      ],
+      "depth_tier": "peripheral",
+      "prominence_score": 3
+    },
+    "soviet union": {
+      "canonical": "Soviet Union",
+      "type": "place",
+      "spacy_label": "GPE",
+      "mentions": 1,
+      "passages": [
+        "p-009"
+      ],
+      "aliases": [
+        "Soviet Union"
+      ],
+      "confidence": 1.0,
+      "positions": [
+        {
+          "passage_id": "p-009",
+          "start_char": 20654,
+          "end_char": 20666
+        }
+      ],
+      "depth_tier": "peripheral",
+      "prominence_score": 3
+    },
+    "riveras": {
+      "canonical": "Riveras",
+      "type": "place",
+      "spacy_label": "FAC",
+      "mentions": 1,
+      "passages": [
+        "p-009"
+      ],
+      "aliases": [
+        "Riveras"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-009",
+          "start_char": 20747,
+          "end_char": 20754
+        }
+      ],
+      "depth_tier": "peripheral",
+      "prominence_score": 3
+    },
+    "stalinist": {
+      "canonical": "Stalinist",
+      "type": "group",
+      "spacy_label": "NORP",
+      "mentions": 1,
+      "passages": [
+        "p-009"
+      ],
+      "aliases": [
+        "Stalinist"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-009",
+          "start_char": 20782,
+          "end_char": 20791
+        }
+      ],
+      "depth_tier": "peripheral",
+      "prominence_score": 3
+    },
+    "english": {
+      "canonical": "English",
+      "type": "unknown",
+      "spacy_label": "LANGUAGE",
+      "mentions": 1,
+      "passages": [
+        "p-009"
+      ],
+      "aliases": [
+        "English"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-009",
+          "start_char": 21100,
+          "end_char": 21107
+        }
+      ],
+      "depth_tier": "peripheral",
+      "prominence_score": 3
+    },
+    "french": {
+      "canonical": "French",
+      "type": "group",
+      "spacy_label": "NORP",
+      "mentions": 1,
+      "passages": [
+        "p-009"
+      ],
+      "aliases": [
+        "French"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-009",
+          "start_char": 21400,
+          "end_char": 21406
+        }
+      ],
+      "depth_tier": "peripheral",
+      "prominence_score": 3
+    },
+    "andr\u00e9 breton": {
+      "canonical": "Andr\u00e9 Breton",
+      "type": "person",
+      "spacy_label": "PERSON",
+      "mentions": 1,
+      "passages": [
+        "p-009"
+      ],
+      "aliases": [
+        "Andr\u00e9 Breton"
+      ],
+      "confidence": 1.0,
+      "positions": [
+        {
+          "passage_id": "p-009",
+          "start_char": 21418,
+          "end_char": 21430
+        }
+      ],
+      "depth_tier": "peripheral",
+      "prominence_score": 3
+    },
+    "the julien levy gallery": {
+      "canonical": "the Julien Levy Gallery",
+      "type": "place",
+      "spacy_label": "FAC",
+      "mentions": 1,
+      "passages": [
+        "p-009"
+      ],
+      "aliases": [
+        "the Julien Levy Gallery"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-009",
+          "start_char": 21550,
+          "end_char": 21573
+        }
+      ],
+      "depth_tier": "peripheral",
+      "prominence_score": 3
+    },
+    "freudian": {
+      "canonical": "Freudian",
+      "type": "group",
+      "spacy_label": "NORP",
+      "mentions": 1,
+      "passages": [
+        "p-009"
+      ],
+      "aliases": [
+        "Freudian"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-009",
+          "start_char": 22414,
+          "end_char": 22422
+        }
+      ],
+      "depth_tier": "peripheral",
+      "prominence_score": 3
+    },
+    "marcel duchamp": {
+      "canonical": "Marcel Duchamp",
+      "type": "project",
+      "spacy_label": "PRODUCT",
+      "mentions": 1,
+      "passages": [
+        "p-010"
+      ],
+      "aliases": [
+        "Marcel Duchamp"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-010",
+          "start_char": 24397,
+          "end_char": 24411
+        }
+      ],
+      "depth_tier": "peripheral",
+      "prominence_score": 3
+    },
+    "the galerie pierre colle": {
+      "canonical": "the Galerie Pierre Colle",
+      "type": "place",
+      "spacy_label": "FAC",
+      "mentions": 1,
+      "passages": [
+        "p-010"
+      ],
+      "aliases": [
+        "the Galerie Pierre Colle"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-010",
+          "start_char": 24662,
+          "end_char": 24686
+        }
+      ],
+      "depth_tier": "peripheral",
+      "prominence_score": 3
+    },
+    "renou et colle": {
+      "canonical": "Renou et Colle",
+      "type": "organisation",
+      "spacy_label": "ORG",
+      "mentions": 1,
+      "passages": [
+        "p-010"
+      ],
+      "aliases": [
+        "Renou et Colle"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-010",
+          "start_char": 24688,
+          "end_char": 24702
+        }
+      ],
+      "depth_tier": "peripheral",
+      "prominence_score": 3
+    },
+    "the frame": {
+      "canonical": "The Frame",
+      "type": "work-of-art",
+      "spacy_label": "WORK_OF_ART",
+      "mentions": 1,
+      "passages": [
+        "p-010"
+      ],
+      "aliases": [
+        "The Frame"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-010",
+          "start_char": 24758,
+          "end_char": 24767
+        }
+      ],
+      "depth_tier": "peripheral",
+      "prominence_score": 3
+    },
+    "the american hospital": {
+      "canonical": "the American Hospital",
+      "type": "organisation",
+      "spacy_label": "ORG",
+      "mentions": 1,
+      "passages": [
+        "p-010"
+      ],
+      "aliases": [
+        "the American Hospital"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-010",
+          "start_char": 25432,
+          "end_char": 25453
+        }
+      ],
+      "depth_tier": "peripheral",
+      "prominence_score": 3
+    },
+    "stalinism": {
+      "canonical": "Stalinism",
+      "type": "group",
+      "spacy_label": "NORP",
+      "mentions": 1,
+      "passages": [
+        "p-011"
+      ],
+      "aliases": [
+        "Stalinism"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-011",
+          "start_char": 26334,
+          "end_char": 26343
+        }
+      ],
+      "depth_tier": "peripheral",
+      "prominence_score": 3
+    },
+    "trotskyist": {
+      "canonical": "Trotskyist",
+      "type": "group",
+      "spacy_label": "NORP",
+      "mentions": 1,
+      "passages": [
+        "p-011"
+      ],
+      "aliases": [
+        "Trotskyist"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-011",
+          "start_char": 26367,
+          "end_char": 26377
+        }
+      ],
+      "depth_tier": "peripheral",
+      "prominence_score": 3
+    },
+    "the european frida": {
+      "canonical": "The European Frida",
+      "type": "organisation",
+      "spacy_label": "ORG",
+      "mentions": 1,
+      "passages": [
+        "p-011"
+      ],
+      "aliases": [
+        "The European Frida"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-011",
+          "start_char": 27062,
+          "end_char": 27080
+        }
+      ],
+      "depth_tier": "peripheral",
+      "prominence_score": 3
+    },
+    "only two": {
+      "canonical": "only two",
+      "type": "unknown",
+      "spacy_label": "CARDINAL",
+      "mentions": 1,
+      "passages": [
+        "p-011"
+      ],
+      "aliases": [
+        "only two"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-011",
+          "start_char": 27406,
+          "end_char": 27414
+        }
+      ],
+      "depth_tier": "peripheral",
+      "prominence_score": 3
+    },
+    "fridas": {
+      "canonical": "Fridas",
+      "type": "organisation",
+      "spacy_label": "ORG",
+      "mentions": 1,
+      "passages": [
+        "p-011"
+      ],
+      "aliases": [
+        "Fridas"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-011",
+          "start_char": 27415,
+          "end_char": 27421
+        }
+      ],
+      "depth_tier": "peripheral",
+      "prominence_score": 3
+    },
+    "dr eloesser": {
+      "canonical": "Dr Eloesser",
+      "type": "person",
+      "spacy_label": "PERSON",
+      "mentions": 1,
+      "passages": [
+        "p-011"
+      ],
+      "aliases": [
+        "Dr Eloesser"
+      ],
+      "confidence": 1.0,
+      "positions": [
+        {
+          "passage_id": "p-011",
+          "start_char": 28370,
+          "end_char": 28381
+        }
+      ],
+      "depth_tier": "peripheral",
+      "prominence_score": 3
+    },
+    "judas": {
+      "canonical": "Judas",
+      "type": "person",
+      "spacy_label": "PERSON",
+      "mentions": 1,
+      "passages": [
+        "p-012"
+      ],
+      "aliases": [
+        "Judas"
+      ],
+      "confidence": 1.0,
+      "positions": [
+        {
+          "passage_id": "p-012",
+          "start_char": 29623,
+          "end_char": 29628
+        }
+      ],
+      "depth_tier": "peripheral",
+      "prominence_score": 3
+    },
+    "xoloitzcuintli": {
+      "canonical": "Xoloitzcuintli",
+      "type": "group",
+      "spacy_label": "NORP",
+      "mentions": 1,
+      "passages": [
+        "p-012"
+      ],
+      "aliases": [
+        "Xoloitzcuintli"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-012",
+          "start_char": 29655,
+          "end_char": 29669
+        }
+      ],
+      "depth_tier": "peripheral",
+      "prominence_score": 3
+    },
+    "ionic": {
+      "canonical": "Ionic",
+      "type": "project",
+      "spacy_label": "PRODUCT",
+      "mentions": 1,
+      "passages": [
+        "p-012"
+      ],
+      "aliases": [
+        "Ionic"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-012",
+          "start_char": 30336,
+          "end_char": 30341
+        }
+      ],
+      "depth_tier": "peripheral",
+      "prominence_score": 3
+    },
+    "dozens": {
+      "canonical": "dozens",
+      "type": "unknown",
+      "spacy_label": "CARDINAL",
+      "mentions": 1,
+      "passages": [
+        "p-012"
+      ],
+      "aliases": [
+        "dozens"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-012",
+          "start_char": 30462,
+          "end_char": 30468
+        }
+      ],
+      "depth_tier": "peripheral",
+      "prominence_score": 3
+    },
+    "the ministry of education's": {
+      "canonical": "the Ministry of Education's",
+      "type": "organisation",
+      "spacy_label": "ORG",
+      "mentions": 1,
+      "passages": [
+        "p-012"
+      ],
+      "aliases": [
+        "the Ministry of Education's"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-012",
+          "start_char": 30778,
+          "end_char": 30805
+        }
+      ],
+      "depth_tier": "peripheral",
+      "prominence_score": 3
+    },
+    "school of painting and sculpture": {
+      "canonical": "School of Painting and Sculpture",
+      "type": "organisation",
+      "spacy_label": "ORG",
+      "mentions": 1,
+      "passages": [
+        "p-012"
+      ],
+      "aliases": [
+        "School of Painting and Sculpture"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-012",
+          "start_char": 30806,
+          "end_char": 30838
+        }
+      ],
+      "depth_tier": "peripheral",
+      "prominence_score": 3
+    },
+    "la esmeralda": {
+      "canonical": "La Esmeralda",
+      "type": "work-of-art",
+      "spacy_label": "WORK_OF_ART",
+      "mentions": 1,
+      "passages": [
+        "p-012"
+      ],
+      "aliases": [
+        "La Esmeralda"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-012",
+          "start_char": 30850,
+          "end_char": 30862
+        }
+      ],
+      "depth_tier": "peripheral",
+      "prominence_score": 3
+    },
+    "los fridos": {
+      "canonical": "Los Fridos",
+      "type": "work-of-art",
+      "spacy_label": "WORK_OF_ART",
+      "mentions": 1,
+      "passages": [
+        "p-012"
+      ],
+      "aliases": [
+        "Los Fridos"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-012",
+          "start_char": 31063,
+          "end_char": 31073
+        }
+      ],
+      "depth_tier": "peripheral",
+      "prominence_score": 3
+    },
+    "the mexican communist party": {
+      "canonical": "the Mexican Communist Party",
+      "type": "organisation",
+      "spacy_label": "ORG",
+      "mentions": 1,
+      "passages": [
+        "p-012"
+      ],
+      "aliases": [
+        "the Mexican Communist Party"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-012",
+          "start_char": 31495,
+          "end_char": 31522
+        }
+      ],
+      "depth_tier": "peripheral",
+      "prominence_score": 3
+    },
+    "diego's trotskyism": {
+      "canonical": "Diego's Trotskyism",
+      "type": "organisation",
+      "spacy_label": "ORG",
+      "mentions": 1,
+      "passages": [
+        "p-012"
+      ],
+      "aliases": [
+        "Diego's Trotskyism"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-012",
+          "start_char": 31665,
+          "end_char": 31683
+        }
+      ],
+      "depth_tier": "peripheral",
+      "prominence_score": 3
+    },
+    "approximately 200": {
+      "canonical": "approximately 200",
+      "type": "unknown",
+      "spacy_label": "CARDINAL",
+      "mentions": 1,
+      "passages": [
+        "p-013"
+      ],
+      "aliases": [
+        "approximately 200"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-013",
+          "start_char": 32371,
+          "end_char": 32388
+        }
+      ],
+      "depth_tier": "peripheral",
+      "prominence_score": 3
+    },
+    "55": {
+      "canonical": "55",
+      "type": "unknown",
+      "spacy_label": "CARDINAL",
+      "mentions": 1,
+      "passages": [
+        "p-013"
+      ],
+      "aliases": [
+        "55"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-013",
+          "start_char": 32425,
+          "end_char": 32427
+        }
+      ],
+      "depth_tier": "peripheral",
+      "prominence_score": 3
+    },
+    "masonite": {
+      "canonical": "Masonite",
+      "type": "project",
+      "spacy_label": "PRODUCT",
+      "mentions": 1,
+      "passages": [
+        "p-013"
+      ],
+      "aliases": [
+        "Masonite"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-013",
+          "start_char": 32489,
+          "end_char": 32497
+        }
+      ],
+      "depth_tier": "peripheral",
+      "prominence_score": 3
+    },
+    "what the water gave me": {
+      "canonical": "What the Water Gave Me",
+      "type": "work-of-art",
+      "spacy_label": "WORK_OF_ART",
+      "mentions": 1,
+      "passages": [
+        "p-013"
+      ],
+      "aliases": [
+        "What the Water Gave Me"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-013",
+          "start_char": 33072,
+          "end_char": 33094
+        }
+      ],
+      "depth_tier": "peripheral",
+      "prominence_score": 3
+    },
+    "the wounded deer": {
+      "canonical": "The Wounded Deer",
+      "type": "work-of-art",
+      "spacy_label": "WORK_OF_ART",
+      "mentions": 1,
+      "passages": [
+        "p-013"
+      ],
+      "aliases": [
+        "The Wounded Deer"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-013",
+          "start_char": 33315,
+          "end_char": 33331
+        }
+      ],
+      "depth_tier": "peripheral",
+      "prominence_score": 3
+    },
+    "nine": {
+      "canonical": "nine",
+      "type": "unknown",
+      "spacy_label": "CARDINAL",
+      "mentions": 1,
+      "passages": [
+        "p-013"
+      ],
+      "aliases": [
+        "nine"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-013",
+          "start_char": 33388,
+          "end_char": 33392
+        }
+      ],
+      "depth_tier": "peripheral",
+      "prominence_score": 3
+    },
+    "philip wilson": {
+      "canonical": "Philip Wilson",
+      "type": "person",
+      "spacy_label": "PERSON",
+      "mentions": 1,
+      "passages": [
+        "p-014"
+      ],
+      "aliases": [
+        "Philip Wilson"
+      ],
+      "confidence": 1.0,
+      "positions": [
+        {
+          "passage_id": "p-014",
+          "start_char": 35018,
+          "end_char": 35031
+        }
+      ],
+      "depth_tier": "peripheral",
+      "prominence_score": 3
+    },
+    "the hospital for special surgery": {
+      "canonical": "the Hospital for Special Surgery",
+      "type": "organisation",
+      "spacy_label": "ORG",
+      "mentions": 1,
+      "passages": [
+        "p-014"
+      ],
+      "aliases": [
+        "the Hospital for Special Surgery"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-014",
+          "start_char": 35035,
+          "end_char": 35067
+        }
+      ],
+      "depth_tier": "peripheral",
+      "prominence_score": 3
+    },
+    "at least six": {
+      "canonical": "at least six",
+      "type": "unknown",
+      "spacy_label": "CARDINAL",
+      "mentions": 1,
+      "passages": [
+        "p-014"
+      ],
+      "aliases": [
+        "at least six"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-014",
+          "start_char": 35349,
+          "end_char": 35361
+        }
+      ],
+      "depth_tier": "peripheral",
+      "prominence_score": 3
+    },
+    "the hospital ingl\u00e9s": {
+      "canonical": "the Hospital Ingl\u00e9s",
+      "type": "organisation",
+      "spacy_label": "ORG",
+      "mentions": 1,
+      "passages": [
+        "p-014"
+      ],
+      "aliases": [
+        "the Hospital Ingl\u00e9s"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-014",
+          "start_char": 35418,
+          "end_char": 35437
+        }
+      ],
+      "depth_tier": "peripheral",
+      "prominence_score": 3
+    },
+    "demerol": {
+      "canonical": "Demerol",
+      "type": "organisation",
+      "spacy_label": "ORG",
+      "mentions": 1,
+      "passages": [
+        "p-014"
+      ],
+      "aliases": [
+        "Demerol"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-014",
+          "start_char": 35774,
+          "end_char": 35781
+        }
+      ],
+      "depth_tier": "peripheral",
+      "prominence_score": 3
+    },
+    "lola \u00e1lvarez bravo": {
+      "canonical": "Lola \u00c1lvarez Bravo",
+      "type": "person",
+      "spacy_label": "PERSON",
+      "mentions": 1,
+      "passages": [
+        "p-015"
+      ],
+      "aliases": [
+        "Lola \u00c1lvarez Bravo"
+      ],
+      "confidence": 1.0,
+      "positions": [
+        {
+          "passage_id": "p-015",
+          "start_char": 37466,
+          "end_char": 37484
+        }
+      ],
+      "depth_tier": "peripheral",
+      "prominence_score": 3
+    },
+    "the galer\u00eda arte contempor\u00e1neo": {
+      "canonical": "the Galer\u00eda Arte Contempor\u00e1neo",
+      "type": "organisation",
+      "spacy_label": "ORG",
+      "mentions": 1,
+      "passages": [
+        "p-015"
+      ],
+      "aliases": [
+        "the Galer\u00eda Arte Contempor\u00e1neo"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-015",
+          "start_char": 37538,
+          "end_char": 37568
+        }
+      ],
+      "depth_tier": "peripheral",
+      "prominence_score": 3
+    },
+    "three hundred": {
+      "canonical": "Three hundred",
+      "type": "unknown",
+      "spacy_label": "CARDINAL",
+      "mentions": 1,
+      "passages": [
+        "p-015"
+      ],
+      "aliases": [
+        "Three hundred"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-015",
+          "start_char": 38110,
+          "end_char": 38123
+        }
+      ],
+      "depth_tier": "peripheral",
+      "prominence_score": 3
+    },
+    "gangrene": {
+      "canonical": "Gangrene",
+      "type": "organisation",
+      "spacy_label": "ORG",
+      "mentions": 1,
+      "passages": [
+        "p-015"
+      ],
+      "aliases": [
+        "Gangrene"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-015",
+          "start_char": 38713,
+          "end_char": 38721
+        }
+      ],
+      "depth_tier": "peripheral",
+      "prominence_score": 3
+    },
+    "cia": {
+      "canonical": "CIA",
+      "type": "organisation",
+      "spacy_label": "ORG",
+      "mentions": 1,
+      "passages": [
+        "p-016"
+      ],
+      "aliases": [
+        "CIA"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-016",
+          "start_char": 40237,
+          "end_char": 40240
+        }
+      ],
+      "depth_tier": "peripheral",
+      "prominence_score": 3
+    },
+    "guatemala": {
+      "canonical": "Guatemala",
+      "type": "place",
+      "spacy_label": "GPE",
+      "mentions": 1,
+      "passages": [
+        "p-016"
+      ],
+      "aliases": [
+        "Guatemala"
+      ],
+      "confidence": 1.0,
+      "positions": [
+        {
+          "passage_id": "p-016",
+          "start_char": 40308,
+          "end_char": 40317
+        }
+      ],
+      "depth_tier": "peripheral",
+      "prominence_score": 3
+    },
+    "gaunt": {
+      "canonical": "gaunt",
+      "type": "person",
+      "spacy_label": "PERSON",
+      "mentions": 1,
+      "passages": [
+        "p-016"
+      ],
+      "aliases": [
+        "gaunt"
+      ],
+      "confidence": 1.0,
+      "positions": [
+        {
+          "passage_id": "p-016",
+          "start_char": 40467,
+          "end_char": 40472
+        }
+      ],
+      "depth_tier": "peripheral",
+      "prominence_score": 3
+    },
+    "thirty-two": {
+      "canonical": "thirty-two",
+      "type": "unknown",
+      "spacy_label": "CARDINAL",
+      "mentions": 1,
+      "passages": [
+        "p-016"
+      ],
+      "aliases": [
+        "thirty-two"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-016",
+          "start_char": 40547,
+          "end_char": 40557
+        }
+      ],
+      "depth_tier": "peripheral",
+      "prominence_score": 3
+    },
+    "two hundred": {
+      "canonical": "two hundred",
+      "type": "unknown",
+      "spacy_label": "CARDINAL",
+      "mentions": 1,
+      "passages": [
+        "p-016"
+      ],
+      "aliases": [
+        "two hundred"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-016",
+          "start_char": 40652,
+          "end_char": 40663
+        }
+      ],
+      "depth_tier": "peripheral",
+      "prominence_score": 3
+    },
+    "twenty-fifth": {
+      "canonical": "twenty-fifth",
+      "type": "unknown",
+      "spacy_label": "CARDINAL",
+      "mentions": 1,
+      "passages": [
+        "p-016"
+      ],
+      "aliases": [
+        "twenty-fifth"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-016",
+          "start_char": 41134,
+          "end_char": 41146
+        }
+      ],
+      "depth_tier": "peripheral",
+      "prominence_score": 3
+    },
+    "the palace of fine arts": {
+      "canonical": "the Palace of Fine Arts",
+      "type": "place",
+      "spacy_label": "FAC",
+      "mentions": 1,
+      "passages": [
+        "p-016"
+      ],
+      "aliases": [
+        "the Palace of Fine Arts"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-016",
+          "start_char": 41381,
+          "end_char": 41404
+        }
+      ],
+      "depth_tier": "peripheral",
+      "prominence_score": 3
+    },
+    "the pante\u00f3n civil de dolores": {
+      "canonical": "the Pante\u00f3n Civil de Dolores",
+      "type": "organisation",
+      "spacy_label": "ORG",
+      "mentions": 1,
+      "passages": [
+        "p-016"
+      ],
+      "aliases": [
+        "the Pante\u00f3n Civil de Dolores"
+      ],
+      "confidence": 0.8,
+      "positions": [
+        {
+          "passage_id": "p-016",
+          "start_char": 41646,
+          "end_char": 41674
+        }
+      ],
+      "depth_tier": "peripheral",
+      "prominence_score": 3
+    },
+    "frida kahlo's": {
+      "canonical": "Frida Kahlo's",
+      "type": "person",
+      "spacy_label": "PERSON",
+      "mentions": 1,
+      "passages": [
+        "p-016"
+      ],
+      "aliases": [
+        "Frida Kahlo's"
+      ],
+      "confidence": 1.0,
+      "positions": [
+        {
+          "passage_id": "p-016",
+          "start_char": 42029,
+          "end_char": 42042
+        }
+      ],
+      "depth_tier": "peripheral",
+      "prominence_score": 3
+    }
+  },
+  "temporal_expressions": [
+    {
+      "text": "6 July 1907",
+      "passage_id": "p-002",
+      "start_char": 243,
+      "end_char": 254,
+      "label": "DATE"
+    },
+    {
+      "text": "three years earlier",
+      "passage_id": "p-002",
+      "start_char": 331,
+      "end_char": 350,
+      "label": "DATE"
+    },
+    {
+      "text": "1891",
+      "passage_id": "p-002",
+      "start_char": 484,
+      "end_char": 488,
+      "label": "DATE"
+    },
+    {
+      "text": "1913",
+      "passage_id": "p-002",
+      "start_char": 1699,
+      "end_char": 1703,
+      "label": "DATE"
+    },
+    {
+      "text": "the age of six",
+      "passage_id": "p-002",
+      "start_char": 1708,
+      "end_char": 1722,
+      "label": "DATE"
+    },
+    {
+      "text": "nine months",
+      "passage_id": "p-002",
+      "start_char": 1784,
+      "end_char": 1795,
+      "label": "DATE"
+    },
+    {
+      "text": "early twentieth-century",
+      "passage_id": "p-002",
+      "start_char": 2200,
+      "end_char": 2223,
+      "label": "DATE"
+    },
+    {
+      "text": "1910",
+      "passage_id": "p-002",
+      "start_char": 2576,
+      "end_char": 2580,
+      "label": "DATE"
+    },
+    {
+      "text": "1910",
+      "passage_id": "p-002",
+      "start_char": 2902,
+      "end_char": 2906,
+      "label": "DATE"
+    },
+    {
+      "text": "1907",
+      "passage_id": "p-002",
+      "start_char": 2919,
+      "end_char": 2923,
+      "label": "DATE"
+    },
+    {
+      "text": "1922",
+      "passage_id": "p-003",
+      "start_char": 3069,
+      "end_char": 3073,
+      "label": "DATE"
+    },
+    {
+      "text": "the age of fifteen",
+      "passage_id": "p-003",
+      "start_char": 3078,
+      "end_char": 3096,
+      "label": "DATE"
+    },
+    {
+      "text": "one day",
+      "passage_id": "p-003",
+      "start_char": 4024,
+      "end_char": 4031,
+      "label": "DATE"
+    },
+    {
+      "text": "fifteen-year-old",
+      "passage_id": "p-003",
+      "start_char": 4270,
+      "end_char": 4286,
+      "label": "DATE"
+    },
+    {
+      "text": "years",
+      "passage_id": "p-003",
+      "start_char": 5165,
+      "end_char": 5170,
+      "label": "DATE"
+    },
+    {
+      "text": "17 September 1925",
+      "passage_id": "p-004",
+      "start_char": 5594,
+      "end_char": 5611,
+      "label": "DATE"
+    },
+    {
+      "text": "a month",
+      "passage_id": "p-004",
+      "start_char": 6512,
+      "end_char": 6519,
+      "label": "DATE"
+    },
+    {
+      "text": "months",
+      "passage_id": "p-004",
+      "start_char": 6856,
+      "end_char": 6862,
+      "label": "DATE"
+    },
+    {
+      "text": "1927",
+      "passage_id": "p-005",
+      "start_char": 9640,
+      "end_char": 9644,
+      "label": "DATE"
+    },
+    {
+      "text": "21 August 1929",
+      "passage_id": "p-006",
+      "start_char": 10772,
+      "end_char": 10786,
+      "label": "DATE"
+    },
+    {
+      "text": "November 1930",
+      "passage_id": "p-007",
+      "start_char": 13396,
+      "end_char": 13409,
+      "label": "DATE"
+    },
+    {
+      "text": "years",
+      "passage_id": "p-007",
+      "start_char": 14585,
+      "end_char": 14590,
+      "label": "DATE"
+    },
+    {
+      "text": "1931",
+      "passage_id": "p-007",
+      "start_char": 14751,
+      "end_char": 14755,
+      "label": "DATE"
+    },
+    {
+      "text": "April 1932",
+      "passage_id": "p-007",
+      "start_char": 14802,
+      "end_char": 14812,
+      "label": "DATE"
+    },
+    {
+      "text": "1930",
+      "passage_id": "p-007",
+      "start_char": 15002,
+      "end_char": 15006,
+      "label": "DATE"
+    },
+    {
+      "text": "4 July 1932",
+      "passage_id": "p-007",
+      "start_char": 15176,
+      "end_char": 15187,
+      "label": "DATE"
+    },
+    {
+      "text": "thirteen weeks",
+      "passage_id": "p-007",
+      "start_char": 15252,
+      "end_char": 15266,
+      "label": "DATE"
+    },
+    {
+      "text": "Two weeks",
+      "passage_id": "p-007",
+      "start_char": 15617,
+      "end_char": 15626,
+      "label": "DATE"
+    },
+    {
+      "text": "1932",
+      "passage_id": "p-007",
+      "start_char": 15692,
+      "end_char": 15696,
+      "label": "DATE"
+    },
+    {
+      "text": "1934",
+      "passage_id": "p-008",
+      "start_char": 17025,
+      "end_char": 17029,
+      "label": "DATE"
+    },
+    {
+      "text": "1935",
+      "passage_id": "p-008",
+      "start_char": 17878,
+      "end_char": 17882,
+      "label": "DATE"
+    },
+    {
+      "text": "months later",
+      "passage_id": "p-008",
+      "start_char": 18815,
+      "end_char": 18827,
+      "label": "DATE"
+    },
+    {
+      "text": "daily",
+      "passage_id": "p-008",
+      "start_char": 18863,
+      "end_char": 18868,
+      "label": "DATE"
+    },
+    {
+      "text": "Between 1936 and 1938",
+      "passage_id": "p-009",
+      "start_char": 19763,
+      "end_char": 19784,
+      "label": "DATE"
+    },
+    {
+      "text": "1936",
+      "passage_id": "p-009",
+      "start_char": 19969,
+      "end_char": 19973,
+      "label": "DATE"
+    },
+    {
+      "text": "1937",
+      "passage_id": "p-009",
+      "start_char": 20184,
+      "end_char": 20188,
+      "label": "DATE"
+    },
+    {
+      "text": "January 1937",
+      "passage_id": "p-009",
+      "start_char": 20480,
+      "end_char": 20492,
+      "label": "DATE"
+    },
+    {
+      "text": "several months in 1937",
+      "passage_id": "p-009",
+      "start_char": 21052,
+      "end_char": 21074,
+      "label": "DATE"
+    },
+    {
+      "text": "1938",
+      "passage_id": "p-009",
+      "start_char": 21390,
+      "end_char": 21394,
+      "label": "DATE"
+    },
+    {
+      "text": "November 1938",
+      "passage_id": "p-009",
+      "start_char": 21589,
+      "end_char": 21602,
+      "label": "DATE"
+    },
+    {
+      "text": "years later",
+      "passage_id": "p-009",
+      "start_char": 23716,
+      "end_char": 23727,
+      "label": "DATE"
+    },
+    {
+      "text": "January 1939",
+      "passage_id": "p-010",
+      "start_char": 23787,
+      "end_char": 23799,
+      "label": "DATE"
+    },
+    {
+      "text": "1938",
+      "passage_id": "p-010",
+      "start_char": 24770,
+      "end_char": 24774,
+      "label": "DATE"
+    },
+    {
+      "text": "twentieth-century",
+      "passage_id": "p-010",
+      "start_char": 24830,
+      "end_char": 24847,
+      "label": "DATE"
+    },
+    {
+      "text": "late March 1939",
+      "passage_id": "p-010",
+      "start_char": 25546,
+      "end_char": 25561,
+      "label": "DATE"
+    },
+    {
+      "text": "September 1939",
+      "passage_id": "p-011",
+      "start_char": 26143,
+      "end_char": 26157,
+      "label": "DATE"
+    },
+    {
+      "text": "a decade",
+      "passage_id": "p-011",
+      "start_char": 26409,
+      "end_char": 26417,
+      "label": "DATE"
+    },
+    {
+      "text": "1939",
+      "passage_id": "p-011",
+      "start_char": 26757,
+      "end_char": 26761,
+      "label": "DATE"
+    },
+    {
+      "text": "1940",
+      "passage_id": "p-011",
+      "start_char": 27537,
+      "end_char": 27541,
+      "label": "DATE"
+    },
+    {
+      "text": "8 December 1940",
+      "passage_id": "p-011",
+      "start_char": 28782,
+      "end_char": 28797,
+      "label": "DATE"
+    },
+    {
+      "text": "Between 1940 and 1946",
+      "passage_id": "p-012",
+      "start_char": 30013,
+      "end_char": 30034,
+      "label": "DATE"
+    },
+    {
+      "text": "1944",
+      "passage_id": "p-012",
+      "start_char": 30281,
+      "end_char": 30285,
+      "label": "DATE"
+    },
+    {
+      "text": "1943",
+      "passage_id": "p-012",
+      "start_char": 30868,
+      "end_char": 30872,
+      "label": "DATE"
+    },
+    {
+      "text": "1943",
+      "passage_id": "p-012",
+      "start_char": 31535,
+      "end_char": 31539,
+      "label": "DATE"
+    },
+    {
+      "text": "her student days",
+      "passage_id": "p-012",
+      "start_char": 31589,
+      "end_char": 31605,
+      "label": "DATE"
+    },
+    {
+      "text": "1954",
+      "passage_id": "p-012",
+      "start_char": 31845,
+      "end_char": 31849,
+      "label": "DATE"
+    },
+    {
+      "text": "1932",
+      "passage_id": "p-013",
+      "start_char": 32878,
+      "end_char": 32882,
+      "label": "DATE"
+    },
+    {
+      "text": "1938",
+      "passage_id": "p-013",
+      "start_char": 33097,
+      "end_char": 33101,
+      "label": "DATE"
+    },
+    {
+      "text": "1946",
+      "passage_id": "p-013",
+      "start_char": 33334,
+      "end_char": 33338,
+      "label": "DATE"
+    },
+    {
+      "text": "months",
+      "passage_id": "p-013",
+      "start_char": 33832,
+      "end_char": 33838,
+      "label": "DATE"
+    },
+    {
+      "text": "1946",
+      "passage_id": "p-014",
+      "start_char": 34941,
+      "end_char": 34945,
+      "label": "DATE"
+    },
+    {
+      "text": "Between 1946 and 1950",
+      "passage_id": "p-014",
+      "start_char": 35312,
+      "end_char": 35333,
+      "label": "DATE"
+    },
+    {
+      "text": "1950",
+      "passage_id": "p-014",
+      "start_char": 35410,
+      "end_char": 35414,
+      "label": "DATE"
+    },
+    {
+      "text": "1925",
+      "passage_id": "p-014",
+      "start_char": 35640,
+      "end_char": 35644,
+      "label": "DATE"
+    },
+    {
+      "text": "1951",
+      "passage_id": "p-014",
+      "start_char": 36138,
+      "end_char": 36142,
+      "label": "DATE"
+    },
+    {
+      "text": "1951",
+      "passage_id": "p-014",
+      "start_char": 36430,
+      "end_char": 36434,
+      "label": "DATE"
+    },
+    {
+      "text": "April 1953",
+      "passage_id": "p-015",
+      "start_char": 37437,
+      "end_char": 37447,
+      "label": "DATE"
+    },
+    {
+      "text": "1953",
+      "passage_id": "p-015",
+      "start_char": 37709,
+      "end_char": 37713,
+      "label": "DATE"
+    },
+    {
+      "text": "hours",
+      "passage_id": "p-015",
+      "start_char": 38301,
+      "end_char": 38306,
+      "label": "TIME"
+    },
+    {
+      "text": "years",
+      "passage_id": "p-015",
+      "start_char": 38452,
+      "end_char": 38457,
+      "label": "DATE"
+    },
+    {
+      "text": "August 1953",
+      "passage_id": "p-015",
+      "start_char": 38656,
+      "end_char": 38667,
+      "label": "DATE"
+    },
+    {
+      "text": "her months earlier",
+      "passage_id": "p-015",
+      "start_char": 38823,
+      "end_char": 38841,
+      "label": "DATE"
+    },
+    {
+      "text": "2 July 1954",
+      "passage_id": "p-016",
+      "start_char": 40139,
+      "end_char": 40150,
+      "label": "DATE"
+    },
+    {
+      "text": "twenty-nine years",
+      "passage_id": "p-016",
+      "start_char": 40520,
+      "end_char": 40537,
+      "label": "DATE"
+    },
+    {
+      "text": "13 July 1954",
+      "passage_id": "p-016",
+      "start_char": 40688,
+      "end_char": 40700,
+      "label": "DATE"
+    },
+    {
+      "text": "last days",
+      "passage_id": "p-016",
+      "start_char": 40977,
+      "end_char": 40986,
+      "label": "DATE"
+    },
+    {
+      "text": "seventeen days",
+      "passage_id": "p-016",
+      "start_char": 41178,
+      "end_char": 41192,
+      "label": "DATE"
+    },
+    {
+      "text": "1958",
+      "passage_id": "p-016",
+      "start_char": 41976,
+      "end_char": 41980,
+      "label": "DATE"
+    }
+  ],
+  "noun_chunks_top50": {
+    "she": {
+      "text": "she",
+      "mentions": 211,
+      "passages": [
+        "p-002",
+        "p-003",
+        "p-004",
+        "p-005",
+        "p-006",
+        "p-007",
+        "p-008",
+        "p-009",
+        "p-010",
+        "p-011",
+        "p-012",
+        "p-013",
+        "p-014",
+        "p-015",
+        "p-016"
+      ]
+    },
+    "her": {
+      "text": "her",
+      "mentions": 52,
+      "passages": [
+        "p-002",
+        "p-004",
+        "p-005",
+        "p-006",
+        "p-007",
+        "p-008",
+        "p-009",
+        "p-010",
+        "p-011",
+        "p-012",
+        "p-014",
+        "p-015",
+        "p-016"
+      ]
+    },
+    "frida": {
+      "text": "Frida",
+      "mentions": 50,
+      "passages": [
+        "p-002",
+        "p-003",
+        "p-004",
+        "p-005",
+        "p-006",
+        "p-007",
+        "p-008",
+        "p-009",
+        "p-010",
+        "p-011",
+        "p-012",
+        "p-013",
+        "p-014",
+        "p-015",
+        "p-016"
+      ]
+    },
+    "that": {
+      "text": "that",
+      "mentions": 46,
+      "passages": [
+        "p-002",
+        "p-003",
+        "p-005",
+        "p-006",
+        "p-007",
+        "p-008",
+        "p-009",
+        "p-010",
+        "p-011",
+        "p-012",
+        "p-013",
+        "p-014",
+        "p-015",
+        "p-016"
+      ]
+    },
+    "diego": {
+      "text": "Diego",
+      "mentions": 29,
+      "passages": [
+        "p-005",
+        "p-006",
+        "p-007",
+        "p-008",
+        "p-009",
+        "p-011",
+        "p-012",
+        "p-013",
+        "p-016"
+      ]
+    },
+    "who": {
+      "text": "who",
+      "mentions": 21,
+      "passages": [
+        "p-002",
+        "p-003",
+        "p-004",
+        "p-006",
+        "p-007",
+        "p-010",
+        "p-011",
+        "p-013",
+        "p-016"
+      ]
+    },
+    "they": {
+      "text": "they",
+      "mentions": 19,
+      "passages": [
+        "p-002",
+        "p-003",
+        "p-006",
+        "p-009",
+        "p-010",
+        "p-011",
+        "p-012",
+        "p-015"
+      ]
+    },
+    "which": {
+      "text": "which",
+      "mentions": 16,
+      "passages": [
+        "p-002",
+        "p-003",
+        "p-004",
+        "p-007",
+        "p-008",
+        "p-009",
+        "p-011",
+        "p-012",
+        "p-013",
+        "p-014",
+        "p-015",
+        "p-016"
+      ]
+    },
+    "him": {
+      "text": "him",
+      "mentions": 15,
+      "passages": [
+        "p-002",
+        "p-003",
+        "p-005",
+        "p-006",
+        "p-007",
+        "p-009",
+        "p-011",
+        "p-016"
+      ]
+    },
+    "mexico": {
+      "text": "Mexico",
+      "mentions": 12,
+      "passages": [
+        "p-002",
+        "p-003",
+        "p-007",
+        "p-008",
+        "p-009",
+        "p-010",
+        "p-015",
+        "p-016"
+      ]
+    },
+    "what": {
+      "text": "what",
+      "mentions": 12,
+      "passages": [
+        "p-002",
+        "p-003",
+        "p-004",
+        "p-007",
+        "p-009",
+        "p-012",
+        "p-013",
+        "p-014",
+        "p-015",
+        "p-016"
+      ]
+    },
+    "la casa azul": {
+      "text": "La Casa Azul",
+      "mentions": 11,
+      "passages": [
+        "p-002",
+        "p-004",
+        "p-005",
+        "p-009",
+        "p-012",
+        "p-015",
+        "p-016"
+      ]
+    },
+    "her life": {
+      "text": "her life",
+      "mentions": 11,
+      "passages": [
+        "p-002",
+        "p-003",
+        "p-005",
+        "p-006",
+        "p-007",
+        "p-008",
+        "p-013",
+        "p-014"
+      ]
+    },
+    "this": {
+      "text": "This",
+      "mentions": 11,
+      "passages": [
+        "p-002",
+        "p-007",
+        "p-008",
+        "p-011",
+        "p-012",
+        "p-015",
+        "p-016"
+      ]
+    },
+    "you": {
+      "text": "you",
+      "mentions": 10,
+      "passages": [
+        "p-002",
+        "p-006",
+        "p-010",
+        "p-011",
+        "p-013",
+        "p-014",
+        "p-015"
+      ]
+    },
+    "herself": {
+      "text": "herself",
+      "mentions": 10,
+      "passages": [
+        "p-002",
+        "p-005",
+        "p-006",
+        "p-007",
+        "p-009",
+        "p-011",
+        "p-013"
+      ]
+    },
+    "them": {
+      "text": "them",
+      "mentions": 9,
+      "passages": [
+        "p-005",
+        "p-010",
+        "p-012",
+        "p-015",
+        "p-016"
+      ]
+    },
+    "pain": {
+      "text": "Pain",
+      "mentions": 8,
+      "passages": [
+        "p-004",
+        "p-005",
+        "p-011",
+        "p-012",
+        "p-013",
+        "p-016"
+      ]
+    },
+    "her father": {
+      "text": "her father",
+      "mentions": 7,
+      "passages": [
+        "p-002",
+        "p-004",
+        "p-005",
+        "p-006"
+      ]
+    },
+    "her body": {
+      "text": "her body",
+      "mentions": 7,
+      "passages": [
+        "p-006",
+        "p-007",
+        "p-012",
+        "p-013",
+        "p-016"
+      ]
+    },
+    "the painting": {
+      "text": "The painting",
+      "mentions": 7,
+      "passages": [
+        "p-007",
+        "p-008",
+        "p-011",
+        "p-012"
+      ]
+    },
+    "mexico city": {
+      "text": "Mexico City",
+      "mentions": 6,
+      "passages": [
+        "p-002",
+        "p-004",
+        "p-014",
+        "p-015",
+        "p-016"
+      ]
+    },
+    "cristina": {
+      "text": "Cristina",
+      "mentions": 6,
+      "passages": [
+        "p-002",
+        "p-008"
+      ]
+    },
+    "alejandro": {
+      "text": "Alejandro",
+      "mentions": 6,
+      "passages": [
+        "p-003",
+        "p-004",
+        "p-005"
+      ]
+    },
+    "her work": {
+      "text": "her work",
+      "mentions": 6,
+      "passages": [
+        "p-005",
+        "p-006",
+        "p-009",
+        "p-010",
+        "p-012"
+      ]
+    },
+    "the house": {
+      "text": "the house",
+      "mentions": 5,
+      "passages": [
+        "p-002",
+        "p-012"
+      ]
+    },
+    "bed": {
+      "text": "bed",
+      "mentions": 5,
+      "passages": [
+        "p-002",
+        "p-004",
+        "p-005",
+        "p-014"
+      ]
+    },
+    "something": {
+      "text": "something",
+      "mentions": 5,
+      "passages": [
+        "p-002",
+        "p-004",
+        "p-005",
+        "p-013"
+      ]
+    },
+    "the body": {
+      "text": "the body",
+      "mentions": 5,
+      "passages": [
+        "p-003",
+        "p-004",
+        "p-013"
+      ]
+    },
+    "painting": {
+      "text": "painting",
+      "mentions": 5,
+      "passages": [
+        "p-004",
+        "p-007",
+        "p-008",
+        "p-009",
+        "p-012"
+      ]
+    },
+    "the paintings": {
+      "text": "the paintings",
+      "mentions": 5,
+      "passages": [
+        "p-010",
+        "p-014",
+        "p-015",
+        "p-016"
+      ]
+    },
+    "her mother": {
+      "text": "Her mother",
+      "mentions": 4,
+      "passages": [
+        "p-002",
+        "p-004",
+        "p-006"
+      ]
+    },
+    "art": {
+      "text": "art",
+      "mentions": 4,
+      "passages": [
+        "p-003",
+        "p-015",
+        "p-016"
+      ]
+    },
+    "her relationship": {
+      "text": "Her relationship",
+      "mentions": 4,
+      "passages": [
+        "p-003",
+        "p-004",
+        "p-005",
+        "p-012"
+      ]
+    },
+    "someone": {
+      "text": "someone",
+      "mentions": 4,
+      "passages": [
+        "p-003",
+        "p-004",
+        "p-011"
+      ]
+    },
+    "the relationship": {
+      "text": "The relationship",
+      "mentions": 4,
+      "passages": [
+        "p-003",
+        "p-009",
+        "p-011"
+      ]
+    },
+    "nothing": {
+      "text": "nothing",
+      "mentions": 4,
+      "passages": [
+        "p-004",
+        "p-008",
+        "p-010"
+      ]
+    },
+    "these": {
+      "text": "these",
+      "mentions": 4,
+      "passages": [
+        "p-004",
+        "p-006",
+        "p-013"
+      ]
+    },
+    "this period": {
+      "text": "this period",
+      "mentions": 4,
+      "passages": [
+        "p-005",
+        "p-008",
+        "p-012",
+        "p-014"
+      ]
+    },
+    "some": {
+      "text": "some",
+      "mentions": 4,
+      "passages": [
+        "p-009",
+        "p-012",
+        "p-016"
+      ]
+    },
+    "coyoac\u00e1n": {
+      "text": "Coyoac\u00e1n",
+      "mentions": 3,
+      "passages": [
+        "p-002",
+        "p-006"
+      ]
+    },
+    "los cachuchas": {
+      "text": "Los Cachuchas",
+      "mentions": 3,
+      "passages": [
+        "p-003",
+        "p-004",
+        "p-005"
+      ]
+    },
+    "her friends": {
+      "text": "her friends",
+      "mentions": 3,
+      "passages": [
+        "p-003",
+        "p-005",
+        "p-016"
+      ]
+    },
+    "a pattern": {
+      "text": "a pattern",
+      "mentions": 3,
+      "passages": [
+        "p-003",
+        "p-005",
+        "p-008"
+      ]
+    },
+    "blood": {
+      "text": "blood",
+      "mentions": 3,
+      "passages": [
+        "p-004",
+        "p-008",
+        "p-011"
+      ]
+    },
+    "the pain": {
+      "text": "The pain",
+      "mentions": 3,
+      "passages": [
+        "p-004",
+        "p-007",
+        "p-014"
+      ]
+    },
+    "the hospital": {
+      "text": "the hospital",
+      "mentions": 3,
+      "passages": [
+        "p-004",
+        "p-007",
+        "p-014"
+      ]
+    },
+    "a mirror": {
+      "text": "a mirror",
+      "mentions": 3,
+      "passages": [
+        "p-004",
+        "p-013",
+        "p-014"
+      ]
+    },
+    "the mirror": {
+      "text": "the mirror",
+      "mentions": 3,
+      "passages": [
+        "p-004",
+        "p-011",
+        "p-013"
+      ]
+    },
+    "her broken body": {
+      "text": "her broken body",
+      "mentions": 3,
+      "passages": [
+        "p-004",
+        "p-007",
+        "p-012"
+      ]
+    }
+  },
+  "gap_template": [
+    {
+      "entity": "Frida",
+      "nlp_type": "organisation",
+      "mentions": 64,
+      "depth_tier": "central",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Diego",
+      "nlp_type": "person",
+      "mentions": 35,
+      "depth_tier": "central",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Mexican",
+      "nlp_type": "group",
+      "mentions": 19,
+      "depth_tier": "central",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Mexico",
+      "nlp_type": "place",
+      "mentions": 15,
+      "depth_tier": "central",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "first",
+      "nlp_type": "unknown",
+      "mentions": 13,
+      "depth_tier": "central",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "European",
+      "nlp_type": "group",
+      "mentions": 13,
+      "depth_tier": "central",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "La Casa Azul",
+      "nlp_type": "organisation",
+      "mentions": 11,
+      "depth_tier": "central",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "one",
+      "nlp_type": "unknown",
+      "mentions": 11,
+      "depth_tier": "central",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Mexico City",
+      "nlp_type": "place",
+      "mentions": 7,
+      "depth_tier": "central",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Cristina",
+      "nlp_type": "person",
+      "mentions": 6,
+      "depth_tier": "central",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Two",
+      "nlp_type": "unknown",
+      "mentions": 5,
+      "depth_tier": "central",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Tehuana",
+      "nlp_type": "person",
+      "mentions": 5,
+      "depth_tier": "central",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "three",
+      "nlp_type": "unknown",
+      "mentions": 4,
+      "depth_tier": "central",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "second",
+      "nlp_type": "unknown",
+      "mentions": 4,
+      "depth_tier": "central",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Breton",
+      "nlp_type": "person",
+      "mentions": 4,
+      "depth_tier": "central",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Coyoac\u00e1n",
+      "nlp_type": "place",
+      "mentions": 3,
+      "depth_tier": "central",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Matilde",
+      "nlp_type": "person",
+      "mentions": 3,
+      "depth_tier": "supporting",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Los Cachuchas",
+      "nlp_type": "place",
+      "mentions": 3,
+      "depth_tier": "central",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Diego Rivera",
+      "nlp_type": "organisation",
+      "mentions": 3,
+      "depth_tier": "central",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "half",
+      "nlp_type": "unknown",
+      "mentions": 3,
+      "depth_tier": "central",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "American",
+      "nlp_type": "group",
+      "mentions": 3,
+      "depth_tier": "central",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "San \u00c1ngel",
+      "nlp_type": "place",
+      "mentions": 3,
+      "depth_tier": "central",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Trotsky",
+      "nlp_type": "person",
+      "mentions": 3,
+      "depth_tier": "central",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "New York",
+      "nlp_type": "place",
+      "mentions": 3,
+      "depth_tier": "central",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Paris",
+      "nlp_type": "place",
+      "mentions": 3,
+      "depth_tier": "supporting",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Louvre",
+      "nlp_type": "person",
+      "mentions": 3,
+      "depth_tier": "supporting",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "four",
+      "nlp_type": "unknown",
+      "mentions": 2,
+      "depth_tier": "supporting",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Marx",
+      "nlp_type": "person",
+      "mentions": 2,
+      "depth_tier": "supporting",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Preparatoria",
+      "nlp_type": "place",
+      "mentions": 2,
+      "depth_tier": "supporting",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Frida Kahlo",
+      "nlp_type": "person",
+      "mentions": 2,
+      "depth_tier": "supporting",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Communist",
+      "nlp_type": "group",
+      "mentions": 2,
+      "depth_tier": "supporting",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "San Francisco",
+      "nlp_type": "place",
+      "mentions": 2,
+      "depth_tier": "supporting",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Henry Ford Hospital",
+      "nlp_type": "person",
+      "mentions": 2,
+      "depth_tier": "supporting",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Natalia",
+      "nlp_type": "place",
+      "mentions": 2,
+      "depth_tier": "supporting",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Stalin",
+      "nlp_type": "person",
+      "mentions": 2,
+      "depth_tier": "supporting",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Parisian",
+      "nlp_type": "group",
+      "mentions": 2,
+      "depth_tier": "supporting",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Nickolas Muray",
+      "nlp_type": "person",
+      "mentions": 2,
+      "depth_tier": "supporting",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Muray",
+      "nlp_type": "person",
+      "mentions": 2,
+      "depth_tier": "supporting",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "The Two Fridas",
+      "nlp_type": "work-of-art",
+      "mentions": 2,
+      "depth_tier": "supporting",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Self-Portrait",
+      "nlp_type": "work-of-art",
+      "mentions": 2,
+      "depth_tier": "supporting",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Juan Farill",
+      "nlp_type": "person",
+      "mentions": 2,
+      "depth_tier": "supporting",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "The Broken Column",
+      "nlp_type": "work-of-art",
+      "mentions": 2,
+      "depth_tier": "supporting",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Marxism Will Give Health",
+      "nlp_type": "work-of-art",
+      "mentions": 2,
+      "depth_tier": "supporting",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Magdalena Carmen",
+      "nlp_type": "organisation",
+      "mentions": 1,
+      "depth_tier": "supporting",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Frida Kahlo Calder\u00f3n",
+      "nlp_type": "person",
+      "mentions": 1,
+      "depth_tier": "supporting",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Guillermo Kahlo",
+      "nlp_type": "person",
+      "mentions": 1,
+      "depth_tier": "supporting",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "German",
+      "nlp_type": "group",
+      "mentions": 1,
+      "depth_tier": "supporting",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Matilde Calder\u00f3n",
+      "nlp_type": "person",
+      "mentions": 1,
+      "depth_tier": "supporting",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Gonz\u00e1lez",
+      "nlp_type": "person",
+      "mentions": 1,
+      "depth_tier": "supporting",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Catholic",
+      "nlp_type": "group",
+      "mentions": 1,
+      "depth_tier": "supporting",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Spanish",
+      "nlp_type": "group",
+      "mentions": 1,
+      "depth_tier": "supporting",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "third",
+      "nlp_type": "unknown",
+      "mentions": 1,
+      "depth_tier": "supporting",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Adriana",
+      "nlp_type": "organisation",
+      "mentions": 1,
+      "depth_tier": "supporting",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Guillermo",
+      "nlp_type": "person",
+      "mentions": 1,
+      "depth_tier": "supporting",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "The Mexican Revolution",
+      "nlp_type": "activity",
+      "mentions": 1,
+      "depth_tier": "supporting",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Emiliano Zapata's",
+      "nlp_type": "person",
+      "mentions": 1,
+      "depth_tier": "supporting",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "the Escuela Nacional Preparatoria",
+      "nlp_type": "organisation",
+      "mentions": 1,
+      "depth_tier": "supporting",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "only thirty-five",
+      "nlp_type": "unknown",
+      "mentions": 1,
+      "depth_tier": "supporting",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "two thousand",
+      "nlp_type": "unknown",
+      "mentions": 1,
+      "depth_tier": "supporting",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "G\u00f3mez Arias",
+      "nlp_type": "person",
+      "mentions": 1,
+      "depth_tier": "supporting",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Hegel",
+      "nlp_type": "person",
+      "mentions": 1,
+      "depth_tier": "supporting",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Spengler",
+      "nlp_type": "person",
+      "mentions": 1,
+      "depth_tier": "supporting",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Creation",
+      "nlp_type": "work-of-art",
+      "mentions": 1,
+      "depth_tier": "supporting",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "the Young Communist League",
+      "nlp_type": "organisation",
+      "mentions": 1,
+      "depth_tier": "supporting",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Cuauhtemotzin",
+      "nlp_type": "organisation",
+      "mentions": 1,
+      "depth_tier": "supporting",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Cinco de Mayo",
+      "nlp_type": "organisation",
+      "mentions": 1,
+      "depth_tier": "supporting",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "eleven",
+      "nlp_type": "unknown",
+      "mentions": 1,
+      "depth_tier": "supporting",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "the Red Cross Hospital",
+      "nlp_type": "organisation",
+      "mentions": 1,
+      "depth_tier": "supporting",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "more than thirty",
+      "nlp_type": "unknown",
+      "mentions": 1,
+      "depth_tier": "supporting",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Europe",
+      "nlp_type": "place",
+      "mentions": 1,
+      "depth_tier": "supporting",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Italian",
+      "nlp_type": "group",
+      "mentions": 1,
+      "depth_tier": "supporting",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Tina Modotti",
+      "nlp_type": "person",
+      "mentions": 1,
+      "depth_tier": "supporting",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Modotti",
+      "nlp_type": "person",
+      "mentions": 1,
+      "depth_tier": "supporting",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "the Communist Party's",
+      "nlp_type": "organisation",
+      "mentions": 1,
+      "depth_tier": "supporting",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "the Ministry of Education",
+      "nlp_type": "organisation",
+      "mentions": 1,
+      "depth_tier": "supporting",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "twenty-two",
+      "nlp_type": "unknown",
+      "mentions": 1,
+      "depth_tier": "supporting",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "forty-two",
+      "nlp_type": "unknown",
+      "mentions": 1,
+      "depth_tier": "peripheral",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Lupe Mar\u00edn",
+      "nlp_type": "person",
+      "mentions": 1,
+      "depth_tier": "peripheral",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Edward Weston",
+      "nlp_type": "person",
+      "mentions": 1,
+      "depth_tier": "peripheral",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Jean Charlot",
+      "nlp_type": "person",
+      "mentions": 1,
+      "depth_tier": "peripheral",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Julien Levy",
+      "nlp_type": "person",
+      "mentions": 1,
+      "depth_tier": "peripheral",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "the San Francisco Stock Exchange",
+      "nlp_type": "organisation",
+      "mentions": 1,
+      "depth_tier": "peripheral",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "the California School of Fine Arts",
+      "nlp_type": "organisation",
+      "mentions": 1,
+      "depth_tier": "peripheral",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "pre-Columbian",
+      "nlp_type": "group",
+      "mentions": 1,
+      "depth_tier": "peripheral",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "the United States",
+      "nlp_type": "place",
+      "mentions": 1,
+      "depth_tier": "peripheral",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Americans",
+      "nlp_type": "group",
+      "mentions": 1,
+      "depth_tier": "peripheral",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Leo Eloesser",
+      "nlp_type": "person",
+      "mentions": 1,
+      "depth_tier": "peripheral",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Portrait of Dr Leo Eloesser",
+      "nlp_type": "work-of-art",
+      "mentions": 1,
+      "depth_tier": "peripheral",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Detroit",
+      "nlp_type": "place",
+      "mentions": 1,
+      "depth_tier": "peripheral",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "the Detroit Institute of Arts",
+      "nlp_type": "organisation",
+      "mentions": 1,
+      "depth_tier": "peripheral",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "the Henry Ford Hospital",
+      "nlp_type": "place",
+      "mentions": 1,
+      "depth_tier": "peripheral",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "six",
+      "nlp_type": "unknown",
+      "mentions": 1,
+      "depth_tier": "peripheral",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Juan O'Gorman",
+      "nlp_type": "person",
+      "mentions": 1,
+      "depth_tier": "peripheral",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "A Few Small Nips",
+      "nlp_type": "work-of-art",
+      "mentions": 1,
+      "depth_tier": "peripheral",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Isamu Noguchi",
+      "nlp_type": "person",
+      "mentions": 1,
+      "depth_tier": "peripheral",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Chavela Vargas",
+      "nlp_type": "person",
+      "mentions": 1,
+      "depth_tier": "peripheral",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Georgia O'Keeffe",
+      "nlp_type": "person",
+      "mentions": 1,
+      "depth_tier": "peripheral",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Fulang-Chang",
+      "nlp_type": "person",
+      "mentions": 1,
+      "depth_tier": "peripheral",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Leon Trotsky",
+      "nlp_type": "person",
+      "mentions": 1,
+      "depth_tier": "peripheral",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Soviet Union",
+      "nlp_type": "place",
+      "mentions": 1,
+      "depth_tier": "peripheral",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Riveras",
+      "nlp_type": "place",
+      "mentions": 1,
+      "depth_tier": "peripheral",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Stalinist",
+      "nlp_type": "group",
+      "mentions": 1,
+      "depth_tier": "peripheral",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "English",
+      "nlp_type": "unknown",
+      "mentions": 1,
+      "depth_tier": "peripheral",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "French",
+      "nlp_type": "group",
+      "mentions": 1,
+      "depth_tier": "peripheral",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Andr\u00e9 Breton",
+      "nlp_type": "person",
+      "mentions": 1,
+      "depth_tier": "peripheral",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "the Julien Levy Gallery",
+      "nlp_type": "place",
+      "mentions": 1,
+      "depth_tier": "peripheral",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Freudian",
+      "nlp_type": "group",
+      "mentions": 1,
+      "depth_tier": "peripheral",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Marcel Duchamp",
+      "nlp_type": "project",
+      "mentions": 1,
+      "depth_tier": "peripheral",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "the Galerie Pierre Colle",
+      "nlp_type": "place",
+      "mentions": 1,
+      "depth_tier": "peripheral",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Renou et Colle",
+      "nlp_type": "organisation",
+      "mentions": 1,
+      "depth_tier": "peripheral",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "The Frame",
+      "nlp_type": "work-of-art",
+      "mentions": 1,
+      "depth_tier": "peripheral",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "the American Hospital",
+      "nlp_type": "organisation",
+      "mentions": 1,
+      "depth_tier": "peripheral",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Stalinism",
+      "nlp_type": "group",
+      "mentions": 1,
+      "depth_tier": "peripheral",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Trotskyist",
+      "nlp_type": "group",
+      "mentions": 1,
+      "depth_tier": "peripheral",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "The European Frida",
+      "nlp_type": "organisation",
+      "mentions": 1,
+      "depth_tier": "peripheral",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "only two",
+      "nlp_type": "unknown",
+      "mentions": 1,
+      "depth_tier": "peripheral",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Fridas",
+      "nlp_type": "organisation",
+      "mentions": 1,
+      "depth_tier": "peripheral",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Dr Eloesser",
+      "nlp_type": "person",
+      "mentions": 1,
+      "depth_tier": "peripheral",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Judas",
+      "nlp_type": "person",
+      "mentions": 1,
+      "depth_tier": "peripheral",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Xoloitzcuintli",
+      "nlp_type": "group",
+      "mentions": 1,
+      "depth_tier": "peripheral",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Ionic",
+      "nlp_type": "project",
+      "mentions": 1,
+      "depth_tier": "peripheral",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "dozens",
+      "nlp_type": "unknown",
+      "mentions": 1,
+      "depth_tier": "peripheral",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "the Ministry of Education's",
+      "nlp_type": "organisation",
+      "mentions": 1,
+      "depth_tier": "peripheral",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "School of Painting and Sculpture",
+      "nlp_type": "organisation",
+      "mentions": 1,
+      "depth_tier": "peripheral",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "La Esmeralda",
+      "nlp_type": "work-of-art",
+      "mentions": 1,
+      "depth_tier": "peripheral",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Los Fridos",
+      "nlp_type": "work-of-art",
+      "mentions": 1,
+      "depth_tier": "peripheral",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "the Mexican Communist Party",
+      "nlp_type": "organisation",
+      "mentions": 1,
+      "depth_tier": "peripheral",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Diego's Trotskyism",
+      "nlp_type": "organisation",
+      "mentions": 1,
+      "depth_tier": "peripheral",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "approximately 200",
+      "nlp_type": "unknown",
+      "mentions": 1,
+      "depth_tier": "peripheral",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "55",
+      "nlp_type": "unknown",
+      "mentions": 1,
+      "depth_tier": "peripheral",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Masonite",
+      "nlp_type": "project",
+      "mentions": 1,
+      "depth_tier": "peripheral",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "What the Water Gave Me",
+      "nlp_type": "work-of-art",
+      "mentions": 1,
+      "depth_tier": "peripheral",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "The Wounded Deer",
+      "nlp_type": "work-of-art",
+      "mentions": 1,
+      "depth_tier": "peripheral",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "nine",
+      "nlp_type": "unknown",
+      "mentions": 1,
+      "depth_tier": "peripheral",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Philip Wilson",
+      "nlp_type": "person",
+      "mentions": 1,
+      "depth_tier": "peripheral",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "the Hospital for Special Surgery",
+      "nlp_type": "organisation",
+      "mentions": 1,
+      "depth_tier": "peripheral",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "at least six",
+      "nlp_type": "unknown",
+      "mentions": 1,
+      "depth_tier": "peripheral",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "the Hospital Ingl\u00e9s",
+      "nlp_type": "organisation",
+      "mentions": 1,
+      "depth_tier": "peripheral",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Demerol",
+      "nlp_type": "organisation",
+      "mentions": 1,
+      "depth_tier": "peripheral",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Lola \u00c1lvarez Bravo",
+      "nlp_type": "person",
+      "mentions": 1,
+      "depth_tier": "peripheral",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "the Galer\u00eda Arte Contempor\u00e1neo",
+      "nlp_type": "organisation",
+      "mentions": 1,
+      "depth_tier": "peripheral",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Three hundred",
+      "nlp_type": "unknown",
+      "mentions": 1,
+      "depth_tier": "peripheral",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Gangrene",
+      "nlp_type": "organisation",
+      "mentions": 1,
+      "depth_tier": "peripheral",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "CIA",
+      "nlp_type": "organisation",
+      "mentions": 1,
+      "depth_tier": "peripheral",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Guatemala",
+      "nlp_type": "place",
+      "mentions": 1,
+      "depth_tier": "peripheral",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "gaunt",
+      "nlp_type": "person",
+      "mentions": 1,
+      "depth_tier": "peripheral",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "thirty-two",
+      "nlp_type": "unknown",
+      "mentions": 1,
+      "depth_tier": "peripheral",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "two hundred",
+      "nlp_type": "unknown",
+      "mentions": 1,
+      "depth_tier": "peripheral",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "twenty-fifth",
+      "nlp_type": "unknown",
+      "mentions": 1,
+      "depth_tier": "peripheral",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "the Palace of Fine Arts",
+      "nlp_type": "place",
+      "mentions": 1,
+      "depth_tier": "peripheral",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "the Pante\u00f3n Civil de Dolores",
+      "nlp_type": "organisation",
+      "mentions": 1,
+      "depth_tier": "peripheral",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    },
+    {
+      "entity": "Frida Kahlo's",
+      "nlp_type": "person",
+      "mentions": 1,
+      "depth_tier": "peripheral",
+      "llm_status": "pending",
+      "mindmap_node_id": null,
+      "notes": ""
+    }
+  ]
+}
