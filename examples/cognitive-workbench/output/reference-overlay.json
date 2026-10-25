@@ -1,0 +1,940 @@
+{
+  "source": "LLM general knowledge (claude-haiku-4-5@20251001)",
+  "generated": "2026-10-09",
+  "version": "v1.0",
+  "subject": "Frida Kahlo",
+  "total_entries": 168,
+  "entries": {
+    "Frida": {
+      "description": "Mexican artist known for her distinctive self-portraits and surrealist works.",
+      "context": "The subject of this biography; Frida Kahlo herself.",
+      "links": {
+        "wikipedia": "Frida_Kahlo",
+        "wikidata": "Q5588121"
+      }
+    },
+    "Escuela Nacional Preparatoria": {
+      "description": "Mexico's prestigious national preparatory school founded in the 19th century.",
+      "context": "Educational institution where Frida studied and developed her intellectual and artistic interests.",
+      "links": {
+        "wikipedia": "Escuela_Nacional_Preparatoria",
+        "wikidata": "Q5396453"
+      }
+    },
+    "Los Cachuchas": {
+      "description": "An intellectual student group at the Escuela Nacional Preparatoria known for radical ideas and activism.",
+      "context": "Student organization to which Frida belonged, influencing her political and artistic development during her school years.",
+      "links": {
+        "wikipedia": "Los_Cachuchas",
+        "wikidata": "Q6663537"
+      }
+    },
+    "Alejandro G\u00f3mez Arias": {
+      "description": "Mexican intellectual and early member of Los Cachuchas student group.",
+      "context": "Frida's early romantic interest and fellow member of Los Cachuchas who shared her intellectual pursuits."
+    },
+    "Diego Rivera": {
+      "description": "Prominent Mexican muralist and painter, one of the most significant artists of the 20th century.",
+      "context": "Major figure in Frida's life; became her husband and had profound influence on her artistic and personal development.",
+      "links": {
+        "wikipedia": "Diego_Rivera",
+        "wikidata": "Q5279"
+      }
+    },
+    "Creation": {
+      "description": "A mural artwork by Diego Rivera.",
+      "context": "Major artistic work by Diego Rivera that Frida encountered and that influenced her artistic direction."
+    },
+    "Bol\u00edvar Amphitheatre": {
+      "description": "An auditorium at the Escuela Nacional Preparatoria in Mexico City.",
+      "context": "Location at Frida's school where significant cultural and intellectual activities took place."
+    },
+    "Mexico": {
+      "description": "Country in North America, Frida Kahlo's birthplace and primary residence.",
+      "context": "Frida's homeland, central to her identity, artistic subjects, and political engagement throughout her life.",
+      "links": {
+        "wikipedia": "Mexico",
+        "wikidata": "Q96"
+      }
+    },
+    "Young Communist League": {
+      "description": "Communist youth organization and political movement.",
+      "context": "Political organization through which Frida expressed her revolutionary ideals and social commitment.",
+      "links": {
+        "wikidata": "Q3578449"
+      }
+    },
+    "Study medicine": {
+      "description": "Academic pursuit of medical education and training.",
+      "context": "One of Frida's early aspirations during her school years before her artistic path took precedence."
+    },
+    "Have Diego Rivera's baby": {
+      "description": "Goal of motherhood within a relationship.",
+      "context": "Personal aspiration of Frida regarding her relationship with Diego Rivera, significant to her life narrative."
+    },
+    "Fuse art with politics": {
+      "description": "Artistic approach integrating political and social activism into creative expression.",
+      "context": "Central artistic philosophy that Frida pursued throughout her career, combining her revolutionary ideals with her art."
+    },
+    "Become an artist": {
+      "description": "Professional aspiration to create and practice visual art.",
+      "context": "Primary life goal that Frida pursued and achieved, becoming one of Mexico's most celebrated artists."
+    },
+    "Develop emotional honesty in expression": {
+      "description": "Artistic principle of authentic and truthful emotional communication.",
+      "context": "Fundamental artistic commitment that guided Frida's creation of deeply personal and emotionally raw self-portraits."
+    },
+    "Achieve intellectual independence": {
+      "description": "Personal goal of developing autonomous critical thinking and autonomous thought.",
+      "context": "Intellectual aspiration central to Frida's development as a thinker and artist, encouraged by her education and peer group."
+    },
+    "Georg Wilhelm Friedrich Hegel": {
+      "description": "German philosopher known for his dialectical method and idealist philosophy, foundational to modern philosophical thought.",
+      "context": "His philosophical ideas, particularly dialecticism, influenced the intellectual circles and ideological discussions relevant to Frida's political and artistic worldview.",
+      "links": {
+        "wikipedia": "Georg_Wilhelm_Friedrich_Hegel",
+        "wikidata": "Q6882"
+      }
+    },
+    "Karl Marx": {
+      "description": "German philosopher and economist whose theories on class struggle and communism fundamentally shaped modern political ideology.",
+      "context": "His communist theories directly influenced Frida's political commitments and her artistic engagement with revolutionary and socialist ideals.",
+      "links": {
+        "wikipedia": "Karl_Marx",
+        "wikidata": "Q9061"
+      }
+    },
+    "Oswald Spengler": {
+      "description": "German philosopher and historian known for his cyclical theory of civilizations presented in 'The Decline of the West'.",
+      "context": "His philosophical perspectives on history and civilization were part of the intellectual discourse shaping Frida's cultural and political consciousness.",
+      "links": {
+        "wikipedia": "Oswald_Spengler",
+        "wikidata": "Q23639"
+      }
+    },
+    "Mexican nationalism": {
+      "description": "Political and cultural movement emphasizing Mexican identity, sovereignty, and indigenous heritage, particularly prominent in early 20th-century Mexico.",
+      "context": "A central force in Frida's artistic vision and personal identity, driving her celebration of Mexican culture and revolutionary spirit."
+    },
+    "Socialism": {
+      "description": "Political and economic ideology advocating for collective or state ownership of the means of production and elimination of class distinctions.",
+      "context": "A core political commitment for Frida, influencing her artistic themes, activism, and ideological positions throughout her life.",
+      "links": {
+        "wikipedia": "Socialism",
+        "wikidata": "Q6721"
+      }
+    },
+    "Role of art in revolution": {
+      "description": "Concept exploring how artistic expression serves as a tool for social change, political consciousness, and revolutionary movements.",
+      "context": "Central to Frida's artistic philosophy and practice, as she viewed her painting as inseparable from her political activism and commitment to social transformation."
+    },
+    "Frida Kahlo": {
+      "description": "Mexican artist renowned for her surrealist and symbolic self-portraits exploring pain, identity, nature, and Mexican culture.",
+      "context": "The subject of the biography; her life, art, and political engagement form the central narrative.",
+      "links": {
+        "wikipedia": "Frida_Kahlo",
+        "wikidata": "Q5588"
+      }
+    },
+    "Alejandro": {
+      "description": "Early romantic interest and companion from Frida's youth.",
+      "context": "Her first significant romantic relationship, representing an important emotional chapter in her adolescence and early adult years."
+    },
+    "Frida's father": {
+      "description": "Guillermo Kahlo, Hungarian-German photographer and artist who immigrated to Mexico.",
+      "context": "Influential parental figure who introduced Frida to artistic practice and intellectual discourse, shaping her creative development.",
+      "links": {
+        "wikipedia": "Guillermo_Kahlo",
+        "wikidata": "Q2305929"
+      }
+    },
+    "Frida's mother": {
+      "description": "Matilde Calder\u00f3n de Kahlo, Mexican woman who raised Frida within a household of mixed cultural heritage.",
+      "context": "Primary family influence providing emotional support, cultural grounding, and domestic presence throughout Frida's early life and beyond."
+    },
+    "Mexico City": {
+      "description": "Capital and largest city of Mexico, cultural and political center of the nation.",
+      "context": "Frida's birthplace and primary residence where she lived most of her life, central to her identity and the Mexican cultural context of her work.",
+      "links": {
+        "wikipedia": "Mexico_City",
+        "wikidata": "Q1489"
+      }
+    },
+    "Cuauhtemotzin and Cinco de Mayo intersection": {
+      "description": "Specific location in Mexico City marking the corner where La Casa Azul is situated.",
+      "context": "Geographic marker of Frida's childhood home and significant residence, anchoring her life within the urban landscape of Mexico City."
+    },
+    "La Casa Azul": {
+      "description": "Historic blue house in Coyoac\u00e1n, Mexico City, built in the early 20th century and home to Frida Kahlo.",
+      "context": "Frida's birthplace and primary residence where she lived, worked, and died; now a museum dedicated to her life and art.",
+      "links": {
+        "wikipedia": "Frida_Kahlo_Museum",
+        "wikidata": "Q1203381"
+      }
+    },
+    "Red Cross Hospital": {
+      "description": "Medical institution in Mexico City providing emergency and hospital services.",
+      "context": "Location where Frida received initial treatment following her severe streetcar accident in 1925."
+    },
+    "streetcar accident": {
+      "description": "Traumatic collision between a streetcar and bus that resulted in severe injuries.",
+      "context": "Pivotal event in Frida's life at age 18 that caused lifelong physical pain and suffering, profoundly influencing her artistic development and thematic concerns."
+    },
+    "hospital confinement and recovery": {
+      "description": "A period of medical treatment and physical rehabilitation following a serious injury or illness.",
+      "context": "Following her 1938 bus accident, Kahlo spent extended time hospitalized, during which she began processing her trauma and physical condition."
+    },
+    "bedbound isolation and convalescence": {
+      "description": "Extended periods of immobility and recovery while confined to bed during healing from injury or illness.",
+      "context": "Kahlo's prolonged bed rest after her accident became the crucible for her artistic awakening, forcing introspection and creative exploration."
+    },
+    "beginning to paint": {
+      "description": "The initial commencement of artistic practice using paint as a medium.",
+      "context": "During her recovery confinement, Kahlo first began to paint, transforming her physical limitation into creative expression."
+    },
+    "develop artistic identity through painting": {
+      "description": "The process of establishing oneself as an artist and defining one's unique creative voice and style.",
+      "context": "Kahlo's primary creative ambition during recovery, as painting became her means of self-expression and identity formation."
+    },
+    "survive and recover from catastrophic injuries": {
+      "description": "The physical and psychological process of healing and rehabilitation following severe bodily trauma.",
+      "context": "Kahlo's immediate objective after the 1938 bus accident, which required both medical intervention and personal resilience."
+    },
+    "transform pain into subject of study": {
+      "description": "The deliberate artistic practice of converting physical or emotional suffering into intellectual or creative material.",
+      "context": "Kahlo's foundational artistic philosophy, wherein her chronic pain and injuries became the primary subjects of her paintings."
+    },
+    "shift from patient to observer role": {
+      "description": "The psychological transition from passive victimhood to active engagement and analysis of one's condition.",
+      "context": "Kahlo's artistic strategy of observing and documenting her own suffering rather than remaining passive within it."
+    },
+    "mirror fitted to bed canopy": {
+      "description": "A reflective surface installed above a bed to allow a bedridden person to see themselves.",
+      "context": "The practical device that enabled Kahlo to use herself as her primary artistic subject during her confinement, facilitating her self-portraiture practice."
+    },
+    "artistic identity": {
+      "description": "The distinctive persona, style, and creative vision that an artist develops and is known for.",
+      "context": "Kahlo's core sense of self built through her painting practice, rooted in her direct experience of physical and emotional pain."
+    },
+    "approach despite suffering": {
+      "description": "The philosophical stance of continuing creative or purposeful action in the face of physical or emotional pain.",
+      "context": "The defining characteristic of Kahlo's artistic methodology and personal resilience throughout her life."
+    },
+    "Tina Modotti": {
+      "description": "Italian-Mexican photographer, actress, and political activist of the early 20th century.",
+      "context": "A mentor figure and significant influence on Kahlo's artistic and political development during her formative years.",
+      "links": {
+        "wikipedia": "Tina_Modotti",
+        "wikidata": "Q213434"
+      }
+    },
+    "Ministry of Education": {
+      "description": "The Mexican government department responsible for educational policy and administration.",
+      "context": "The institution through which Kahlo engaged with the broader Mexican cultural and artistic establishment, particularly through connections to muralist circles.",
+      "links": {
+        "wikidata": "Q6866362"
+      }
+    },
+    "Communist Party": {
+      "description": "Political organization advocating for communist ideology and governance.",
+      "context": "Kahlo's primary political affiliation throughout her life, central to her artistic mission and worldview.",
+      "links": {
+        "wikipedia": "Communist_Party_of_Mexico",
+        "wikidata": "Q1074902"
+      }
+    },
+    "Mexican muralism movement": {
+      "description": "A 20th-century artistic movement emphasizing large-scale public murals with social and political themes.",
+      "context": "The broader cultural context of Kahlo's artistic development, representing the nationalist and revolutionary artistic aspirations of post-revolutionary Mexico.",
+      "links": {
+        "wikipedia": "Mexican_muralism",
+        "wikidata": "Q650263"
+      }
+    },
+    "Recovery from illness and injury": {
+      "description": "The physical and psychological process of healing and rehabilitation following disease or bodily trauma.",
+      "context": "The overarching theme of Kahlo's life following her accident, encompassing both her medical struggles and her transformation through art."
+    },
+    "Self-portrait painting series": {
+      "description": "A body of work in which an artist depicts themselves as the primary subject, often exploring identity and introspection.",
+      "context": "Kahlo's self-portraits became her signature artistic practice, serving as vehicles for exploring her physical pain, emotional state, and Mexican identity."
+    },
+    "Diego Rivera portrait": {
+      "description": "A painted depiction of the Mexican muralist and artist Diego Rivera.",
+      "context": "Kahlo created portraits of her husband as part of her artistic practice and as an expression of her complex emotional relationship with him."
+    },
+    "Financial self-sufficiency": {
+      "description": "The ability to support oneself economically without depending on others.",
+      "context": "A key goal for Kahlo, who sought to sustain her artistic career and personal independence through the sale of her paintings rather than relying on Diego Rivera's income."
+    },
+    "Autonomy and independence": {
+      "description": "The state of being self-governing and capable of functioning without external control or support.",
+      "context": "A fundamental objective for Kahlo, who struggled against both physical limitations and her husband's dominance to establish herself as an independent artist and person."
+    },
+    "Artistic development and mastery": {
+      "description": "The process of cultivating skill, technique, and creative vision in artistic practice.",
+      "context": "A driving goal for Kahlo throughout her career, as she worked to refine her distinctive style and establish herself as a serious artist in her own right."
+    },
+    "Political and intellectual engagement": {
+      "description": "Active participation in political movements and intellectual discourse.",
+      "context": "Kahlo sought to involve herself in political activism and intellectual circles, reflecting her commitment to communist ideology and leftist causes alongside Diego Rivera."
+    },
+    "Romantic connection with Diego Rivera": {
+      "description": "An emotional and intimate bond between two people in a romantic relationship.",
+      "context": "Kahlo's desire for romantic partnership with Rivera was a significant motivating force in her life, despite the relationship's turbulence and infidelities."
+    },
+    "Frida and Diego's marriage": {
+      "description": "A legal and personal union between two individuals.",
+      "context": "Kahlo's marriage to Diego Rivera was a defining relationship marked by infidelities, separations, and reconciliations that profoundly influenced her emotional life and artistic output."
+    },
+    "Frida's goal of artistic independence": {
+      "description": "The objective of creating and exhibiting art according to one's own vision without external control.",
+      "context": "Kahlo strived to establish her artistic reputation and authority separate from Diego Rivera's overwhelming fame, seeking recognition as an individual artist."
+    },
+    "Frida's goal of emotional autonomy from Diego": {
+      "description": "The objective of achieving psychological independence and self-determination in a relationship.",
+      "context": "Kahlo sought freedom from emotional dependency on Rivera, attempting to develop her own identity and emotional resilience despite their deep connection."
+    },
+    "Frida's goal of sexual and political equality": {
+      "description": "The objective of achieving equal rights and treatment in sexual relationships and political participation.",
+      "context": "Kahlo pursued equality with Rivera both sexually and politically, challenging traditional gender roles and seeking recognition as his intellectual and political peer."
+    },
+    "Frida's goal of artistic legitimacy": {
+      "description": "The objective of gaining recognition and acceptance of one's artistic work as serious and valuable.",
+      "context": "Kahlo worked to establish herself as a legitimate artist deserving of critical respect and museum exhibition, moving beyond being perceived merely as Diego Rivera's wife."
+    },
+    "Coyoac\u00e1n": {
+      "description": "A borough and historic neighborhood in Mexico City known for its bohemian culture and artistic community.",
+      "context": "Kahlo's birthplace and lifelong home where she lived with Diego Rivera; the Casa Azul in Coyoac\u00e1n became her studio and sanctuary.",
+      "links": {
+        "wikipedia": "Coyoac\u00e1n",
+        "wikidata": "Q80115"
+      }
+    },
+    "Lupe Mar\u00edn": {
+      "description": "A Mexican painter, muralist's model, and writer who was Diego Rivera's first wife.",
+      "context": "Mar\u00edn was Diego Rivera's previous spouse; her relationship with Rivera and presence in Kahlo's social circle added complexity to Kahlo's marriage and artistic environment.",
+      "links": {
+        "wikipedia": "Lupe_Mar\u00edn",
+        "wikidata": "Q1874760"
+      }
+    },
+    "Edward Weston": {
+      "description": "An American modernist photographer renowned for his striking black-and-white photographs of natural forms and portraits.",
+      "context": "Weston was a prominent photographer who documented Kahlo and her work, contributing to the visual record of her artistic practice and persona during the 1920s.",
+      "links": {
+        "wikipedia": "Edward_Weston",
+        "wikidata": "Q363841"
+      }
+    },
+    "Jean Charlot": {
+      "description": "Mexican-American muralist and painter known for promoting Mexican art and culture in the early 20th century.",
+      "context": "Influenced Frida's artistic development and helped introduce her work to broader audiences through his connections in the art world.",
+      "links": {
+        "wikipedia": "Jean_Charlot",
+        "wikidata": "Q1684643"
+      }
+    },
+    "Julien Levy": {
+      "description": "American art dealer and gallery owner who championed avant-garde and surrealist art.",
+      "context": "Promoted Frida's work in New York and facilitated her international exhibition opportunities during the 1930s-1940s.",
+      "links": {
+        "wikipedia": "Julien_Levy",
+        "wikidata": "Q6304393"
+      }
+    },
+    "retablo tradition": {
+      "description": "Mexican folk art form of small devotional paintings on metal or wood, typically depicting religious scenes or miraculous events.",
+      "context": "Frida drew upon this traditional Mexican artistic form as inspiration for her own painting style and subject matter.",
+      "links": {
+        "wikipedia": "Retablo",
+        "wikidata": "Q1389360"
+      }
+    },
+    "European artistic traditions": {
+      "description": "Established art movements and techniques originating from Europe, including Renaissance, Baroque, and modern European schools.",
+      "context": "Frida deliberately positioned her work against European artistic conventions to assert a distinctly Mexican artistic identity."
+    },
+    "political salon household": {
+      "description": "An intellectual and artistic gathering space where cultural and political figures convene for discussion and patronage.",
+      "context": "Frida and Diego's home functioned as a political salon that influenced her artistic networks and ideological commitments."
+    },
+    "Frida's easel paintings": {
+      "description": "Small-scale, intimately-scaled paintings created on easels, typically exploring personal and autobiographical themes.",
+      "context": "Frida's body of work in this medium became her signature artistic practice, characterized by intense self-portraiture and Mexican imagery."
+    },
+    "Paris Exhibition": {
+      "description": "A major international art exhibition held in Paris in 1939.",
+      "context": "Frida's work was exhibited in Paris in 1939, marking a significant moment in her international recognition and exposure to European audiences.",
+      "links": {
+        "wikidata": "Q1394894"
+      }
+    },
+    "Paris": {
+      "description": "The capital city of France and a major center of artistic innovation and avant-garde movements in the early 20th century.",
+      "context": "Paris represented the epicenter of European artistic validation that Frida sought and ultimately rejected in favor of Mexican cultural identity.",
+      "links": {
+        "wikipedia": "Paris",
+        "wikidata": "Q90"
+      }
+    },
+    "The Louvre": {
+      "description": "The world's largest and most famous art museum, located in Paris and housing European masterworks.",
+      "context": "The Louvre represented European artistic canon and institutional validation that Frida aspired to and later critiqued.",
+      "links": {
+        "wikipedia": "Louvre",
+        "wikidata": "Q11985"
+      }
+    },
+    "The Frame": {
+      "description": "A 1938 self-portrait painting by Frida Kahlo featuring the artist within an ornamental wooden frame.",
+      "context": "This painting exemplified Frida's integration of Mexican folk aesthetics with modernist self-portraiture, creating a bridge between Mexican and European artistic traditions.",
+      "links": {
+        "wikipedia": "The_Frame_(painting)",
+        "wikidata": "Q2493644"
+      }
+    },
+    "Andr\u00e9 Breton": {
+      "description": "French writer and founder of Surrealism, influential avant-garde movement of the 20th century.",
+      "context": "Breton championed Frida's work and facilitated her Paris exhibition in 1939, though Frida resisted the Surrealist label.",
+      "links": {
+        "wikipedia": "Andr\u00e9_Breton",
+        "wikidata": "Q154371"
+      }
+    },
+    "Marcel Duchamp": {
+      "description": "Influential French-American artist and conceptualist who challenged traditional definitions of art.",
+      "context": "Duchamp was involved in promoting Frida's work in Paris and represented the avant-garde European artistic circles she encountered.",
+      "links": {
+        "wikipedia": "Marcel_Duchamp",
+        "wikidata": "Q152324"
+      }
+    },
+    "Nickolas Muray": {
+      "description": "Hungarian-American photographer and artist known for color photography and portraiture.",
+      "context": "Muray was a close friend and professional associate of Frida's who documented her work and facilitated connections in the New York art world.",
+      "links": {
+        "wikipedia": "Nickolas_Muray",
+        "wikidata": "Q714558"
+      }
+    },
+    "Achieve Mexican Recognition": {
+      "description": "An aspiration to gain artistic validation and acknowledgment within Mexican cultural institutions and society.",
+      "context": "This goal reflected Frida's commitment to establishing herself as a significant figure in Mexican art rather than merely seeking European approval."
+    },
+    "Establish Mexican Identity Over European Validation": {
+      "description": "A deliberate artistic and cultural strategy prioritizing Mexican aesthetic traditions and national identity over international European standards.",
+      "context": "This became a central principle in Frida's artistic philosophy, driving her to ground her work in Mexican folk art, politics, and indigenous heritage."
+    },
+    "Reject Extractive European Interest": {
+      "description": "A philosophical stance against the exploitative appropriation of non-European cultures and resources by European powers.",
+      "context": "A core ideological position in Kahlo's artistic and personal worldview, reflecting her commitment to Mexican cultural independence."
+    },
+    "Privilege Action Over Intellectual Contemplation": {
+      "description": "A philosophical principle favoring direct engagement and practical doing over passive theoretical reflection.",
+      "context": "An existential value that guided Kahlo's artistic practice and life choices, emphasizing lived experience over abstract philosophy."
+    },
+    "Kidney Infection": {
+      "description": "A bacterial infection of the kidneys causing inflammation and systemic illness.",
+      "context": "One of several serious health crises Kahlo endured throughout her life, contributing to her chronic suffering and artistic output."
+    },
+    "American Hospital": {
+      "description": "A medical facility in Mexico City providing healthcare services, particularly to upper-class and foreign patients.",
+      "context": "A place where Kahlo received treatment for her various medical conditions during her lifetime."
+    },
+    "Surrealist Movement": {
+      "description": "An early-20th-century avant-garde artistic and literary movement emphasizing the unconscious mind, dreams, and automatic creation.",
+      "context": "An artistic movement that claimed Kahlo's work, though she resisted the label and insisted her paintings depicted her own reality rather than surrealist fantasy.",
+      "links": {
+        "wikipedia": "Surrealism",
+        "wikidata": "Q39629"
+      }
+    },
+    "Mexican Identity and Cultural Authenticity": {
+      "description": "The philosophical and cultural concept of preserving and celebrating indigenous and authentic Mexican heritage and values.",
+      "context": "A central preoccupation of Kahlo's artistic identity, expressed through her use of traditional Mexican imagery, dress, and indigenous symbolism."
+    },
+    "Frida-Diego Divorce": {
+      "description": "The legal dissolution of a marriage between two people.",
+      "context": "Kahlo's separation from muralist Diego Rivera in 1939, a traumatic event that profoundly affected her emotional state and artistic production."
+    },
+    "The Two Fridas": {
+      "description": "A monumental double self-portrait oil painting created in 1944 depicting two versions of Kahlo holding hands.",
+      "context": "One of Kahlo's most significant works, symbolizing her divided self and emotional pain, particularly created during the aftermath of her divorce.",
+      "links": {
+        "wikipedia": "The_Two_Fridas",
+        "wikidata": "Q3527450"
+      }
+    },
+    "Self-Portrait with Cropped Hair": {
+      "description": "A 1940 oil painting of Kahlo sitting with short hair, holding scissors, created as a response to personal trauma.",
+      "context": "A powerful self-portrait created following her divorce from Diego Rivera, expressing her emotional devastation and rejection of conventional feminine beauty.",
+      "links": {
+        "wikipedia": "Self-Portrait_with_Cropped_Hair",
+        "wikidata": "Q3521675"
+      }
+    },
+    "Frida-Diego Remarriage": {
+      "description": "The renewal of a marriage between two previously divorced individuals.",
+      "context": "Kahlo and Rivera's reconciliation and remarriage in 1940, representing a resumption of their tumultuous relationship after their separation."
+    },
+    "San Francisco": {
+      "description": "A major port city in California, United States, located on the Pacific coast.",
+      "context": "A place where Kahlo spent significant time, particularly during treatments and while accompanying Diego Rivera for his mural commissions.",
+      "links": {
+        "wikipedia": "San_Francisco",
+        "wikidata": "Q62"
+      }
+    },
+    "Dr. Juan Farill": {
+      "description": "A Mexican physician specializing in orthopedics and spinal medicine during the mid-20th century.",
+      "context": "One of Kahlo's primary medical doctors who treated her chronic spinal and physical ailments throughout her later years."
+    },
+    "Dr. Eloesser": {
+      "description": "An early-20th-century physician and medical specialist, likely based in San Francisco.",
+      "context": "A trusted doctor who treated Kahlo during her time in California and provided her with medical care and advice."
+    },
+    "Trotsky": {
+      "description": "Leon Trotsky (1879\u20131940), a Russian revolutionary, Marxist theorist, and founder of the Fourth International.",
+      "context": "A political figure with whom Kahlo had a brief affair in 1937 while he was in exile in Mexico, influencing her artistic and political circles.",
+      "links": {
+        "wikipedia": "Leon_Trotsky",
+        "wikidata": "Q6386"
+      }
+    },
+    "Trotskyism": {
+      "description": "A revolutionary socialist ideology based on Leon Trotsky's interpretation of Marxism, emphasizing permanent revolution and international communism.",
+      "context": "A political ideology embraced by Kahlo and her circle in Mexico, reflecting her commitment to leftist politics and social revolution.",
+      "links": {
+        "wikipedia": "Trotskyism",
+        "wikidata": "Q168796"
+      }
+    },
+    "Stalinism": {
+      "description": "A communist political ideology emphasizing rapid industrialization, centralized state control, and loyalty to the Soviet Union under Stalin's leadership.",
+      "context": "A political framework relevant to Kahlo's engagement with Marxist ideology and Mexican communist circles during the 1950s.",
+      "links": {
+        "wikipedia": "Stalinism",
+        "wikidata": "Q6581097"
+      }
+    },
+    "psychic splitting": {
+      "description": "A psychological concept describing the fragmentation of consciousness or identity into separate, often conflicting parts.",
+      "context": "A psychological pattern identified in Kahlo's internal conflicts between her competing desires for independence and connection to Diego.",
+      "links": {
+        "wikipedia": "Dissociation_(psychology)",
+        "wikidata": "Q1239625"
+      }
+    },
+    "all-or-nothing thinking": {
+      "description": "A cognitive pattern involving extreme, black-and-white views that reject middle ground or nuanced perspectives.",
+      "context": "A psychological tendency reflected in Kahlo's oscillation between absolute merger with and complete separation from Diego.",
+      "links": {
+        "wikipedia": "Cognitive_distortion",
+        "wikidata": "Q5139804"
+      }
+    },
+    "Achieve artistic independence from Diego": {
+      "description": "A personal objective to develop and maintain creative autonomy separate from her spouse's influence and shadow.",
+      "context": "A core goal driving Kahlo's artistic practice and identity formation during her mature period."
+    },
+    "Establish self-reliance and agency": {
+      "description": "A personal objective to develop personal autonomy and the capacity to act independently in one's own interests.",
+      "context": "A fundamental goal underlying Kahlo's psychological development and her attempts to resist complete dependency on Diego."
+    },
+    "Maintain relationship with Diego on strategic terms": {
+      "description": "A personal objective to preserve a relationship while negotiating its terms and boundaries to protect one's own interests.",
+      "context": "A pragmatic goal reflecting Kahlo's desire to keep Diego in her life without surrendering her autonomy completely."
+    },
+    "Process trauma and emotional pain through art": {
+      "description": "A personal objective to channel difficult psychological experiences into creative expression as a form of healing.",
+      "context": "A central artistic and therapeutic goal that defined Kahlo's approach to painting, particularly her self-portraits."
+    },
+    "San \u00c1ngel": {
+      "description": "A neighborhood in Mexico City known as an artistic and bohemian enclave.",
+      "context": "The location of Kahlo and Diego's residence, significant as a space where she cultivated her social and political circles.",
+      "links": {
+        "wikipedia": "San_\u00c1ngel",
+        "wikidata": "Q752035"
+      }
+    },
+    "The Broken Column": {
+      "description": "A major self-portrait painting by Frida Kahlo completed in 1944, depicting a fragmented female torso with internal architectural collapse.",
+      "context": "One of Kahlo's most important works expressing her chronic physical pain and psychological fragmentation.",
+      "links": {
+        "wikipedia": "The_Broken_Column",
+        "wikidata": "Q3975893"
+      }
+    },
+    "Marxism Will Give Health to the Sick": {
+      "description": "A painting by Frida Kahlo combining political ideology with imagery of physical healing and bodily transformation.",
+      "context": "A work reflecting Kahlo's attempt to integrate her communist political beliefs with her personal struggle against chronic illness.",
+      "links": {
+        "wikipedia": "Marxism_Will_Give_Health_to_the_Sick",
+        "wikidata": "Q109374314"
+      }
+    },
+    "La Esmeralda": {
+      "description": "The National School of Painting, Sculpture and Printmaking in Mexico City, Mexico's premier art academy.",
+      "context": "An institution where Kahlo taught from 1943, allowing her to exercise authority and develop her own artistic pedagogy.",
+      "links": {
+        "wikipedia": "San_Carlos_Academy",
+        "wikidata": "Q6210220"
+      }
+    },
+    "Mexican Communist Party": {
+      "description": "A Marxist political organization founded in Mexico, central to communist movements in Latin America.",
+      "context": "A political organization Kahlo joined in 1950, representing her commitment to communist ideology and activism in her later life.",
+      "links": {
+        "wikipedia": "Mexican_Communist_Party",
+        "wikidata": "Q1000788"
+      }
+    },
+    "Los Fridos": {
+      "description": "An informal artistic collective or group of artists associated with Frida Kahlo.",
+      "context": "A social and artistic circle through which Kahlo cultivated relationships, artistic dialogue, and community beyond Diego's dominance."
+    },
+    "Manage chronic physical pain": {
+      "description": "A personal objective to develop strategies and practices to cope with persistent bodily suffering.",
+      "context": "An ongoing goal throughout Kahlo's life, resulting from her 1925 bus accident and subsequent health complications."
+    },
+    "Transform personal suffering through art": {
+      "description": "A personal objective to convert private pain and trauma into meaningful creative and aesthetic expression.",
+      "context": "A defining artistic and existential goal that made Kahlo's work a vehicle for transcending her physical and emotional injuries."
+    },
+    "Establish independent self-worth through teaching": {
+      "description": "A personal objective focused on developing confidence and autonomy by educating others.",
+      "context": "A core goal in Kahlo's life, reflecting her desire to sustain herself and validate her identity through pedagogical work rather than dependence on others."
+    },
+    "Advance Mexican Communist ideology and practice": {
+      "description": "A political objective aimed at promoting communist principles and activism within Mexican society.",
+      "context": "A significant ideological commitment for Kahlo, who joined the Communist Party and integrated political activism into her artistic and personal life."
+    },
+    "Create distinctly Mexican art rooted in lived experience": {
+      "description": "An artistic vision emphasizing authentic cultural expression derived from personal and national identity.",
+      "context": "Central to Kahlo's artistic mission\u2014she deliberately drew on Mexican folk traditions, indigenous imagery, and her own biography to create art that was unapologetically Mexican."
+    },
+    "Curate La Casa Azul as expression of Mexican identity": {
+      "description": "An objective to design and present a living space as a cultural statement and artistic statement.",
+      "context": "Kahlo transformed her Mexico City home (The Blue House) into a reflection of her identity, filling it with pre-Columbian artifacts, Mexican folk art, and personal memorabilia.",
+      "links": {
+        "wikipedia": "La_Casa_Azul",
+        "wikidata": "Q1136537"
+      }
+    },
+    "Integrate medical necessity into artistic practice": {
+      "description": "An approach to making art that incorporates or responds to physical health constraints and treatments.",
+      "context": "Kahlo's chronic pain and multiple surgeries became integral to her artistic process; she often painted during recovery periods and used her medical experiences as artistic subjects."
+    },
+    "Teach authentic artistic practice grounded in observation": {
+      "description": "A pedagogical philosophy emphasizing direct experiential learning and careful attention to visual reality.",
+      "context": "Kahlo taught at La Esmeralda art school and believed in teaching students to paint from genuine observation and personal experience rather than abstract theory."
+    },
+    "Diego": {
+      "description": "Diego Rivera, a renowned Mexican muralist and painter.",
+      "context": "Kahlo's husband and significant artistic influence; their volatile marriage profoundly shaped her emotional life, artistic themes, and personal struggles.",
+      "links": {
+        "wikipedia": "Diego_Rivera",
+        "wikidata": "Q128960"
+      }
+    },
+    "My Birth": {
+      "description": "A 1932 painting by Frida Kahlo depicting a human head with a face giving birth to itself.",
+      "context": "A shocking and intimate work created after Kahlo's miscarriage, exemplifying her commitment to depicting bodily experience and pain through bold surrealist imagery.",
+      "links": {
+        "wikipedia": "My_Birth_(painting)",
+        "wikidata": "Q3324598"
+      }
+    },
+    "What the Water Gave Me": {
+      "description": "A 1938 surrealist painting by Frida Kahlo showing a woman's reflection in water containing fragmented imagery.",
+      "context": "A key work demonstrating Kahlo's exploration of the unconscious, bodily introspection, and psychological trauma through surrealist techniques.",
+      "links": {
+        "wikipedia": "What_the_Water_Gave_Me",
+        "wikidata": "Q3568514"
+      }
+    },
+    "The Wounded Deer": {
+      "description": "A 1946 self-portrait by Frida Kahlo depicting her head on a deer's body pierced with arrows.",
+      "context": "A powerful metaphorical work expressing Kahlo's physical and emotional suffering, merging her human identity with animal vulnerability.",
+      "links": {
+        "wikipedia": "The_Wounded_Deer",
+        "wikidata": "Q3568329"
+      }
+    },
+    "Henry Ford Hospital": {
+      "description": "A 1932 painting by Frida Kahlo depicting a miscarriage using anatomical and surrealist imagery.",
+      "context": "Created after Kahlo's miscarriage in Detroit, this work represents her unflinching exploration of bodily trauma and reproductive loss.",
+      "links": {
+        "wikipedia": "Henry_Ford_Hospital_(The_Flying_Bed)",
+        "wikidata": "Q3324569"
+      }
+    },
+    "the accident": {
+      "description": "A 1925 bus collision in Mexico City that caused severe injuries to Kahlo.",
+      "context": "The defining traumatic event of Kahlo's life, resulting in a spinal fracture, chronic pain, and multiple miscarriages that became central themes in her art."
+    },
+    "Frida's medical studies aspiration": {
+      "description": "A goal to pursue formal education in medicine or medical practice.",
+      "context": "Before the accident, Kahlo aspired to become a doctor, a dream derailed by her injuries but which influenced her scientific interest in anatomy evident in her paintings."
+    },
+    "Frida's goal to explore bodily intimacy through self-portraiture": {
+      "description": "An artistic objective focused on depicting physical sensation, sexuality, and bodily connection in self-directed works.",
+      "context": "A defining aspect of Kahlo's artistic practice, in which she used self-portraiture to unflinchingly explore intimate bodily experiences, desire, and vulnerability."
+    },
+    "Frida's goal to express pain as pre-linguistic embodied knowledge": {
+      "description": "An artistic aim to communicate suffering and physical sensation through visual representation rather than verbal language.",
+      "context": "Central to Kahlo's artistic philosophy\u2014she sought to visualize pain and bodily knowledge as direct experience that precedes and exceeds words."
+    },
+    "Frida's goal to reject tonal depth and European artistic convention": {
+      "description": "An artistic objective to move away from Western perspectival traditions and academic realism in favor of flattened, non-naturalistic representation.",
+      "context": "Central to Kahlo's artistic philosophy, she deliberately rejected European Renaissance conventions to develop her distinctive modernist style."
+    },
+    "Frida's goal to integrate medical illustration and emotional expression": {
+      "description": "An artistic aim to combine anatomical precision with personal psychological and emotional content in visual representation.",
+      "context": "Drove Kahlo's approach to depicting her own body and suffering, merging scientific accuracy with surrealist emotional intensity."
+    },
+    "Frida's goal to collapse observer-subject distance": {
+      "description": "An artistic intention to eliminate the separation between the viewer and the artwork, creating immediate emotional engagement.",
+      "context": "Fundamental to Kahlo's confrontational self-portraiture, which directly addresses and implicates the viewer in her subjective experience."
+    },
+    "Mexican folk art": {
+      "description": "Traditional decorative and functional artistic practices developed by Mexican communities, including textiles, ceramics, retablos, and crafts.",
+      "context": "A major influence on Kahlo's aesthetic, she incorporated folk art traditions, symbolism, and materials into her modernist practice.",
+      "links": {
+        "wikipedia": "Folk_art_of_Mexico",
+        "wikidata": "Q116947883"
+      }
+    },
+    "Frida's body": {
+      "description": "The physical form of the artist, marked by chronic pain, disability, and surgical intervention.",
+      "context": "The primary subject and vehicle of Kahlo's artistic practice; her injured body became her most significant artistic material."
+    },
+    "Philip Wilson": {
+      "description": "An American surgeon.",
+      "context": "A medical physician involved in treating Kahlo's spinal condition during her time in New York."
+    },
+    "Juan Farill": {
+      "description": "A Mexican orthopedic surgeon.",
+      "context": "Kahlo's primary spinal surgeon who performed multiple operations on her deteriorating vertebral column between 1946 and 1951."
+    },
+    "Hospital for Special Surgery": {
+      "description": "A specialized orthopedic hospital in New York City.",
+      "context": "Medical facility where Kahlo received spinal surgery and treatment during her stays in New York.",
+      "links": {
+        "wikipedia": "Hospital_for_Special_Surgery",
+        "wikidata": "Q2517854"
+      }
+    },
+    "Hospital Ingl\u00e9s": {
+      "description": "A private hospital in Mexico City.",
+      "context": "Medical facility in Mexico where Kahlo underwent spinal operations and treatment."
+    },
+    "New York": {
+      "description": "A major city in the northeastern United States, center of American art and culture.",
+      "context": "The location where Kahlo sought advanced spinal surgery and medical treatment in the late 1940s.",
+      "links": {
+        "wikipedia": "New_York_City",
+        "wikidata": "Q60"
+      }
+    },
+    "Spinal fusion operation (1946)": {
+      "description": "A surgical procedure to stabilize the spine by fusing vertebrae together.",
+      "context": "An early major surgery performed on Kahlo to address her deteriorating spinal condition and chronic pain."
+    },
+    "Series of spinal operations (1946-1950)": {
+      "description": "A sequence of multiple surgical interventions on the vertebral column over a four-year period.",
+      "context": "Kahlo underwent numerous operations during this critical period to manage her progressive spinal deterioration and pain."
+    },
+    "Spinal fusion operation (1951)": {
+      "description": "A surgical procedure to fuse vertebrae, performed in the final year of intensive spinal intervention.",
+      "context": "The last major spinal surgery in Kahlo's sequence of operations, reflecting her continued struggle with physical deterioration."
+    },
+    "Maintain capacity to paint": {
+      "description": "An objective to preserve functional ability in the hands and upper body required for artistic creation.",
+      "context": "A crucial goal driving Kahlo's medical interventions, as her artistic practice was her primary means of expression and survival."
+    },
+    "Manage chronic spinal pain": {
+      "description": "An objective to control or reduce persistent pain originating from the vertebral column and surrounding structures.",
+      "context": "The primary medical motivation for Kahlo's extensive surgical interventions and ongoing treatment throughout the late 1940s and 1950s."
+    },
+    "Survive spinal surgery and recover": {
+      "description": "A medical objective to undergo surgical intervention on the spine and achieve post-operative healing.",
+      "context": "A critical health goal during Frida's later years as she battled severe spinal complications from her earlier bus accident."
+    },
+    "Evaluate whether continued life is worth the pain": {
+      "description": "A philosophical and existential assessment of quality of life versus suffering.",
+      "context": "Reflects Frida's profound struggle with chronic pain and disability, which led to periods of depression and suicidal ideation."
+    },
+    "Self-Portrait with the Portrait of Dr Farill": {
+      "description": "A painting by Frida Kahlo depicting herself alongside her physician, created as a tribute to medical care.",
+      "context": "An artwork expressing Frida's gratitude to Dr. Farill during her medical treatment and representing her artistic response to her health challenges.",
+      "links": {
+        "wikidata": "Q19675344"
+      }
+    },
+    "Create art despite chronic pain and disability": {
+      "description": "An artistic and personal objective to produce creative work under conditions of physical suffering and bodily limitation.",
+      "context": "Central to Frida's identity and legacy, demonstrating her determination to maintain artistic practice despite severe physical constraints."
+    },
+    "Bone infection": {
+      "description": "A medical condition in which pathogenic microorganisms infect bone tissue, causing inflammation and potential complications.",
+      "context": "A serious complication Frida experienced that threatened her health and required medical intervention.",
+      "links": {
+        "wikipedia": "Osteomyelitis",
+        "wikidata": "Q929833"
+      }
+    },
+    "Chronic spinal pain": {
+      "description": "Long-term, persistent pain in the spine and surrounding structures, often causing functional disability.",
+      "context": "A defining condition of Frida's adult life resulting from her bus accident, which profoundly influenced her art and psychological state.",
+      "links": {
+        "wikipedia": "Spinal_cord_injury",
+        "wikidata": "Q202387"
+      }
+    },
+    "Lola \u00c1lvarez Bravo": {
+      "description": "A Mexican photographer and artist active in the early-to-mid 20th century.",
+      "context": "Associated with organizing or supporting Frida's first solo exhibition in Mexico, playing a role in advancing her recognition.",
+      "links": {
+        "wikipedia": "Lola_\u00c1lvarez_Bravo",
+        "wikidata": "Q232616"
+      }
+    },
+    "Dr Farill": {
+      "description": "A Mexican physician who treated Frida Kahlo during her medical crises in the 1950s.",
+      "context": "Frida's surgeon and physician during her final years, credited with providing care and inspiring gratitude that she expressed in her art."
+    },
+    "Galer\u00eda Arte Contempor\u00e1neo": {
+      "description": "A Mexican art gallery that exhibited contemporary works during the mid-20th century.",
+      "context": "The venue that hosted Frida's first solo exhibition in Mexico, marking a significant milestone in her domestic recognition."
+    },
+    "Frida's first solo exhibition in Mexico": {
+      "description": "A solo art exhibition showcasing Frida Kahlo's work displayed in her home country.",
+      "context": "A milestone achievement representing recognition and validation of Frida's artistic legacy within Mexico, fulfilling a long-held goal."
+    },
+    "bus accident": {
+      "description": "A 1925 collision between a bus and streetcar in Mexico City that caused severe injuries to Frida Kahlo.",
+      "context": "The traumatic event that caused the spinal injuries and physical disabilities that defined Frida's life and became central to her artistic identity.",
+      "links": {
+        "wikipedia": "Frida_Kahlo",
+        "wikidata": "Q5588"
+      }
+    },
+    "amputation of right leg": {
+      "description": "Surgical removal of the right lower limb, a severe disability requiring prosthetic adaptation.",
+      "context": "A devastating final blow to Frida's health in the 1950s, occurring late in her life and accelerating her physical decline."
+    },
+    "recognition in her own country": {
+      "description": "Acknowledgment, validation, and cultural appreciation of artistic achievements by her native nation.",
+      "context": "A long-sought goal for Frida, who achieved domestic recognition later in her career with her first solo exhibition in Mexico."
+    },
+    "continue painting": {
+      "description": "The artistic practice and activity of creating painted works.",
+      "context": "Frida's primary means of expressing her identity and suffering, which she pursued relentlessly despite escalating physical disabilities."
+    },
+    "physical recovery after amputation": {
+      "description": "The process of healing and functional adaptation following the surgical removal of a limb.",
+      "context": "A challenging objective in Frida's final years as she struggled to adjust to life without her right leg while maintaining her artistic practice."
+    },
+    "maintain will to live": {
+      "description": "A psychological and emotional determination to persist despite adversity and suffering.",
+      "context": "A central theme in Kahlo's later work as she battled chronic pain and health crises while creating increasingly intense paintings."
+    },
+    "still life series with fruit": {
+      "description": "A body of paintings depicting arrangements of fruits and vegetables, often with symbolic or metaphorical meaning.",
+      "context": "Kahlo's late-period artistic project that combined intimate still life imagery with themes of mortality, vitality, and personal struggle."
+    },
+    "VIVA LA VIDA": {
+      "description": "A Spanish phrase meaning 'Long Live Life,' often used as an affirmation of living despite hardship.",
+      "context": "The title of Kahlo's final painting completed before her death, representing her defiant celebration of life in the face of imminent mortality.",
+      "links": {
+        "wikipedia": "Viva_la_Vida_(painting)"
+      }
+    },
+    "Guatemala": {
+      "description": "A Central American nation with a complex history of political instability, indigenous cultures, and colonial legacy.",
+      "context": "A cause Kahlo supported politically in her final years, defending its sovereignty against U.S. intervention and imperialism.",
+      "links": {
+        "wikipedia": "Guatemala",
+        "wikidata": "Q774"
+      }
+    },
+    "Palace of Fine Arts": {
+      "description": "A prominent cultural institution and architectural landmark in Mexico City dedicated to the arts.",
+      "context": "The venue where Kahlo held her only solo exhibition in Mexico during her lifetime, a major career milestone.",
+      "links": {
+        "wikipedia": "Palacio_de_Bellas_Artes",
+        "wikidata": "Q1238222"
+      }
+    },
+    "Pante\u00f3n Civil de Dolores": {
+      "description": "A historic cemetery in Mexico City where notable Mexican figures are interred.",
+      "context": "The burial site where Kahlo was laid to rest following her death in 1954.",
+      "links": {
+        "wikipedia": "Pante\u00f3n_Civil_de_Dolores",
+        "wikidata": "Q3888694"
+      }
+    },
+    "CIA-orchestrated coup against Guatemala": {
+      "description": "The 1954 military coup in Guatemala backed by the United States Central Intelligence Agency against President Jacobo \u00c1rbenz.",
+      "context": "A significant historical event that Kahlo opposed, reflecting her anti-imperialist political stance in her final years.",
+      "links": {
+        "wikipedia": "1954_Guatemalan_coup_d'\u00e9tat",
+        "wikidata": "Q3301169"
+      }
+    },
+    "Political demonstration for Guatemala": {
+      "description": "Public protest or activism expressing solidarity with Guatemala against foreign intervention.",
+      "context": "A political action Kahlo participated in as part of her commitment to defending Guatemala's independence against U.S. imperialism."
+    },
+    "Frida's artistic body of work": {
+      "description": "The complete collection of paintings, drawings, and other artistic creations produced by Kahlo throughout her lifetime.",
+      "context": "The culmination of Kahlo's creative output, increasingly characterized by bold color, self-portraiture, and integration of personal and political themes."
+    },
+    "Frida's medical suffering": {
+      "description": "The chronic physical pain and health complications resulting from Kahlo's 1925 bus accident and subsequent illnesses.",
+      "context": "A persistent biographical reality that profoundly shaped her artistic vision, emotional intensity, and existential outlook throughout her life."
+    },
+    "Survive and continue creating": {
+      "description": "The goal of persisting through hardship while maintaining artistic productivity and expression.",
+      "context": "A driving motivation in Kahlo's final period as she channeled physical suffering into increasingly powerful artistic work despite deteriorating health."
+    },
+    "Defend Guatemala and oppose imperialism": {
+      "description": "Political commitment to protecting national sovereignty against foreign military or economic domination.",
+      "context": "A key ideological goal for Kahlo in her late years, reflecting her broader leftist politics and internationalist solidarity."
+    },
+    "Maintain marriage with Diego": {
+      "description": "The effort to preserve a romantic and artistic partnership despite conflicts and difficulties.",
+      "context": "A significant personal goal throughout much of Kahlo's life with fellow muralist Diego Rivera, marked by infidelities, separation, and reunion."
+    },
+    "Achieve joyful exit from life": {
+      "description": "The aspiration to depart from life with dignity, acceptance, and affirmation rather than despair.",
+      "context": "An existential goal reflected in Kahlo's final paintings, suggesting her desire to meet death with defiant celebration rather than resignation."
+    },
+    "Integrate personal and political expression": {
+      "description": "The artistic strategy of blending intimate autobiographical content with broader social and political commentary.",
+      "context": "A defining characteristic of Kahlo's mature artistic practice, where personal suffering and Mexican identity became vehicles for political messaging."
+    },
+    "Leave lasting artistic legacy": {
+      "description": "The objective of creating enduring influence and cultural impact through artistic work that survives and resonates beyond the artist's lifetime.",
+      "context": "A central aspiration in Frida Kahlo's life, reflecting her commitment to establishing herself as a major figure in art history through her distinctive self-portraits and exploration of pain, identity, and Mexican culture."
+    },
+    "Pulmonary embolism": {
+      "description": "A life-threatening medical condition in which a blood clot blocks blood flow to the lungs.",
+      "context": "The immediate cause of Frida Kahlo's death on July 13, 1954, ending her life at age 47 as her health had deteriorated from years of physical suffering and complications from her 1938 bus accident.",
+      "links": {
+        "wikipedia": "Pulmonary_embolism",
+        "wikidata": "Q188462"
+      }
+    },
+    "Communism": {
+      "description": "A political and economic ideology advocating for a classless society with collective ownership of production means.",
+      "context": "A significant force in Frida Kahlo's life and art; she was a committed Communist Party member in Mexico, expressing her political beliefs through her paintings and activism despite personal conflicts with the party.",
+      "links": {
+        "wikipedia": "Communism",
+        "wikidata": "Q6186"
+      }
+    }
+  }
+}

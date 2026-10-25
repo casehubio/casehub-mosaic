@@ -1,0 +1,37 @@
+# Pipeline calibration experiments.
+# Each experiment gets its own Claude Code session in tmux.
+#
+# Usage: python3 scripts/calibrate.py --experiments experiments.yaml
+
+experiments:
+  - name: baseline-4call
+    limit: 3
+    changes: |
+      No changes — run the current 4-call extraction as-is to establish
+      the baseline for comparison. Just run iterate.sh.
+
+  - name: entity-minimum
+    limit: 3
+    changes: |
+      In extract_structure.py ENTITY_SYSTEM prompt, add before "Respond with JSON":
+      "Extract at least 10 entities per passage. Include ALL named persons, places,
+      organisations, projects, concepts, and activities mentioned in the text."
+
+  - name: goal-examples-generic
+    limit: 3
+    changes: |
+      In extract_structure.py GOAL_SYSTEM prompt, add generic examples after
+      "Extract aggressively":
+      "Examples of implicit goals:
+       - Choosing profession X over Y = goal of career in X
+       - Repeated hospital visits = goal of physical survival/recovery
+       - Publishing/exhibiting work = goal of professional recognition
+       - Setting conditions in relationships = goal of autonomy"
+
+  - name: chunk-split-large
+    limit: 0
+    changes: |
+      In chunk.py, after creating passages, split any passage over 3000 chars
+      into two roughly equal passages at the nearest sentence boundary.
+      This produces more, smaller passages for finer-grained extraction.
+      Run with --limit 5 to test on the resulting chunks.
