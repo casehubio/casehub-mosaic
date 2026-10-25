@@ -80,12 +80,12 @@ export class ConversationWorkbenchElement extends LitElement {
   private _push = new PushController(this);
   private _channels = new ChannelStateController(this, this._push);
   private _messaging = new MessagingController(this, this._channels, {
-    restBase: '',
+    restBase: () => this.config?.restBase ?? '',
     fetch: (input: string | URL | Request, init?: RequestInit) => this.config?.fetch?.(String(input), init) ?? fetch(input, init),
   });
   private _members = new MembershipController(this, this._push, this._channels);
   private _reactions = new ReactionController(this, this._push, this._channels, {
-    restBase: '',
+    restBase: () => this.config?.restBase ?? '',
     fetch: (input: string | URL | Request, init?: RequestInit) => this.config?.fetch?.(String(input), init) ?? fetch(input, init),
   });
   private _commitments = new CommitmentController(this, this._push, this._channels);
