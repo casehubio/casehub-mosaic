@@ -3,6 +3,7 @@ import { customElement, property, state } from 'lit/decorators.js';
 import { emitPagesEvent } from '@casehubio/pages-data';
 import { ChannelEventTopics } from './events.js';
 import type { QhorusMessage } from './types.js';
+import './channel-emoji-picker.js';
 
 @customElement('agency-channel-hover-toolbar')
 export class ChannelHoverToolbarElement extends LitElement {
@@ -10,6 +11,7 @@ export class ChannelHoverToolbarElement extends LitElement {
   @property({ type: String }) currentActorId = '';
   @state() private _overflowOpen = false;
   @state() private _retractConfirming = false;
+  @state() private _emojiPickerOpen = false;
 
   static override readonly styles = css`
     :host {
@@ -85,6 +87,13 @@ export class ChannelHoverToolbarElement extends LitElement {
     }
     .retract-cancel-btn:hover { background: var(--pages-neutral-3, #e8e8e8); }
     .retract-confirm-btn:hover { background: var(--pages-danger-10, #b91c1c); }
+    .emoji-picker-popover {
+      position: absolute; top: 100%; right: 0;
+      z-index: 100;
+      box-shadow: var(--pages-shadow-2, 0 4px 12px rgba(0,0,0,0.15));
+      border-radius: 8px;
+      overflow: hidden;
+    }
   `;
 
   private get _isOwnMessage(): boolean {
@@ -104,12 +113,21 @@ export class ChannelHoverToolbarElement extends LitElement {
         @click=${this._onReply}>↩</button>
       <button class="toolbar-btn more" title="More" aria-label="More actions"
         @click=${this._toggleOverflow}>⋯</button>
+      ${this._emojiPickerOpen ? html`<div class="emoji-picker-popover"><agency-channel-emoji-picker @emoji-selected=${this._onEmojiSelected}></agency-channel-emoji-picker></div>` : nothing}
       ${this._retractConfirming ? this._renderRetractConfirm() : this._overflowOpen ? this._renderOverflow() : nothing}
     `;
   }
 
   private _onReact() {
-    emitPagesEvent(this, ChannelEventTopics.REACT, { messageId: this.message!.id });
+    this._emojiPickerOpen = !this._emojiPickerOpen;
+  }
+
+  private _onEmojiSelected(e: CustomEvent) {
+    const emoji = e.detail?.emoji;
+    if (emoji && this.message) {
+      emitPagesEvent(this, ChannelEventTopics.REACT, { messageId: this.message.id, emoji });
+    }
+    this._emojiPickerOpen = false;
   }
 
   private _onReply() {

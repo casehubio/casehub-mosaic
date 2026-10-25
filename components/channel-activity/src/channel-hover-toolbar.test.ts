@@ -37,15 +37,39 @@ describe('agency-channel-hover-toolbar', () => {
     expect(buttons.length).toBe(3);
   });
 
-  it('emits channel:react on react button click', async () => {
+  it('opens emoji picker on react button click', async () => {
+    const el = await renderToolbar();
+    const reactBtn = el.shadowRoot!.querySelector('.toolbar-btn.react') as HTMLButtonElement;
+    reactBtn.click();
+    await (el as any).updateComplete;
+    const picker = el.shadowRoot!.querySelector('agency-channel-emoji-picker');
+    expect(picker).toBeTruthy();
+  });
+
+  it('closes emoji picker on second react button click', async () => {
+    const el = await renderToolbar();
+    const reactBtn = el.shadowRoot!.querySelector('.toolbar-btn.react') as HTMLButtonElement;
+    reactBtn.click();
+    await (el as any).updateComplete;
+    reactBtn.click();
+    await (el as any).updateComplete;
+    const picker = el.shadowRoot!.querySelector('agency-channel-emoji-picker');
+    expect(picker).toBeNull();
+  });
+
+  it('emits channel:react with emoji when emoji selected from picker', async () => {
     const el = await renderToolbar();
     const handler = vi.fn();
     el.addEventListener('pages-event', handler);
     const reactBtn = el.shadowRoot!.querySelector('.toolbar-btn.react') as HTMLButtonElement;
     reactBtn.click();
+    await (el as any).updateComplete;
+    const picker = el.shadowRoot!.querySelector('agency-channel-emoji-picker')!;
+    picker.dispatchEvent(new CustomEvent('emoji-selected', { bubbles: true, composed: true, detail: { emoji: '👍' } }));
     expect(handler).toHaveBeenCalledOnce();
     expect(handler.mock.calls[0]![0]!.detail.topic).toBe(ChannelEventTopics.REACT);
     expect(handler.mock.calls[0]![0]!.detail.payload.messageId).toBe('msg-1');
+    expect(handler.mock.calls[0]![0]!.detail.payload.emoji).toBe('👍');
   });
 
   it('emits channel:message-selected on reply button click', async () => {
