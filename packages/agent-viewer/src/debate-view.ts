@@ -354,8 +354,6 @@ export class DebateView extends LitElement {
           <div class="section-label">Termination</div>
           ${p.termination.map(t => html`
             <div class="meta-type">${t.type}</div>
-            ${t.iterations ? html`<div class="meta-detail">${t.iterations} iterations</div>` : nothing}
-            ${t.resolvedStatuses?.length ? html`<div class="meta-detail">${t.resolvedStatuses.join(', ')}</div>` : nothing}
           `)}
         </div>
       `);
@@ -365,8 +363,8 @@ export class DebateView extends LitElement {
       cards.push(html`
         <div class="meta-card">
           <div class="section-label">Failure Policy</div>
-          ${fp.routingFailureAction ? html`<div class="meta-detail">routing: ${fp.routingFailureAction}</div>` : nothing}
-          ${fp.aggregationFailureAction ? html`<div class="meta-detail">deadlock: ${fp.aggregationFailureAction}</div>` : nothing}
+          ${fp.onRoutingFailure ? html`<div class="meta-detail">routing: ${fp.onRoutingFailure}</div>` : nothing}
+          ${fp.onDeadlock ? html`<div class="meta-detail">deadlock: ${fp.onDeadlock}</div>` : nothing}
         </div>
       `);
     }

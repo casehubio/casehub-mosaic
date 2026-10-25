@@ -27,7 +27,7 @@ export type {
   AgentRefType,
   AggregationSpec,
   TerminationSpec,
-  JudgmentSpec,
+  JudgmentSpecDef,
   FailurePolicy,
 } from '@casehubio/mosaic-core';
 

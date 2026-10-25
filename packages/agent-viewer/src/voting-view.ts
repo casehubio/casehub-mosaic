@@ -240,7 +240,7 @@ export class VotingView extends LitElement {
     if (!a) return nothing;
     const detail: string[] = [];
     const j = this.pattern.judgment;
-    if (j?.trigger?.threshold != null) detail.push(`threshold: ${j.trigger.threshold}`);
+    if (j?.trigger?.type === 'confidenceThreshold' && j.trigger.threshold != null) detail.push(`threshold: ${j.trigger.threshold}`);
     return html`
       <div class="aggregation">
         <div class="aggregation-card">
@@ -271,7 +271,6 @@ export class VotingView extends LitElement {
           <div class="section-label">Termination</div>
           ${p.termination.map(t => html`
             <div class="meta-type">${t.type}</div>
-            ${t.iterations ? html`<div class="meta-detail">${t.iterations} iterations</div>` : nothing}
           `)}
         </div>
       `);
@@ -281,8 +280,8 @@ export class VotingView extends LitElement {
       cards.push(html`
         <div class="meta-card">
           <div class="section-label">Failure Policy</div>
-          ${fp.routingFailureAction ? html`<div class="meta-detail">routing: ${fp.routingFailureAction}</div>` : nothing}
-          ${fp.aggregationFailureAction ? html`<div class="meta-detail">deadlock: ${fp.aggregationFailureAction}</div>` : nothing}
+          ${fp.onRoutingFailure ? html`<div class="meta-detail">routing: ${fp.onRoutingFailure}</div>` : nothing}
+          ${fp.onDeadlock ? html`<div class="meta-detail">deadlock: ${fp.onDeadlock}</div>` : nothing}
         </div>
       `);
     }
@@ -292,7 +291,8 @@ export class VotingView extends LitElement {
   private renderOutcomes(): TemplateResult | typeof nothing {
     const j = this.pattern.judgment;
     if (!j) return nothing;
-    const callerNames = j.caller.callerNames ?? (j.caller.callerName ? [j.caller.callerName] : []);
+    const c = j.caller;
+    const names: string[] = c ? ('callerNames' in c ? c.callerNames ?? [] : 'callerName' in c && c.callerName ? [c.callerName] : []) : [];
     return html`
       <div class="outcomes">
         <div class="outcome">
@@ -302,7 +302,7 @@ export class VotingView extends LitElement {
         <div class="outcome">
           <div class="outcome-label contested">CONTESTED</div>
           <div class="outcome-box contested">
-            → escalate to${callerNames.map(n => html`
+            → escalate to${names.map((n: string) => html`
               <div class="escalation-badge">
                 <span style="font-size:10px">👤</span>
                 <span class="escalation-name">${n}</span>
@@ -316,14 +316,17 @@ export class VotingView extends LitElement {
   private renderJudgment(): TemplateResult | typeof nothing {
     const j = this.pattern.judgment;
     if (!j) return nothing;
-    const callerNames = j.caller.callerNames ?? (j.caller.callerName ? [j.caller.callerName] : []);
+    const caller = j.caller;
+    const callerNames = caller ? ('callerNames' in caller ? caller.callerNames ?? [] : 'callerName' in caller && caller.callerName ? [caller.callerName] : []) : [];
+    const trigger = j.trigger;
+    const thresholdStr = trigger?.type === 'confidenceThreshold' && trigger.threshold != null ? ` (${trigger.threshold})` : '';
     return html`
       <div class="judgment-card">
         <span class="judgment-icon">⚖</span>
         <div>
-          <div class="judgment-type">${j.caller.type.toUpperCase().replace(/-/g, ' ')}</div>
+          <div class="judgment-type">${caller?.type.toUpperCase().replace(/-/g, ' ') ?? ''}</div>
           <div class="judgment-detail">
-            trigger: ${j.trigger.type}${j.trigger.threshold != null ? ` (${j.trigger.threshold})` : ''}
+            trigger: ${trigger?.type ?? ''}${thresholdStr}
             ${callerNames.length > 0 ? html` · ${callerNames.join(', ')}` : nothing}
           </div>
         </div>
@@ -337,7 +340,7 @@ export class VotingView extends LitElement {
     if (p.aggregation) parts.push(p.aggregation.type);
     if (p.termination?.length) {
       for (const t of p.termination) {
-        if (t.type === 'max-iterations' && t.iterations) parts.push(`max ${t.iterations} rounds`);
+        if (t.type === 'max-iterations') parts.push('max-iterations');
         else if (t.type !== 'single-pass') parts.push(t.type);
       }
       if (p.termination.some(t => t.type === 'single-pass')) parts.push('single-pass');
