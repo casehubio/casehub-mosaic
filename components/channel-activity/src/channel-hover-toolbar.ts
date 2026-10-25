@@ -88,11 +88,12 @@ export class ChannelHoverToolbarElement extends LitElement {
     .retract-cancel-btn:hover { background: var(--pages-neutral-3, #e8e8e8); }
     .retract-confirm-btn:hover { background: var(--pages-danger-10, #b91c1c); }
     .emoji-picker-popover {
-      position: absolute; top: 100%; right: 0;
-      z-index: 100;
+      position: fixed;
+      z-index: 1000;
       box-shadow: var(--pages-shadow-2, 0 4px 12px rgba(0,0,0,0.15));
       border-radius: 8px;
       overflow: hidden;
+      max-height: 60vh;
     }
   `;
 
@@ -120,6 +121,25 @@ export class ChannelHoverToolbarElement extends LitElement {
 
   private _onReact() {
     this._emojiPickerOpen = !this._emojiPickerOpen;
+    if (this._emojiPickerOpen) {
+      this.updateComplete.then(() => this._positionPicker());
+    }
+  }
+
+  private _positionPicker() {
+    const popover = this.renderRoot.querySelector('.emoji-picker-popover') as HTMLElement | null;
+    const btn = this.renderRoot.querySelector('.toolbar-btn.react') as HTMLElement | null;
+    if (!popover || !btn) return;
+    const btnRect = btn.getBoundingClientRect();
+    const pickerH = Math.min(popover.scrollHeight, window.innerHeight * 0.6);
+    const spaceBelow = window.innerHeight - btnRect.bottom - 8;
+    if (spaceBelow >= pickerH) {
+      popover.style.top = `${btnRect.bottom + 4}px`;
+    } else {
+      popover.style.top = `${Math.max(8, btnRect.top - pickerH - 4)}px`;
+    }
+    const pickerW = 352;
+    popover.style.left = `${Math.max(8, Math.min(btnRect.left, window.innerWidth - pickerW - 8))}px`;
   }
 
   private _onEmojiSelected(e: CustomEvent) {
