@@ -6,7 +6,7 @@ import { ChannelEventTopics } from './events.js';
 import type { ReactPayload } from './events.js';
 
 export interface ReactionConfig {
-  readonly restBase: string;
+  readonly restBase: string | (() => string);
   readonly fetch?: typeof globalThis.fetch;
 }
 
@@ -15,8 +15,12 @@ export class ReactionController implements ReactiveController {
 
   private _host: ReactiveControllerHost;
   private _channels: ChannelStateController;
-  private _restBase: string;
+  private _restBase: string | (() => string);
   private _fetch: typeof globalThis.fetch;
+
+  private get _base(): string {
+    return typeof this._restBase === 'function' ? this._restBase() : this._restBase;
+  }
 
   constructor(host: ReactiveControllerHost, push: PushController, channels: ChannelStateController, config: ReactionConfig) {
     this._host = host;
@@ -53,7 +57,7 @@ export class ReactionController implements ReactiveController {
     if (!msg) return;
     try {
       await this._fetch(
-        `${this._restBase}/channels/${msg.channelId}/messages/${payload.messageId}/reactions`,
+        `${this._base}/channels/${msg.channelId}/messages/${payload.messageId}/reactions`,
         { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ emoji: payload.emoji }) },
       );
     } catch (e) {
@@ -66,7 +70,7 @@ export class ReactionController implements ReactiveController {
     if (!msg) return;
     try {
       await this._fetch(
-        `${this._restBase}/channels/${msg.channelId}/messages/${payload.messageId}/reactions/${encodeURIComponent(payload.emoji)}`,
+        `${this._base}/channels/${msg.channelId}/messages/${payload.messageId}/reactions/${encodeURIComponent(payload.emoji)}`,
         { method: 'DELETE' },
       );
     } catch (e) {

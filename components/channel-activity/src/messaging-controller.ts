@@ -8,8 +8,8 @@ import type {
 } from './events.js';
 
 export interface MessagingConfig {
-  readonly restBase: string;
-  readonly messageRestBase?: string;
+  readonly restBase: string | (() => string);
+  readonly messageRestBase?: string | (() => string);
   readonly fetch?: typeof globalThis.fetch;
 }
 
@@ -18,15 +18,26 @@ export class MessagingController implements ReactiveController {
 
   private _host: ReactiveControllerHost;
   private _channels: ChannelStateController;
-  private _restBase: string;
-  private _messageRestBase: string;
+  private _restBase: string | (() => string);
+  private _messageRestBase: string | (() => string) | undefined;
   private _fetch: typeof globalThis.fetch;
+
+  private get _base(): string {
+    return typeof this._restBase === 'function' ? this._restBase() : this._restBase;
+  }
+
+  private get _msgBase(): string {
+    if (this._messageRestBase) {
+      return typeof this._messageRestBase === 'function' ? this._messageRestBase() : this._messageRestBase;
+    }
+    return `${this._base}/channels`;
+  }
 
   constructor(host: ReactiveControllerHost, channels: ChannelStateController, config: MessagingConfig) {
     this._host = host;
     this._channels = channels;
     this._restBase = config.restBase;
-    this._messageRestBase = config.messageRestBase ?? `${config.restBase}/channels`;
+    this._messageRestBase = config.messageRestBase;
     this._fetch = config.fetch ?? globalThis.fetch.bind(globalThis);
     host.addController(this);
   }
@@ -50,17 +61,17 @@ export class MessagingController implements ReactiveController {
       }
       case ChannelEventTopics.CREATE_TOPIC: {
         const cp = payload as CreateTopicPayload;
-        this._postJson(`${this._restBase}/channels/${cp.channelId}/topics`, { name: cp.name });
+        this._postJson(`${this._base}/channels/${cp.channelId}/topics`, { name: cp.name });
         break;
       }
       case ChannelEventTopics.RENAME_TOPIC: {
         const rp = payload as RenameTopicPayload;
-        this._putJson(`${this._restBase}/channels/${rp.channelId}/topics/${rp.topicId}`, { name: rp.newName });
+        this._putJson(`${this._base}/channels/${rp.channelId}/topics/${rp.topicId}`, { name: rp.newName });
         break;
       }
       case ChannelEventTopics.MERGE_TOPIC: {
         const mp = payload as MergeTopicPayload;
-        this._postJson(`${this._restBase}/channels/${mp.channelId}/topics/${mp.sourceTopicId}/merge`, { targetTopicId: mp.targetTopicId });
+        this._postJson(`${this._base}/channels/${mp.channelId}/topics/${mp.sourceTopicId}/merge`, { targetTopicId: mp.targetTopicId });
         break;
       }
       case ChannelEventTopics.RESOLVE_TOPIC:
@@ -78,8 +89,8 @@ export class MessagingController implements ReactiveController {
   private async _sendMessage(payload: SendMessagePayload) {
     try {
       const url = payload.inReplyTo
-        ? `${this._messageRestBase}/${payload.channelId}/messages/${payload.inReplyTo}/replies`
-        : `${this._messageRestBase}/${payload.channelId}/messages`;
+        ? `${this._msgBase}/${payload.channelId}/messages/${payload.inReplyTo}/replies`
+        : `${this._msgBase}/${payload.channelId}/messages`;
       const body: Record<string, unknown> = { text: payload.content };
       if (payload.speechAct) body.messageType = payload.speechAct;
       if (payload.artefactRefs?.length) body.artefactRefs = payload.artefactRefs;
@@ -103,14 +114,14 @@ export class MessagingController implements ReactiveController {
 
   private async _deleteChannel(channelId: string) {
     try {
-      await this._fetch(`${this._restBase}/channels/${channelId}`, { method: 'DELETE' });
+      await this._fetch(`${this._base}/channels/${channelId}`, { method: 'DELETE' });
     } catch (e) {
       console.error('Failed to delete channel:', e);
     }
   }
 
   private _updateTopicState(payload: TopicActionPayload, state: string) {
-    this._putJson(`${this._restBase}/channels/${payload.channelId}/topics/${payload.topicId}`, { state });
+    this._putJson(`${this._base}/channels/${payload.channelId}/topics/${payload.topicId}`, { state });
   }
 
   private _postJson(url: string, body: unknown) {
