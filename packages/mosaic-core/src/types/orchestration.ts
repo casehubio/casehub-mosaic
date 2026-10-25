@@ -26,17 +26,134 @@ export interface AgentResult {
   readonly duration?: number;
 }
 
-export interface AggregationSpec {
-  type: string;
+// --- YAML spec types (schema-derived discriminated unions) ---
+
+export type AggregationSpec =
+  | { type: 'pass-through' }
+  | { type: 'collect-all' }
+  | { type: 'majority-vote' }
+  | { type: 'auction' };
+
+export type TerminationSpec =
+  | { type: 'max-iterations' }
+  | { type: 'goal-reached' }
+  | { type: 'judge-convergence' }
+  | { type: 'all-agreed' }
+  | { type: 'supervisor' }
+  | { type: 'contested' }
+  | { type: 'convergence' }
+  | { type: 'single-pass' }
+  | { type: 'agent-count' }
+  | { type: 'accepted' }
+  | { type: 'terminal-outcome' }
+  | { type: 'deadline' };
+
+export type RoutingSpec =
+  | { type: 'first-match'; guard?: string }
+  | { type: 'round-robin' }
+  | { type: 'sequential' }
+  | { type: 'llm-selected' }
+  | { type: 'select-all' };
+
+export type DecompositionSpec =
+  | { type: 'identity' }
+  | { type: 'static' }
+  | { type: 'llm' }
+  | { type: 'hybrid' }
+  | { type: 'heuristic' }
+  | { type: 'goap' }
+  | { type: 'capability-dependency' }
+  | { type: 'forward-reasoning' };
+
+export type ActivationSpec =
+  | { type: 'on-dispatch' }
+  | { type: 'max-iterations' };
+
+export type TaskNodeSpec =
+  | { type: 'primitive'; name?: string; description?: string; executor?: string }
+  | { type: 'compound'; name?: string; subtasks?: TaskNodeSpec[] };
+
+export type AgreementSpec =
+  | { type: 'unanimous' }
+  | { type: 'majority' }
+  | { type: 'threshold' };
+
+export interface GovernanceSpec {
+  oversight?: {
+    classifier?: string;
+    reversible?: boolean;
+    candidateGroups?: string[];
+  };
+  trustRouting?: {
+    threshold?: number;
+    minimumObservations?: number;
+    borderlineMargin?: number;
+    blendFactor?: number;
+  };
+  cbrRouting?: {
+    successWeight?: number;
+    gateExpiredWeight?: number;
+    gateRejectedWeight?: number;
+    failureWeight?: number;
+  };
+  attestation?: {
+    observer?: string;
+    capabilityTag?: string;
+  };
 }
 
-export interface TerminationSpec {
-  type: string;
-  iterations?: number;
-  resolvedStatuses?: string[];
-  maxDisputeRounds?: number;
-  when?: string;
+export interface BaseAgentRefSpec {
+  readonly name?: string;
+  readonly description?: string;
+  readonly capabilities?: string[];
+  readonly model?: string;
 }
+
+export type AgentRefSpec =
+  | (BaseAgentRefSpec & { type: 'worker' })
+  | (BaseAgentRefSpec & { type: 'channel'; channelId?: string })
+  | (BaseAgentRefSpec & { type: 'human' })
+  | (BaseAgentRefSpec & { type: 'external' })
+  | (BaseAgentRefSpec & { type: 'composed'; pattern?: PatternDefinitionRef });
+
+export interface PatternDefinitionRef {
+  type: string;
+  [key: string]: unknown;
+}
+
+export interface FailurePolicySpec {
+  onRoutingFailure?: 'FAIL' | 'RETRY_BROADER' | 'ESCALATE';
+  onDeadlock?: 'FAIL' | 'ESCALATE' | 'RETRY_DIFFERENT';
+  agentRetry?: {
+    maxRetries?: number;
+    backoffStrategy?: 'FIXED' | 'EXPONENTIAL' | 'EXPONENTIAL_WITH_JITTER';
+    backoff?: string;
+    onExhausted?: 'FAIL' | 'ESCALATE' | 'SKIP';
+  };
+  replanPolicy?: {
+    maxReplans?: number;
+    fallbackAction?: 'FAIL' | 'RETRY_BROADER' | 'ESCALATE';
+  };
+}
+
+export type JudgmentTriggerSpec =
+  | { type: 'alwaysYield' }
+  | { type: 'neverYield' }
+  | { type: 'iterationBased'; every?: number }
+  | { type: 'confidenceThreshold'; threshold?: number; extractor?: string };
+
+export type JudgmentCallerSpec =
+  | { type: 'single'; callerName?: string }
+  | { type: 'fanOut'; callerNames?: string[] }
+  | { type: 'escalationChain'; callerNames?: string[] };
+
+export interface JudgmentSpecDef {
+  trigger?: JudgmentTriggerSpec;
+  caller?: JudgmentCallerSpec;
+  agreement?: AgreementSpec;
+}
+
+// --- Runtime types (mosaic-owned, not schema-derived) ---
 
 export type RoutingFailureAction = 'fail' | 'retry-broader' | 'escalate';
 export type AggregationFailureAction = 'fail' | 'escalate' | 'retry-different';
