@@ -22,7 +22,7 @@
     "test": "vitest run"
   },
   "files": [
-    "dist",
+    "src",
     "package.json"
   ]
 }
