@@ -8,7 +8,7 @@ export class AgentCard extends LitElement {
 
   static override styles = css`
     :host {
-      display: inline-flex;
+      display: flex;
       flex-direction: column;
       align-items: center;
       gap: 6px;
@@ -19,7 +19,8 @@ export class AgentCard extends LitElement {
       padding: 10px 16px;
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
       color: #cdd6f4;
-      width: 280px;
+      min-width: 200px;
+      box-sizing: border-box;
       cursor: pointer;
       transition: background 0.15s;
     }

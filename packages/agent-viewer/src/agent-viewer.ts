@@ -8,6 +8,14 @@ import './views/deliberation/voting-view.js';
 import './views/deliberation/debate-view.js';
 import './views/base-pattern-view.js';
 import './views/playbook-spec-view.js';
+import './views/orchestration/supervisor-view.js';
+import './views/orchestration/choreography-view.js';
+import './views/orchestration/saga-view.js';
+import './views/orchestration/decomposition-view.js';
+import './views/deliberation/negotiation-view.js';
+import './views/deliberation/coalition-view.js';
+import './views/deliberation/normative-view.js';
+import './views/governance/judgment-view.js';
 
 export type AgentTab = 'eidos' | 'pattern' | 'steps';
 
@@ -268,10 +276,13 @@ export class AgentViewer extends LitElement {
       case 'orchestration':
         switch (spec.type) {
           case 'supervisor':
+            return html`<agency-orchestration-supervisor-view .spec=${spec}></agency-orchestration-supervisor-view>`;
           case 'choreography':
+            return html`<agency-orchestration-choreography-view .spec=${spec}></agency-orchestration-choreography-view>`;
           case 'saga':
+            return html`<agency-orchestration-saga-view .spec=${spec}></agency-orchestration-saga-view>`;
           case 'decomposition':
-            return html`<div class="empty-state">${spec.category}/${spec.type} — coming in Wave 1</div>`;
+            return html`<agency-orchestration-decomposition-view .spec=${spec}></agency-orchestration-decomposition-view>`;
           default: { const _o: never = spec.type; return _o; }
         }
       case 'deliberation':
@@ -281,9 +292,11 @@ export class AgentViewer extends LitElement {
           case 'debate':
             return html`<agency-deliberation-debate-view .spec=${spec}></agency-deliberation-debate-view>`;
           case 'negotiation':
+            return html`<agency-deliberation-negotiation-view .spec=${spec}></agency-deliberation-negotiation-view>`;
           case 'coalition':
+            return html`<agency-deliberation-coalition-view .spec=${spec}></agency-deliberation-coalition-view>`;
           case 'normative':
-            return html`<div class="empty-state">${spec.category}/${spec.type} — coming in Wave 2</div>`;
+            return html`<agency-deliberation-normative-view .spec=${spec}></agency-deliberation-normative-view>`;
           default: { const _d: never = spec.type; return _d; }
         }
       case 'perception':
@@ -304,7 +317,7 @@ export class AgentViewer extends LitElement {
       case 'governance':
         switch (spec.type) {
           case 'judgment':
-            return html`<div class="empty-state">${spec.category}/${spec.type} — coming in Wave 1</div>`;
+            return html`<agency-governance-judgment-view .spec=${spec}></agency-governance-judgment-view>`;
           case 'oversight':
           case 'attestation':
           case 'trust':

@@ -47,8 +47,8 @@ export class BasePatternView extends PatternViewMixin(LitElement) {
     }
     .agents-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 8px;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 16px;
       padding: 12px 16px;
     }
   `];

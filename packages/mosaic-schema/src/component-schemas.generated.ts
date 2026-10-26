@@ -314,7 +314,7 @@ export const groupedDataViewPropsSchema = z.object({
   groupOrder: z.array(z.string()).optional(),
   groupConfig: z.object({
     size: z.number(),
-    "__@toStringTag@572": z.string(),
+    "__@toStringTag@585": z.string(),
   }).optional(),
   columnConfig: z.array(z.unknown()).optional(),
   columnRenderers: z.object({
@@ -1427,7 +1427,7 @@ export const agentProfilePanelPropsSchema = z.object({
     })]),
   locked: z.object({
     size: z.number(),
-    "__@toStringTag@572": z.string(),
+    "__@toStringTag@585": z.string(),
   }),
   showConfirmButton: z.boolean(),
   archetypeRoles: z.array(z.object({
