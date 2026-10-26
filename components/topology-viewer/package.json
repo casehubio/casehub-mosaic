@@ -1,7 +1,7 @@
 {
   "name": "@casehubio/mosaic-topology-viewer",
   "version": "0.1.0",
-  "description": "Service dependency DAG \u2014 topology graph with status badges and SSE live updates",
+  "description": "Service dependency DAG — topology graph with status badges and SSE live updates",
   "repository": {
     "type": "git",
     "url": "https://github.com/casehubio/casehub-mosaic.git"
