@@ -1,7 +1,7 @@
 {
   "name": "@casehubio/mosaic-service-card",
   "version": "0.1.0",
-  "description": "Per-service health card \u2014 status badge, replicas, image, per-cluster deployment status",
+  "description": "Per-service health card — status badge, replicas, image, per-cluster deployment status",
   "repository": {
     "type": "git",
     "url": "https://github.com/casehubio/casehub-mosaic.git"
