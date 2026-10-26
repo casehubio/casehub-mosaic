@@ -1,6 +1,6 @@
 import { LitElement, html, css, nothing, type TemplateResult } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import type { DeliberationPatternCategory } from '@casehubio/mosaic-core';
+import type { DeliberationPatternCategory, NegotiationParty, AcceptancePolicy } from '@casehubio/mosaic-core';
 import { PatternViewMixin, patternViewStyles } from '../../shared-styles.js';
 import '../../agent-card.js';
 
@@ -53,46 +53,63 @@ export class NegotiationView extends PatternViewMixin(LitElement) {
       align-items: center;
       flex-wrap: wrap;
     }
-    .party-slot { text-align: center; }
+    .party-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      padding: 12px 16px;
+      text-align: center;
+      min-width: 140px;
+    }
+    .party-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: #cdd6f4;
+    }
+    .party-role {
+      font-size: 10px;
+      font-weight: 500;
+      padding: 1px 6px;
+      border-radius: 3px;
+      background: rgba(203, 166, 247, 0.12);
+      color: #cba6f7;
+      margin-top: 4px;
+      display: inline-block;
+    }
     .exchange-icon {
       font-size: 20px;
       color: #7f849c;
     }
-    .rounds {
-      display: grid;
-      gap: 6px;
-      max-width: 500px;
-      margin: 0 auto 12px;
+    .acceptance-section {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 16px;
     }
-    .round-entry {
+    .acceptance-card {
+      background: rgba(166, 227, 161, 0.06);
+      border: 1px solid rgba(166, 227, 161, 0.2);
+      border-radius: 8px;
+      padding: 10px 20px;
       display: flex;
       align-items: center;
-      gap: 8px;
-      padding: 6px 12px;
-      background: rgba(255, 255, 255, 0.03);
-      border-radius: 6px;
-      border-left: 3px solid;
+      gap: 10px;
     }
-    .round-label {
+    .acceptance-label {
       font-size: 10px;
       font-weight: 600;
       color: #7f849c;
-      min-width: 50px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
-    .round-speaker {
+    .acceptance-type {
       font-size: 12px;
-      font-weight: 500;
+      font-weight: 600;
+      color: #a6e3a1;
     }
-    .round-action {
-      font-size: 10px;
-      color: #7f849c;
-      font-style: italic;
-    }
-    .rounds-ellipsis {
-      text-align: center;
+    .acceptance-threshold {
       font-size: 11px;
       color: #7f849c;
-      padding: 4px;
+      font-family: 'JetBrains Mono', 'Fira Code', monospace;
     }
     .flow-indicator {
       display: flex;
@@ -178,11 +195,6 @@ export class NegotiationView extends PatternViewMixin(LitElement) {
   `];
 
   private static readonly PARTY_COLORS = ['#89b4fa', '#a6e3a1', '#fab387', '#cba6f7'] as const;
-  private static readonly ROUND_ACTIONS: string[][] = [
-    ['opens with initial proposal', 'presents counter-proposal'],
-    ['offers concession', 'adjusts terms'],
-    ['proposes compromise', 'evaluates trade-offs'],
-  ];
 
   override render() {
     const p = this.spec as DeliberationPatternCategory;
@@ -196,7 +208,7 @@ export class NegotiationView extends PatternViewMixin(LitElement) {
       </div>
       <div class="body">
         ${this.renderParties(p)}
-        ${this.renderRounds(p)}
+        ${p.acceptance ? this.renderAcceptance(p.acceptance) : nothing}
         ${this.renderFlowIndicator()}
         ${this.renderOutcomes(p)}
         ${this.renderMetadata(p)}
@@ -205,17 +217,11 @@ export class NegotiationView extends PatternViewMixin(LitElement) {
   }
 
   private renderParties(p: DeliberationPatternCategory): TemplateResult | typeof nothing {
+    if (p.parties?.length) {
+      return this.renderNamedParties(p.parties);
+    }
     const agents = p.agents ?? [];
     if (agents.length === 0) return nothing;
-    if (agents.length === 2) {
-      return html`
-        <div class="parties">
-          <div class="party-slot"><agent-card .agent=${agents[0]}></agent-card></div>
-          <div class="exchange-icon">⇄</div>
-          <div class="party-slot"><agent-card .agent=${agents[1]}></agent-card></div>
-        </div>
-      `;
-    }
     return html`
       <div class="parties">
         ${agents.map(a => html`<agent-card .agent=${a}></agent-card>`)}
@@ -223,31 +229,44 @@ export class NegotiationView extends PatternViewMixin(LitElement) {
     `;
   }
 
-  private renderRounds(p: DeliberationPatternCategory): TemplateResult | typeof nothing {
-    const agents = p.agents ?? [];
-    const maxRounds = p.maxRounds;
-    if (agents.length < 2 || !maxRounds) return nothing;
-    const previewRounds = Math.min(maxRounds, 3);
-    const entries: TemplateResult[] = [];
-    for (let r = 1; r <= previewRounds; r++) {
-      for (let a = 0; a < Math.min(agents.length, 2); a++) {
-        const agent = agents[a]!;
-        const color = NegotiationView.PARTY_COLORS[a] ?? '#7f849c';
-        const action = NegotiationView.ROUND_ACTIONS[r - 1]?.[a] ?? '';
-        entries.push(html`
-          <div class="round-entry" style="border-left-color:${color}">
-            <span class="round-label">Round ${r}</span>
-            <span class="round-speaker" style="color:${color}">${agent.name}</span>
-            ${action ? html`<span class="round-action">${action}</span>` : nothing}
-          </div>
-        `);
-      }
+  private renderNamedParties(parties: NegotiationParty[]): TemplateResult {
+    if (parties.length === 2) {
+      return html`
+        <div class="parties">
+          ${this.renderPartyCard(parties[0], 0)}
+          <div class="exchange-icon">⇄</div>
+          ${this.renderPartyCard(parties[1], 1)}
+        </div>
+      `;
     }
     return html`
-      <div class="rounds">${entries}</div>
-      ${maxRounds > previewRounds
-        ? html`<div class="rounds-ellipsis">⋮ until agreement or max ${maxRounds} rounds</div>`
-        : nothing}
+      <div class="parties">
+        ${parties.map((party, i) => this.renderPartyCard(party, i))}
+      </div>
+    `;
+  }
+
+  private renderPartyCard(party: NegotiationParty, index: number): TemplateResult {
+    const color = NegotiationView.PARTY_COLORS[index] ?? '#7f849c';
+    return html`
+      <div class="party-card" style="border-color: ${color}">
+        <div class="party-name" style="color: ${color}">${party.name}</div>
+        ${party.role ? html`<div class="party-role">${party.role}</div>` : nothing}
+      </div>
+    `;
+  }
+
+  private renderAcceptance(acceptance: AcceptancePolicy): TemplateResult {
+    return html`
+      <div class="acceptance-section">
+        <div class="acceptance-card">
+          <span class="acceptance-label">Acceptance</span>
+          <span class="acceptance-type">${acceptance.type}</span>
+          ${acceptance.type === 'threshold' && acceptance.value != null
+            ? html`<span class="acceptance-threshold">≥ ${acceptance.value}</span>`
+            : nothing}
+        </div>
+      </div>
     `;
   }
 
@@ -283,14 +302,6 @@ export class NegotiationView extends PatternViewMixin(LitElement) {
         <div class="meta-card">
           <div class="meta-label">Max Rounds</div>
           <div class="meta-type">${p.maxRounds}</div>
-        </div>
-      `);
-    }
-    if (p.aggregation) {
-      cards.push(html`
-        <div class="meta-card">
-          <div class="meta-label">Aggregation</div>
-          <div class="meta-type">${p.aggregation.type}</div>
         </div>
       `);
     }

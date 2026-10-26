@@ -170,6 +170,18 @@
 <h3>2l. With Governance/Judgment</h3>
 <div id="viewer-judgment-section"></div>
 
+<h3>2m. With Perception/Summarisation</h3>
+<div id="viewer-summarisation-section"></div>
+
+<h3>2n. With Perception/Observation</h3>
+<div id="viewer-observation-section"></div>
+
+<h3>2o. With Optimisation/Prompt</h3>
+<div id="viewer-prompt-opt-section"></div>
+
+<h3>2p. With Social/Cognition</h3>
+<div id="viewer-cognition-section"></div>
+
 <!-- ═══════════════════════════════════════════════════════ -->
 <h2>3. Pattern Views — Internal Sub-Components</h2>
 <h3>these are the views agent-viewer dispatches internally via its exhaustive switch. shown in isolation for development and review.</h3>
@@ -181,7 +193,7 @@
 <div id="debate-section"></div>
 
 <h3>3c. Base Pattern View — Thin Capability Types</h3>
-<p style="font-size:12px;color:#7f849c;margin-bottom:12px;">Shared view for 6 types with no category-specific fields: governance/oversight, governance/attestation, governance/trust, communication/channel-execution, communication/channel-summary, social/reflection</p>
+<p style="font-size:12px;color:#7f849c;margin-bottom:12px;">Shared view for 5 types with no category-specific fields: governance/oversight, governance/attestation, governance/trust, communication/channel-execution, communication/channel-summary</p>
 <div id="base-pattern-section"></div>
 
 <h3>3d. Playbook Spec View — Step Orchestration Descriptor</h3>
@@ -228,12 +240,40 @@
 <div id="decomposition-section"></div>
 
 <!-- ═══════════════════════════════════════════════════════ -->
-<h2>5. Coordination Pipeline — Swim Lane + Graph View</h2>
+<h2>5. Perception, Optimisation & Social Pattern Views</h2>
+<h3>grounded views matching real Java YAML types (issue #288)</h3>
+
+<h3>5a. Summarisation — Multi-Level Pipeline</h3>
+<p style="font-size:12px;color:#7f849c;margin-bottom:12px;">PipelineDefinition: source event → levels with grouping/summariser → emit events</p>
+<div id="summarisation-section"></div>
+
+<h3>5b. Observation — World Definition</h3>
+<p style="font-size:12px;color:#7f849c;margin-bottom:12px;">WorldDefinition: actions, sections, renderer with verbatim/grouped/summarised tier thresholds</p>
+<div id="observation-section"></div>
+
+<h3>5c. Narrative — Decision Pipeline</h3>
+<p style="font-size:12px;color:#7f849c;margin-bottom:12px;">L0 signals → L1 step summaries → L2 decision narratives</p>
+<div id="narrative-section"></div>
+
+<h3>5d. Prompt Optimisation — Pipeline Configuration</h3>
+<p style="font-size:12px;color:#7f849c;margin-bottom:12px;">PromptOptimisationDefinition: named pipelines with signature, optimiser, safety guardrails</p>
+<div id="prompt-optimisation-section"></div>
+
+<h3>5e. Cognition — Cognitive Module Grid</h3>
+<p style="font-size:12px;color:#7f849c;margin-bottom:12px;">CognitionDefinition: 13 optional config sections with ON/OFF status and config keys</p>
+<div id="cognition-section"></div>
+
+<h3>5f. Memory Hygiene — Retention Scoring</h3>
+<p style="font-size:12px;color:#7f849c;margin-bottom:12px;">Retention config: threshold and weighted scoring (confidence/recency/scope/trust)</p>
+<div id="memory-hygiene-section"></div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<h2>6. Coordination Pipeline — Swim Lane + Graph View</h2>
 <h3>KYC verification pipeline with Lanes/Graph toggle (auto-detects graph for fan-out/fan-in). Coordination views exist alongside but separate from the 4 orchestration pattern views above.</h3>
 <div id="coordination-section"></div>
 
 <!-- ═══════════════════════════════════════════════════════ -->
-<h2>6. Agent Drill-Down — Project View</h2>
+<h2>7. Agent Drill-Down — Project View</h2>
 <h3>drill-down from pipeline with breadcrumb, eidos, pattern and steps tabs</h3>
 <div id="drilldown-section"></div>
 
@@ -252,6 +292,12 @@
   import './src/views/deliberation/coalition-view.ts';
   import './src/views/deliberation/normative-view.ts';
   import './src/views/governance/judgment-view.ts';
+  import './src/views/perception/summarisation-view.ts';
+  import './src/views/perception/observation-view.ts';
+  import './src/views/perception/narrative-view.ts';
+  import './src/views/optimisation/prompt-optimisation-view.ts';
+  import './src/views/social/cognition-view.ts';
+  import './src/views/social/memory-hygiene-view.ts';
   import './src/agent-viewer.ts';
   import './src/coordination-pipeline-view.ts';
   import { parse } from 'yaml';
@@ -823,6 +869,219 @@ agents:
   });
 
   // ═══════════════════════════════════════════════
+  // 5. Perception, Optimisation & Social Pattern Views
+  // ═══════════════════════════════════════════════
+
+  // 5a. Summarisation
+  const summarisationYaml = `
+category: perception
+type: summarisation
+name: document-summariser
+description: "Multi-level document summarisation pipeline for case evidence"
+pipeline:
+  source: case.document.updated
+  levels:
+    - grouping: windowed
+      summariser:
+        type: extractive
+        config:
+          maxSentences: 5
+      emit: summary.l1
+    - grouping: keyed
+      summariser:
+        type: llm
+        config:
+          model: claude-sonnet-5
+      emit: summary.l2
+    - grouping: keyed
+      summariser:
+        type: abstractive
+      emit: summary.l3
+`;
+
+  renderComponentSection('summarisation-section', summarisationYaml, (data) => {
+    const el = document.createElement('agency-perception-summarisation-view');
+    el.spec = data;
+    return el;
+  });
+
+  // 5b. Observation
+  const observationYaml = `
+category: perception
+type: observation
+name: case-world-observer
+description: "Observes case entities with tiered rendering based on item count"
+world:
+  actions:
+    - inspect
+    - query
+    - monitor
+    - annotate
+  entities:
+    claim:
+      fields: [amount, status, category]
+    policy:
+      fields: [coverage, exclusions]
+  sections:
+    - type: entity-group
+      requiredTags: [active, priority]
+    - type: text
+    - type: item-list
+      resolutions: [auto, manual, escalated]
+  pipeline:
+    - extract
+    - filter
+    - rank
+    - deduplicate
+  renderer:
+    verbatimThreshold: 5
+    groupedThreshold: 20
+`;
+
+  renderComponentSection('observation-section', observationYaml, (data) => {
+    const el = document.createElement('agency-perception-observation-view');
+    el.spec = data;
+    return el;
+  });
+
+  // 5c. Narrative
+  const narrativeYaml = `
+category: perception
+type: narrative
+name: risk-narrative
+description: "Signals to step summaries to decision narratives for risk assessment"
+pipeline:
+  source: step.decision.completed
+  levels:
+    - grouping: windowed
+      summariser:
+        type: signal-collector
+      emit: signals.l0
+    - grouping: keyed
+      summariser:
+        type: step-summariser
+      emit: summary.l1
+    - grouping: keyed
+      summariser:
+        type: narrative-generator
+      emit: narrative.l2
+`;
+
+  renderComponentSection('narrative-section', narrativeYaml, (data) => {
+    const el = document.createElement('agency-perception-narrative-view');
+    el.spec = data;
+    return el;
+  });
+
+  // 5d. Prompt Optimisation
+  const promptOptYaml = `
+category: optimisation
+type: prompt-optimisation
+name: risk-prompt-tuning
+description: "Optimises prompts for risk assessment and triage tasks"
+pipelines:
+  risk-assessment:
+    signature:
+      id: risk-v1
+      baseSystemPrompt: "Assess risk factors for the given insurance case, considering policy terms, claim history, and external signals."
+    optimiser:
+      type: few-shot
+      diversityStrategy: max-marginal
+    config:
+      maxExamples: 10
+      minQualityThreshold: 0.7
+      minOutcomeCount: 50
+    safety:
+      qualityFloor: 0.5
+      maxExperimentCycles: 100
+      circuitBreakerThreshold: 0.3
+    confidenceScorer:
+      type: composite
+    examples:
+      - input: "claim-1234"
+        output: "high-risk"
+        outcome: correct
+        qualityScore: 0.92
+      - input: "claim-5678"
+        output: "low-risk"
+        outcome: correct
+        qualityScore: 0.88
+      - input: "claim-9012"
+        output: "medium-risk"
+        outcome: incorrect
+        qualityScore: 0.45
+  triage:
+    signature:
+      id: triage-v2
+    optimiser:
+      type: instruction
+`;
+
+  renderComponentSection('prompt-optimisation-section', promptOptYaml, (data) => {
+    const el = document.createElement('agency-optimisation-prompt-view');
+    el.spec = data;
+    return el;
+  });
+
+  // 5e. Cognition
+  const cognitionYaml = `
+category: social
+type: cognition
+name: autonomous-agent-cognition
+description: "Full cognitive configuration for an autonomous agent with learning and self-regulation"
+cognition:
+  drive:
+    baseLevel: 0.5
+    decayRate: 0.1
+    boostOnSuccess: 0.15
+  mood:
+    volatility: 0.3
+    baseline: neutral
+  retention:
+    retentionThreshold: 0.6
+    confidenceWeight: 0.4
+    recencyWeight: 0.25
+    scopeWeight: 0.2
+    trustWeight: 0.15
+  mentalModel:
+    updateFrequency: per-turn
+    maxEntities: 50
+  strategyLearning:
+    explorationRate: 0.2
+    minSampleSize: 10
+  narrative:
+    style: analytical
+  goalProposal:
+    maxActiveGoals: 3
+`;
+
+  renderComponentSection('cognition-section', cognitionYaml, (data) => {
+    const el = document.createElement('agency-social-cognition-view');
+    el.spec = data;
+    return el;
+  });
+
+  // 5f. Memory Hygiene
+  const memoryHygieneYaml = `
+category: social
+type: memory-hygiene
+name: memory-cleanup
+description: "Confidence-weighted memory eviction with balanced scoring"
+retention:
+  retentionThreshold: 0.5
+  confidenceWeight: 0.3
+  recencyWeight: 0.3
+  scopeWeight: 0.2
+  trustWeight: 0.2
+`;
+
+  renderComponentSection('memory-hygiene-section', memoryHygieneYaml, (data) => {
+    const el = document.createElement('agency-social-memory-hygiene-view');
+    el.spec = data;
+    return el;
+  });
+
+  // ═══════════════════════════════════════════════
   // Agent Viewer — Drill-Down with Tabs
   // ═══════════════════════════════════════════════
   const viewerDescriptorYaml = `
@@ -1142,8 +1401,53 @@ agents:
     `# agent-viewer with governance/judgment\n${judgmentYaml.trim()}`,
     () => viewerJudgment);
 
+  // ── Viewer compositions for perception/optimisation/social ──
+  const summarisationViewerData = parse(summarisationYaml);
+  const viewerSummarisation = document.createElement('agent-viewer');
+  viewerSummarisation.data = {
+    agent: descriptor,
+    spec: summarisationViewerData,
+    breadcrumb: [summarisationViewerData.name ?? 'Pattern', descriptor.name],
+  };
+  renderComponentSection('viewer-summarisation-section',
+    `# agent-viewer with perception/summarisation\n${summarisationYaml.trim()}`,
+    () => viewerSummarisation);
+
+  const observationViewerData = parse(observationYaml);
+  const viewerObservation = document.createElement('agent-viewer');
+  viewerObservation.data = {
+    agent: descriptor,
+    spec: observationViewerData,
+    breadcrumb: [observationViewerData.name ?? 'Pattern', descriptor.name],
+  };
+  renderComponentSection('viewer-observation-section',
+    `# agent-viewer with perception/observation\n${observationYaml.trim()}`,
+    () => viewerObservation);
+
+  const promptOptViewerData = parse(promptOptYaml);
+  const viewerPromptOpt = document.createElement('agent-viewer');
+  viewerPromptOpt.data = {
+    agent: descriptor,
+    spec: promptOptViewerData,
+    breadcrumb: [promptOptViewerData.name ?? 'Pattern', descriptor.name],
+  };
+  renderComponentSection('viewer-prompt-opt-section',
+    `# agent-viewer with optimisation/prompt-optimisation\n${promptOptYaml.trim()}`,
+    () => viewerPromptOpt);
+
+  const cognitionViewerData = parse(cognitionYaml);
+  const viewerCognition = document.createElement('agent-viewer');
+  viewerCognition.data = {
+    agent: descriptor,
+    spec: cognitionViewerData,
+    breadcrumb: [cognitionViewerData.name ?? 'Pattern', descriptor.name],
+  };
+  renderComponentSection('viewer-cognition-section',
+    `# agent-viewer with social/cognition\n${cognitionYaml.trim()}`,
+    () => viewerCognition);
+
   // ═══════════════════════════════════════════════
-  // 4. Coordination Pipeline — Swim Lane View
+  // 6. Coordination Pipeline — Swim Lane View
   // ═══════════════════════════════════════════════
   const coordinationYaml = `
 name: kyc-verification
