@@ -2,7 +2,7 @@
 """Step 6: Assemble importable corpus from enriched data.
 
 Input:  enriched.json + nlp-baseline.json
-Output: corpus.json — ready for FridaSeeder or BiographyHandler import
+Output: corpus.json — ready for BiographyHandler import
 
 Also produces:
 - coverage-report.json — NLP coverage audit with gap classification
@@ -505,7 +505,7 @@ def assemble(enriched: dict) -> dict:
             'text': mem['text'],
             'domain': domain,
             'event_type': mem.get('event_type', 'observation'),
-            'subject': mem.get('subject', 'frida-kahlo'),
+            'subject': mem.get('subject', ''),
             'period': mem.get('period'),
             'related_entities': mem.get('related_entities', []),
             'mentioned_entities': mem.get('related_entities', []),
@@ -716,6 +716,23 @@ def main():
 
     print(f"\n--- Coverage Gate Report ---")
     print(format_report(reports))
+
+    from coverage import check_connectivity_coverage
+    conn_report = check_connectivity_coverage(corpus)
+    corpus['stats']['orphan_rate'] = round(conn_report['overall_orphan_rate'], 3)
+    corpus['stats']['orphan_count'] = conn_report['orphan_count']
+    corpus['stats']['median_degree'] = conn_report['median_degree']
+    with open(args.output, 'w') as f:
+        json.dump(corpus, f, indent=2)
+
+    print(f"\n--- Connectivity ---")
+    print(f"  Orphan rate: {conn_report['overall_orphan_rate']:.1%} ({conn_report['orphan_count']}/{conn_report['total_nodes']})"
+          f"  {'PASS' if conn_report['overall_orphan_rate'] < 0.1 else 'FAIL'} (target: <10%)")
+    for sg, rate in sorted(conn_report['orphan_rate_by_subgraph'].items()):
+        print(f"    {sg}: {rate:.1%}")
+    print(f"  Median degree: {conn_report['median_degree']}")
+    if conn_report['orphan_names']:
+        print(f"  Orphans: {conn_report['orphan_names']}")
 
     print(f"\nOutput: {args.output}")
     print(f"Coverage: {args.report}")

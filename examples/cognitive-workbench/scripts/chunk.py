@@ -10,8 +10,26 @@ Usage:
 
 import argparse
 import json
+import os
 import re
 import sys
+
+
+def detect_subject(text: str, source_path: str = '') -> str:
+    """Detect the biographical subject from the source document.
+
+    Tries: (1) first # heading, stripping common suffixes like
+    " — Biographical Source Document", (2) filename without extension.
+    """
+    title_match = re.match(r'^#\s+(.+)$', text, re.MULTILINE)
+    if title_match:
+        title = title_match.group(1).strip()
+        title = re.sub(r'\s*[—–-]\s*(Biographical|Biography|Source|Document).*$', '', title, flags=re.IGNORECASE)
+        return title.strip()
+    if source_path:
+        name = re.sub(r'[-_]', ' ', os.path.splitext(os.path.basename(source_path))[0])
+        return name.title()
+    return ''
 
 
 def chunk_markdown(text: str) -> list[dict]:
@@ -66,6 +84,7 @@ def main():
         text = f.read()
 
     passages = chunk_markdown(text)
+    subject = detect_subject(text, args.source)
 
     stats = {
         'source_file': args.source,
@@ -74,11 +93,12 @@ def main():
         'avg_chars': sum(p['char_count'] for p in passages) // max(len(passages), 1),
     }
 
-    output = {'stats': stats, 'passages': passages}
+    output = {'subject': subject, 'stats': stats, 'passages': passages}
 
     with open(args.output, 'w') as f:
         json.dump(output, f, indent=2)
 
+    print(f"Subject: {subject}")
     print(f"Chunked {stats['total_passages']} passages, {stats['total_chars']} chars total")
     print(f"Average passage: {stats['avg_chars']} chars")
     print(f"Output: {args.output}")
