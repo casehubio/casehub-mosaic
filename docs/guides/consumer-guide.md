@@ -172,6 +172,23 @@ Five components:
 
 Data delivery is property-based (`conversationState: ConversationState`) — host app owns fetching. Extension points via render callbacks (`renderPoint`, `renderEntry`, `renderFact`) per PP-20260713-8ea1af.
 
+### agent-viewer pattern views
+
+14 dedicated pattern views organized by agency category, dispatched by `<agency-agent-viewer>` based on `PatternCategory` discriminated union type. All views extend `PatternViewMixin(LitElement)` with shared `patternViewStyles`, ARIA (`role="region"`, `aria-label`), and empty-state handling.
+
+| Category | Views | Element tags |
+|----------|-------|-------------|
+| Orchestration | supervisor, choreography, saga, decomposition | `<agency-orchestration-supervisor-view>`, `-choreography-view`, `-saga-view`, `-decomposition-view` |
+| Deliberation | voting, debate, negotiation, coalition, normative | `<agency-deliberation-voting-view>`, `-debate-view`, `-negotiation-view`, `-coalition-view`, `-normative-view` |
+| Governance | judgment | `<agency-governance-judgment-view>` |
+| Perception | summarisation, observation, narrative | `<agency-perception-summarisation-view>`, `-observation-view`, `-narrative-view` |
+| Optimisation | prompt-optimisation | `<agency-optimisation-prompt-view>` |
+| Social | cognition, memory-hygiene | `<agency-social-cognition-view>`, `-memory-hygiene-view>` |
+
+Each view receives its spec via the `spec` property (typed `PatternCategory`). The `agent-viewer` routes to the correct view based on `spec.category` and `spec.type` with exhaustive `default: never` guards.
+
+Category colour scheme: Orchestration `#fab387` (peach), Deliberation `#cba6f7` (purple), Governance `#f38ba8` (red), Perception `#94e2d5` (teal), Optimisation `#f9e2af` (amber), Social `#f5c2e7` (pink).
+
 ### casehub-diagram
 
 Visual diagram editor for CaseDefinition YAML. Renders case definitions as interactive node graphs with ELK auto-layout.
