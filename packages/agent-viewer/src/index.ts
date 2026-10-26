@@ -33,6 +33,14 @@ export type {
 
 export { BasePatternView } from './views/base-pattern-view.js';
 export { PlaybookSpecView } from './views/playbook-spec-view.js';
+export { SupervisorView } from './views/orchestration/supervisor-view.js';
+export { ChoreographyView } from './views/orchestration/choreography-view.js';
+export { SagaView } from './views/orchestration/saga-view.js';
+export { DecompositionView } from './views/orchestration/decomposition-view.js';
+export { NegotiationView } from './views/deliberation/negotiation-view.js';
+export { CoalitionView } from './views/deliberation/coalition-view.js';
+export { NormativeView } from './views/deliberation/normative-view.js';
+export { JudgmentView } from './views/governance/judgment-view.js';
 export { PatternViewMixin, patternViewStyles } from './shared-styles.js';
 
 export { AgentViewer } from './agent-viewer.js';
