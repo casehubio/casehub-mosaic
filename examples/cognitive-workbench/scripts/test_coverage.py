@@ -154,3 +154,59 @@ def test_format_report():
     assert 'FAIL' in text
     assert 'WARN' in text
     assert 'Overall:' in text
+
+
+def test_connectivity_coverage_reports_orphan_rate():
+    from coverage import check_connectivity_coverage
+    corpus = {
+        'nodes': [
+            {'name': 'A', 'type': 'person'},
+            {'name': 'B', 'type': 'person'},
+            {'name': 'C', 'type': 'concept'},
+        ],
+        'edges': [
+            {'source': 'A', 'target': 'B', 'type': 'married-to'},
+        ],
+    }
+    report = check_connectivity_coverage(corpus)
+    assert report['overall_orphan_rate'] == pytest.approx(1/3, abs=0.01)
+    assert report['orphan_rate_by_subgraph']['concept'] == 1.0
+    assert report['orphan_rate_by_subgraph']['person'] == 0.0
+    assert report['orphan_count'] == 1
+    assert report['orphan_names'] == ['C']
+
+
+def test_connectivity_coverage_reports_edge_distribution():
+    from coverage import check_connectivity_coverage
+    corpus = {
+        'nodes': [{'name': 'A'}, {'name': 'B'}, {'name': 'C'}, {'name': 'D'}],
+        'edges': [
+            {'source': 'A', 'target': 'B', 'type': 'married-to'},
+            {'source': 'C', 'target': 'D', 'type': 'married-to'},
+            {'source': 'A', 'target': 'C', 'type': 'inspired-by'},
+        ],
+    }
+    report = check_connectivity_coverage(corpus)
+    assert report['edge_type_distribution']['married-to'] == 2
+    assert report['edge_type_distribution']['inspired-by'] == 1
+    assert report['overall_orphan_rate'] == 0.0
+
+
+def test_connectivity_coverage_empty_corpus():
+    from coverage import check_connectivity_coverage
+    report = check_connectivity_coverage({'nodes': [], 'edges': []})
+    assert report['total_nodes'] == 0
+    assert report['overall_orphan_rate'] == 0
+
+
+def test_format_connectivity_report():
+    from coverage import check_connectivity_coverage, format_connectivity_report
+    corpus = {
+        'nodes': [{'name': 'A', 'type': 'person'}, {'name': 'B', 'type': 'person'}],
+        'edges': [{'source': 'A', 'target': 'B', 'type': 'married-to'}],
+    }
+    report = check_connectivity_coverage(corpus)
+    text = format_connectivity_report(report)
+    assert 'Connectivity Coverage' in text
+    assert '0.0%' in text
+    assert '✓' in text

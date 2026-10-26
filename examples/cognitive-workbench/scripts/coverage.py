@@ -284,3 +284,69 @@ Verify each field. Return JSON."""
         print(f"  Verification warning: {e}")
 
     return VerificationResult(verified=True, field_checks=[], retries_needed=[])
+
+
+def check_connectivity_coverage(corpus: dict) -> dict:
+    """Compute connectivity metrics for the corpus."""
+    nodes = corpus.get('nodes', [])
+    edges = corpus.get('edges', [])
+
+    connected = set()
+    for e in edges:
+        connected.add(e.get('source', ''))
+        connected.add(e.get('target', ''))
+
+    node_names = [n['name'] for n in nodes]
+    orphans = [n for n in node_names if n not in connected]
+
+    by_subgraph: dict[str, dict] = {}
+    for n in nodes:
+        sg = n.get('subgraph_type', n.get('type', 'unknown'))
+        by_subgraph.setdefault(sg, {'total': 0, 'orphan': 0})
+        by_subgraph[sg]['total'] += 1
+        if n['name'] not in connected:
+            by_subgraph[sg]['orphan'] += 1
+
+    orphan_rate_by_subgraph = {
+        sg: d['orphan'] / d['total'] if d['total'] > 0 else 0
+        for sg, d in by_subgraph.items()
+    }
+
+    edge_type_dist: dict[str, int] = {}
+    for e in edges:
+        t = e.get('type', 'unknown')
+        edge_type_dist[t] = edge_type_dist.get(t, 0) + 1
+
+    degree: dict[str, int] = {}
+    for e in edges:
+        degree[e.get('source', '')] = degree.get(e.get('source', ''), 0) + 1
+        degree[e.get('target', '')] = degree.get(e.get('target', ''), 0) + 1
+    degrees = sorted(degree.values()) if degree else [0]
+    median_degree = degrees[len(degrees) // 2] if degrees else 0
+
+    return {
+        'total_nodes': len(nodes),
+        'total_edges': len(edges),
+        'orphan_count': len(orphans),
+        'overall_orphan_rate': len(orphans) / len(nodes) if nodes else 0,
+        'orphan_rate_by_subgraph': orphan_rate_by_subgraph,
+        'edge_type_distribution': edge_type_dist,
+        'median_degree': median_degree,
+        'orphan_names': orphans,
+    }
+
+
+def format_connectivity_report(report: dict) -> str:
+    """Format connectivity metrics as a human-readable report."""
+    lines = ['=== Connectivity Coverage ===']
+    rate = report['overall_orphan_rate']
+    status = '✓' if rate < 0.1 else '✗'
+    lines.append(f"Orphan rate (overall): {rate:.1%} (target: <10%)  {status}")
+    for sg, sg_rate in sorted(report['orphan_rate_by_subgraph'].items()):
+        sg_status = '✓' if sg_rate < 0.1 else '✗'
+        lines.append(f"  {sg}: {sg_rate:.1%}  {sg_status}")
+    dist = dict(sorted(report['edge_type_distribution'].items(), key=lambda x: -x[1]))
+    lines.append(f"Edge type distribution: {dist}")
+    lines.append(f"Median degree: {report['median_degree']}")
+    lines.append(f"Orphans: {report['orphan_count']}/{report['total_nodes']}")
+    return '\n'.join(lines)

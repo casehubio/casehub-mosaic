@@ -77,7 +77,7 @@ def main():
     parser.add_argument('structure', help='Path to structure.json')
     parser.add_argument('passages', help='Path to passages.json')
     parser.add_argument('--output', '-o', default='reference-overlay.json', help='Output file')
-    parser.add_argument('--subject', '-s', default='Frida Kahlo', help='Biography subject name')
+    parser.add_argument('--subject', '-s', default=None, help='Biography subject name (auto-detected from structure.json if omitted)')
     parser.add_argument('--batch-size', '-b', type=int, default=15, help='Entities per LLM call')
     args = parser.parse_args()
 
@@ -87,6 +87,9 @@ def main():
         structure = json.load(f)
     with open(args.passages, 'r') as f:
         passages_data = json.load(f)
+
+    if not args.subject:
+        args.subject = structure.get('subject', 'the subject')
 
     entities = structure.get('entities', [])
     print(f"Generating overlay for {len(entities)} entities...")

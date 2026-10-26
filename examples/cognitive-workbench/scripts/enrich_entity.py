@@ -10,7 +10,7 @@ Input:  enriched.json (Phase 2a output)
 Output: enriched.json (updated in-place with Phase 2b additions)
 
 Usage:
-    python3 enrich_entity.py <enriched.json> <structure.json> [--subject "Frida Kahlo"]
+    python3 enrich_entity.py <enriched.json> <structure.json> [--subject "Subject Name"]
 """
 
 import argparse

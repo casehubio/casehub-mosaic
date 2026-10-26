@@ -24,6 +24,7 @@ import time
 from llm_client import create_client, model_id
 from coverage import load_registry, check_node_coverage, check_memory_coverage, format_report
 from pipeline_state import atomic_write, clamp_confidence
+from quality_gate import run_quality_gate
 
 ENTITY_SYSTEM = """You are a biographical knowledge graph builder. Extract ENTITIES from the passage.
 
@@ -64,11 +65,11 @@ Do not skip any entity in favor of another type. Every named entity in the passa
 
 Respond with JSON only: {"entities": [...]}"""
 
-EDGE_SYSTEM = """You are a biographical knowledge graph builder. Extract RELATIONSHIPS (edges) between entities in the passage.
+EDGE_SYSTEM = """You are a biographical knowledge graph builder. Extract RELATIONSHIPS (edges) between the extracted entities listed below.
 
 For each edge:
-- source: entity name
-- target: entity name
+- source: entity name (MUST match one of the extracted entity names exactly)
+- target: entity name (MUST match one of the extracted entity names exactly)
 - type: relationship type from vocabulary:
   Kinship: child-of, sibling-of, parent-of
   Romantic: married-to, affair-with, divorced-from
@@ -76,12 +77,22 @@ For each edge:
   Goal: pursues, enables, blocks, requires, contributes-to, decomposes-into
   Spatial: lives-at, located-in, at
   Creative: inspired-by, created-by, depicted-in
-  Conceptual: associated-with, influenced-by
+  Conceptual: embodies, exemplifies, contradicts, influenced-by
   Activity: participated, occasion
+  Temporal: preceded-by, concurrent-with, succeeded-by
+  Causal: caused-by, resulted-in, motivated-by
 - confidence_origin: STATED | INFERRED
 - validation_tier: REGISTERED (from vocabulary above) | UNVALIDATED (ad-hoc type)
 
-Respond with JSON only: {"edges": [...]}"""
+CRITICAL RULES:
+- Every entity should have at least one edge. If an entity is genuinely standalone,
+  add it to the "standalone" array with a justification.
+- Create cross-type relationships: person→goal (pursues), person→concept (influenced-by),
+  activity→place (at), person→project (created-by, contributed-to), goal→goal (requires, decomposes-into)
+- A typical passage with 5 entities should produce 4-8 edges.
+- Use entity names EXACTLY as provided in the extracted entities list.
+
+Respond with JSON only: {"edges": [...], "standalone": [{"entity": "name", "reason": "..."}]}"""
 
 GOAL_SYSTEM = """You are a biographical knowledge graph builder. Extract GOALS from the passage.
 
@@ -192,8 +203,45 @@ Extract {chunk_name} from this passage."""
     return {}
 
 
-def extract_passage(client, passage, candidates):
-    """Extract structure from one passage via 4 independent LLM calls."""
+def detect_subject(entities):
+    """Detect the biographical subject from extracted entities.
+
+    Returns the most-mentioned person entity, or the first person if no
+    mention counts are available.
+    """
+    persons = [e for e in entities if e.get('type', '').lower() == 'person']
+    if not persons:
+        return None
+    best = max(persons, key=lambda e: len(e.get('source_passages', [])), default=persons[0])
+    return best['name']
+
+
+def close_goal_orphans(entities, edges, subject_name):
+    """Mechanical orphan closure: any goal with zero edges gets a 'pursues' edge from the subject."""
+    if not subject_name:
+        return []
+    connected = set()
+    for e in edges:
+        connected.add(e.get('source', ''))
+        connected.add(e.get('target', ''))
+    new_edges = []
+    for ent in entities:
+        if ent.get('type', '').lower() == 'goal' and ent['name'] not in connected:
+            new_edges.append({
+                'source': subject_name,
+                'target': ent['name'],
+                'type': 'pursues',
+                'confidence_origin': 'INFERRED',
+                'validation_tier': 'REGISTERED',
+                'closure': 'mechanical-goal-link',
+            })
+            connected.add(ent['name'])
+    return new_edges
+
+
+def extract_passage(client, passage, candidates, subject_name=None):
+    """Extract structure from one passage: entity+goal first, then edge with entity context,
+    then quality gate for orphan closure."""
     candidate_text = '\n'.join(
         f"  - {c['canonical']} ({c['type']}, {c['mentions']} mentions, tier: {c.get('depth_tier', '?')})"
         for c in candidates[:30]
@@ -202,16 +250,40 @@ def extract_passage(client, passage, candidates):
 
     ent_result = call_llm(client, ENTITY_SYSTEM, text, candidate_text, 'entities')
     goal_result = call_llm(client, GOAL_SYSTEM, text, candidate_text, 'goals')
-    edge_result = call_llm(client, EDGE_SYSTEM, text, candidate_text, 'edges')
-    mem_result = call_llm(client, MEMORY_SYSTEM, text, candidate_text, 'memories')
 
     all_entities = ent_result.get('entities', []) + goal_result.get('entities', [])
 
-    return {
+    entity_context = candidate_text + '\n\nExtracted entities:\n' + '\n'.join(
+        f"  - {e['name']} ({e.get('type', 'unknown')})"
+        for e in all_entities
+    )
+
+    edge_result = call_llm(client, EDGE_SYSTEM, text, entity_context, 'edges')
+    mem_result = call_llm(client, MEMORY_SYSTEM, text, candidate_text, 'memories')
+
+    result = {
         'entities': all_entities,
         'edges': edge_result.get('edges', []),
+        'standalone': edge_result.get('standalone', []),
         'memories': mem_result.get('memories', []),
     }
+
+    # Phase 5: mechanical goal orphan closure
+    local_subject = subject_name or detect_subject(all_entities)
+    if not local_subject and candidates:
+        person_candidates = [c for c in candidates if c.get('type', '').upper() == 'PERSON']
+        if person_candidates:
+            local_subject = person_candidates[0]['canonical']
+    goal_edges = close_goal_orphans(all_entities, result['edges'], local_subject)
+    if goal_edges:
+        result['edges'].extend(goal_edges)
+
+    # Phase 6: quality gate — Haiku evaluation for remaining orphans
+    result, flags, corrections, justifications = run_quality_gate(result, text, client)
+    if corrections:
+        print(f"    quality gate: +{len(corrections)} edges, {len(justifications)} justified")
+
+    return result
 
 
 CONVERGENCE_SYSTEM = """You are a biographical knowledge graph builder. Given synthesized insights about an entity and the existing graph context, identify NEW content not already captured.
@@ -453,6 +525,7 @@ def main():
     parser.add_argument('--structure-base', help='Path to existing structure.json to merge into')
     parser.add_argument('--pass-num', type=int, default=1, help='Convergence pass number')
     parser.add_argument('--limit', type=int, default=0, help='Process only first N passages (0=all)')
+    parser.add_argument('--subject', default=None, help='Primary subject name (auto-detected from passages.json if omitted)')
     args = parser.parse_args()
 
     if args.convergence:
@@ -477,6 +550,10 @@ def main():
             gap_entities = json.load(f).get('new_entities', [])
 
     passages = passages_data['passages']
+    pipeline_subject = args.subject or passages_data.get('subject', '')
+    if pipeline_subject:
+        print(f"  Subject: {pipeline_subject}")
+
     entities_by_passage = {}
     for key, ent in baseline.get('entities', {}).items():
         for pid in ent.get('passages', []):
@@ -531,7 +608,7 @@ def main():
             })
 
         print(f"  [{i+1}/{len(passages)}] {passage['id']}: {passage['section'][:40]}... ({len(candidates)} candidates)")
-        result = extract_passage(client, passage, candidates)
+        result = extract_passage(client, passage, candidates, subject_name=pipeline_subject or None)
 
         ent_count = len(result.get('entities', []))
         edge_count = len(result.get('edges', []))
@@ -610,8 +687,54 @@ def main():
 
     derive_temporal_from_lifecycle(all_entities)
 
-    registry_path = os.path.join(os.path.dirname(__file__), '..', 'docs', 'field-registry.yaml')
     entity_list = list(all_entities.values())
+    subject_name = pipeline_subject or detect_subject(entity_list)
+
+    # Global orphan closure: catch any goals missed by per-passage closure
+    edge_list = list(edge_dedup.values())
+    global_goal_edges = close_goal_orphans(entity_list, edge_list, subject_name)
+    for e in global_goal_edges:
+        ekey = f"{e['source'].lower()}|{e['target'].lower()}|{e['type']}"
+        if ekey not in edge_dedup:
+            edge_dedup[ekey] = e
+            collected_edge_types.add(e['type'])
+    if global_goal_edges:
+        print(f"\n  Global goal closure: +{len(global_goal_edges)} goal edges")
+
+    # Global quality gate: Haiku evaluation for remaining orphans with source passage context
+    from quality_gate import check_orphans, evaluate_with_haiku, QualityFlag, FlagType
+    global_edges = list(edge_dedup.values())
+    global_orphan_flags = check_orphans(entity_list, global_edges, [])
+    if global_orphan_flags:
+        print(f"  Global quality gate: {len(global_orphan_flags)} remaining orphans")
+        passages_by_id = {p['id']: p for p in passages_data['passages']}
+        entity_by_name = {e['name']: e for e in entity_list}
+        total_corrections = 0
+        total_justifications = 0
+        for flag in global_orphan_flags:
+            ent = entity_by_name.get(flag.entity, {})
+            source_pids = ent.get('source_passages', [])
+            passage_text = '\n\n'.join(passages_by_id[pid]['text'] for pid in source_pids if pid in passages_by_id)
+            single_flag = [flag]
+            corrections, justifications = evaluate_with_haiku(single_flag, passage_text, entity_list, client)
+            for c in corrections:
+                c['closure'] = 'global-haiku'
+                ekey = f"{c.get('source', '').lower()}|{c.get('target', '').lower()}|{c.get('type', '')}"
+                if ekey not in edge_dedup:
+                    edge_dedup[ekey] = c
+                    collected_edge_types.add(c.get('type', ''))
+                    total_corrections += 1
+            total_justifications += len(justifications)
+        if total_corrections or total_justifications:
+            print(f"    +{total_corrections} edges, {total_justifications} justified standalone")
+
+    # Connectivity report
+    from coverage import check_connectivity_coverage
+    conn_nodes = [{'name': e['name'], 'subgraph_type': e.get('type', 'unknown')} for e in entity_list]
+    conn_report = check_connectivity_coverage({'nodes': conn_nodes, 'edges': list(edge_dedup.values())})
+    orphan_rate = conn_report['overall_orphan_rate']
+
+    registry_path = os.path.join(os.path.dirname(__file__), '..', 'docs', 'field-registry.yaml')
     registry = load_registry(registry_path)
     node_report = check_node_coverage(entity_list, registry, stage='extraction')
     mem_report = check_memory_coverage(all_memories, registry, stage='extraction')
@@ -623,7 +746,10 @@ def main():
             'memories': len(all_memories),
             'passages_processed': len(passages),
             'edge_types': sorted(collected_edge_types),
+            'orphan_rate': round(orphan_rate, 3),
+            'orphan_count': conn_report['orphan_count'],
         },
+        'subject': subject_name,
         'entities': entity_list,
         'edges': list(edge_dedup.values()),
         'memories': all_memories,
@@ -638,9 +764,13 @@ def main():
     atomic_write(args.output, output)
 
     print(f"\nExtraction complete:")
+    print(f"  Subject: {subject_name}")
     print(f"  Entities: {len(all_entities)}")
     print(f"  Edges: {len(edge_dedup)}")
     print(f"  Memories: {len(all_memories)}")
+    print(f"  Orphan rate: {orphan_rate:.1%} ({conn_report['orphan_count']}/{conn_report['total_nodes']})")
+    if conn_report['orphan_names']:
+        print(f"  Remaining orphans: {conn_report['orphan_names']}")
     print(f"\n{format_report([node_report, mem_report])}")
     print(f"\nOutput: {args.output}")
 
