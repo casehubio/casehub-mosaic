@@ -23,6 +23,13 @@ export type {
   OrchestrationPatternType,
   DeliberationPatternCategory,
   DeliberationPatternType,
+  PerceptionPatternCategory,
+  PerceptionPatternType,
+  OptimisationPatternCategory,
+  SocialPatternCategory,
+  SocialPatternType,
+  NegotiationParty,
+  AcceptancePolicy,
   AgentRef,
   AgentRefType,
   AggregationSpec,
@@ -41,6 +48,12 @@ export { NegotiationView } from './views/deliberation/negotiation-view.js';
 export { CoalitionView } from './views/deliberation/coalition-view.js';
 export { NormativeView } from './views/deliberation/normative-view.js';
 export { JudgmentView } from './views/governance/judgment-view.js';
+export { SummarisationView } from './views/perception/summarisation-view.js';
+export { ObservationView } from './views/perception/observation-view.js';
+export { NarrativeView } from './views/perception/narrative-view.js';
+export { PromptOptimisationView } from './views/optimisation/prompt-optimisation-view.js';
+export { CognitionView } from './views/social/cognition-view.js';
+export { MemoryHygieneView } from './views/social/memory-hygiene-view.js';
 export { PatternViewMixin, patternViewStyles } from './shared-styles.js';
 
 export { AgentViewer } from './agent-viewer.js';

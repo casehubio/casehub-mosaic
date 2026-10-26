@@ -9,13 +9,13 @@ function fixture(): DeliberationPatternCategory {
     name: 'contract-terms',
     description: 'Agents negotiate contract terms through proposals and counter-proposals',
     maxRounds: 5,
-    aggregation: { type: 'majority-vote' },
-    termination: [{ type: 'all-agreed' }, { type: 'max-iterations' }],
+    termination: [{ type: 'accepted' }, { type: 'max-iterations' }],
     failurePolicy: { onRoutingFailure: 'FAIL', onDeadlock: 'ESCALATE' },
-    agents: [
-      { type: 'worker', name: 'buyer-agent', description: 'Represents buyer interests', capabilities: ['negotiation'] },
-      { type: 'worker', name: 'seller-agent', description: 'Represents seller interests', capabilities: ['negotiation'] },
+    parties: [
+      { name: 'buyer-agent', role: 'buyer' },
+      { name: 'seller-agent', role: 'seller' },
     ],
+    acceptance: { type: 'unanimous' },
   };
 }
 
@@ -37,9 +37,8 @@ describe('agency-deliberation-negotiation-view', () => {
     expect(el.getAttribute('aria-label')).toBe('deliberation view');
   });
 
-  it('renders category and type badges', async () => {
+  it('renders type badge', async () => {
     await create(fixture());
-    expect(el.shadowRoot!.querySelector('.header-label')?.textContent).toBe('PATTERN');
     expect(el.shadowRoot!.querySelector('.type-badge')?.textContent).toBe('negotiation');
   });
 
@@ -48,20 +47,55 @@ describe('agency-deliberation-negotiation-view', () => {
     expect(el.shadowRoot!.querySelector('.header-name')?.textContent).toBe('contract-terms');
   });
 
-  it('renders agent cards', async () => {
+  it('renders party cards with names', async () => {
     await create(fixture());
-    expect(el.shadowRoot!.querySelectorAll('agent-card').length).toBe(2);
+    const names = el.shadowRoot!.querySelectorAll('.party-name');
+    expect(names.length).toBe(2);
+    expect(names[0].textContent).toBe('buyer-agent');
+    expect(names[1].textContent).toBe('seller-agent');
   });
 
-  it('renders negotiation rounds', async () => {
+  it('renders party roles', async () => {
     await create(fixture());
-    const rounds = el.shadowRoot!.querySelectorAll('.round-entry');
-    expect(rounds.length).toBeGreaterThan(0);
+    const roles = el.shadowRoot!.querySelectorAll('.party-role');
+    expect(roles.length).toBe(2);
+    expect(roles[0].textContent).toBe('buyer');
   });
 
-  it('renders max rounds', async () => {
+  it('renders exchange icon between two parties', async () => {
+    await create(fixture());
+    expect(el.shadowRoot!.querySelector('.exchange-icon')?.textContent).toBe('⇄');
+  });
+
+  it('renders acceptance policy', async () => {
+    await create(fixture());
+    expect(el.shadowRoot!.querySelector('.acceptance-type')?.textContent).toBe('unanimous');
+  });
+
+  it('renders threshold value for threshold acceptance', async () => {
+    const spec = { ...fixture(), acceptance: { type: 'threshold' as const, value: 0.75 } };
+    await create(spec);
+    expect(el.shadowRoot!.querySelector('.acceptance-threshold')?.textContent).toBe('≥ 0.75');
+  });
+
+  it('renders max rounds in metadata', async () => {
     await create(fixture());
     expect(el.shadowRoot!.textContent).toContain('5');
+  });
+
+  it('renders outcome section', async () => {
+    await create(fixture());
+    expect(el.shadowRoot!.querySelector('.outcome-section')).toBeTruthy();
+  });
+
+  it('falls back to agent-card when parties absent', async () => {
+    const spec: DeliberationPatternCategory = {
+      category: 'deliberation',
+      type: 'negotiation',
+      agents: [{ type: 'worker', name: 'agent-a' }],
+    };
+    await create(spec);
+    expect(el.shadowRoot!.querySelectorAll('agent-card').length).toBe(1);
   });
 
   it('renders empty state when no spec', async () => {

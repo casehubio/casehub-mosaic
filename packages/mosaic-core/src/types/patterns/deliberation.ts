@@ -7,6 +7,17 @@ import type {
 export type DeliberationPatternType =
   'voting' | 'debate' | 'negotiation' | 'coalition' | 'normative';
 
+export interface NegotiationParty {
+  name: string;
+  role?: string;
+  agent?: AgentRefSpec;
+}
+
+export type AcceptancePolicy =
+  | { type: 'unanimous' }
+  | { type: 'majority' }
+  | { type: 'threshold'; value?: number };
+
 export interface DeliberationPatternCategory {
   category: 'deliberation';
   type: DeliberationPatternType;
@@ -24,4 +35,6 @@ export interface DeliberationPatternCategory {
   termination?: TerminationSpec[];
   governance?: GovernanceSpec;
   failurePolicy?: FailurePolicySpec;
+  parties?: NegotiationParty[];
+  acceptance?: AcceptancePolicy;
 }

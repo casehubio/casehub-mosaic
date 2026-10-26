@@ -16,6 +16,12 @@ import './views/deliberation/negotiation-view.js';
 import './views/deliberation/coalition-view.js';
 import './views/deliberation/normative-view.js';
 import './views/governance/judgment-view.js';
+import './views/perception/summarisation-view.js';
+import './views/perception/observation-view.js';
+import './views/perception/narrative-view.js';
+import './views/optimisation/prompt-optimisation-view.js';
+import './views/social/cognition-view.js';
+import './views/social/memory-hygiene-view.js';
 
 export type AgentTab = 'eidos' | 'pattern' | 'steps';
 
@@ -302,9 +308,11 @@ export class AgentViewer extends LitElement {
       case 'perception':
         switch (spec.type) {
           case 'summarisation':
-          case 'narrative':
+            return html`<agency-perception-summarisation-view .spec=${spec}></agency-perception-summarisation-view>`;
           case 'observation':
-            return html`<div class="empty-state">${spec.category}/${spec.type} — coming in Wave 3</div>`;
+            return html`<agency-perception-observation-view .spec=${spec}></agency-perception-observation-view>`;
+          case 'narrative':
+            return html`<agency-perception-narrative-view .spec=${spec}></agency-perception-narrative-view>`;
           default: { const _p: never = spec.type; return _p; }
         }
       case 'communication':
@@ -327,14 +335,15 @@ export class AgentViewer extends LitElement {
       case 'optimisation':
         switch (spec.type) {
           case 'prompt-optimisation':
-            return html`<div class="empty-state">${spec.category}/${spec.type} — coming in Wave 3</div>`;
+            return html`<agency-optimisation-prompt-view .spec=${spec}></agency-optimisation-prompt-view>`;
           default: { const _x: never = spec.type; return _x; }
         }
       case 'social':
         switch (spec.type) {
-          case 'memory-hygiene':
           case 'cognition':
-            return html`<div class="empty-state">${spec.category}/${spec.type} — coming in Wave 3</div>`;
+            return html`<agency-social-cognition-view .spec=${spec}></agency-social-cognition-view>`;
+          case 'memory-hygiene':
+            return html`<agency-social-memory-hygiene-view .spec=${spec}></agency-social-memory-hygiene-view>`;
           case 'reflection':
             return html`<agency-base-pattern-view .spec=${spec}></agency-base-pattern-view>`;
           default: { const _s: never = spec.type; return _s; }

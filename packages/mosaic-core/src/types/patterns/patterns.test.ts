@@ -6,6 +6,8 @@ import type {
   OrchestrationPatternCategory,
   DeliberationPatternCategory,
   PerceptionPatternCategory,
+  OptimisationPatternCategory,
+  SocialPatternCategory,
 } from './index.js';
 import type {
   RoutingSpec, AggregationSpec, TerminationSpec, DecompositionSpec,
@@ -66,13 +68,85 @@ describe('pattern category hierarchy', () => {
     }
   });
 
-  it('minimal categories accept base fields only', () => {
+  it('PerceptionPatternCategory has pipeline and world fields', () => {
     const p: PerceptionPatternCategory = {
       category: 'perception',
       type: 'summarisation',
       name: 'doc-summary',
+      pipeline: {
+        source: 'case.document.updated',
+        levels: [
+          { grouping: 'windowed', summariser: { type: 'llm' }, emit: 'summary.l1' },
+          { grouping: 'keyed', summariser: { type: 'extractive' }, emit: 'summary.l2' },
+        ],
+      },
     };
-    expect(p.category).toBe('perception');
+    expect(p.pipeline!.levels).toHaveLength(2);
+    expect(p.pipeline!.source).toBe('case.document.updated');
+  });
+
+  it('PerceptionPatternCategory observation has world spec', () => {
+    const p: PerceptionPatternCategory = {
+      category: 'perception',
+      type: 'observation',
+      world: {
+        actions: ['inspect', 'query'],
+        sections: [{ type: 'entity-group', requiredTags: ['active'] }],
+        renderer: { verbatimThreshold: 5, groupedThreshold: 20 },
+      },
+    };
+    expect(p.world!.renderer!.verbatimThreshold).toBe(5);
+    expect(p.world!.sections).toHaveLength(1);
+  });
+
+  it('OptimisationPatternCategory has pipelines map', () => {
+    const p: OptimisationPatternCategory = {
+      category: 'optimisation',
+      type: 'prompt-optimisation',
+      name: 'risk-prompt-tuning',
+      pipelines: {
+        'risk-assessment': {
+          signature: { id: 'risk-v1', baseSystemPrompt: 'Assess risk factors' },
+          optimiser: { type: 'few-shot', diversityStrategy: 'max-marginal' },
+          config: { maxExamples: 10, minQualityThreshold: 0.7 },
+          safety: { qualityFloor: 0.5, circuitBreakerThreshold: 0.3 },
+          confidenceScorer: { type: 'composite' },
+        },
+      },
+    };
+    const pipeline = p.pipelines!['risk-assessment'];
+    expect(pipeline.signature.id).toBe('risk-v1');
+    expect(pipeline.optimiser.type).toBe('few-shot');
+    expect(pipeline.safety!.qualityFloor).toBe(0.5);
+  });
+
+  it('SocialPatternCategory has cognition config', () => {
+    const p: SocialPatternCategory = {
+      category: 'social',
+      type: 'cognition',
+      name: 'agent-cognition',
+      cognition: {
+        drive: { baseLevel: 0.5 },
+        mood: { volatility: 0.3 },
+        retention: { retentionThreshold: 0.6, confidenceWeight: 0.4 },
+      },
+    };
+    expect(p.cognition!.retention!.retentionThreshold).toBe(0.6);
+  });
+
+  it('SocialPatternCategory memory-hygiene uses retention config', () => {
+    const p: SocialPatternCategory = {
+      category: 'social',
+      type: 'memory-hygiene',
+      retention: {
+        retentionThreshold: 0.5,
+        confidenceWeight: 0.3,
+        recencyWeight: 0.3,
+        scopeWeight: 0.2,
+        trustWeight: 0.2,
+      },
+    };
+    expect(p.retention!.confidenceWeight).toBe(0.3);
   });
 });
 

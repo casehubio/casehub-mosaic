@@ -4,6 +4,9 @@ export * from './categories.js';
 export * from './base.js';
 export * from './orchestration.js';
 export * from './deliberation.js';
+export * from './perception.js';
+export * from './optimisation.js';
+export * from './social.js';
 export * from './normalize.js';
 
 export type {
@@ -16,12 +19,12 @@ export type {
 import type { PlaybookPatternCategory } from '@casehubio/yaml-core/patterns';
 import type { OrchestrationPatternCategory } from './orchestration.js';
 import type { DeliberationPatternCategory } from './deliberation.js';
+import type { PerceptionPatternCategory } from './perception.js';
+import type { OptimisationPatternCategory } from './optimisation.js';
+import type { SocialPatternCategory } from './social.js';
 import type {
-  PerceptionPatternCategory,
   CommunicationPatternCategory,
   GovernancePatternCategory,
-  OptimisationPatternCategory,
-  SocialPatternCategory,
 } from './base.js';
 
 export type PatternCategory =
