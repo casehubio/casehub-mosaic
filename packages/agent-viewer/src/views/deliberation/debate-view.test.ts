@@ -27,13 +27,18 @@ describe('debate-view', () => {
   let el: DebateView;
 
   beforeEach(async () => {
-    el = document.createElement('debate-view') as DebateView;
-    el.pattern = fixture();
+    el = document.createElement('agency-deliberation-debate-view') as DebateView;
+    el.spec = fixture();
     document.body.appendChild(el);
     await el.updateComplete;
   });
 
   afterEach(() => el.remove());
+
+  it('has role="region" and aria-label', () => {
+    expect(el.getAttribute('role')).toBe('region');
+    expect(el.getAttribute('aria-label')).toBe('deliberation view');
+  });
 
   it('renders pattern name', () => {
     expect(el.shadowRoot!.querySelector('.header-name')?.textContent).toBe('adversarial-review');
@@ -89,13 +94,13 @@ describe('debate-view', () => {
   });
 
   it('renders judge model badge when present', async () => {
-    el.pattern = { ...fixture(), judge: { type: 'worker', name: 'arbiter', model: 'claude-opus-5' } };
+    el.spec = { ...fixture(), judge: { type: 'worker', name: 'arbiter', model: 'claude-opus-5' } };
     await el.updateComplete;
     expect(el.shadowRoot!.querySelector('.judge-model')?.textContent).toBe('claude-opus-5');
   });
 
   it('omits judge when absent', async () => {
-    el.pattern = { ...fixture(), judge: undefined };
+    el.spec = { ...fixture(), judge: undefined };
     await el.updateComplete;
     expect(el.shadowRoot!.querySelector('.judge-card')).toBeNull();
   });

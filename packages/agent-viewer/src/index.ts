@@ -13,8 +13,8 @@ export type {
 } from './agent-types.js';
 
 export { AgentCard } from './agent-card.js';
-export { VotingView } from './voting-view.js';
-export { DebateView } from './debate-view.js';
+export { VotingView } from './views/deliberation/voting-view.js';
+export { DebateView } from './views/deliberation/debate-view.js';
 export type {
   PatternCategory,
   PatternCategoryName,
@@ -30,6 +30,10 @@ export type {
   JudgmentSpecDef,
   FailurePolicy,
 } from '@casehubio/mosaic-core';
+
+export { BasePatternView } from './views/base-pattern-view.js';
+export { PlaybookSpecView } from './views/playbook-spec-view.js';
+export { PatternViewMixin, patternViewStyles } from './shared-styles.js';
 
 export { AgentViewer } from './agent-viewer.js';
 export type { AgentTab, AgentViewerData, BreadcrumbBackDetail } from './agent-viewer.js';
