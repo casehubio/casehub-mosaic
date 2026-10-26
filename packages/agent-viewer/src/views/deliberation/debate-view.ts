@@ -1,23 +1,13 @@
 import { LitElement, html, css, nothing, type TemplateResult } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement } from 'lit/decorators.js';
 import type { DeliberationPatternCategory } from '@casehubio/mosaic-core';
-import './agent-card.js';
+import { PatternViewMixin, patternViewStyles } from '../../shared-styles.js';
+import '../../agent-card.js';
 
-@customElement('debate-view')
-export class DebateView extends LitElement {
-  @property({ attribute: false }) pattern!: DeliberationPatternCategory;
+@customElement('agency-deliberation-debate-view')
+export class DebateView extends PatternViewMixin(LitElement) {
 
-  static override styles = css`
-    :host {
-      display: block;
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 8px;
-      overflow: hidden;
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-      color: #cdd6f4;
-    }
-
+  static override styles = [patternViewStyles, css`
     .header {
       padding: 10px 16px;
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
@@ -207,11 +197,11 @@ export class DebateView extends LitElement {
       color: #7f849c;
       margin-top: 2px;
     }
-  `;
+  `];
 
   override render() {
-    if (!this.pattern) return nothing;
-    const p = this.pattern;
+    const p = this.spec as DeliberationPatternCategory;
+    if (!p) return nothing;
     return html`
       <div class="header">
         <span class="header-label">PATTERN</span>
@@ -238,7 +228,7 @@ export class DebateView extends LitElement {
   ] as const;
 
   private renderDebaters(): TemplateResult | typeof nothing {
-    const agents = this.pattern.agents ?? [];
+    const agents = (this.spec as DeliberationPatternCategory).agents ?? [];
     if (agents.length === 0) return nothing;
     if (agents.length === 2) {
       return html`
@@ -281,8 +271,8 @@ export class DebateView extends LitElement {
   ];
 
   private renderRounds(): TemplateResult | typeof nothing {
-    const agents = this.pattern.agents ?? [];
-    const maxRounds = this.pattern.maxRounds;
+    const agents = (this.spec as DeliberationPatternCategory).agents ?? [];
+    const maxRounds = (this.spec as DeliberationPatternCategory).maxRounds;
     if (agents.length < 2 || !maxRounds) return nothing;
     const previewRounds = Math.min(maxRounds, 3);
     const entries: TemplateResult[] = [];
@@ -300,7 +290,7 @@ export class DebateView extends LitElement {
         `);
       }
     }
-    const termDesc = this.pattern.termination?.find(t => t.type === 'all-agreed')
+    const termDesc = (this.spec as DeliberationPatternCategory).termination?.find(t => t.type === 'all-agreed')
       ? 'convergence' : 'completion';
     return html`
       <div class="rounds">${entries}</div>
@@ -311,7 +301,7 @@ export class DebateView extends LitElement {
   }
 
   private renderFlowIndicator(): TemplateResult | typeof nothing {
-    if (!this.pattern.judge) return nothing;
+    if (!(this.spec as DeliberationPatternCategory).judge) return nothing;
     return html`
       <div class="flow-indicator">
         <div class="flow-line"></div>
@@ -321,7 +311,7 @@ export class DebateView extends LitElement {
   }
 
   private renderJudge(): TemplateResult | typeof nothing {
-    const j = this.pattern.judge;
+    const j = (this.spec as DeliberationPatternCategory).judge;
     if (!j) return nothing;
     return html`
       <div class="judge-section">
@@ -338,7 +328,7 @@ export class DebateView extends LitElement {
   }
 
   private renderMetadata(): TemplateResult | typeof nothing {
-    const p = this.pattern;
+    const p = (this.spec as DeliberationPatternCategory);
     const cards: TemplateResult[] = [];
     if (p.maxRounds) {
       cards.push(html`

@@ -1,24 +1,13 @@
 import { LitElement, html, css, nothing, type TemplateResult } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement } from 'lit/decorators.js';
 import type { DeliberationPatternCategory } from '@casehubio/mosaic-core';
-// flow is vertical through levels — CSS indicators, not SVG arrows
-import './agent-card.js';
+import { PatternViewMixin, patternViewStyles } from '../../shared-styles.js';
+import '../../agent-card.js';
 
-@customElement('voting-view')
-export class VotingView extends LitElement {
-  @property({ attribute: false }) pattern!: DeliberationPatternCategory;
+@customElement('agency-deliberation-voting-view')
+export class VotingView extends PatternViewMixin(LitElement) {
 
-  static override styles = css`
-    :host {
-      display: block;
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 8px;
-      overflow: hidden;
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-      color: #cdd6f4;
-    }
-
+  static override styles = [patternViewStyles, css`
     .header {
       padding: 10px 16px;
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
@@ -201,11 +190,11 @@ export class VotingView extends LitElement {
       font-size: 11px;
       color: #94e2d5;
     }
-  `;
+  `];
 
   override render() {
-    if (!this.pattern) return nothing;
-    const p = this.pattern;
+    const p = this.spec as DeliberationPatternCategory;
+    if (!p) return nothing;
     return html`
       <div class="header">
         <span class="header-label">PATTERN</span>
@@ -236,10 +225,10 @@ export class VotingView extends LitElement {
   }
 
   private renderAggregation(): TemplateResult | typeof nothing {
-    const a = this.pattern.aggregation;
+    const a = (this.spec as DeliberationPatternCategory).aggregation;
     if (!a) return nothing;
     const detail: string[] = [];
-    const j = this.pattern.judgment;
+    const j = (this.spec as DeliberationPatternCategory).judgment;
     if (j?.trigger?.type === 'confidenceThreshold' && j.trigger.threshold != null) detail.push(`threshold: ${j.trigger.threshold}`);
     return html`
       <div class="aggregation">
@@ -255,7 +244,7 @@ export class VotingView extends LitElement {
   }
 
   private renderMetadata(): TemplateResult | typeof nothing {
-    const p = this.pattern;
+    const p = (this.spec as DeliberationPatternCategory);
     const cards: TemplateResult[] = [];
     if (p.aggregation) {
       cards.push(html`
@@ -289,7 +278,7 @@ export class VotingView extends LitElement {
   }
 
   private renderOutcomes(): TemplateResult | typeof nothing {
-    const j = this.pattern.judgment;
+    const j = (this.spec as DeliberationPatternCategory).judgment;
     if (!j) return nothing;
     const c = j.caller;
     const names: string[] = c ? ('callerNames' in c ? c.callerNames ?? [] : 'callerName' in c && c.callerName ? [c.callerName] : []) : [];
@@ -314,7 +303,7 @@ export class VotingView extends LitElement {
   }
 
   private renderJudgment(): TemplateResult | typeof nothing {
-    const j = this.pattern.judgment;
+    const j = (this.spec as DeliberationPatternCategory).judgment;
     if (!j) return nothing;
     const caller = j.caller;
     const callerNames = caller ? ('callerNames' in caller ? caller.callerNames ?? [] : 'callerName' in caller && caller.callerName ? [caller.callerName] : []) : [];
@@ -335,7 +324,7 @@ export class VotingView extends LitElement {
   }
 
   private headerMeta(): string {
-    const p = this.pattern;
+    const p = (this.spec as DeliberationPatternCategory);
     const parts: string[] = [];
     if (p.aggregation) parts.push(p.aggregation.type);
     if (p.termination?.length) {

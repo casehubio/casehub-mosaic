@@ -16,7 +16,7 @@ function fixture(): AgentViewerData {
       constraints: [{ name: 'observation-before-theory', description: 'Direct observation', severity: 'HARD' }],
       briefing: 'You are Leonardo da Vinci.',
     },
-    pattern: {
+    spec: {
       category: 'deliberation',
       type: 'voting',
       name: 'proposal-evaluation',
@@ -68,11 +68,11 @@ describe('agent-viewer', () => {
     (tabs[1] as HTMLElement).click();
     await el.updateComplete;
     expect(el.shadowRoot!.querySelector('.tab.active')?.textContent).toBe('Pattern');
-    expect(el.shadowRoot!.querySelector('voting-view')).toBeTruthy();
+    expect(el.shadowRoot!.querySelector('agency-deliberation-voting-view')).toBeTruthy();
   });
 
   it('pattern tab disabled when no pattern data', async () => {
-    el.data = { ...fixture(), pattern: undefined };
+    el.data = { ...fixture(), spec: undefined };
     await el.updateComplete;
     const patternTab = el.shadowRoot!.querySelectorAll('.tab')[1];
     expect(patternTab?.classList.contains('disabled')).toBe(true);
@@ -105,7 +105,7 @@ describe('agent-viewer', () => {
   it('renders debate pattern in pattern tab', async () => {
     el.data = {
       ...fixture(),
-      pattern: {
+      spec: {
         category: 'deliberation',
         type: 'debate',
         name: 'adversarial-review',
@@ -121,7 +121,7 @@ describe('agent-viewer', () => {
     const tabs = el.shadowRoot!.querySelectorAll('.tab');
     (tabs[1] as HTMLElement).click();
     await el.updateComplete;
-    expect(el.shadowRoot!.querySelector('debate-view')).toBeTruthy();
+    expect(el.shadowRoot!.querySelector('agency-deliberation-debate-view')).toBeTruthy();
   });
 });
 

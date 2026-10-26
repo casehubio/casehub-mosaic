@@ -28,13 +28,18 @@ describe('voting-view', () => {
   let el: VotingView;
 
   beforeEach(async () => {
-    el = document.createElement('voting-view') as VotingView;
-    el.pattern = fixture();
+    el = document.createElement('agency-deliberation-voting-view') as VotingView;
+    el.spec = fixture();
     document.body.appendChild(el);
     await el.updateComplete;
   });
 
   afterEach(() => el.remove());
+
+  it('has role="region" and aria-label', () => {
+    expect(el.getAttribute('role')).toBe('region');
+    expect(el.getAttribute('aria-label')).toBe('deliberation view');
+  });
 
   it('renders pattern name in header', () => {
     expect(el.shadowRoot!.querySelector('.header-name')?.textContent).toBe('proposal-evaluation');
@@ -94,7 +99,7 @@ describe('voting-view', () => {
   });
 
   it('omits judgment when absent', async () => {
-    el.pattern = { ...fixture(), judgment: undefined };
+    el.spec = { ...fixture(), judgment: undefined };
     await el.updateComplete;
     expect(el.shadowRoot!.querySelector('.judgment-card')).toBeNull();
   });
@@ -116,7 +121,7 @@ describe('voting-view', () => {
   });
 
   it('omits outcomes when no judgment', async () => {
-    el.pattern = { ...fixture(), judgment: undefined };
+    el.spec = { ...fixture(), judgment: undefined };
     await el.updateComplete;
     expect(el.shadowRoot!.querySelector('.outcomes')).toBeNull();
   });
