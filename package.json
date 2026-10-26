@@ -46,6 +46,7 @@
     "@tisoap/react-flow-smart-edge": "^5.0.0"
   },
   "devDependencies": {
-    "@casehubio/pages-tsconfig": "portal:./build-support/pages-tsconfig"
+    "@casehubio/pages-tsconfig": "portal:./build-support/pages-tsconfig",
+    "typescript": "~5.8.0"
   }
 }

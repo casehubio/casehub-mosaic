@@ -4124,6 +4124,7 @@ __metadata:
   dependencies:
     "@casehubio/pages-tsconfig": "portal:./build-support/pages-tsconfig"
     "@tisoap/react-flow-smart-edge": "npm:^5.0.0"
+    typescript: "npm:~5.8.0"
   languageName: unknown
   linkType: soft
 
