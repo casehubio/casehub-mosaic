@@ -845,9 +845,17 @@ public class CorpusImporter {
         var fields     = props.fields();
         while (fields.hasNext()) {
             var f = fields.next();
-            properties.put(f.getKey(), f.getValue().asText());
+            String val = f.getValue().asText();
+            if (f.getKey().startsWith("lifecycle.") && val.contains(" ")) {
+                val = val.split(" ")[0];
+            }
+            properties.put(f.getKey(), val);
         }
-        return LifecycleResolver.resolve(properties, type);
+        try {
+            return LifecycleResolver.resolve(properties, type);
+        } catch (Exception e) {
+            return new LifecycleResolver.TemporalBounds(null, null);
+        }
     }
 
     static Map<String, String> buildNodeProperties(JsonNode node) {
