@@ -44,6 +44,8 @@ export { SupervisorView } from './views/orchestration/supervisor-view.js';
 export { ChoreographyView } from './views/orchestration/choreography-view.js';
 export { SagaView } from './views/orchestration/saga-view.js';
 export { DecompositionView } from './views/orchestration/decomposition-view.js';
+export { RoutingStrategyView, registerRoutingRenderer, routingRendererRegistry } from './views/orchestration/routing-strategy-view.js';
+export type { RoutingRendererFn } from './views/orchestration/routing-strategy-view.js';
 export { NegotiationView } from './views/deliberation/negotiation-view.js';
 export { CoalitionView } from './views/deliberation/coalition-view.js';
 export { NormativeView } from './views/deliberation/normative-view.js';

@@ -3,6 +3,7 @@ import type {
   ExecutionState, ExecutionResult, AgentRefType,
   AgentResultStatus, OrchestrationAuditEvent,
   RoutingDecisionPayload, ExecutionSnapshot, AgentRetryPolicy,
+  RoutingSpec, DispositionAxisWeight, RoutingAgentStatus,
 } from './orchestration.js';
 import type { PatternCategoryName } from './patterns/index.js';
 
@@ -83,5 +84,34 @@ describe('orchestration types', () => {
       initialDelayMs: 1000,
     };
     expect(policy.backoffStrategy).toBe('exponential');
+  });
+
+  it('RoutingSpec accepts cbr-agent with optional similarityThreshold', () => {
+    const spec: RoutingSpec = { type: 'cbr-agent', similarityThreshold: 0.8 };
+    expect(spec.type).toBe('cbr-agent');
+  });
+
+  it('RoutingSpec accepts disposition-aware with optional axes', () => {
+    const axes: DispositionAxisWeight[] = [
+      { axis: 'openness', weight: 0.7 },
+      { axis: 'conscientiousness', weight: 0.3 },
+    ];
+    const spec: RoutingSpec = { type: 'disposition-aware', axes };
+    expect(spec.type).toBe('disposition-aware');
+    if (spec.type === 'disposition-aware') expect(spec.axes).toHaveLength(2);
+  });
+
+  it('RoutingSpec accepts llm-selected with model and prompt', () => {
+    const spec: RoutingSpec = { type: 'llm-selected', model: 'claude-sonnet-5-5', prompt: 'Pick the best analyst' };
+    expect(spec.type).toBe('llm-selected');
+    if (spec.type === 'llm-selected') {
+      expect(spec.model).toBe('claude-sonnet-5-5');
+      expect(spec.prompt).toBe('Pick the best analyst');
+    }
+  });
+
+  it('RoutingAgentStatus covers all 4 values', () => {
+    const statuses: RoutingAgentStatus[] = ['selected', 'skipped', 'not-evaluated', 'excluded'];
+    expect(statuses).toHaveLength(4);
   });
 });

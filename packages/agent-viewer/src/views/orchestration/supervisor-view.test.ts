@@ -54,14 +54,18 @@ describe('agency-orchestration-supervisor-view', () => {
     expect(el.shadowRoot!.textContent).toContain('Central supervisor routes verification tasks');
   });
 
-  it('renders routing strategy badge', async () => {
+  it('renders routing strategy view component', async () => {
     await create(fixture());
-    expect(el.shadowRoot!.querySelector('.routing-badge')?.textContent).toContain('llm-selected');
+    const routingView = el.shadowRoot!.querySelector('agency-routing-strategy-view');
+    expect(routingView).toBeTruthy();
+    expect((routingView as any).routing).toEqual({ type: 'llm-selected' });
   });
 
-  it('renders agent cards in spokes', async () => {
+  it('passes agents to routing strategy view', async () => {
     await create(fixture());
-    expect(el.shadowRoot!.querySelectorAll('agent-card').length).toBe(3);
+    const routingView = el.shadowRoot!.querySelector('agency-routing-strategy-view') as any;
+    expect(routingView).toBeTruthy();
+    expect(routingView.agents).toHaveLength(3);
   });
 
   it('renders aggregation card', async () => {

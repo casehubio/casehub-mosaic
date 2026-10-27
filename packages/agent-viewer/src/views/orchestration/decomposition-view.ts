@@ -3,6 +3,7 @@ import { customElement } from 'lit/decorators.js';
 import type { OrchestrationPatternCategory } from '@casehubio/mosaic-core';
 import { PatternViewMixin, patternViewStyles } from '../../shared-styles.js';
 import '../../agent-card.js';
+import './routing-strategy-view.js';
 
 @customElement('agency-orchestration-decomposition-view')
 export class DecompositionView extends PatternViewMixin(LitElement) {
@@ -176,6 +177,13 @@ export class DecompositionView extends PatternViewMixin(LitElement) {
             ${(p.agents ?? []).map(a => html`<agent-card .agent=${a}></agent-card>`)}
           </div>
         </div>
+        ${p.routing ? html`
+          <agency-routing-strategy-view
+            .routing=${p.routing}
+            .agents=${p.agents ?? []}
+            .governance=${p.governance}
+          ></agency-routing-strategy-view>
+        ` : nothing}
         ${this.renderMetadata(p)}
       </div>
     `;
@@ -183,14 +191,6 @@ export class DecompositionView extends PatternViewMixin(LitElement) {
 
   private renderMetadata(p: OrchestrationPatternCategory): TemplateResult | typeof nothing {
     const cards: TemplateResult[] = [];
-    if (p.routing) {
-      cards.push(html`
-        <div class="meta-card">
-          <div class="meta-label">Routing</div>
-          <div class="meta-type">${p.routing.type}</div>
-        </div>
-      `);
-    }
     if (p.aggregation) {
       cards.push(html`
         <div class="meta-card">

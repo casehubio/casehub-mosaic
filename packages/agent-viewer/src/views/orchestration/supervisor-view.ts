@@ -3,6 +3,7 @@ import { customElement } from 'lit/decorators.js';
 import type { OrchestrationPatternCategory } from '@casehubio/mosaic-core';
 import { PatternViewMixin, patternViewStyles } from '../../shared-styles.js';
 import '../../agent-card.js';
+import './routing-strategy-view.js';
 
 @customElement('agency-orchestration-supervisor-view')
 export class SupervisorView extends PatternViewMixin(LitElement) {
@@ -72,16 +73,6 @@ export class SupervisorView extends PatternViewMixin(LitElement) {
     .supervisor-detail {
       font-size: 11px;
       color: #7f849c;
-    }
-    .routing-badge {
-      font-size: 10px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      padding: 2px 8px;
-      border-radius: 4px;
-      background: rgba(148, 226, 213, 0.15);
-      color: #94e2d5;
     }
     .spokes {
       display: flex;
@@ -172,15 +163,22 @@ export class SupervisorView extends PatternViewMixin(LitElement) {
               <div class="supervisor-label">Supervisor</div>
               <div class="supervisor-detail">hub-and-spoke routing</div>
             </div>
-            ${p.routing ? html`<span class="routing-badge">${p.routing.type}</span>` : nothing}
           </div>
-          <div class="spokes">
-            <div class="spoke-line"></div>
-            <span class="spoke-arrow">▼</span>
-          </div>
-          <div class="workers-grid">
-            ${(p.agents ?? []).map(a => html`<agent-card .agent=${a}></agent-card>`)}
-          </div>
+          ${p.routing ? html`
+            <agency-routing-strategy-view
+              .routing=${p.routing}
+              .agents=${p.agents ?? []}
+              .governance=${p.governance}
+            ></agency-routing-strategy-view>
+          ` : html`
+            <div class="spokes">
+              <div class="spoke-line"></div>
+              <span class="spoke-arrow">▼</span>
+            </div>
+            <div class="workers-grid">
+              ${(p.agents ?? []).map(a => html`<agent-card .agent=${a}></agent-card>`)}
+            </div>
+          `}
           ${this.renderAggregation(p)}
         </div>
         ${this.renderMetadata(p)}
