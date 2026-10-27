@@ -80,9 +80,9 @@ describe('assignTiers', () => {
         routing: {
           expression: '${result.decision}',
           cases: [
-            { pattern: 'approve', step: { action: 'rest', target: '/approve', iconColor: 'green' } },
-            { pattern: 'escalate', step: { action: 'agent-delegate', target: 'reviewer', iconColor: 'amber' } },
-            { pattern: 'reject', step: { action: 'rest', target: '/reject', iconColor: 'red' } },
+            { pattern: 'approve', step: { action: 'rest', target: '/approve' } },
+            { pattern: 'escalate', step: { action: 'agent-delegate', target: 'reviewer' } },
+            { pattern: 'reject', step: { action: 'rest', target: '/reject' } },
           ],
         },
       },

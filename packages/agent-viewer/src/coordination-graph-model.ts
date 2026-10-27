@@ -56,7 +56,7 @@ export function assignTiers(phases: PhaseItem[]): TierElement[] {
         if (phase.routing) {
           elements.push({ kind: 'connector', type: 'outcomes' });
           const outcomeNodes: GraphNode[] = phase.routing.cases.map(c => {
-            const hint = COLOR_HINT_MAP[c.pattern] ?? (c.step.iconColor as 'green' | 'amber' | 'red' | undefined);
+            const hint = COLOR_HINT_MAP[c.pattern];
             const node: GraphNode = { step: c.step };
             if (hint) node.colorHint = hint;
             return node;

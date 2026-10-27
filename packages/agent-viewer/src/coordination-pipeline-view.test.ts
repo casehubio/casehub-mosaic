@@ -36,7 +36,6 @@ function kycPipeline(): CoordinationPipeline {
               action: 'agent-delegate',
               model: 'claude-opus-5',
               outputFormat: 'structured',
-              drillDown: true,
               params: { descriptor: 'kyc-identity', docs: '${from.identity_docs}' },
             },
             { action: 'graphql', target: 'sanctions / screenEntity' },
@@ -46,7 +45,6 @@ function kycPipeline(): CoordinationPipeline {
               action: 'agent-delegate',
               model: 'claude-opus-5',
               outputFormat: 'structured',
-              drillDown: true,
               params: { descriptor: 'kyc-financials', docs: '${from.financial_docs}' },
             },
             { action: 'rest', target: 'POST /api/aml/check' },
@@ -56,7 +54,6 @@ function kycPipeline(): CoordinationPipeline {
               action: 'agent-delegate',
               model: 'claude-sonnet-5',
               outputFormat: 'structured',
-              drillDown: true,
               params: { descriptor: 'kyc-address', docs: '${from.address_docs}' },
             },
             { action: 'mcp-call', target: 'geo-verify' },
@@ -75,7 +72,6 @@ function kycPipeline(): CoordinationPipeline {
         target: 'risk-assessor',
         model: 'claude-opus-5',
         outputFormat: 'structured',
-        drillDown: true,
         params: {
           'descriptor': 'kyc-risk-decision',
           'params.identity': '${identity-extractor.result}',
@@ -92,8 +88,6 @@ function kycPipeline(): CoordinationPipeline {
                 action: 'rest',
                 target: 'POST /api/kyc/approve',
                 channel: 'notify-compliance',
-                icon: '✓',
-                iconColor: 'green',
               },
             },
             {
@@ -102,8 +96,6 @@ function kycPipeline(): CoordinationPipeline {
                 action: 'agent-delegate',
                 target: 'senior-reviewer',
                 model: 'claude-opus-5',
-                icon: '⚠',
-                iconColor: 'amber',
               },
             },
             {
@@ -112,8 +104,6 @@ function kycPipeline(): CoordinationPipeline {
                 action: 'rest',
                 target: 'POST /api/kyc/reject',
                 channel: 'notify-applicant',
-                icon: '✕',
-                iconColor: 'red',
               },
             },
           ],
@@ -219,14 +209,14 @@ describe('coordination-pipeline-view (lanes)', () => {
     expect(grid.style.gridTemplateColumns).toBe('1fr 1fr 1fr');
   });
 
-  it('renders drillable step cards with border', () => {
+  it('renders drillable step cards for agent-delegate actions', () => {
     const drillables = el.shadowRoot!.querySelectorAll('.step-card.drillable');
-    expect(drillables.length).toBeGreaterThanOrEqual(3);
+    expect(drillables.length).toBe(5);
   });
 
   it('renders drill-down hint on drillable cards', () => {
     const hints = el.shadowRoot!.querySelectorAll('.drill-hint');
-    expect(hints.length).toBeGreaterThanOrEqual(3);
+    expect(hints.length).toBe(5);
     expect(hints[0]?.textContent).toBe('↗ drill down');
   });
 
@@ -255,7 +245,7 @@ describe('coordination-pipeline-view (lanes)', () => {
     expect(channels[0]?.textContent).toBe('→ notify-compliance');
   });
 
-  it('renders custom icons on match case steps', () => {
+  it('derives icons from match case pattern names', () => {
     const cases = el.shadowRoot!.querySelectorAll('.match-case .step-icon');
     expect(cases[0]?.textContent).toBe('✓');
     expect(cases[0]?.classList.contains('approve')).toBe(true);
@@ -471,7 +461,7 @@ describe('drill-down events', () => {
       detail = e.detail;
     }) as EventListener);
     const drillables = el.shadowRoot!.querySelectorAll('.step-card.drillable');
-    (drillables[0] as HTMLElement).click();
+    (drillables[1] as HTMLElement).click();
     expect(detail.steps.length).toBe(2);
   });
 

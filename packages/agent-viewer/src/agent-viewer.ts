@@ -255,12 +255,8 @@ export class AgentViewer extends LitElement {
       'mcp-call': { icon: 'M', cssClass: 'mcp' },
     };
     const actionDef = ACTION_ICONS[step.action] ?? { icon: '•', cssClass: 'default' };
-    let iconClass = actionDef.cssClass;
-    const iconChar = step.icon ?? actionDef.icon;
-    if (step.iconColor) {
-      const colorMap: Record<string, string> = { green: 'approve', red: 'reject', amber: 'warn' };
-      iconClass = colorMap[step.iconColor] ?? iconClass;
-    }
+    const iconClass = actionDef.cssClass;
+    const iconChar = actionDef.icon;
     return html`
       <div class="step-card">
         <div class="step-icon ${iconClass}">${iconChar}</div>
