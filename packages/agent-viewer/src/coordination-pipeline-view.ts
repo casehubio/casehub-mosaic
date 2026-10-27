@@ -21,6 +21,12 @@ const ACTION_ICONS: Record<string, { icon: string; cssClass: string }> = {
   'mcp-call': { icon: 'M', cssClass: 'mcp' },
 };
 
+const PATTERN_STYLES: Record<string, { icon: string; cssClass: string }> = {
+  approve: { icon: '✓', cssClass: 'approve' },
+  escalate: { icon: '⚠', cssClass: 'warn' },
+  reject: { icon: '✕', cssClass: 'reject' },
+};
+
 const COLOR_MAP: Record<string, string> = {
   green: '#a6e3a1',
   amber: '#f9e2af',
@@ -612,26 +618,22 @@ export class CoordinationPipelineView extends LitElement {
     }
   }
 
-  private renderStepCard(step: CoordinationStep, drillContext?: { name: string; steps: CoordinationStep[] }): TemplateResult {
+  private renderStepCard(step: CoordinationStep, drillContext?: { name: string; steps: CoordinationStep[] }, matchPattern?: string): TemplateResult {
     const actionDef = ACTION_ICONS[step.action] ?? { icon: '•', cssClass: 'default' };
-    let iconClass = actionDef.cssClass;
-    let iconChar = step.icon ?? actionDef.icon;
+    const patternStyle = matchPattern ? PATTERN_STYLES[matchPattern] : undefined;
+    const iconClass = patternStyle?.cssClass ?? actionDef.cssClass;
+    const iconChar = patternStyle?.icon ?? actionDef.icon;
 
-    if (step.iconColor) {
-      const colorMap: Record<string, string> = { green: 'approve', red: 'reject', amber: 'warn' };
-      iconClass = colorMap[step.iconColor] ?? iconClass;
-    }
-
-    const canDrill = step.drillDown && drillContext;
+    const canDrill = step.action === 'agent-delegate' && drillContext != null;
     const drillClick = canDrill ? () => this._emitDrillDown(drillContext.name, drillContext.steps) : undefined;
     const drillKey = canDrill ? (e: KeyboardEvent) => {
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); this._emitDrillDown(drillContext.name, drillContext.steps); }
     } : undefined;
 
     return html`
-      <div class="step-card${step.drillDown ? ' drillable' : ''}"
-           role="${step.drillDown ? 'button' : nothing}"
-           tabindex="${step.drillDown ? '0' : nothing}"
+      <div class="step-card${canDrill ? ' drillable' : ''}"
+           role="${canDrill ? 'button' : nothing}"
+           tabindex="${canDrill ? '0' : nothing}"
            @click="${drillClick ?? nothing}"
            @keydown="${drillKey ?? nothing}">
         <div class="step-icon ${iconClass}">${iconChar}</div>
@@ -643,7 +645,7 @@ export class CoordinationPipelineView extends LitElement {
           ${step.model ? html`<span class="badge-model">${step.model}</span>` : nothing}
           ${step.outputFormat ? html`<span class="badge-format">${step.outputFormat}</span>` : nothing}
           ${step.channel ? html`<span class="badge-channel">→ ${step.channel}</span>` : nothing}
-          ${step.drillDown ? html`<span class="drill-hint">↗ drill down</span>` : nothing}
+          ${canDrill ? html`<span class="drill-hint">↗ drill down</span>` : nothing}
         </span>
       </div>
     `;
@@ -751,7 +753,7 @@ export class CoordinationPipelineView extends LitElement {
       <div class="match-case">
         <span class="match-pattern">"${c.pattern}"</span>
         <span class="match-arrow">→</span>
-        ${this.renderStepCard(c.step)}
+        ${this.renderStepCard(c.step, undefined, c.pattern)}
       </div>
     `;
   }

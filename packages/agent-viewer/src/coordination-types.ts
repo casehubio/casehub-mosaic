@@ -14,10 +14,7 @@ export interface CoordinationStep {
   target?: string;
   model?: string;
   outputFormat?: string;
-  drillDown?: boolean;
   params?: CoordinationStepParams;
-  icon?: string;
-  iconColor?: string;
   channel?: string;
 }
 

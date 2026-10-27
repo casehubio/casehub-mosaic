@@ -127,7 +127,7 @@ describe('agent-viewer', () => {
 
 function stepsFixture(): CoordinationStep[] {
   return [
-    { action: 'agent-delegate', model: 'claude-opus-5', outputFormat: 'structured', drillDown: true,
+    { action: 'agent-delegate', model: 'claude-opus-5', outputFormat: 'structured',
       params: { descriptor: 'kyc-identity', docs: '${from.identity_docs}' } },
     { action: 'graphql', target: 'sanctions / screenEntity' },
   ];

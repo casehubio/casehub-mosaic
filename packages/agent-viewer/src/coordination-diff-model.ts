@@ -41,7 +41,7 @@ function compareStepParams(
 
 function compareStep(oldStep: CoordinationStep, newStep: CoordinationStep): FieldChange[] {
   const changes: FieldChange[] = [];
-  const fields: (keyof CoordinationStep)[] = ['model', 'outputFormat', 'channel', 'icon', 'iconColor'];
+  const fields: (keyof CoordinationStep)[] = ['model', 'outputFormat', 'channel'];
   for (const f of fields) {
     if (oldStep[f] !== newStep[f]) {
       changes.push({ field: f, oldValue: oldStep[f] as string | undefined, newValue: newStep[f] as string | undefined });

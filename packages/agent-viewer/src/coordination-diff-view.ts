@@ -385,7 +385,7 @@ export class CoordinationDiffView extends LitElement {
     const actionDef = ACTION_ICONS[step.action] ?? { icon: '•', cssClass: 'default' };
     return html`
       <div class="step-card">
-        <div class="step-icon ${actionDef.cssClass}">${step.icon ?? actionDef.icon}</div>
+        <div class="step-icon ${actionDef.cssClass}">${actionDef.icon}</div>
         <span class="step-action">${step.target ?? step.action}</span>
         <span class="step-badges">
           ${step.model ? html`<span class="badge-model">${step.model}</span>` : nothing}
