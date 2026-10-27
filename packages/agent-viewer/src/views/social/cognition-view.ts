@@ -1,6 +1,6 @@
 import { LitElement, html, css, nothing, type TemplateResult } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import type { SocialPatternCategory, CognitionConfig } from '@casehubio/mosaic-core';
+import type { SocialPatternCategory, CognitionConfig, DriveConfigSpec } from '@casehubio/mosaic-core';
 import { PatternViewMixin, patternViewStyles } from '../../shared-styles.js';
 
 const SECTION_META: Record<string, { label: string; icon: string }> = {
@@ -19,50 +19,25 @@ const SECTION_META: Record<string, { label: string; icon: string }> = {
   cognitiveGoal: { label: 'Cognitive Goal', icon: '💡' },
 };
 
+const DURATION_FIELDS = new Set([
+  'decayTimeConstant', 'staleStateTimeout', 'affiliationStaleDuration',
+  'synthesisCooldown', 'expectedTickInterval', 'evictionTimeout',
+  'beliefHalfLife', 'desireHalfLife', 'intentionHalfLife', 'inferenceCooldown',
+  'quietPeriodBypass', 'staleAfter', 'cooldown', 'surfacingCooldown',
+]);
+
 @customElement('agency-social-cognition-view')
 export class CognitionView extends PatternViewMixin(LitElement) {
 
   static override styles = [patternViewStyles, css`
-    .header {
-      padding: 10px 16px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .header-label {
-      font-size: 12px;
-      font-weight: 600;
-      color: #7f849c;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    .header-name {
-      font-size: 13px;
-      font-weight: 500;
-      color: #f0f4ff;
-    }
-    .type-badge {
-      padding: 1px 7px;
-      border-radius: 4px;
-      font-size: 11px;
-      font-weight: 500;
-      background: rgba(245, 194, 231, 0.2);
-      color: #f5c2e7;
-    }
-    .header-desc {
-      margin-left: auto;
-      font-size: 11px;
-      color: #7f849c;
-      max-width: 400px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
+    :host {
+      --pattern-badge-color: rgba(245, 194, 231, 0.2);
+      --pattern-badge-text: #f5c2e7;
     }
     .body { padding: 24px 16px; }
     .sections-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
       gap: 10px;
     }
     .section-card {
@@ -106,18 +81,81 @@ export class CognitionView extends PatternViewMixin(LitElement) {
       background: rgba(255, 255, 255, 0.05);
       color: #585b70;
     }
-    .section-keys {
+    .config-fields {
       display: flex;
-      flex-wrap: wrap;
+      flex-direction: column;
       gap: 4px;
+      margin-top: 4px;
     }
-    .key-tag {
-      font-size: 9px;
-      padding: 1px 5px;
-      border-radius: 3px;
-      background: rgba(255, 255, 255, 0.05);
+    .config-field {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 8px;
+    }
+    .field-label {
+      font-size: 10px;
       color: #7f849c;
       font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    }
+    .field-value {
+      font-size: 10px;
+      color: #cdd6f4;
+      font-family: 'JetBrains Mono', 'Fira Code', monospace;
+      text-align: right;
+    }
+    .field-value.duration {
+      color: #89b4fa;
+    }
+    .axis-weights {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      margin-top: 2px;
+    }
+    .axis-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .axis-name {
+      font-size: 9px;
+      color: #7f849c;
+      min-width: 60px;
+      font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    }
+    .axis-bar {
+      flex: 1;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .axis-fill {
+      height: 100%;
+      background: #f5c2e7;
+      border-radius: 2px;
+    }
+    .axis-value {
+      font-size: 9px;
+      color: #cdd6f4;
+      min-width: 24px;
+      text-align: right;
+      font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    }
+    .sub-section {
+      margin-top: 4px;
+      padding: 6px 8px;
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 4px;
+    }
+    .sub-section-label {
+      font-size: 9px;
+      font-weight: 600;
+      color: #7f849c;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      margin-bottom: 4px;
     }
     .summary {
       text-align: center;
@@ -135,8 +173,12 @@ export class CognitionView extends PatternViewMixin(LitElement) {
   `];
 
   override render() {
+    if (!this.spec) return this.renderEmptyState();
+    return html`${this.renderTabBar()}${this.renderTabPanel()}`;
+  }
+
+  override renderExecution() {
     const p = this.spec as SocialPatternCategory;
-    if (!p) return this.renderEmptyState();
     return html`
       <div class="header">
         <span class="header-label">PATTERN</span>
@@ -164,7 +206,6 @@ export class CognitionView extends PatternViewMixin(LitElement) {
   private renderSection(key: string, value: unknown): TemplateResult {
     const meta = SECTION_META[key] ?? { label: key, icon: '•' };
     const active = value != null;
-    const configKeys = active && typeof value === 'object' ? Object.keys(value as object) : [];
     return html`
       <div class="section-card ${active ? 'active' : ''}">
         <div class="section-header">
@@ -172,11 +213,65 @@ export class CognitionView extends PatternViewMixin(LitElement) {
           <span class="section-name">${meta.label}</span>
           <span class="section-status ${active ? 'status-active' : 'status-inactive'}">${active ? 'on' : 'off'}</span>
         </div>
-        ${configKeys.length > 0 ? html`
-          <div class="section-keys">
-            ${configKeys.map(k => html`<span class="key-tag">${k}</span>`)}
+        ${active ? this.renderConfigDetail(key, value as Record<string, unknown>) : nothing}
+      </div>
+    `;
+  }
+
+  private renderConfigDetail(key: string, config: Record<string, unknown>): TemplateResult {
+    const entries = Object.entries(config);
+    if (entries.length === 0) return html``;
+
+    const specialKeys = new Set(['axisWeights', 'baseline', 'synthesisGate', 'stageConfig']);
+    const scalarEntries = entries.filter(([k]) => !specialKeys.has(k));
+    const driveConfig = key === 'drive' ? config as DriveConfigSpec : null;
+    const baseline = key === 'mood' && config.baseline ? config.baseline as Record<string, number> : null;
+    const synthesisGate = key === 'narrative' && config.synthesisGate ? config.synthesisGate as Record<string, unknown> : null;
+
+    return html`
+      <div class="config-fields">
+        ${scalarEntries.map(([k, v]) => this.renderField(k, v))}
+      </div>
+      ${driveConfig?.axisWeights ? this.renderAxisWeights(driveConfig.axisWeights) : nothing}
+      ${baseline ? this.renderSubSection('Baseline', baseline) : nothing}
+      ${synthesisGate ? this.renderSubSection('Synthesis Gate', synthesisGate) : nothing}
+    `;
+  }
+
+  private renderField(key: string, value: unknown): TemplateResult {
+    const isDuration = DURATION_FIELDS.has(key);
+    const display = String(value);
+    return html`
+      <div class="config-field">
+        <span class="field-label">${key}</span>
+        <span class="field-value ${isDuration ? 'duration' : ''}">${display}</span>
+      </div>
+    `;
+  }
+
+  private renderAxisWeights(weights: Record<string, number>): TemplateResult {
+    return html`
+      <div class="axis-weights">
+        ${Object.entries(weights).map(([axis, weight]) => html`
+          <div class="axis-row">
+            <span class="axis-name">${axis}</span>
+            <div class="axis-bar">
+              <div class="axis-fill" style="width: ${Math.min(weight * 100, 100)}%"></div>
+            </div>
+            <span class="axis-value">${weight}</span>
           </div>
-        ` : nothing}
+        `)}
+      </div>
+    `;
+  }
+
+  private renderSubSection(label: string, obj: Record<string, unknown>): TemplateResult {
+    return html`
+      <div class="sub-section">
+        <div class="sub-section-label">${label}</div>
+        <div class="config-fields">
+          ${Object.entries(obj).map(([k, v]) => this.renderField(k, v))}
+        </div>
       </div>
     `;
   }

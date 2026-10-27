@@ -7,41 +7,9 @@ import { PatternViewMixin, patternViewStyles } from '../../shared-styles.js';
 export class PromptOptimisationView extends PatternViewMixin(LitElement) {
 
   static override styles = [patternViewStyles, css`
-    .header {
-      padding: 10px 16px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .header-label {
-      font-size: 12px;
-      font-weight: 600;
-      color: #7f849c;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    .header-name {
-      font-size: 13px;
-      font-weight: 500;
-      color: #f0f4ff;
-    }
-    .type-badge {
-      padding: 1px 7px;
-      border-radius: 4px;
-      font-size: 11px;
-      font-weight: 500;
-      background: rgba(249, 226, 175, 0.2);
-      color: #f9e2af;
-    }
-    .header-desc {
-      margin-left: auto;
-      font-size: 11px;
-      color: #7f849c;
-      max-width: 400px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
+    :host {
+      --pattern-badge-color: rgba(249, 226, 175, 0.2);
+      --pattern-badge-text: #f9e2af;
     }
     .body { padding: 24px 16px; }
     .pipelines-grid {
@@ -192,8 +160,12 @@ export class PromptOptimisationView extends PatternViewMixin(LitElement) {
   `];
 
   override render() {
+    if (!this.spec) return this.renderEmptyState();
+    return html`${this.renderTabBar()}${this.renderTabPanel()}`;
+  }
+
+  override renderExecution() {
     const p = this.spec as OptimisationPatternCategory;
-    if (!p) return this.renderEmptyState();
     const entries = p.pipelines ? Object.entries(p.pipelines) : [];
     return html`
       <div class="header">

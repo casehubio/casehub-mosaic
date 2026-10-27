@@ -7,41 +7,9 @@ import { PatternViewMixin, patternViewStyles } from '../../shared-styles.js';
 export class MemoryHygieneView extends PatternViewMixin(LitElement) {
 
   static override styles = [patternViewStyles, css`
-    .header {
-      padding: 10px 16px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .header-label {
-      font-size: 12px;
-      font-weight: 600;
-      color: #7f849c;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    .header-name {
-      font-size: 13px;
-      font-weight: 500;
-      color: #f0f4ff;
-    }
-    .type-badge {
-      padding: 1px 7px;
-      border-radius: 4px;
-      font-size: 11px;
-      font-weight: 500;
-      background: rgba(245, 194, 231, 0.2);
-      color: #f5c2e7;
-    }
-    .header-desc {
-      margin-left: auto;
-      font-size: 11px;
-      color: #7f849c;
-      max-width: 400px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
+    :host {
+      --pattern-badge-color: rgba(245, 194, 231, 0.2);
+      --pattern-badge-text: #f5c2e7;
     }
     .body { padding: 24px 16px; display: flex; flex-direction: column; gap: 20px; align-items: center; }
     .threshold-section {
@@ -139,8 +107,12 @@ export class MemoryHygieneView extends PatternViewMixin(LitElement) {
   ];
 
   override render() {
+    if (!this.spec) return this.renderEmptyState();
+    return html`${this.renderTabBar()}${this.renderTabPanel()}`;
+  }
+
+  override renderExecution() {
     const p = this.spec as SocialPatternCategory;
-    if (!p) return this.renderEmptyState();
     const retention = p.retention ?? p.cognition?.retention;
     return html`
       <div class="header">

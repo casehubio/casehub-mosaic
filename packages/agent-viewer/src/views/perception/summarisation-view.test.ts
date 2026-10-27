@@ -81,4 +81,29 @@ describe('agency-perception-summarisation-view', () => {
     await create(undefined);
     expect(el.shadowRoot!.querySelector('.empty-state')).toBeTruthy();
   });
+
+  it('renders tablist with Execution and Reports tabs', async () => {
+    await create(fixture());
+    const tablist = el.shadowRoot!.querySelector('[role="tablist"]');
+    expect(tablist).toBeTruthy();
+    const tabs = el.shadowRoot!.querySelectorAll('[role="tab"]');
+    expect(tabs.length).toBe(2);
+    expect(tabs[0].textContent?.trim()).toBe('Execution');
+    expect(tabs[1].textContent?.trim()).toBe('Reports');
+  });
+
+  it('renders execution content by default', async () => {
+    await create(fixture());
+    const panel = el.shadowRoot!.querySelector('[role="tabpanel"]');
+    expect(panel).toBeTruthy();
+    expect(panel!.getAttribute('id')).toBe('panel-execution');
+  });
+
+  it('Reports tab shows stub placeholder', async () => {
+    await create(fixture());
+    const tabs = el.shadowRoot!.querySelectorAll('[role="tab"]');
+    (tabs[1] as HTMLElement).click();
+    await (el as any).updateComplete;
+    expect(el.shadowRoot!.querySelector('.empty-state')?.textContent).toBe('No report data available');
+  });
 });

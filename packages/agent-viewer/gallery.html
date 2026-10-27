@@ -1085,12 +1085,27 @@ name: autonomous-agent-cognition
 description: "Full cognitive configuration for an autonomous agent with learning and self-regulation"
 cognition:
   drive:
-    baseLevel: 0.5
-    decayRate: 0.1
-    boostOnSuccess: 0.15
+    axisWeights:
+      curiosity: 0.8
+      affiliation: 0.6
+      autonomy: 0.7
+    changeThreshold: 0.1
+    moodPleasureModulation: 0.3
+    moodArousalModulation: 0.2
+    maxIntensity: 1.0
+    minIntensity: 0.0
+    affiliationDecayThreshold: 0.3
+    affiliationStaleDuration: PT72H
+    autonomyConfidenceFloor: 0.4
   mood:
-    volatility: 0.3
-    baseline: neutral
+    baseline:
+      pleasure: 0.0
+      arousal: 0.0
+      dominance: 0.0
+    decayTimeConstant: PT4H
+    maxDisplacement: 1.0
+    moodInfluence: 0.5
+    staleStateTimeout: PT24H
   retention:
     retentionThreshold: 0.6
     confidenceWeight: 0.4
@@ -1098,15 +1113,22 @@ cognition:
     scopeWeight: 0.2
     trustWeight: 0.15
   mentalModel:
-    updateFrequency: per-turn
-    maxEntities: 50
-  strategyLearning:
-    explorationRate: 0.2
-    minSampleSize: 10
+    beliefHalfLife: PT48H
+    desireHalfLife: PT24H
+    intentionHalfLife: PT12H
+    confidenceFloor: 0.3
+    projectionFloor: 0.2
+    minSignalsForInference: 3
+    inferenceCooldown: PT5M
+    maxSignalsInPrompt: 10
   narrative:
-    style: analytical
-  goalProposal:
-    maxActiveGoals: 3
+    synthesisGate:
+      minNewReflections: 3
+      noveltyThreshold: 0.4
+      quietPeriodBypass: PT1H
+    maxEpisodes: 20
+    maxThemes: 5
+    themeSalienceFloor: 0.3
 `;
 
   renderComponentSection('cognition-section', cognitionYaml, (data) => {
