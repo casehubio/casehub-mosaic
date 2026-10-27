@@ -180,7 +180,7 @@ export const PatternViewMixin = <T extends Constructor<LitElement>>(Base: T) => 
       else if (e.key === 'End') next = order.length - 1;
       else return;
       e.preventDefault();
-      this._activeTab = order[next];
+      this._activeTab = order[next]!;
       this.updateComplete.then(() => {
         const btn = this.shadowRoot?.querySelector(`#tab-${order[next]}`) as HTMLElement;
         btn?.focus();
