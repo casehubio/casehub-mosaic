@@ -12,10 +12,10 @@ function fixture(): DeliberationPatternCategory {
     aggregation: { type: 'majority-vote' },
     termination: [{ type: 'single-pass' }],
     judgment: {
-      trigger: { type: 'confidence-threshold', threshold: 0.7 },
-      caller: { type: 'fan-out', callerNames: ['senior-reviewer', 'domain-lead'] },
+      trigger: { type: 'confidenceThreshold', threshold: 0.7 },
+      caller: { type: 'fanOut', callerNames: ['senior-reviewer', 'domain-lead'] },
     },
-    failurePolicy: { routingFailureAction: 'fail', aggregationFailureAction: 'escalate' },
+    failurePolicy: { onRoutingFailure: 'FAIL', onDeadlock: 'ESCALATE' },
     agents: [
       { type: 'worker', name: 'quantitative-scorer', description: 'Statistical risk models', capabilities: ['risk-modelling'], model: 'claude-opus-5' },
       { type: 'worker', name: 'qualitative-reviewer', description: 'Contextual analysis', capabilities: ['contextual-analysis'], model: 'claude-sonnet-5' },
@@ -80,17 +80,17 @@ describe('voting-view', () => {
   });
 
   it('renders failure policy', () => {
-    expect(el.shadowRoot!.textContent).toContain('fail');
-    expect(el.shadowRoot!.textContent).toContain('escalate');
+    const details = [...el.shadowRoot!.querySelectorAll('.metadata .meta-detail')].map(e => e.textContent);
+    expect(details).toEqual(['routing: FAIL', 'deadlock: ESCALATE']);
   });
 
   it('renders judgment card', () => {
     expect(el.shadowRoot!.querySelector('.judgment-card')).toBeTruthy();
-    expect(el.shadowRoot!.querySelector('.judgment-type')?.textContent).toBe('FAN OUT');
+    expect(el.shadowRoot!.querySelector('.judgment-type')?.textContent).toBe('FANOUT');
   });
 
   it('renders judgment trigger details', () => {
-    expect(el.shadowRoot!.querySelector('.judgment-detail')?.textContent).toContain('confidence-threshold');
+    expect(el.shadowRoot!.querySelector('.judgment-detail')?.textContent).toContain('confidenceThreshold');
     expect(el.shadowRoot!.querySelector('.judgment-detail')?.textContent).toContain('0.7');
   });
 
