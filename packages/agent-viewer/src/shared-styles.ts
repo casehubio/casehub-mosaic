@@ -5,6 +5,19 @@ import type { PatternCategory } from '@casehubio/mosaic-core';
 
 type Constructor<T = {}> = new (...args: any[]) => T;
 
+export type { PatternView };
+
+declare abstract class PatternView extends LitElement {
+  spec: PatternCategory;
+  _activeTab: 'execution' | 'reports';
+  protected setLoading(loading: boolean): void;
+  protected renderEmptyState(message?: string): TemplateResult;
+  protected renderTabBar(): TemplateResult;
+  protected renderTabPanel(): TemplateResult;
+  protected renderExecution(): TemplateResult;
+  protected renderReports(): TemplateResult;
+}
+
 export const patternViewStyles: CSSResult = css`
   :host {
     display: block;
@@ -174,5 +187,5 @@ export const PatternViewMixin = <T extends Constructor<LitElement>>(Base: T) => 
       });
     };
   }
-  return PatternViewHost as Constructor<PatternViewHost> & T;
+  return PatternViewHost as unknown as Constructor<PatternView> & T;
 };

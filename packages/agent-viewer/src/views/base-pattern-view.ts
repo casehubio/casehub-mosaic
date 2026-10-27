@@ -55,6 +55,7 @@ export class BasePatternView extends PatternViewMixin(LitElement) {
 
   override render() {
     if (!this.spec) return this.renderEmptyState();
+    const agents = 'agents' in this.spec ? this.spec.agents : undefined;
     return html`
       <div class="header">
         <span class="category-badge">${this.spec.category}</span>
@@ -62,9 +63,9 @@ export class BasePatternView extends PatternViewMixin(LitElement) {
         ${this.spec.name ? html`<span class="header-name">${this.spec.name}</span>` : nothing}
       </div>
       ${this.spec.description ? html`<div class="description">${this.spec.description}</div>` : nothing}
-      ${'agents' in this.spec && (this.spec as any).agents?.length ? html`
+      ${agents?.length ? html`
         <div class="agents-grid">
-          ${(this.spec as any).agents.map((a: any) => html`<agent-card .agent=${a}></agent-card>`)}
+          ${agents.map(a => html`<agent-card .agent=${a}></agent-card>`)}
         </div>
       ` : nothing}
     `;

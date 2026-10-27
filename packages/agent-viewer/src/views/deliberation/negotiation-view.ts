@@ -233,9 +233,9 @@ export class NegotiationView extends PatternViewMixin(LitElement) {
     if (parties.length === 2) {
       return html`
         <div class="parties">
-          ${this.renderPartyCard(parties[0], 0)}
+          ${this.renderPartyCard(parties[0]!, 0)}
           <div class="exchange-icon">⇄</div>
-          ${this.renderPartyCard(parties[1], 1)}
+          ${this.renderPartyCard(parties[1]!, 1)}
         </div>
       `;
     }
