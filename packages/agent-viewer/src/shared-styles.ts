@@ -89,6 +89,7 @@ export const patternViewStyles: CSSResult = css`
   }
 `;
 
+// @ts-ignore TS4094: Lit mixin exposes LitElement internal properties in declaration emit
 export const PatternViewMixin = <T extends Constructor<LitElement>>(Base: T) => {
   class PatternViewHost extends Base {
     @property({ attribute: false }) spec!: PatternCategory;
