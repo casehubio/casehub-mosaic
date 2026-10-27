@@ -12,10 +12,10 @@ function fixture(): DeliberationPatternCategory {
     maxRounds: 7,
     judge: { type: 'worker', name: 'arbiter', description: 'Evaluates arguments', capabilities: ['argument-evaluation'] },
     termination: [
-      { type: 'all-agreed', resolvedStatuses: ['RESOLVED', 'ACCEPTED'] },
-      { type: 'max-iterations', iterations: 14 },
+      { type: 'all-agreed' },
+      { type: 'max-iterations' },
     ],
-    failurePolicy: { routingFailureAction: 'fail', aggregationFailureAction: 'escalate' },
+    failurePolicy: { onRoutingFailure: 'FAIL', onDeadlock: 'ESCALATE' },
     agents: [
       { type: 'worker', name: 'proponent', description: 'Argues in favour', capabilities: ['argumentation'] },
       { type: 'worker', name: 'opponent', description: 'Challenges the position', capabilities: ['critical-analysis'] },
@@ -85,12 +85,12 @@ describe('debate-view', () => {
 
   it('renders termination specs', () => {
     expect(el.shadowRoot!.textContent).toContain('all-agreed');
-    expect(el.shadowRoot!.textContent).toContain('RESOLVED');
+    expect(el.shadowRoot!.textContent).toContain('max-iterations');
   });
 
   it('renders failure policy', () => {
-    expect(el.shadowRoot!.textContent).toContain('fail');
-    expect(el.shadowRoot!.textContent).toContain('escalate');
+    const details = [...el.shadowRoot!.querySelectorAll('.metadata .meta-detail')].map(e => e.textContent);
+    expect(details).toEqual(['routing: FAIL', 'deadlock: ESCALATE']);
   });
 
   it('renders judge model badge when present', async () => {
