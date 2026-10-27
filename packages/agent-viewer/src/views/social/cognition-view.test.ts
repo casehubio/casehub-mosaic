@@ -9,10 +9,26 @@ function fixture(): SocialPatternCategory {
     name: 'agent-cognition',
     description: 'Full cognitive configuration for autonomous agent',
     cognition: {
-      drive: { baseLevel: 0.5, decayRate: 0.1 },
-      mood: { volatility: 0.3 },
+      drive: {
+        axisWeights: { curiosity: 0.8, affiliation: 0.6 },
+        changeThreshold: 0.1,
+        maxIntensity: 1.0,
+        minIntensity: 0.0,
+        moodPleasureModulation: 0.3,
+      },
+      mood: {
+        baseline: { pleasure: 0.0, arousal: 0.0, dominance: 0.0 },
+        decayTimeConstant: 'PT4H',
+        maxDisplacement: 1.0,
+        moodInfluence: 0.5,
+        staleStateTimeout: 'PT24H',
+      },
       retention: { retentionThreshold: 0.6, confidenceWeight: 0.4 },
-      mentalModel: { updateFrequency: 'per-turn' },
+      mentalModel: {
+        beliefHalfLife: 'PT48H',
+        confidenceFloor: 0.3,
+        minSignalsForInference: 3,
+      },
     },
   };
 }
@@ -64,13 +80,21 @@ describe('agency-social-cognition-view', () => {
     expect(offBadges.length).toBe(9);
   });
 
-  it('renders config keys for active sections', async () => {
+  it('renders typed config fields for active sections', async () => {
     await create(fixture());
-    const tags = el.shadowRoot!.querySelectorAll('.key-tag');
-    expect(tags.length).toBeGreaterThan(0);
-    const text = Array.from(tags).map(t => t.textContent);
-    expect(text).toContain('baseLevel');
-    expect(text).toContain('decayRate');
+    const fields = el.shadowRoot!.querySelectorAll('.config-field');
+    expect(fields.length).toBeGreaterThan(0);
+    const labels = Array.from(fields).map(f => f.querySelector('.field-label')?.textContent);
+    expect(labels).toContain('decayTimeConstant');
+    expect(labels).toContain('maxDisplacement');
+  });
+
+  it('renders drive axis weights', async () => {
+    await create(fixture());
+    const driveCard = Array.from(el.shadowRoot!.querySelectorAll('.section-card.active'))
+      .find(c => c.querySelector('.section-name')?.textContent === 'Drive');
+    expect(driveCard).toBeTruthy();
+    expect(driveCard!.querySelector('.axis-weights')).toBeTruthy();
   });
 
   it('renders summary count', async () => {
@@ -86,5 +110,23 @@ describe('agency-social-cognition-view', () => {
   it('renders empty state when no spec', async () => {
     await create(undefined);
     expect(el.shadowRoot!.querySelector('.empty-state')).toBeTruthy();
+  });
+
+  it('renders tablist with Execution and Reports tabs', async () => {
+    await create(fixture());
+    const tablist = el.shadowRoot!.querySelector('[role="tablist"]');
+    expect(tablist).toBeTruthy();
+    const tabs = el.shadowRoot!.querySelectorAll('[role="tab"]');
+    expect(tabs.length).toBe(2);
+    expect(tabs[0].textContent?.trim()).toBe('Execution');
+    expect(tabs[1].textContent?.trim()).toBe('Reports');
+  });
+
+  it('Reports tab shows stub placeholder', async () => {
+    await create(fixture());
+    const tabs = el.shadowRoot!.querySelectorAll('[role="tab"]');
+    (tabs[1] as HTMLElement).click();
+    await (el as any).updateComplete;
+    expect(el.shadowRoot!.querySelector('.empty-state')?.textContent).toBe('No report data available');
   });
 });
