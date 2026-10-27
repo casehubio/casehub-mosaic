@@ -21,7 +21,7 @@ function toBrainGraph(response: BrainResponse): { nodes: BrainNode[]; links: Bra
   for (const cn of response.capsNodes) {
     nodes.push({
       id: 'caps-' + cn.id, name: cn.id, regionId: 'habitual',
-      nodeType: 'caps', capsType: cn.type,
+      nodeType: 'caps', capsType: cn.type as string,
     });
   }
 

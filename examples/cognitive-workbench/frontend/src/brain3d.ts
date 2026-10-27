@@ -10,6 +10,11 @@ let _cachedBrainData: BrainResponse | null = null;
 let _brainHighlightedNodeId: string | null = null;
 let _brainHighlightedNeighborIds: Set<string> = new Set();
 let _brainScale = 1.0;
+let _brainEdgeCounts: Map<string, number> = new Map();
+
+const CAPS_TYPE_COLORS: Record<string, string> = {
+  INPUT: '#6366f1', MEDIATING: '#94a3b8', OUTPUT: '#f59e0b',
+};
 
 type BrainViewState = 'BRAIN_IDLE' | 'ZOOMING_IN' | 'EGO_ACTIVE' | 'ZOOMING_OUT';
 let _brainViewState: BrainViewState = 'BRAIN_IDLE';
@@ -28,6 +33,9 @@ function brainNodeColor(node: BrainNode): string {
     return 'rgba(100, 116, 139, 0.2)';
   }
   if (!isBrainRegionActive(node.regionId)) return 'rgba(100, 116, 139, 0.15)';
+  if (node.nodeType === 'caps') return CAPS_TYPE_COLORS[node.capsType || ''] || '#94a3b8';
+  if (node.nodeType === 'mood') return '#fbbf24';
+  if (node.nodeType === 'affect') return '#f97316';
   return BRAIN_REGION_COLORS[node.regionId] || '#6b7280';
 }
 
@@ -46,13 +54,83 @@ function brainLinkColor(link: any): string {
 
 function brainNodeSize(node: BrainNode): number {
   if (node.id.startsWith('_outline-')) return 0.01;
-  if (node.nodeType === 'caps') return 1;
-  if (node.nodeType === 'mood' || node.nodeType === 'affect') return 1.5;
-  return 1.5 + (node.confidenceValue ?? 0.8) * 2;
+  if (node.nodeType === 'caps') {
+    if (node.capsType === 'INPUT') return 1.2;
+    if (node.capsType === 'OUTPUT') return 1.4;
+    return 0.8;
+  }
+  if (node.nodeType === 'mood') return 2;
+  if (node.nodeType === 'affect') return 1.8;
+  var edgeCount = _brainEdgeCounts.get(node.id) || 0;
+  var baseSize = 1.5 + (node.confidenceValue ?? 0.8) * 1.5;
+  var connectivityBoost = Math.min(edgeCount * 0.3, 2.0);
+  return baseSize + connectivityBoost;
+}
+
+function buildBrainNodeThreeObject(node: any): any {
+  if (node.id.startsWith('_outline-')) return undefined;
+  if (node.nodeType !== 'entity') return undefined;
+
+  var edgeCount = _brainEdgeCounts.get(node.id) || 0;
+  if (edgeCount < 1 && (node.confidenceValue ?? 0) < 0.5) return undefined;
+
+  var THREE = (window as any).THREE;
+  if (!THREE) return undefined;
+
+  var canvas = document.createElement('canvas');
+  var ctx = canvas.getContext('2d');
+  if (!ctx) return undefined;
+
+  var name = node.name || '';
+  if (name.length > 20) name = name.substring(0, 18) + '..';
+
+  var fontSize = 24;
+  ctx.font = 'bold ' + fontSize + 'px system-ui, -apple-system, sans-serif';
+  var textWidth = ctx.measureText(name).width;
+  canvas.width = Math.max(textWidth + 16, 64);
+  canvas.height = 36;
+
+  ctx.font = 'bold ' + fontSize + 'px system-ui, -apple-system, sans-serif';
+  ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText(name, canvas.width / 2, canvas.height / 2);
+
+  var texture = new THREE.CanvasTexture(canvas);
+  texture.needsUpdate = true;
+
+  var spriteMat = new THREE.SpriteMaterial({
+    map: texture,
+    transparent: true,
+    depthTest: false,
+    sizeAttenuation: true,
+  });
+  var sprite = new THREE.Sprite(spriteMat);
+  var spriteScale = canvas.width / 22;
+  sprite.scale.set(spriteScale, spriteScale * (canvas.height / canvas.width), 1);
+  sprite.position.set(0, 5, 0);
+
+  var group = new THREE.Group();
+
+  var color = new THREE.Color(brainNodeColor(node));
+  var size = brainNodeSize(node);
+  var geometry = new THREE.SphereGeometry(size, 16, 12);
+  var material = new THREE.MeshPhongMaterial({
+    color: color,
+    transparent: true,
+    opacity: 0.9,
+    emissive: color,
+    emissiveIntensity: 0.25,
+  });
+  var sphere = new THREE.Mesh(geometry, material);
+  group.add(sphere);
+  group.add(sprite);
+
+  return group;
 }
 
 function initBrain(): void {
-  const container = document.getElementById('brainArea');
+  var container = document.getElementById('brainArea');
   if (!container || _brainGraph) return;
 
   _brainGraph = ForceGraph3D({ controlType: 'orbit' })(container)
@@ -61,12 +139,23 @@ function initBrain(): void {
     .backgroundColor('#0f1117')
     .nodeColor(function(node: any) { return brainNodeColor(node); })
     .nodeVal(function(node: any) { var s = brainNodeSize(node); return s * s; })
-    .nodeLabel(function(node: any) { return node.name || node.id; })
-    .nodeOpacity(0.85)
+    .nodeLabel(function(node: any) {
+      if (node.id.startsWith('_outline-')) return '';
+      var label = node.name || node.id;
+      if (node.nodeType === 'caps') label = '[' + (node.capsType || 'CAPS') + '] ' + label;
+      return label;
+    })
+    .nodeOpacity(0.9)
+    .nodeThreeObject(function(node: any) { return buildBrainNodeThreeObject(node); })
     .linkColor(function(link: any) { return brainLinkColor(link); })
-    .linkWidth(function(link: any) { if (link.type === 'outline') return 0.5; return link.linkType === 'caps' ? 0.5 : 1; })
-    .linkOpacity(0.6)
-    .linkDirectionalArrowLength(3)
+    .linkWidth(function(link: any) {
+      if (link.type === 'outline') return 0.3;
+      if (link.linkType === 'caps') return 0.3;
+      if (link.linkType === 'affect') return 1.5;
+      return 0.8;
+    })
+    .linkOpacity(0.5)
+    .linkDirectionalArrowLength(2.5)
     .linkDirectionalArrowRelPos(1)
     .onNodeClick(function(node: any) {
       if (node.id && node.id.startsWith('_outline-')) return;
@@ -101,15 +190,25 @@ function initBrain(): void {
         .linkColor(function(l: any) { return brainLinkColor(l); });
     })
     .enableNodeDrag(false)
-    .warmupTicks(120)
-    .cooldownTicks(400);
+    .warmupTicks(200)
+    .cooldownTicks(600);
 
-  _brainGraph.d3Force('charge').strength(-250).distanceMax(800);
-  _brainGraph.d3Force('link').distance(50);
+  _brainGraph.d3Force('charge').strength(-120).distanceMax(500);
+  _brainGraph.d3Force('link').distance(30).strength(0.3);
+
+  var scene = _brainGraph.scene();
+  var THREE = (window as any).THREE;
+  if (THREE && scene) {
+    var ambient = new THREE.AmbientLight(0x606080, 1.2);
+    scene.add(ambient);
+    var directional = new THREE.DirectionalLight(0xffffff, 0.5);
+    directional.position.set(100, 200, 300);
+    scene.add(directional);
+  }
 
   new ResizeObserver(function() {
-    if (_brainGraph) _brainGraph.width(container.clientWidth).height(container.clientHeight);
-  }).observe(container);
+    if (_brainGraph && container) _brainGraph.width(container.clientWidth).height(container.clientHeight);
+  }).observe(container!);
 }
 
 async function loadBrainView(): Promise<void> {
@@ -125,6 +224,16 @@ async function loadBrainView(): Promise<void> {
 
   currentNodes = response.regions.flatMap(function(r) { return r.nodes; });
   currentEdges = response.edges;
+
+  _brainEdgeCounts = new Map();
+  for (var li = 0; li < links.length; li++) {
+    var lk = links[li];
+    if (lk.type === 'outline') continue;
+    var ls = typeof lk.source === 'string' ? lk.source : (lk.source as any).id;
+    var lt = typeof lk.target === 'string' ? lk.target : (lk.target as any).id;
+    _brainEdgeCounts.set(ls, (_brainEdgeCounts.get(ls) || 0) + 1);
+    _brainEdgeCounts.set(lt, (_brainEdgeCounts.get(lt) || 0) + 1);
+  }
 
   var regionCounts = new Map<string, number>();
   for (var i = 0; i < nodes.length; i++) {
@@ -164,14 +273,61 @@ async function loadBrainView(): Promise<void> {
   }
 
   addBrainOutlineNodes(scaledMesh, nodes, links);
+  addBrainMeshToScene(scaledMesh);
   _brainGraph.d3Force('region', makeRegionContainmentForce(scaledMesh.regionBounds, _brainScale));
   _brainGraph.graphData({ nodes: nodes, links: links });
-  _brainGraph.cameraPosition({ x: 80 * _brainScale, y: 60 * _brainScale, z: 250 * _brainScale }, { x: 0, y: 0, z: 0 }, 0);
+  _brainGraph.cameraPosition({ x: 120 * _brainScale, y: 80 * _brainScale, z: 180 * _brainScale }, { x: 0, y: 0, z: 0 }, 0);
 
   renderBrainPillFilters();
 
+  var entityCount = 0;
+  var capsCount = 0;
+  for (var si = 0; si < nodes.length; si++) {
+    if (nodes[si].nodeType === 'entity') entityCount++;
+    else if (nodes[si].nodeType === 'caps') capsCount++;
+  }
   var statsEl = document.getElementById('brainStats');
-  if (statsEl) statsEl.textContent = nodes.length + ' nodes, ' + links.length + ' edges';
+  if (statsEl) statsEl.textContent = entityCount + ' entities, ' + capsCount + ' CAPS, ' + links.length + ' edges';
+}
+
+function addBrainMeshToScene(meshData: BrainMesh): void {
+  var THREE = (window as any).THREE;
+  if (!THREE || !_brainGraph) return;
+
+  var scene = _brainGraph.scene();
+  if (!scene) return;
+
+  if (_brainMeshObj) {
+    scene.remove(_brainMeshObj);
+    _brainMeshObj = null;
+  }
+
+  var geometry = new THREE.BufferGeometry();
+  geometry.setAttribute('position', new THREE.Float32BufferAttribute(meshData.vertices, 3));
+  geometry.setIndex(new THREE.Uint16BufferAttribute(meshData.indices, 1));
+  geometry.computeVertexNormals();
+
+  var material = new THREE.MeshPhongMaterial({
+    color: 0x4a4e69,
+    transparent: true,
+    opacity: 0.06,
+    side: THREE.DoubleSide,
+    wireframe: false,
+    depthWrite: false,
+  });
+
+  _brainMeshObj = new THREE.Mesh(geometry, material);
+  scene.add(_brainMeshObj);
+
+  var wireGeo = new THREE.WireframeGeometry(geometry);
+  var wireMat = new THREE.LineBasicMaterial({
+    color: 0x6366f1,
+    transparent: true,
+    opacity: 0.05,
+    depthWrite: false,
+  });
+  var wireframe = new THREE.LineSegments(wireGeo, wireMat);
+  _brainMeshObj.add(wireframe);
 }
 
 function addBrainOutlineNodes(meshData: BrainMesh, nodes: any[], links: BrainLink[]): void {
@@ -255,21 +411,65 @@ function renderBrainPillFilters(): void {
   var sidebar = document.getElementById('brainSidebar');
   if (!sidebar) return;
 
-  var html = '<h2>Regions</h2>';
   var regions = allBrainRegions();
+  regions.sort(function(a, b) { return b.nodeCount - a.nodeCount; });
+
+  var html = '<h2>Regions</h2>';
   for (var i = 0; i < regions.length; i++) {
     var region = regions[i];
     var color = BRAIN_REGION_COLORS[region.regionId] || '#6b7280';
     var activeClass = region.active ? ' active' : '';
-    html += '<div class="brain-pill' + activeClass + '" onclick="toggleBrainFilter(\'' + region.regionId + '\')">'
+    var emptyStyle = region.nodeCount === 0 ? ';opacity:0.4' : '';
+    html += '<div class="brain-pill' + activeClass + '" style="' + emptyStyle + '" onclick="toggleBrainFilter(\'' + region.regionId + '\')">'
       + '<span class="pill-dot" style="background:' + color + '"></span>'
       + '<div class="pill-text">'
       + '<span class="pill-label">' + region.functionalLabel + '</span>'
       + '<span class="pill-sub">' + region.anatomicalLabel + '</span>'
       + '</div>'
-      + '<span class="badge">' + region.nodeCount + '</span>'
+      + '<span class="badge">' + (region.nodeCount > 0 ? region.nodeCount : '—') + '</span>'
       + '</div>';
   }
+
+  var capsData = _cachedBrainData;
+  if (capsData && capsData.capsNodes.length > 0) {
+    var inputCount = 0, mediatingCount = 0, outputCount = 0;
+    for (var ci = 0; ci < capsData.capsNodes.length; ci++) {
+      var cn = capsData.capsNodes[ci];
+      if (cn.type === 'INPUT') inputCount++;
+      else if (cn.type === 'MEDIATING') mediatingCount++;
+      else if (cn.type === 'OUTPUT') outputCount++;
+    }
+    html += '<h2 style="margin-top:16px">CAPS Network</h2>';
+    html += '<div class="brain-pill" style="cursor:default">'
+      + '<span class="pill-dot" style="background:#6366f1"></span>'
+      + '<div class="pill-text"><span class="pill-label">Input</span><span class="pill-sub">Sensory</span></div>'
+      + '<span class="badge">' + inputCount + '</span></div>';
+    html += '<div class="brain-pill" style="cursor:default">'
+      + '<span class="pill-dot" style="background:#94a3b8"></span>'
+      + '<div class="pill-text"><span class="pill-label">Mediating</span><span class="pill-sub">Processing</span></div>'
+      + '<span class="badge">' + mediatingCount + '</span></div>';
+    html += '<div class="brain-pill" style="cursor:default">'
+      + '<span class="pill-dot" style="background:#f59e0b"></span>'
+      + '<div class="pill-text"><span class="pill-label">Output</span><span class="pill-sub">Behavioral</span></div>'
+      + '<span class="badge">' + outputCount + '</span></div>';
+  }
+
+  if (capsData && capsData.moodSnapshots.length > 0) {
+    var latest = capsData.moodSnapshots[0];
+    html += '<h2 style="margin-top:16px">Mood</h2>';
+    html += '<div class="brain-pill" style="cursor:default">'
+      + '<span class="pill-dot" style="background:#fbbf24"></span>'
+      + '<div class="pill-text"><span class="pill-label">Snapshots</span>'
+      + '<span class="pill-sub">' + capsData.moodSnapshots.length + ' samples</span></div></div>';
+    if (latest.pleasure != null) {
+      html += '<div style="padding:4px 16px 8px"><div class="pad-pill" style="font-size:11px;gap:6px">'
+        + '<span class="pad-p" style="padding:2px 6px">P ' + latest.pleasure.toFixed(2) + '</span>'
+        + '<span class="pad-a" style="padding:2px 6px">A ' + (latest.arousal || 0).toFixed(2) + '</span>'
+        + '<span class="pad-d" style="padding:2px 6px">D ' + (latest.dominance || 0).toFixed(2) + '</span>'
+        + '</div></div>';
+    }
+  }
+
   sidebar.innerHTML = html;
 }
 
@@ -277,8 +477,10 @@ function toggleBrainFilter(regionId: string): void {
   toggleBrainRegion(regionId);
   renderBrainPillFilters();
   if (_brainGraph) {
-    _brainGraph.nodeColor(function(n: any) { return brainNodeColor(n); })
-      .linkColor(function(l: any) { return brainLinkColor(l); });
+    _brainGraph
+      .nodeColor(function(n: any) { return brainNodeColor(n); })
+      .linkColor(function(l: any) { return brainLinkColor(l); })
+      .nodeThreeObject(function(n: any) { return buildBrainNodeThreeObject(n); });
   }
 }
 
@@ -298,7 +500,7 @@ function focusBrainNode(nodeId: string): void {
 
   var zoomTarget = { x: node.x || 0, y: node.y || 0, z: (node.z || 0) + 100 };
   _brainGraph.cameraPosition(zoomTarget, { x: node.x || 0, y: node.y || 0, z: node.z || 0 }, 600);
-  fadeBrainMesh(0.12, 0, 600);
+  fadeBrainMesh(0.06, 0, 600);
 
   fetch('/api/workbench/ego/' + nodeId + '?depth=2&maxNodes=200')
     .then(function(r) { return r.json(); })
@@ -314,7 +516,7 @@ function focusBrainNode(nodeId: string): void {
       if (_brainSavedCameraPos) {
         _brainGraph.cameraPosition(_brainSavedCameraPos.pos, _brainSavedCameraPos.lookAt, 400);
       }
-      fadeBrainMesh(0, 0.12, 400);
+      fadeBrainMesh(0, 0.06, 400);
       _brainViewState = 'BRAIN_IDLE';
     });
 }
@@ -335,6 +537,13 @@ function renderBrainEgo(egoData: any, focusId: string): void {
     return { source: e.sourceNodeId, target: e.targetNodeId, type: e.edgeType, linkType: 'entity' };
   });
 
+  _brainEdgeCounts = new Map();
+  for (var eli = 0; eli < links.length; eli++) {
+    var elk = links[eli];
+    _brainEdgeCounts.set(elk.source as string, (_brainEdgeCounts.get(elk.source as string) || 0) + 1);
+    _brainEdgeCounts.set(elk.target as string, (_brainEdgeCounts.get(elk.target as string) || 0) + 1);
+  }
+
   _brainGraph.d3Force('region', null);
   _brainGraph.d3Force('charge').strength(-60);
 
@@ -343,6 +552,7 @@ function renderBrainEgo(egoData: any, focusId: string): void {
     return COLORS_3D[n.subgraphType?.toLowerCase()] || '#6b7280';
   });
   _brainGraph.linkColor(function() { return 'rgba(100, 116, 139, 0.4)'; });
+  _brainGraph.nodeThreeObject(function(n: any) { return buildBrainNodeThreeObject(n); });
   _brainGraph.graphData({ nodes: nodes, links: links });
   _brainGraph.cameraPosition({ x: 0, y: 0, z: 300 }, { x: 0, y: 0, z: 0 }, 400);
 
@@ -357,7 +567,7 @@ function returnToBrain(): void {
   if (_brainSavedCameraPos) {
     _brainGraph.cameraPosition(_brainSavedCameraPos.pos, _brainSavedCameraPos.lookAt, 600);
   }
-  fadeBrainMesh(0, 0.12, 600);
+  fadeBrainMesh(0, 0.06, 600);
 
   setTimeout(function() {
     if (_cachedBrainData) {
@@ -375,10 +585,20 @@ function returnToBrain(): void {
         }
       }
 
+      _brainEdgeCounts = new Map();
+      for (var ri = 0; ri < result.links.length; ri++) {
+        var rl = result.links[ri];
+        if (rl.type === 'outline') continue;
+        _brainEdgeCounts.set(rl.source as string, (_brainEdgeCounts.get(rl.source as string) || 0) + 1);
+        _brainEdgeCounts.set(rl.target as string, (_brainEdgeCounts.get(rl.target as string) || 0) + 1);
+      }
+
       _brainGraph.d3Force('region', makeRegionContainmentForce(scaledMesh.regionBounds, _brainScale));
-      _brainGraph.d3Force('charge').strength(-40);
-      _brainGraph.nodeColor(function(n: any) { return brainNodeColor(n); })
-        .linkColor(function(l: any) { return brainLinkColor(l); });
+      _brainGraph.d3Force('charge').strength(-120);
+      _brainGraph
+        .nodeColor(function(n: any) { return brainNodeColor(n); })
+        .linkColor(function(l: any) { return brainLinkColor(l); })
+        .nodeThreeObject(function(n: any) { return buildBrainNodeThreeObject(n); });
       _brainGraph.graphData({ nodes: result.nodes, links: result.links });
 
       currentNodes = _cachedBrainData.regions.flatMap(function(r) { return r.nodes; });
