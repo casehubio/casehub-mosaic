@@ -238,6 +238,9 @@ export class RoutingStrategyView extends LitElement {
   @property({ attribute: false }) agentStatuses?: Record<string, RoutingAgentStatus>;
 
   static override styles = [patternViewStyles, css`
+    :host {
+      margin-top: 16px;
+    }
     .header {
       padding: 10px 16px;
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
