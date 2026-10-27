@@ -87,6 +87,9 @@ public class CorpusImporter {
         int goalEdgeCount = linkSubjectToGoals(root, nodeIds, t, edgeTypes);
         edgeCount += goalEdgeCount;
 
+        int cooccurrenceEdgeCount = createCooccurrenceEdges(root.get("memories"), nodeIds, t, edgeTypes);
+        edgeCount += cooccurrenceEdgeCount;
+
         // #536: Import entity enrichments
         importEntityEnrichments(root.get("entity_enrichments"), t, nodeIds, subject, edgeTypes);
 
@@ -231,6 +234,47 @@ public class CorpusImporter {
             edgeTypes.add(type);
             count++;
         }
+        return count;
+    }
+
+    private int createCooccurrenceEdges(JsonNode memoriesArray, Map<String, String> nodeIds,
+                                        String tenantId, Set<String> edgeTypes) {
+        if (memoriesArray == null) return 0;
+        var createdPairs = new HashSet<String>();
+        int count = 0;
+
+        for (JsonNode mem : memoriesArray) {
+            JsonNode relatedNode = mem.get("related_entities");
+            if (relatedNode == null || !relatedNode.isArray() || relatedNode.isEmpty()) continue;
+
+            var entities = new ArrayList<String>();
+            for (JsonNode re : relatedNode) {
+                String name = re.asText().trim().toLowerCase();
+                if (!name.isEmpty() && nodeIds.containsKey(name)) entities.add(name);
+            }
+            if (entities.size() < 2) continue;
+
+            for (int i = 0; i < entities.size(); i++) {
+                for (int j = i + 1; j < entities.size(); j++) {
+                    String a = entities.get(i);
+                    String b = entities.get(j);
+                    String pairKey = a.compareTo(b) < 0 ? a + "|" + b : b + "|" + a;
+                    if (createdPairs.contains(pairKey)) continue;
+                    createdPairs.add(pairKey);
+
+                    String sourceId = nodeIds.get(a);
+                    String targetId = nodeIds.get(b);
+                    if (sourceId == null || targetId == null) continue;
+
+                    var edgeInput = EdgeInput.of(sourceId, targetId, "associated-with")
+                            .withConfidence(new Confidence(ConfidenceOrigin.INFERRED, 0.6, null));
+                    mindMapStore.addEdge(edgeInput, tenantId);
+                    count++;
+                }
+            }
+        }
+        edgeTypes.add("associated-with");
+        System.out.println("[corpus] Created " + count + " co-occurrence edges from related-entities");
         return count;
     }
 
