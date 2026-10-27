@@ -1,5 +1,5 @@
 import { describe, it, expect, afterEach } from 'vitest';
-import type { GovernancePatternCategory, CommunicationPatternCategory, SocialPatternCategory } from '@casehubio/mosaic-core';
+import type { GovernancePatternCategory, CommunicationPatternCategory, SocialPatternCategory, PlaybookPatternCategory } from '@casehubio/mosaic-core';
 import './base-pattern-view.js';
 
 function governanceFixture(): GovernancePatternCategory {
@@ -74,5 +74,12 @@ describe('agency-base-pattern-view', () => {
     const spec: SocialPatternCategory = { category: 'social', type: 'reflection', name: 'daily-reflection' };
     await create(spec);
     expect(el.shadowRoot!.querySelector('.type-badge')?.textContent).toBe('reflection');
+  });
+
+  it('renders a playbook without an agents property', async () => {
+    const spec: PlaybookPatternCategory = { category: 'playbook', type: 'sequence' };
+    await create(spec);
+    expect(el.shadowRoot!.querySelector('.type-badge')?.textContent).toBe('sequence');
+    expect(el.shadowRoot!.querySelector('.agents-grid')).toBeNull();
   });
 });
