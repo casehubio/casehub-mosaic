@@ -289,7 +289,7 @@ export class AgentViewer extends LitElement {
             return html`<agency-orchestration-saga-view .spec=${spec}></agency-orchestration-saga-view>`;
           case 'decomposition':
             return html`<agency-orchestration-decomposition-view .spec=${spec}></agency-orchestration-decomposition-view>`;
-          default: { const _o: never = spec.type; return _o; }
+          default: return html`<agency-base-pattern-view .spec=${spec}></agency-base-pattern-view>`;
         }
       case 'deliberation':
         switch (spec.type) {
@@ -303,7 +303,7 @@ export class AgentViewer extends LitElement {
             return html`<agency-deliberation-coalition-view .spec=${spec}></agency-deliberation-coalition-view>`;
           case 'normative':
             return html`<agency-deliberation-normative-view .spec=${spec}></agency-deliberation-normative-view>`;
-          default: { const _d: never = spec.type; return _d; }
+          default: return html`<agency-base-pattern-view .spec=${spec}></agency-base-pattern-view>`;
         }
       case 'perception':
         switch (spec.type) {
@@ -313,14 +313,14 @@ export class AgentViewer extends LitElement {
             return html`<agency-perception-observation-view .spec=${spec}></agency-perception-observation-view>`;
           case 'narrative':
             return html`<agency-perception-narrative-view .spec=${spec}></agency-perception-narrative-view>`;
-          default: { const _p: never = spec.type; return _p; }
+          default: return html`<agency-base-pattern-view .spec=${spec}></agency-base-pattern-view>`;
         }
       case 'communication':
         switch (spec.type) {
           case 'channel-execution':
           case 'channel-summary':
             return html`<agency-base-pattern-view .spec=${spec}></agency-base-pattern-view>`;
-          default: { const _c: never = spec.type; return _c; }
+          default: return html`<agency-base-pattern-view .spec=${spec}></agency-base-pattern-view>`;
         }
       case 'governance':
         switch (spec.type) {
@@ -330,13 +330,13 @@ export class AgentViewer extends LitElement {
           case 'attestation':
           case 'trust':
             return html`<agency-base-pattern-view .spec=${spec}></agency-base-pattern-view>`;
-          default: { const _g: never = spec.type; return _g; }
+          default: return html`<agency-base-pattern-view .spec=${spec}></agency-base-pattern-view>`;
         }
       case 'optimisation':
         switch (spec.type) {
           case 'prompt-optimisation':
             return html`<agency-optimisation-prompt-view .spec=${spec}></agency-optimisation-prompt-view>`;
-          default: { const _x: never = spec.type; return _x; }
+          default: return html`<agency-base-pattern-view .spec=${spec}></agency-base-pattern-view>`;
         }
       case 'social':
         switch (spec.type) {
@@ -346,11 +346,11 @@ export class AgentViewer extends LitElement {
             return html`<agency-social-memory-hygiene-view .spec=${spec}></agency-social-memory-hygiene-view>`;
           case 'reflection':
             return html`<agency-base-pattern-view .spec=${spec}></agency-base-pattern-view>`;
-          default: { const _s: never = spec.type; return _s; }
+          default: return html`<agency-base-pattern-view .spec=${spec}></agency-base-pattern-view>`;
         }
       case 'playbook':
         return html`<agency-playbook-spec-view .spec=${spec}></agency-playbook-spec-view>`;
-      default: { const _: never = spec; return _; }
+      default: return html`<agency-base-pattern-view .spec=${spec as any}></agency-base-pattern-view>`;
     }
   }
 }
