@@ -48,12 +48,22 @@ export type TerminationSpec =
   | { type: 'terminal-outcome' }
   | { type: 'deadline' };
 
+export interface DispositionAxisWeight {
+  readonly axis: string;
+  readonly weight: number;
+}
+
 export type RoutingSpec =
   | { type: 'first-match'; guard?: string }
   | { type: 'round-robin' }
   | { type: 'sequential' }
-  | { type: 'llm-selected' }
-  | { type: 'select-all' };
+  | { type: 'llm-selected'; model?: string; prompt?: string }
+  | { type: 'select-all' }
+  | { type: 'cbr-agent'; similarityThreshold?: number }
+  | { type: 'disposition-aware'; axes?: DispositionAxisWeight[] };
+
+export type RoutingAgentStatus =
+  'selected' | 'skipped' | 'not-evaluated' | 'excluded';
 
 export type DecompositionSpec =
   | { type: 'identity' }

@@ -2,6 +2,7 @@ import { LitElement, html, css, nothing, type TemplateResult } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import type { OrchestrationPatternCategory, AgentRefSpec } from '@casehubio/mosaic-core';
 import { PatternViewMixin, patternViewStyles } from '../../shared-styles.js';
+import './routing-strategy-view.js';
 
 @customElement('agency-orchestration-saga-view')
 export class SagaView extends PatternViewMixin(LitElement) {
@@ -174,6 +175,13 @@ export class SagaView extends PatternViewMixin(LitElement) {
       ${p.description ? html`<div class="description">${p.description}</div>` : nothing}
       <div class="body">
         ${this.renderSagaTrack(p)}
+        ${p.routing ? html`
+          <agency-routing-strategy-view
+            .routing=${p.routing}
+            .agents=${p.agents ?? []}
+            .governance=${p.governance}
+          ></agency-routing-strategy-view>
+        ` : nothing}
         ${this.renderMetadata(p)}
       </div>
     `;
@@ -220,14 +228,6 @@ export class SagaView extends PatternViewMixin(LitElement) {
 
   private renderMetadata(p: OrchestrationPatternCategory): TemplateResult | typeof nothing {
     const cards: TemplateResult[] = [];
-    if (p.routing) {
-      cards.push(html`
-        <div class="meta-card">
-          <div class="meta-label">Routing</div>
-          <div class="meta-type">${p.routing.type}</div>
-        </div>
-      `);
-    }
     if (p.termination?.length) {
       cards.push(html`
         <div class="meta-card">

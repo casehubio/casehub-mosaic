@@ -3,6 +3,7 @@ import { customElement } from 'lit/decorators.js';
 import type { OrchestrationPatternCategory } from '@casehubio/mosaic-core';
 import { PatternViewMixin, patternViewStyles } from '../../shared-styles.js';
 import '../../agent-card.js';
+import './routing-strategy-view.js';
 
 @customElement('agency-orchestration-choreography-view')
 export class ChoreographyView extends PatternViewMixin(LitElement) {
@@ -170,6 +171,13 @@ export class ChoreographyView extends PatternViewMixin(LitElement) {
             ${(p.agents ?? []).map(a => html`<agent-card .agent=${a}></agent-card>`)}
           </div>
         </div>
+        ${p.routing ? html`
+          <agency-routing-strategy-view
+            .routing=${p.routing}
+            .agents=${p.agents ?? []}
+            .governance=${p.governance}
+          ></agency-routing-strategy-view>
+        ` : nothing}
         ${this.renderMetadata(p)}
       </div>
     `;

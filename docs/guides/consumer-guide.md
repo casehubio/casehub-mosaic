@@ -174,11 +174,11 @@ Data delivery is property-based (`conversationState: ConversationState`) — hos
 
 ### agent-viewer pattern views
 
-14 dedicated pattern views organized by agency category, dispatched by `<agency-agent-viewer>` based on `PatternCategory` discriminated union type. All views extend `PatternViewMixin(LitElement)` with shared `patternViewStyles`, ARIA (`role="region"`, `aria-label`), and empty-state handling.
+15 dedicated pattern views organized by agency category, dispatched by `<agency-agent-viewer>` based on `PatternCategory` discriminated union type. All views extend `PatternViewMixin(LitElement)` with shared `patternViewStyles`, ARIA (`role="region"`, `aria-label`), and empty-state handling.
 
 | Category | Views | Element tags |
 |----------|-------|-------------|
-| Orchestration | supervisor, choreography, saga, decomposition | `<agency-orchestration-supervisor-view>`, `-choreography-view`, `-saga-view`, `-decomposition-view` |
+| Orchestration | supervisor, choreography, saga, decomposition, routing-strategy | `<agency-orchestration-supervisor-view>`, `-choreography-view`, `-saga-view`, `-decomposition-view`, `<agency-routing-strategy-view>` (composable) |
 | Deliberation | voting, debate, negotiation, coalition, normative | `<agency-deliberation-voting-view>`, `-debate-view`, `-negotiation-view`, `-coalition-view`, `-normative-view` |
 | Governance | judgment | `<agency-governance-judgment-view>` |
 | Perception | summarisation, observation, narrative | `<agency-perception-summarisation-view>`, `-observation-view`, `-narrative-view` |
@@ -188,6 +188,21 @@ Data delivery is property-based (`conversationState: ConversationState`) — hos
 Each view receives its spec via the `spec` property (typed `PatternCategory`). The `agent-viewer` routes to the correct view based on `spec.category` and `spec.type` with exhaustive `default: never` guards.
 
 Category colour scheme: Orchestration `#fab387` (peach), Deliberation `#cba6f7` (purple), Governance `#f38ba8` (red), Perception `#94e2d5` (teal), Optimisation `#f9e2af` (amber), Social `#f5c2e7` (pink).
+
+#### routing-strategy-view (composable)
+
+Unlike other pattern views, `<agency-routing-strategy-view>` is a composable component that accepts a `RoutingSpec` directly rather than a full `PatternCategory`. It is embedded within orchestration views (supervisor, decomposition, saga, choreography) and can also be used standalone.
+
+**Properties:**
+
+| Property | Type | Required | Description |
+|----------|------|----------|-------------|
+| `routing` | `RoutingSpec` | Yes | Routing strategy from YAML (7 types: first-match, round-robin, sequential, select-all, llm-selected, cbr-agent, disposition-aware) |
+| `agents` | `AgentRefSpec[]` | No | Candidate agent list |
+| `governance` | `GovernanceSpec` | No | Trust routing and CBR routing policy display |
+| `agentStatuses` | `Record<string, RoutingAgentStatus>` | No | Runtime status overlay (selected/skipped/not-evaluated/excluded) |
+
+**Extensibility:** `registerRoutingRenderer(type, fn)` registers custom render functions for new strategy types. Unknown types fall back to a generic badge + agent grid.
 
 ### casehub-diagram
 

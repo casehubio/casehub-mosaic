@@ -239,6 +239,15 @@
 <p style="font-size:12px;color:#7f849c;margin-bottom:12px;">Decomposes complex tasks into specialist sub-tasks via LLM or heuristic strategies</p>
 <div id="decomposition-section"></div>
 
+<h3>4e. Routing Strategy — Agent Selection Visualization</h3>
+<p style="font-size:12px;color:#7f849c;margin-bottom:12px;">Routing strategy layouts showing how agents are selected: first-match, round-robin, sequential, select-all, llm-selected, cbr-agent, disposition-aware</p>
+<div id="routing-first-match-section"></div>
+<div id="routing-round-robin-section"></div>
+<div id="routing-select-all-section"></div>
+<div id="routing-llm-section"></div>
+<div id="routing-cbr-section"></div>
+<div id="routing-disposition-section"></div>
+
 <!-- ═══════════════════════════════════════════════════════ -->
 <h2>5. Perception, Optimisation & Social Pattern Views</h2>
 <h3>grounded views matching real Java YAML types (issue #288)</h3>
@@ -285,6 +294,7 @@
   import './src/views/base-pattern-view.ts';
   import './src/views/playbook-spec-view.ts';
   import './src/views/orchestration/supervisor-view.ts';
+  import './src/views/orchestration/routing-strategy-view.ts';
   import './src/views/orchestration/choreography-view.ts';
   import './src/views/orchestration/saga-view.ts';
   import './src/views/orchestration/decomposition-view.ts';
@@ -867,6 +877,50 @@ agents:
     el.spec = data;
     return el;
   });
+
+  // ═══════════════════════════════════════════════
+  // 4e. Routing Strategy — Agent Selection
+  // ═══════════════════════════════════════════════
+  const routingAgents = [
+    { type: 'worker', name: 'risk-analyst', description: 'Evaluates financial risk', capabilities: ['risk-assessment', 'quantitative-analysis'] },
+    { type: 'worker', name: 'compliance-check', description: 'Regulatory compliance', capabilities: ['compliance', 'audit'] },
+    { type: 'human', name: 'senior-reviewer', description: 'Escalation target for edge cases' },
+  ];
+
+  function renderRoutingSection(containerId, routing, governance) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    const el = document.createElement('agency-routing-strategy-view');
+    el.routing = routing;
+    el.agents = routingAgents;
+    if (governance) el.governance = governance;
+    container.appendChild(el);
+  }
+
+  renderRoutingSection('routing-first-match-section',
+    { type: 'first-match', guard: 'hasCapability("risk-assessment")' });
+
+  renderRoutingSection('routing-round-robin-section',
+    { type: 'round-robin' });
+
+  renderRoutingSection('routing-select-all-section',
+    { type: 'select-all' });
+
+  renderRoutingSection('routing-llm-section',
+    { type: 'llm-selected', model: 'claude-sonnet-5-5', prompt: 'Select the agent best suited for this financial risk assessment task' });
+
+  renderRoutingSection('routing-cbr-section',
+    { type: 'cbr-agent', similarityThreshold: 0.85 },
+    { cbrRouting: { successWeight: 1.0, gateExpiredWeight: 0.5, gateRejectedWeight: -0.5, failureWeight: -1.0 } });
+
+  renderRoutingSection('routing-disposition-section',
+    { type: 'disposition-aware', axes: [
+      { axis: 'openness', weight: 0.8 },
+      { axis: 'conscientiousness', weight: 0.6 },
+      { axis: 'analytical', weight: 0.9 },
+      { axis: 'risk-tolerance', weight: 0.3 },
+    ]},
+    { trustRouting: { threshold: 0.7, borderlineMargin: 0.1, blendFactor: 0.6, minimumObservations: 5 } });
 
   // ═══════════════════════════════════════════════
   // 5. Perception, Optimisation & Social Pattern Views
