@@ -3,18 +3,36 @@ import { customElement, property } from 'lit/decorators.js';
 import type {
   AgentDescriptor,
   Capability,
+  CapabilityStatus,
   Constraint,
   Disposition,
   DispositionValue,
   Goal,
-  HealthStatus,
 } from './agent-types.js';
 
-const HEALTH_COLORS: Record<HealthStatus, string> = {
-  healthy: '#a6e3a1',
-  degraded: '#f9e2af',
-  unavailable: '#f38ba8',
-};
+function healthColor(status: CapabilityStatus): string {
+  switch (status.type) {
+    case 'ready': return '#a6e3a1';
+    case 'degraded':
+    case 'overloaded':
+    case 'epistemically-weak': return '#f9e2af';
+    case 'unavailable':
+    case 'excluded':
+    case 'behavioral-violation': return '#f38ba8';
+  }
+}
+
+function healthTooltip(status: CapabilityStatus): string {
+  switch (status.type) {
+    case 'ready': return 'Ready';
+    case 'degraded': return `Degraded: ${status.reason}${status.detail ? ` — ${status.detail}` : ''}`;
+    case 'overloaded': return `Overloaded: ${(status.pressure * 100).toFixed(0)}% (threshold ${(status.threshold * 100).toFixed(0)}%)`;
+    case 'unavailable': return `Unavailable${status.reason ? `: ${status.reason}` : ''}`;
+    case 'epistemically-weak': return `Weak in ${status.domain} (${(status.confidence * 100).toFixed(0)}%)`;
+    case 'excluded': return `Excluded from ${status.domain} (${status.source})`;
+    case 'behavioral-violation': return `Violation (${status.kind})`;
+  }
+}
 
 interface AxisEntry {
   key: string;
@@ -366,7 +384,8 @@ export class EidosView extends LitElement {
     const tags = c.tags ?? [];
     const hasQuality = c.qualityHint != null;
     const pct = hasQuality ? Math.max(0, Math.min(100, c.qualityHint! * 100)) : 0;
-    const healthColor = c.health ? (HEALTH_COLORS[c.health] ?? HEALTH_COLORS.healthy) : undefined;
+    const hColor = c.health ? healthColor(c.health) : undefined;
+    const hTip = c.health ? healthTooltip(c.health) : undefined;
     return html`
       <div class="capability">
         <span class="cap-name">${c.name}</span>
@@ -376,7 +395,7 @@ export class EidosView extends LitElement {
           </div>
           <span class="cap-score">${c.qualityHint!.toFixed(1)}</span>
         ` : html`<div class="cap-bar-track"></div>`}
-        ${healthColor ? html`<div class="cap-health" style="background:${healthColor}"></div>` : nothing}
+        ${hColor ? html`<div class="cap-health" style="background:${hColor}" title="${hTip}"></div>` : nothing}
         ${tags.length > 0
           ? html`<div class="cap-domains">${tags.map(d => html`<span class="domain-tag">${d}</span>`)}</div>`
           : nothing}

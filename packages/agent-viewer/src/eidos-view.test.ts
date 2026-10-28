@@ -103,6 +103,26 @@ describe('eidos-view', () => {
     expect(el.shadowRoot!.querySelectorAll('.cap-health').length).toBe(0);
   });
 
+  it('renders health dot with status-derived color and tooltip', async () => {
+    el.agent = {
+      ...fixture(),
+      capabilities: [
+        { name: 'test-ready', health: { type: 'ready' } },
+        { name: 'test-degraded', health: { type: 'degraded', reason: 'RATE_LIMITED', detail: 'quota exceeded' } },
+        { name: 'test-unavailable', health: { type: 'unavailable', reason: 'service down' } },
+      ],
+    };
+    await el.updateComplete;
+    const dots = el.shadowRoot!.querySelectorAll('.cap-health') as NodeListOf<HTMLElement>;
+    expect(dots.length).toBe(3);
+    expect(dots[0]!.style.background).toBe('rgb(166, 227, 161)');
+    expect(dots[0]!.title).toBe('Ready');
+    expect(dots[1]!.style.background).toBe('rgb(249, 226, 175)');
+    expect(dots[1]!.title).toContain('RATE_LIMITED');
+    expect(dots[2]!.style.background).toBe('rgb(243, 139, 168)');
+    expect(dots[2]!.title).toContain('service down');
+  });
+
   it('shows qualityHint bar when present', async () => {
     el.agent = {
       ...fixture(),
