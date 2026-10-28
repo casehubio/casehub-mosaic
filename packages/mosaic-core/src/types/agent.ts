@@ -1,15 +1,14 @@
 import type { Manifest } from './manifest.js';
-import type { MbtiType, EnneagramType, DiscType, BelbinType, SdiType, BigFiveDimension, BigFivePole } from './personality-vocab.js';
 
 export interface PersonalityProfile {
   profession?: string;
   role?: string;
-  mbti?: MbtiType;
-  enneagram?: EnneagramType;
-  disc?: DiscType;
-  belbin?: { primary: BelbinType; secondaries: BelbinType[] };
-  sdi?: SdiType;
-  bigFive?: Partial<Record<BigFiveDimension, BigFivePole>>;
+  mbti?: string;
+  enneagram?: string;
+  disc?: string;
+  belbin?: { primary: string; secondaries: string[] };
+  sdi?: string;
+  bigFive?: Partial<Record<'O' | 'C' | 'E' | 'A' | 'N', 'high' | 'low'>>;
 }
 
 export interface FullAgentDescriptor {

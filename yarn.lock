@@ -553,7 +553,6 @@ __metadata:
     jsdom: "npm:^29.1.1"
     lit: "npm:^3.3.3"
     rimraf: "npm:^6.1.0"
-    tsx: "npm:^4.19.0"
     typescript: "npm:~5.8.0"
     vitest: "npm:^3.0.0"
   languageName: unknown

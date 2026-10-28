@@ -14,14 +14,8 @@ import { deriveDispositions, deriveTendencies, DISPOSITION_TIPS } from './data/d
 import { FRAMEWORK_TOOLTIPS } from './data/framework-tooltips.js';
 import { initProfile } from './data/profile-derivation.js';
 import type { PersonalityProfile } from '@casehubio/mosaic-core';
-import { MBTI_META, ENNEAGRAM_META, DISC_META, BELBIN_META, SDI_META, BIGFIVE_META } from '@casehubio/mosaic-core';
-import type { VocabTermMeta } from '@casehubio/mosaic-core';
 
 const FAMILIES = ARCHETYPE_FAMILIES as readonly string[];
-const VOCAB_LABEL: Record<string, string> = {};
-for (const meta of [MBTI_META, ENNEAGRAM_META, DISC_META, BELBIN_META, SDI_META, BIGFIVE_META] as Record<string, VocabTermMeta>[]) {
-  for (const [value, m] of Object.entries(meta)) VOCAB_LABEL[value] = m.label;
-}
 const SINGLE_FRAMEWORKS: PersonalityFramework[] = ['mbti', 'enneagram', 'disc', 'belbin', 'sdi'];
 const MAPPED_ARCHETYPES = new Set(Object.values(PROFESSION_PRESETS).flatMap(roles => roles.flatMap(r => r.variants.map(v => v.archetype))));
 
@@ -352,15 +346,9 @@ export class AvatarStep extends LitElement {
     return initProfile(archetypeKey);
   }
 
-  private _bigFiveKey(dim: string, pole: string): string {
-    const names: Record<string, string> = { O: 'openness', C: 'conscientiousness', E: 'extraversion', A: 'agreeableness', N: 'neuroticism' };
-    return `${names[dim] ?? dim}-${pole}`;
-  }
-
   private _sdiColor(value: string) {
-    const cls = `sdi-text-${value}`;
-    const display = value.charAt(0).toUpperCase() + value.slice(1);
-    return html`<span class=${cls}>${display}</span>`;
+    const cls = `sdi-text-${value.toLowerCase()}`;
+    return html`<span class=${cls}>${value}</span>`;
   }
 
   private _toggleLock(fw: string) {
@@ -704,7 +692,7 @@ export class AvatarStep extends LitElement {
                     </div>
                     <dl class="variant-profile">
                       ${Object.entries(profile).map(([fw, vals]) => html`
-                        <dt>${this._tip(fw, fw)}</dt><dd>${vals.map((val: string) => this._tip(`${fw}:${val}`, fw === 'SDI' ? this._sdiColor(val) : VOCAB_LABEL[val] ?? val)).reduce((a: unknown, b: unknown) => html`${a}, ${b}`)}</dd>
+                        <dt>${this._tip(fw, fw)}</dt><dd>${vals.map((val: string) => this._tip(`${fw}:${val}`, fw === 'SDI' ? this._sdiColor(val) : val)).reduce((a: unknown, b: unknown) => html`${a}, ${b}`)}</dd>
                       `)}
                     </dl>
                   </button>
@@ -779,7 +767,7 @@ export class AvatarStep extends LitElement {
             <div class=${classMap({ 'profile-group': true, locked: isLocked })}>
               <div class="profile-row">
                 <span class="profile-label">${this._tip(label, label)}</span>
-                <span class="profile-value">${val ? this._tip(`${label}:${val}`, fw === 'sdi' ? this._sdiColor(val) : VOCAB_LABEL[val!] ?? val) : '—'}</span>
+                <span class="profile-value">${val ? this._tip(`${label}:${val}`, fw === 'sdi' ? this._sdiColor(val) : val) : '—'}</span>
                 <button class=${classMap({ 'profile-lock': true, locked: isLocked })}
                   @click=${() => this._toggleLock(fw)}>
                   ${isLocked ? 'unlock' : 'lock'}
@@ -794,7 +782,7 @@ export class AvatarStep extends LitElement {
                     <button class=${classMap(classes)}
                       role="option" aria-selected=${String(p[fw] === v)}
                       @click=${() => this._updateProfileValue(fw, v)}>
-                      ${this._tip(`${label}:${v}`, fw === 'sdi' ? this._sdiColor(v) : VOCAB_LABEL[v] ?? v)}
+                      ${this._tip(`${label}:${v}`, v)}
                     </button>
                   `;
                 })}
@@ -805,7 +793,7 @@ export class AvatarStep extends LitElement {
         <div class=${classMap({ 'profile-group': true, locked: this._profileLocked.has('belbin') })}>
           <div class="profile-row">
             <span class="profile-label">${this._tip('Belbin', 'Belbin')}</span>
-            <span class="profile-value">${p.belbin ? html`${this._tip('Belbin:' + p.belbin.primary, VOCAB_LABEL[p.belbin.primary] ?? p.belbin.primary)}${p.belbin.secondaries.length ? html` + ${p.belbin.secondaries.map(s => this._tip('Belbin:' + s, VOCAB_LABEL[s] ?? s)).reduce((a: unknown, b: unknown) => html`${a}, ${b}`)}` : nothing}` : '—'}</span>
+            <span class="profile-value">${p.belbin ? html`${this._tip('Belbin:' + p.belbin.primary, p.belbin.primary)}${p.belbin.secondaries.length ? html` + ${p.belbin.secondaries.map(s => this._tip('Belbin:' + s, s)).reduce((a: unknown, b: unknown) => html`${a}, ${b}`)}` : nothing}` : '—'}</span>
             <button class=${classMap({ 'profile-lock': true, locked: this._profileLocked.has('belbin') })}
               @click=${() => this._toggleLock('belbin')}>
               ${this._profileLocked.has('belbin') ? 'unlock' : 'lock'}
@@ -822,7 +810,7 @@ export class AvatarStep extends LitElement {
                   aria-pressed=${String(isPrimary || isSecondary)}
                   aria-description=${isPrimary ? 'primary' : isSecondary ? 'secondary' : nothing}
                   @click=${() => this._updateProfileBelbin(v)}>
-                  ${this._tip('Belbin:' + v, VOCAB_LABEL[v] ?? v)}
+                  ${this._tip('Belbin:' + v, v)}
                 </button>
               `;
             })}
@@ -831,7 +819,7 @@ export class AvatarStep extends LitElement {
         <div class=${classMap({ 'profile-group': true, locked: this._profileLocked.has('bigFive') })}>
           <div class="profile-row">
             <span class="profile-label">${this._tip('Big Five', 'Big Five')}</span>
-            <span class="profile-value">${(() => { const dims = BIG_FIVE_DIMS.filter(d => p.bigFive?.[d]); return dims.length > 0 ? dims.map(d => this._tip(`Big Five:${this._bigFiveKey(d, p.bigFive![d]!)}`, html`${d}${p.bigFive![d] === 'high' ? '↑' : '↓'}`)) : '—'; })()}</span>
+            <span class="profile-value">${(() => { const dims = BIG_FIVE_DIMS.filter(d => p.bigFive?.[d]); return dims.length > 0 ? dims.map(d => this._tip(`Big Five:${p.bigFive![d] === 'high' ? 'High' : 'Low'} ${d}`, html`${d}${p.bigFive![d] === 'high' ? '↑' : '↓'}`)) : '—'; })()}</span>
             <button class=${classMap({ 'profile-lock': true, locked: this._profileLocked.has('bigFive') })}
               @click=${() => this._toggleLock('bigFive')}>
               ${this._profileLocked.has('bigFive') ? 'unlock' : 'lock'}
@@ -845,7 +833,7 @@ export class AvatarStep extends LitElement {
                   <button class="big5-toggle" role="radio"
                     aria-checked=${String(p.bigFive?.[dim] === pole)}
                     @click=${() => this._updateProfileBigFive(dim, pole)}>
-                    ${this._tip(`Big Five:${this._bigFiveKey(dim, pole)}`, pole === 'high' ? 'High' : 'Low')}
+                    ${this._tip(`Big Five:${pole === 'high' ? 'High' : 'Low'} ${dim}`, pole === 'high' ? 'High' : 'Low')}
                   </button>
                 `)}
               </div>
@@ -936,7 +924,7 @@ export class AvatarStep extends LitElement {
                       aria-selected=${String(isSelected)}
                       ?data-dimmed=${isDisabled || isDimmedSdi}
                       @click=${() => this._selectFramework(fw, v)}>
-                      ${this._tip(`${fwLabel}:${v}`, fw === 'sdi' ? this._sdiColor(v) : VOCAB_LABEL[v] ?? v)}
+                      ${this._tip(`${fwLabel}:${v}`, v)}
                     </button>
                   `;
                 })}
@@ -957,7 +945,7 @@ export class AvatarStep extends LitElement {
                       aria-checked=${String(this._bigFive[dim] === pole)}
                       ?data-dimmed=${!validPoles.has(pole) && this._bigFive[dim] !== pole}
                       @click=${() => this._toggleBigFive(dim, pole)}>
-                      ${this._tip(`Big Five:${this._bigFiveKey(dim, pole)}`, pole === 'high' ? 'High' : 'Low')}
+                      ${this._tip(`Big Five:${pole === 'high' ? 'High' : 'Low'} ${dim}`, pole === 'high' ? 'High' : 'Low')}
                     </button>
                   `)}
                 </div>

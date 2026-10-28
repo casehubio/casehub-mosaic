@@ -48,13 +48,13 @@ describe('FullAgentDescriptor', () => {
       profession: 'Software',
       role: 'Architect',
       preferredAlias: 'reasoning-heavy',
-      personality: { mbti: 'intj', disc: 'conscientiousness-disc' },
+      personality: { mbti: 'INTJ', disc: 'C' },
     };
     expect(descriptor.description).toBe('A test agent for catalog');
     expect(descriptor.profession).toBe('Software');
     expect(descriptor.role).toBe('Architect');
     expect(descriptor.preferredAlias).toBe('reasoning-heavy');
-    expect(descriptor.personality?.mbti).toBe('intj');
+    expect(descriptor.personality?.mbti).toBe('INTJ');
   });
 
   it('remains backward compatible — new fields are optional', () => {
