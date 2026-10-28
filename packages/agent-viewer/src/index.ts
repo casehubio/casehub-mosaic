@@ -1,15 +1,21 @@
 export { EidosView } from './eidos-view.js';
 export type {
   AgentDescriptor,
+  AgentVoiceProfile,
   Capability,
+  CapabilityStatus,
   Constraint,
+  DegradationReason,
   Disposition,
   DispositionValue,
+  ExclusionSource,
   Goal,
-  HealthStatus,
+  GoalHorizon,
+  GoalLifecycleState,
   GoalPriority,
   GoalVisibility,
   ConstraintSeverity,
+  ViolationKind,
 } from './agent-types.js';
 
 export { AgentCard } from './agent-card.js';
