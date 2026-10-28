@@ -325,7 +325,7 @@ export const groupedDataViewPropsSchema = z.object({
       className: z.string().optional(),
       style: z.record(z.string()).optional(),
     })).optional(),
-  selection: z.enum(["none", "single", "multi"]).optional(),
+  selection: z.unknown().optional(),
   preset: z.enum(["sectioned", "spreadsheet", "list"]),
   defaultExpanded: z.boolean(),
   sortable: z.boolean(),
@@ -965,33 +965,7 @@ export const planModelDashboardPropsSchema = z.object({
 });
 
 export const caseFlowViewerPropsSchema = z.object({
-  runtimeState: z.union([z.null(), z.object({
-      planItems: z.array(z.object({
-          id: z.string(),
-          bindingName: z.string(),
-          status: z.enum(["PENDING", "COMPLETED", "REJECTED", "FAULTED", "DELEGATED", "SUSPENDED", "CANCELLED", "OBSOLETE", "RUNNING"]),
-          createdAt: z.string(),
-        })),
-      milestones: z.array(z.object({
-          name: z.string(),
-          status: z.enum(["PENDING", "COMPLETED", "ACTIVE"]),
-        })),
-      timestamp: z.string(),
-      caseStatus: z.string().optional(),
-      trustScores: z.array(z.object({
-          bindingName: z.string(),
-          workerId: z.string(),
-          score: z.number(),
-        })).optional(),
-      adaptiveDecisions: z.array(z.object({
-          trigger: z.string(),
-          condition: z.string(),
-          fired: z.boolean(),
-          timestamp: z.string(),
-          affectedBindings: z.array(z.string()).optional(),
-        })).optional(),
-      parallelGroups: z.array(z.array(z.string())).optional(),
-    })]),
+  runtimeState: z.unknown(),
   selectionTopic: z.string(),
 });
 
@@ -1003,33 +977,7 @@ export const caseDependencyGraphPropsSchema = z.object({
 export const diagramWorkbenchPropsSchema = z.object({
   yaml: z.string(),
   src: z.string(),
-  runtimeState: z.union([z.null(), z.object({
-      planItems: z.array(z.object({
-          id: z.string(),
-          bindingName: z.string(),
-          status: z.enum(["PENDING", "COMPLETED", "REJECTED", "FAULTED", "DELEGATED", "SUSPENDED", "CANCELLED", "OBSOLETE", "RUNNING"]),
-          createdAt: z.string(),
-        })),
-      milestones: z.array(z.object({
-          name: z.string(),
-          status: z.enum(["PENDING", "COMPLETED", "ACTIVE"]),
-        })),
-      timestamp: z.string(),
-      caseStatus: z.string().optional(),
-      trustScores: z.array(z.object({
-          bindingName: z.string(),
-          workerId: z.string(),
-          score: z.number(),
-        })).optional(),
-      adaptiveDecisions: z.array(z.object({
-          trigger: z.string(),
-          condition: z.string(),
-          fired: z.boolean(),
-          timestamp: z.string(),
-          affectedBindings: z.array(z.string()).optional(),
-        })).optional(),
-      parallelGroups: z.array(z.array(z.string())).optional(),
-    })]),
+  runtimeState: z.unknown(),
 });
 
 export const clusterPanelPropsSchema = z.object({
@@ -1073,7 +1021,7 @@ export const topologyViewerPropsSchema = z.object({
       services: z.array(z.object({
           id: z.string(),
           name: z.string(),
-          status: z.enum(["FAULTED", "RUNNING", "ABSENT", "DEGRADED", "DEPLOYING"]),
+          status: z.enum(["FAULTED", "ABSENT", "RUNNING", "DEGRADED", "DEPLOYING"]),
           replicas: z.number().optional(),
           image: z.string().optional(),
           type: z.string().optional(),
@@ -1411,14 +1359,14 @@ export const agentProfilePanelPropsSchema = z.object({
   profile: z.union([z.null(), z.object({
       profession: z.string().optional(),
       role: z.string().optional(),
-      mbti: z.string().optional(),
-      enneagram: z.string().optional(),
-      disc: z.string().optional(),
+      mbti: z.enum(["intj", "intp", "entj", "entp", "infj", "infp", "enfj", "enfp", "istj", "istp", "estj", "estp", "isfj", "isfp", "esfj", "esfp"]).optional(),
+      enneagram: z.enum(["type-1", "type-2", "type-3", "type-4", "type-5", "type-6", "type-7", "type-8", "type-9"]).optional(),
+      disc: z.enum(["dominance", "influence", "steadiness", "conscientiousness-disc"]).optional(),
       belbin: z.object({
-        primary: z.string(),
-        secondaries: z.array(z.string()),
+        primary: z.enum(["plant", "resource-investigator", "co-ordinator", "shaper", "monitor-evaluator", "teamworker", "implementer", "completer-finisher", "specialist"]),
+        secondaries: z.array(z.enum(["plant", "resource-investigator", "co-ordinator", "shaper", "monitor-evaluator", "teamworker", "implementer", "completer-finisher", "specialist"])),
       }).optional(),
-      sdi: z.string().optional(),
+      sdi: z.enum(["blue", "red", "green", "hub"]).optional(),
       bigFive: z.object({}).optional(),
     })]),
   archetype: z.union([z.null(), z.object({
@@ -1453,14 +1401,14 @@ export const agentPersonalityWorkbenchPropsSchema = z.object({
     personality: z.object({
       profession: z.string().optional(),
       role: z.string().optional(),
-      mbti: z.string().optional(),
-      enneagram: z.string().optional(),
-      disc: z.string().optional(),
+      mbti: z.enum(["intj", "intp", "entj", "entp", "infj", "infp", "enfj", "enfp", "istj", "istp", "estj", "estp", "isfj", "isfp", "esfj", "esfp"]).optional(),
+      enneagram: z.enum(["type-1", "type-2", "type-3", "type-4", "type-5", "type-6", "type-7", "type-8", "type-9"]).optional(),
+      disc: z.enum(["dominance", "influence", "steadiness", "conscientiousness-disc"]).optional(),
       belbin: z.object({
-        primary: z.string(),
-        secondaries: z.array(z.string()),
+        primary: z.enum(["plant", "resource-investigator", "co-ordinator", "shaper", "monitor-evaluator", "teamworker", "implementer", "completer-finisher", "specialist"]),
+        secondaries: z.array(z.enum(["plant", "resource-investigator", "co-ordinator", "shaper", "monitor-evaluator", "teamworker", "implementer", "completer-finisher", "specialist"])),
       }).optional(),
-      sdi: z.string().optional(),
+      sdi: z.enum(["blue", "red", "green", "hub"]).optional(),
       bigFive: z.object({}).optional(),
     }).optional(),
     manifest: z.object({
