@@ -35,8 +35,7 @@ export function getCompatibleArchetypes(
   }
 
   for (const [dim, pole] of Object.entries(bigFiveSelections)) {
-    const dimNames: Record<string, string> = { O: 'openness', C: 'conscientiousness', E: 'extraversion', A: 'agreeableness', N: 'neuroticism' };
-    const key = `${dimNames[dim] ?? dim}-${pole}`;
+    const key = `${pole === 'high' ? 'High' : 'Low'} ${dim}`;
     const compatible = new Set((FRAMEWORK_FAMILY_MAP.bigFive[key] ?? []) as ArchetypeFamily[]);
     families = families ? intersection(families, compatible) : compatible;
   }
@@ -58,7 +57,7 @@ export function getCompatibleArchetypes(
       : null;
 
     const ennVal = selections.enneagram;
-    const ennNum = ennVal ? parseInt(ennVal.replace('type-', ''), 10) : null;
+    const ennNum = ennVal ? parseInt(ennVal.replace('Type ', ''), 10) : null;
     const ennMatch = ennNum !== null
       ? rules?.enneagramAffinity.includes(ennNum) ?? false
       : null;

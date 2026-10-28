@@ -1,8 +1,7 @@
 import { LitElement, html, css, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import type { PersonalityProfile, VocabTermMeta } from '@casehubio/mosaic-core';
-import { MBTI_META, ENNEAGRAM_META, DISC_META, BELBIN_META, SDI_META, BIGFIVE_META } from '@casehubio/mosaic-core';
+import type { PersonalityProfile } from '@casehubio/mosaic-core';
 import { buildSummaryText, BIG_FIVE_DIMS, BIG_FIVE_LABELS } from '../../avatar-step/src/data/framework-descriptors.js';
 import { deriveDispositions, deriveTendencies, DISPOSITION_TIPS } from '../../avatar-step/src/data/disposition-mapping.js';
 import { ALL_FRAMEWORK_VALUES, getFrameworkProfile } from '../../avatar-step/src/data/compatibility-matrix.js';
@@ -10,11 +9,6 @@ import type { PersonalityFramework, BigFiveDimension, BigFivePole } from '../../
 import { FRAMEWORK_TOOLTIPS } from '../../avatar-step/src/data/framework-tooltips.js';
 import { PROFESSION_LIST, PROFESSION_PRESETS } from '../../avatar-step/src/data/profession-presets.js';
 import '@casehubio/mosaic-agent-avatar-2d';
-
-const VOCAB_LABEL: Record<string, string> = {};
-for (const meta of [MBTI_META, ENNEAGRAM_META, DISC_META, BELBIN_META, SDI_META, BIGFIVE_META] as Record<string, VocabTermMeta>[]) {
-  for (const [value, m] of Object.entries(meta)) VOCAB_LABEL[value] = m.label;
-}
 
 export interface AgentProfilePanelProps {
   profile: PersonalityProfile | null;
@@ -231,15 +225,9 @@ export class AgentProfilePanel extends LitElement {
     `;
   }
 
-  private _bigFiveKey(dim: string, pole: string): string {
-    const names: Record<string, string> = { O: 'openness', C: 'conscientiousness', E: 'extraversion', A: 'agreeableness', N: 'neuroticism' };
-    return `${names[dim] ?? dim}-${pole}`;
-  }
-
   private _sdiColor(value: string) {
-    const cls = `sdi-text-${value}`;
-    const display = value.charAt(0).toUpperCase() + value.slice(1);
-    return html`<span class=${cls}>${display}</span>`;
+    const cls = `sdi-text-${value.toLowerCase()}`;
+    return html`<span class=${cls}>${value}</span>`;
   }
 
   private _emitValueChanged(field: string, value: unknown) {
@@ -325,7 +313,7 @@ export class AgentProfilePanel extends LitElement {
             <div class=${classMap({ 'profile-group': true, locked: isLocked })}>
               <div class="profile-row">
                 <span class="profile-label">${this._tip(label, label)}</span>
-                <span class="profile-value">${val ? this._tip(`${label}:${val}`, fw === 'sdi' ? this._sdiColor(val) : VOCAB_LABEL[val!] ?? val) : '—'}</span>
+                <span class="profile-value">${val ? this._tip(`${label}:${val}`, fw === 'sdi' ? this._sdiColor(val) : val) : '—'}</span>
                 <button class=${classMap({ 'profile-lock': true, locked: isLocked })}
                   @click=${() => this._emitLockChanged(fw)}>
                   ${isLocked ? 'unlock' : 'lock'}
@@ -340,7 +328,7 @@ export class AgentProfilePanel extends LitElement {
                     <button class=${classMap(classes)}
                       role="option" aria-selected=${String(p[fw] === v)}
                       @click=${() => this._emitValueChanged(fw, v)}>
-                      ${this._tip(`${label}:${v}`, fw === 'sdi' ? this._sdiColor(v) : VOCAB_LABEL[v] ?? v)}
+                      ${this._tip(`${label}:${v}`, v)}
                     </button>
                   `;
                 })}
@@ -351,7 +339,7 @@ export class AgentProfilePanel extends LitElement {
         <div class=${classMap({ 'profile-group': true, locked: this.locked.has('belbin') })}>
           <div class="profile-row">
             <span class="profile-label">${this._tip('Belbin', 'Belbin')}</span>
-            <span class="profile-value">${p.belbin ? html`${this._tip('Belbin:' + p.belbin.primary, VOCAB_LABEL[p.belbin.primary] ?? p.belbin.primary)}${p.belbin.secondaries.length ? html` + ${p.belbin.secondaries.map(s => this._tip('Belbin:' + s, VOCAB_LABEL[s] ?? s)).reduce((a: unknown, b: unknown) => html`${a}, ${b}`)}` : nothing}` : '—'}</span>
+            <span class="profile-value">${p.belbin ? html`${this._tip('Belbin:' + p.belbin.primary, p.belbin.primary)}${p.belbin.secondaries.length ? html` + ${p.belbin.secondaries.map(s => this._tip('Belbin:' + s, s)).reduce((a: unknown, b: unknown) => html`${a}, ${b}`)}` : nothing}` : '—'}</span>
             <button class=${classMap({ 'profile-lock': true, locked: this.locked.has('belbin') })}
               @click=${() => this._emitLockChanged('belbin')}>
               ${this.locked.has('belbin') ? 'unlock' : 'lock'}
@@ -368,7 +356,7 @@ export class AgentProfilePanel extends LitElement {
                   aria-pressed=${String(isPrimary || isSecondary)}
                   aria-description=${isPrimary ? 'primary' : isSecondary ? 'secondary' : nothing}
                   @click=${() => this._emitValueChanged('belbin', v)}>
-                  ${this._tip('Belbin:' + v, VOCAB_LABEL[v] ?? v)}
+                  ${this._tip('Belbin:' + v, v)}
                 </button>
               `;
             })}
@@ -377,7 +365,7 @@ export class AgentProfilePanel extends LitElement {
         <div class=${classMap({ 'profile-group': true, locked: this.locked.has('bigFive') })}>
           <div class="profile-row">
             <span class="profile-label">${this._tip('Big Five', 'Big Five')}</span>
-            <span class="profile-value">${(() => { const dims = BIG_FIVE_DIMS.filter(d => p.bigFive?.[d]); return dims.length > 0 ? dims.map(d => this._tip(`Big Five:${this._bigFiveKey(d, p.bigFive![d]!)}`, html`${d}${p.bigFive![d] === 'high' ? '↑' : '↓'}`)) : '—'; })()}</span>
+            <span class="profile-value">${(() => { const dims = BIG_FIVE_DIMS.filter(d => p.bigFive?.[d]); return dims.length > 0 ? dims.map(d => this._tip(`Big Five:${p.bigFive![d] === 'high' ? 'High' : 'Low'} ${d}`, html`${d}${p.bigFive![d] === 'high' ? '↑' : '↓'}`)) : '—'; })()}</span>
             <button class=${classMap({ 'profile-lock': true, locked: this.locked.has('bigFive') })}
               @click=${() => this._emitLockChanged('bigFive')}>
               ${this.locked.has('bigFive') ? 'unlock' : 'lock'}
@@ -391,7 +379,7 @@ export class AgentProfilePanel extends LitElement {
                   <button class="big5-toggle" role="radio"
                     aria-checked=${String(p.bigFive?.[dim] === pole)}
                     @click=${() => this._emitValueChanged('bigFive', { dim, pole })}>
-                    ${this._tip(`Big Five:${this._bigFiveKey(dim, pole)}`, pole === 'high' ? 'High' : 'Low')}
+                    ${this._tip(`Big Five:${pole === 'high' ? 'High' : 'Low'} ${dim}`, pole === 'high' ? 'High' : 'Low')}
                   </button>
                 `)}
               </div>
