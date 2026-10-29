@@ -10,6 +10,7 @@ export * from './conversation.js';
 export * from './relationship.js';
 export * from './agent.js';
 export * from './manifest.js';
+export * from './desired-state.js';
 
 export type { QueueScopeChangedPayload } from './events.js';
 export type { InboxMode, QueueScope, QueueSummaryEntry } from './work-item.js';
