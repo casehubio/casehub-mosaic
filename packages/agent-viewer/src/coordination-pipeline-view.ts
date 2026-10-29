@@ -42,6 +42,7 @@ const COLOR_MAP: Record<string, string> = {
 export class CoordinationPipelineView extends LitElement {
   @property({ attribute: false }) pipeline!: CoordinationPipeline;
   @property() viewMode: 'lanes' | 'graph' = 'lanes';
+  @property({ type: Boolean, attribute: 'focus-mode' }) focusMode = false;
 
   static override styles = css`
     :host {
@@ -215,6 +216,21 @@ export class CoordinationPipelineView extends LitElement {
     }
     .expr.literal {
       color: #a6e3a1;
+    }
+
+    /* ─── Focus Mode ─── */
+    .step-card.dimmed {
+      opacity: 0.25;
+      pointer-events: none;
+      transition: opacity 0.2s;
+    }
+    .focus-badge {
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: rgba(137, 180, 250, 0.15);
+      color: #89b4fa;
+      font-weight: 600;
     }
 
     /* ─── Barrier ─── */
@@ -592,6 +608,7 @@ export class CoordinationPipelineView extends LitElement {
                 tabindex="${this.viewMode === 'graph' ? '0' : '-1'}"
                 @keydown="${this._handleToggleKey}">Graph</span>
         </div>
+        ${this.focusMode ? html`<span class="focus-badge">🔍 LLM Logic</span>` : nothing}
         ${parts.length > 0
           ? html`<span class="meta">${parts.join(' · ')}</span>`
           : nothing}
@@ -625,13 +642,14 @@ export class CoordinationPipelineView extends LitElement {
     const iconChar = patternStyle?.icon ?? actionDef.icon;
 
     const canDrill = step.action === 'agent-delegate' && drillContext != null;
+    const isDimmed = this.focusMode && step.action !== 'agent-delegate';
     const drillClick = canDrill ? () => this._emitDrillDown(drillContext.name, drillContext.steps) : undefined;
     const drillKey = canDrill ? (e: KeyboardEvent) => {
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); this._emitDrillDown(drillContext.name, drillContext.steps); }
     } : undefined;
 
     return html`
-      <div class="step-card${canDrill ? ' drillable' : ''}"
+      <div class="step-card${canDrill ? ' drillable' : ''}${isDimmed ? ' dimmed' : ''}"
            role="${canDrill ? 'button' : nothing}"
            tabindex="${canDrill ? '0' : nothing}"
            @click="${drillClick ?? nothing}"

@@ -492,6 +492,17 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@casehubio/mosaic-completeness-matrix@workspace:components/completeness-matrix":
+  version: 0.0.0-use.local
+  resolution: "@casehubio/mosaic-completeness-matrix@workspace:components/completeness-matrix"
+  dependencies:
+    lit: "npm:^3.2.1"
+    rimraf: "npm:^6.1.0"
+    typescript: "npm:~5.8.0"
+    vitest: "npm:^3.0.0"
+  languageName: unknown
+  linkType: soft
+
 "@casehubio/mosaic-compliance-summary@workspace:*, @casehubio/mosaic-compliance-summary@workspace:components/compliance-summary":
   version: 0.0.0-use.local
   resolution: "@casehubio/mosaic-compliance-summary@workspace:components/compliance-summary"
