@@ -19,6 +19,7 @@ export type {
 } from './agent-types.js';
 
 export { AgentCard } from './agent-card.js';
+export { HumanWorkItemCard } from './human-work-item-card.js';
 export { VotingView } from './views/deliberation/voting-view.js';
 export { DebateView } from './views/deliberation/debate-view.js';
 export type {
