@@ -1,5 +1,7 @@
 export type TopologyNodeStatus = 'RUNNING' | 'DEGRADED' | 'DEPLOYING' | 'FAULTED' | 'ABSENT';
 
+export type DeploymentStrategy = 'rolling' | 'canary' | 'blue-green';
+
 export interface TopologyNode {
   readonly id: string;
   readonly name: string;
@@ -7,6 +9,9 @@ export interface TopologyNode {
   readonly replicas?: number;
   readonly image?: string;
   readonly type?: string;
+  readonly deploymentStrategy?: DeploymentStrategy;
+  readonly cluster?: string;
+  readonly forEachSource?: string;
 }
 
 export interface TopologyEdge {
@@ -15,7 +20,14 @@ export interface TopologyEdge {
   readonly label?: string;
 }
 
+export interface ClusterGroup {
+  readonly id: string;
+  readonly name: string;
+  readonly region?: string;
+}
+
 export interface TopologySnapshot {
-  readonly services: TopologyNode[];
-  readonly edges: TopologyEdge[];
+  readonly services: readonly TopologyNode[];
+  readonly edges: readonly TopologyEdge[];
+  readonly clusters?: readonly ClusterGroup[];
 }
