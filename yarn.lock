@@ -966,6 +966,18 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@casehubio/mosaic-project-dashboard@workspace:components/project-dashboard":
+  version: 0.0.0-use.local
+  resolution: "@casehubio/mosaic-project-dashboard@workspace:components/project-dashboard"
+  dependencies:
+    "@casehubio/pages-data": "workspace:*"
+    lit: "npm:^3.2.1"
+    rimraf: "npm:^6.1.0"
+    typescript: "npm:~5.8.0"
+    vitest: "npm:^3.0.0"
+  languageName: unknown
+  linkType: soft
+
 "@casehubio/mosaic-reconciliation-status@workspace:*, @casehubio/mosaic-reconciliation-status@workspace:components/reconciliation-status":
   version: 0.0.0-use.local
   resolution: "@casehubio/mosaic-reconciliation-status@workspace:components/reconciliation-status"
