@@ -494,3 +494,58 @@ describe('drill-down events', () => {
     }
   });
 });
+
+describe('focus mode', () => {
+  let el: CoordinationPipelineView;
+
+  beforeEach(async () => {
+    el = document.createElement('coordination-pipeline-view') as CoordinationPipelineView;
+    el.pipeline = kycPipeline();
+    document.body.appendChild(el);
+    await el.updateComplete;
+    el.viewMode = 'lanes';
+    await el.updateComplete;
+  });
+
+  afterEach(() => el.remove());
+
+  it('does not dim steps when focusMode is false', async () => {
+    el.focusMode = false;
+    await el.updateComplete;
+    const dimmed = el.shadowRoot!.querySelectorAll('.step-card.dimmed');
+    expect(dimmed).toHaveLength(0);
+  });
+
+  it('dims non-agent-delegate steps when focusMode is true', async () => {
+    el.focusMode = true;
+    await el.updateComplete;
+    const dimmed = el.shadowRoot!.querySelectorAll('.step-card.dimmed');
+    expect(dimmed.length).toBeGreaterThan(0);
+  });
+
+  it('does not dim agent-delegate steps when focusMode is true', async () => {
+    el.focusMode = true;
+    await el.updateComplete;
+    const allCards = el.shadowRoot!.querySelectorAll('.step-card');
+    const undimmed = Array.from(allCards).filter(c => !c.classList.contains('dimmed'));
+    expect(undimmed.length).toBeGreaterThan(0);
+    for (const card of undimmed) {
+      expect(card.querySelector('.step-action')?.textContent).toBe('agent-delegate');
+    }
+  });
+
+  it('shows focus badge in header when focusMode is true', async () => {
+    el.focusMode = true;
+    await el.updateComplete;
+    const badge = el.shadowRoot!.querySelector('.focus-badge');
+    expect(badge).not.toBeNull();
+    expect(badge?.textContent).toContain('LLM Logic');
+  });
+
+  it('hides focus badge when focusMode is false', async () => {
+    el.focusMode = false;
+    await el.updateComplete;
+    const badge = el.shadowRoot!.querySelector('.focus-badge');
+    expect(badge).toBeNull();
+  });
+});
