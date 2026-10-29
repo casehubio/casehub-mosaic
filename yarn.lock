@@ -558,6 +558,22 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@casehubio/mosaic-desired-state-graph@workspace:components/desired-state-graph":
+  version: 0.0.0-use.local
+  resolution: "@casehubio/mosaic-desired-state-graph@workspace:components/desired-state-graph"
+  dependencies:
+    "@casehubio/graph-core": "npm:*"
+    "@casehubio/graph-renderer": "npm:*"
+    "@casehubio/mosaic-core": "workspace:*"
+    "@casehubio/pages-data": "npm:*"
+    jsdom: "npm:^29.1.1"
+    lit: "npm:^3.3.3"
+    rimraf: "npm:^6.1.0"
+    typescript: "npm:~5.8.0"
+    vitest: "npm:^3.0.0"
+  languageName: unknown
+  linkType: soft
+
 "@casehubio/mosaic-detail-pane@workspace:*, @casehubio/mosaic-detail-pane@workspace:components/detail-pane":
   version: 0.0.0-use.local
   resolution: "@casehubio/mosaic-detail-pane@workspace:components/detail-pane"
