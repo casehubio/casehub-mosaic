@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
-import type { TopologySnapshot } from './types.js';
+import type { TopologySnapshot, Situation } from './types.js';
 import { toGraphModel, topologyToDecorations } from './topology-viewer.js';
 
 vi.mock('@casehubio/graph-renderer', () => ({
@@ -167,5 +167,175 @@ describe('agency-topology-viewer', () => {
     const area = el.shadowRoot!.querySelector('.canvas-area');
     expect(area?.getAttribute('role')).toBe('img');
     expect(area?.getAttribute('aria-label')).toContain('services');
+  });
+});
+
+const SAMPLE_SITUATION: Situation = {
+  id: 'vol-spike',
+  name: 'Volatility Spike',
+  condition: 'volatility > 0.8',
+  active: true,
+  mutations: [
+    { targetId: 'order-api', action: 'scale-up', detail: 'replicas 3→5' },
+    { targetId: 'payment-svc', action: 'reroute', detail: 'failover to backup' },
+  ],
+};
+
+const TOPOLOGY_WITH_SITUATIONS: TopologySnapshot = {
+  ...SAMPLE_TOPOLOGY,
+  situations: [
+    SAMPLE_SITUATION,
+    { id: 'maint', name: 'Maintenance Mode', condition: 'scheduled', active: false, mutations: [
+      { targetId: 'notification-svc', action: 'remove' },
+    ] },
+  ],
+};
+
+describe('topologyToDecorations with situations', () => {
+  it('returns unchanged decorations when no activeSituation', () => {
+    const decos = topologyToDecorations(TOPOLOGY_WITH_SITUATIONS);
+    expect(decos.get('order-api')?.badge?.icon).toBeUndefined();
+  });
+
+  it('overlays scale-up badge on targeted node', () => {
+    const decos = topologyToDecorations(TOPOLOGY_WITH_SITUATIONS, SAMPLE_SITUATION);
+    expect(decos.get('order-api')?.badge?.icon).toBe('↑');
+    expect(decos.get('order-api')?.badge?.color).toBe('#a6e3a1');
+  });
+
+  it('overlays reroute badge on targeted node', () => {
+    const decos = topologyToDecorations(TOPOLOGY_WITH_SITUATIONS, SAMPLE_SITUATION);
+    expect(decos.get('payment-svc')?.badge?.icon).toBe('↺');
+    expect(decos.get('payment-svc')?.badge?.color).toBe('#cba6f7');
+  });
+
+  it('appends mutation detail to tooltip', () => {
+    const decos = topologyToDecorations(TOPOLOGY_WITH_SITUATIONS, SAMPLE_SITUATION);
+    expect(decos.get('order-api')?.tooltip).toContain('replicas 3→5');
+  });
+
+  it('ignores mutations targeting non-existent nodes', () => {
+    const sit: Situation = {
+      id: 'ghost', name: 'Ghost', condition: 'x', active: true,
+      mutations: [{ targetId: 'nonexistent', action: 'scale-up' }],
+    };
+    const snap: TopologySnapshot = { ...SAMPLE_TOPOLOGY, situations: [sit] };
+    const decos = topologyToDecorations(snap, sit);
+    expect(decos.has('nonexistent')).toBe(false);
+  });
+
+  it('maps each MutationAction to correct icon and color', () => {
+    const actions: Array<{ action: 'scale-up' | 'scale-down' | 'add' | 'remove' | 'reroute'; icon: string; color: string }> = [
+      { action: 'scale-up', icon: '↑', color: '#a6e3a1' },
+      { action: 'scale-down', icon: '↓', color: '#f9e2af' },
+      { action: 'add', icon: '+', color: '#89b4fa' },
+      { action: 'remove', icon: '✕', color: '#f38ba8' },
+      { action: 'reroute', icon: '↺', color: '#cba6f7' },
+    ];
+    for (const { action, icon, color } of actions) {
+      const sit: Situation = {
+        id: `test-${action}`, name: action, condition: 'x', active: true,
+        mutations: [{ targetId: 'order-api', action }],
+      };
+      const snap: TopologySnapshot = { ...SAMPLE_TOPOLOGY, situations: [sit] };
+      const decos = topologyToDecorations(snap, sit);
+      expect(decos.get('order-api')?.badge?.icon).toBe(icon);
+      expect(decos.get('order-api')?.badge?.color).toBe(color);
+    }
+  });
+});
+
+const SITUATION_TOPOLOGY: TopologySnapshot = {
+  services: [
+    { id: 'order-api', name: 'Order API', status: 'RUNNING', replicas: 3 },
+    { id: 'payment-svc', name: 'Payment Service', status: 'RUNNING', replicas: 2 },
+  ],
+  edges: [{ source: 'order-api', target: 'payment-svc', label: 'gRPC' }],
+  situations: [
+    {
+      id: 'vol-spike', name: 'Volatility Spike', condition: 'volatility > 0.8', active: false,
+      mutations: [{ targetId: 'order-api', action: 'scale-up' as const, detail: 'replicas 3→5' }],
+    },
+    {
+      id: 'maint', name: 'Maintenance Mode', condition: 'scheduled', active: false,
+      mutations: [{ targetId: 'payment-svc', action: 'remove' as const }],
+    },
+  ],
+};
+
+describe('situation bar', () => {
+  let el: TopologyViewerEl;
+
+  beforeEach(() => {
+    el = document.createElement('agency-topology-viewer') as TopologyViewerEl;
+    document.body.appendChild(el);
+  });
+
+  afterEach(() => {
+    el.remove();
+  });
+
+  it('renders situation bar when situations present', async () => {
+    el.data = SITUATION_TOPOLOGY;
+    await el.updateComplete;
+    const bar = el.shadowRoot!.querySelector('[role="radiogroup"]');
+    expect(bar).not.toBeNull();
+  });
+
+  it('does not render situation bar when no situations', async () => {
+    el.data = SAMPLE_TOPOLOGY;
+    await el.updateComplete;
+    const bar = el.shadowRoot!.querySelector('[role="radiogroup"]');
+    expect(bar).toBeNull();
+  });
+
+  it('renders Baseline pill plus one pill per situation', async () => {
+    el.data = SITUATION_TOPOLOGY;
+    await el.updateComplete;
+    const pills = el.shadowRoot!.querySelectorAll('[role="radio"]');
+    expect(pills).toHaveLength(3);
+  });
+
+  it('Baseline pill is checked by default', async () => {
+    el.data = SITUATION_TOPOLOGY;
+    await el.updateComplete;
+    const pills = el.shadowRoot!.querySelectorAll('[role="radio"]');
+    expect(pills[0].getAttribute('aria-checked')).toBe('true');
+    expect(pills[0].textContent).toContain('Baseline');
+  });
+
+  it('clicking a situation pill activates it', async () => {
+    el.data = SITUATION_TOPOLOGY;
+    await el.updateComplete;
+    const pills = el.shadowRoot!.querySelectorAll('[role="radio"]');
+    (pills[1] as HTMLElement).click();
+    await el.updateComplete;
+    expect(pills[1].getAttribute('aria-checked')).toBe('true');
+    expect(pills[0].getAttribute('aria-checked')).toBe('false');
+  });
+
+  it('situation bar has aria-label', async () => {
+    el.data = SITUATION_TOPOLOGY;
+    await el.updateComplete;
+    const bar = el.shadowRoot!.querySelector('[role="radiogroup"]');
+    expect(bar?.getAttribute('aria-label')).toBe('Topology situations');
+  });
+
+  it('shows mutation count in toolbar when situation active', async () => {
+    el.data = SITUATION_TOPOLOGY;
+    await el.updateComplete;
+    const pills = el.shadowRoot!.querySelectorAll('[role="radio"]');
+    (pills[1] as HTMLElement).click();
+    await el.updateComplete;
+    const toolbar = el.shadowRoot!.querySelector('.toolbar');
+    expect(toolbar?.textContent).toContain('Mutations');
+    expect(toolbar?.textContent).toContain('1');
+  });
+
+  it('condition appears as pill tooltip', async () => {
+    el.data = SITUATION_TOPOLOGY;
+    await el.updateComplete;
+    const pills = el.shadowRoot!.querySelectorAll('[role="radio"]');
+    expect(pills[1].getAttribute('title')).toBe('volatility > 0.8');
   });
 });

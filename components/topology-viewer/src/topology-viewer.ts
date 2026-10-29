@@ -1,4 +1,4 @@
-import { LitElement, html, css, type PropertyValues } from 'lit';
+import { LitElement, html, css, nothing, type PropertyValues } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { emitPagesEvent } from '@casehubio/pages-data';
 import { PushMixin } from '@casehubio/pages-component';
@@ -6,7 +6,7 @@ import type { GraphModel, GraphNode, GraphEdge, NodeDecoration } from '@casehubi
 import { computeElkLayout, toReactFlowGraph } from '@casehubio/graph-renderer';
 import type { ElkLayoutResult } from '@casehubio/graph-renderer';
 import '@casehubio/graph-renderer';
-import type { TopologySnapshot, TopologyNode, TopologyNodeStatus, ClusterGroup } from './types.js';
+import type { TopologySnapshot, TopologyNode, TopologyNodeStatus, ClusterGroup, Situation, MutationAction } from './types.js';
 
 export const TopologyViewerTopics = {
   NODE_SELECTED: 'topology.node-selected',
@@ -18,6 +18,14 @@ const STATUS_BORDER: Record<TopologyNodeStatus, { style: string; color: string }
   DEPLOYING: { style: 'solid',  color: '#89b4fa' },
   FAULTED:   { style: 'solid',  color: '#f38ba8' },
   ABSENT:    { style: 'dashed', color: '#6c7086' },
+};
+
+const MUTATION_BADGE: Record<MutationAction, { icon: string; color: string }> = {
+  'scale-up':   { icon: '↑', color: '#a6e3a1' },
+  'scale-down': { icon: '↓', color: '#f9e2af' },
+  'add':        { icon: '+', color: '#89b4fa' },
+  'remove':     { icon: '✕', color: '#f38ba8' },
+  'reroute':    { icon: '↺', color: '#cba6f7' },
 };
 
 const STRATEGY_LABELS: Record<string, string> = {
@@ -74,6 +82,7 @@ export function toGraphModel(snapshot: TopologySnapshot): GraphModel {
 
 export function topologyToDecorations(
   snapshot: TopologySnapshot,
+  activeSituation?: Situation,
 ): ReadonlyMap<string, NodeDecoration> {
   const map = new Map<string, NodeDecoration>();
   for (const s of snapshot.services) {
@@ -93,6 +102,23 @@ export function topologyToDecorations(
       ...(s.image ? { tooltip: s.image } : {}),
     };
     map.set(s.id, deco);
+  }
+  if (activeSituation) {
+    const serviceIds = new Set(snapshot.services.map(s => s.id));
+    for (const mutation of activeSituation.mutations) {
+      if (!serviceIds.has(mutation.targetId)) continue;
+      const badge = MUTATION_BADGE[mutation.action];
+      const existing = map.get(mutation.targetId);
+      const baseTooltip = existing?.tooltip ?? '';
+      const mutationTooltip = mutation.detail
+        ? (baseTooltip ? `${baseTooltip}\n${mutation.detail}` : mutation.detail)
+        : baseTooltip;
+      map.set(mutation.targetId, {
+        ...existing,
+        badge,
+        ...(mutationTooltip ? { tooltip: mutationTooltip } : {}),
+      });
+    }
   }
   return map;
 }
@@ -115,6 +141,7 @@ export class TopologyViewer extends PushMixin(LitElement) {
   @state() private _edges: ReturnType<typeof toReactFlowGraph>['edges'] = [];
   @state() private _fetchedData: TopologySnapshot | null = null;
   @state() private _loading = false;
+  @state() private _activeSituationId: string | null = null;
   private _lastLayout: ElkLayoutResult | undefined;
   private _renderInProgress = false;
 
@@ -135,12 +162,40 @@ export class TopologyViewer extends PushMixin(LitElement) {
     .canvas-area { flex: 1; position: relative; }
     .empty { display: flex; align-items: center; justify-content: center;
       height: 100%; color: var(--pages-text-tertiary, #999); font-style: italic; }
+    .situation-bar {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-bottom: 1px solid var(--pages-neutral-6, #dee2e6);
+      font-size: 12px;
+    }
+    .situation-pill {
+      padding: 2px 10px;
+      border-radius: 12px;
+      border: 1px solid var(--pages-neutral-6, #dee2e6);
+      background: transparent;
+      color: var(--pages-text-secondary, #6c757d);
+      cursor: pointer;
+      font-size: 12px;
+      font-family: inherit;
+      transition: background 0.15s, color 0.15s;
+    }
+    .situation-pill:hover {
+      background: var(--pages-neutral-3, #f1f3f5);
+    }
+    .situation-pill[aria-checked="true"] {
+      background: var(--pages-accent, #4dabf7);
+      color: #fff;
+      border-color: var(--pages-accent, #4dabf7);
+    }
   `;
 
   override willUpdate(changed: PropertyValues): void {
     super.willUpdate(changed);
     const dataChanged = changed.has('data') || changed.has('_fetchedData');
     if (dataChanged) {
+      this._activeSituationId = null;
       const d = this._effectiveData;
       if (d) this._fullRender(d);
       else {
@@ -172,7 +227,7 @@ export class TopologyViewer extends PushMixin(LitElement) {
     this._graphModel = toGraphModel(snapshot);
     const layout = await computeElkLayout(this._graphModel, { direction: 'DOWN', spacing: 60 });
     this._lastLayout = layout;
-    this._decorations = topologyToDecorations(snapshot);
+    this._decorations = topologyToDecorations(snapshot, this._activeSituation);
     this._applyLayout();
     this._renderInProgress = false;
   }
@@ -201,6 +256,41 @@ export class TopologyViewer extends PushMixin(LitElement) {
     return this.data ?? this._fetchedData;
   }
 
+  private get _activeSituation(): Situation | undefined {
+    const d = this._effectiveData;
+    if (!d?.situations || !this._activeSituationId) return undefined;
+    return d.situations.find(s => s.id === this._activeSituationId);
+  }
+
+  private _selectSituation(id: string | null): void {
+    this._activeSituationId = id;
+    const d = this._effectiveData;
+    if (d) {
+      this._decorations = topologyToDecorations(d, this._activeSituation);
+      this._applyLayout();
+    }
+  }
+
+  private _renderSituationBar() {
+    const d = this._effectiveData;
+    if (!d?.situations?.length) return nothing;
+    return html`
+      <div class="situation-bar" role="radiogroup" aria-label="Topology situations">
+        <button type="button" class="situation-pill"
+                role="radio"
+                aria-checked="${this._activeSituationId == null}"
+                @click=${() => this._selectSituation(null)}>Baseline</button>
+        ${d.situations.map(s => html`
+          <button type="button" class="situation-pill"
+                  role="radio"
+                  aria-checked="${this._activeSituationId === s.id}"
+                  title="${s.condition}"
+                  @click=${() => this._selectSituation(s.id)}>${s.name}</button>
+        `)}
+      </div>
+    `;
+  }
+
   private _computeStats() {
     const d = this._effectiveData;
     if (!d) return { serviceCount: 0, edgeCount: 0, healthyCount: 0, degradedCount: 0 };
@@ -219,6 +309,7 @@ export class TopologyViewer extends PushMixin(LitElement) {
     if (d.services.length === 0) return html`<div class="empty">No services in topology</div>`;
 
     const stats = this._computeStats();
+    const activeSit = this._activeSituation;
 
     return html`
       <div class="toolbar" role="status" aria-live="polite">
@@ -229,8 +320,12 @@ export class TopologyViewer extends PushMixin(LitElement) {
           ${stats.degradedCount > 0
             ? html`<span class="stat">Issues: <span class="stat-value">${stats.degradedCount}</span></span>`
             : ''}
+          ${activeSit
+            ? html`<span class="stat">Mutations: <span class="stat-value">${activeSit.mutations.length}</span></span>`
+            : ''}
         </div>
       </div>
+      ${this._renderSituationBar()}
       <div class="canvas-area"
            role="img"
            aria-label="Application topology: ${stats.serviceCount} services, ${stats.healthyCount} healthy">
