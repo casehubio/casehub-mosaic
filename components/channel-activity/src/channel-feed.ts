@@ -442,7 +442,9 @@ export class ChannelFeedElement extends ChannelFeedBase {
 
   private _onToolbarLeave() {
     this._isHoveringToolbar = false;
-    this._hoveredMessageId = null;
+    this._hoverLeaveTimer = setTimeout(() => {
+      this._hoveredMessageId = null;
+    }, 200);
   }
 
   private _renderHoverToolbar(msg: QhorusMessage) {
