@@ -175,10 +175,9 @@ let ChannelFeedElement = class ChannelFeedElement extends ChannelFeedBase {
     .message-item { position: relative; }
     .hover-toolbar-anchor {
       position: absolute;
-      top: 0;
+      top: -15px;
       right: var(--pages-space-3, 12px);
       z-index: 50;
-      transform: translateY(-50%);
     }
   `; }
     _loadCursors() {
