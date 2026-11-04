@@ -8,6 +8,7 @@ export * from './perception.js';
 export * from './optimisation.js';
 export * from './social.js';
 export * from './normalize.js';
+export * from './perception-runtime.js';
 
 export type {
   RoutingSpec, DecompositionSpec, ActivationSpec, GovernanceSpec,

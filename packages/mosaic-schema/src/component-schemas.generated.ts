@@ -1077,12 +1077,31 @@ export const topologyViewerPropsSchema = z.object({
           replicas: z.number().optional(),
           image: z.string().optional(),
           type: z.string().optional(),
+          deploymentStrategy: z.enum(["rolling", "canary", "blue-green"]).optional(),
+          cluster: z.string().optional(),
+          forEachSource: z.string().optional(),
         })),
       edges: z.array(z.object({
           source: z.string(),
           target: z.string(),
           label: z.string().optional(),
         })),
+      clusters: z.array(z.object({
+          id: z.string(),
+          name: z.string(),
+          region: z.string().optional(),
+        })).optional(),
+      situations: z.array(z.object({
+          id: z.string(),
+          name: z.string(),
+          condition: z.string(),
+          active: z.boolean(),
+          mutations: z.array(z.object({
+              targetId: z.string(),
+              action: z.enum(["scale-up", "scale-down", "add", "remove", "reroute"]),
+              detail: z.string().optional(),
+            })),
+        })).optional(),
     })]),
   endpoint: z.string().optional(),
   selectionTopic: z.string(),
@@ -1514,6 +1533,66 @@ export const agentPersonalityWorkbenchPropsSchema = z.object({
   }).optional(),
 });
 
+export const summarisationTimelinePropsSchema = z.object({
+  data: z.object({
+    snapshotId: z.string(),
+    caseExecutionId: z.string(),
+    pipelineName: z.string(),
+    timeRange: z.object({
+      from: z.number(),
+      to: z.number(),
+    }),
+    rawEvents: z.array(z.object({
+        id: z.string(),
+        timestamp: z.number(),
+        classification: z.string(),
+        payload: z.record(z.unknown()),
+        lineageRefs: z.array(z.string()),
+      })),
+    summarisedEvents: z.array(z.object({
+        id: z.string(),
+        from: z.number(),
+        to: z.number(),
+        label: z.string(),
+        classification: z.string(),
+        payload: z.record(z.unknown()),
+        sourceRefs: z.array(z.string()),
+        lineageRefs: z.array(z.string()),
+      })),
+    phaseSummaries: z.array(z.object({
+        id: z.string(),
+        from: z.number(),
+        to: z.number(),
+        label: z.string(),
+        classification: z.string(),
+        payload: z.record(z.unknown()),
+        sourceRefs: z.array(z.string()),
+        windowPolicy: z.object({
+          maxCount: z.number().optional(),
+          maxAge: z.number().optional(),
+        }).optional(),
+      })),
+    steps: z.array(z.object({
+        caseId: z.string(),
+        stepName: z.string(),
+        signals: z.array(z.object({
+            type: z.string(),
+            summary: z.string(),
+            confidence: z.number().optional(),
+            keyFacts: z.array(z.string()).optional(),
+          })),
+        from: z.number(),
+        to: z.number(),
+      })),
+    narrative: z.object({
+      explanation: z.string(),
+    }).optional(),
+  }).optional(),
+  endpoint: z.string().optional(),
+  classificationColours: z.record(z.string()).optional(),
+  timestampFormat: z.enum(["utc", "local"]).optional(),
+});
+
 export const agencyComponentSchemaMap: ReadonlyMap<string, z.ZodType> = new Map([
   ["agency-sla-indicator", slaIndicatorPropsSchema] as [string, z.ZodType],
   ["agency-execution-monitor", executionMonitorPropsSchema] as [string, z.ZodType],
@@ -1581,4 +1660,5 @@ export const agencyComponentSchemaMap: ReadonlyMap<string, z.ZodType> = new Map(
   ["agent-manifest-editor", agentManifestEditorPropsSchema] as [string, z.ZodType],
   ["agency-agent-profile-panel", agentProfilePanelPropsSchema] as [string, z.ZodType],
   ["agency-agent-personality-workbench", agentPersonalityWorkbenchPropsSchema] as [string, z.ZodType],
+  ["agency-summarisation-timeline", summarisationTimelinePropsSchema] as [string, z.ZodType],
 ]);

@@ -1190,6 +1190,23 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@casehubio/mosaic-summarisation-timeline@workspace:components/summarisation-timeline":
+  version: 0.0.0-use.local
+  resolution: "@casehubio/mosaic-summarisation-timeline@workspace:components/summarisation-timeline"
+  dependencies:
+    "@casehubio/mosaic-core": "workspace:*"
+    "@casehubio/pages-component": "npm:*"
+    "@casehubio/pages-data": "npm:*"
+    "@casehubio/pages-primitives": "npm:*"
+    "@casehubio/pages-ui-tokens": "npm:*"
+    "@open-wc/testing-helpers": "npm:*"
+    jsdom: "npm:^25.0.0"
+    lit: "npm:^3.1.0"
+    typescript: "npm:~5.8.0"
+    vitest: "npm:^3.0.0"
+  languageName: unknown
+  linkType: soft
+
 "@casehubio/mosaic-swf-diagram@workspace:*, @casehubio/mosaic-swf-diagram@workspace:components/swf-diagram":
   version: 0.0.0-use.local
   resolution: "@casehubio/mosaic-swf-diagram@workspace:components/swf-diagram"
@@ -2597,7 +2614,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@open-wc/testing-helpers@npm:^3.0.0":
+"@open-wc/testing-helpers@npm:*, @open-wc/testing-helpers@npm:^3.0.0":
   version: 3.0.1
   resolution: "@open-wc/testing-helpers@npm:3.0.1"
   dependencies:
