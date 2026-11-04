@@ -37,6 +37,7 @@ export default defineConfig({
       { find: '@casehubio/mosaic-agency-plan-item-tree', replacement: resolve(__dirname, '../components/agency-plan-item-tree/src/agency-plan-item-tree.ts') },
       { find: '@casehubio/mosaic-agency-plan-model-dashboard', replacement: resolve(__dirname, '../components/agency-plan-model-dashboard/src/agency-plan-model-dashboard.ts') },
       { find: '@casehubio/mosaic-execution-monitor', replacement: resolve(__dirname, '../components/execution-monitor/src') },
+      { find: '@casehubio/mosaic-summarisation-timeline', replacement: resolve(__dirname, '../components/summarisation-timeline/src') },
       { find: '@casehubio/mosaic-orchestration-workbench', replacement: resolve(__dirname, '../components/orchestration-workbench/src') },
       { find: '@casehubio/mosaic-contributor-workbench', replacement: resolve(__dirname, '../components/contributor-workbench/src') },
       { find: '@casehubio/mosaic-casehub-diagram', replacement: resolve(__dirname, '../components/casehub-diagram/src/casehub-diagram.ts') },

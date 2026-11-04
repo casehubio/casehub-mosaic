@@ -59,6 +59,7 @@ const PAGE_MODULES = [
   './pages/push-updates-page.js',
   './pages/avatar-step-page.js',
   './pages/manifest-editor-page.js',
+  './pages/summarisation-timeline-page.js',
 ];
 
 async function bootstrap() {

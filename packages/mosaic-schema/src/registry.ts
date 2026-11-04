@@ -49,6 +49,7 @@ import type { AgentAvatarProps } from '@casehubio/mosaic-agent-avatar-2d';
 import type { AgentManifestEditorProps } from '@casehubio/agent-manifest-editor';
 import type { AgentProfilePanelProps } from '@casehubio/mosaic-agent-profile-panel';
 import type { AgentPersonalityWorkbenchProps } from '@casehubio/mosaic-agent-personality-workbench';
+import type { SummarisationTimelineProps } from '@casehubio/mosaic-summarisation-timeline';
 
 export interface AgencyComponentRegistry {
   'agency-sla-indicator': SlaIndicatorProps;
@@ -117,4 +118,5 @@ export interface AgencyComponentRegistry {
   'agent-manifest-editor': AgentManifestEditorProps;
   'agency-agent-profile-panel': AgentProfilePanelProps;
   'agency-agent-personality-workbench': AgentPersonalityWorkbenchProps;
+  'agency-summarisation-timeline': SummarisationTimelineProps;
 }

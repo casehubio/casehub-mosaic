@@ -61,6 +61,7 @@ const NAV: NavCategory[] = [
       { id: 'dag-viewer', label: 'DAG Viewer', hash: '#orchestration/dag-viewer' },
       { id: 'execution-monitor', label: 'Execution Monitor', hash: '#orchestration/execution-monitor' },
       { id: 'orchestration-workbench', label: 'Orchestration Workbench', hash: '#orchestration/orchestration-workbench' },
+      { id: 'summarisation-timeline', label: 'Summarisation Timeline', hash: '#orchestration/summarisation-timeline' },
     ],
   },
   {
@@ -308,6 +309,7 @@ export class ExampleShell extends LitElement {
       case '#orchestration/dag-viewer': return html`<agency-example-dag-viewer></agency-example-dag-viewer>`;
       case '#orchestration/execution-monitor': return html`<agency-example-execution-monitor></agency-example-execution-monitor>`;
       case '#orchestration/orchestration-workbench': return html`<agency-example-orchestration-workbench></agency-example-orchestration-workbench>`;
+      case '#orchestration/summarisation-timeline': return html`<agency-example-summarisation-timeline></agency-example-summarisation-timeline>`;
       case '#diagrams/casehub-diagram': return html`<agency-example-casehub-diagram></agency-example-casehub-diagram>`;
       case '#diagrams/swf-diagram': return html`<agency-example-swf-diagram></agency-example-swf-diagram>`;
       case '#diagrams/diagram-workbench': return html`<agency-example-diagram-workbench></agency-example-diagram-workbench>`;
