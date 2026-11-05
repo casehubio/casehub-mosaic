@@ -152,6 +152,6 @@ export const timelineShellStyles = css`
   }
   @media (prefers-reduced-motion: reduce) {
     .skeleton-lane { animation: none; opacity: 0.8; }
-    * { transition: none !important; }
+    * { transition: none !important; animation: none !important; }
   }
 `;

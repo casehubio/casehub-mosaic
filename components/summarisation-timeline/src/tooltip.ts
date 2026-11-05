@@ -14,13 +14,14 @@ export function renderTooltip(
   timestampFormat: 'utc' | 'local',
   upwardLabels: string[],
   downwardCount: number,
+  pinned = false,
 ) {
   if (!event || !position || !lane) return nothing;
 
   const laneLabel = lane === 'l1' ? 'Raw Event' : lane === 'l2' ? 'Episode' : lane === 'l3' ? 'Phase' : 'Decision Step';
 
   return html`
-    <div class="tooltip" style="left: ${position.x}px; top: ${position.y}px;" role="tooltip">
+    <div class="tooltip ${pinned ? 'pinned' : ''}" style="left: ${position.x}px; top: ${position.y}px;" role="tooltip">
       <div class="tooltip-header">${laneLabel}</div>
       ${_renderTimestamps(event, timestampFormat)}
       ${'classification' in event ? html`<div class="tooltip-row"><strong>Classification:</strong> ${event['classification']}</div>` : nothing}

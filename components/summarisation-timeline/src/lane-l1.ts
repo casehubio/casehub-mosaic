@@ -139,6 +139,10 @@ export class SummarisationLaneL1 extends LitElement {
       bubbles: true, composed: true,
       detail: { sourceIds: [event.id], targetIds: event.lineageRefs },
     }));
+    this.dispatchEvent(new CustomEvent('summarisation-timeline:event:hovered', {
+      bubbles: true, composed: true,
+      detail: { event, lane: 'l1' },
+    }));
   }
 
   private _onHoverCluster(cluster: EventCluster) {
@@ -148,12 +152,20 @@ export class SummarisationLaneL1 extends LitElement {
       bubbles: true, composed: true,
       detail: { sourceIds, targetIds },
     }));
+    this.dispatchEvent(new CustomEvent('summarisation-timeline:event:hovered', {
+      bubbles: true, composed: true,
+      detail: { event: cluster.events[0]!, lane: 'l1' },
+    }));
   }
 
   private _onLeave() {
     this.dispatchEvent(new CustomEvent('summarisation-timeline:lineage:highlighted', {
       bubbles: true, composed: true,
       detail: { sourceIds: [], targetIds: [] },
+    }));
+    this.dispatchEvent(new CustomEvent('summarisation-timeline:event:hovered', {
+      bubbles: true, composed: true,
+      detail: { event: null, lane: null },
     }));
   }
 }
