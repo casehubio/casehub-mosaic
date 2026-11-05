@@ -2,6 +2,7 @@ import { LitElement, html, css, nothing } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { styleMap } from 'lit/directives/style-map.js';
+import { repeat } from 'lit/directives/repeat.js';
 import type { RawEvent, TimeRange } from '@casehubio/mosaic-core';
 import { clusterEvents, type EventCluster } from './clustering.js';
 import { timestampToPixel, classificationColour, laneStyles, isPointVisible } from './styles.js';
@@ -17,7 +18,7 @@ export class SummarisationLaneL1 extends LitElement {
       transform: translate(-50%, -50%);
       top: 50%;
       cursor: pointer;
-      transition: opacity 0.15s ease;
+      transition: left 200ms ease-out, opacity 0.15s ease;
     }
     .cluster {
       position: absolute;
@@ -33,7 +34,7 @@ export class SummarisationLaneL1 extends LitElement {
       color: white;
       min-width: 20px;
       padding: 0 4px;
-      transition: opacity 0.15s ease;
+      transition: left 200ms ease-out, width 200ms ease-out, opacity 0.15s ease;
     }
     .dimmed { opacity: 0.2; }
   `];
@@ -46,6 +47,7 @@ export class SummarisationLaneL1 extends LitElement {
   @property({ type: Array }) highlightedIds: string[] = [];
 
   private _classIndex = new Map<string, number>();
+  private _previousClusters?: EventCluster[];
 
   private _getClassIndex(cls: string): number {
     if (!this._classIndex.has(cls)) {
@@ -61,14 +63,18 @@ export class SummarisationLaneL1 extends LitElement {
 
   override render() {
     const visible = this.rawEvents.filter((e: RawEvent) => isPointVisible(e.timestamp, this.visibleRange));
-    const clusters = clusterEvents(visible, this.visibleRange, this.containerWidth, 6);
+    const clusters = clusterEvents(visible, this.visibleRange, this.containerWidth, 6, this._previousClusters);
+    this._previousClusters = clusters;
 
     return html`
       <div class="lane-container" role="region" aria-label="Raw events lane">
         <div role="list">
-          ${clusters.map(c => c.count === 1
-            ? this._renderDot(c.events[0]!)
-            : this._renderCluster(c)
+          ${repeat(
+            clusters,
+            c => c.key,
+            c => c.count === 1
+              ? this._renderDot(c.events[0]!)
+              : this._renderCluster(c)
           )}
         </div>
       </div>
@@ -111,6 +117,7 @@ export class SummarisationLaneL1 extends LitElement {
         class="cluster ${dimmed ? 'dimmed' : ''}"
         role="listitem"
         aria-label="Cluster of ${cluster.count} events, mostly ${cluster.dominantClassification}"
+        data-cluster-key="${cluster.key}"
         data-cluster-ids="${cluster.events.map(e => e.id).join(',')}"
         style=${styleMap({ left: `${left}px`, backgroundColor: colour })}
         @click=${() => this._onSelectCluster(cluster)}

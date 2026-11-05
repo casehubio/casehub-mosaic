@@ -1,10 +1,14 @@
-import { LitElement, html, css, nothing } from 'lit';
+import { LitElement, html, css, nothing, type PropertyValues } from 'lit';
 import { customElement, property, state, query } from 'lit/decorators.js';
 import {
   type SummarisationSnapshot, type LineageIndex,
   type RawEvent, type SummarisedEvent, type PhaseSummary,
+  type TimePositionedStep, type DecisionNarrative,
   buildLineageIndex, computeEffectiveTimeRange,
 } from '@casehubio/mosaic-core';
+import { DataSourceMixin, DataSourceAdapter } from '@casehubio/pages-component';
+import { createTypedFetchSource, EMPTY_DATASET } from '@casehubio/pages-data';
+import type { SourceFactory, TypedDataSet } from '@casehubio/pages-data';
 import { TimeAxisController } from './time-axis-controller.js';
 import {
   computeLineagePaths, renderLineageOverlay, type LineagePath,
@@ -27,15 +31,20 @@ interface LaneRef {
   lane: 'l1' | 'l2' | 'l3';
 }
 
+interface NarrativeResponse {
+  steps: TimePositionedStep[];
+  narrative?: DecisionNarrative;
+}
+
 export interface SummarisationTimelineProps {
   data?: SummarisationSnapshot;
-  endpoint?: string;
+  narrativeEndpoint?: string;
   classificationColours?: Record<string, string>;
   timestampFormat?: 'utc' | 'local';
 }
 
 @customElement('agency-summarisation-timeline')
-export class SummarisationTimeline extends LitElement {
+export class SummarisationTimeline extends DataSourceMixin(LitElement) {
   static override styles = [timelineShellStyles, css`
     .tooltip {
       position: absolute;
@@ -64,10 +73,14 @@ export class SummarisationTimeline extends LitElement {
   `];
 
   @property({ type: Object }) data?: SummarisationSnapshot;
-  @property({ type: String }) endpoint?: string;
+  @property({ type: String, attribute: 'narrative-endpoint' }) narrativeEndpoint?: string;
   @property({ type: Object }) classificationColours?: Record<string, string>;
   @property({ attribute: 'timestamp-format' }) timestampFormat: 'utc' | 'local' = 'local';
 
+  @state() private _snapshot?: SummarisationSnapshot;
+  @state() private _narrativeSteps: TimePositionedStep[] = [];
+  @state() private _narrativeData: DecisionNarrative | undefined;
+  private _narrativeSource?: DataSourceAdapter;
   @state() private _lineageIndex: LineageIndex = { upward: new Map(), downward: new Map() };
   @state() private _hoverState: HoverState = { eventId: null, lane: null };
   @state() private _highlightedIds: string[] = [];
@@ -77,12 +90,38 @@ export class SummarisationTimeline extends LitElement {
   @state() private _tooltipPinned = false;
   @state() private _lineagePaths: LineagePath[] = [];
   private _selectHandledClick = false;
-  @state() private _fetchError: string | null = null;
 
   @query('.lanes-container') private _lanesContainer!: HTMLElement;
 
   private _timeAxis = new TimeAxisController(this);
   private _resizeObserver?: ResizeObserver;
+
+  override resolveEndpoint(): string | undefined {
+    if (this.data) return undefined;
+    return this.endpoint;
+  }
+
+  override createSourceFactory(): SourceFactory {
+    return (url) => createTypedFetchSource<SummarisationSnapshot>(url, (snapshot, sink) => {
+      this._snapshot = snapshot;
+      if (!this.narrativeEndpoint) {
+        this._narrativeSteps = snapshot.steps;
+        this._narrativeData = snapshot.narrative;
+      }
+      sink.apply({ type: 'snapshot', dataset: EMPTY_DATASET as TypedDataSet });
+    });
+  }
+
+  private _initNarrativeSource() {
+    this._narrativeSource = new DataSourceAdapter(this, {
+      sourceFactory: (url) => createTypedFetchSource<NarrativeResponse>(url, (data, sink) => {
+        this._narrativeSteps = data.steps;
+        this._narrativeData = data.narrative;
+        sink.apply({ type: 'snapshot', dataset: EMPTY_DATASET as TypedDataSet });
+      }),
+    });
+    this._narrativeSource.endpoint = this.narrativeEndpoint;
+  }
 
   override connectedCallback() {
     super.connectedCallback();
@@ -92,15 +131,15 @@ export class SummarisationTimeline extends LitElement {
         this._updateLineagePaths();
       }
     });
-
-    if (this.endpoint && !this.data) {
-      this._fetchData();
+    if (this.narrativeEndpoint) {
+      this._initNarrativeSource();
     }
   }
 
   override disconnectedCallback() {
     super.disconnectedCallback();
     this._resizeObserver?.disconnect();
+    this._narrativeSource?.dispose();
   }
 
   override firstUpdated() {
@@ -109,53 +148,59 @@ export class SummarisationTimeline extends LitElement {
     }
   }
 
-  override updated(changed: Map<string, unknown>) {
+  override willUpdate(changed: PropertyValues): void {
+    super.willUpdate(changed);
     if (changed.has('data') && this.data) {
-      const effectiveRange = computeEffectiveTimeRange(this.data);
+      this._snapshot = this.data;
+      if (!this.narrativeEndpoint) {
+        this._narrativeSteps = this.data.steps;
+        this._narrativeData = this.data.narrative;
+      }
+    }
+    if (changed.has('narrativeEndpoint') && this.narrativeEndpoint) {
+      if (!this._narrativeSource) {
+        this._initNarrativeSource();
+      } else {
+        this._narrativeSource.endpoint = this.narrativeEndpoint;
+      }
+    }
+  }
+
+  override updated(changed: Map<string, unknown>) {
+    if (changed.has('_snapshot') && this._snapshot) {
+      const effectiveRange = computeEffectiveTimeRange(this._snapshot);
       this._timeAxis.setEffectiveRange(effectiveRange);
       this._lineageIndex = buildLineageIndex(
-        this.data.rawEvents, this.data.summarisedEvents, this.data.phaseSummaries,
+        this._snapshot.rawEvents, this._snapshot.summarisedEvents, this._snapshot.phaseSummaries,
       );
       requestAnimationFrame(() => requestAnimationFrame(() => this._updateLineagePaths()));
     }
   }
 
-  private async _fetchData() {
-    if (!this.endpoint) return;
-    try {
-      const resp = await fetch(this.endpoint);
-      if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
-      this.data = await resp.json() as SummarisationSnapshot;
-      this._fetchError = null;
-    } catch (e) {
-      this._fetchError = (e as Error).message;
-    }
-  }
-
   private _hasData(): boolean {
-    return !!(this.data && (
-      this.data.rawEvents.length > 0 ||
-      this.data.summarisedEvents.length > 0 ||
-      this.data.phaseSummaries.length > 0 ||
-      this.data.steps.length > 0
+    return !!(this._snapshot && (
+      this._snapshot.rawEvents.length > 0 ||
+      this._snapshot.summarisedEvents.length > 0 ||
+      this._snapshot.phaseSummaries.length > 0 ||
+      this._narrativeSteps.length > 0
     ));
   }
 
   override render() {
-    if (this._fetchError) return this._renderError();
-    if (!this.data) return this._renderLoading();
+    if (this.error) return this._renderError();
+    if (this.loading || !this._snapshot) return this._renderLoading();
     if (!this._hasData()) return this._renderEmpty();
 
     const vr = this._timeAxis.visibleRange;
     const cw = this._timeAxis.containerWidth;
     const allTimestamps = [
-      ...this.data.rawEvents.map((e: RawEvent) => e.timestamp),
-      ...this.data.summarisedEvents.map((e: SummarisedEvent) => e.from),
-      ...this.data.phaseSummaries.map((p: PhaseSummary) => p.from),
+      ...this._snapshot.rawEvents.map((e: RawEvent) => e.timestamp),
+      ...this._snapshot.summarisedEvents.map((e: SummarisedEvent) => e.from),
+      ...this._snapshot.phaseSummaries.map((p: PhaseSummary) => p.from),
     ];
 
     return html`
-      <div role="group" aria-label="Summarisation timeline: ${this.data.pipelineName}" tabindex="0" @keydown=${this._onKeyDown}>
+      <div role="group" aria-label="Summarisation timeline: ${this._snapshot.pipelineName}" tabindex="0" @keydown=${this._onKeyDown}>
         <summarisation-minimap
           .effectiveRange=${this._timeAxis.effectiveRange}
           .visibleRange=${vr}
@@ -171,10 +216,10 @@ export class SummarisationTimeline extends LitElement {
             @click=${this._onContainerClick}
             @wheel=${this._onWheel}
           >
-            ${this.data.rawEvents.length > 0 ? html`
+            ${this._snapshot.rawEvents.length > 0 ? html`
               <div class="lane-label">L1 — Raw Events</div>
               <summarisation-lane-l1
-                .rawEvents=${this.data.rawEvents}
+                .rawEvents=${this._snapshot.rawEvents}
                 .visibleRange=${vr}
                 .containerWidth=${cw}
                 .classificationColours=${this.classificationColours}
@@ -183,10 +228,10 @@ export class SummarisationTimeline extends LitElement {
               ></summarisation-lane-l1>
             ` : nothing}
 
-            ${this.data.summarisedEvents.length > 0 ? html`
+            ${this._snapshot.summarisedEvents.length > 0 ? html`
               <div class="lane-label">L2 — Episodes</div>
               <summarisation-lane-l2
-                .summarisedEvents=${this.data.summarisedEvents}
+                .summarisedEvents=${this._snapshot.summarisedEvents}
                 .visibleRange=${vr}
                 .containerWidth=${cw}
                 .classificationColours=${this.classificationColours}
@@ -195,10 +240,10 @@ export class SummarisationTimeline extends LitElement {
               ></summarisation-lane-l2>
             ` : nothing}
 
-            ${this.data.phaseSummaries.length > 0 ? html`
+            ${this._snapshot.phaseSummaries.length > 0 ? html`
               <div class="lane-label">L3 — Phases</div>
               <summarisation-lane-l3
-                .phaseSummaries=${this.data.phaseSummaries}
+                .phaseSummaries=${this._snapshot.phaseSummaries}
                 .visibleRange=${vr}
                 .containerWidth=${cw}
                 .classificationColours=${this.classificationColours}
@@ -207,11 +252,11 @@ export class SummarisationTimeline extends LitElement {
               ></summarisation-lane-l3>
             ` : nothing}
 
-            ${this.data.steps.length > 0 ? html`
+            ${this._narrativeSteps.length > 0 ? html`
               <div class="lane-label">L4 — Narrative</div>
               <summarisation-lane-l4
-                .steps=${this.data.steps}
-                .narrative=${this.data.narrative}
+                .steps=${this._narrativeSteps}
+                .narrative=${this._narrativeData}
                 .visibleRange=${vr}
                 .containerWidth=${cw}
               ></summarisation-lane-l4>
@@ -256,7 +301,7 @@ export class SummarisationTimeline extends LitElement {
     return html`
       <div class="error-state" role="alert">
         Failed to load summarisation data.
-        <button @click=${() => { this._fetchError = null; this._fetchData(); }}>
+        <button @click=${() => { this.dataSource.refresh(); }}>
           Retry
         </button>
       </div>
@@ -357,9 +402,9 @@ export class SummarisationTimeline extends LitElement {
   }
 
   private _resolveEventLane(id: string): 'l1' | 'l2' | 'l3' | 'l4' | null {
-    if (this.data?.rawEvents.some((e: RawEvent) => e.id === id)) return 'l1';
-    if (this.data?.summarisedEvents.some((e: SummarisedEvent) => e.id === id)) return 'l2';
-    if (this.data?.phaseSummaries.some((e: PhaseSummary) => e.id === id)) return 'l3';
+    if (this._snapshot?.rawEvents.some((e: RawEvent) => e.id === id)) return 'l1';
+    if (this._snapshot?.summarisedEvents.some((e: SummarisedEvent) => e.id === id)) return 'l2';
+    if (this._snapshot?.phaseSummaries.some((e: PhaseSummary) => e.id === id)) return 'l3';
     return null;
   }
 
@@ -398,9 +443,9 @@ export class SummarisationTimeline extends LitElement {
         return null;
       },
       (id: string) => {
-        if (this.data?.rawEvents.some((e: RawEvent) => e.id === id)) return 'l1';
-        if (this.data?.summarisedEvents.some((e: SummarisedEvent) => e.id === id)) return 'l2';
-        if (this.data?.phaseSummaries.some((e: PhaseSummary) => e.id === id)) return 'l3';
+        if (this._snapshot?.rawEvents.some((e: RawEvent) => e.id === id)) return 'l1';
+        if (this._snapshot?.summarisedEvents.some((e: SummarisedEvent) => e.id === id)) return 'l2';
+        if (this._snapshot?.phaseSummaries.some((e: PhaseSummary) => e.id === id)) return 'l3';
         return null;
       },
       svgRect,
@@ -413,9 +458,9 @@ export class SummarisationTimeline extends LitElement {
     if (!eventId) return [];
     const upIds = this._lineageIndex.upward.get(eventId) ?? [];
     return upIds.map((id: string) => {
-      const ev = this.data?.summarisedEvents.find((e: SummarisedEvent) => e.id === id);
+      const ev = this._snapshot?.summarisedEvents.find((e: SummarisedEvent) => e.id === id);
       if (ev) return ev.label;
-      const phase = this.data?.phaseSummaries.find((p: PhaseSummary) => p.id === id);
+      const phase = this._snapshot?.phaseSummaries.find((p: PhaseSummary) => p.id === id);
       return phase?.label ?? id;
     });
   }
