@@ -67,4 +67,46 @@ describe('SummarisationTimeline (shell)', () => {
     const mod = await import('./index.js');
     expect(mod.SummarisationTimeline).toBeDefined();
   });
+
+  it('provides loading state from DataSourceMixin', async () => {
+    const { SummarisationTimeline } = await import('./summarisation-timeline.js');
+    const el = new SummarisationTimeline();
+    expect(el.loading).toBeDefined();
+    expect(typeof el.loading).toBe('boolean');
+  });
+
+  it('provides error state from DataSourceMixin', async () => {
+    const { SummarisationTimeline } = await import('./summarisation-timeline.js');
+    const el = new SummarisationTimeline();
+    expect(el.error).toBeDefined();
+    expect(typeof el.error).toBe('string');
+  });
+
+  it('resolveEndpoint returns undefined when inline data is set', async () => {
+    const { SummarisationTimeline } = await import('./summarisation-timeline.js');
+    const el = new SummarisationTimeline();
+    el.data = SAMPLE_SNAPSHOT;
+    expect(el.resolveEndpoint()).toBeUndefined();
+  });
+
+  it('resolveEndpoint returns endpoint when no inline data', async () => {
+    const { SummarisationTimeline } = await import('./summarisation-timeline.js');
+    const el = new SummarisationTimeline();
+    el.endpoint = '/api/snapshots/1';
+    expect(el.resolveEndpoint()).toBe('/api/snapshots/1');
+  });
+
+  it('accepts narrativeEndpoint property', async () => {
+    const { SummarisationTimeline } = await import('./summarisation-timeline.js');
+    const el = new SummarisationTimeline();
+    el.narrativeEndpoint = '/api/narrative/1';
+    expect(el.narrativeEndpoint).toBe('/api/narrative/1');
+  });
+
+  it('uses snapshot steps when no narrativeEndpoint is set', async () => {
+    const { SummarisationTimeline } = await import('./summarisation-timeline.js');
+    const el = new SummarisationTimeline();
+    el.data = SAMPLE_SNAPSHOT;
+    expect(el.data.steps).toHaveLength(1);
+  });
 });

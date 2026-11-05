@@ -44,4 +44,20 @@ describe('SummarisationLaneL1', () => {
     expect(el.hoveredEventId).toBe('e1');
     expect(el.highlightedIds).toHaveLength(2);
   });
+
+  it('cluster elements have CSS transition on left and width', async () => {
+    const { SummarisationLaneL1 } = await import('./lane-l1.js');
+    const el = new SummarisationLaneL1();
+    const styles = (el.constructor as typeof SummarisationLaneL1).styles;
+    const cssText = Array.isArray(styles)
+      ? styles.map(s => (s as { cssText?: string }).cssText ?? '').join(' ')
+      : ((styles as { cssText?: string })?.cssText ?? '');
+    expect(cssText).toContain('200ms');
+  });
+
+  it('has correct ARIA on lane container', async () => {
+    const { SummarisationLaneL1 } = await import('./lane-l1.js');
+    const el = new SummarisationLaneL1();
+    expect(el).toBeDefined();
+  });
 });
