@@ -92,11 +92,19 @@ export class SummarisationLaneL3 extends LitElement {
       bubbles: true, composed: true,
       detail: { sourceIds: phase.sourceRefs, targetIds: [phase.id] },
     }));
+    this.dispatchEvent(new CustomEvent('summarisation-timeline:event:hovered', {
+      bubbles: true, composed: true,
+      detail: { event: phase, lane: 'l3' },
+    }));
   }
 
   private _onLeave() {
     this.dispatchEvent(new CustomEvent('summarisation-timeline:lineage:highlighted', {
       bubbles: true, composed: true, detail: { sourceIds: [], targetIds: [] },
+    }));
+    this.dispatchEvent(new CustomEvent('summarisation-timeline:event:hovered', {
+      bubbles: true, composed: true,
+      detail: { event: null, lane: null },
     }));
   }
 }

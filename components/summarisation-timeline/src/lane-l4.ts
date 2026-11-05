@@ -88,6 +88,8 @@ export class SummarisationLaneL4 extends LitElement {
         aria-label="Decision step: ${step.stepName}"
         style=${styleMap({ left: `${left}px`, width: `${width}px` })}
         @click=${() => this._onSelect(step)}
+        @mouseenter=${() => this._onHover(step)}
+        @mouseleave=${() => this._onLeave()}
       >
         <div class="step-name">${step.stepName}</div>
         ${step.signals.map((sig: SignalDigest) => html`
@@ -106,6 +108,20 @@ export class SummarisationLaneL4 extends LitElement {
   private _onSelect(step: TimePositionedStep) {
     this.dispatchEvent(new CustomEvent('summarisation-timeline:event:selected', {
       bubbles: true, composed: true, detail: { event: step, lane: 'l4' },
+    }));
+  }
+
+  private _onHover(step: TimePositionedStep) {
+    this.dispatchEvent(new CustomEvent('summarisation-timeline:event:hovered', {
+      bubbles: true, composed: true,
+      detail: { event: step, lane: 'l4' },
+    }));
+  }
+
+  private _onLeave() {
+    this.dispatchEvent(new CustomEvent('summarisation-timeline:event:hovered', {
+      bubbles: true, composed: true,
+      detail: { event: null, lane: null },
     }));
   }
 }

@@ -48,6 +48,15 @@ export class SummarisationTimeline extends LitElement {
       max-width: 300px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.15);
       pointer-events: none;
+      animation: tooltipFadeIn 0.15s ease;
+    }
+    .tooltip.pinned {
+      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+      border-color: var(--pages-accent-7, #4d99cc);
+    }
+    @keyframes tooltipFadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
     }
     .tooltip-header { font-weight: 600; margin-bottom: 4px; }
     .tooltip-row { margin: 2px 0; }
@@ -65,7 +74,9 @@ export class SummarisationTimeline extends LitElement {
   @state() private _tooltipEvent: { id?: string; [k: string]: unknown } | null = null;
   @state() private _tooltipLane: 'l1' | 'l2' | 'l3' | 'l4' | null = null;
   @state() private _tooltipPos: { x: number; y: number } | null = null;
+  @state() private _tooltipPinned = false;
   @state() private _lineagePaths: LineagePath[] = [];
+  private _selectHandledClick = false;
   @state() private _fetchError: string | null = null;
 
   @query('.lanes-container') private _lanesContainer!: HTMLElement;
@@ -144,7 +155,7 @@ export class SummarisationTimeline extends LitElement {
     ];
 
     return html`
-      <div role="group" aria-label="Summarisation timeline: ${this.data.pipelineName}">
+      <div role="group" aria-label="Summarisation timeline: ${this.data.pipelineName}" tabindex="0" @keydown=${this._onKeyDown}>
         <summarisation-minimap
           .effectiveRange=${this._timeAxis.effectiveRange}
           .visibleRange=${vr}
@@ -156,6 +167,8 @@ export class SummarisationTimeline extends LitElement {
           <div class="lanes-container"
             @summarisation-timeline:lineage:highlighted=${this._onLineageHighlighted}
             @summarisation-timeline:event:selected=${this._onEventSelected}
+            @summarisation-timeline:event:hovered=${this._onEventHovered}
+            @click=${this._onContainerClick}
             @wheel=${this._onWheel}
           >
             ${this.data.rawEvents.length > 0 ? html`
@@ -214,6 +227,7 @@ export class SummarisationTimeline extends LitElement {
           this._tooltipEvent, this._tooltipLane, this._tooltipPos,
           this.timestampFormat,
           this._getUpwardLabels(), this._getDownwardCount(),
+          this._tooltipPinned,
         )}
       </div>
     `;
@@ -267,8 +281,6 @@ export class SummarisationTimeline extends LitElement {
     if (sourceIds.length === 0 && targetIds.length === 0) {
       this._hoverState = { eventId: null, lane: null };
       this._highlightedIds = [];
-      this._tooltipEvent = null;
-      this._tooltipPos = null;
     } else {
       const hoveredId: string = sourceIds[0] ?? targetIds[0] ?? '';
       const lane = this._resolveEventLane(hoveredId);
@@ -282,16 +294,66 @@ export class SummarisationTimeline extends LitElement {
     const { event: ev, lane } = e.detail;
     this._tooltipEvent = ev;
     this._tooltipLane = lane;
+    this._tooltipPinned = true;
+    this._selectHandledClick = true;
     const target = e.composedPath()[0] as HTMLElement;
     if (target) {
-      const rect = target.getBoundingClientRect();
-      const host = this.getBoundingClientRect();
-      const tooltipWidth = 300;
-      let x = rect.left - host.left + rect.width / 2;
-      x = Math.max(0, Math.min(x, host.width - tooltipWidth));
-      const y = rect.top - host.top - 10;
-      this._tooltipPos = { x, y };
+      this._positionTooltip(target);
     }
+  }
+
+  private _onEventHovered(e: CustomEvent) {
+    const { event: ev, lane } = e.detail;
+    if (!ev) {
+      if (!this._tooltipPinned) {
+        this._tooltipEvent = null;
+        this._tooltipPos = null;
+        this._tooltipLane = null;
+      }
+      return;
+    }
+    if (this._tooltipPinned) return;
+    this._tooltipEvent = ev;
+    this._tooltipLane = lane;
+    const target = e.composedPath()[0] as HTMLElement;
+    if (target) {
+      this._positionTooltip(target);
+    }
+  }
+
+  private _onContainerClick() {
+    if (this._selectHandledClick) {
+      this._selectHandledClick = false;
+      return;
+    }
+    if (this._tooltipPinned) {
+      this._tooltipPinned = false;
+      this._tooltipEvent = null;
+      this._tooltipPos = null;
+      this._tooltipLane = null;
+    }
+  }
+
+  private _onKeyDown(e: KeyboardEvent) {
+    if (e.key === 'Escape' && this._tooltipPinned) {
+      this._tooltipPinned = false;
+      this._tooltipEvent = null;
+      this._tooltipPos = null;
+      this._tooltipLane = null;
+    }
+  }
+
+  private _positionTooltip(target: HTMLElement) {
+    const rect = target.getBoundingClientRect();
+    const host = this.getBoundingClientRect();
+    const tooltipWidth = 300;
+    let x = rect.left - host.left + rect.width / 2;
+    x = Math.max(0, Math.min(x, host.width - tooltipWidth));
+    let y = rect.top - host.top - 10;
+    if (y < 0) {
+      y = rect.bottom - host.top + 10;
+    }
+    this._tooltipPos = { x, y };
   }
 
   private _resolveEventLane(id: string): 'l1' | 'l2' | 'l3' | 'l4' | null {
