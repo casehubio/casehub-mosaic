@@ -109,14 +109,14 @@ Case domain adapter for the visual diagram editor (epic #103). Exports:
 
 Each stencil's render function accepts `(node: GraphNode, decoration?: NodeDecoration)` → `StencilTemplate`. Decorations are rendered by the pages graph-renderer; OBSOLETE status additionally applies reduced opacity inside the stencil render function.
 
-### diagram-core (`packages/diagram-core`)
+### diagram-core (migrated to `@casehubio/pages-diagram-core`)
 
-Shared diagram orchestration extracted from casehub-diagram (#106). Exports:
-- `DiagramBaseMixin(LitElement)` — Lit mixin owning undo/redo, render pipeline (`_fullRender`/`_updateWithoutLayout`), dirty tracking, persistence (`_load`/`_save`), keyboard shortcuts, selected node state, mode toggle, `src` fetch with AbortController, error/degraded/readonly modes. Subclasses implement 4 abstract methods: `_adaptYaml`, `_applyPropertyEdit`, `_paletteTypes`, `_emptyTemplate`.
-- `registerPropertySchema(nodeType, schema)` / `getPropertySchema(nodeType)` — schema registry (Map-based). `_updateSelectedNode()` uses registry lookup. Each stencil package registers schemas in its `register*Stencils()` function.
-- `DiagramToolbar` — base toolbar (save/dirty indicator)
-- `DiagramProperties` — generic schema-driven property panel with `renderPropertyForm`
-- Custom editor stubs: `AgencyPromptEditorElement` (textarea), `AgencyJsonEditorElement` (readonly JSON display) — for `x-editor-component` fields
+**No longer a local package** — migrated to casehub-pages as `@casehubio/pages-diagram-core`. All diagram components (`casehub-diagram`, `swf-diagram`, `org-diagram`, `htn-diagram`) import `DiagramBaseMixin` from the pages package. The local `packages/diagram-core` directory has been removed.
+
+Key exports (from pages-diagram-core):
+- `DiagramBaseMixin(LitElement)` — Lit mixin owning undo/redo, render pipeline (`_fullRender`/`_updateWithoutLayout`), dirty tracking, persistence (`_load`/`_save`), keyboard shortcuts, selected node state, mode toggle, `src` fetch with AbortController, error/degraded/readonly modes, SVG/PNG export via `exportDiagram`. Subclasses implement 4 abstract methods: `_adaptYaml`, `_applyPropertyEdit`, `_paletteTypes`, `_emptyTemplate`.
+- `registerPropertySchema(nodeType, schema)` / `getPropertySchema(nodeType)` — schema registry. Each stencil package registers schemas in its `register*Stencils()` function.
+- `DiagramToolbar`, `DiagramProperties` — base toolbar and schema-driven property panel
 - Form utilities: `fieldTypeFor`, `validateField`, `renderNestedGroup`, `renderTriggerEditor`
 
 ### graph-stencil-swf (`packages/graph-stencil-swf`)
@@ -139,6 +139,74 @@ HTN/DAG domain adapter for the DAG execution viewer and decomposition tree (epic
 - `registerHtnStencils()` — registers the `dag-node` stencil via pages `registerStencil()` (join indicators, executor badges, dimmed opacity for Skipped/Cancelled)
 - `toDecoration(domain, state)` → `NodeDecoration` — local duplicate of graph-stencil-case's decoration function (parallel packages, no cross-dependency)
 - Types: `TaskNodeSnapshot` (LeafTask/CompoundTask), `DecompositionSnapshot`, `DagPlanSnapshot`, `DagNodeSnapshot`, `DagResultSnapshot`, `NodeStateKind` (6 variants), `PlanItemDefinition` (Primitive/Compound), `CasePlanModelSnapshot`
+
+### graph-stencil-org (`packages/graph-stencil-org`)
+
+Eidos org domain adapter for the organizational structure diagram. Exports:
+- `toOrgGraph(yaml)` → `OrgAdapterResult { model: GraphModel }` — parses org YAML into graph model with compound nodes (org units as containers, agents as leaves)
+- `toOrgYaml(roster, relationships)` → YAML string — converts roster entries and relationships back to YAML for the relationship editor diagram tab
+- `registerOrgStencils()` — registers 2 stencils (`org-unit` container, `org-agent`) and 6 edge types (one per `RelationshipKind`)
+- `applyOrgPropertyEdit`, `addOrgUnit`, `removeOrgUnit`, `addMember`, `removeMember`, `addRelationship`, `removeRelationship` — CST-preserving YAML editing operations
+- `createOrgEditPolicy()` — `EditPolicy` for org-specific structural editing constraints
+- `enrichWithDescriptors(model, descriptors)` — applies `AgentDescriptor` data to graph nodes
+- `computeDerivedData(model)` → `DerivedOrgData` — derives supervision entries and other computed data
+- `resolveKindColors(kinds)` / `DEFAULT_KIND_PALETTE` — edge colour resolution per relationship kind
+- `applyCollapsedUnits`, `applyOrgEdgeLabels`, `applySelectionHighlight` — graph model transforms for visual state
+- `extractEgoSubgraph(model, agentId)` — single-hop subgraph extraction for focal-agent views
+- `OrgLayoutEngine` — rule-based layout engine with `orgClassificationRules`, `sizingClassifier`, `orgLayoutRules`, `orgHardConstraints`
+- Types: `OrgUnit`, `Membership`, `AgentRelationship`, `RelationshipKind`, `OrgStructureYaml`, `OrgLayoutStrategy`, `FactBase`, `ArchetypeHint`
+
+### agent-avatar-2d (`packages/agent-avatar-2d`)
+
+Composable 2D SVG avatar system. Exports:
+- `AgentAvatar` (`<agent-avatar>`) — Lit component rendering an avatar from archetype config or custom parts
+- `buildAvatar(config, size, modifiers?)` → SVG string — layered builder (body→costume→head→hair→face→props)
+- `ARCHETYPE_CONFIGS` / `ARCHETYPE_INDEX` / `HEAD_FACE_SPECS` — 48 archetype configs (12 families × 4 sub-archetypes), face specs for expression variants
+- `registerCollection(name, collection)` / `getCollection(name)` / `listCollections()` — collection registry for avatar styles
+- 4 built-in collections: `mythicCollection` (parts-based), `chibiCollection`, `simpsonsCollection`, `neonCollection` (fixed SVG)
+- `encodePreset(family, sub)` / `encodeCustom(parts)` / `decodeCode(code)` — compact avatar identity codes for serialisation
+- `resolveModifiers(input)` — modifier resolution for expression/pose customisation
+- `FAMILY_PALETTES` — per-family colour palettes
+- Types: `AvatarCollection` (`PartsCollection | FixedCollection` discriminated union), `ArchetypeFamily`, `AvatarSize`, `AvatarModifiers`, `AvatarPayload`, `AxisExpression`
+
+### agent-viewer (`packages/agent-viewer`)
+
+Agent visualization package — the tabbed drill-down container and 15+ pattern views. Exports:
+- `AgentViewer` (`<agency-agent-viewer>`) — tabbed container with exhaustive `PatternCategory` dispatch
+- `EidosView` (`<agency-eidos-view>`) — agent descriptor with disposition bars, capabilities, goals
+- `AgentCard` (`<agency-agent-card>`) — compact agent reference card
+- `HumanWorkItemCard` (`<agency-human-work-item-card>`) — human work item card for orchestration views
+- `CoordinationPipelineView` (`<agency-coordination-pipeline-view>`) — coordination playbook as vertical pipeline with agent-delegate cards, signal/quorum barriers, parallel swim lanes, match/case routing, expression pills
+- `CoordinationDiffView` / `computeCoordinationDiff` — before/after diff view for coordination pipelines
+- `assignTiers`, `detectPreferredView` — graph model utilities for coordination visualisation
+- 15 pattern views organized by category in `src/views/`:
+  - **Orchestration:** `SupervisorView`, `ChoreographyView`, `SagaView`, `DecompositionView`, `RoutingStrategyView` (composable with `registerRoutingRenderer`)
+  - **Deliberation:** `VotingView`, `DebateView`, `NegotiationView`, `CoalitionView`, `NormativeView`
+  - **Governance:** `JudgmentView`
+  - **Perception:** `SummarisationView`, `ObservationView`, `NarrativeView`
+  - **Optimisation:** `PromptOptimisationView`
+  - **Social:** `CognitionView`, `MemoryHygieneView`
+- `PatternViewMixin` + `patternViewStyles` — shared infrastructure (Execution/Reports tab architecture with `renderTabBar`/`renderTabPanel`, ARIA roving tabindex, shared header CSS with `--pattern-badge-color`)
+- `BasePatternView`, `PlaybookSpecView` — base classes for pattern views
+- Types: `AgentDescriptor`, `Disposition`, `Capability`, `Goal`, `CoordinationPipeline`, `CoordinationStep`, `DrillDownDetail`
+
+### avatar (`packages/avatar`)
+
+3D avatar rendering and conversational interaction. Uses TalkingHead for WebGL-rendered 3D avatars with lip-sync. Exports:
+- `CasehubAvatar` (`<casehub-avatar>`) — 3D avatar component with mood, camera view (head/upper/full), lip-sync language, speed control, and audio queue for TTS playback
+- `CasehubAvatarPanel` (`<casehub-avatar-panel>`) — panel wrapper composing avatar + transcript + speech controls
+- `CasehubTranscript` (`<casehub-transcript>`) — conversation transcript display
+- `CasehubSpeech` (`<casehub-speech>`) — speech controls (play/pause/stop)
+- `AvatarWsController` — Lit ReactiveController for WebSocket-based avatar communication, manages audio queue and viseme frames
+- Types: `VisemeFrame`, `PlaybackItem`, `ConversationTurn`, `AvatarConfig`, `AvatarMessage`
+
+### lsp-schemas (`packages/lsp-schemas`)
+
+YAML language server schema definitions for diagram editors. Re-exports `createSchemaRegistry` and `SchemaRegistry` from `@casehubio/pages-lsp`. Provides domain-specific format registrations:
+- `caseDefinitionFormat` — CaseDefinition YAML schema
+- `swfFormat` — Serverless Workflow YAML schema
+- `htnFormat` — HTN plan YAML schema
+- `orgFormat` — Org structure YAML schema
 
 ### agency-dag-viewer (`components/agency-dag-viewer`)
 
@@ -323,6 +391,128 @@ All panels follow the `configure(props)` pattern for hostPanel integration and u
 ### work-item-row (`components/work-item-row`) — DEPRECATED
 
 Single work item row component. Legacy — inbox now uses pages-table. Do not use in new code.
+
+### agent-catalog (`components/agent-catalog`)
+
+Agent template catalog — browsable grid of pre-built agent configurations derived from `PROFESSION_PRESETS` (8 professions, 42 roles, ~120 variants). `CATALOG_TEMPLATES` / `FEATURED_TEMPLATES` static data, `buildDescriptor(template)` constructs a `FullAgentDescriptor`. Profession pill filters, fuzzy search, featured picks section, responsive card grid with inline detail expansion. `collection` property for avatar style, `groupBy` property (`'role' | 'family'`) for pluggable grouping strategy. Emits `catalog:template:selected` with `FullAgentDescriptor`.
+
+### agent-manifest-editor (`components/agent-manifest-editor`)
+
+Agent manifest editor — LLM provider/model/credential configuration. `ManifestProviderCard` sub-component for per-provider UI. `PRESETS` with built-in provider templates (Anthropic/OpenAI/Google/Ollama). `PROVIDER_DEFAULTS` / `OTHER_PROVIDER_DEFAULTS` for provider-specific inference ranges. Progressive disclosure provider cards, credential editing (env/file/ref + dev-mode inline), model picker with tier grouping and capability badges, model alias configuration, per-model inference sliders. Test connection with persistent badges. Manifest YAML preview. Host + sub-component architecture.
+
+### agent-personality-workbench (`components/agent-personality-workbench`)
+
+Agent personality workbench — tabbed composition of `agent-catalog` (Templates) and `avatar-step` (Advanced) with shared `agent-profile-panel`. Custom CSS grid layout with responsive stacking. Event-up/property-down state coordination. Tab keyboard navigation. Collection bar, group toggle (By Role/By Family), detail header pass-through. Emits `personality:confirmed` with `PersonalityProfile` + archetype.
+
+### agent-profile (`components/agent-profile`)
+
+Agent profile — read-only agent profile display with avatar, name, archetype/profession badges, SVG radar chart for disposition axes, framework pills, and description text. Receives `FullAgentDescriptor` and `PersonalityProfile` as properties. Uses `deriveDispositions` from avatar-step. Purely presentational — no editing, no events.
+
+### agent-profile-panel (`components/agent-profile-panel`)
+
+Agent profile panel — editable personality profile display with profession/role/framework pickers (MBTI, Enneagram, DISC, SDI, Belbin, Big Five), lock toggles, disposition axes, behavioral tendencies. Detail header (avatar, name, archetype, description, alias, summary) when template selected. `archetypeRoles` badge list. Stateless: all data via properties, all edits via events (`profile:value:changed`, `profile:lock:changed`, `profile:reset`, `personality:confirmed`).
+
+### agent-relationship-editor (`components/agent-relationship-editor`)
+
+Agent relationship editor — three-tab view (Table/Arc/Diagram) for org relationships. `ArcView` sub-component for SVG focal-agent arc diagram. Table: grouped-by-kind CRUD with avatar thumbnails and profession badges via `agents` property. Diagram: readonly `org-diagram` composed via `toOrgYaml` bridge, live pending changes, click-to-focus bidirectional interaction. Emits `relationship:changed` with `RelationshipChangeset`.
+
+### avatar-step (`components/avatar-step`)
+
+Avatar personality wizard step — faceted personality selector (6 frameworks: MBTI, Enneagram, DISC, Belbin, SDI, Big Five), profession presets (8 professions, 42 roles via `PROFESSION_PRESETS`). Split-panel profile configurator with hover-to-edit and lock. 4 avatar collections (Mythic/Chibi/Donut Creek/Neon), 12×4 archetype grid with three-tier filtering + profession ghosting + role-match highlighting. External `collection` property (hides internal bar when set). Exports: `getCompatibleArchetypes`, `getValidFrameworkValues`, `initProfile`, `deriveDispositions`, `deriveTendencies`, `buildSummaryText`, `FRAMEWORK_LABELS`, `FRAMEWORK_TOOLTIPS`, `DISPOSITION_TIPS`. Types: `PersonalityFramework`, `AxisScore`, `BehavioralTendency`, `ProfessionRole`, `RoleVariant`.
+
+### case-flow-viewer (`components/case-flow-viewer`)
+
+Read-only case flow DAG viewer — the viewer counterpart to `casehub-diagram`. Element tag: `<agency-case-flow-viewer>`. Extends `DiagramBaseMixin` in readonly mode, composes `toGraph` + `toDecorations` from graph-stencil-case. Trust score pills, adaptive decision badges, parallel group ELK partitioning. `AgencyCaseFlowToolbar` sub-component with stats, staleness, case status badge, SVG/PNG export. Properties: `yaml`, `src`, `runtimeState`, `selectionTopic`.
+
+### swf-diagram (`components/swf-diagram`)
+
+Standalone SWF workflow diagram — extends `DiagramBaseMixin` from `@casehubio/pages-diagram-core`. Delegates to `graph-stencil-swf` for adapter (`toSwfGraph`), property editing (`applySwfPropertyEdit`), and structural editing (`addSwfTask`, `insertSwfTask`, `spliceSwfTask`, `removeSwfTask`, `moveSwfTask`). `createSwfEditPolicy()` provides edit constraints. Custom `computeSwfLayout` for SWF-specific ELK layout. Detects diagram type via `detectDiagramType` from mosaic-core.
+
+### org-diagram (`components/org-diagram`)
+
+Eidos org structure diagram — extends `DiagramBaseMixin` from `@casehubio/pages-diagram-core`. Element tag: `<agency-org-diagram>`. `OrgLayoutEngine`-driven layout (10 strategies via ELK), org-specific toolbar with layout dropdown and archetype badge, stencil palette, property panel. Sub-panels: escalation chain, supervision hierarchy, attestation grants, legend (chip bar toggles ESC/SUP/ATT/LGD). `OrgEdgeTooltip` and `OrgTooltip` for hover detail. Full structural editing via graph-stencil-org YAML editor functions. `enrichWithDescriptors` + `computeDerivedData` for agent descriptor overlay. `applyCollapsedUnits`, `applyOrgEdgeLabels`, `applySelectionHighlight` for visual transforms.
+
+### htn-diagram (`components/htn-diagram`)
+
+HTN plan diagram — extends `DiagramBaseMixin` from `@casehubio/pages-diagram-core`. Element tag: `<htn-diagram>`. Readonly diagram for HTN plan YAML. Delegates to `htnYamlToGraph` from graph-stencil-htn for adapter. `layoutDirection` property (`'DOWN' | 'RIGHT'`). No structural editing (read-only). Detects diagram type via `detectDiagramType`.
+
+### diagram-workbench (`components/diagram-workbench`)
+
+Diagram workbench — split-pane composition of `casehub-diagram` + `swf-diagram`. Click worker node to drill down from case diagram to SWF workflow via `diagram:worker-drill-down` event. Three consumption tiers.
+
+### event-trail (`components/event-trail`)
+
+Event trail — re-exports `@casehubio/pages-ui-components/event-trail`. The actual implementation lives in pages; this package exists as a mosaic entry point for backward compatibility. Provides pages-filter-bar + pages-table with DataSourceMixin lifecycle, client-side chip/entity filtering, server-side date range params, dual data mode (endpoint or inline), `data-loaded` event for raw entry access.
+
+### execution-monitor (`components/execution-monitor`)
+
+Execution monitor — EventStreamController-driven live execution state for orchestration framework. State badge, pattern badge, execution model summary, agent roster. Dual data mode (endpoint or property). Staleness detection. `ExecutionMonitorTopics` for event coordination.
+
+### orchestration-workbench (`components/orchestration-workbench`)
+
+Orchestration workbench — composes `execution-monitor` + `agency-timeline` with orchestration-events strategy in split-workbench. Three consumption tiers (standalone, panel-hosted, inline data).
+
+### worker-task-pane (`components/worker-task-pane`)
+
+Worker task pane — generic specialist task queue with context tabs (`TabDefinition[]`), workspace element registry (`WorkspaceDefinition[]`), response/claim/decline form. Extends `LiveRegionMixin`. Direct fetch (no DataSourceMixin) like work-item-inbox. Optional push via `eventStreamEndpoint` + `EventStreamController`. `WorkerTaskEventTopics` for event coordination. Types: `WorkspaceDefinition`, `WorkerTaskResponse`, `WorkerTaskSubmission`, `WorkerTaskClaimRequest`, `WorkerTaskContext`.
+
+### cluster-panel (`components/cluster-panel`)
+
+Cluster management panel — cluster list, registration form, connectivity test, delete. `ClusterPanelTopics` for event coordination. Dual data mode. Readonly mode.
+
+### service-card (`components/service-card`)
+
+Per-service health card — status badge, replicas, image, per-cluster deployment status. `ServiceCardTopics` for event coordination. Dual data mode.
+
+### reconciliation-status (`components/reconciliation-status`)
+
+Desired vs actual reconciliation — per-cluster sections with per-node status grid. EventStreamController push updates. `ReconciliationStatusTopics` for event coordination.
+
+### dimension-dashboard (`components/dimension-dashboard`)
+
+Multi-dimension status dashboard — N dimensions with severity badges, active response counts, compact layout. `DimensionDashboardTopics` for event coordination. Dual data mode.
+
+### topology-viewer (`components/topology-viewer`)
+
+Service dependency DAG — topology graph with status-coloured nodes, replica badges, edge labels. EventStreamController push updates. `TopologyViewerTopics` for event coordination.
+
+### evolution-config (`components/evolution-config`)
+
+Evolution conductor components — five sub-components:
+- `DenyPatternEditor` — static + dynamic deny pattern CRUD, stream preview
+- `WatchPatternEditor` — escalation patterns
+- `GatePolicyEditor` — per-stage GATED/AUTO/NOTIFY, impact preview
+- `EvolutionStreams` — improvement stream table with block/unblock
+- `EvolutionInbox` — conductor inbox table with approve/reject
+Shared `EvolutionApi` for REST calls, `EvolutionEventTopics` + `emitEvolutionEvent` for event coordination. Dual data mode.
+
+### evolution-workbench (`components/evolution-workbench`)
+
+Evolution conductor dashboard — KPI summary bar (health, active, inbox, circuit breaker, enabled) + tabbed content via detail-pane `renderContent` callbacks (Streams, Inbox, Audit, Configuration, Health). Domain-extensible via `TabDefinition[]`. CSS container queries for responsive layout. Three consumption tiers.
+
+### summarisation-timeline (`components/summarisation-timeline`)
+
+Summarisation pipeline timeline — four-lane viewer (L1 raw events, L2 episodes, L3 phases, L4 narrative) with density clustering, SVG lineage overlay, brush zoom minimap, and click-to-inspect tooltips. Element tag: `<agency-summarisation-timeline>`. Shell composes lane sub-components (`lane-l1`, `lane-l2`, `lane-l3`, `lane-l4`, `minimap`) via `TimeAxisController`. `DataSourceMixin` for endpoint-driven data. Inline data via `data` property (`SummarisationSnapshot`). `narrativeEndpoint` for fetching decision narrative. `classificationColours` for per-classification colour overrides. Hover-to-show tooltips, click to pin, Escape to dismiss.
+
+### narrative-timeline (`components/narrative-timeline`)
+
+Decision narrative timeline — vertical timeline displaying step-by-step agent decision summaries. Element tag: `<agency-narrative-timeline>`. Uses `DataSourceMixin`. Renders `StepDecisionSummary` items with signal badges (ROUTING/CBR/TRUST/DELIBERATION/STEP_OUTCOME with per-type icons and colours), optional `SignalDigest` detail expansion, and a narrative explanation block. Designed for orchestration flow explanation.
+
+### completeness-matrix (`components/completeness-matrix`)
+
+Project completeness matrix — grid showing completion status (done/partial/missing) across four signals (exists, configured, tested, deployed) for a set of dimensions. Element tag: `<agency-completeness-matrix>`. Dual data mode (property or endpoint). `compact` mode for dashboard embedding. ARIA `role="region"`.
+
+### project-dashboard (`components/project-dashboard`)
+
+Project dashboard — card-based grid layout showing layer health summaries. Element tag: `<agency-project-dashboard>`. `overallHealth(layers)` utility function. Health colours (healthy/degraded/incomplete). `selectionTopic` for layer drill-down. `ProjectDashboardTopics` for event coordination. Dual data mode. `compact` mode.
+
+### desired-state-graph (`components/desired-state-graph`)
+
+Desired state graph viewer — visualises `DesiredStateSnapshot` as a DAG using `pages-graph-canvas` with ELK layout. Element tag: `<agency-desired-state-graph>`. Adapter functions: `desiredStateToGraph(snapshot)` → `DesiredStateAdapterResult`, `desiredStateToDecorations(snapshot)` → decorations map. `DesiredStateToolbar` sub-component. `selectionTopic` for node selection events.
+
+### contributor-workbench (`components/contributor-workbench`)
+
+Contributor workbench — split-workbench for contributor detail views. Element tag: `<agency-contributor-workbench>`. Left panel shows intake classification (lane badge: FAST_TRACK/STANDARD/TRIAGE with reason), dimension scores, and trust score via `trust-score-panel`. Right panel shows outcome history via `pages-table` with `fromRows`. Extends `LiveRegionMixin`. Direct fetch from `endpoint`/`actorId` properties.
 
 ---
 

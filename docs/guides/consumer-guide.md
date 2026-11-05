@@ -21,12 +21,22 @@ Domain-aware but app-agnostic — components know about trust scores, case timel
 
 | Package | npm name | Purpose | Maturity |
 |---------|----------|---------|----------|
-| `packages/mosaic-core` | `@casehubio/casehub-mosaic-core` | Tokens (re-exported from pages-ui-tokens), domain types (trust, commitment, orchestration, conversation, work-item), event helpers (re-exported from pages-component), CommitmentStatePill, StatusBadge (generic status pills), status registry (`lookupStatus`/`registerStatus`), `stateCategoryStyles`. Generic utilities (DataSourceMixin, TrendSourceMixin, renderSparkline, EventStreamController, SharedTimerController, confirm dialog, renderPropertyTree, pulseAnimation, fetchSource, EMPTY_DATASET) have moved to `@casehubio/pages-*` packages — re-exported here for backward compatibility. | Beta |
+| `packages/mosaic-core` | `@casehubio/casehub-mosaic-core` | Domain types (trust, commitment, orchestration, conversation, work-item, pattern category), event helpers (re-exported from pages-component), CommitmentStatePill, StatusBadge (generic status pills), status registry (`lookupStatus`/`registerStatus` with 14 built-in domains), `stateCategoryStyles`. Generic utilities (DataSourceMixin, TrendSourceMixin, renderSparkline, EventStreamController, SharedTimerController, confirm dialog, renderPropertyTree, pulseAnimation, fetchSource, EMPTY_DATASET) have moved to `@casehubio/pages-*` packages — re-exported here for backward compatibility. | Beta |
+| `packages/mosaic-schema` | `@casehubio/casehub-mosaic-schema` | Auto-generated Zod schemas for mosaic component properties. AgencyComponentRegistry maps element tag names to Props interfaces. ts-morph generator reads source, produces per-component schemas + `agencyComponentSchemaMap`. Staleness and registry completeness tests. | Beta |
+| `packages/agent-avatar-2d` | `@casehubio/agent-avatar-2d` | 2D avatar rendering — composable SVG parts system with layered builder (body→costume→head→hair→face→props), 48 archetype configs (12 families × 4 sub-archetypes), 4 collections (Mythic parts-based, Chibi/Donut Creek/Neon fixed SVG), collection registry, compact avatar identity codes. | Beta |
+| `packages/avatar` | `@casehubio/avatar` | 3D/speech avatar — WebSocket-controlled avatar panel with speech synthesis, transcript display, conversation turns. Components: `casehub-avatar`, `casehub-avatar-panel`, `casehub-speech`, `casehub-transcript`. | Beta |
+| `packages/agent-viewer` | `@casehubio/agent-viewer` | Agent visualization — eidos-view (agent descriptor with disposition bars, capabilities, goals), agent-card (compact reference), human-work-item-card, coordination-pipeline-view, agent-viewer (tabbed drill-down with exhaustive PatternCategory dispatch), 15 pattern views by category, PatternViewMixin + patternViewStyles shared infrastructure. | Beta |
 | `packages/graph-stencil-case` | `@casehubio/graph-stencil-case` | Case domain adapter, structural stencils (binding, worker with function type badge, milestone, goal, subcase), YAML editor (add/remove/edit/switchTarget/switchFunctionType/switchMcpTransport/switchModelProvider), worker-function module (type detection, config interfaces, form renderers), RuntimeAdapter (`toDecorations`), persistence SPI (`GitHubBackend`). | Beta |
-| `packages/diagram-core` | `@casehubio/diagram-core` | Shared diagram orchestration — DiagramBaseMixin (undo/redo, render pipeline, persistence, keyboard shortcuts, error/degraded/readonly modes, SVG/PNG export via `exportDiagram`), DiagramToolbar (includes Export SVG/PNG buttons), DiagramProperties, form utilities. | Beta |
 | `packages/graph-stencil-swf` | `@casehubio/graph-stencil-swf` | SWF domain adapter (`toSwfGraph` — dual YAML walk with SDK `buildFlatGraph`, type prefixing, degraded mode), 10 typed stencils + generic fallback, edge types (flow, switch-case), `applySwfPropertyEdit`, `swfTaskSchema`, `createSwfThumbnailRenderer`. Uses `@openworkflowspec/sdk`. | Beta |
+| `packages/graph-stencil-htn` | `@casehubio/graph-stencil-htn` | HTN/DAG domain adapter — `dagToGraph` (DagPlanSnapshot→GraphModel), `dagToDecorations` (runtime state→decorations), `nodeStatesToTaskStates`, dag-node stencil with join indicators and executor badges, HTN YAML adapter. | Beta |
+| `packages/graph-stencil-org` | `@casehubio/graph-stencil-org` | Eidos org domain adapter — `toOrgGraph` (YAML→GraphModel with compound nodes), `toOrgYaml` (roster+relationships→YAML), 2 stencils (org-unit, org-agent), 6 edge types (per RelationshipKind), CST-preserving YAML editor, edit policy, OrgLayoutEngine with sizing classifier. | Beta |
+| `packages/lsp-schemas` | `@casehubio/lsp-schemas` | LSP format registrations for YAML language server — case definition, SWF, HTN, and org formats. Wraps `createSchemaRegistry` from `@casehubio/pages-lsp`. | Beta |
+
+**Note:** `diagram-core` has migrated to `@casehubio/pages-diagram-core` in casehub-pages. DiagramBaseMixin, DiagramToolbar, DiagramProperties, and form utilities are now imported from the pages package directly.
 
 ### Components (`components/`)
+
+**Layout & generic:**
 
 | Component | Purpose | Maturity |
 |-----------|---------|----------|
@@ -34,38 +44,133 @@ Domain-aware but app-agnostic — components know about trust scores, case timel
 | `list-pane` | Data list wrapping `<pages-table>` — paginated mode, single selection, client-sort/filter, emits selection events | Beta |
 | `detail-pane` | Tabbed detail view — lazy tab panel creation, keyboard tab navigation, receives selected item via topic events | Beta |
 | `grouped-data-view` | Grouped data view — items grouped by column key with per-group pages-table rendering | Beta |
+| `preferences-editor` | Preferences editor — tree-table UI for scope-aware preference management | Beta |
+
+**Work items:**
+
+| Component | Purpose | Maturity |
+|-----------|---------|----------|
 | `work-item-inbox` | Work item inbox — queue pill bar, filter bar, SSE lifecycle, three-tab perspective (My Work / Claimable / All) | Beta |
 | `work-item-detail` | Work item detail panel — action bar, activity tab, relations tab with semantic type inverses | Beta |
 | `work-item-workbench` | Full workbench — split-pane layout with inbox and detail, keyboard shortcuts | Beta |
+| `worker-task-pane` | Worker task pane — specialist task queue with context tabs, workspace registry, response/claim/decline form, optional SSE push | Beta |
+| `work-item-row` | Single work item row (legacy — inbox now uses pages-table) | Deprecated |
+
+**Agent configuration:**
+
+| Component | Purpose | Maturity |
+|-----------|---------|----------|
+| `agent-catalog` | Agent template catalog — browsable grid of pre-built agent configs (8 professions, 42 roles, ~120 variants), fuzzy search, featured picks, emits `catalog:template:selected` | Beta |
+| `agent-manifest-editor` | Agent manifest editor — LLM provider/model/credential configuration, provider presets (Anthropic/OpenAI/Google/Ollama), model alias configuration, inference sliders, test connection, manifest YAML preview | Beta |
+| `agent-personality-workbench` | Agent personality workbench — tabbed composition of agent-catalog (Templates) and avatar-step (Advanced) with shared agent-profile-panel, collection bar, group toggle | Beta |
+| `agent-profile` | Agent profile — compact agent identity display | Beta |
+| `agent-profile-panel` | Agent profile panel — personality profile display with profession/role/framework pickers (MBTI, Enneagram, DISC, SDI, Belbin, Big Five), lock toggles, disposition axes, behavioral tendencies | Beta |
+| `agent-relationship-editor` | Agent relationship editor — three-tab view (Table/Arc/Diagram) for org relationships, grouped-by-kind CRUD, SVG arc diagram, org-diagram composition | Beta |
+| `avatar-step` | Avatar personality wizard step — faceted personality selector (6 frameworks), profession presets, 4 avatar collections, archetype grid with filtering, disposition derivation | Beta |
+
+**Notifications & SLA:**
+
+| Component | Purpose | Maturity |
+|-----------|---------|----------|
 | `notification-inbox` | Notification inbox — bell with unread badge, inbox with tabs/filters/SSE, subscription list CRUD | Beta |
 | `sla-indicator` | SLA deadline indicator — countdown, breach state, escalation badge, threshold-based colour transitions | Stable |
+| `sla-breach-policy` | SLA breach escalation tiers — active tier highlighting, optional live countdown | Beta |
 | `kpi-metric-row` | KPI metric cards — responsive grid with sparklines, trends, status colours, density property | Stable |
-| `approval-gate` | Approval gate — structured decision point with quorum, evidence slots, SLA integration | Beta |
-| `audit-trail-viewer` | Audit trail viewer — ledger entries with pages-table, Merkle verification banner, attestations, filters, GDPR erasure handling | Beta |
-| `agency-timeline` | CaseHub timeline — extends PagesEventTimeline with tenancy header mapping and domain strategies | Beta |
-| `trust-score-panel` | Agent trust score visualisation — Bayesian Beta scores, trend lines, per-capability breakdown | Beta |
-| `channel-activity` | Qhorus channel activity — message feed, channel nav, member panel, speech-act badges | Beta |
-| `commitment-viz` | Commitment lifecycle visualization — state pills, transition badges, range bars | Beta |
+
+**Trust & compliance:**
+
+| Component | Purpose | Maturity |
+|-----------|---------|----------|
+| `trust-score-panel` | Agent trust score visualisation — SVG gauge, trend lines, per-capability breakdown, compact badge mode | Beta |
+| `trust-feedback-display` | Post-gate trust score delta — decision, attestation, trust before/after with compact mode | Beta |
+| `trust-workbench` | Composite trust visibility — score panel + list-pane (left), routing rationale + feedback (right) in split-workbench | Beta |
+| `routing-rationale` | Trust-weighted routing decision explanation — score vs threshold, alternatives, phases | Beta |
 | `similarity-panel` | Similar past cases — similarity scores, outcomes, resolution times via pages-table | Beta |
 | `compliance-summary` | Regulation compliance grid — status badges, evidence links via pages-table | Beta |
-| `trust-feedback-display` | Post-gate trust score delta — decision, attestation, trust before/after with compact mode | Beta |
-| `sla-breach-policy` | SLA breach escalation tiers — active tier highlighting, optional live countdown | Beta |
-| `gdpr-erasure-action` | GDPR data erasure form — subject lookup, reason selection, confirmation dialog, receipt | Beta |
+| `approval-gate` | Approval gate — structured decision point with quorum, evidence slots, SLA integration | Beta |
+| `gdpr-erasure-action` | GDPR data erasure form — three-phase (input/confirmation/receipt), customisable subject label and reason options | Beta |
+
+**Case & diagrams:**
+
+| Component | Purpose | Maturity |
+|-----------|---------|----------|
+| `casehub-diagram` | Visual diagram editor for CaseDefinition YAML — extends DiagramBaseMixin, case-specific palette, property panel, structural editing, runtime overlay with status badges | Beta |
+| `case-flow-viewer` | Read-only case flow DAG viewer — extends DiagramBaseMixin in readonly mode, trust score pills, adaptive decision badges, parallel group ELK partitioning | Beta |
 | `case-explorer` | Composable case explorer — universal entity browser with registration, state/command SPI, management actions | Beta |
-| `preferences-editor` | Preferences editor — tree-table UI for scope-aware preference management | Beta |
-| `routing-rationale` | Trust-weighted routing decision explanation — score vs threshold, alternatives, phases | Beta |
-| `session-list` | Session list — filterable session table with status badges | Beta |
-| `session-detail` | Session detail panel — session metadata, activity log, state display | Beta |
-| `session-workbench` | Session workbench — split-pane layout with session list and detail panels | Beta |
-| `execution-monitor` | Execution monitor — SSE-driven live execution state with agent roster | Beta |
+| `case-dependency-graph` | Case relationship graph — force-directed graph of case relationships, relationship type registry, edge type filter toolbar, DOT export | Beta |
+| `swf-diagram` | Standalone SWF workflow diagram — extends DiagramBaseMixin, schema-driven property editing, degraded mode banner | Beta |
+| `org-diagram` | Eidos org structure diagram — extends DiagramBaseMixin, LayoutEngine-driven layout (10 ELK strategies), stencil palette, property panel, chip bar toggles (ESC/SUP/ATT/LGD) | Beta |
+| `htn-diagram` | HTN task diagram — extends DiagramBaseMixin for HTN/DAG task network visualization | Beta |
+| `diagram-workbench` | Diagram workbench — split-pane composition of casehub-diagram + swf-diagram with worker drill-down | Beta |
+| `desired-state-graph` | Desired state graph — deployment topology with desired-vs-actual state decorations, adapter and toolbar | Beta |
+
+**Agency & orchestration:**
+
+| Component | Purpose | Maturity |
+|-----------|---------|----------|
+| `agency-dag-viewer` | DAG execution graph viewer — read-only graph with ELK layout, dispatch mode badge, summary stats, staleness timer | Beta |
+| `agency-decomposition-tree` | HTN decomposition tree — recursive ARIA tree for CompoundTask/DecompositionMethod/children hierarchy, strategy badges | Beta |
+| `agency-plan-item-tree` | PlanItemDefinition tree — recursive ARIA tree for Primitive/Compound hierarchy, CompletionSemantics badges, DispatchMode pills | Beta |
+| `agency-plan-model-dashboard` | CasePlanModel dashboard — card-based grid: agenda table, focus area, resource budget, sub-case list, progress bars | Beta |
+| `execution-monitor` | Execution monitor — SSE-driven live execution state with agent roster, pattern badge, staleness detection | Beta |
 | `orchestration-workbench` | Orchestration workbench — execution monitor + audit timeline in split-workbench | Beta |
-| `trust-workbench` | Composite trust visibility — score panel, routing history, feedback display | Beta |
+
+**Channel & conversation:**
+
+| Component | Purpose | Maturity |
+|-----------|---------|----------|
+| `channel-activity` | Qhorus channel activity — message feed with sender grouping and threading, channel nav, member panel, speech-act badges | Beta |
+| `commitment-viz` | Commitment lifecycle visualization — state pills, transition badges, range bars (compact/detailed modes) | Beta |
+| `conversation-viewer` | Conversation protocol viewer — convergence indicator, common ground panel, point list, point detail, conversation workbench | Beta |
+
+**Audit & events:**
+
+| Component | Purpose | Maturity |
+|-----------|---------|----------|
+| `audit-trail-viewer` | Audit trail viewer — ledger entries with pages-table, Merkle verification banner, attestations, GDPR erasure handling | Beta |
+| `event-trail` | Event trail — composable event list with pages-filter-bar + pages-table, client-side chip/entity filtering, dual data mode | Beta |
+| `agency-timeline` | CaseHub timeline — extends PagesEventTimeline with tenancy header mapping and domain strategies | Beta |
+| `summarisation-timeline` | Summarisation pipeline timeline — four-lane viewer (L1 events, L2 episodes, L3 phases, L4 narrative) with density clustering, SVG lineage overlay, brush zoom | Beta |
+| `narrative-timeline` | Narrative timeline — narrative-level timeline visualization | Beta |
+
+**Evolution:**
+
+| Component | Purpose | Maturity |
+|-----------|---------|----------|
+| `evolution-config` | Evolution conductor components — deny-pattern-editor, watch-pattern-editor, gate-policy-editor, EvolutionStreams, EvolutionInbox | Beta |
+| `evolution-workbench` | Evolution conductor dashboard — KPI summary bar + tabbed content (Streams, Inbox, Audit, Configuration, Health) | Beta |
+
+**Infrastructure & ops:**
+
+| Component | Purpose | Maturity |
+|-----------|---------|----------|
+| `service-card` | Per-service health card — status badge, replicas, image, per-cluster deployment status | Beta |
+| `cluster-panel` | Cluster management panel — cluster list, registration form, connectivity test, delete | Beta |
+| `reconciliation-status` | Desired vs actual reconciliation — per-cluster sections with per-node status grid, SSE push updates | Beta |
+| `dimension-dashboard` | Multi-dimension status dashboard — N dimensions with severity badges, active response counts | Beta |
+| `topology-viewer` | Service dependency DAG — topology graph with status-coloured nodes, replica badges, edge labels | Beta |
+
+**Sessions:**
+
+| Component | Purpose | Maturity |
+|-----------|---------|----------|
+| `session-list` | Session list — claudony session table with status badges, inline spawn form, delete/restart actions | Beta |
+| `session-detail` | Session detail panel — tabbed view: Terminal, Git, Health, Events tabs | Beta |
+| `session-workbench` | Session workbench — split-pane layout with session list and detail panels | Beta |
+
+**Document review:**
+
+| Component | Purpose | Maturity |
+|-----------|---------|----------|
 | `document-workbench` | Document review workbench — 9 panels for AI-assisted document review: debate feed, document diff, timeline, review tracker, brainstorm options/picker, context gauge, doc picker, workspace status | Beta |
-| `conversation-viewer` | Conversation protocol viewer — convergence indicator, common ground panel, point list, point detail, conversation workbench. Structured deliberation UI with property-based data delivery. | Beta |
-| `casehub-diagram` | Visual diagram editor for CaseDefinition YAML — extends DiagramBaseMixin, case-specific palette, property panel with binding target selector + worker function type editor (agent/a2a/mcp/sequence/flow sub-forms, pop-out prompt dialog), structural editing, runtime overlay with status badges, worker inline expand | Beta |
-| `swf-diagram` | Standalone SWF workflow diagram — extends DiagramBaseMixin, schema-driven property editing, degraded mode banner. Read-only + property editing (no structural editing). | Beta |
-| `agency-case-flow-viewer` | Read-only case flow DAG viewer — extends DiagramBaseMixin in readonly mode, composes toGraph + toDecorations from graph-stencil-case. Trust score pills, adaptive decision badges, parallel group ELK partitioning. Toolbar with stats, staleness, export. | Beta |
-| `work-item-row` | Single work item row (legacy — inbox now uses pages-table) | Deprecated |
+
+**Project & contributor:**
+
+| Component | Purpose | Maturity |
+|-----------|---------|----------|
+| `project-dashboard` | Project dashboard — layer summary with health indicators, overall project health computation | Beta |
+| `completeness-matrix` | Completeness matrix — coverage grid showing completeness across dimensions | Beta |
+| `contributor-workbench` | Contributor workbench — intake classification, contributor detail, outcome summary | Beta |
 
 **Maturity levels:**
 - **Stable** — API locked, used in production apps, full test coverage
@@ -115,7 +220,7 @@ Generic status pill for any domain's state enum. Replaces ad-hoc `_statusColors`
 | `size` | `'sm' \| 'md'` | `'sm'` | Pill size |
 | `showIcon` | `boolean` | `false` | Show state icon |
 
-Built-in domains: `case`, `task`, `workitem`, `work`, `milestone`, `outcome`, `group`, `sla`, `node`, `session`, `commitment`.
+Built-in domains (14 in mosaic-core): `case`, `task`, `workitem`, `work`, `milestone`, `outcome`, `group`, `sla`, `node`, `session`, `commitment`, `execution`, `agent`, `pattern`. Additionally, `conversation` and `epistemic` are registered by conversation-viewer.
 
 ### audit-trail-viewer
 
@@ -259,7 +364,7 @@ const decorations = toDecorations(runtimeState);
 
 ### swf-diagram + graph-stencil-swf
 
-Standalone SWF workflow diagram component. `swf-diagram` extends `DiagramBaseMixin` from `diagram-core` and delegates to `graph-stencil-swf` for adapter, stencils, property editing, and schema.
+Standalone SWF workflow diagram component. `swf-diagram` extends `DiagramBaseMixin` from `@casehubio/pages-diagram-core` and delegates to `graph-stencil-swf` for adapter, stencils, property editing, and schema.
 
 **Properties:**
 
@@ -286,7 +391,7 @@ registerThumbnailRenderer('swf', createSwfThumbnailRenderer());
 
 **Worker function types:** Worker stencils display a coloured badge indicating the function type (agent, flow, a2a, mcp, seq, ext). The property panel shows a function type selector and type-specific configuration forms when a worker node is selected. Supported types: Agent (prompt, model provider config), A2A (endpoint, skill, auth), MCP (stdio/HTTP transport, auth), Sequence (ordered worker list with drag-reorder), Flow (drill-down to SWF diagram). Unknown function keys render as read-only JSON. The `casehub-diagram-properties` component accepts `selectedType` and `workerNames` properties to enable the function section.
 
-### agency-case-flow-viewer
+### case-flow-viewer
 
 Read-only case flow DAG viewer — the viewer counterpart to `casehub-diagram`. Composes the same rendering pipeline (`toGraph`, `toDecorations`, case stencils, ELK layout, `pages-graph-canvas`) without the editor machinery.
 
@@ -335,8 +440,8 @@ Lit mixin for time-series trend data. Adds trend endpoint, provides `TrendPoint[
 
 ## Dependencies
 
-- `casehub-pages` — `@casehubio/pages-data`, `@casehubio/pages-component`, `@casehubio/pages-ui-tokens`, `@casehubio/pages-primitives` (a11y mixins, pages-modal, focus trap), `@casehubio/pages-table` (data table component), `@casehubio/pages-ui-components`, `@casehubio/pages-viz`
-- `@casehubio/graph-core` — graph editor core (used by graph-stencil-case and graph-stencil-swf)
+- `casehub-pages` — `@casehubio/pages-data`, `@casehubio/pages-component`, `@casehubio/pages-ui-tokens`, `@casehubio/pages-primitives` (a11y mixins, pages-modal, focus trap), `@casehubio/pages-table` (data table component), `@casehubio/pages-ui-components`, `@casehubio/pages-viz`, `@casehubio/pages-diagram-core` (DiagramBaseMixin, toolbar, properties), `@casehubio/pages-lsp` (YAML language server)
+- `@casehubio/graph-core` — graph editor core (used by graph-stencil-case, graph-stencil-swf, graph-stencil-htn, graph-stencil-org)
 - `@openworkflowspec/sdk` — SWF workflow spec SDK (used by graph-stencil-swf)
 
 All casehub-pages dependencies are resolved via Yarn portal resolutions pointing to `.casehub-packages/`.
