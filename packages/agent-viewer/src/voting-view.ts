@@ -1,12 +1,12 @@
 import { LitElement, html, css, nothing, type TemplateResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import type { PatternSpec } from './pattern-types.js';
+import type { DeliberationPatternCategory } from '@casehubio/blocks-ui-core';
 // flow is vertical through levels — CSS indicators, not SVG arrows
 import './agent-card.js';
 
 @customElement('voting-view')
 export class VotingView extends LitElement {
-  @property({ attribute: false }) pattern!: PatternSpec;
+  @property({ attribute: false }) pattern!: DeliberationPatternCategory;
 
   static override styles = css`
     :host {
