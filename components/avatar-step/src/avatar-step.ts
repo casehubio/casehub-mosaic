@@ -1,7 +1,7 @@
 import { LitElement, html, css, nothing, type PropertyValues } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { ARCHETYPE_CONFIGS, ARCHETYPE_FAMILIES, listCollections } from '@casehubio/agent-avatar-2d';
+import { ARCHETYPE_CONFIGS, ARCHETYPE_FAMILIES, listCollections } from '@casehubio/mosaic-agent-avatar-2d';
 
 import { getCompatibleArchetypes, getValidFrameworkValues, getValidBigFivePoles } from './filter.js';
 import type { MatchTier } from './filter.js';
@@ -13,7 +13,7 @@ import { buildSummaryText, BIG_FIVE_DIMS, BIG_FIVE_LABELS, FRAMEWORK_LABELS } fr
 import { deriveDispositions, deriveTendencies, DISPOSITION_TIPS } from './data/disposition-mapping.js';
 import { FRAMEWORK_TOOLTIPS } from './data/framework-tooltips.js';
 import { initProfile } from './data/profile-derivation.js';
-import type { PersonalityProfile } from '@casehubio/blocks-ui-core';
+import type { PersonalityProfile } from '@casehubio/mosaic-core';
 
 const FAMILIES = ARCHETYPE_FAMILIES as readonly string[];
 const SINGLE_FRAMEWORKS: PersonalityFramework[] = ['mbti', 'enneagram', 'disc', 'belbin', 'sdi'];

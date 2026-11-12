@@ -2,7 +2,7 @@ import { LitElement, html, css, nothing } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import type { TransitionRecord } from './types.js';
 import '@casehubio/pages-ui-components';
-import { formatTimestamp } from '@casehubio/blocks-ui-core';
+import { formatTimestamp } from '@casehubio/mosaic-core';
 
 export interface CommitmentTransitionBadgeProps {
   transition?: TransitionRecord;

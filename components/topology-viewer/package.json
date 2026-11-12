@@ -1,5 +1,5 @@
 {
-  "name": "@casehubio/blocks-ui-topology-viewer",
+  "name": "@casehubio/mosaic-topology-viewer",
   "version": "0.1.0",
   "description": "Service dependency DAG — topology graph with status badges and SSE live updates",
   "repository": {
@@ -19,9 +19,9 @@
     "clean": "rimraf dist"
   },
   "dependencies": {
-    "@casehubio/blocks-ui-core": "workspace:*",
     "@casehubio/graph-core": "*",
     "@casehubio/graph-renderer": "*",
+    "@casehubio/mosaic-core": "workspace:*",
     "@casehubio/pages-data": "*",
     "lit": "^3.2.1"
   },

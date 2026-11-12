@@ -1,5 +1,5 @@
 {
-  "name": "@casehubio/blocks-ui-work-item-detail",
+  "name": "@casehubio/mosaic-work-item-detail",
   "version": "0.2.2",
   "type": "module",
   "main": "./dist/index.js",
@@ -17,7 +17,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@casehubio/blocks-ui-core": "workspace:*",
+    "@casehubio/mosaic-core": "workspace:*",
     "@casehubio/pages-primitives": "*",
     "lit": "^3.1.0"
   },

@@ -35,7 +35,7 @@ describe('schema staleness', () => {
     });
     for (const file of GENERATED_FILES) {
       const after = readFileSync(resolve(schemasDir, file), 'utf-8');
-      expect(after, `${file} is stale — run 'yarn workspace @casehubio/lsp-schemas run generate' to update`).toBe(before.get(file));
+      expect(after, `${file} is stale — run 'yarn workspace @casehubio/mosaic-lsp-schemas run generate' to update`).toBe(before.get(file));
     }
   });
 });

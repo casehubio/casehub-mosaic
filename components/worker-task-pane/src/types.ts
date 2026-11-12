@@ -1,4 +1,4 @@
-import type { TabDefinition } from '@casehubio/blocks-ui-detail-pane';
+import type { TabDefinition } from '@casehubio/mosaic-detail-pane';
 
 export type { TabDefinition };
 

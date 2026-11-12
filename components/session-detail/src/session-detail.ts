@@ -6,8 +6,8 @@ import '@casehubio/pages-table';
 import { fromRows } from '@casehubio/pages-data';
 import { columnId, ColumnType } from '@casehubio/pages-data';
 import type { TypedDataSet } from '@casehubio/pages-data';
-import type { GitStatusResponse, PortStatus } from '@casehubio/blocks-ui-session-list';
-import { SessionEventTopics } from '@casehubio/blocks-ui-session-list';
+import type { GitStatusResponse, PortStatus } from '@casehubio/mosaic-session-list';
+import { SessionEventTopics } from '@casehubio/mosaic-session-list';
 
 type TabId = 'terminal' | 'git' | 'health' | 'events';
 

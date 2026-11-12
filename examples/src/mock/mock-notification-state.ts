@@ -8,7 +8,7 @@ import type {
   NotificationPreferences,
   Snooze,
   SnoozeInput,
-} from '@casehubio/blocks-ui-notification-inbox';
+} from '@casehubio/mosaic-notification-inbox';
 import { MockSSESource } from './mock-sse.js';
 
 interface EventTypeFieldDescriptor {

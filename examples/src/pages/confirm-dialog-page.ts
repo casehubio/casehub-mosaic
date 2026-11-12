@@ -1,6 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
-import '@casehubio/blocks-ui-core';
+import '@casehubio/mosaic-core';
 
 @customElement('blocks-example-confirm-dialog')
 export class ConfirmDialogPage extends LitElement {

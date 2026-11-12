@@ -1,18 +1,18 @@
 import { LitElement, html, css, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { onPagesEvent } from '@casehubio/pages-data';
-import type { TabDefinition } from '@casehubio/blocks-ui-detail-pane';
-import '@casehubio/blocks-ui-detail-pane';
-import '@casehubio/blocks-ui-kpi-metric-row';
-import '@casehubio/blocks-ui-evolution-config';
-import '@casehubio/blocks-ui-audit-trail-viewer';
-import '@casehubio/blocks-ui-trust-score-panel';
+import type { TabDefinition } from '@casehubio/mosaic-detail-pane';
+import '@casehubio/mosaic-detail-pane';
+import '@casehubio/mosaic-kpi-metric-row';
+import '@casehubio/mosaic-evolution-config';
+import '@casehubio/mosaic-audit-trail-viewer';
+import '@casehubio/mosaic-trust-score-panel';
 import type {
   EvolutionStateSnapshot, ImprovementStreamView, ConductorInboxEntry,
   DenyPatternView, WatchPattern, StageDescriptor, CategoryDescriptor,
   GatePolicy,
-} from '@casehubio/blocks-ui-evolution-config';
-import { EvolutionApi, EvolutionEventTopics } from '@casehubio/blocks-ui-evolution-config';
+} from '@casehubio/mosaic-evolution-config';
+import { EvolutionApi, EvolutionEventTopics } from '@casehubio/mosaic-evolution-config';
 
 export interface EvolutionWorkbenchProps {
   endpoint?: string;

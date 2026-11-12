@@ -16,20 +16,15 @@ export { AgentCard } from './agent-card.js';
 export { VotingView } from './voting-view.js';
 export { DebateView } from './debate-view.js';
 export type {
-  PatternCategory,
-  PatternCategoryName,
-  AgencyCategoryName,
-  OrchestrationPatternCategory,
-  OrchestrationPatternType,
-  DeliberationPatternCategory,
-  DeliberationPatternType,
+  PatternType,
+  PatternSpec,
   AgentRef,
   AgentRefType,
   AggregationSpec,
   TerminationSpec,
   JudgmentSpec,
   FailurePolicy,
-} from '@casehubio/blocks-ui-core';
+} from './pattern-types.js';
 
 export { AgentViewer } from './agent-viewer.js';
 export type { AgentTab, AgentViewerData, BreadcrumbBackDetail } from './agent-viewer.js';

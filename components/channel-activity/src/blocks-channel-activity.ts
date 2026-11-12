@@ -15,7 +15,7 @@ import type {
   QhorusChannel, QhorusMessage, QhorusTopic, ChannelMember,
   PresenceState, Reaction, ActorType, ArtefactRef, MessageType,
 } from './types.js';
-import type { CommitmentRecord } from '@casehubio/blocks-ui-core';
+import type { CommitmentRecord } from '@casehubio/mosaic-core';
 import type { ChannelTree } from './channel-state-controller.js';
 import './channel-feed.js';
 import './channel-nav.js';

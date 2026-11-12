@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
-import type { WorkItemResponse } from '@casehubio/blocks-ui-core';
+import type { WorkItemResponse } from '@casehubio/mosaic-core';
 import './work-item-row.js';
 
 const mockItem: WorkItemResponse = {

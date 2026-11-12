@@ -1,5 +1,5 @@
 {
-  "name": "@casehubio/blocks-ui-blocks-plan-item-tree",
+  "name": "@casehubio/mosaic-blocks-plan-item-tree",
   "version": "0.1.0",
   "description": "PlanItemDefinition tree with CompletionSemantics badges and DispatchMode pills",
   "repository": {
@@ -25,8 +25,8 @@
     "vitest": "^3.0.0"
   },
   "dependencies": {
-    "@casehubio/blocks-ui-core": "workspace:*",
-    "@casehubio/graph-stencil-htn": "workspace:*",
+    "@casehubio/mosaic-core": "workspace:*",
+    "@casehubio/mosaic-graph-stencil-htn": "workspace:*",
     "lit": "^3.3.3"
   },
   "license": "Apache-2.0"

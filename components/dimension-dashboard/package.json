@@ -1,5 +1,5 @@
 {
-  "name": "@casehubio/blocks-ui-dimension-dashboard",
+  "name": "@casehubio/mosaic-dimension-dashboard",
   "version": "0.1.0",
   "description": "Multi-dimension status dashboard — status indicators, severity badges, compact layout",
   "repository": {
@@ -19,7 +19,7 @@
     "clean": "rimraf dist"
   },
   "dependencies": {
-    "@casehubio/blocks-ui-core": "workspace:*",
+    "@casehubio/mosaic-core": "workspace:*",
     "lit": "^3.2.1"
   },
   "devDependencies": {

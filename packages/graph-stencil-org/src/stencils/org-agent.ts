@@ -2,7 +2,7 @@ import { html, nothing } from 'lit-html';
 import type { GraphNode, NodeDecoration } from '@casehubio/graph-core';
 import type { OrgAgentNodeData, AgentCapability } from '../types.js';
 import { DISPOSITION_SHORT_NAMES } from '../layout/layout-rules.js';
-import '@casehubio/agent-avatar-2d';
+import '@casehubio/mosaic-agent-avatar-2d';
 
 const DISPOSITION_COLORS: Record<string, { bg: string; color: string }> = {
   autonomy: { bg: '#fed7d7', color: '#c53030' },

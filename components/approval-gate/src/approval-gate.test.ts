@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
-import type { WorkIdentity } from '@casehubio/blocks-ui-core';
+import type { WorkIdentity } from '@casehubio/mosaic-core';
 import type { OutcomeDefinition, QuorumConfig } from './approval-gate.js';
 import './approval-gate.js';
 

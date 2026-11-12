@@ -6,11 +6,11 @@ import { fromRows } from '@casehubio/pages-data';
 import { columnId, ColumnType } from '@casehubio/pages-data';
 import type { TypedDataSet, TypedRow, ColumnId as ColId } from '@casehubio/pages-data';
 import type { TableColumnConfig, ColumnRenderer } from '@casehubio/pages-table';
-import type { TabDefinition } from '@casehubio/blocks-ui-detail-pane';
-import type { WorkIdentity } from '@casehubio/blocks-ui-core';
+import type { TabDefinition } from '@casehubio/mosaic-detail-pane';
+import type { WorkIdentity } from '@casehubio/mosaic-core';
 import '@casehubio/pages-ui-components';
-import '@casehubio/blocks-ui-list-pane';
-import '@casehubio/blocks-ui-detail-pane';
+import '@casehubio/mosaic-list-pane';
+import '@casehubio/mosaic-detail-pane';
 import type {
   WorkerTaskResponse,
   WorkerTaskSubmission,

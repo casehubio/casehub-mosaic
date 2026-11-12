@@ -1,5 +1,5 @@
 {
-  "name": "@casehubio/blocks-ui-gdpr-erasure-action",
+  "name": "@casehubio/mosaic-gdpr-erasure-action",
   "version": "0.2.2",
   "description": "GDPR data erasure form — subject lookup, reason selection, confirmation dialog, receipt",
   "repository": {
@@ -19,7 +19,7 @@
     "clean": "rimraf dist"
   },
   "dependencies": {
-    "@casehubio/blocks-ui-core": "workspace:*",
+    "@casehubio/mosaic-core": "workspace:*",
     "@casehubio/pages-viz": "*",
     "lit": "^3.2.1"
   },

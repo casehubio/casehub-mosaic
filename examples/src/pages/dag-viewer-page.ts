@@ -1,7 +1,7 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
-import '@casehubio/blocks-ui-blocks-dag-viewer';
-import type { DagPlanSnapshot, DagResultSnapshot, DagDispatchMode } from '@casehubio/graph-stencil-htn';
+import '@casehubio/mosaic-blocks-dag-viewer';
+import type { DagPlanSnapshot, DagResultSnapshot, DagDispatchMode } from '@casehubio/mosaic-graph-stencil-htn';
 import mockData from '../../mock-data/dag-plan.json';
 
 const RESULT_SCENARIOS: Record<string, Record<string, { kind: string; reason?: string }>> = {

@@ -1,7 +1,7 @@
 import { LitElement, html, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import type { OrgAgentNodeData, AgentCapability, AgentGoal, AgentConstraint } from '@casehubio/graph-stencil-org';
-import { DISPOSITION_SHORT_NAMES } from '@casehubio/graph-stencil-org';
+import type { OrgAgentNodeData, AgentCapability, AgentGoal, AgentConstraint } from '@casehubio/mosaic-graph-stencil-org';
+import { DISPOSITION_SHORT_NAMES } from '@casehubio/mosaic-graph-stencil-org';
 
 const DISPOSITION_COLORS: Record<string, { bg: string; color: string }> = {
   autonomy: { bg: '#fed7d7', color: '#c53030' },

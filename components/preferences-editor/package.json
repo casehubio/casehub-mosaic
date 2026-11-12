@@ -1,5 +1,5 @@
 {
-  "name": "@casehubio/blocks-ui-preferences-editor",
+  "name": "@casehubio/mosaic-preferences-editor",
   "version": "0.1.0",
   "description": "Preferences editor — tree-table UI for scope-aware preference management",
   "repository": {
@@ -19,7 +19,7 @@
     "clean": "rimraf dist"
   },
   "dependencies": {
-    "@casehubio/blocks-ui-core": "workspace:*",
+    "@casehubio/mosaic-core": "workspace:*",
     "@casehubio/pages-data": "*",
     "@casehubio/pages-table": "*",
     "lit": "^3.2.1"

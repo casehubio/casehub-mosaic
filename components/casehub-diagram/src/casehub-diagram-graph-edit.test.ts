@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { addElement, removeElement } from '@casehubio/graph-stencil-case';
-import { toGraph } from '@casehubio/graph-stencil-case';
+import { addElement, removeElement } from '@casehubio/mosaic-graph-stencil-case';
+import { toGraph } from '@casehubio/mosaic-graph-stencil-case';
 
 const YAML = `dsl: "1.0.0"
 namespace: test

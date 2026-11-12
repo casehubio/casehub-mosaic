@@ -1,5 +1,5 @@
 {
-  "name": "@casehubio/blocks-ui-service-card",
+  "name": "@casehubio/mosaic-service-card",
   "version": "0.1.0",
   "description": "Per-service health card — status badge, replicas, image, per-cluster deployment status",
   "repository": {
@@ -19,7 +19,7 @@
     "clean": "rimraf dist"
   },
   "dependencies": {
-    "@casehubio/blocks-ui-core": "workspace:*",
+    "@casehubio/mosaic-core": "workspace:*",
     "lit": "^3.2.1"
   },
   "devDependencies": {

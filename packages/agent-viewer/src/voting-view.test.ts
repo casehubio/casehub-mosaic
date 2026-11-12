@@ -1,11 +1,10 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
-import type { DeliberationPatternCategory } from '@casehubio/blocks-ui-core';
+import type { PatternSpec } from './pattern-types.js';
 import './voting-view.js';
 import type { VotingView } from './voting-view.js';
 
-function fixture(): DeliberationPatternCategory {
+function fixture(): PatternSpec {
   return {
-    category: 'deliberation',
     type: 'voting',
     name: 'proposal-evaluation',
     description: 'Three evaluators assess proposals',

@@ -5,7 +5,7 @@ import { LiveRegionMixin } from '@casehubio/pages-primitives/a11y';
 import { fromRows } from '@casehubio/pages-data';
 import { ColumnType, columnId as toColumnId } from '@casehubio/pages-data';
 import type { TypedDataSet, ColumnId } from '@casehubio/pages-data';
-import '@casehubio/blocks-ui-list-pane';
+import '@casehubio/mosaic-list-pane';
 import type { TypedRow } from '@casehubio/pages-data';
 import type { EntityTypeRegistration, EntitySelection, FilterDescriptor } from './types.js';
 import { DEFAULT_READER, DEFAULT_RESPONSE_READER } from './readers.js';

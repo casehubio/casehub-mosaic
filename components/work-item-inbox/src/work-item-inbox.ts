@@ -14,14 +14,14 @@ import type {
   QueueScopeChangedPayload,
   QueueView,
   WorkItemQueueEvent,
-} from '@casehubio/blocks-ui-core';
+} from '@casehubio/mosaic-core';
 import { emitPagesEvent, onPagesEvent } from '@casehubio/pages-data';
 import { PagesConfirmDialog } from '@casehubio/pages-ui-components';
 import {
   WorkItemEventTopics,
   isActiveStatus,
   WorkEventType as WorkEventTypeEnum,
-} from '@casehubio/blocks-ui-core';
+} from '@casehubio/mosaic-core';
 import { KeyboardShortcutMixin, LiveRegionMixin } from '@casehubio/pages-primitives';
 import { EventStream } from '@casehubio/pages-data';
 import { PushMixin } from '@casehubio/pages-component';

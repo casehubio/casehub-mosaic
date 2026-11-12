@@ -1,6 +1,6 @@
 import { LitElement, html, css, type PropertyValues } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import type { WorkIdentity } from '@casehubio/blocks-ui-core';
+import type { WorkIdentity } from '@casehubio/mosaic-core';
 import { FocusTrapMixin, KeyboardShortcutMixin } from '@casehubio/pages-primitives/a11y';
 import { PushMixin } from '@casehubio/pages-component';
 import { NotificationApi } from './api.js';

@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-**Name:** casehub-blocks-ui
+**Name:** casehub-mosaic
 
 
 
@@ -11,7 +11,7 @@ type: custom
 ## Work Tracking
 
 Issue tracking: enabled
-GitHub repo: casehubio/blocks-ui
+GitHub repo: casehubio/casehub-mosaic
 Changelog: GitHub Releases
 
 ## What This Project Is
@@ -68,7 +68,7 @@ yarn typecheck
 
 | Path | Contents |
 |------|----------|
-| `packages/blocks-ui-core/` | Domain types (TrustLevel, trustLevelFromScore, CommitmentState, CommitmentRecord, commitmentStateCategory, isTerminalCommitmentState, toCommitmentRecord, toCommitmentMap), CommitmentStatePill + stateCategoryStyles (commitment-state-pill web component + category styling — promoted from commitment-viz), StatusBadge + status registry (generic status pill for all domains — lookupStatus/registerStatus with 15 built-in domains including execution/agent/pattern/conversation/epistemic, toDecoration for graph overlays), orchestration types (ExecutionState, ExecutionResult, AgentRef, AgentResult, PatternType, ExecutionModel, FailurePolicy, OrchestrationAuditEvent, ExecutionSnapshot), conversation protocol types (EpistemicStatus, ConvergenceState, ConvergenceSignal, CommonGroundState, GroundedFact, ConversationPoint, ConversationEntry, SubTaskFinding, FlagEntry, RoundMemo, ObligationChain, ConversationState), TransitionRecord (promoted from commitment-viz). Pages primitives (DataSourceMixin, emitPagesEvent, fetchSource, etc.) are imported directly from their canonical pages packages — not re-exported through blocks-ui-core. Rendering utilities (formatTimestamp, statusBorderColour, shared CSS: entryCardStyles, badgeStyles, roundDividerStyles, selectedHighlightStyles). |
+| `packages/mosaic-core/` | Domain types (TrustLevel, trustLevelFromScore, CommitmentState, CommitmentRecord, commitmentStateCategory, isTerminalCommitmentState, toCommitmentRecord, toCommitmentMap), CommitmentStatePill + stateCategoryStyles (commitment-state-pill web component + category styling — promoted from commitment-viz), StatusBadge + status registry (generic status pill for all domains — lookupStatus/registerStatus with 15 built-in domains including execution/agent/pattern/conversation/epistemic, toDecoration for graph overlays), orchestration types (ExecutionState, ExecutionResult, AgentRef, AgentResult, PatternType, ExecutionModel, FailurePolicy, OrchestrationAuditEvent, ExecutionSnapshot), conversation protocol types (EpistemicStatus, ConvergenceState, ConvergenceSignal, CommonGroundState, GroundedFact, ConversationPoint, ConversationEntry, SubTaskFinding, FlagEntry, RoundMemo, ObligationChain, ConversationState), TransitionRecord (promoted from commitment-viz). Pages primitives (DataSourceMixin, emitPagesEvent, fetchSource, etc.) are imported directly from their canonical pages packages — not re-exported through mosaic-core. Rendering utilities (formatTimestamp, statusBorderColour, shared CSS: entryCardStyles, badgeStyles, roundDividerStyles, selectedHighlightStyles). |
 | `packages/agent-avatar-2d/` | 2D avatar rendering — composable SVG parts system with layered builder (body→costume→head→hair→face→props), 48 archetype configs (12 families × 4 sub-archetypes), 4 collections (Mythic parts-based, Chibi/Donut Creek/Neon fixed SVG), collection registry with `listCollections()`, `PartsCollection \| FixedCollection` discriminated union, compact avatar identity codes. |
 | `packages/agent-viewer/` | Agent visualization components — eidos-view (agent descriptor with disposition bars, capabilities, goals), agent-card (compact agent reference), voting-view (multi-agent convergence pattern), debate-view (turn-based deliberation pattern), coordination-pipeline-view (coordination playbook as vertical pipeline with agent-delegate cards, signal/quorum barriers, parallel swim lanes, match/case routing, expression pills), agent-viewer (tabbed drill-down container). Gallery at `gallery.html` (run via Vite). |
 | `packages/blocks-ui-schema/` | Auto-generated Zod schemas for blocks-ui component properties. BlocksComponentRegistry maps element tag names to Props interfaces. ts-morph generator reads source via tsconfig paths, produces per-component schemas + blocksComponentSchemaMap. Staleness test ensures schemas stay in sync with interfaces. Registry completeness test catches new components missing entries. |
@@ -100,7 +100,7 @@ yarn typecheck
 | `components/trust-workbench/` | Trust workbench — composes trust-score-panel + list-pane (left) and routing-rationale + trust-feedback-display (right) in split-workbench. Capability drill-down filters routing history. Inline data mode for demos. Three consumption tiers. |
 | `components/sla-breach-policy/` | SLA breach escalation tiers — active tier highlighting, optional embedded sla-indicator countdown via deadline prop, shared pulseAnimation. Complements sla-indicator. Promoted from clinical. |
 | `components/gdpr-erasure-action/` | GDPR data erasure form — three-phase (input / confirmation / receipt), customisable subjectLabel and reasonOptions. Extends LitElement directly (no DataSourceMixin). Promoted from clinical. |
-| `components/commitment-viz/` | Commitment lifecycle visualization — transition badges, range bars (compact/detailed modes), decorateCommitmentRanges pure function for feed decoration metadata. Props-driven, decoupled from channel-activity. Types and commitment-state-pill re-exported from blocks-ui-core. |
+| `components/commitment-viz/` | Commitment lifecycle visualization — transition badges, range bars (compact/detailed modes), decorateCommitmentRanges pure function for feed decoration metadata. Props-driven, decoupled from channel-activity. Types and commitment-state-pill re-exported from mosaic-core. |
 | `components/channel-activity/` | Qhorus channel activity — message feed with sender grouping and threading, channel nav with keyboard navigation, member panel with presence, message input with speech-act type selector, emoji reactions, stale cursor detection. Convenience wrapper composes nav + feed + input + topic-bar in split-workbench with tabbed sidebar. Three tiers: standalone, panel-hosted, inline data. |
 | `components/case-flow-viewer/` | Case flow viewer — read-only case definition DAG with runtime decorations (trust score pills, adaptive decision badges, parallel groups). Extends DiagramBaseMixin in readonly mode. Toolbar with stats, staleness, case status badge, SVG/PNG export. |
 | `components/case-explorer/` | Composable case explorer — universal entity browser with registration-based entity types. Generic components: entity-list, entity-detail, entity-tree, entity-command-bar, case-explorer. Presets: caseInstanceType, workerType, caseDefinitionType, gateType, channelType. |

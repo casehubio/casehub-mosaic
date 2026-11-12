@@ -1,7 +1,7 @@
 import { LitElement, html, css, nothing, svg } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import type { AgentRelationship, RelationshipKind } from '@casehubio/graph-stencil-org';
-import { lookupRelationshipType } from '@casehubio/blocks-ui-core';
+import type { AgentRelationship, RelationshipKind } from '@casehubio/mosaic-graph-stencil-org';
+import { lookupRelationshipType } from '@casehubio/mosaic-core';
 import type { AgentRosterEntry } from './types.js';
 
 function kindToRegistryKey(kind: RelationshipKind): string {

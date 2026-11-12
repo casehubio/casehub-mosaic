@@ -1,6 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import '@casehubio/blocks-ui-document-workbench';
+import '@casehubio/mosaic-document-workbench';
 import { MOCK_BRAINSTORM_OPTIONS } from '../../mock-data/document-workbench.js';
 
 @customElement('blocks-example-brainstorm-options')

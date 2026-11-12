@@ -1,5 +1,5 @@
-import { ARCHETYPE_CONFIGS } from '@casehubio/agent-avatar-2d';
-import type { ArchetypeFamily } from '@casehubio/agent-avatar-2d';
+import { ARCHETYPE_CONFIGS } from '@casehubio/mosaic-agent-avatar-2d';
+import type { ArchetypeFamily } from '@casehubio/mosaic-agent-avatar-2d';
 import {
   FRAMEWORK_FAMILY_MAP, SUB_ARCHETYPE_RULES, ALL_FRAMEWORK_VALUES,
 } from './data/compatibility-matrix.js';

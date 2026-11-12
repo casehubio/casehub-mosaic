@@ -1,8 +1,8 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
-import { registerOrgStencils } from '@casehubio/graph-stencil-org';
-import type { AgentDescriptor } from '@casehubio/graph-stencil-org';
-import '@casehubio/blocks-ui-org-diagram';
+import { registerOrgStencils } from '@casehubio/mosaic-graph-stencil-org';
+import type { AgentDescriptor } from '@casehubio/mosaic-graph-stencil-org';
+import '@casehubio/mosaic-org-diagram';
 
 registerOrgStencils();
 

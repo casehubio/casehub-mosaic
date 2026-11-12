@@ -1,7 +1,7 @@
 // @vitest-environment jsdom
 import { describe, it, expect } from 'vitest';
 import { BlocksPlanItemTree, completionLabel, COMPLETION_COLORS } from './blocks-plan-item-tree.js';
-import type { PrimitivePlanItem, CompoundPlanItem, PlanItemDefinition } from '@casehubio/graph-stencil-htn';
+import type { PrimitivePlanItem, CompoundPlanItem, PlanItemDefinition } from '@casehubio/mosaic-graph-stencil-htn';
 
 function primitive(id: string, name: string, executor = 'exec-1'): PrimitivePlanItem {
   return { kind: 'primitive', id, name, executor: { name: executor } };

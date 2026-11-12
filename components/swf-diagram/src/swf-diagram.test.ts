@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeAll } from 'vitest';
-import { toSwfGraph, applySwfPropertyEdit, swfTaskSchema, insertSwfTask, spliceSwfTask, createSwfEditPolicy, registerSwfStencils } from '@casehubio/graph-stencil-swf';
+import { toSwfGraph, applySwfPropertyEdit, swfTaskSchema, insertSwfTask, spliceSwfTask, createSwfEditPolicy, registerSwfStencils } from '@casehubio/mosaic-graph-stencil-swf';
 import { SwfDiagram } from './swf-diagram.js';
 import { toReactFlowGraph } from '@casehubio/graph-renderer';
 import { readFileSync } from 'node:fs';

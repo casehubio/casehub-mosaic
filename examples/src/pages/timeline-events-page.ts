@@ -1,9 +1,9 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
-import '@casehubio/blocks-ui-blocks-timeline';
-import { eventChronologyStrategy } from '@casehubio/blocks-ui-blocks-timeline';
-import type { CaseEvent, PagedResponse, EventLogEntryResponse } from '@casehubio/blocks-ui-blocks-timeline';
-import type { EventTimelineLayout } from '@casehubio/blocks-ui-blocks-timeline';
+import '@casehubio/mosaic-blocks-timeline';
+import { eventChronologyStrategy } from '@casehubio/mosaic-blocks-timeline';
+import type { CaseEvent, PagedResponse, EventLogEntryResponse } from '@casehubio/mosaic-blocks-timeline';
+import type { EventTimelineLayout } from '@casehubio/mosaic-blocks-timeline';
 import mockEvents from '../../mock-data/case-events.json';
 
 @customElement('blocks-example-timeline-events')

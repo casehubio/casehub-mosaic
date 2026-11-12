@@ -178,12 +178,15 @@ export function computeCoordinationDiff(
 
   for (let i = 0; i < oldOrder.length; i++) {
     const key = oldOrder[i];
+    if (!key) continue;
     if (!consumed.has(key)) {
       const oldPhase = oldMap.get(key)!;
       let insertIdx = annotated.length;
       for (let j = i - 1; j >= 0; j--) {
-        if (consumed.has(oldOrder[j])) {
-          const matchIdx = annotated.findIndex(a => phaseKey(a.phase) === oldOrder[j]);
+        const prevKey = oldOrder[j];
+        if (!prevKey) continue;
+        if (consumed.has(prevKey)) {
+          const matchIdx = annotated.findIndex(a => phaseKey(a.phase) === prevKey);
           if (matchIdx >= 0) {
             insertIdx = matchIdx + 1;
             break;

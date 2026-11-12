@@ -1,5 +1,5 @@
 {
-  "name": "@casehubio/graph-stencil-case",
+  "name": "@casehubio/mosaic-graph-stencil-case",
   "version": "0.1.0",
   "description": "Case domain adapter and structural stencils for graph editor",
   "repository": {
@@ -32,9 +32,9 @@
   },
   "license": "Apache-2.0",
   "dependencies": {
-    "@casehubio/blocks-ui-core": "workspace:*",
     "@casehubio/graph-core": "*",
     "@casehubio/graph-renderer": "*",
+    "@casehubio/mosaic-core": "workspace:*",
     "@casehubio/pages-component": "*",
     "@casehubio/pages-diagram-core": "*",
     "@casehubio/pages-lsp": "*",

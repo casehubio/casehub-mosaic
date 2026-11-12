@@ -1,6 +1,6 @@
 import { LitElement, html, css, type TemplateResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import type { WorkItemResponse, WorkIdentity } from '@casehubio/blocks-ui-core';
+import type { WorkItemResponse, WorkIdentity } from '@casehubio/mosaic-core';
 
 @customElement('blocks-detail-action-bar')
 export class DetailActionBar extends LitElement {

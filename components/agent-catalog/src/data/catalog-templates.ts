@@ -1,6 +1,6 @@
-import { PROFESSION_PRESETS, PROFESSION_LIST, initProfile } from '@casehubio/avatar-step';
-import type { RoleVariant } from '@casehubio/avatar-step';
-import type { FullAgentDescriptor } from '@casehubio/blocks-ui-core';
+import { PROFESSION_PRESETS, PROFESSION_LIST, initProfile } from '@casehubio/mosaic-avatar-step';
+import type { RoleVariant } from '@casehubio/mosaic-avatar-step';
+import type { FullAgentDescriptor } from '@casehubio/mosaic-core';
 
 export interface CatalogTemplate {
   readonly id: string;

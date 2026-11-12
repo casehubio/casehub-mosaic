@@ -1,7 +1,7 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import type { WorkItemResponse } from '@casehubio/blocks-ui-core';
-import { formatTimestamp } from '@casehubio/blocks-ui-core';
+import type { WorkItemResponse } from '@casehubio/mosaic-core';
+import { formatTimestamp } from '@casehubio/mosaic-core';
 
 export interface WorkItemRowProps {
   item: WorkItemResponse;

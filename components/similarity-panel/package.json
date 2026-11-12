@@ -1,5 +1,5 @@
 {
-  "name": "@casehubio/blocks-ui-similarity-panel",
+  "name": "@casehubio/mosaic-similarity-panel",
   "version": "0.2.2",
   "description": "Similar past cases — similarity scores, outcomes, resolution times via pages-table",
   "repository": {
@@ -19,7 +19,7 @@
     "clean": "rimraf dist"
   },
   "dependencies": {
-    "@casehubio/blocks-ui-core": "workspace:*",
+    "@casehubio/mosaic-core": "workspace:*",
     "@casehubio/pages-data": "*",
     "@casehubio/pages-table": "*",
     "lit": "^3.2.1"

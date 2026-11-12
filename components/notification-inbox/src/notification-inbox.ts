@@ -1,6 +1,6 @@
 import { LitElement, html, css, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import type { WorkIdentity } from '@casehubio/blocks-ui-core';
+import type { WorkIdentity } from '@casehubio/mosaic-core';
 import { PagesConfirmDialog } from '@casehubio/pages-ui-components';
 import { KeyboardShortcutMixin, LiveRegionMixin } from '@casehubio/pages-primitives/a11y';
 import { PushMixin } from '@casehubio/pages-component';
@@ -13,7 +13,7 @@ import type { Notification, NotificationPage } from './types.js';
 import { NotificationApi } from './api.js';
 import { emitNotificationEvent, NotificationEventTopics } from './events.js';
 
-import { formatTimestamp } from '@casehubio/blocks-ui-core';
+import { formatTimestamp } from '@casehubio/mosaic-core';
 
 // --- Tab type ---
 

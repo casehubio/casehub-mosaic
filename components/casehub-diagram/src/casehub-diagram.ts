@@ -22,7 +22,7 @@ import {
   detectTargetType,
   toDecorations,
   FUNCTION_TYPE_TO_YAML_KEY,
-} from '@casehubio/graph-stencil-case';
+} from '@casehubio/mosaic-graph-stencil-case';
 import type {
   CaseRuntimeState,
   WorkerFunctionType,
@@ -30,13 +30,13 @@ import type {
   ModelProviderKey,
   TriggerType,
   TargetType,
-} from '@casehubio/graph-stencil-case';
+} from '@casehubio/mosaic-graph-stencil-case';
 import { toReactFlowGraph } from '@casehubio/graph-renderer';
 import type { ElkLayoutOptions, EditPolicy, GraphEdit } from '@casehubio/graph-renderer';
 import type { NodeDecoration } from '@casehubio/graph-core';
 import { edgesOf } from '@casehubio/graph-core';
 import { emitPagesEvent } from '@casehubio/pages-data';
-import { detectDiagramType } from '@casehubio/blocks-ui-core';
+import { detectDiagramType } from '@casehubio/mosaic-core';
 import { stringify, parseDocument } from 'yaml';
 import { DiagramBaseMixin } from '@casehubio/pages-diagram-core';
 import type { AdapterResult, LayoutResult } from '@casehubio/pages-diagram-core';

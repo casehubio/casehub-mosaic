@@ -1,6 +1,6 @@
 import { LitElement, html, css, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import type { PersonalityProfile, FullAgentDescriptor } from '@casehubio/blocks-ui-core';
+import type { PersonalityProfile, FullAgentDescriptor } from '@casehubio/mosaic-core';
 import { listCollections } from '../../../packages/agent-avatar-2d/src/collections/registry.js';
 import { getRolesForArchetype } from '../../avatar-step/src/data/compatibility-matrix.js';
 import '../../agent-catalog/src/agent-catalog.js';

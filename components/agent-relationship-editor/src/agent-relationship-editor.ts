@@ -1,10 +1,10 @@
 import { LitElement, html, css, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import type { AgentRelationship, RelationshipKind, AgentDescriptor } from '@casehubio/graph-stencil-org';
-import { toOrgYaml } from '@casehubio/graph-stencil-org';
-import { lookupRelationshipType } from '@casehubio/blocks-ui-core';
+import type { AgentRelationship, RelationshipKind, AgentDescriptor } from '@casehubio/mosaic-graph-stencil-org';
+import { toOrgYaml } from '@casehubio/mosaic-graph-stencil-org';
+import { lookupRelationshipType } from '@casehubio/mosaic-core';
 import type { RelationshipChangeset, AgentRosterEntry } from './types.js';
-import '@casehubio/agent-avatar-2d';
+import '@casehubio/mosaic-agent-avatar-2d';
 
 type ViewTab = 'table' | 'diagram';
 

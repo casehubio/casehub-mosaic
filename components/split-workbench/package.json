@@ -1,5 +1,5 @@
 {
-  "name": "@casehubio/blocks-ui-split-workbench",
+  "name": "@casehubio/mosaic-split-workbench",
   "version": "0.2.2",
   "description": "DEPRECATED — migrated to @casehubio/pages-ui-components/split-workbench",
   "repository": {

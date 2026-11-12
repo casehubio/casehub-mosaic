@@ -1,6 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
-import '@casehubio/blocks-ui-contributor-workbench';
+import '@casehubio/mosaic-contributor-workbench';
 import contributorData from '../../mock-data/contributor.json';
 
 const MOCK_ENDPOINT = '/mock-api/contributor';

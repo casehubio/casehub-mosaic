@@ -1,7 +1,7 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
-import '@casehubio/blocks-ui-preferences-editor';
-import type { ScopeNode, PreferenceSchemaDescriptor, PreferenceRecord } from '@casehubio/blocks-ui-preferences-editor';
+import '@casehubio/mosaic-preferences-editor';
+import type { ScopeNode, PreferenceSchemaDescriptor, PreferenceRecord } from '@casehubio/mosaic-preferences-editor';
 
 const MOCK_SCHEMA: PreferenceSchemaDescriptor[] = [
   { namespace: 'casehub.work', name: 'sla.default-hours', qualifiedName: 'casehub.work.sla.default-hours', type: 'integer', label: 'Default SLA hours', description: 'Hours before an SLA breach triggers escalation', defaultValue: '24', multiValue: false, constraints: { min: 1, max: 720 }, options: [] },

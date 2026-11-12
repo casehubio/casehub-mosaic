@@ -1,7 +1,7 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
-import type { WorkItemResponse } from '@casehubio/blocks-ui-core';
-import '@casehubio/blocks-ui-work-item-row';
+import type { WorkItemResponse } from '@casehubio/mosaic-core';
+import '@casehubio/mosaic-work-item-row';
 
 @customElement('blocks-example-row')
 export class RowPage extends LitElement {

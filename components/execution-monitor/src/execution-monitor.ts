@@ -6,9 +6,9 @@ import { emitPagesEvent } from '@casehubio/pages-data';
 import { PushMixin } from '@casehubio/pages-component';
 import type {
   ExecutionSnapshot, ExecutionState, AgentRef, AgentResult,
-  ExecutionModel, PatternCategoryName,
-} from '@casehubio/blocks-ui-core';
-import '@casehubio/blocks-ui-core';
+  ExecutionModel, PatternType,
+} from '@casehubio/mosaic-core';
+import '@casehubio/mosaic-core';
 
 export const ExecutionMonitorTopics = {
   AGENT_SELECTED: 'execution.agent-selected',
@@ -87,7 +87,7 @@ export class ExecutionMonitor extends PushMixin(LiveRegionMixin(LitElement)) {
   }
 
   private _isTerminal(state: ExecutionState): boolean {
-    return state === 'complete' || state === 'faulted' || state === 'cancelled';
+    return state === 'COMPLETE' || state === 'FAULTED' || state === 'CANCELLED';
   }
 
   private _handleAgentClick(agent: AgentRef): void {
@@ -99,7 +99,7 @@ export class ExecutionMonitor extends PushMixin(LiveRegionMixin(LitElement)) {
     return html`<pages-status-badge domain="execution" state=${state}></pages-status-badge>`;
   }
 
-  private _renderPatternBadge(pattern: PatternCategoryName): TemplateResult {
+  private _renderPatternBadge(pattern: PatternType): TemplateResult {
     return html`<pages-status-badge domain="pattern" state=${pattern}></pages-status-badge>`;
   }
 
@@ -174,7 +174,7 @@ export class ExecutionMonitor extends PushMixin(LiveRegionMixin(LitElement)) {
       return html`<div class="placeholder">No execution data</div>`;
     }
     const s = this._snapshot;
-    const showIteration = s.iteration != null && (s.model.pattern === 'deliberation' || s.model.pattern === 'orchestration');
+    const showIteration = s.iteration != null && (s.model.pattern === 'LOOP' || s.model.pattern === 'DEBATE');
 
     return html`
       ${this._stale ? html`<div class="stale-banner" role="alert">Data may be stale</div>` : ''}

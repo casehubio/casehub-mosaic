@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import './agent-relationship-editor.js';
-import type { AgentRelationship } from '@casehubio/graph-stencil-org';
+import type { AgentRelationship } from '@casehubio/mosaic-graph-stencil-org';
 import type { AgentRosterEntry } from './types.js';
 
 const SAMPLE_RELATIONSHIPS: AgentRelationship[] = [

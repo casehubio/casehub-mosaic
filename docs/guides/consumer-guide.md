@@ -1,15 +1,15 @@
-# casehub-blocks-ui — Consumer Guide
+# casehub-mosaic — Consumer Guide
 
 > Shared, domain-aware UI components for CaseHub applications — compose blocks into domain-specific dashboards without coupling to any single app's model.
 
-**GitHub:** [casehubio/blocks-ui](https://github.com/casehubio/blocks-ui)
+**GitHub:** [casehubio/casehub-mosaic](https://github.com/casehubio/casehub-mosaic)
 **Tier:** Platform (shared UI layer)
 
 ---
 
 ## Purpose
 
-blocks-ui provides reusable Web Components that multiple CaseHub applications share. Each component consumes `casehub-pages` APIs (`registerPanel`, `pages-event`, dataset contracts) but knows nothing about a specific app's domain model.
+casehub-mosaic provides reusable Web Components that multiple CaseHub applications share. Each component consumes `casehub-pages` APIs (`registerPanel`, `pages-event`, dataset contracts) but knows nothing about a specific app's domain model.
 
 Domain-aware but app-agnostic — components know about trust scores, case timelines, channel activity, work items, and audit trails, but not about AML investigations, clinical trials, or governance processes. Applications compose these blocks into domain-specific dashboards.
 
@@ -21,7 +21,7 @@ Domain-aware but app-agnostic — components know about trust scores, case timel
 
 | Package | npm name | Purpose | Maturity |
 |---------|----------|---------|----------|
-| `packages/blocks-ui-core` | `@casehubio/blocks-ui-core` | Tokens (re-exported from pages-ui-tokens), domain types (trust, commitment, orchestration, conversation, work-item), event helpers (re-exported from pages-component), CommitmentStatePill, StatusBadge (generic status pills), status registry (`lookupStatus`/`registerStatus`), `stateCategoryStyles`. Generic utilities (DataSourceMixin, TrendSourceMixin, renderSparkline, EventStreamController, SharedTimerController, confirm dialog, renderPropertyTree, pulseAnimation, fetchSource, EMPTY_DATASET) have moved to `@casehubio/pages-*` packages — re-exported here for backward compatibility. | Beta |
+| `packages/mosaic-core` | `@casehubio/casehub-mosaic-core` | Tokens (re-exported from pages-ui-tokens), domain types (trust, commitment, orchestration, conversation, work-item), event helpers (re-exported from pages-component), CommitmentStatePill, StatusBadge (generic status pills), status registry (`lookupStatus`/`registerStatus`), `stateCategoryStyles`. Generic utilities (DataSourceMixin, TrendSourceMixin, renderSparkline, EventStreamController, SharedTimerController, confirm dialog, renderPropertyTree, pulseAnimation, fetchSource, EMPTY_DATASET) have moved to `@casehubio/pages-*` packages — re-exported here for backward compatibility. | Beta |
 | `packages/graph-stencil-case` | `@casehubio/graph-stencil-case` | Case domain adapter, structural stencils (binding, worker with function type badge, milestone, goal, subcase), YAML editor (add/remove/edit/switchTarget/switchFunctionType/switchMcpTransport/switchModelProvider), worker-function module (type detection, config interfaces, form renderers), RuntimeAdapter (`toDecorations`), persistence SPI (`GitHubBackend`). | Beta |
 | `packages/diagram-core` | `@casehubio/diagram-core` | Shared diagram orchestration — DiagramBaseMixin (undo/redo, render pipeline, persistence, keyboard shortcuts, error/degraded/readonly modes, SVG/PNG export via `exportDiagram`), DiagramToolbar (includes Export SVG/PNG buttons), DiagramProperties, form utilities. | Beta |
 | `packages/graph-stencil-swf` | `@casehubio/graph-stencil-swf` | SWF domain adapter (`toSwfGraph` — dual YAML walk with SDK `buildFlatGraph`, type prefixing, degraded mode), 10 typed stencils + generic fallback, edge types (flow, switch-case), `applySwfPropertyEdit`, `swfTaskSchema`, `createSwfThumbnailRenderer`. Uses `@openworkflowspec/sdk`. | Beta |
@@ -339,6 +339,6 @@ Each page provides mock data and demonstrates the component's API surface standa
 
 - **No domain-specific logic** — components are domain-aware but app-agnostic. AML investigation rules, clinical trial protocols, and governance workflows belong in application repos.
 - **No direct component-to-component coupling** — all inter-component communication flows through `pages-event` CustomEvent.
-- **No layout framework** — blocks-ui provides composable panels, not full page layouts. Page-level layout is the responsibility of `casehub-pages`.
+- **No layout framework** — casehub-mosaic provides composable panels, not full page layouts. Page-level layout is the responsibility of `casehub-pages`.
 - **No backend services** — components consume REST endpoints and SSE streams but do not define backend APIs or database schemas.
 - **No graph rendering** — the graph stencil packages define domain adapters and stencil descriptors for the graph editor, but the graph editor itself (`@casehubio/graph-core`) lives in casehub-pages.

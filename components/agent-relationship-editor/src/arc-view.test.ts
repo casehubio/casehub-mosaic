@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import './arc-view.js';
-import type { AgentRelationship } from '@casehubio/graph-stencil-org';
+import type { AgentRelationship } from '@casehubio/mosaic-graph-stencil-org';
 import type { AgentRosterEntry } from './types.js';
 
 const SAMPLE_RELATIONSHIPS: AgentRelationship[] = [

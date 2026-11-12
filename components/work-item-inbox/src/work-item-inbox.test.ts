@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
-import type { WorkItemRootResponse, WorkIdentity } from '@casehubio/blocks-ui-core';
+import type { WorkItemRootResponse, WorkIdentity } from '@casehubio/mosaic-core';
 import './work-item-inbox.js';
 
 // Mock IntersectionObserver globally for all tests

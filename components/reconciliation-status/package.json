@@ -1,5 +1,5 @@
 {
-  "name": "@casehubio/blocks-ui-reconciliation-status",
+  "name": "@casehubio/mosaic-reconciliation-status",
   "version": "0.1.0",
   "description": "Reconciliation status — desired vs actual state diff with per-node status and SSE live updates",
   "repository": {
@@ -19,7 +19,7 @@
     "clean": "rimraf dist"
   },
   "dependencies": {
-    "@casehubio/blocks-ui-core": "workspace:*",
+    "@casehubio/mosaic-core": "workspace:*",
     "@casehubio/pages-data": "*",
     "lit": "^3.2.1"
   },

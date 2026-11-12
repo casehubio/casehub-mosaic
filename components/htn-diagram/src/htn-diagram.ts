@@ -1,11 +1,11 @@
 import { LitElement, html, nothing } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { stringify } from 'yaml';
-import { htnYamlToGraph, registerHtnStencils } from '@casehubio/graph-stencil-htn';
+import { htnYamlToGraph, registerHtnStencils } from '@casehubio/mosaic-graph-stencil-htn';
 import { DiagramBaseMixin } from '@casehubio/pages-diagram-core';
 import type { AdapterResult } from '@casehubio/pages-diagram-core';
 import { emitPagesEvent } from '@casehubio/pages-data';
-import { detectDiagramType } from '@casehubio/blocks-ui-core';
+import { detectDiagramType } from '@casehubio/mosaic-core';
 import '@casehubio/graph-renderer';
 
 @customElement('htn-diagram')

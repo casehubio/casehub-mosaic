@@ -4,7 +4,7 @@ import type { TemplateResult } from 'lit';
 import type {
   PlanItemDefinition, PrimitivePlanItem, CompoundPlanItem,
   CompletionSemantics,
-} from '@casehubio/graph-stencil-htn';
+} from '@casehubio/mosaic-graph-stencil-htn';
 
 function completionLabel(cs: CompletionSemantics): string {
   switch (cs.kind) {

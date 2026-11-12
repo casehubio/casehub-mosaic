@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { orchestrationEventsStrategy, orchestrationFilterCategory } from './orchestration-events.js';
-import type { OrchestrationAuditEvent } from '@casehubio/blocks-ui-core';
+import type { OrchestrationAuditEvent } from '@casehubio/mosaic-core';
 
 function makeEvent(
   eventType: OrchestrationAuditEvent['eventType'],

@@ -3,7 +3,7 @@ import { customElement, property } from 'lit/decorators.js';
 import '@casehubio/pages-ui-components';
 import type {
   CasePlanModelSnapshot, AgendaItem, SubCaseSnapshot, CompoundStatusSnapshot,
-} from '@casehubio/graph-stencil-htn';
+} from '@casehubio/mosaic-graph-stencil-htn';
 
 export interface PlanModelDashboardProps {
   planModel: CasePlanModelSnapshot | null;

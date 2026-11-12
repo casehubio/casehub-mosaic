@@ -2,7 +2,7 @@ import type {
   EvolutionStateSnapshot, ImprovementStreamView, ConductorInboxEntry,
   DenyPatternView, WatchPattern, StageDescriptor, CategoryDescriptor,
   GatePolicy,
-} from '@casehubio/blocks-ui-evolution-config';
+} from '@casehubio/mosaic-evolution-config';
 
 export const sampleState: EvolutionStateSnapshot = {
   caseId: '550e8400-e29b-41d4-a716-446655440000',

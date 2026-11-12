@@ -2,8 +2,8 @@ import { html } from 'lit';
 import { columnId, ColumnType } from '@casehubio/pages-data';
 import type { CellValue, ColumnId } from '@casehubio/pages-data';
 import type { TableColumnConfig, ColumnRenderer } from '@casehubio/pages-table';
-import { PHASE_STYLES } from '@casehubio/blocks-ui-routing-rationale';
-import { formatTimestamp } from '@casehubio/blocks-ui-core';
+import { PHASE_STYLES } from '@casehubio/mosaic-routing-rationale';
+import { formatTimestamp } from '@casehubio/mosaic-core';
 import type { RoutingDecisionSummary } from './types.js';
 
 export const ID_COL = columnId('id');

@@ -1,5 +1,5 @@
 {
-  "name": "@casehubio/blocks-ui-trust-workbench",
+  "name": "@casehubio/mosaic-trust-workbench",
   "version": "0.1.0",
   "description": "Composite trust visibility — score panel, routing history, feedback display",
   "repository": {
@@ -19,11 +19,11 @@
     "clean": "rimraf dist"
   },
   "dependencies": {
-    "@casehubio/blocks-ui-core": "workspace:*",
-    "@casehubio/blocks-ui-list-pane": "workspace:*",
-    "@casehubio/blocks-ui-routing-rationale": "workspace:*",
-    "@casehubio/blocks-ui-trust-feedback-display": "workspace:*",
-    "@casehubio/blocks-ui-trust-score-panel": "workspace:*",
+    "@casehubio/mosaic-core": "workspace:*",
+    "@casehubio/mosaic-list-pane": "workspace:*",
+    "@casehubio/mosaic-routing-rationale": "workspace:*",
+    "@casehubio/mosaic-trust-feedback-display": "workspace:*",
+    "@casehubio/mosaic-trust-score-panel": "workspace:*",
     "@casehubio/pages-data": "*",
     "@casehubio/pages-primitives": "*",
     "@casehubio/pages-table": "*",

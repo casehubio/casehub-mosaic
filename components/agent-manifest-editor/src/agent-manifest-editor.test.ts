@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import './agent-manifest-editor.js';
-import type { Manifest } from '@casehubio/blocks-ui-core';
+import type { Manifest } from '@casehubio/mosaic-core';
 
 type EditorEl = HTMLElement & {
   updateComplete: Promise<boolean>;

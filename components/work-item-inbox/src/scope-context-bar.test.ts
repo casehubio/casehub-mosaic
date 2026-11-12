@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import './scope-context-bar.js';
-import type { QueueView } from '@casehubio/blocks-ui-core';
+import type { QueueView } from '@casehubio/mosaic-core';
 
 describe('blocks-scope-context-bar', () => {
   let el: HTMLElement & { queue: QueueView | null };

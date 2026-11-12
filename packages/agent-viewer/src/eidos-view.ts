@@ -326,7 +326,7 @@ export class EidosView extends LitElement {
     `;
   }
 
-  private renderDispositionRow(axis: AxisEntry): TemplateResult {
+  private renderDispositionRow(axis: AxisEntry): TemplateResult | typeof nothing {
     const val = axis.value;
     if (typeof val === 'string') {
       return html`

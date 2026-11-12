@@ -5,7 +5,7 @@ import { existsSync } from 'fs';
 export default defineConfig({
   resolve: {
     alias: [
-      { find: '@casehubio/blocks-ui-core', replacement: path.resolve(__dirname, '../../packages/blocks-ui-core/src') },
+      { find: '@casehubio/mosaic-core', replacement: path.resolve(__dirname, '../../packages/blocks-ui-core/src') },
       ...(existsSync(path.resolve(__dirname, '../../../pages/packages/pages-data/src')) ? [{ find: '@casehubio/pages-data', replacement: path.resolve(__dirname, '../../../pages/packages/pages-data/src') }] : []),
     ],
   },

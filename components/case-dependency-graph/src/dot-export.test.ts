@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { toDOT } from './dot-export.js';
-import { registerRelationshipType } from '@casehubio/blocks-ui-core';
+import { registerRelationshipType } from '@casehubio/mosaic-core';
 import type { GraphModel } from '@casehubio/graph-core';
 
 describe('toDOT', () => {

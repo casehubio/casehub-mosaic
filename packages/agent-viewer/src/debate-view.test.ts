@@ -1,11 +1,10 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
-import type { DeliberationPatternCategory } from '@casehubio/blocks-ui-core';
+import type { PatternSpec } from './pattern-types.js';
 import './debate-view.js';
 import type { DebateView } from './debate-view.js';
 
-function fixture(): DeliberationPatternCategory {
+function fixture(): PatternSpec {
   return {
-    category: 'deliberation',
     type: 'debate',
     name: 'adversarial-review',
     description: 'Structured adversarial debate',

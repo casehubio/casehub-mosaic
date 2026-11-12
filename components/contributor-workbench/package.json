@@ -1,5 +1,5 @@
 {
-  "name": "@casehubio/blocks-ui-contributor-workbench",
+  "name": "@casehubio/mosaic-contributor-workbench",
   "version": "0.1.0",
   "description": "Contributor trust profile — intake lane, dimension scores, attestation outcomes",
   "repository": {
@@ -19,9 +19,9 @@
     "clean": "rimraf dist"
   },
   "dependencies": {
-    "@casehubio/blocks-ui-core": "workspace:*",
-    "@casehubio/blocks-ui-list-pane": "workspace:*",
-    "@casehubio/blocks-ui-trust-score-panel": "workspace:*",
+    "@casehubio/mosaic-core": "workspace:*",
+    "@casehubio/mosaic-list-pane": "workspace:*",
+    "@casehubio/mosaic-trust-score-panel": "workspace:*",
     "@casehubio/pages-data": "*",
     "@casehubio/pages-primitives": "*",
     "@casehubio/pages-table": "*",

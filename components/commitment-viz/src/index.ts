@@ -1,4 +1,4 @@
-export type { CommitmentState, CommitmentRecord, StateCategory } from '@casehubio/blocks-ui-core';
+export type { CommitmentState, CommitmentRecord, StateCategory } from '@casehubio/mosaic-core';
 
 export type { DecorableMessage, TransitionRecord, RangeDecoration } from './types.js';
 export { CommitmentTransitionBadge } from './commitment-transition-badge.js';

@@ -2,11 +2,11 @@ import { LitElement, html, css, type TemplateResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { LiveRegionMixin } from '@casehubio/pages-primitives/a11y';
 import { onPagesEvent } from '@casehubio/pages-data';
-import { orchestrationEventsStrategy } from '@casehubio/blocks-ui-blocks-timeline';
-import type { ExecutionSnapshot, OrchestrationAuditEvent } from '@casehubio/blocks-ui-core';
+import { orchestrationEventsStrategy } from '@casehubio/mosaic-blocks-timeline';
+import type { ExecutionSnapshot, OrchestrationAuditEvent } from '@casehubio/mosaic-core';
 import '@casehubio/pages-ui-components/split-workbench';
-import '@casehubio/blocks-ui-execution-monitor';
-import '@casehubio/blocks-ui-blocks-timeline';
+import '@casehubio/mosaic-execution-monitor';
+import '@casehubio/mosaic-blocks-timeline';
 
 export interface OrchestrationWorkbenchData {
   readonly snapshot: ExecutionSnapshot;

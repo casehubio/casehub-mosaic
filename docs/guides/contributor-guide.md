@@ -1,8 +1,8 @@
-# casehub-blocks-ui — Contributor Guide
+# casehub-mosaic — Contributor Guide
 
 > Internal architecture, extension points, and development conventions for contributors modifying or extending blocks-ui components.
 
-**GitHub:** [casehubio/blocks-ui](https://github.com/casehubio/blocks-ui)
+**GitHub:** [casehubio/casehub-mosaic](https://github.com/casehubio/casehub-mosaic)
 
 ---
 
@@ -19,7 +19,7 @@
 
 ### Data Architecture
 
-**DataSourceMixin** — Lit mixin for pull-based data loading (REST endpoints). Adds `endpoint`, `loading`, `error`, `dataSet` properties. Wraps `DataSourceAdapter` -> `DataSourceController`, producing `TypedDataSet` via extraction pipeline. **Canonical home: `@casehubio/pages-component`** — re-exported from blocks-ui-core for backward compatibility. Used by: similarity-panel, compliance-summary, grouped-data-view, list-pane, routing-rationale.
+**DataSourceMixin** — Lit mixin for pull-based data loading (REST endpoints). Adds `endpoint`, `loading`, `error`, `dataSet` properties. Wraps `DataSourceAdapter` -> `DataSourceController`, producing `TypedDataSet` via extraction pipeline. **Canonical home: `@casehubio/pages-component`** — re-exported from mosaic-core for backward compatibility. Used by: similarity-panel, compliance-summary, grouped-data-view, list-pane, routing-rationale.
 
 Additional data-source exports (all canonical in `@casehubio/pages-data`, re-exported here):
 - `fetchSource(url, options)` — standalone fetch with TypedDataSet extraction
@@ -54,7 +54,7 @@ Portal resolutions are declared in the root `package.json`:
 
 ## Full Module Details
 
-### blocks-ui-schema (`packages/blocks-ui-schema`)
+### mosaic-schema (`packages/mosaic-schema`)
 
 Auto-generated Zod schemas for all blocks-ui component properties. `BlocksComponentRegistry` in `src/registry.ts` maps element tag names to their Props interfaces. A ts-morph generator (`scripts/generate-schemas.ts`) reads the registry and produces `component-schemas.generated.ts` with per-component Zod schemas and a `blocksComponentSchemaMap`. The generator uses `tsconfig.generator.json` (with `paths` mapping packages to source) to resolve types without requiring a full build. Staleness test ensures generated schemas stay in sync. Registry completeness test ensures every `blocks-*` element has an entry.
 
@@ -62,9 +62,9 @@ When adding a new component:
 1. Export a `FooProps` interface from the component's index.ts
 2. Add `import type` and registry entry in `src/registry.ts`
 3. Add `workspace:*` devDependency in `package.json`
-4. Run `yarn workspace @casehubio/blocks-ui-schema run generate`
+4. Run `yarn workspace @casehubio/casehub-mosaic-schema run generate`
 
-### blocks-ui-core (`packages/blocks-ui-core`)
+### mosaic-core (`packages/mosaic-core`)
 
 Core shared utilities re-exported from pages and domain-specific to blocks-ui:
 
@@ -81,7 +81,7 @@ Core shared utilities re-exported from pages and domain-specific to blocks-ui:
 **Status registry** (#109): `StatusDescriptor`, `StateCategory`, `lookupStatus(domain, state)`, `registerStatus(domain, state, descriptor)`, `FALLBACK_DESCRIPTOR`. 13 built-in domains (case, task, workitem, work, milestone, outcome, group, sla, node, session, commitment, execution, agent, pattern) with cross-domain defaults. Extend with `registerStatus()` for new domains:
 
 ```typescript
-import { registerStatus } from '@casehubio/blocks-ui-core';
+import { registerStatus } from '@casehubio/casehub-mosaic-core';
 registerStatus('myDomain', 'ACTIVE', { category: 'info', icon: '◉', pulse: true });
 ```
 
@@ -218,7 +218,7 @@ Qhorus channel activity — message feed with sender grouping and threading, cha
 
 ### commitment-viz (`components/commitment-viz`)
 
-Commitment lifecycle visualization — transition badges (`commitment-transition-badge`), range bars (compact/detailed modes), `decorateCommitmentRanges` pure function for feed decoration metadata. Props-driven, decoupled from channel-activity. Types and commitment-state-pill re-exported from blocks-ui-core (pill promoted in #101).
+Commitment lifecycle visualization — transition badges (`commitment-transition-badge`), range bars (compact/detailed modes), `decorateCommitmentRanges` pure function for feed decoration metadata. Props-driven, decoupled from channel-activity. Types and commitment-state-pill re-exported from mosaic-core (pill promoted in #101).
 
 ### similarity-panel (`components/similarity-panel`)
 
@@ -272,7 +272,7 @@ Session workbench — composition shell for session management. Composes session
 
 Conversation protocol viewer — five Lit components for structured deliberation. Extends `KeyboardShortcutMixin(LiveRegionMixin(LitElement))` for the workbench. Property-based data delivery (`ConversationState` as a single reactive property). All events use `emitPagesEvent` with colon-delimited topics (`${selectionTopic}:selected`/`:deselected`).
 
-Domain types live in `blocks-ui-core` (`types/conversation.ts`): `EpistemicStatus`, `ConvergenceState`, `ConvergenceSignal`, `CommonGroundState`, `GroundedFact`, `ConversationPoint`, `ConversationEntry`, `SubTaskFinding`, `FlagEntry`, `RoundMemo`, `ObligationChain`, `ConversationState`. `TransitionRecord` promoted from commitment-viz to `blocks-ui-core` (`types/commitment.ts`).
+Domain types live in `mosaic-core` (`types/conversation.ts`): `EpistemicStatus`, `ConvergenceState`, `ConvergenceSignal`, `CommonGroundState`, `GroundedFact`, `ConversationPoint`, `ConversationEntry`, `SubTaskFinding`, `FlagEntry`, `RoundMemo`, `ObligationChain`, `ConversationState`. `TransitionRecord` promoted from commitment-viz to `mosaic-core` (`types/commitment.ts`).
 
 Status registrations (`conversation` and `epistemic` domains) execute at module scope in `index.ts` as top-level side effects.
 
@@ -294,7 +294,7 @@ Render guard: async `_fullRender` tracks `_renderInProgress` and `_pendingRender
 
 ### case-dependency-graph (`components/case-dependency-graph`)
 
-Force-directed graph of case relationships using pages graph infrastructure (`computeElkLayout` with `algorithm: 'force'` + `pages-graph-canvas`). Consumes `GraphModel` from graph-core. Three built-in relationship types (parent_child, supersedes, coordination) via the relationship type registry in blocks-ui-core — apps register additional types with `registerRelationshipType()`. Dual data mode (endpoint fetch or `graphData` property). Edge type filter toolbar with DOT export. Node click emits selection topic events.
+Force-directed graph of case relationships using pages graph infrastructure (`computeElkLayout` with `algorithm: 'force'` + `pages-graph-canvas`). Consumes `GraphModel` from graph-core. Three built-in relationship types (parent_child, supersedes, coordination) via the relationship type registry in mosaic-core — apps register additional types with `registerRelationshipType()`. Dual data mode (endpoint fetch or `graphData` property). Edge type filter toolbar with DOT export. Node click emits selection topic events.
 
 ### document-workbench (`components/document-workbench`)
 

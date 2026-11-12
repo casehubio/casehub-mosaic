@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, afterEach } from 'vitest';
-import type { EvolutionStateSnapshot, DenyPatternView, StageDescriptor, GatePolicy } from '@casehubio/blocks-ui-evolution-config';
-import type { TabDefinition } from '@casehubio/blocks-ui-detail-pane';
+import type { EvolutionStateSnapshot, DenyPatternView, StageDescriptor, GatePolicy } from '@casehubio/mosaic-evolution-config';
+import type { TabDefinition } from '@casehubio/mosaic-detail-pane';
 import './evolution-workbench.js';
 import { EvolutionWorkbench } from './evolution-workbench.js';
 

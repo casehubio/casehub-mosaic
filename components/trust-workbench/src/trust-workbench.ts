@@ -4,17 +4,17 @@ import { LiveRegionMixin } from '@casehubio/pages-primitives/a11y';
 import { onPagesEvent } from '@casehubio/pages-data';
 import type { TableColumnConfig, ColumnRenderer } from '@casehubio/pages-table';
 import type { ColumnId, TypedRow, TypedDataSet } from '@casehubio/pages-data';
-import type { CandidateScore } from '@casehubio/blocks-ui-routing-rationale';
-import type { GateDecision } from '@casehubio/blocks-ui-trust-feedback-display';
-import type { RoutingRationaleData } from '@casehubio/blocks-ui-routing-rationale';
+import type { CandidateScore } from '@casehubio/mosaic-routing-rationale';
+import type { GateDecision } from '@casehubio/mosaic-trust-feedback-display';
+import type { RoutingRationaleData } from '@casehubio/mosaic-routing-rationale';
 import { fromRows } from '@casehubio/pages-data';
 import { ID_COL, ROUTING_HISTORY_COLUMNS, ROUTING_HISTORY_TABLE_CONFIG, DEFAULT_ROUTING_RENDERERS } from './columns.js';
 import type { RoutingDecisionSummary, RoutingDecisionDetail } from './types.js';
 import '@casehubio/pages-ui-components/split-workbench';
-import '@casehubio/blocks-ui-trust-score-panel';
-import '@casehubio/blocks-ui-list-pane';
-import '@casehubio/blocks-ui-routing-rationale';
-import '@casehubio/blocks-ui-trust-feedback-display';
+import '@casehubio/mosaic-trust-score-panel';
+import '@casehubio/mosaic-list-pane';
+import '@casehubio/mosaic-routing-rationale';
+import '@casehubio/mosaic-trust-feedback-display';
 
 export interface TrustWorkbenchProps {
   endpoint: string;

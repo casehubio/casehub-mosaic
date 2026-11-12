@@ -4,7 +4,7 @@ import { BlocksDecompositionTree, STRATEGY_COLORS } from './blocks-decomposition
 import type {
   DecompositionSnapshot, LeafTaskSnapshot, CompoundTaskSnapshot,
   DecompositionMethodSnapshot, NodeStateSnapshot,
-} from '@casehubio/graph-stencil-htn';
+} from '@casehubio/mosaic-graph-stencil-htn';
 
 function leaf(id: string, desc?: string, executor?: string): LeafTaskSnapshot {
   const result: LeafTaskSnapshot = { kind: 'leaf', id, description: desc ?? `Leaf ${id}` };

@@ -8,8 +8,8 @@ import type {
   CompleteRequest,
   EscalateRequest,
   DelegateRequest,
-} from '@casehubio/blocks-ui-core';
-import { isTerminalStatus, WorkItemEventTopics } from '@casehubio/blocks-ui-core';
+} from '@casehubio/mosaic-core';
+import { isTerminalStatus, WorkItemEventTopics } from '@casehubio/mosaic-core';
 import { onPagesEvent } from '@casehubio/pages-data';
 interface SchemaFormElement extends HTMLElement { submit(): Record<string, unknown> | null; }
 import { FocusTrapMixin, LiveRegionMixin } from '@casehubio/pages-primitives/a11y';

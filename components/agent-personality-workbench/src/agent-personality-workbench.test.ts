@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeAll, afterAll, afterEach } from 'vitest';
-import { registerCollection, mythicCollection, chibiCollection } from '@casehubio/agent-avatar-2d';
+import { registerCollection, mythicCollection, chibiCollection } from '@casehubio/mosaic-agent-avatar-2d';
 import './agent-personality-workbench.js';
-import type { PersonalityProfile, FullAgentDescriptor } from '@casehubio/blocks-ui-core';
+import type { PersonalityProfile, FullAgentDescriptor } from '@casehubio/mosaic-core';
 
 type WorkbenchEl = HTMLElement & {
   initialDescriptor: FullAgentDescriptor | null;

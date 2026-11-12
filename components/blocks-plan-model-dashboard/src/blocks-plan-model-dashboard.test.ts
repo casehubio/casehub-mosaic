@@ -1,7 +1,7 @@
 // @vitest-environment jsdom
 import { describe, it, expect } from 'vitest';
 import { BlocksPlanModelDashboard } from './blocks-plan-model-dashboard.js';
-import type { CasePlanModelSnapshot } from '@casehubio/graph-stencil-htn';
+import type { CasePlanModelSnapshot } from '@casehubio/mosaic-graph-stencil-htn';
 
 function emptyModel(): CasePlanModelSnapshot {
   return {

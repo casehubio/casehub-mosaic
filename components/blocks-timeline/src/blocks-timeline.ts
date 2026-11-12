@@ -1,6 +1,6 @@
 import { customElement } from 'lit/decorators.js';
 import { PagesEventTimeline } from '@casehubio/pages-viz';
-import type { WorkIdentity } from '@casehubio/blocks-ui-core';
+import type { WorkIdentity } from '@casehubio/mosaic-core';
 
 @customElement('blocks-timeline')
 export class BlocksTimeline extends PagesEventTimeline {

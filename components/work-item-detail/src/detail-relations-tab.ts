@@ -1,6 +1,6 @@
 import { LitElement, html, css, type TemplateResult } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import type { WorkItemResponse } from '@casehubio/blocks-ui-core';
+import type { WorkItemResponse } from '@casehubio/mosaic-core';
 import { emitPagesEvent } from '@casehubio/pages-data';
 
 interface WorkItemRelation {

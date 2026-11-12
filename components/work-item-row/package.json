@@ -1,5 +1,5 @@
 {
-  "name": "@casehubio/blocks-ui-work-item-row",
+  "name": "@casehubio/mosaic-work-item-row",
   "version": "0.2.2",
   "type": "module",
   "main": "dist/index.js",
@@ -11,7 +11,7 @@
     "clean": "rimraf dist"
   },
   "dependencies": {
-    "@casehubio/blocks-ui-core": "workspace:*",
+    "@casehubio/mosaic-core": "workspace:*",
     "lit": "^3.0.0"
   },
   "devDependencies": {

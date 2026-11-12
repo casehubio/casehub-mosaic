@@ -1,5 +1,5 @@
 {
-  "name": "@casehubio/blocks-ui-commitment-viz",
+  "name": "@casehubio/mosaic-commitment-viz",
   "version": "0.1.0",
   "description": "Commitment lifecycle visualization — state pills, transition badges, range bars",
   "repository": {
@@ -19,7 +19,7 @@
     "clean": "rimraf dist"
   },
   "dependencies": {
-    "@casehubio/blocks-ui-core": "workspace:*",
+    "@casehubio/mosaic-core": "workspace:*",
     "lit": "^3.3.3"
   },
   "devDependencies": {

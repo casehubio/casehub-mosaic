@@ -11,11 +11,11 @@
         <relativePath/>
     </parent>
 
-    <artifactId>casehub-blocks-ui-npm</artifactId>
-    <version>0.4-SNAPSHOT</version>
+    <artifactId>casehub-mosaic-npm</artifactId>
+    <version>0.3-SNAPSHOT</version>
     <packaging>jar</packaging>
-    <name>CaseHub Blocks UI NPM Packages</name>
-    <description>Packed @casehubio/blocks-ui-* npm packages with resolved versions — consumed by CaseHub apps via Maven</description>
+    <name>CaseHub Mosaic NPM Packages</name>
+    <description>Packed @casehubio/mosaic-* npm packages with resolved versions — consumed by CaseHub apps via Maven</description>
 
     <repositories>
         <repository>
@@ -31,7 +31,7 @@
     <distributionManagement>
         <repository>
             <id>github</id>
-            <url>https://maven.pkg.github.com/casehubio/blocks-ui</url>
+            <url>https://maven.pkg.github.com/casehubio/casehub-mosaic</url>
         </repository>
     </distributionManagement>
 

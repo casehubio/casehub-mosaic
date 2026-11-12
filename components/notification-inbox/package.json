@@ -1,5 +1,5 @@
 {
-  "name": "@casehubio/blocks-ui-notification-inbox",
+  "name": "@casehubio/mosaic-notification-inbox",
   "version": "0.2.2",
   "type": "module",
   "main": "dist/index.js",
@@ -12,7 +12,7 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@casehubio/blocks-ui-core": "workspace:*",
+    "@casehubio/mosaic-core": "workspace:*",
     "@casehubio/pages-data": "*",
     "@casehubio/pages-primitives": "*",
     "@casehubio/pages-table": "*",

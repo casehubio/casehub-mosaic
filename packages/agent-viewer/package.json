@@ -1,5 +1,5 @@
 {
-  "name": "@casehubio/agent-viewer",
+  "name": "@casehubio/mosaic-agent-viewer",
   "version": "0.1.0",
   "description": "Agent identity, pattern topology, and drill-down viewer components for blocks agentic YAML",
   "repository": {
@@ -27,7 +27,6 @@
     "clean": "rimraf dist"
   },
   "dependencies": {
-    "@casehubio/blocks-ui-core": "workspace:*",
     "lit": "^3.3.3"
   },
   "devDependencies": {
