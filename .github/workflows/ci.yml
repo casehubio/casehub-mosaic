@@ -55,7 +55,7 @@ jobs:
           server-password: GITHUB_TOKEN
 
       - name: Resolve pages packages from Maven
-        run: mvn -f npm-packages/pom.xml initialize
+        run: mvn -U -f npm-packages/pom.xml initialize
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -99,7 +99,7 @@ jobs:
           server-password: GITHUB_TOKEN
 
       - name: Resolve pages packages from Maven
-        run: mvn -f npm-packages/pom.xml initialize
+        run: mvn -U -f npm-packages/pom.xml initialize
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
