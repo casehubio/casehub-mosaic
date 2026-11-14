@@ -19,7 +19,7 @@
     "clean": "rimraf dist"
   },
   "dependencies": {
-    "@casehubio/pages-data": "workspace:*",
+    "@casehubio/pages-data": "*",
     "lit": "^3.2.1"
   },
   "devDependencies": {
