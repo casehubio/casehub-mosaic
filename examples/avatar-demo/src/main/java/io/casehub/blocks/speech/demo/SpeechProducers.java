@@ -1,7 +1,7 @@
 package io.casehub.agency.speech.demo;
 
 import io.casehub.agency.speech.CleanupConfig;
-import io.casehub.agency.speech.TextToSpeechService;
+import io.casehub.connectors.voice.spi.TextToSpeech;
 import io.casehub.agency.speech.sherpa.VitsTextToSpeech;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.inject.Produces;
@@ -15,17 +15,17 @@ public class SpeechProducers {
 
     @Produces
     @ApplicationScoped
-    TextToSpeechService tts() {
+    TextToSpeech tts() {
         return VitsTextToSpeech.withDefaults();
     }
 
     @Produces
     @jakarta.inject.Singleton
     io.casehub.agency.speech.ws.TtsModelRegistry ttsRegistry() {
-        var models = new java.util.LinkedHashMap<String, io.casehub.agency.speech.TextToSpeechService>();
+        var models = new java.util.LinkedHashMap<String, io.casehub.connectors.voice.spi.TextToSpeech>();
 
         // Shared lip-sync aligner — enriches any TTS engine that returns empty phonemes
-        io.casehub.agency.speech.PhonemeAligner aligner = null;
+        io.casehub.connectors.voice.spi.PhonemeAligner aligner = null;
         try {
             aligner = io.casehub.agency.speech.sherpa.EspeakPhonemeAligner.withDefaults();
         } catch (Exception e) {
@@ -83,13 +83,13 @@ public class SpeechProducers {
 
         return new io.casehub.agency.speech.ws.TtsModelRegistry(java.util.Collections.unmodifiableMap(models));}
 
-    private static io.casehub.agency.speech.TextToSpeechService wrapIfAvailable(
-            io.casehub.agency.speech.TextToSpeechService delegate,
-            io.casehub.agency.speech.PhonemeAligner aligner) {
+    private static io.casehub.connectors.voice.spi.TextToSpeech wrapIfAvailable(
+            io.casehub.connectors.voice.spi.TextToSpeech delegate,
+            io.casehub.connectors.voice.spi.PhonemeAligner aligner) {
         if (aligner == null) {
             return delegate;
         }
-        return io.casehub.agency.speech.LipSyncEnricher.wrap(delegate, aligner);
+        return io.casehub.connectors.voice.spi.LipSyncEnricher.wrap(delegate, aligner);
     }
 
 
@@ -188,7 +188,7 @@ public class SpeechProducers {
 
     @Produces
     @jakarta.inject.Singleton
-    io.casehub.agency.speech.StreamingSpeechToTextService stt(
+    io.casehub.connectors.voice.spi.StreamingSpeechToText stt(
             @org.eclipse.microprofile.config.inject.ConfigProperty(
                     name = "casehub.speech.denoising.enabled",
                     defaultValue = "true")
@@ -197,7 +197,7 @@ public class SpeechProducers {
                     name = "casehub.speech.vad.enabled",
                     defaultValue = "true")
             jakarta.inject.Provider<Boolean> vadEnabled) {
-        io.casehub.agency.speech.StreamingSpeechDenoiserFactory denoiserFactory = null;
+        io.casehub.connectors.voice.spi.StreamingSpeechDenoiserFactory denoiserFactory = null;
         try {
             denoiserFactory = io.casehub.agency.speech.sherpa.SherpaOnnxStreamingSpeechDenoiser.withDefaults();
             LOG.log(System.Logger.Level.INFO, "Speech denoiser loaded (GTCRN)");
@@ -205,7 +205,7 @@ public class SpeechProducers {
             LOG.log(System.Logger.Level.WARNING, "Speech denoiser unavailable: " + e.getMessage());
         }
 
-        io.casehub.agency.speech.VoiceActivityFilterFactory vadFactory = null;
+        io.casehub.connectors.voice.spi.VoiceActivityFilterFactory vadFactory = null;
         try {
             vadFactory = io.casehub.agency.speech.sherpa.SherpaOnnxVoiceActivityFilter.withDefaults();
             LOG.log(System.Logger.Level.INFO, "VAD loaded (Silero)");
@@ -231,7 +231,7 @@ public class SpeechProducers {
         return zipformer;}
 
     void eagerNativeInit(@jakarta.enterprise.event.Observes io.quarkus.runtime.StartupEvent event,
-                         io.casehub.agency.speech.StreamingSpeechToTextService stt,
+                         io.casehub.connectors.voice.spi.StreamingSpeechToText stt,
                          io.casehub.agency.speech.ws.TtsModelRegistry ttsRegistry) {
         // ORT is not thread-safe for concurrent Env creation on ARM64 (GE-20260803-e363e6).
         // Forcing eager init here serialises all ORT environment creation at startup.

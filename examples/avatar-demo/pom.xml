@@ -42,6 +42,11 @@
     </dependency>
     <dependency>
       <groupId>io.casehub</groupId>
+      <artifactId>casehub-connectors-voice-spi</artifactId>
+      <version>${casehub-agency.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.casehub</groupId>
       <artifactId>casehub-platform-agent-api</artifactId>
       <version>${casehub-agency.version}</version>
     </dependency>
