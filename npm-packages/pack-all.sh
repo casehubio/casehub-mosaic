@@ -32,7 +32,7 @@ for pkg_json in "$REPO_ROOT"/packages/*/package.json "$REPO_ROOT"/components/*/p
     echo "  PACK $npm_name"
     tarball="$OUTPUT_DIR/tarballs/$pkg_name.tgz"
     GH_PACKAGES_TOKEN="${GH_PACKAGES_TOKEN:-dummy}" \
-        yarn --cwd "$REPO_ROOT" workspace "$npm_name" pack --out "$tarball" 2>/dev/null
+        yarn --cwd "$REPO_ROOT" workspace "$npm_name" pack --out "$tarball"
 
     # Unpack tarball to packages/<name>/
     mkdir -p "$OUTPUT_DIR/packages/$pkg_name"

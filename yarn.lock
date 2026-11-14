@@ -981,7 +981,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@casehubio/mosaic-project-dashboard@workspace:components/project-dashboard"
   dependencies:
-    "@casehubio/pages-data": "workspace:*"
+    "@casehubio/pages-data": "npm:*"
     lit: "npm:^3.2.1"
     rimraf: "npm:^6.1.0"
     typescript: "npm:~5.8.0"
