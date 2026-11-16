@@ -20,7 +20,8 @@
     "./*": "./dist/*"
   },
   "scripts": {
-    "build": "tsc -p tsconfig.build.json",
+    "build": "tsx scripts/generate-personality-vocab.ts && tsc -p tsconfig.build.json",
+    "generate:vocab": "tsx scripts/generate-personality-vocab.ts",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "clean": "rimraf dist"
@@ -29,6 +30,7 @@
     "@open-wc/testing": "^4.0.0",
     "jsdom": "^29.1.1",
     "rimraf": "^6.1.0",
+    "tsx": "^4.19.0",
     "typescript": "~5.8.0",
     "vitest": "^3.0.0"
   },
