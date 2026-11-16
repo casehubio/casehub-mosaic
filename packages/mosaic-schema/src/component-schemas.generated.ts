@@ -1536,7 +1536,7 @@ export const summarisationTimelinePropsSchema = z.object({
       explanation: z.string(),
     }).optional(),
   }).optional(),
-  endpoint: z.string().optional(),
+  narrativeEndpoint: z.string().optional(),
   classificationColours: z.record(z.string()).optional(),
   timestampFormat: z.enum(["utc", "local"]).optional(),
 });
