@@ -4,14 +4,14 @@ import type { PersonalityFramework } from './compatibility-matrix.js';
 
 describe('FRAMEWORK_FAMILY_MAP', () => {
   it('MBTI INTJ maps to Sage, Magician, Sovereign', () => {
-    expect(FRAMEWORK_FAMILY_MAP.mbti['INTJ']).toEqual(
+    expect(FRAMEWORK_FAMILY_MAP.mbti['intj']).toEqual(
       expect.arrayContaining(['Sage', 'Magician', 'Sovereign'])
     );
-    expect(FRAMEWORK_FAMILY_MAP.mbti['INTJ']).toHaveLength(3);
+    expect(FRAMEWORK_FAMILY_MAP.mbti['intj']).toHaveLength(3);
   });
 
   it('ENTP maps to Magician, Rebel, Explorer', () => {
-    expect(FRAMEWORK_FAMILY_MAP.mbti['ENTP']).toEqual(
+    expect(FRAMEWORK_FAMILY_MAP.mbti['entp']).toEqual(
       expect.arrayContaining(['Magician', 'Rebel', 'Explorer'])
     );
   });
@@ -49,7 +49,7 @@ describe('SUB_ARCHETYPE_RULES', () => {
       expect.arrayContaining(['Angel', 'Guardian', 'Healer', 'Samaritan'])
     );
     expect(rules.find(r => r.subArchetype === 'Angel')!.mbtiAffinity)
-      .toEqual(expect.arrayContaining(['INFJ', 'ISFJ']));
+      .toEqual(expect.arrayContaining(['infj', 'isfj']));
   });
 
   it('all 12 families have sub-archetype rules', () => {

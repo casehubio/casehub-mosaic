@@ -56,7 +56,7 @@ describe('entry-point consistency', () => {
   describe('first facet selection auto-selects best profession', () => {
     it('selecting MBTI from clean state auto-selects profession and role', async () => {
       await el.updateComplete;
-      clickPill(el, 'mbti', 'ESFP');
+      clickPill(el, 'mbti', 'esfp');
       await el.updateComplete;
       await el.updateComplete;
       expect(el._profession).toBeTruthy();
@@ -65,7 +65,7 @@ describe('entry-point consistency', () => {
 
     it('selecting Enneagram from clean state auto-selects profession', async () => {
       await el.updateComplete;
-      clickPill(el, 'enneagram', 'Type 7');
+      clickPill(el, 'enneagram', 'type-7');
       await el.updateComplete;
       await el.updateComplete;
       expect(el._profession).toBeTruthy();
@@ -73,7 +73,7 @@ describe('entry-point consistency', () => {
 
     it('switching facet value clears stale profession when archetype was selected', async () => {
       await el.updateComplete;
-      clickPill(el, 'mbti', 'ESFP');
+      clickPill(el, 'mbti', 'esfp');
       await el.updateComplete;
       // Select an archetype within context
       const cell = archetypeCell(el, 'Jester', 'Entertainer');
@@ -82,7 +82,7 @@ describe('entry-point consistency', () => {
       await el.updateComplete;
       expect(el._selectedArchetype).toBe('Jester/Entertainer');
       // Switch to INTJ — clears everything
-      clickPill(el, 'mbti', 'INTJ');
+      clickPill(el, 'mbti', 'intj');
       await el.updateComplete;
       await el.updateComplete;
       // After clearing, should auto-select best profession for INTJ
@@ -92,14 +92,14 @@ describe('entry-point consistency', () => {
 
     it('switching facet without archetype re-auto-selects profession for new type', async () => {
       await el.updateComplete;
-      clickPill(el, 'mbti', 'INTJ');
+      clickPill(el, 'mbti', 'intj');
       await el.updateComplete;
       await el.updateComplete;
       const intjProf = el._profession;
       const intjRole = el._selectedRole;
       expect(intjProf).toBeTruthy();
       // Switch to ESFP — no archetype selected, just auto-profession
-      clickPill(el, 'mbti', 'ESFP');
+      clickPill(el, 'mbti', 'esfp');
       await el.updateComplete;
       await el.updateComplete;
       // Profession should change to best match for ESFP
@@ -111,7 +111,7 @@ describe('entry-point consistency', () => {
   describe('facet filter highlights compatible professions', () => {
     it('ESFP highlights compatible professions (selected or has-compatible)', async () => {
       await el.updateComplete;
-      clickPill(el, 'mbti', 'ESFP');
+      clickPill(el, 'mbti', 'esfp');
       await el.updateComplete;
       await el.updateComplete;
       const pills = professionPills(el);
@@ -123,9 +123,9 @@ describe('entry-point consistency', () => {
 
     it('clearing facet removes compatible highlights', async () => {
       await el.updateComplete;
-      clickPill(el, 'mbti', 'ESFP');
+      clickPill(el, 'mbti', 'esfp');
       await el.updateComplete;
-      clickPill(el, 'mbti', 'ESFP'); // toggle off
+      clickPill(el, 'mbti', 'esfp'); // toggle off
       await el.updateComplete;
       await el.updateComplete;
       const pills = professionPills(el);
@@ -139,7 +139,7 @@ describe('entry-point consistency', () => {
   describe('grid shows tiers from facet filters', () => {
     it('ESFP-compatible archetypes have strong or weak tier class', async () => {
       await el.updateComplete;
-      clickPill(el, 'mbti', 'ESFP');
+      clickPill(el, 'mbti', 'esfp');
       await el.updateComplete;
       await el.updateComplete;
       // Check that at least some cells have strong or weak tier
@@ -152,7 +152,7 @@ describe('entry-point consistency', () => {
 
     it('ESFP-incompatible archetypes have incompatible tier', async () => {
       await el.updateComplete;
-      clickPill(el, 'mbti', 'ESFP');
+      clickPill(el, 'mbti', 'esfp');
       await el.updateComplete;
       await el.updateComplete;
       // Sage/Scientist has INTJ affinity — should be incompatible with ESFP
@@ -162,7 +162,7 @@ describe('entry-point consistency', () => {
 
     it('all 48 cells remain visible (no compact hiding)', async () => {
       await el.updateComplete;
-      clickPill(el, 'mbti', 'ESFP');
+      clickPill(el, 'mbti', 'esfp');
       await el.updateComplete;
       await el.updateComplete;
       const cells = el.shadowRoot!.querySelectorAll('.avatar-cell');
@@ -175,7 +175,7 @@ describe('entry-point consistency', () => {
   describe('clicking compatible cell within facet context', () => {
     it('selects archetype without changing framework filters', async () => {
       await el.updateComplete;
-      clickPill(el, 'mbti', 'ESFP');
+      clickPill(el, 'mbti', 'esfp');
       await el.updateComplete;
       await el.updateComplete;
       const before = { ...el._frameworks };
@@ -190,7 +190,7 @@ describe('entry-point consistency', () => {
 
     it('auto-selects matching profession for the chosen archetype', async () => {
       await el.updateComplete;
-      clickPill(el, 'mbti', 'ESFP');
+      clickPill(el, 'mbti', 'esfp');
       await el.updateComplete;
       clickArchetype(el, 'Jester', 'Entertainer');
       await el.updateComplete;
@@ -204,7 +204,7 @@ describe('entry-point consistency', () => {
   describe('clicking incompatible cell resets filters', () => {
     it('resets frameworks and selects the archetype', async () => {
       await el.updateComplete;
-      clickPill(el, 'mbti', 'ESFP');
+      clickPill(el, 'mbti', 'esfp');
       await el.updateComplete;
       await el.updateComplete;
       // Find an incompatible cell and click it
@@ -214,7 +214,7 @@ describe('entry-point consistency', () => {
       await el.updateComplete;
       expect(el._selectedArchetype).toBe('Magician/Scientist');
       // Frameworks should be reset and then filled from the archetype
-      expect(el._frameworks.mbti).not.toBe('ESFP');
+      expect(el._frameworks.mbti).not.toBe('esfp');
     });
   });
 
@@ -224,7 +224,7 @@ describe('entry-point consistency', () => {
     it('changing MBTI clears incompatible archetype selection', async () => {
       await el.updateComplete;
       // Select ESFJ and an archetype
-      clickPill(el, 'mbti', 'ESFJ');
+      clickPill(el, 'mbti', 'esfj');
       await el.updateComplete;
       clickArchetype(el, 'Caregiver', 'Healer');
       await el.updateComplete;
@@ -232,7 +232,7 @@ describe('entry-point consistency', () => {
       expect(el._selectedArchetype).toBe('Caregiver/Healer');
       expect(el._profession).toBeTruthy();
       // Switch to INTJ — Healer is incompatible with INTJ
-      clickPill(el, 'mbti', 'INTJ');
+      clickPill(el, 'mbti', 'intj');
       await el.updateComplete;
       await el.updateComplete;
       expect(el._selectedArchetype).toBeNull();
@@ -240,7 +240,7 @@ describe('entry-point consistency', () => {
 
     it('changing MBTI replaces profession/role with best match for new type', async () => {
       await el.updateComplete;
-      clickPill(el, 'mbti', 'ESFJ');
+      clickPill(el, 'mbti', 'esfj');
       await el.updateComplete;
       clickArchetype(el, 'Caregiver', 'Healer');
       await el.updateComplete;
@@ -249,7 +249,7 @@ describe('entry-point consistency', () => {
       const oldRole = el._selectedRole;
       expect(oldRole).toBeTruthy();
       // Switch to INTJ — clears archetype, auto-selects best profession for INTJ
-      clickPill(el, 'mbti', 'INTJ');
+      clickPill(el, 'mbti', 'intj');
       await el.updateComplete;
       await el.updateComplete;
       expect(el._selectedArchetype).toBeNull();
@@ -260,7 +260,7 @@ describe('entry-point consistency', () => {
 
     it('variant cards are not shown for stale profession after facet change', async () => {
       await el.updateComplete;
-      clickPill(el, 'mbti', 'ESFJ');
+      clickPill(el, 'mbti', 'esfj');
       await el.updateComplete;
       clickArchetype(el, 'Caregiver', 'Healer');
       await el.updateComplete;
@@ -269,7 +269,7 @@ describe('entry-point consistency', () => {
       const variantsBefore = el.shadowRoot!.querySelectorAll('.variant-card');
       expect(variantsBefore.length).toBeGreaterThan(0);
       // Switch to INTJ
-      clickPill(el, 'mbti', 'INTJ');
+      clickPill(el, 'mbti', 'intj');
       await el.updateComplete;
       await el.updateComplete;
       // Variant cards should clear if profession cleared
@@ -288,8 +288,8 @@ describe('entry-point consistency', () => {
       (el as any).externalProfile = {
         profession: 'Coaching',
         role: 'Life Coach',
-        mbti: 'ENFJ',
-        enneagram: 'Type 1',
+        mbti: 'enfj',
+        enneagram: 'type-1',
         disc: 'C',
         sdi: 'Green',
       };
@@ -310,7 +310,7 @@ describe('entry-point consistency', () => {
       (el as any).externalProfile = {
         profession: 'Coaching',
         role: 'Life Coach',
-        mbti: 'ENFJ',
+        mbti: 'enfj',
       };
       (el as any).externalArchetype = { family: 'Sage', subArchetype: 'Mentor' };
       await el.updateComplete;
@@ -318,10 +318,10 @@ describe('entry-point consistency', () => {
       expect(el._selectedArchetype).toBe('Sage/Mentor');
       expect(el._profession).toBe('Coaching');
       // Now click ESFP — should clear Sage/Mentor and auto-select new profession
-      clickPill(el, 'mbti', 'ESFP');
+      clickPill(el, 'mbti', 'esfp');
       await el.updateComplete;
       await el.updateComplete;
-      expect(el._frameworks.mbti).toBe('ESFP');
+      expect(el._frameworks.mbti).toBe('esfp');
       expect(el._selectedArchetype).toBeNull();
       expect(el._profession).toBeTruthy();
     });

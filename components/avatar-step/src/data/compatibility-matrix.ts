@@ -52,10 +52,10 @@ export interface SubArchetypeRule {
 }
 
 function buildSubArchetypeRules(): Record<ArchetypeFamily, readonly SubArchetypeRule[]> {
-  const byFamily = new Map<string, SubArchetypeRule[]>();
+  const byFamily = new Map<ArchetypeFamily, SubArchetypeRule[]>();
 
   for (const term of ARCHETYPE_TERMS) {
-    const family = term.family;
+    const family = term.family as ArchetypeFamily;
     const aff = ARCHETYPE_AFFINITIES[term.value];
     if (!aff) continue;
 
@@ -69,7 +69,9 @@ function buildSubArchetypeRules(): Record<ArchetypeFamily, readonly SubArchetype
     });
   }
 
-  return Object.fromEntries(byFamily) as Record<ArchetypeFamily, readonly SubArchetypeRule[]>;
+  const rules = {} as Record<ArchetypeFamily, readonly SubArchetypeRule[]>;
+  for (const [family, familyRules] of byFamily) rules[family] = familyRules;
+  return rules;
 }
 
 export const SUB_ARCHETYPE_RULES: Record<ArchetypeFamily, readonly SubArchetypeRule[]> = buildSubArchetypeRules();

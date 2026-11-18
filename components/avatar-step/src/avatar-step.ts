@@ -13,7 +13,7 @@ import { buildSummaryText, BIG_FIVE_DIMS, BIG_FIVE_LABELS, FRAMEWORK_LABELS } fr
 import { deriveDispositions, deriveTendencies, DISPOSITION_TIPS } from './data/disposition-mapping.js';
 import { FRAMEWORK_TOOLTIPS } from './data/framework-tooltips.js';
 import { initProfile } from './data/profile-derivation.js';
-import type { PersonalityProfile } from '@casehubio/mosaic-core';
+import type { BelbinType, PersonalityProfile } from '@casehubio/mosaic-core';
 import { MBTI_META, ENNEAGRAM_META, DISC_META, BELBIN_META, SDI_META, BIGFIVE_META } from '@casehubio/mosaic-core';
 import type { VocabTermMeta } from '@casehubio/mosaic-core';
 
@@ -370,7 +370,7 @@ export class AvatarStep extends LitElement {
   }
 
   private _updateProfileValue(fw: string, value: string) {
-    if (fw === 'belbin') { this._updateProfileBelbin(value); return; }
+    if (fw === 'belbin') { this._updateProfileBelbin(value as BelbinType); return; }
     const current = (this._profile as Record<string, unknown>)[fw];
     if (current === value) {
       const copy = { ...this._profile };
@@ -382,7 +382,7 @@ export class AvatarStep extends LitElement {
     this._emitPersonalityChanged();
   }
 
-  private _updateProfileBelbin(value: string) {
+  private _updateProfileBelbin(value: BelbinType) {
     const belbin = this._profile.belbin;
     if (!belbin) {
       this._profile = { ...this._profile, belbin: { primary: value, secondaries: [] } };
@@ -812,7 +812,7 @@ export class AvatarStep extends LitElement {
             </button>
           </div>
           <div class="profile-picker" role="group" aria-label="Belbin team roles">
-            ${(ALL_FRAMEWORK_VALUES.belbin as readonly string[]).map(v => {
+            ${(ALL_FRAMEWORK_VALUES.belbin as readonly BelbinType[]).map(v => {
               const isPrimary = p.belbin?.primary === v;
               const isSecondary = p.belbin?.secondaries.includes(v) ?? false;
               const isDefault = affinityVals.has(`Belbin:${v}`);
