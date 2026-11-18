@@ -11,7 +11,7 @@ describe('getCompatibleArchetypes', () => {
   });
 
   it('narrows to 3 families (12 archetypes) for MBTI=INTJ', () => {
-    const result = getCompatibleArchetypes({ mbti: 'INTJ' }, {});
+    const result = getCompatibleArchetypes({ mbti: 'intj' }, {});
     const compatible = [...result.entries()].filter(([, t]) => t !== 'incompatible');
     const incompatible = [...result.entries()].filter(([, t]) => t === 'incompatible');
     expect(compatible).toHaveLength(12);
@@ -20,7 +20,7 @@ describe('getCompatibleArchetypes', () => {
 
   it('intersects MBTI=INTJ + Enneagram=Type 5 to Sage + Magician', () => {
     const result = getCompatibleArchetypes(
-      { mbti: 'INTJ', enneagram: 'Type 5' }, {}
+      { mbti: 'intj', enneagram: 'type-5' }, {}
     );
     const compatible = [...result.entries()].filter(([, t]) => t !== 'incompatible');
     const families = new Set(compatible.map(([k]) => k.split('/')[0]));
@@ -28,13 +28,13 @@ describe('getCompatibleArchetypes', () => {
   });
 
   it('marks sub-archetype with MBTI affinity as strong', () => {
-    const result = getCompatibleArchetypes({ mbti: 'INTJ', enneagram: 'Type 5' }, {});
+    const result = getCompatibleArchetypes({ mbti: 'intj', enneagram: 'type-5' }, {});
     expect(result.get('Sage/Detective')).toBe('strong');
   });
 
   it('marks sub-archetype without affinity as weak', () => {
     // Magician/Innovator: MBTI affinity ENTP,ENTJ,ENFP (not INTJ), Enneagram 7,3 (not 5)
-    const result = getCompatibleArchetypes({ mbti: 'INTJ', enneagram: 'Type 5' }, {});
+    const result = getCompatibleArchetypes({ mbti: 'intj', enneagram: 'type-5' }, {});
     expect(result.get('Magician/Innovator')).toBe('weak');
   });
 
@@ -52,7 +52,7 @@ describe('getCompatibleArchetypes', () => {
   it('conflicting selections produce empty intersection', () => {
     // INTJ → Sage, Magician, Sovereign; Type 7 → Jester, Explorer, Innocent — no overlap
     const result = getCompatibleArchetypes(
-      { mbti: 'INTJ', enneagram: 'Type 7' }, {}
+      { mbti: 'intj', enneagram: 'type-7' }, {}
     );
     const compatible = [...result.entries()].filter(([, t]) => t !== 'incompatible');
     expect(compatible).toHaveLength(0);
@@ -66,10 +66,10 @@ describe('getValidFrameworkValues', () => {
   });
 
   it('disables conflicting MBTI values when Enneagram selected', () => {
-    const valid = getValidFrameworkValues('mbti', { enneagram: 'Type 7' }, {});
+    const valid = getValidFrameworkValues('mbti', { enneagram: 'type-7' }, {});
     expect(valid.length).toBeLessThan(16);
-    expect(valid).toContain('ENFP');
-    expect(valid).not.toContain('INTJ');
+    expect(valid).toContain('enfp');
+    expect(valid).not.toContain('intj');
   });
 });
 

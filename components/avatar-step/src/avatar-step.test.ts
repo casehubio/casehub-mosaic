@@ -110,7 +110,7 @@ describe('avatar-step', () => {
     it('syncs MBTI profile value as selected pill', async () => {
       await el.updateComplete;
       await clickArchetype('Caregiver', 'Angel');
-      const p = pill('mbti', 'INFJ');
+      const p = pill('mbti', 'infj');
       expect(p).toBeTruthy();
       expect(p!.getAttribute('aria-selected')).toBe('true');
     });
@@ -118,7 +118,7 @@ describe('avatar-step', () => {
     it('syncs Enneagram profile value as selected pill', async () => {
       await el.updateComplete;
       await clickArchetype('Caregiver', 'Angel');
-      const p = pill('enneagram', 'Type 2');
+      const p = pill('enneagram', 'type-2');
       expect(p).toBeTruthy();
       expect(p!.getAttribute('aria-selected')).toBe('true');
     });
@@ -126,7 +126,7 @@ describe('avatar-step', () => {
     it('syncs DISC profile value as selected pill', async () => {
       await el.updateComplete;
       await clickArchetype('Caregiver', 'Angel');
-      const p = pill('disc', 'S');
+      const p = pill('disc', 'steadiness');
       expect(p).toBeTruthy();
       expect(p!.getAttribute('aria-selected')).toBe('true');
     });
@@ -142,7 +142,7 @@ describe('avatar-step', () => {
     it('does not select non-profile MBTI values', async () => {
       await el.updateComplete;
       await clickArchetype('Caregiver', 'Angel');
-      const p = pill('mbti', 'INTJ');
+      const p = pill('mbti', 'intj');
       expect(p).toBeTruthy();
       expect(p!.getAttribute('aria-selected')).toBe('false');
     });
@@ -168,9 +168,9 @@ describe('avatar-step', () => {
     it('syncs correctly for a different family (Hero/Warrior)', async () => {
       await el.updateComplete;
       await clickArchetype('Hero', 'Warrior');
-      expect(pill('mbti', 'ENTJ')!.getAttribute('aria-selected')).toBe('true');
-      expect(pill('enneagram', 'Type 8')!.getAttribute('aria-selected')).toBe('true');
-      expect(pill('disc', 'D')!.getAttribute('aria-selected')).toBe('true');
+      expect(pill('mbti', 'entj')!.getAttribute('aria-selected')).toBe('true');
+      expect(pill('enneagram', 'type-8')!.getAttribute('aria-selected')).toBe('true');
+      expect(pill('disc', 'dominance')!.getAttribute('aria-selected')).toBe('true');
       expect(pill('sdi', 'Red')!.getAttribute('aria-selected')).toBe('true');
       expect(pill('sdi', 'Blue')!.hasAttribute('data-dimmed')).toBe(true);
       expect(pill('sdi', 'Green')!.hasAttribute('data-dimmed')).toBe(true);
@@ -201,21 +201,21 @@ describe('avatar-step', () => {
       await el.updateComplete;
       const profile: PersonalityProfile = {
         profession: 'Engineering', role: 'Architect',
-        mbti: 'INTJ', enneagram: 'Type 5', disc: 'CD',
+        mbti: 'intj', enneagram: 'type-5', disc: 'CD',
       };
       el.externalProfile = profile;
       await el.updateComplete;
-      expect(el._profile.mbti).toBe('INTJ');
-      expect(el._frameworks.mbti).toBe('INTJ');
+      expect(el._profile.mbti).toBe('intj');
+      expect(el._frameworks.mbti).toBe('intj');
       expect(el._profileProfession).toBe('Engineering');
       expect(el._profileRole).toBe('Architect');
     });
 
     it('clears internal state when externalProfile is set to null', async () => {
       await el.updateComplete;
-      el.externalProfile = { mbti: 'INTJ', enneagram: 'Type 5' };
+      el.externalProfile = { mbti: 'intj', enneagram: 'type-5' };
       await el.updateComplete;
-      expect(el._profile.mbti).toBe('INTJ');
+      expect(el._profile.mbti).toBe('intj');
 
       el.externalProfile = null;
       await el.updateComplete;
@@ -227,7 +227,7 @@ describe('avatar-step', () => {
   describe('externalArchetype', () => {
     it('selects archetype in grid when externalArchetype is set', async () => {
       await el.updateComplete;
-      el.externalProfile = { mbti: 'ENFJ', enneagram: 'Type 1' };
+      el.externalProfile = { mbti: 'enfj', enneagram: 'type-1' };
       el.externalArchetype = { family: 'Sage', subArchetype: 'Mentor' };
       await el.updateComplete;
       expect(el._selectedArchetype).toBe('Sage/Mentor');
@@ -238,7 +238,7 @@ describe('avatar-step', () => {
 
     it('auto-navigates profession from archetype', async () => {
       await el.updateComplete;
-      el.externalProfile = { mbti: 'ENFJ' };
+      el.externalProfile = { mbti: 'enfj' };
       el.externalArchetype = { family: 'Sage', subArchetype: 'Mentor' };
       await el.updateComplete;
       expect(el._profession).toBeTruthy();
@@ -246,7 +246,7 @@ describe('avatar-step', () => {
 
     it('clears selection when externalArchetype is set to null', async () => {
       await el.updateComplete;
-      el.externalProfile = { mbti: 'ENFJ' };
+      el.externalProfile = { mbti: 'enfj' };
       el.externalArchetype = { family: 'Sage', subArchetype: 'Mentor' };
       await el.updateComplete;
       expect(el._selectedArchetype).toBe('Sage/Mentor');
