@@ -93,7 +93,7 @@ describe('mosaic-provider-status-row', () => {
     el.addEventListener('pages-event', handler);
     el.shadowRoot!.querySelector<HTMLButtonElement>('.action-btn')!.click();
     expect(handler).toHaveBeenCalledOnce();
-    const detail = handler.mock.calls[0][0].detail;
+    const detail = (handler.mock.calls[0]![0] as CustomEvent).detail;
     expect(detail.topic).toBe('connection.disconnect');
     expect(detail.payload.provider).toBe('google');
   });
@@ -105,7 +105,7 @@ describe('mosaic-provider-status-row', () => {
     el.addEventListener('pages-event', handler);
     el.shadowRoot!.querySelector<HTMLButtonElement>('.action-btn')!.click();
     expect(handler).toHaveBeenCalledOnce();
-    const detail = handler.mock.calls[0][0].detail;
+    const detail = (handler.mock.calls[0]![0] as CustomEvent).detail;
     expect(detail.topic).toBe('connection.consent');
     expect(detail.payload.provider).toBe('github');
     expect(detail.payload.missingScopes).toEqual(['repo', 'workflow']);
@@ -118,7 +118,7 @@ describe('mosaic-provider-status-row', () => {
     el.addEventListener('pages-event', handler);
     el.shadowRoot!.querySelector<HTMLButtonElement>('.action-btn')!.click();
     expect(handler).toHaveBeenCalledOnce();
-    const detail = handler.mock.calls[0][0].detail;
+    const detail = (handler.mock.calls[0]![0] as CustomEvent).detail;
     expect(detail.topic).toBe('connection.connect');
     expect(detail.payload.provider).toBe('slack');
   });

@@ -36,9 +36,9 @@ describe('mosaic-login-page', () => {
     buttons.forEach(btn => {
       expect(btn.getAttribute('mode')).toBe('signin');
     });
-    expect(buttons[0].getAttribute('provider')).toBe('google');
-    expect(buttons[1].getAttribute('provider')).toBe('github');
-    expect(buttons[2].getAttribute('provider')).toBe('slack');
+    expect(buttons[0]!.getAttribute('provider')).toBe('google');
+    expect(buttons[1]!.getAttribute('provider')).toBe('github');
+    expect(buttons[2]!.getAttribute('provider')).toBe('slack');
   });
 
   it('renders passkey-authenticate button when passkeyEnabled=true', () => {
@@ -76,7 +76,7 @@ describe('mosaic-login-page', () => {
     if (innerBtn) {
       innerBtn.click();
       expect(handler).toHaveBeenCalledOnce();
-      const detail = handler.mock.calls[0][0].detail;
+      const detail = (handler.mock.calls[0]![0] as CustomEvent).detail;
       expect(detail.topic).toBe('connection.connect');
       expect(detail.payload.provider).toBe('google');
     }

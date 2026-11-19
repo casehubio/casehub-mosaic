@@ -30,7 +30,7 @@ describe('mosaic-passkey-authenticate', () => {
     el.addEventListener('pages-event', handler);
     el.shadowRoot!.querySelector('button')!.click();
     expect(handler).toHaveBeenCalledOnce();
-    const detail = handler.mock.calls[0][0].detail;
+    const detail = (handler.mock.calls[0]![0] as CustomEvent).detail;
     expect(detail.topic).toBe('passkey.authenticate-request');
   });
 

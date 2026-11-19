@@ -3,11 +3,12 @@ import { OAuthFlowController } from './oauth-flow-controller.js';
 
 describe('OAuthFlowController', () => {
   let controller: OAuthFlowController;
-  let openSpy: ReturnType<typeof vi.spyOn>;
+  let openSpy: ReturnType<typeof vi.fn>;
 
   beforeEach(() => {
     controller = new OAuthFlowController();
-    openSpy = vi.spyOn(window, 'open');
+    openSpy = vi.fn();
+    vi.stubGlobal('open', openSpy);
   });
 
   afterEach(() => {

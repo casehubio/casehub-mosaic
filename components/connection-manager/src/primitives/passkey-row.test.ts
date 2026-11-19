@@ -58,7 +58,7 @@ describe('mosaic-passkey-row', () => {
     el.addEventListener('pages-event', handler);
     el.shadowRoot!.querySelector<HTMLButtonElement>('.revoke-btn')!.click();
     expect(handler).toHaveBeenCalledOnce();
-    const detail = handler.mock.calls[0][0].detail;
+    const detail = (handler.mock.calls[0]![0] as CustomEvent).detail;
     expect(detail.topic).toBe('passkey.revoke');
     expect(detail.payload.credentialId).toBe('cred-abc');
   });

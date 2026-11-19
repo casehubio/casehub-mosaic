@@ -49,7 +49,7 @@ describe('mosaic-connect-button', () => {
     el.addEventListener('pages-event', handler);
     el.shadowRoot!.querySelector('button')!.click();
     expect(handler).toHaveBeenCalledOnce();
-    const detail = handler.mock.calls[0][0].detail;
+    const detail = (handler.mock.calls[0]![0] as CustomEvent).detail;
     expect(detail.topic).toBe('connection.connect');
     expect(detail.payload.provider).toBe('google');
   });
