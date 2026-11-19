@@ -12,6 +12,8 @@ export * from './agent.js';
 export * from './manifest.js';
 export * from './desired-state.js';
 export * from './personality-vocab.js';
+export * from './connection.js';
+export * from './credential.js';
 
 export type { QueueScopeChangedPayload } from './events.js';
 export type { InboxMode, QueueScope, QueueSummaryEntry } from './work-item.js';
