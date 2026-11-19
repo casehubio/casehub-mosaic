@@ -1,0 +1,33 @@
+{
+  "name": "@casehubio/mosaic-connection-manager",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "clean": "rimraf dist"
+  },
+  "dependencies": {
+    "@casehubio/mosaic-core": "workspace:*",
+    "@casehubio/pages-data": "*",
+    "@casehubio/pages-primitives": "*",
+    "lit": "^3.0.0"
+  },
+  "devDependencies": {
+    "@open-wc/testing": "^4.0.0",
+    "jsdom": "^25.0.0",
+    "rimraf": "^6.1.0",
+    "typescript": "~5.8.0",
+    "vitest": "^3.0.0"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "files": [
+    "dist",
+    "package.json"
+  ]
+}
