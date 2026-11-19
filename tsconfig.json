@@ -43,6 +43,7 @@
     { "path": "components/evolution-workbench/tsconfig.build.json" },
     { "path": "components/agent-profile/tsconfig.build.json" },
     { "path": "components/agent-relationship-editor/tsconfig.build.json" },
-    { "path": "components/connection-manager/tsconfig.build.json" }
+    { "path": "components/connection-manager/tsconfig.build.json" },
+    { "path": "components/login-page/tsconfig.build.json" }
   ]
 }

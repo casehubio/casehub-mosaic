@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page Demo</title>
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      background: #f5f5f5;
+      margin: 0;
+      padding: 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .container {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+      padding: 2rem;
+      width: 420px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <mosaic-login-page id="login"></mosaic-login-page>
+  </div>
+
+  <script type="module">
+    import './src/login-page.js';
+
+    const el = document.getElementById('login');
+    el.providers = ['google', 'github', 'slack'];
+    el.passkeyEnabled = true;
+
+    el.addEventListener('pages-event', (e) => {
+      console.log('Login event:', e.detail.topic, e.detail.payload);
+    });
+  </script>
+</body>
+</html>
