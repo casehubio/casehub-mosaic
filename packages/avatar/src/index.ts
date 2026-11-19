@@ -12,3 +12,5 @@ export { AvatarWsController } from './avatar-ws-controller.js';
 export type { AvatarWsHost } from './avatar-ws-controller.js';
 export { CasehubAvatar } from './casehub-avatar.js';
 export { CasehubAvatarPanel } from './casehub-avatar-panel.js';
+export { AvatarSession } from './avatar-session.js';
+export type { AvatarSessionConfig } from './avatar-session.js';
