@@ -4,3 +4,7 @@ export { OAuthFlowController } from './controllers/oauth-flow-controller.js';
 export type { OAuthFlowOptions, OAuthFlowResult } from './controllers/oauth-flow-controller.js';
 export { ScopeList } from './primitives/scope-list.js';
 export { ConnectButton } from './primitives/connect-button.js';
+export { ProviderStatusRow } from './primitives/provider-status-row.js';
+export { PasskeyRow } from './primitives/passkey-row.js';
+export { PasskeyRegisterButton } from './primitives/passkey-register-button.js';
+export { PasskeyAuthenticateButton } from './primitives/passkey-authenticate-button.js';
