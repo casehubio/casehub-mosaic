@@ -8,3 +8,4 @@ export { ProviderStatusRow } from './primitives/provider-status-row.js';
 export { PasskeyRow } from './primitives/passkey-row.js';
 export { PasskeyRegisterButton } from './primitives/passkey-register-button.js';
 export { PasskeyAuthenticateButton } from './primitives/passkey-authenticate-button.js';
+export { ConnectionManagementPage } from './connection-management-page.js';

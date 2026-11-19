@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Connection Management Demo</title>
+  <style>body { font-family: system-ui; max-width: 600px; margin: 2rem auto; }</style>
+  <script type="module">
+    import './src/connection-management-page.js';
+    const page = document.querySelector('mosaic-connection-management');
+    page.connections = [
+      { provider: 'google', status: 'CONNECTED', grantedScopes: ['email', 'profile', 'calendar'], missingScopes: [], connectedAt: '2026-01-15T10:30:00Z' },
+      { provider: 'github', status: 'PARTIAL', grantedScopes: ['repo'], missingScopes: ['workflow', 'packages'], connectedAt: '2026-03-01T08:00:00Z' },
+      { provider: 'slack', status: 'DISCONNECTED', grantedScopes: [], missingScopes: ['channels:read', 'chat:write'], connectedAt: null },
+    ];
+    page.credentials = [
+      { credentialId: 'cred-1', displayName: 'MacBook Pro Touch ID', transports: ['internal'], discoverable: true, createdAt: '2026-06-01T12:00:00Z', lastUsedAt: '2026-11-17T09:30:00Z' },
+      { credentialId: 'cred-2', displayName: 'YubiKey 5C NFC', transports: ['usb', 'nfc'], discoverable: true, createdAt: '2026-02-14T15:00:00Z', lastUsedAt: '2026-11-05T14:20:00Z' },
+    ];
+    page.providers = ['google', 'github', 'slack'];
+  </script>
+</head>
+<body>
+  <mosaic-connection-management></mosaic-connection-management>
+</body>
+</html>
