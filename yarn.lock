@@ -517,6 +517,22 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@casehubio/mosaic-connection-manager@workspace:*, @casehubio/mosaic-connection-manager@workspace:components/connection-manager":
+  version: 0.0.0-use.local
+  resolution: "@casehubio/mosaic-connection-manager@workspace:components/connection-manager"
+  dependencies:
+    "@casehubio/mosaic-core": "workspace:*"
+    "@casehubio/pages-data": "npm:*"
+    "@casehubio/pages-primitives": "npm:*"
+    "@open-wc/testing": "npm:^4.0.0"
+    jsdom: "npm:^25.0.0"
+    lit: "npm:^3.0.0"
+    rimraf: "npm:^6.1.0"
+    typescript: "npm:~5.8.0"
+    vitest: "npm:^3.0.0"
+  languageName: unknown
+  linkType: soft
+
 "@casehubio/mosaic-contributor-workbench@workspace:*, @casehubio/mosaic-contributor-workbench@workspace:components/contributor-workbench":
   version: 0.0.0-use.local
   resolution: "@casehubio/mosaic-contributor-workbench@workspace:components/contributor-workbench"
@@ -862,6 +878,23 @@ __metadata:
     "@casehubio/mosaic-core": "workspace:*"
     "@casehubio/pages-primitives": "npm:*"
     "@casehubio/pages-table": "npm:*"
+    "@open-wc/testing": "npm:^4.0.0"
+    jsdom: "npm:^25.0.0"
+    lit: "npm:^3.0.0"
+    rimraf: "npm:^6.1.0"
+    typescript: "npm:~5.8.0"
+    vitest: "npm:^3.0.0"
+  languageName: unknown
+  linkType: soft
+
+"@casehubio/mosaic-login-page@workspace:components/login-page":
+  version: 0.0.0-use.local
+  resolution: "@casehubio/mosaic-login-page@workspace:components/login-page"
+  dependencies:
+    "@casehubio/mosaic-connection-manager": "workspace:*"
+    "@casehubio/mosaic-core": "workspace:*"
+    "@casehubio/pages-data": "npm:*"
+    "@casehubio/pages-primitives": "npm:*"
     "@open-wc/testing": "npm:^4.0.0"
     jsdom: "npm:^25.0.0"
     lit: "npm:^3.0.0"

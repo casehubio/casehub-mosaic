@@ -514,6 +514,14 @@ Desired state graph viewer — visualises `DesiredStateSnapshot` as a DAG using 
 
 Contributor workbench — split-workbench for contributor detail views. Element tag: `<agency-contributor-workbench>`. Left panel shows intake classification (lane badge: FAST_TRACK/STANDARD/TRIAGE with reason), dimension scores, and trust score via `trust-score-panel`. Right panel shows outcome history via `pages-table` with `fromRows`. Extends `LiveRegionMixin`. Direct fetch from `endpoint`/`actorId` properties.
 
+### connection-manager (`components/connection-manager`)
+
+Connection & identity UI primitives and pre-configured management page. Three-layer architecture: **primitives** (provider-status-row, connect-button, scope-list, passkey-row, passkey-register, passkey-authenticate), **controllers** (OAuthFlowController for popup+redirect OAuth with origin verification, ProviderBrandRegistry with built-in Google/GitHub/Slack/Discord SVGs), and **pages** (ConnectionManagementPage composing all primitives). Pure-view pattern: data in via properties, user actions out via `pages-event`. Types (`ServiceConnection`, `WebAuthnCredential`, `ProviderBrand`) live in mosaic-core. Platform REST endpoints: casehubio/platform#898.
+
+### login-page (`components/login-page`)
+
+Authentication page composing connect-button (signin mode) and passkey-authenticate-button from connection-manager. Element tag: `<mosaic-login-page>`. Properties: `providers: string[]`, `passkeyEnabled: boolean`. Separate package because it has a distinct deployment context (login flow vs settings page).
+
 ---
 
 ## Known Gotchas

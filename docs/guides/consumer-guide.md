@@ -158,6 +158,13 @@ Domain-aware but app-agnostic — components know about trust scores, case timel
 | `session-detail` | Session detail panel — tabbed view: Terminal, Git, Health, Events tabs | Beta |
 | `session-workbench` | Session workbench — split-pane layout with session list and detail panels | Beta |
 
+**Connection & identity:**
+
+| Component | Purpose | Maturity |
+|-----------|---------|----------|
+| `connection-manager` | Connection & identity primitives — `mosaic-provider-status-row`, `mosaic-connect-button`, `mosaic-scope-list`, `mosaic-passkey-row`, `mosaic-passkey-register`, `mosaic-passkey-authenticate`, `OAuthFlowController`, `ProviderBrandRegistry`. Pre-configured `mosaic-connection-management` page composes all primitives. | Alpha |
+| `login-page` | Authentication page — social login buttons (`mosaic-connect-button` in signin mode) + passkey sign-in (`mosaic-passkey-authenticate`). Pre-configured `mosaic-login-page`. | Alpha |
+
 **Document review:**
 
 | Component | Purpose | Maturity |

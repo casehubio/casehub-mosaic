@@ -325,7 +325,7 @@ export const groupedDataViewPropsSchema = z.object({
       className: z.string().optional(),
       style: z.record(z.string()).optional(),
     })).optional(),
-  selection: z.unknown().optional(),
+  selection: z.enum(["none", "single", "multi"]).optional(),
   preset: z.enum(["sectioned", "spreadsheet", "list"]),
   defaultExpanded: z.boolean(),
   sortable: z.boolean(),
@@ -965,7 +965,33 @@ export const planModelDashboardPropsSchema = z.object({
 });
 
 export const caseFlowViewerPropsSchema = z.object({
-  runtimeState: z.unknown(),
+  runtimeState: z.union([z.null(), z.object({
+      planItems: z.array(z.object({
+          id: z.string(),
+          bindingName: z.string(),
+          status: z.enum(["PENDING", "COMPLETED", "REJECTED", "FAULTED", "DELEGATED", "SUSPENDED", "CANCELLED", "OBSOLETE", "RUNNING"]),
+          createdAt: z.string(),
+        })),
+      milestones: z.array(z.object({
+          name: z.string(),
+          status: z.enum(["PENDING", "COMPLETED", "ACTIVE"]),
+        })),
+      timestamp: z.string(),
+      caseStatus: z.string().optional(),
+      trustScores: z.array(z.object({
+          bindingName: z.string(),
+          workerId: z.string(),
+          score: z.number(),
+        })).optional(),
+      adaptiveDecisions: z.array(z.object({
+          trigger: z.string(),
+          condition: z.string(),
+          fired: z.boolean(),
+          timestamp: z.string(),
+          affectedBindings: z.array(z.string()).optional(),
+        })).optional(),
+      parallelGroups: z.array(z.array(z.string())).optional(),
+    })]),
   selectionTopic: z.string(),
 });
 
@@ -977,7 +1003,33 @@ export const caseDependencyGraphPropsSchema = z.object({
 export const diagramWorkbenchPropsSchema = z.object({
   yaml: z.string(),
   src: z.string(),
-  runtimeState: z.unknown(),
+  runtimeState: z.union([z.null(), z.object({
+      planItems: z.array(z.object({
+          id: z.string(),
+          bindingName: z.string(),
+          status: z.enum(["PENDING", "COMPLETED", "REJECTED", "FAULTED", "DELEGATED", "SUSPENDED", "CANCELLED", "OBSOLETE", "RUNNING"]),
+          createdAt: z.string(),
+        })),
+      milestones: z.array(z.object({
+          name: z.string(),
+          status: z.enum(["PENDING", "COMPLETED", "ACTIVE"]),
+        })),
+      timestamp: z.string(),
+      caseStatus: z.string().optional(),
+      trustScores: z.array(z.object({
+          bindingName: z.string(),
+          workerId: z.string(),
+          score: z.number(),
+        })).optional(),
+      adaptiveDecisions: z.array(z.object({
+          trigger: z.string(),
+          condition: z.string(),
+          fired: z.boolean(),
+          timestamp: z.string(),
+          affectedBindings: z.array(z.string()).optional(),
+        })).optional(),
+      parallelGroups: z.array(z.array(z.string())).optional(),
+    })]),
 });
 
 export const clusterPanelPropsSchema = z.object({
@@ -1021,7 +1073,7 @@ export const topologyViewerPropsSchema = z.object({
       services: z.array(z.object({
           id: z.string(),
           name: z.string(),
-          status: z.enum(["FAULTED", "ABSENT", "RUNNING", "DEGRADED", "DEPLOYING"]),
+          status: z.enum(["FAULTED", "RUNNING", "ABSENT", "DEGRADED", "DEPLOYING"]),
           replicas: z.number().optional(),
           image: z.string().optional(),
           type: z.string().optional(),
