@@ -5,7 +5,7 @@ import { customElement, property, state } from 'lit/decorators.js';
 export class CasehubSpeech extends LitElement {
   @property({ type: Number, attribute: 'sample-rate' }) sampleRate = 16000;
   @property({ type: Boolean, reflect: true }) disabled = false;
-  @property({ attribute: false }) session: any | null = null;
+  @property({ attribute: false }) session: { connectionState: string; sendStart(opts: { sampleRate: number }): void; sendStop(): void; sendAudio(buf: ArrayBuffer): void; addEventListener(type: string, listener: EventListener): void; removeEventListener(type: string, listener: EventListener): void } | null = null;
 
   private _statusHandler = ((e: CustomEvent) => {
     if (this.session) {

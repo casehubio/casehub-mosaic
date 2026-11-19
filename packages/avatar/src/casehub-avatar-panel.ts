@@ -48,8 +48,8 @@ export class CasehubAvatarPanel extends LitElement {
     .input-bar button:disabled { opacity: 0.5; cursor: default; }
   `;
 
-  private get _session(): AvatarSession {
-    return this.session ?? this._ownedSession!;
+  private get _session(): AvatarSession | null {
+    return this.session ?? this._ownedSession;
   }
 
   override connectedCallback() {
@@ -60,14 +60,14 @@ export class CasehubAvatarPanel extends LitElement {
       this._ownedSession = new AvatarSession({ wsUrl: this.wsUrl });
       this._ownedSession.connect();
     }
-    this._session.addEventListener('avatar:status', this._statusHandler);
-    this._session.addEventListener('avatar:timing', this._timingHandler);
+    this._session?.addEventListener('avatar:status', this._statusHandler);
+    this._session?.addEventListener('avatar:timing', this._timingHandler);
   }
 
   override disconnectedCallback() {
     super.disconnectedCallback();
-    this._session.removeEventListener('avatar:status', this._statusHandler);
-    this._session.removeEventListener('avatar:timing', this._timingHandler);
+    this._session?.removeEventListener('avatar:status', this._statusHandler);
+    this._session?.removeEventListener('avatar:timing', this._timingHandler);
     if (this._ownedSession) {
       this._ownedSession.disconnect();
       this._ownedSession = null;
@@ -79,7 +79,7 @@ export class CasehubAvatarPanel extends LitElement {
     if (!input) return;
     const text = input.value.trim();
     if (!text) return;
-    this._session.sendText(text);
+    this._session?.sendText(text);
     input.value = '';
     this._statusText = 'Processing...';
   }

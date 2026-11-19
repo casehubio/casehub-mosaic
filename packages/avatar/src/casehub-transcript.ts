@@ -48,6 +48,7 @@ export class CasehubTranscript extends LitElement {
     this.setAttribute('role', 'log');
     this.setAttribute('aria-live', 'polite');
     this.setAttribute('aria-label', 'Conversation transcript');
+    this.session?.addEventListener('avatar:turn', this._turnHandler);
   }
 
   override disconnectedCallback() {
