@@ -34,8 +34,13 @@ jobs:
           server-username: GITHUB_ACTOR
           server-password: GITHUB_TOKEN
 
+      - name: Install root POM locally
+        run: mvn -N --batch-mode install
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Resolve pages packages from Maven
-        run: mvn -f npm-packages/pom.xml initialize
+        run: mvn -f npm-packages/pom.xml -U initialize
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -111,7 +116,7 @@ jobs:
 
       - name: Publish Maven npm-packages artifact
         run: |
-          mvn -f npm-packages/pom.xml --batch-mode install
+          mvn -f npm-packages/pom.xml --batch-mode -U install
           mvn -f npm-packages/pom.xml --batch-mode deploy -DaltDeploymentRepository=github::https://maven.pkg.github.com/casehubio/casehub-mosaic -DaltSnapshotDeploymentRepository=github::https://maven.pkg.github.com/casehubio/casehub-mosaic
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
