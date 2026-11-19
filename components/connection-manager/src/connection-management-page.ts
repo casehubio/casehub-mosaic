@@ -9,7 +9,6 @@ import './primitives/passkey-register-button.js';
 export class ConnectionManagementPage extends LitElement {
   @property({ attribute: false }) connections: readonly ServiceConnection[] = [];
   @property({ attribute: false }) credentials: readonly WebAuthnCredential[] = [];
-  @property({ attribute: false }) providers: readonly string[] = [];
 
   override connectedCallback(): void {
     super.connectedCallback();

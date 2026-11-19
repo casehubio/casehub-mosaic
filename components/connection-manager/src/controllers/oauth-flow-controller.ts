@@ -16,6 +16,7 @@ export class OAuthFlowController {
   private cleanup: (() => void) | null = null;
 
   async start(options: OAuthFlowOptions): Promise<OAuthFlowResult> {
+    this.doCleanup();
     const {
       authorizationUrl,
       state,

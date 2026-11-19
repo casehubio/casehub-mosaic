@@ -143,6 +143,7 @@ export class ProviderStatusRow extends LitElement {
   }
 
   private handleAction(): void {
+    if (!this.connection) return;
     const { status, provider, missingScopes } = this.connection;
     switch (status) {
       case 'CONNECTED':
