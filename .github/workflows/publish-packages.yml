@@ -35,9 +35,7 @@ jobs:
           server-password: GITHUB_TOKEN
 
       - name: Install root POM locally
-        run: mvn -N --batch-mode install
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: mvn install:install-file -Dfile=pom.xml -DpomFile=pom.xml -DgroupId=io.casehub -DartifactId=casehub-mosaic -Dversion=0.4-SNAPSHOT -Dpackaging=pom
 
       - name: Resolve pages packages from Maven
         run: mvn -f npm-packages/pom.xml -U initialize
