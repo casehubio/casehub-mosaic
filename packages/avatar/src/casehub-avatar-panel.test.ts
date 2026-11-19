@@ -26,8 +26,24 @@ let mockWs: MockWebSocket;
 
 beforeEach(() => {
   mockWs = new MockWebSocket();
-  const WsCtor = class { constructor() { return mockWs; } static readonly OPEN = 1; };
+  const WsCtor = class extends MockWebSocket {
+    constructor(_url: string) { super(); mockWs = this; }
+  };
+  (WsCtor as any).OPEN = 1;
+  (WsCtor as any).CLOSED = 3;
   vi.stubGlobal('WebSocket', WsCtor);
+  vi.stubGlobal('fetch', vi.fn().mockResolvedValue({
+    ok: true,
+    json: () => Promise.resolve({
+      avatarUrl: 'test.glb',
+      cameraView: 'head',
+      defaultVoice: 'kokoro:af_heart',
+      defaultSpeed: 0.9,
+      voices: [{ id: 'kokoro:af_heart', engine: 'kokoro', label: 'Heart' }],
+      llms: [{ id: 'claude-haiku-4-5', label: 'Haiku 4.5' }],
+    }),
+  }));
+  vi.stubGlobal('location', { protocol: 'http:', host: 'localhost:8080' });
 });
 
 afterEach(() => {
@@ -40,6 +56,8 @@ async function createElement(avatarUrl = './test.glb') {
   el.avatarUrl = avatarUrl;
   document.body.appendChild(el);
   await el.updateComplete;
+  await new Promise(r => setTimeout(r, 10));
+  await el.updateComplete;
   return el;
 }
 
@@ -50,14 +68,16 @@ describe('CasehubAvatarPanel', () => {
     expect(el.getAttribute('aria-label')).toBe('Avatar conversation');
   });
 
-  it('composes avatar, transcript, and speech components', async () => {
+  it('composes avatar, transcript, speech, and controls components', async () => {
     const el = await createElement();
     const avatar = el.shadowRoot!.querySelector('casehub-avatar');
     const transcript = el.shadowRoot!.querySelector('casehub-transcript');
     const speech = el.shadowRoot!.querySelector('casehub-speech');
+    const controls = el.shadowRoot!.querySelector('casehub-avatar-controls');
     expect(avatar).toBeTruthy();
     expect(transcript).toBeTruthy();
     expect(speech).toBeTruthy();
+    expect(controls).toBeTruthy();
   });
 
   it('shows connection status', async () => {
@@ -72,61 +92,20 @@ describe('CasehubAvatarPanel', () => {
     expect(avatar.getAttribute('avatar-url')).toBe('./custom.glb');
   });
 
-  it('disables speech when not connected', async () => {
+  it('passes session to child components', async () => {
     const el = await createElement();
+    const avatar = el.shadowRoot!.querySelector('casehub-avatar') as any;
+    const transcript = el.shadowRoot!.querySelector('casehub-transcript') as any;
     const speech = el.shadowRoot!.querySelector('casehub-speech') as any;
-    expect(speech.disabled).toBe(true);
+    const controls = el.shadowRoot!.querySelector('casehub-avatar-controls') as any;
+    expect(avatar.session).toBeTruthy();
+    expect(transcript.session).toBeTruthy();
+    expect(speech.session).toBeTruthy();
+    expect(controls.session).toBeTruthy();
   });
 
-  it('enables speech when connected', async () => {
+  it('creates own session when none provided', async () => {
     const el = await createElement();
-    mockWs.onopen!();
-    await el.updateComplete;
-    const speech = el.shadowRoot!.querySelector('casehub-speech') as any;
-    expect(speech.disabled).toBe(false);
-  });
-
-  it('wires speech:start event to controller', async () => {
-    const el = await createElement();
-    mockWs.onopen!();
-    await el.updateComplete;
-
-    const speech = el.shadowRoot!.querySelector('casehub-speech')!;
-    speech.dispatchEvent(new CustomEvent('speech:start', {
-      detail: { sampleRate: 16000 }, bubbles: true, composed: true,
-    }));
-
-    expect(mockWs.sent.length).toBeGreaterThanOrEqual(1);
-    const sent = JSON.parse(mockWs.sent[0]);
-    expect(sent.type).toBe('start');
-    expect(sent.sampleRate).toBe(16000);
-  });
-
-  it('wires speech:audio event to controller binary send', async () => {
-    const el = await createElement();
-    mockWs.onopen!();
-    await el.updateComplete;
-
-    const speech = el.shadowRoot!.querySelector('casehub-speech')!;
-    const buf = new ArrayBuffer(16);
-    speech.dispatchEvent(new CustomEvent('speech:audio', {
-      detail: { buffer: buf }, bubbles: true, composed: true,
-    }));
-
-    expect(mockWs.sent).toContain(buf);
-  });
-
-  it('wires speech:stop event to controller', async () => {
-    const el = await createElement();
-    mockWs.onopen!();
-    await el.updateComplete;
-
-    const speech = el.shadowRoot!.querySelector('casehub-speech')!;
-    speech.dispatchEvent(new CustomEvent('speech:stop', {
-      detail: {}, bubbles: true, composed: true,
-    }));
-
-    const sent = JSON.parse(mockWs.sent[0]);
-    expect(sent.type).toBe('stop');
+    expect(el._ownedSession).toBeTruthy();
   });
 });

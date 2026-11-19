@@ -5,6 +5,13 @@ import { customElement, property, state } from 'lit/decorators.js';
 export class CasehubSpeech extends LitElement {
   @property({ type: Number, attribute: 'sample-rate' }) sampleRate = 16000;
   @property({ type: Boolean, reflect: true }) disabled = false;
+  @property({ attribute: false }) session: any | null = null;
+
+  private _statusHandler = ((e: CustomEvent) => {
+    if (this.session) {
+      this.disabled = this.session.connectionState !== 'connected';
+    }
+  }) as EventListener;
 
   @state() private _recording = false;
   @state() private _finishing = false;
@@ -48,9 +55,18 @@ export class CasehubSpeech extends LitElement {
   override disconnectedCallback() {
     super.disconnectedCallback();
     this._stopCapture();
+    this.session?.removeEventListener('avatar:status', this._statusHandler);
   }
 
   protected override updated(changed: Map<string, unknown>) {
+    if (changed.has('session')) {
+      const prev = changed.get('session') as any;
+      prev?.removeEventListener('avatar:status', this._statusHandler);
+      if (this.session) {
+        this.session.addEventListener('avatar:status', this._statusHandler);
+        this.disabled = this.session.connectionState !== 'connected';
+      }
+    }
     if (changed.has('disabled') && this.disabled && this._recording && !this._finishing) {
       this._stopRecording();
     }
@@ -76,13 +92,21 @@ export class CasehubSpeech extends LitElement {
         const resampled = this._resampleTo16k(input, this._audioCtx!.sampleRate);
         const buf = new ArrayBuffer(resampled.length * 4);
         new Float32Array(buf).set(resampled);
-        this.dispatchEvent(new CustomEvent('speech:audio', { detail: { buffer: buf }, bubbles: true, composed: true }));
+        if (this.session) {
+          this.session.sendAudio(buf);
+        } else {
+          this.dispatchEvent(new CustomEvent('speech:audio', { detail: { buffer: buf }, bubbles: true, composed: true }));
+        }
         this._audioFrameCount++;
       };
       this._micSource.connect(this._micProcessor);
       this._micProcessor.connect(this._audioCtx.destination);
       console.log('[MIC] dispatching speech:start, sampleRate:', this.sampleRate);
-      this.dispatchEvent(new CustomEvent('speech:start', { detail: { sampleRate: this.sampleRate }, bubbles: true, composed: true }));
+      if (this.session) {
+        this.session.sendStart({ sampleRate: this.sampleRate });
+      } else {
+        this.dispatchEvent(new CustomEvent('speech:start', { detail: { sampleRate: this.sampleRate }, bubbles: true, composed: true }));
+      }
       this._recording = true;
       console.log('[MIC] recording=true, mic active');
     } catch (e) {
@@ -101,7 +125,11 @@ export class CasehubSpeech extends LitElement {
       this._recording = false;
       console.log('[MIC] sending STOP after 500ms delay, total frames:', this._audioFrameCount);
       this._stopCapture();
-      this.dispatchEvent(new CustomEvent('speech:stop', { detail: {}, bubbles: true, composed: true }));
+      if (this.session) {
+        this.session.sendStop();
+      } else {
+        this.dispatchEvent(new CustomEvent('speech:stop', { detail: {}, bubbles: true, composed: true }));
+      }
       this._finishing = false;
     }, 500);
   }

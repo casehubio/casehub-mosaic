@@ -5,6 +5,11 @@ import type { ConversationTurn } from './types.js';
 @customElement('casehub-transcript')
 export class CasehubTranscript extends LitElement {
   @property({ type: Array }) turns: ConversationTurn[] = [];
+  @property({ attribute: false }) session: EventTarget | null = null;
+
+  private _turnHandler = ((e: CustomEvent) => {
+    this.turns = e.detail;
+  }) as EventListener;
 
   static override readonly styles = css`
     :host {
@@ -45,7 +50,17 @@ export class CasehubTranscript extends LitElement {
     this.setAttribute('aria-label', 'Conversation transcript');
   }
 
-  protected override updated() {
+  override disconnectedCallback() {
+    super.disconnectedCallback();
+    this.session?.removeEventListener('avatar:turn', this._turnHandler);
+  }
+
+  protected override updated(changed: Map<string, unknown>) {
+    if (changed.has('session')) {
+      const prev = changed.get('session') as EventTarget | null;
+      prev?.removeEventListener('avatar:turn', this._turnHandler);
+      this.session?.addEventListener('avatar:turn', this._turnHandler);
+    }
     this.scrollTop = this.scrollHeight;
   }
 

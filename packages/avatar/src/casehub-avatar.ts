@@ -19,9 +19,21 @@ export class CasehubAvatar extends LitElement {
   @property({ type: String, attribute: 'lipsync-lang' }) lipsyncLang = 'en';
   @property({ type: Number }) speed = 0.9;
   @property({ type: Array }) audioQueue: PlaybackItem[] = [];
+  @property({ attribute: false }) session: EventTarget | null = null;
 
   @state() private _loading = true;
   @state() private _speaking = false;
+
+  private _audioHandler = ((e: CustomEvent) => {
+    this._internalQueue.push(e.detail);
+    if (!this._processingQueue) this._processQueue();
+  }) as EventListener;
+
+  private _configHandler = ((e: CustomEvent) => {
+    const config = e.detail;
+    if (config.avatarUrl) this.avatarUrl = config.avatarUrl;
+    if (config.cameraView) this.cameraView = config.cameraView;
+  }) as EventListener;
 
   private _head: any = null;
   private _processingQueue = false;
@@ -59,11 +71,20 @@ export class CasehubAvatar extends LitElement {
     super.disconnectedCallback();
     this._head = null;
     this._visemeMeshes = null;
+    this.session?.removeEventListener('avatar:audio', this._audioHandler);
+    this.session?.removeEventListener('avatar:config-loaded', this._configHandler);
   }
 
   private _internalQueue: PlaybackItem[] = [];
 
   protected override updated(changed: Map<string, unknown>) {
+    if (changed.has('session')) {
+      const prev = changed.get('session') as EventTarget | null;
+      prev?.removeEventListener('avatar:audio', this._audioHandler);
+      prev?.removeEventListener('avatar:config-loaded', this._configHandler);
+      this.session?.addEventListener('avatar:audio', this._audioHandler);
+      this.session?.addEventListener('avatar:config-loaded', this._configHandler);
+    }
     if (changed.has('audioQueue') && this.audioQueue.length > 0) {
       this._internalQueue.push(...this.audioQueue);
       this.dispatchEvent(new CustomEvent('avatar:queue-accepted', { bubbles: true, composed: true }));
