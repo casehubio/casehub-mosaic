@@ -75,6 +75,12 @@ export class CasehubAvatarPanel extends LitElement {
     }
   }
 
+  protected override updated(changed: Map<string, unknown>) {
+    if (changed.has('showAvatar')) {
+      this.setAttribute('aria-label', this.showAvatar ? 'Avatar conversation' : 'Text conversation');
+    }
+  }
+
   private _onSendText() {
     const input = this.shadowRoot!.querySelector<HTMLInputElement>('#msg');
     if (!input) return;

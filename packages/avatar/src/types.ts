@@ -14,11 +14,16 @@ export interface ConversationTurn {
   role: 'user' | 'avatar';
   text: string;
   status: 'partial' | 'final';
-  type?: 'message' | 'tool-call';
+  type?: 'message' | 'tool-call' | 'confirmation';
   toolName?: string;
   toolArgs?: Record<string, unknown>;
   toolResult?: string;
   toolError?: boolean;
+  confirmationId?: string;
+  actionDescription?: string;
+  consequences?: string;
+  confirmationStatus?: 'pending' | 'confirmed' | 'declined' | 'expired';
+  expiresAt?: string;
 }
 
 export interface AvatarComponentConfig {

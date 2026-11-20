@@ -86,6 +86,51 @@ export class CasehubTranscript extends LitElement {
       background: color-mix(in srgb, var(--pages-error) 15%, transparent);
       color: var(--pages-error);
     }
+    .turn.confirmation {
+      align-self: flex-start;
+      max-width: 85%;
+      background: var(--pages-surface-variant);
+      color: var(--pages-on-surface);
+      border: 1px solid var(--pages-neutral-5);
+    }
+    .confirmation-action {
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .confirmation-consequences {
+      font-size: 0.85rem;
+      opacity: 0.8;
+      margin-bottom: 8px;
+    }
+    .confirmation-status {
+      font-size: 0.8rem;
+      font-style: italic;
+      opacity: 0.7;
+    }
+    .confirmation-buttons {
+      display: flex;
+      gap: 8px;
+      margin-top: 8px;
+    }
+    .confirmation-buttons button {
+      padding: 6px 16px;
+      border-radius: 6px;
+      border: none;
+      font-size: 0.85rem;
+      cursor: pointer;
+    }
+    .confirmation-buttons button:disabled {
+      opacity: 0.5;
+      cursor: default;
+    }
+    .confirmation-buttons button.confirm {
+      background: var(--pages-primary);
+      color: var(--pages-on-primary);
+    }
+    .confirmation-buttons button.decline {
+      background: var(--pages-error);
+      color: var(--pages-on-error);
+    }
   `;
 
   override connectedCallback() {
@@ -110,6 +155,35 @@ export class CasehubTranscript extends LitElement {
     this.scrollTop = this.scrollHeight;
   }
 
+  private _onConfirmationResponse(confirmationId: string, approved: boolean) {
+    this.dispatchEvent(new CustomEvent('avatar:confirmation-response', {
+      detail: { confirmationId, approved },
+      bubbles: true, composed: true,
+    }));
+  }
+
+  private _renderConfirmation(turn: ConversationTurn) {
+    const pending = turn.confirmationStatus === 'pending';
+    const statusLabel = turn.confirmationStatus === 'confirmed' ? 'Confirmed'
+      : turn.confirmationStatus === 'declined' ? 'Declined'
+      : turn.confirmationStatus === 'expired' ? 'Expired' : '';
+    return html`
+      <div class="turn confirmation"
+           role="alertdialog"
+           aria-label="Confirmation required: ${turn.actionDescription}">
+        <div class="confirmation-action">${turn.actionDescription}</div>
+        ${turn.consequences ? html`<div class="confirmation-consequences">${turn.consequences}</div>` : nothing}
+        ${!pending ? html`<div class="confirmation-status">${statusLabel}</div>` : nothing}
+        <div class="confirmation-buttons">
+          <button class="confirm" ?disabled=${!pending}
+            @click=${() => this._onConfirmationResponse(turn.confirmationId!, true)}>Confirm</button>
+          <button class="decline" ?disabled=${!pending}
+            @click=${() => this._onConfirmationResponse(turn.confirmationId!, false)}>Decline</button>
+        </div>
+      </div>
+    `;
+  }
+
   private _renderToolCall(turn: ConversationTurn) {
     const hasArgs = turn.toolArgs && Object.keys(turn.toolArgs).length > 0;
     return html`
@@ -131,14 +205,16 @@ export class CasehubTranscript extends LitElement {
 
   protected override render() {
     return html`${this.turns.map((turn) =>
-      turn.type === 'tool-call'
-        ? this._renderToolCall(turn)
-        : html`
-          <div class="turn ${turn.role} ${turn.status === 'partial' ? 'partial' : ''}"
-               aria-label="${turn.role === 'user' ? 'You said' : 'Avatar said'}: ${turn.text}">
-            ${turn.text}
-          </div>
-        `
+      turn.type === 'confirmation'
+        ? this._renderConfirmation(turn)
+        : turn.type === 'tool-call'
+          ? this._renderToolCall(turn)
+          : html`
+            <div class="turn ${turn.role} ${turn.status === 'partial' ? 'partial' : ''}"
+                 aria-label="${turn.role === 'user' ? 'You said' : 'Avatar said'}: ${turn.text}">
+              ${turn.text}
+            </div>
+          `
     )}`;
   }
 }

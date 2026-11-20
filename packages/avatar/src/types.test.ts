@@ -48,6 +48,32 @@ describe('Avatar types', () => {
     expect(turn.type).toBeUndefined();
   });
 
+  it('ConversationTurn supports confirmation type', () => {
+    const turn: ConversationTurn = {
+      role: 'avatar', text: 'Confirm action', status: 'final',
+      type: 'confirmation', confirmationId: 'c-123',
+      actionDescription: 'Start case #42',
+      consequences: 'This will create a new case and assign it to you.',
+      confirmationStatus: 'pending',
+    };
+    expect(turn.type).toBe('confirmation');
+    expect(turn.confirmationId).toBe('c-123');
+    expect(turn.actionDescription).toBe('Start case #42');
+    expect(turn.confirmationStatus).toBe('pending');
+  });
+
+  it('ConversationTurn confirmation supports expiry', () => {
+    const turn: ConversationTurn = {
+      role: 'avatar', text: 'Confirm', status: 'final',
+      type: 'confirmation', confirmationId: 'c-456',
+      actionDescription: 'Delete record',
+      confirmationStatus: 'expired',
+      expiresAt: '2026-11-20T12:00:00Z',
+    };
+    expect(turn.confirmationStatus).toBe('expired');
+    expect(turn.expiresAt).toBe('2026-11-20T12:00:00Z');
+  });
+
   it('AvatarMessage discriminates on type field', () => {
     const msg: AvatarMessage = { type: 'partial', text: 'hello' };
     if (msg.type === 'partial') {

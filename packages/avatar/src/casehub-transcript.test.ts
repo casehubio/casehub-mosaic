@@ -106,4 +106,81 @@ describe('CasehubTranscript', () => {
     const details = el.shadowRoot!.querySelector('.tool-call details');
     expect(details).toBeNull();
   });
+
+  it('renders pending confirmation with confirm and decline buttons', async () => {
+    const el = await createElement([makeTurn({
+      role: 'avatar', text: 'Confirm', type: 'confirmation',
+      confirmationId: 'c-1', actionDescription: 'Start case #42',
+      consequences: 'Creates a new case.', confirmationStatus: 'pending',
+    })]);
+    const card = el.shadowRoot!.querySelector('.turn.confirmation');
+    expect(card).toBeTruthy();
+    expect(card!.textContent).toContain('Start case #42');
+    expect(card!.textContent).toContain('Creates a new case.');
+    const buttons = card!.querySelectorAll('button');
+    expect(buttons.length).toBe(2);
+    expect(buttons[0]!.textContent).toContain('Confirm');
+    expect(buttons[1]!.textContent).toContain('Decline');
+  });
+
+  it('dispatches confirmation-response on confirm click', async () => {
+    const el = await createElement([makeTurn({
+      role: 'avatar', text: 'Confirm', type: 'confirmation',
+      confirmationId: 'c-2', actionDescription: 'Approve payment',
+      confirmationStatus: 'pending',
+    })]);
+    const events: CustomEvent[] = [];
+    el.addEventListener('avatar:confirmation-response', (e: CustomEvent) => events.push(e));
+    const btn = el.shadowRoot!.querySelector('.confirmation button.confirm') as HTMLButtonElement;
+    btn.click();
+    expect(events.length).toBe(1);
+    expect(events[0]!.detail).toEqual({ confirmationId: 'c-2', approved: true });
+  });
+
+  it('dispatches confirmation-response on decline click', async () => {
+    const el = await createElement([makeTurn({
+      role: 'avatar', text: 'Confirm', type: 'confirmation',
+      confirmationId: 'c-3', actionDescription: 'Delete record',
+      confirmationStatus: 'pending',
+    })]);
+    const events: CustomEvent[] = [];
+    el.addEventListener('avatar:confirmation-response', (e: CustomEvent) => events.push(e));
+    const btn = el.shadowRoot!.querySelector('.confirmation button.decline') as HTMLButtonElement;
+    btn.click();
+    expect(events.length).toBe(1);
+    expect(events[0]!.detail).toEqual({ confirmationId: 'c-3', approved: false });
+  });
+
+  it('disables buttons when confirmation is not pending', async () => {
+    const el = await createElement([makeTurn({
+      role: 'avatar', text: 'Confirmed', type: 'confirmation',
+      confirmationId: 'c-4', actionDescription: 'Start case',
+      confirmationStatus: 'confirmed',
+    })]);
+    const buttons = el.shadowRoot!.querySelectorAll('.confirmation button');
+    for (const btn of buttons) {
+      expect((btn as HTMLButtonElement).disabled).toBe(true);
+    }
+  });
+
+  it('shows expired status on expired confirmation', async () => {
+    const el = await createElement([makeTurn({
+      role: 'avatar', text: 'Expired', type: 'confirmation',
+      confirmationId: 'c-5', actionDescription: 'Approve',
+      confirmationStatus: 'expired',
+    })]);
+    const card = el.shadowRoot!.querySelector('.turn.confirmation');
+    expect(card!.textContent).toContain('Expired');
+  });
+
+  it('confirmation card has correct ARIA attributes', async () => {
+    const el = await createElement([makeTurn({
+      role: 'avatar', text: 'Confirm', type: 'confirmation',
+      confirmationId: 'c-6', actionDescription: 'Start case #42',
+      confirmationStatus: 'pending',
+    })]);
+    const card = el.shadowRoot!.querySelector('.turn.confirmation');
+    expect(card!.getAttribute('role')).toBe('alertdialog');
+    expect(card!.getAttribute('aria-label')).toContain('Confirmation required: Start case #42');
+  });
 });

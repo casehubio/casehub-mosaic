@@ -159,4 +159,12 @@ describe('CasehubAvatarPanel', () => {
     await el.updateComplete;
     expect(el.getAttribute('aria-label')).toBe('Text conversation');
   });
+
+  it('updates aria-label when showAvatar toggles after render', async () => {
+    const el = await createElement();
+    expect(el.getAttribute('aria-label')).toBe('Avatar conversation');
+    el.showAvatar = false;
+    await el.updateComplete;
+    expect(el.getAttribute('aria-label')).toBe('Text conversation');
+  });
 });
