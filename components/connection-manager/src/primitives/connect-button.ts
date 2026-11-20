@@ -13,6 +13,7 @@ export class ConnectButton extends LitElement {
   @property() mode: 'connect' | 'signin' = 'connect';
   @property({ attribute: 'authorization-url' }) authorizationUrl: string | null = null;
   @property({ attribute: 'expected-origin' }) expectedOrigin: string | null = null;
+  @property({ attribute: 'oauth-state' }) oauthState: string | null = null;
   @property({ attribute: false }) brand: ProviderBrand | null = null;
   @property({ type: Boolean }) loading = false;
   @property() error: string | null = null;
@@ -74,7 +75,7 @@ export class ConnectButton extends LitElement {
       try {
         const result = await this.flowController.start({
           authorizationUrl: this.authorizationUrl,
-          state: new URL(this.authorizationUrl).searchParams.get('state') ?? '',
+          state: this.oauthState ?? new URL(this.authorizationUrl).searchParams.get('state') ?? '',
           expectedOrigin: this.expectedOrigin,
         });
         emitPagesEvent(this, ConnectionManagerTopics.OAUTH_COMPLETE, {
