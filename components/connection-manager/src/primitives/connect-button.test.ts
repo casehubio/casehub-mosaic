@@ -75,4 +75,13 @@ describe('mosaic-connect-button', () => {
     expect(btn!.getAttribute('aria-label')).toContain('unknown-provider');
     expect(el.shadowRoot!.textContent).toContain('Connect with unknown-provider');
   });
+
+  it('disabled prop prevents click', async () => {
+    el.disabled = true;
+    await el.updateComplete;
+    const handler = vi.fn();
+    el.addEventListener('pages-event', handler);
+    el.shadowRoot!.querySelector('button')!.click();
+    expect(handler).not.toHaveBeenCalled();
+  });
 });

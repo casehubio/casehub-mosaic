@@ -98,4 +98,49 @@ describe('OAuthFlowController', () => {
   it('checkRedirectReturn returns null when no pending state', () => {
     expect(OAuthFlowController.checkRedirectReturn()).toBeNull();
   });
+
+  it('cleans up previous flow when start() called twice', async () => {
+    const fakePopup1 = { closed: false, close: vi.fn() } as unknown as Window;
+    const fakePopup2 = { closed: false, close: vi.fn() } as unknown as Window;
+    openSpy.mockReturnValueOnce(fakePopup1).mockReturnValueOnce(fakePopup2);
+
+    const promise1 = controller.start({
+      authorizationUrl: 'https://example.com?state=first',
+      state: 'first',
+      expectedOrigin: 'http://localhost:8080',
+    });
+
+    const promise2 = controller.start({
+      authorizationUrl: 'https://example.com?state=second',
+      state: 'second',
+      expectedOrigin: 'http://localhost:8080',
+    });
+
+    window.dispatchEvent(new MessageEvent('message', {
+      data: { type: 'oauth-callback', code: 'code2', state: 'second' },
+      origin: 'http://localhost:8080',
+    }));
+
+    const result = await promise2;
+    expect(result.code).toBe('code2');
+    expect(result.state).toBe('second');
+  });
+
+  it('rejects when popup is closed by user', async () => {
+    vi.useFakeTimers();
+    const fakePopup = { closed: false, close: vi.fn() } as unknown as Window & { closed: boolean };
+    openSpy.mockReturnValue(fakePopup);
+
+    const promise = controller.start({
+      authorizationUrl: 'https://example.com?state=abc',
+      state: 'abc',
+      expectedOrigin: 'http://localhost:8080',
+    });
+
+    (fakePopup as { closed: boolean }).closed = true;
+    vi.advanceTimersByTime(600);
+
+    await expect(promise).rejects.toThrow('OAuth popup closed by user');
+    vi.useRealTimers();
+  });
 });

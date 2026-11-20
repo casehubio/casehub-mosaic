@@ -81,4 +81,11 @@ describe('mosaic-login-page', () => {
       expect(detail.payload.provider).toBe('google');
     }
   });
+
+  it('renders empty state with no providers', async () => {
+    el.providers = [];
+    await el.updateComplete;
+    const buttons = el.shadowRoot!.querySelectorAll('mosaic-connect-button');
+    expect(buttons.length).toBe(0);
+  });
 });
