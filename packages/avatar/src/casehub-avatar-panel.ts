@@ -34,17 +34,17 @@ export class CasehubAvatarPanel extends LitElement {
   }) as EventListener;
 
   static override readonly styles = css`
-    :host { display: flex; flex-direction: column; height: 100%; background: var(--pages-background, #1a1a2e); color: var(--pages-on-background, #e0e0e0); font-family: system-ui, sans-serif; }
-    casehub-avatar-controls { border-bottom: 1px solid var(--pages-neutral-3, #333); }
-    casehub-avatar { flex: 0 0 300px; border-bottom: 1px solid var(--pages-neutral-3, #333); }
-    .status { padding: 0.25rem 1rem; font-size: 0.75rem; color: var(--pages-on-surface-variant, #666); text-align: center; }
-    .timing { margin: 0.5rem 1rem; padding: 0.5rem 0.75rem; background: var(--pages-surface-variant, #1e1e32); border-radius: 8px; font-size: 0.8rem; font-family: monospace; }
+    :host { display: flex; flex-direction: column; height: 100%; background: var(--pages-background); color: var(--pages-on-background); font-family: system-ui, sans-serif; }
+    casehub-avatar-controls { border-bottom: 1px solid var(--pages-neutral-3); }
+    casehub-avatar { flex: 0 0 300px; border-bottom: 1px solid var(--pages-neutral-3); }
+    .status { padding: 0.25rem 1rem; font-size: 0.75rem; color: var(--pages-on-surface-variant); text-align: center; }
+    .timing { margin: 0.5rem 1rem; padding: 0.5rem 0.75rem; background: var(--pages-surface-variant); border-radius: 8px; font-size: 0.8rem; font-family: monospace; }
     .timing:empty { display: none; }
     casehub-transcript { flex: 1; overflow-y: auto; }
-    .input-bar { display: flex; gap: 0.5rem; padding: 1rem; border-top: 1px solid var(--pages-neutral-3, #333); }
-    .input-bar input { flex: 1; padding: 0.75rem; border-radius: 8px; border: 1px solid var(--pages-neutral-5, #555); background: var(--pages-surface, #2a2a3e); color: var(--pages-on-surface, #e0e0e0); font-size: 1rem; }
-    .input-bar input:focus { outline: none; border-color: var(--pages-primary, #2d5aa0); }
-    .input-bar button { padding: 0.75rem 1.5rem; border-radius: 8px; border: none; background: var(--pages-primary, #2d5aa0); color: var(--pages-on-primary, white); font-size: 1rem; cursor: pointer; }
+    .input-bar { display: flex; gap: 0.5rem; padding: 1rem; border-top: 1px solid var(--pages-neutral-3); }
+    .input-bar input { flex: 1; padding: 0.75rem; border-radius: 8px; border: 1px solid var(--pages-neutral-5); background: var(--pages-surface); color: var(--pages-on-surface); font-size: 1rem; }
+    .input-bar input:focus { outline: none; border-color: var(--pages-primary); }
+    .input-bar button { padding: 0.75rem 1.5rem; border-radius: 8px; border: none; background: var(--pages-primary); color: var(--pages-on-primary); font-size: 1rem; cursor: pointer; }
     .input-bar button:disabled { opacity: 0.5; cursor: default; }
   `;
 

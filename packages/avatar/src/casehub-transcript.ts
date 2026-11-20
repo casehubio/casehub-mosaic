@@ -29,13 +29,13 @@ export class CasehubTranscript extends LitElement {
     }
     .turn.user {
       align-self: flex-end;
-      background: var(--pages-primary, #2d5aa0);
-      color: var(--pages-on-primary, #fff);
+      background: var(--pages-primary);
+      color: var(--pages-on-primary);
     }
     .turn.avatar {
       align-self: flex-start;
-      background: var(--pages-surface-variant, #333);
-      color: var(--pages-on-surface, #e0e0e0);
+      background: var(--pages-surface-variant);
+      color: var(--pages-on-surface);
     }
     .turn.partial {
       opacity: 0.7;

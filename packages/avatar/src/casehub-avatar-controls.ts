@@ -22,8 +22,8 @@ export class CasehubAvatarControls extends LitElement {
 
   static override readonly styles = css`
     :host { display: flex; gap: 1rem; padding: 0.5rem 1rem; align-items: center; justify-content: center; flex-wrap: wrap; }
-    label { font-size: 0.8rem; color: var(--pages-on-surface-variant, #999); }
-    select { padding: 0.3rem 0.5rem; border-radius: 6px; border: 1px solid var(--pages-neutral-5, #555); background: var(--pages-surface, #2a2a3e); color: var(--pages-on-surface, #e0e0e0); font-size: 0.85rem; }
+    label { font-size: 0.8rem; color: var(--pages-on-surface-variant); }
+    select { padding: 0.3rem 0.5rem; border-radius: 6px; border: 1px solid var(--pages-neutral-5); background: var(--pages-surface); color: var(--pages-on-surface); font-size: 0.85rem; }
     input[type="range"] { width: 80px; vertical-align: middle; }
   `;
 

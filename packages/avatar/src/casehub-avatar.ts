@@ -50,7 +50,7 @@ export class CasehubAvatar extends LitElement {
     :host {
       display: block;
       position: relative;
-      background: var(--pages-surface, #111);
+      background: var(--pages-surface);
     }
     .avatar-container {
       width: 100%;

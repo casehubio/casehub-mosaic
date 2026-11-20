@@ -29,18 +29,18 @@ export class CasehubSpeech extends LitElement {
     button {
       padding: var(--pages-space-3, 12px) var(--pages-space-4, 16px);
       border-radius: 8px;
-      border: 2px solid var(--pages-neutral-5, #555);
-      background: var(--pages-surface, #2a2a3e);
-      color: var(--pages-on-surface, #e0e0e0);
+      border: 2px solid var(--pages-neutral-5);
+      background: var(--pages-surface);
+      color: var(--pages-on-surface);
       font-size: 1rem;
       cursor: pointer;
       transition: all 0.2s;
     }
     button:disabled { opacity: 0.5; cursor: default; }
     button[aria-pressed="true"] {
-      background: var(--pages-error, #d64);
-      border-color: var(--pages-error, #d64);
-      color: var(--pages-on-error, white);
+      background: var(--pages-error);
+      border-color: var(--pages-error);
+      color: var(--pages-on-error);
       animation: pulse 1s infinite;
     }
     @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.7; } }
