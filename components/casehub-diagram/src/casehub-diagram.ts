@@ -36,7 +36,7 @@ import type { ElkLayoutOptions, EditPolicy, GraphEdit } from '@casehubio/graph-r
 import type { NodeDecoration } from '@casehubio/graph-core';
 import { edgesOf } from '@casehubio/graph-core';
 import { emitPagesEvent } from '@casehubio/pages-data';
-import { detectDiagramType } from '@casehubio/mosaic-core';
+import { detectDiagramType, detectDiagramTypeFromSrc } from '@casehubio/mosaic-core';
 import { stringify, parseDocument } from 'yaml';
 import { DiagramBaseMixin } from '@casehubio/pages-diagram-core';
 import type { AdapterResult, LayoutResult } from '@casehubio/pages-diagram-core';
@@ -964,6 +964,7 @@ export class CasehubDiagram extends DiagramBaseMixin(LitElement) {
     return html`
       <div style="display: flex; flex-direction: column; width: 100%; height: 100%;">
         <casehub-diagram-toolbar
+          .diagramType=${detectDiagramTypeFromSrc(this.src) ?? detectDiagramType(this._currentYaml)}
           ?hasBackend=${this.backend != null}
           ?hasNodes=${this._nodes.length > 0}
           ?dirty=${this._isDirty}

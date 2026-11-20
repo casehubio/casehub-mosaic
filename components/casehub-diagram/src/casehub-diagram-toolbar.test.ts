@@ -8,6 +8,7 @@ type ToolbarEl = HTMLElement & {
   runtimeAvailable: boolean;
   mode: 'design' | 'runtime';
   staleSeconds: number;
+  diagramType: string;
   updateComplete: Promise<boolean>;
 };
 
@@ -151,5 +152,55 @@ describe('mode toggle', () => {
     el.staleSeconds = 0;
     await el.updateComplete;
     expect(el.shadowRoot!.querySelector('.stale-badge')).toBeNull();
+  });
+});
+
+describe('diagram type badge', () => {
+  let el: ToolbarEl;
+
+  beforeEach(async () => {
+    el = document.createElement('casehub-diagram-toolbar') as ToolbarEl;
+    document.body.appendChild(el);
+    await el.updateComplete;
+  });
+
+  afterEach(() => {
+    el.remove();
+  });
+
+  it('renders badge with correct text for known type', async () => {
+    el.diagramType = 'choreography';
+    await el.updateComplete;
+    const badge = el.shadowRoot!.querySelector('.diagram-type-badge');
+    expect(badge).not.toBeNull();
+    expect(badge!.textContent!.trim()).toBe('choreography');
+  });
+
+  it('hides badge when diagramType is empty', async () => {
+    el.diagramType = '';
+    await el.updateComplete;
+    expect(el.shadowRoot!.querySelector('.diagram-type-badge')).toBeNull();
+  });
+
+  it('hides badge when diagramType is unknown', async () => {
+    el.diagramType = 'unknown';
+    await el.updateComplete;
+    expect(el.shadowRoot!.querySelector('.diagram-type-badge')).toBeNull();
+  });
+
+  it('renders badge for any string type (open set)', async () => {
+    el.diagramType = 'avatar-conf';
+    await el.updateComplete;
+    const badge = el.shadowRoot!.querySelector('.diagram-type-badge');
+    expect(badge).not.toBeNull();
+    expect(badge!.textContent!.trim()).toBe('avatar-conf');
+  });
+
+  it('has correct ARIA attributes', async () => {
+    el.diagramType = 'htn';
+    await el.updateComplete;
+    const badge = el.shadowRoot!.querySelector('.diagram-type-badge')!;
+    expect(badge.getAttribute('role')).toBe('status');
+    expect(badge.getAttribute('aria-label')).toBe('Document type: htn');
   });
 });

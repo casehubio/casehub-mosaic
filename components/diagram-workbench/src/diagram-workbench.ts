@@ -111,7 +111,7 @@ export class DiagramWorkbench extends LitElement {
     const rootLevel: DrillDownLevel = {
       name: 'Case Definition',
       yaml: this.yaml,
-      diagramType: 'case',
+      diagramType: 'choreography',
     };
 
     const allLevels = [rootLevel, ...this._stack];

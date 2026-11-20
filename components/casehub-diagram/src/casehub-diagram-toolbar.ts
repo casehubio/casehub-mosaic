@@ -2,6 +2,19 @@ import { LitElement, html, css, nothing } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import '@casehubio/pages-ui-components';
 
+const DIAGRAM_TYPE_COLORS: Record<string, string> = {
+  choreography: '#3b82f6',
+  htn: '#8b5cf6',
+  goap: '#d97706',
+  llm: '#0d9488',
+  swf: '#ea580c',
+  playbook: '#16a34a',
+  'agent-conf': '#64748b',
+  'avatar-conf': '#64748b',
+  agency: '#64748b',
+};
+const DEFAULT_BADGE_COLOR = '#6b7280';
+
 @customElement('casehub-diagram-toolbar')
 export class CasehubDiagramToolbar extends LitElement {
   @property({ type: Boolean }) dirty = false;
@@ -12,6 +25,7 @@ export class CasehubDiagramToolbar extends LitElement {
   @property({ type: String }) mode: 'design' | 'runtime' = 'design';
   @property({ type: Number }) staleSeconds = 0;
   @property({ type: String }) caseStatus?: string;
+  @property({ type: String }) diagramType = '';
 
   static override styles = css`
     :host { display: flex; align-items: center; gap: 8px; padding: 4px 12px; border-bottom: 1px solid var(--pages-border-color, #ddd); height: 32px; box-sizing: border-box; font-family: var(--pages-font-family, system-ui, sans-serif); }
@@ -27,6 +41,7 @@ export class CasehubDiagramToolbar extends LitElement {
     .mode-toggle[aria-pressed="true"] { background: var(--pages-accent-subtle, #e8f0fe); border-color: var(--pages-accent-color, #1a73e8); color: var(--pages-accent-color, #1a73e8); }
     .spacer { flex: 1; }
     .stale-badge { font-size: 11px; color: var(--pages-warning-color, #f59e0b); }
+    .diagram-type-badge { font-size: 11px; padding: 1px 8px; border-radius: 10px; color: #fff; text-transform: lowercase; letter-spacing: 0.3px; white-space: nowrap; }
   `;
 
   override render() {
@@ -57,7 +72,16 @@ export class CasehubDiagramToolbar extends LitElement {
       <button ?disabled=${!this.hasNodes} @click=${() => this._export('png')}>Export PNG</button>
     `;
 
-    return html`${saveSection}${exportSection}${modeSection}`;
+    const typeBadge = this.diagramType && this.diagramType !== 'unknown' ? html`
+      <span class="diagram-type-badge"
+        role="status"
+        aria-label="Document type: ${this.diagramType}"
+        style="background: ${DIAGRAM_TYPE_COLORS[this.diagramType] ?? DEFAULT_BADGE_COLOR}">
+        ${this.diagramType}
+      </span>
+    ` : nothing;
+
+    return html`${saveSection}${exportSection}${typeBadge}${modeSection}`;
   }
 
   private _save(): void {

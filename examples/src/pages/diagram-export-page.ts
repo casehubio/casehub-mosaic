@@ -45,14 +45,14 @@ spec:
 @customElement('agency-example-diagram-export')
 export class DiagramExportPage extends LitElement {
   @state() private _yaml = PLACEHOLDER;
-  @state() private _diagramType: 'case' | 'swf' = 'case';
+  @state() private _diagramType: 'case' | 'swf' | 'choreography' = 'choreography';
 
   override connectedCallback() {
     super.connectedCallback();
     const params = new URLSearchParams(window.location.search);
 
     const type = params.get('type');
-    if (type === 'case' || type === 'swf') this._diagramType = type;
+    if (type === 'case' || type === 'swf' || type === 'choreography') this._diagramType = type;
 
     const yamlParam = params.get('yaml');
     if (yamlParam) {
@@ -135,8 +135,8 @@ export class DiagramExportPage extends LitElement {
     return html`
       <div class="header">
         <h2>Diagram Export</h2>
-        <button class="type-toggle ${this._diagramType === 'case' ? 'active' : ''}"
-          @click=${() => this._diagramType = 'case'}>Case</button>
+        <button class="type-toggle ${this._diagramType === 'choreography' || this._diagramType === 'case' ? 'active' : ''}"
+          @click=${() => this._diagramType = 'choreography'}>Case</button>
         <button class="type-toggle ${this._diagramType === 'swf' ? 'active' : ''}"
           @click=${() => this._diagramType = 'swf'}>SWF</button>
         <p>Paste YAML, then use the toolbar Export buttons to save as SVG or PNG.</p>
@@ -151,7 +151,7 @@ export class DiagramExportPage extends LitElement {
           ></textarea>
         </div>
         <div class="diagram-container">
-          ${this._diagramType === 'case'
+          ${this._diagramType === 'choreography' || this._diagramType === 'case'
             ? html`<casehub-diagram .yaml=${this._yaml}></casehub-diagram>`
             : html`<swf-diagram .yaml=${this._yaml}></swf-diagram>`}
         </div>
