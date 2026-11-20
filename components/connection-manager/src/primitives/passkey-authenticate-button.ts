@@ -19,7 +19,7 @@ export class PasskeyAuthenticateButton extends LitElement {
       border-radius: var(--pages-radius-2, 6px); cursor: pointer;
       font-family: var(--pages-font-family, system-ui); font-size: 0.875rem;
       background: var(--pages-neutral-9, #333);
-      color: #fff; transition: opacity 0.15s;
+      color: var(--pages-on-primary, #fff); transition: opacity 0.15s;
     }
     button:hover:not(:disabled) { opacity: 0.9; }
     button:disabled { opacity: 0.6; cursor: not-allowed; }

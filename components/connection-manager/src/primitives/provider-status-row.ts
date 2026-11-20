@@ -76,7 +76,7 @@ export class ProviderStatusRow extends LitElement {
     .loading-overlay {
       position: absolute; inset: 0;
       display: flex; align-items: center; justify-content: center;
-      background: rgba(255,255,255,0.6);
+      background: color-mix(in srgb, var(--pages-neutral-1, #fff) 60%, transparent);
       border-radius: inherit;
     }
     .spinner {

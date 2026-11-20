@@ -148,4 +148,12 @@ describe('mosaic-provider-status-row', () => {
     expect(errorEl).not.toBeNull();
     expect(errorEl!.textContent).toContain('Failed to disconnect');
   });
+
+  it('renders nothing when connection is null', async () => {
+    const nullEl = document.createElement('mosaic-provider-status-row') as typeof el;
+    document.body.appendChild(nullEl);
+    await nullEl.updateComplete;
+    expect(nullEl.shadowRoot!.querySelector('.info')).toBeNull();
+    nullEl.remove();
+  });
 });
