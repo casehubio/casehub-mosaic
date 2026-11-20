@@ -57,4 +57,53 @@ describe('CasehubTranscript', () => {
     const bubble = el.shadowRoot!.querySelector('.turn');
     expect(bubble!.textContent).toContain('New message');
   });
+
+  it('renders tool-call turns with tool-call class', async () => {
+    const el = await createElement([makeTurn({
+      role: 'avatar', text: 'Called life/tasks/create', type: 'tool-call',
+      toolName: 'life/tasks/create', toolArgs: { title: 'Buy milk' },
+      toolResult: '{"id": 42}',
+    })]);
+    const bubble = el.shadowRoot!.querySelector('.turn.tool-call');
+    expect(bubble).toBeTruthy();
+    expect(bubble!.textContent).toContain('life/tasks/create');
+  });
+
+  it('renders tool-call with collapsed args by default', async () => {
+    const el = await createElement([makeTurn({
+      role: 'avatar', text: 'Called db/query', type: 'tool-call',
+      toolName: 'db/query', toolArgs: { sql: 'SELECT 1' },
+      toolResult: '[{"1": 1}]',
+    })]);
+    const details = el.shadowRoot!.querySelector('.tool-call details');
+    expect(details).toBeTruthy();
+    expect(details!.hasAttribute('open')).toBe(false);
+  });
+
+  it('renders tool-call error with error class', async () => {
+    const el = await createElement([makeTurn({
+      role: 'avatar', text: 'Tool failed', type: 'tool-call',
+      toolName: 'db/query', toolResult: 'connection refused', toolError: true,
+    })]);
+    const result = el.shadowRoot!.querySelector('.tool-result.error');
+    expect(result).toBeTruthy();
+  });
+
+  it('tool-call turn has correct ARIA attributes', async () => {
+    const el = await createElement([makeTurn({
+      role: 'avatar', text: 'Called life/tasks/create', type: 'tool-call',
+      toolName: 'life/tasks/create', toolResult: '{"id": 42}',
+    })]);
+    const bubble = el.shadowRoot!.querySelector('.turn.tool-call');
+    expect(bubble!.getAttribute('aria-label')).toContain('Tool call: life/tasks/create');
+  });
+
+  it('renders tool-call without args when none provided', async () => {
+    const el = await createElement([makeTurn({
+      role: 'avatar', text: 'Called ping', type: 'tool-call',
+      toolName: 'ping', toolResult: 'pong',
+    })]);
+    const details = el.shadowRoot!.querySelector('.tool-call details');
+    expect(details).toBeNull();
+  });
 });

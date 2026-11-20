@@ -1,4 +1,4 @@
-import { LitElement, html, css } from 'lit';
+import { LitElement, html, css, nothing } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import type { ConversationTurn } from './types.js';
 
@@ -37,9 +37,54 @@ export class CasehubTranscript extends LitElement {
       background: var(--pages-surface-variant);
       color: var(--pages-on-surface);
     }
+    .turn.tool-call {
+      align-self: flex-start;
+      max-width: 85%;
+      background: var(--pages-surface-variant);
+      color: var(--pages-on-surface);
+      font-family: monospace;
+      font-size: 0.85rem;
+    }
     .turn.partial {
       opacity: 0.7;
       font-style: italic;
+    }
+    .tool-name {
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .tool-name::before {
+      content: '⚙️ ';
+    }
+    details {
+      margin-top: 4px;
+    }
+    summary {
+      cursor: pointer;
+      font-size: 0.8rem;
+      opacity: 0.7;
+    }
+    .tool-args {
+      margin-top: 4px;
+      padding: 6px 8px;
+      background: color-mix(in srgb, var(--pages-on-surface) 8%, transparent);
+      border-radius: 6px;
+      white-space: pre-wrap;
+      word-break: break-word;
+      font-size: 0.8rem;
+    }
+    .tool-result {
+      margin-top: 6px;
+      padding: 6px 8px;
+      background: color-mix(in srgb, var(--pages-on-surface) 5%, transparent);
+      border-radius: 6px;
+      white-space: pre-wrap;
+      word-break: break-word;
+      font-size: 0.8rem;
+    }
+    .tool-result.error {
+      background: color-mix(in srgb, var(--pages-error) 15%, transparent);
+      color: var(--pages-error);
     }
   `;
 
@@ -65,14 +110,35 @@ export class CasehubTranscript extends LitElement {
     this.scrollTop = this.scrollHeight;
   }
 
+  private _renderToolCall(turn: ConversationTurn) {
+    const hasArgs = turn.toolArgs && Object.keys(turn.toolArgs).length > 0;
+    return html`
+      <div class="turn tool-call ${turn.status === 'partial' ? 'partial' : ''}"
+           aria-label="Tool call: ${turn.toolName}${turn.toolError ? ' (error)' : ''}">
+        <div class="tool-name">${turn.toolName}</div>
+        ${hasArgs ? html`
+          <details>
+            <summary>Arguments</summary>
+            <div class="tool-args">${JSON.stringify(turn.toolArgs, null, 2)}</div>
+          </details>
+        ` : nothing}
+        ${turn.toolResult != null ? html`
+          <div class="tool-result ${turn.toolError ? 'error' : ''}">${turn.toolResult}</div>
+        ` : nothing}
+      </div>
+    `;
+  }
+
   protected override render() {
-    return html`${this.turns.map(
-      (turn) => html`
-        <div class="turn ${turn.role} ${turn.status === 'partial' ? 'partial' : ''}"
-             aria-label="${turn.role === 'user' ? 'You said' : 'Avatar said'}: ${turn.text}">
-          ${turn.text}
-        </div>
-      `
+    return html`${this.turns.map((turn) =>
+      turn.type === 'tool-call'
+        ? this._renderToolCall(turn)
+        : html`
+          <div class="turn ${turn.role} ${turn.status === 'partial' ? 'partial' : ''}"
+               aria-label="${turn.role === 'user' ? 'You said' : 'Avatar said'}: ${turn.text}">
+            ${turn.text}
+          </div>
+        `
     )}`;
   }
 }

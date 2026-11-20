@@ -14,6 +14,11 @@ export interface ConversationTurn {
   role: 'user' | 'avatar';
   text: string;
   status: 'partial' | 'final';
+  type?: 'message' | 'tool-call';
+  toolName?: string;
+  toolArgs?: Record<string, unknown>;
+  toolResult?: string;
+  toolError?: boolean;
 }
 
 export interface AvatarComponentConfig {
