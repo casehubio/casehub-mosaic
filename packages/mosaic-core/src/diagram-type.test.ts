@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { detectDiagramType } from './diagram-type.js';
+import { detectDiagramType, detectDiagramTypeFromSrc } from './diagram-type.js';
 
 const CASE_YAML = `dsl: "1.0.0"
 namespace: test
@@ -27,8 +27,27 @@ baz: 42
 `;
 
 describe('detectDiagramType', () => {
-  it('detects case definition', () => {
-    expect(detectDiagramType(CASE_YAML)).toBe('case');
+  it('detects case definition as choreography', () => {
+    expect(detectDiagramType(CASE_YAML)).toBe('choreography');
+  });
+
+  it('detects GOAP definition', () => {
+    const GOAP_YAML = `dsl: "1.0.0"
+namespace: test
+name: my-case
+spec:
+  bindings:
+    - name: b1
+      capability: cap1
+  workers:
+    - name: w1
+      capabilities: [cap1]
+  goals:
+    - name: resolve-case
+      expression:
+        all: [b1]
+`;
+    expect(detectDiagramType(GOAP_YAML)).toBe('goap');
   });
 
   it('detects SWF workflow', () => {
@@ -59,5 +78,49 @@ spec:
               capability: triage-assessment
 `;
     expect(detectDiagramType(HTN_YAML)).toBe('htn');
+  });
+
+  it('HTN takes priority over GOAP when both present', () => {
+    const HTN_GOAP_YAML = `dsl: "1.0.0"
+namespace: test
+name: my-case
+spec:
+  decomposition:
+    root:
+      name: investigate
+  goals:
+    - name: resolve
+      expression:
+        all: [investigate]
+`;
+    expect(detectDiagramType(HTN_GOAP_YAML)).toBe('htn');
+  });
+});
+
+describe('detectDiagramTypeFromSrc', () => {
+  it('extracts type from name.type.yaml pattern', () => {
+    expect(detectDiagramTypeFromSrc('mycase.choreography.yaml')).toBe('choreography');
+    expect(detectDiagramTypeFromSrc('plan.htn.yaml')).toBe('htn');
+    expect(detectDiagramTypeFromSrc('bot.agent-conf.yaml')).toBe('agent-conf');
+    expect(detectDiagramTypeFromSrc('flow.swf.yml')).toBe('swf');
+  });
+
+  it('returns undefined for single-segment filenames', () => {
+    expect(detectDiagramTypeFromSrc('legacy.yaml')).toBeUndefined();
+    expect(detectDiagramTypeFromSrc('file.yml')).toBeUndefined();
+  });
+
+  it('returns undefined for empty or missing src', () => {
+    expect(detectDiagramTypeFromSrc('')).toBeUndefined();
+  });
+
+  it('extracts from URL paths', () => {
+    expect(detectDiagramTypeFromSrc('/api/definitions/mycase.choreography.yaml')).toBe('choreography');
+    expect(detectDiagramTypeFromSrc('https://example.com/defs/plan.htn.yaml')).toBe('htn');
+  });
+
+  it('ignores query strings and fragments', () => {
+    expect(detectDiagramTypeFromSrc('mycase.goap.yaml?v=2')).toBe('goap');
+    expect(detectDiagramTypeFromSrc('mycase.llm.yaml#section')).toBe('llm');
   });
 });

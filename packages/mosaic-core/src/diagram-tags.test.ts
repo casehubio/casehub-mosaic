@@ -2,9 +2,11 @@ import { describe, it, expect } from 'vitest';
 import { DIAGRAM_TAGS } from './diagram-tags.js';
 
 describe('DIAGRAM_TAGS', () => {
-  it('maps all four domain formats', () => {
+  it('maps all domain formats including aliases', () => {
     expect(DIAGRAM_TAGS).toEqual({
       case: 'casehub-diagram',
+      choreography: 'casehub-diagram',
+      goap: 'casehub-diagram',
       swf: 'swf-diagram',
       htn: 'htn-diagram',
       org: 'agency-org-diagram',
