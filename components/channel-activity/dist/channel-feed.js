@@ -415,7 +415,9 @@ let ChannelFeedElement = class ChannelFeedElement extends ChannelFeedBase {
     }
     _onToolbarLeave() {
         this._isHoveringToolbar = false;
-        this._hoveredMessageId = null;
+        this._hoverLeaveTimer = setTimeout(() => {
+            this._hoveredMessageId = null;
+        }, 200);
     }
     _renderHoverToolbar(msg) {
         if (this._hoveredMessageId !== msg.id)

@@ -84,7 +84,7 @@ describe('personality-vocab generated module', () => {
   it('has framework descriptions for all 6 frameworks', () => {
     for (const key of ['mbti', 'enneagram', 'disc', 'belbin', 'sdi', 'bigFive']) {
       expect(FRAMEWORK_DESCRIPTIONS[key]).toBeDefined();
-      expect(FRAMEWORK_DESCRIPTIONS[key].description).toBeTruthy();
+      expect(FRAMEWORK_DESCRIPTIONS[key]!.description).toBeTruthy();
     }
   });
 
@@ -99,7 +99,7 @@ describe('personality-vocab generated module', () => {
   it('archetypeAffinities uses kebab-case values', () => {
     const angel = ARCHETYPE_AFFINITIES['angel'];
     expect(angel).toBeDefined();
-    for (const v of angel.mbti) {
+    for (const v of angel!.mbti) {
       expect(v).toMatch(/^[a-z]/);
     }
   });

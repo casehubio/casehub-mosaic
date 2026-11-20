@@ -116,9 +116,17 @@ let ChannelHoverToolbarElement = class ChannelHoverToolbarElement extends LitEle
         @click=${this._onReply}>↩</button>
       <button class="toolbar-btn more" title="More" aria-label="More actions"
         @click=${this._toggleOverflow}>⋯</button>
-      ${this._emojiPickerOpen ? html `<div class="emoji-picker-popover"><agency-channel-emoji-picker @emoji-selected=${this._onEmojiSelected}></agency-channel-emoji-picker></div>` : nothing}
+      ${this._emojiPickerOpen ? html `<div class="emoji-picker-popover"
+        @mouseenter=${this._onPickerEnter}
+        @mouseleave=${this._onPickerLeave}><agency-channel-emoji-picker @emoji-selected=${this._onEmojiSelected}></agency-channel-emoji-picker></div>` : nothing}
       ${this._retractConfirming ? this._renderRetractConfirm() : this._overflowOpen ? this._renderOverflow() : nothing}
     `;
+    }
+    _onPickerEnter() {
+        this.dispatchEvent(new Event('mouseenter', { bubbles: true, composed: true }));
+    }
+    _onPickerLeave() {
+        this.dispatchEvent(new Event('mouseleave', { bubbles: true, composed: true }));
     }
     _onReact() {
         this._emojiPickerOpen = !this._emojiPickerOpen;

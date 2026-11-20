@@ -1,5 +1,6 @@
 import type { CommitmentRecord, CommitmentState } from './commitment.js';
 import type { TransitionRecord } from './commitment.js';
+export type { TransitionRecord };
 
 export const EPISTEMIC_STATUSES = ['ESTABLISHED', 'PENDING', 'DISPUTED'] as const;
 export type EpistemicStatus = typeof EPISTEMIC_STATUSES[number];

@@ -114,10 +114,10 @@ describe('pattern category hierarchy', () => {
         },
       },
     };
-    const pipeline = p.pipelines!['risk-assessment'];
-    expect(pipeline.signature.id).toBe('risk-v1');
-    expect(pipeline.optimiser.type).toBe('few-shot');
-    expect(pipeline.safety!.qualityFloor).toBe(0.5);
+    const pipeline = p.pipelines!['risk-assessment']!;
+    expect(pipeline!.signature.id).toBe('risk-v1');
+    expect(pipeline!.optimiser.type).toBe('few-shot');
+    expect(pipeline!.safety!.qualityFloor).toBe(0.5);
   });
 
   it('SocialPatternCategory has cognition config', () => {
@@ -126,8 +126,8 @@ describe('pattern category hierarchy', () => {
       type: 'cognition',
       name: 'agent-cognition',
       cognition: {
-        drive: { baseLevel: 0.5 },
-        mood: { volatility: 0.3 },
+        drive: { changeThreshold: 0.5 },
+        mood: { maxDisplacement: 0.3 },
         retention: { retentionThreshold: 0.6, confidenceWeight: 0.4 },
       },
     };
