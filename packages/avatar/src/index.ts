@@ -2,7 +2,7 @@ export type {
   VisemeFrame,
   PlaybackItem,
   ConversationTurn,
-  AvatarConfig,
+  AvatarComponentConfig,
   AvatarMessage,
 } from './types.js';
 

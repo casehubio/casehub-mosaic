@@ -198,7 +198,7 @@ Agent visualization package — the tabbed drill-down container and 15+ pattern 
 - `CasehubTranscript` (`<casehub-transcript>`) — conversation transcript display
 - `CasehubSpeech` (`<casehub-speech>`) — speech controls (play/pause/stop)
 - `AvatarWsController` — Lit ReactiveController for WebSocket-based avatar communication, manages audio queue and viseme frames
-- Types: `VisemeFrame`, `PlaybackItem`, `ConversationTurn`, `AvatarConfig`, `AvatarMessage`
+- Types: `VisemeFrame`, `PlaybackItem`, `ConversationTurn`, `AvatarComponentConfig`, `AvatarMessage`
 
 ### lsp-schemas (`packages/lsp-schemas`)
 

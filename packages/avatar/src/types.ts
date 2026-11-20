@@ -16,7 +16,7 @@ export interface ConversationTurn {
   status: 'partial' | 'final';
 }
 
-export interface AvatarConfig {
+export interface AvatarComponentConfig {
   wsUrl?: string;
   avatarUrl: string;
   body?: 'M' | 'F';
