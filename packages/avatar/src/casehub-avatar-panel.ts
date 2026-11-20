@@ -1,4 +1,4 @@
-import { LitElement, html, css } from 'lit';
+import { LitElement, html, css, nothing } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { AvatarSession } from './avatar-session.js';
 import './casehub-avatar.js';
@@ -12,6 +12,7 @@ export class CasehubAvatarPanel extends LitElement {
   @property({ type: String, attribute: 'avatar-url' }) avatarUrl = '';
   @property({ type: String }) body: 'M' | 'F' = 'F';
   @property({ type: String }) mood = 'neutral';
+  @property({ type: Boolean, attribute: 'show-avatar' }) showAvatar = true;
   @property({ attribute: false }) session: AvatarSession | null = null;
 
   @state() private _statusText = 'Connecting...';
@@ -55,7 +56,7 @@ export class CasehubAvatarPanel extends LitElement {
   override connectedCallback() {
     super.connectedCallback();
     this.setAttribute('role', 'region');
-    this.setAttribute('aria-label', 'Avatar conversation');
+    this.setAttribute('aria-label', this.showAvatar ? 'Avatar conversation' : 'Text conversation');
     if (!this.session) {
       this._ownedSession = new AvatarSession({ wsUrl: this.wsUrl });
       this._ownedSession.connect();
@@ -91,18 +92,20 @@ export class CasehubAvatarPanel extends LitElement {
   protected override render() {
     const s = this._session;
     return html`
-      <casehub-avatar-controls .session=${s}></casehub-avatar-controls>
-      <casehub-avatar
-        avatar-url=${this.avatarUrl}
-        body=${this.body}
-        mood=${this.mood}
-        .session=${s}>
-      </casehub-avatar>
+      ${this.showAvatar ? html`
+        <casehub-avatar-controls .session=${s}></casehub-avatar-controls>
+        <casehub-avatar
+          avatar-url=${this.avatarUrl}
+          body=${this.body}
+          mood=${this.mood}
+          .session=${s}>
+        </casehub-avatar>
+      ` : nothing}
       <div class="status">${this._statusText}</div>
-      <div class="timing">${this._timingText}</div>
+      ${this.showAvatar ? html`<div class="timing">${this._timingText}</div>` : nothing}
       <casehub-transcript .session=${s}></casehub-transcript>
       <div class="input-bar">
-        <casehub-speech .session=${s}></casehub-speech>
+        ${this.showAvatar ? html`<casehub-speech .session=${s}></casehub-speech>` : nothing}
         <input id="msg" type="text" placeholder="Type a message..."
           autocomplete="off" ?disabled=${!this._connected}
           @keydown=${this._onInputKeydown}>

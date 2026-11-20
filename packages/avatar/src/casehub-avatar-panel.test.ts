@@ -108,4 +108,55 @@ describe('CasehubAvatarPanel', () => {
     const el = await createElement();
     expect(el._ownedSession).toBeTruthy();
   });
+
+  it('defaults showAvatar to true', async () => {
+    const el = await createElement();
+    expect(el.showAvatar).toBe(true);
+  });
+
+  it('hides avatar and controls when showAvatar is false', async () => {
+    const el = document.createElement('casehub-avatar-panel') as any;
+    el.avatarUrl = './test.glb';
+    el.showAvatar = false;
+    document.body.appendChild(el);
+    await el.updateComplete;
+    await new Promise(r => setTimeout(r, 10));
+    await el.updateComplete;
+    expect(el.shadowRoot!.querySelector('casehub-avatar')).toBeNull();
+    expect(el.shadowRoot!.querySelector('casehub-avatar-controls')).toBeNull();
+    expect(el.shadowRoot!.querySelector('casehub-speech')).toBeNull();
+    expect(el.shadowRoot!.querySelector('.timing')).toBeNull();
+  });
+
+  it('still shows transcript and input when showAvatar is false', async () => {
+    const el = document.createElement('casehub-avatar-panel') as any;
+    el.avatarUrl = './test.glb';
+    el.showAvatar = false;
+    document.body.appendChild(el);
+    await el.updateComplete;
+    await new Promise(r => setTimeout(r, 10));
+    await el.updateComplete;
+    expect(el.shadowRoot!.querySelector('casehub-transcript')).toBeTruthy();
+    expect(el.shadowRoot!.querySelector('.input-bar')).toBeTruthy();
+    expect(el.shadowRoot!.querySelector('.input-bar input')).toBeTruthy();
+    expect(el.shadowRoot!.querySelector('.input-bar button')).toBeTruthy();
+  });
+
+  it('reflects showAvatar property', async () => {
+    const el = document.createElement('casehub-avatar-panel') as any;
+    el.showAvatar = false;
+    el.avatarUrl = './test.glb';
+    document.body.appendChild(el);
+    await el.updateComplete;
+    expect(el.showAvatar).toBe(false);
+    expect(el.shadowRoot!.querySelector('casehub-avatar')).toBeNull();
+  });
+
+  it('updates aria-label for text-only mode', async () => {
+    const el = document.createElement('casehub-avatar-panel') as any;
+    el.showAvatar = false;
+    document.body.appendChild(el);
+    await el.updateComplete;
+    expect(el.getAttribute('aria-label')).toBe('Text conversation');
+  });
 });
