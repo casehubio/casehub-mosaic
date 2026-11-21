@@ -21,7 +21,7 @@ public class SpeechProducers {
 
     @Produces
     @jakarta.inject.Singleton
-    io.casehub.agency.speech.ws.TtsModelRegistry ttsRegistry() {
+    io.casehub.agency.speech.TtsModelRegistry ttsRegistry() {
         var models = new java.util.LinkedHashMap<String, io.casehub.connectors.voice.spi.TextToSpeech>();
 
         // Shared lip-sync aligner — enriches any TTS engine that returns empty phonemes
@@ -81,7 +81,7 @@ public class SpeechProducers {
             models.put(entry.getKey(), wrapIfAvailable(kokoro.forVoice(entry.getValue()), aligner));
         }
 
-        return new io.casehub.agency.speech.ws.TtsModelRegistry(java.util.Collections.unmodifiableMap(models));}
+        return new io.casehub.agency.speech.TtsModelRegistry(java.util.Collections.unmodifiableMap(models));}
 
     private static io.casehub.connectors.voice.spi.TextToSpeech wrapIfAvailable(
             io.casehub.connectors.voice.spi.TextToSpeech delegate,
@@ -232,7 +232,7 @@ public class SpeechProducers {
 
     void eagerNativeInit(@jakarta.enterprise.event.Observes io.quarkus.runtime.StartupEvent event,
                          io.casehub.connectors.voice.spi.StreamingSpeechToText stt,
-                         io.casehub.agency.speech.ws.TtsModelRegistry ttsRegistry) {
+                         io.casehub.agency.speech.TtsModelRegistry ttsRegistry) {
         // ORT is not thread-safe for concurrent Env creation on ARM64 (GE-20260803-e363e6).
         // Forcing eager init here serialises all ORT environment creation at startup.
         LOG.log(System.Logger.Level.INFO, "Speech services pre-initialised — STT: "
@@ -290,10 +290,10 @@ public class SpeechProducers {
 
     @Produces
     @jakarta.inject.Singleton
-    io.casehub.agency.speech.ws.CorrectionHooks correctionHooks(
+    io.casehub.agency.speech.CorrectionHooks correctionHooks(
             io.casehub.connectors.voice.sherpa.correction.TranscriptCorrector corrector,
             io.casehub.connectors.voice.sherpa.correction.ConversationVocabulary vocabulary) {
-        return new io.casehub.agency.speech.ws.CorrectionHooks(
+        return new io.casehub.agency.speech.CorrectionHooks(
                 whisperActive ? text -> text : corrector::correct,
                 response -> {
                     vocabulary.addFromText(response);
