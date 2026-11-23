@@ -11,6 +11,8 @@ export class CasehubTranscript extends LitElement {
     this.turns = e.detail;
   }) as EventListener;
 
+  private _expiryTimer: ReturnType<typeof setInterval> | null = null;
+
   static override readonly styles = css`
     :host {
       display: flex;
@@ -139,11 +141,13 @@ export class CasehubTranscript extends LitElement {
     this.setAttribute('aria-live', 'polite');
     this.setAttribute('aria-label', 'Conversation transcript');
     this.session?.addEventListener('avatar:turn', this._turnHandler);
+    this._startExpiryTimer();
   }
 
   override disconnectedCallback() {
     super.disconnectedCallback();
     this.session?.removeEventListener('avatar:turn', this._turnHandler);
+    this._stopExpiryTimer();
   }
 
   protected override updated(changed: Map<string, unknown>) {
@@ -153,6 +157,35 @@ export class CasehubTranscript extends LitElement {
       this.session?.addEventListener('avatar:turn', this._turnHandler);
     }
     this.scrollTop = this.scrollHeight;
+  }
+
+  private _startExpiryTimer() {
+    this._expiryTimer = setInterval(() => this._checkExpiry(), 1000);
+  }
+
+  private _stopExpiryTimer() {
+    if (this._expiryTimer != null) {
+      clearInterval(this._expiryTimer);
+      this._expiryTimer = null;
+    }
+  }
+
+  private _checkExpiry() {
+    const now = Date.now();
+    let changed = false;
+    for (const turn of this.turns) {
+      if (turn.type === 'confirmation' && turn.confirmationStatus === 'pending' && turn.expiresAt) {
+        if (new Date(turn.expiresAt).getTime() <= now) {
+          turn.confirmationStatus = 'expired';
+          changed = true;
+          this.dispatchEvent(new CustomEvent('avatar:confirmation-expired', {
+            detail: { confirmationId: turn.confirmationId },
+            bubbles: true, composed: true,
+          }));
+        }
+      }
+    }
+    if (changed) this.requestUpdate();
   }
 
   private _onConfirmationResponse(confirmationId: string, approved: boolean) {

@@ -1,4 +1,4 @@
-import { describe, it, expect, afterEach } from 'vitest';
+import { describe, it, expect, afterEach, vi, beforeEach } from 'vitest';
 import type { ConversationTurn } from './types.js';
 import './casehub-transcript.js';
 
@@ -182,5 +182,123 @@ describe('CasehubTranscript', () => {
     const card = el.shadowRoot!.querySelector('.turn.confirmation');
     expect(card!.getAttribute('role')).toBe('alertdialog');
     expect(card!.getAttribute('aria-label')).toContain('Confirmation required: Start case #42');
+  });
+
+  describe('auto-expiry timer', () => {
+    beforeEach(() => { vi.useFakeTimers(); });
+    afterEach(() => { vi.useRealTimers(); });
+
+    it('expires a pending confirmation whose expiresAt has passed', async () => {
+      const pastDate = new Date(Date.now() - 1000).toISOString();
+      const el = await createElement([makeTurn({
+        role: 'avatar', text: 'Confirm', type: 'confirmation',
+        confirmationId: 'c-exp-1', actionDescription: 'Approve payment',
+        confirmationStatus: 'pending', expiresAt: pastDate,
+      })]);
+      await vi.advanceTimersByTimeAsync(1000);
+      await el.updateComplete;
+      const card = el.shadowRoot!.querySelector('.turn.confirmation');
+      expect(card!.textContent).toContain('Expired');
+      const buttons = card!.querySelectorAll('button');
+      for (const btn of buttons) {
+        expect((btn as HTMLButtonElement).disabled).toBe(true);
+      }
+    });
+
+    it('does not expire a pending confirmation whose expiresAt is in the future', async () => {
+      const futureDate = new Date(Date.now() + 60_000).toISOString();
+      const el = await createElement([makeTurn({
+        role: 'avatar', text: 'Confirm', type: 'confirmation',
+        confirmationId: 'c-exp-2', actionDescription: 'Approve payment',
+        confirmationStatus: 'pending', expiresAt: futureDate,
+      })]);
+      await vi.advanceTimersByTimeAsync(1000);
+      await el.updateComplete;
+      const buttons = el.shadowRoot!.querySelectorAll('.confirmation button');
+      for (const btn of buttons) {
+        expect((btn as HTMLButtonElement).disabled).toBe(false);
+      }
+    });
+
+    it('dispatches avatar:confirmation-expired event on auto-expiry', async () => {
+      const pastDate = new Date(Date.now() - 1000).toISOString();
+      const el = await createElement([makeTurn({
+        role: 'avatar', text: 'Confirm', type: 'confirmation',
+        confirmationId: 'c-exp-3', actionDescription: 'Start case',
+        confirmationStatus: 'pending', expiresAt: pastDate,
+      })]);
+      const events: CustomEvent[] = [];
+      el.addEventListener('avatar:confirmation-expired', (e: CustomEvent) => events.push(e));
+      await vi.advanceTimersByTimeAsync(1000);
+      await el.updateComplete;
+      expect(events.length).toBe(1);
+      expect(events[0]!.detail).toEqual({ confirmationId: 'c-exp-3' });
+    });
+
+    it('does not dispatch expired event for already-expired confirmations', async () => {
+      const pastDate = new Date(Date.now() - 1000).toISOString();
+      const el = await createElement([makeTurn({
+        role: 'avatar', text: 'Expired', type: 'confirmation',
+        confirmationId: 'c-exp-4', actionDescription: 'Approve',
+        confirmationStatus: 'expired', expiresAt: pastDate,
+      })]);
+      const events: CustomEvent[] = [];
+      el.addEventListener('avatar:confirmation-expired', (e: CustomEvent) => events.push(e));
+      await vi.advanceTimersByTimeAsync(1000);
+      await el.updateComplete;
+      expect(events.length).toBe(0);
+    });
+
+    it('does not expire confirmations without expiresAt', async () => {
+      const el = await createElement([makeTurn({
+        role: 'avatar', text: 'Confirm', type: 'confirmation',
+        confirmationId: 'c-exp-5', actionDescription: 'Approve',
+        confirmationStatus: 'pending',
+      })]);
+      await vi.advanceTimersByTimeAsync(1000);
+      await el.updateComplete;
+      const buttons = el.shadowRoot!.querySelectorAll('.confirmation button');
+      for (const btn of buttons) {
+        expect((btn as HTMLButtonElement).disabled).toBe(false);
+      }
+    });
+
+    it('expires multiple pending confirmations in a single tick', async () => {
+      const pastDate = new Date(Date.now() - 1000).toISOString();
+      const el = await createElement([
+        makeTurn({
+          role: 'avatar', text: 'Confirm', type: 'confirmation',
+          confirmationId: 'c-multi-1', actionDescription: 'First',
+          confirmationStatus: 'pending', expiresAt: pastDate,
+        }),
+        makeTurn({
+          role: 'avatar', text: 'Confirm', type: 'confirmation',
+          confirmationId: 'c-multi-2', actionDescription: 'Second',
+          confirmationStatus: 'pending', expiresAt: pastDate,
+        }),
+      ]);
+      const events: CustomEvent[] = [];
+      el.addEventListener('avatar:confirmation-expired', (e: CustomEvent) => events.push(e));
+      await vi.advanceTimersByTimeAsync(1000);
+      await el.updateComplete;
+      expect(events.length).toBe(2);
+      expect(events.map((e: CustomEvent) => e.detail.confirmationId)).toEqual(['c-multi-1', 'c-multi-2']);
+      const cards = el.shadowRoot!.querySelectorAll('.turn.confirmation');
+      for (const card of cards) {
+        expect(card.textContent).toContain('Expired');
+      }
+    });
+
+    it('cleans up timer on disconnect', async () => {
+      const futureDate = new Date(Date.now() + 500).toISOString();
+      const el = await createElement([makeTurn({
+        role: 'avatar', text: 'Confirm', type: 'confirmation',
+        confirmationId: 'c-exp-6', actionDescription: 'Approve',
+        confirmationStatus: 'pending', expiresAt: futureDate,
+      })]);
+      el.remove();
+      await vi.advanceTimersByTimeAsync(2000);
+      expect(el.turns[0].confirmationStatus).toBe('pending');
+    });
   });
 });
