@@ -2,18 +2,18 @@ import { LitElement, html, css, nothing } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import '@casehubio/pages-ui-components';
 
-const DIAGRAM_TYPE_COLORS: Record<string, string> = {
-  choreography: '#3b82f6',
-  htn: '#8b5cf6',
-  goap: '#d97706',
-  llm: '#0d9488',
-  swf: '#ea580c',
-  playbook: '#16a34a',
-  'agent-conf': '#64748b',
-  'avatar-conf': '#64748b',
-  agency: '#64748b',
+const DIAGRAM_TYPE_VARIANT: Record<string, string> = {
+  choreography: 'info',
+  htn: 'accent',
+  goap: 'warning',
+  llm: 'success',
+  swf: 'danger',
+  playbook: 'success',
+  'agent-conf': 'neutral',
+  'avatar-conf': 'neutral',
+  agency: 'neutral',
 };
-const DEFAULT_BADGE_COLOR = '#6b7280';
+const DEFAULT_BADGE_VARIANT = 'neutral';
 
 @customElement('casehub-diagram-toolbar')
 export class CasehubDiagramToolbar extends LitElement {
@@ -41,7 +41,13 @@ export class CasehubDiagramToolbar extends LitElement {
     .mode-toggle[aria-pressed="true"] { background: var(--pages-accent-subtle, #e8f0fe); border-color: var(--pages-accent-color, #1a73e8); color: var(--pages-accent-color, #1a73e8); }
     .spacer { flex: 1; }
     .stale-badge { font-size: 11px; color: var(--pages-warning-color, #f59e0b); }
-    .diagram-type-badge { font-size: 11px; padding: 1px 8px; border-radius: 10px; color: #fff; text-transform: lowercase; letter-spacing: 0.3px; white-space: nowrap; }
+    .diagram-type-badge { font-size: 11px; padding: 1px 8px; border-radius: 10px; text-transform: lowercase; letter-spacing: 0.3px; white-space: nowrap; }
+    .diagram-type-badge.info { background: var(--pages-info-3); color: var(--pages-info-11); }
+    .diagram-type-badge.accent { background: var(--pages-accent-3); color: var(--pages-accent-11); }
+    .diagram-type-badge.warning { background: var(--pages-warning-3); color: var(--pages-warning-11); }
+    .diagram-type-badge.success { background: var(--pages-success-3); color: var(--pages-success-11); }
+    .diagram-type-badge.danger { background: var(--pages-danger-3); color: var(--pages-danger-11); }
+    .diagram-type-badge.neutral { background: var(--pages-neutral-4); color: var(--pages-neutral-11); }
   `;
 
   override render() {
@@ -72,11 +78,11 @@ export class CasehubDiagramToolbar extends LitElement {
       <button ?disabled=${!this.hasNodes} @click=${() => this._export('png')}>Export PNG</button>
     `;
 
+    const badgeVariant = DIAGRAM_TYPE_VARIANT[this.diagramType] ?? DEFAULT_BADGE_VARIANT;
     const typeBadge = this.diagramType && this.diagramType !== 'unknown' ? html`
-      <span class="diagram-type-badge"
+      <span class="diagram-type-badge ${badgeVariant}"
         role="status"
-        aria-label="Document type: ${this.diagramType}"
-        style="background: ${DIAGRAM_TYPE_COLORS[this.diagramType] ?? DEFAULT_BADGE_COLOR}">
+        aria-label="Document type: ${this.diagramType}">
         ${this.diagramType}
       </span>
     ` : nothing;

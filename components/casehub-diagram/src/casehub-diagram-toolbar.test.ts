@@ -203,4 +203,25 @@ describe('diagram type badge', () => {
     expect(badge.getAttribute('role')).toBe('status');
     expect(badge.getAttribute('aria-label')).toBe('Document type: htn');
   });
+
+  it('applies semantic variant class for known type', async () => {
+    el.diagramType = 'choreography';
+    await el.updateComplete;
+    const badge = el.shadowRoot!.querySelector('.diagram-type-badge')!;
+    expect(badge.classList.contains('info')).toBe(true);
+  });
+
+  it('applies neutral variant for unregistered type', async () => {
+    el.diagramType = 'custom-type';
+    await el.updateComplete;
+    const badge = el.shadowRoot!.querySelector('.diagram-type-badge')!;
+    expect(badge.classList.contains('neutral')).toBe(true);
+  });
+
+  it('does not use inline background style', async () => {
+    el.diagramType = 'htn';
+    await el.updateComplete;
+    const badge = el.shadowRoot!.querySelector('.diagram-type-badge')!;
+    expect(badge.getAttribute('style')).toBeNull();
+  });
 });
