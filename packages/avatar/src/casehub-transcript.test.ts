@@ -184,6 +184,36 @@ describe('CasehubTranscript', () => {
     expect(card!.getAttribute('aria-label')).toContain('Confirmation required: Start case #42');
   });
 
+  it('ARIA label reflects confirmed status', async () => {
+    const el = await createElement([makeTurn({
+      role: 'avatar', text: 'Confirm', type: 'confirmation',
+      confirmationId: 'c-7', actionDescription: 'Start case #42',
+      confirmationStatus: 'confirmed',
+    })]);
+    const card = el.shadowRoot!.querySelector('.turn.confirmation');
+    expect(card!.getAttribute('aria-label')).toBe('Confirmation approved: Start case #42');
+  });
+
+  it('ARIA label reflects declined status', async () => {
+    const el = await createElement([makeTurn({
+      role: 'avatar', text: 'Confirm', type: 'confirmation',
+      confirmationId: 'c-8', actionDescription: 'Start case #42',
+      confirmationStatus: 'declined',
+    })]);
+    const card = el.shadowRoot!.querySelector('.turn.confirmation');
+    expect(card!.getAttribute('aria-label')).toBe('Confirmation declined: Start case #42');
+  });
+
+  it('ARIA label reflects expired status', async () => {
+    const el = await createElement([makeTurn({
+      role: 'avatar', text: 'Confirm', type: 'confirmation',
+      confirmationId: 'c-9', actionDescription: 'Start case #42',
+      confirmationStatus: 'expired',
+    })]);
+    const card = el.shadowRoot!.querySelector('.turn.confirmation');
+    expect(card!.getAttribute('aria-label')).toBe('Confirmation expired: Start case #42');
+  });
+
   describe('auto-expiry timer', () => {
     beforeEach(() => { vi.useFakeTimers(); });
     afterEach(() => { vi.useRealTimers(); });

@@ -200,10 +200,14 @@ export class CasehubTranscript extends LitElement {
     const statusLabel = turn.confirmationStatus === 'confirmed' ? 'Confirmed'
       : turn.confirmationStatus === 'declined' ? 'Declined'
       : turn.confirmationStatus === 'expired' ? 'Expired' : '';
+    const ariaPrefix = turn.confirmationStatus === 'confirmed' ? 'Confirmation approved'
+      : turn.confirmationStatus === 'declined' ? 'Confirmation declined'
+      : turn.confirmationStatus === 'expired' ? 'Confirmation expired'
+      : 'Confirmation required';
     return html`
       <div class="turn confirmation"
            role="alertdialog"
-           aria-label="Confirmation required: ${turn.actionDescription}">
+           aria-label="${ariaPrefix}: ${turn.actionDescription}">
         <div class="confirmation-action">${turn.actionDescription}</div>
         ${turn.consequences ? html`<div class="confirmation-consequences">${turn.consequences}</div>` : nothing}
         ${!pending ? html`<div class="confirmation-status">${statusLabel}</div>` : nothing}
