@@ -3,7 +3,7 @@ import { html as staticHtml, unsafeStatic } from 'lit/static-html.js';
 import { customElement, property, state } from 'lit/decorators.js';
 import { onPagesEvent } from '@casehubio/pages-data';
 import type { CaseRuntimeState } from '@casehubio/mosaic-graph-stencil-case';
-import { DIAGRAM_TAGS } from '@casehubio/mosaic-core';
+import { DIAGRAM_TAGS, detectDiagramType, detectDiagramTypeFromSrc } from '@casehubio/mosaic-core';
 
 import '@casehubio/mosaic-casehub-diagram';
 import '@casehubio/mosaic-swf-diagram';
@@ -111,7 +111,7 @@ export class DiagramWorkbench extends LitElement {
     const rootLevel: DrillDownLevel = {
       name: 'Case Definition',
       yaml: this.yaml,
-      diagramType: 'choreography',
+      diagramType: detectDiagramTypeFromSrc(this.src) ?? detectDiagramType(this.yaml),
     };
 
     const allLevels = [rootLevel, ...this._stack];
