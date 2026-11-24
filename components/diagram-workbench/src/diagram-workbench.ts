@@ -3,7 +3,7 @@ import { html as staticHtml, unsafeStatic } from 'lit/static-html.js';
 import { customElement, property, state } from 'lit/decorators.js';
 import { onPagesEvent } from '@casehubio/pages-data';
 import type { CaseRuntimeState } from '@casehubio/mosaic-graph-stencil-case';
-import { DIAGRAM_TAGS, detectDiagramType, detectDiagramTypeFromSrc } from '@casehubio/mosaic-core';
+import { DIAGRAM_TAGS, DIAGRAM_TYPE_VARIANT, DEFAULT_BADGE_VARIANT, detectDiagramType, detectDiagramTypeFromSrc } from '@casehubio/mosaic-core';
 
 import '@casehubio/mosaic-casehub-diagram';
 import '@casehubio/mosaic-swf-diagram';
@@ -36,19 +36,31 @@ export class DiagramWorkbench extends LitElement {
     .workbench-row { display: flex; flex: 1; height: 100%; min-width: 0; }
     .collapsed-strip {
       width: 36px; min-width: 36px; height: 100%; cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
+      display: flex; flex-direction: column; align-items: center;
       border-right: 1px solid var(--pages-border-color, #333);
       background: var(--pages-neutral-3, #2a2a2a);
       transition: background 0.15s;
+      padding: 8px 0;
+      box-sizing: border-box;
     }
     .collapsed-strip:hover { background: var(--pages-neutral-4, #3a3a3a); }
-    .collapsed-strip span {
+    .type-dot {
+      width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+      margin-bottom: 8px;
+    }
+    .type-dot.info { background: var(--pages-info-9); }
+    .type-dot.accent { background: var(--pages-accent-9); }
+    .type-dot.warning { background: var(--pages-warning-9); }
+    .type-dot.success { background: var(--pages-success-9); }
+    .type-dot.danger { background: var(--pages-danger-9); }
+    .type-dot.neutral { background: var(--pages-neutral-8); }
+    .strip-label {
       writing-mode: vertical-rl; text-orientation: mixed;
       transform: rotate(180deg);
       font-size: 12px; font-weight: 600; letter-spacing: 0.5px;
       color: var(--pages-text-secondary, #999);
       white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-      max-height: calc(100% - 16px);
+      max-height: calc(100% - 32px);
     }
     .active-panel { flex: 1; height: 100%; display: flex; flex-direction: column; min-width: 0; overflow: hidden; }
     casehub-diagram, swf-diagram { width: 100%; height: 100%; }
@@ -123,9 +135,12 @@ export class DiagramWorkbench extends LitElement {
           i < activeIndex
             ? html`
               <div class="collapsed-strip"
-                title="${level.name} — click to expand"
+                title="${level.name} (${level.diagramType}) — click to expand"
                 @click=${() => this._expandLevel(i)}>
-                <span>${level.name}</span>
+                <span class="type-dot ${DIAGRAM_TYPE_VARIANT[level.diagramType] ?? DEFAULT_BADGE_VARIANT}"
+                  role="status"
+                  aria-label="Diagram type: ${level.diagramType}"></span>
+                <span class="strip-label">${level.name}</span>
               </div>`
             : html`
               <div class="active-panel">

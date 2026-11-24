@@ -1,19 +1,7 @@
 import { LitElement, html, css, nothing } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import '@casehubio/pages-ui-components';
-
-const DIAGRAM_TYPE_VARIANT: Record<string, string> = {
-  choreography: 'info',
-  htn: 'accent',
-  goap: 'warning',
-  llm: 'success',
-  swf: 'danger',
-  playbook: 'success',
-  'agent-conf': 'neutral',
-  'avatar-conf': 'neutral',
-  agency: 'neutral',
-};
-const DEFAULT_BADGE_VARIANT = 'neutral';
+import { DIAGRAM_TYPE_VARIANT, DEFAULT_BADGE_VARIANT } from '@casehubio/mosaic-core';
 
 @customElement('casehub-diagram-toolbar')
 export class CasehubDiagramToolbar extends LitElement {
