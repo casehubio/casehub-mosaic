@@ -60,8 +60,8 @@ export const patternViewStyles: CSSResult = css`
     border-radius: 4px;
     font-size: 11px;
     font-weight: 500;
-    background: var(--pattern-badge-color, rgba(137, 180, 250, 0.2));
-    color: var(--pattern-badge-text, #89b4fa);
+    background: var(--pattern-badge-color, var(--pages-info-3));
+    color: var(--pattern-badge-text, var(--pages-info-11));
   }
   .header-desc {
     margin-left: auto;

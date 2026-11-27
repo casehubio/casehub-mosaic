@@ -67,16 +67,16 @@ export class AgentCard extends LitElement {
       border-radius: 3px;
       font-family: 'JetBrains Mono', 'Fira Code', monospace;
     }
-    .type-badge.worker   { background: rgba(250, 179, 135, 0.15); color: #fab387; }
-    .type-badge.human    { background: rgba(148, 226, 213, 0.15); color: #94e2d5; }
-    .type-badge.external { background: rgba(137, 180, 250, 0.15); color: #89b4fa; }
-    .type-badge.composed { background: rgba(203, 166, 247, 0.15); color: #cba6f7; }
+    .type-badge.worker   { background: var(--pages-warning-3); color: var(--pages-warning-11); }
+    .type-badge.human    { background: var(--pages-success-3); color: var(--pages-success-11); }
+    .type-badge.external { background: var(--pages-info-3); color: var(--pages-info-11); }
+    .type-badge.composed { background: var(--pages-accent-3); color: var(--pages-accent-11); }
     .model-badge {
       font-size: 9px;
       padding: 1px 6px;
       border-radius: 3px;
-      background: rgba(127, 132, 156, 0.15);
-      color: #bac2de;
+      background: var(--pages-neutral-4);
+      color: var(--pages-neutral-11);
       font-family: 'JetBrains Mono', 'Fira Code', monospace;
       flex-shrink: 0;
     }

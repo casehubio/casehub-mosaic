@@ -59,11 +59,11 @@ export class OrgLegend extends LitElement {
             <div>
               <div style="font-size:9px;font-weight:600;color:#4a5568;margin-bottom:6px;">Disposition Axes</div>
               <div style="display:flex;flex-wrap:wrap;gap:4px;">
-                <span style="padding:1px 6px;border-radius:3px;font-size:7.5px;background:#fed7d7;color:#c53030;">autonomy</span>
-                <span style="padding:1px 6px;border-radius:3px;font-size:7.5px;background:#fefcbf;color:#975a16;">rules</span>
-                <span style="padding:1px 6px;border-radius:3px;font-size:7.5px;background:#c6f6d5;color:#276749;">social</span>
-                <span style="padding:1px 6px;border-radius:3px;font-size:7.5px;background:#c6f6d5;color:#276749;">risk</span>
-                <span style="padding:1px 6px;border-radius:3px;font-size:7.5px;background:#ebf8ff;color:#2b6cb0;">conflict</span>
+                <span style="padding:1px 6px;border-radius:3px;font-size:7.5px;background:var(--pages-danger-3);color:var(--pages-danger-11);">autonomy</span>
+                <span style="padding:1px 6px;border-radius:3px;font-size:7.5px;background:var(--pages-warning-3);color:var(--pages-warning-11);">rules</span>
+                <span style="padding:1px 6px;border-radius:3px;font-size:7.5px;background:var(--pages-success-3);color:var(--pages-success-11);">social</span>
+                <span style="padding:1px 6px;border-radius:3px;font-size:7.5px;background:var(--pages-success-3);color:var(--pages-success-11);">risk</span>
+                <span style="padding:1px 6px;border-radius:3px;font-size:7.5px;background:var(--pages-info-3);color:var(--pages-info-11);">conflict</span>
               </div>
             </div>
           ` : ''}
@@ -72,15 +72,15 @@ export class OrgLegend extends LitElement {
             <div>
               <div style="font-size:9px;font-weight:600;color:#4a5568;margin-bottom:6px;">Scope &amp; Attestation</div>
               <div style="font-size:8px;color:#718096;margin-bottom:3px;">
-                <span style="padding:1px 6px;border-radius:3px;background:#e9d8fd;color:#553c9a;font-size:7.5px;">scoped supervision</span>
+                <span style="padding:1px 6px;border-radius:3px;background:var(--pages-accent-3);color:var(--pages-accent-11);font-size:7.5px;">scoped supervision</span>
                 — relationship constrained to a capability
               </div>
               <div style="font-size:8px;color:#718096;margin-bottom:3px;">
-                <span style="padding:1px 6px;border-radius:3px;background:#e9d8fd;color:#553c9a;font-size:7.5px;">attestation grant</span>
+                <span style="padding:1px 6px;border-radius:3px;background:var(--pages-accent-3);color:var(--pages-accent-11);font-size:7.5px;">attestation grant</span>
                 — supervisor can record COMPLIANT/VIOLATED signals
               </div>
               <div style="font-size:8px;color:#718096;">
-                <span style="padding:1px 6px;border-radius:3px;background:#ebf8ff;color:#2b6cb0;border:0.8px solid #90cdf4;font-size:7.5px;">unit capability</span>
+                <span style="padding:1px 6px;border-radius:3px;background:var(--pages-info-3);color:var(--pages-info-11);border:0.8px solid var(--pages-info-6);font-size:7.5px;">unit capability</span>
                 — capability declared at the unit level
               </div>
             </div>
