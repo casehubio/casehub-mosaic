@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import type { VisemeFrame, ConversationTurn, AvatarMessage } from './types.js';
+import type { VisemeFrame, ConversationTurn, MessageTurn, ToolCallTurn, ConfirmationTurn, AvatarMessage } from './types.js';
 
 describe('Avatar types', () => {
   it('VisemeFrame has required fields', () => {
@@ -15,14 +15,15 @@ describe('Avatar types', () => {
     expect(frame.weight).toBe(0.8);
   });
 
-  it('ConversationTurn has role, text, status', () => {
-    const turn: ConversationTurn = { role: 'user', text: 'hello', status: 'final' };
+  it('MessageTurn has role, text, status and optional type', () => {
+    const turn: MessageTurn = { role: 'user', text: 'hello', status: 'final' };
     expect(turn.role).toBe('user');
     expect(turn.status).toBe('final');
+    expect(turn.type).toBeUndefined();
   });
 
-  it('ConversationTurn supports tool-call type', () => {
-    const turn: ConversationTurn = {
+  it('ToolCallTurn requires toolName and type', () => {
+    const turn: ToolCallTurn = {
       role: 'avatar', text: 'Called life/tasks/create', status: 'final',
       type: 'tool-call', toolName: 'life/tasks/create',
       toolArgs: { title: 'Buy milk' }, toolResult: '{"id": 42}',
@@ -34,8 +35,8 @@ describe('Avatar types', () => {
     expect(turn.toolError).toBeUndefined();
   });
 
-  it('ConversationTurn tool-call supports error flag', () => {
-    const turn: ConversationTurn = {
+  it('ToolCallTurn supports error flag', () => {
+    const turn: ToolCallTurn = {
       role: 'avatar', text: 'Tool failed', status: 'final',
       type: 'tool-call', toolName: 'db/query',
       toolResult: 'connection refused', toolError: true,
@@ -43,13 +44,8 @@ describe('Avatar types', () => {
     expect(turn.toolError).toBe(true);
   });
 
-  it('ConversationTurn without type defaults to message', () => {
-    const turn: ConversationTurn = { role: 'user', text: 'hello', status: 'final' };
-    expect(turn.type).toBeUndefined();
-  });
-
-  it('ConversationTurn supports confirmation type', () => {
-    const turn: ConversationTurn = {
+  it('ConfirmationTurn requires confirmationId and actionDescription', () => {
+    const turn: ConfirmationTurn = {
       role: 'avatar', text: 'Confirm action', status: 'final',
       type: 'confirmation', confirmationId: 'c-123',
       actionDescription: 'Start case #42',
@@ -62,8 +58,8 @@ describe('Avatar types', () => {
     expect(turn.confirmationStatus).toBe('pending');
   });
 
-  it('ConversationTurn confirmation supports expiry', () => {
-    const turn: ConversationTurn = {
+  it('ConfirmationTurn supports expiry', () => {
+    const turn: ConfirmationTurn = {
       role: 'avatar', text: 'Confirm', status: 'final',
       type: 'confirmation', confirmationId: 'c-456',
       actionDescription: 'Delete record',
@@ -72,6 +68,16 @@ describe('Avatar types', () => {
     };
     expect(turn.confirmationStatus).toBe('expired');
     expect(turn.expiresAt).toBe('2026-11-20T12:00:00Z');
+  });
+
+  it('ConversationTurn union narrows on type field', () => {
+    const turn: ConversationTurn = {
+      role: 'avatar', text: '', status: 'final',
+      type: 'tool-call', toolName: 'ping',
+    };
+    if (turn.type === 'tool-call') {
+      expect(turn.toolName).toBe('ping');
+    }
   });
 
   it('AvatarMessage discriminates on type field', () => {

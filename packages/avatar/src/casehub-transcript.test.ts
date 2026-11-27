@@ -1,9 +1,17 @@
 import { describe, it, expect, afterEach, vi, beforeEach } from 'vitest';
-import type { ConversationTurn } from './types.js';
+import type { ConversationTurn, MessageTurn, ToolCallTurn, ConfirmationTurn } from './types.js';
 import './casehub-transcript.js';
 
-function makeTurn(overrides: Partial<ConversationTurn> = {}): ConversationTurn {
+function makeMessage(overrides: Partial<MessageTurn> = {}): MessageTurn {
   return { role: 'user', text: 'Hello', status: 'final', ...overrides };
+}
+
+function makeToolCall(overrides: Partial<ToolCallTurn> & Pick<ToolCallTurn, 'toolName'>): ToolCallTurn {
+  return { role: 'avatar', text: '', status: 'final', type: 'tool-call', ...overrides };
+}
+
+function makeConfirmation(overrides: Partial<ConfirmationTurn> & Pick<ConfirmationTurn, 'confirmationId' | 'actionDescription'>): ConfirmationTurn {
+  return { role: 'avatar', text: 'Confirm', status: 'final', type: 'confirmation', confirmationStatus: 'pending', ...overrides };
 }
 
 async function createElement(turns: ConversationTurn[] = []) {
@@ -25,21 +33,21 @@ describe('CasehubTranscript', () => {
   });
 
   it('renders user turns right-aligned', async () => {
-    const el = await createElement([makeTurn({ role: 'user', text: 'Hi' })]);
+    const el = await createElement([makeMessage({ role: 'user', text: 'Hi' })]);
     const bubble = el.shadowRoot!.querySelector('.turn.user');
     expect(bubble).toBeTruthy();
     expect(bubble!.textContent).toContain('Hi');
   });
 
   it('renders avatar turns left-aligned', async () => {
-    const el = await createElement([makeTurn({ role: 'avatar', text: 'Hello!' })]);
+    const el = await createElement([makeMessage({ role: 'avatar', text: 'Hello!' })]);
     const bubble = el.shadowRoot!.querySelector('.turn.avatar');
     expect(bubble).toBeTruthy();
     expect(bubble!.textContent).toContain('Hello!');
   });
 
   it('renders partial turns with partial class', async () => {
-    const el = await createElement([makeTurn({ status: 'partial', text: 'Hel' })]);
+    const el = await createElement([makeMessage({ status: 'partial', text: 'Hel' })]);
     const bubble = el.shadowRoot!.querySelector('.turn.partial');
     expect(bubble).toBeTruthy();
   });
@@ -52,15 +60,15 @@ describe('CasehubTranscript', () => {
 
   it('updates when turns property changes', async () => {
     const el = await createElement([]);
-    el.turns = [makeTurn({ text: 'New message' })];
+    el.turns = [makeMessage({ text: 'New message' })];
     await el.updateComplete;
     const bubble = el.shadowRoot!.querySelector('.turn');
     expect(bubble!.textContent).toContain('New message');
   });
 
   it('renders tool-call turns with tool-call class', async () => {
-    const el = await createElement([makeTurn({
-      role: 'avatar', text: 'Called life/tasks/create', type: 'tool-call',
+    const el = await createElement([makeToolCall({
+      text: 'Called life/tasks/create',
       toolName: 'life/tasks/create', toolArgs: { title: 'Buy milk' },
       toolResult: '{"id": 42}',
     })]);
@@ -70,8 +78,8 @@ describe('CasehubTranscript', () => {
   });
 
   it('renders tool-call with collapsed args by default', async () => {
-    const el = await createElement([makeTurn({
-      role: 'avatar', text: 'Called db/query', type: 'tool-call',
+    const el = await createElement([makeToolCall({
+      text: 'Called db/query',
       toolName: 'db/query', toolArgs: { sql: 'SELECT 1' },
       toolResult: '[{"1": 1}]',
     })]);
@@ -81,8 +89,8 @@ describe('CasehubTranscript', () => {
   });
 
   it('renders tool-call error with error class', async () => {
-    const el = await createElement([makeTurn({
-      role: 'avatar', text: 'Tool failed', type: 'tool-call',
+    const el = await createElement([makeToolCall({
+      text: 'Tool failed',
       toolName: 'db/query', toolResult: 'connection refused', toolError: true,
     })]);
     const result = el.shadowRoot!.querySelector('.tool-result.error');
@@ -90,8 +98,8 @@ describe('CasehubTranscript', () => {
   });
 
   it('tool-call turn has correct ARIA attributes', async () => {
-    const el = await createElement([makeTurn({
-      role: 'avatar', text: 'Called life/tasks/create', type: 'tool-call',
+    const el = await createElement([makeToolCall({
+      text: 'Called life/tasks/create',
       toolName: 'life/tasks/create', toolResult: '{"id": 42}',
     })]);
     const bubble = el.shadowRoot!.querySelector('.turn.tool-call');
@@ -99,8 +107,8 @@ describe('CasehubTranscript', () => {
   });
 
   it('renders tool-call without args when none provided', async () => {
-    const el = await createElement([makeTurn({
-      role: 'avatar', text: 'Called ping', type: 'tool-call',
+    const el = await createElement([makeToolCall({
+      text: 'Called ping',
       toolName: 'ping', toolResult: 'pong',
     })]);
     const details = el.shadowRoot!.querySelector('.tool-call details');
@@ -108,10 +116,9 @@ describe('CasehubTranscript', () => {
   });
 
   it('renders pending confirmation with confirm and decline buttons', async () => {
-    const el = await createElement([makeTurn({
-      role: 'avatar', text: 'Confirm', type: 'confirmation',
+    const el = await createElement([makeConfirmation({
       confirmationId: 'c-1', actionDescription: 'Start case #42',
-      consequences: 'Creates a new case.', confirmationStatus: 'pending',
+      consequences: 'Creates a new case.',
     })]);
     const card = el.shadowRoot!.querySelector('.turn.confirmation');
     expect(card).toBeTruthy();
@@ -124,10 +131,8 @@ describe('CasehubTranscript', () => {
   });
 
   it('dispatches confirmation-response on confirm click', async () => {
-    const el = await createElement([makeTurn({
-      role: 'avatar', text: 'Confirm', type: 'confirmation',
+    const el = await createElement([makeConfirmation({
       confirmationId: 'c-2', actionDescription: 'Approve payment',
-      confirmationStatus: 'pending',
     })]);
     const events: CustomEvent[] = [];
     el.addEventListener('avatar:confirmation-response', (e: CustomEvent) => events.push(e));
@@ -138,10 +143,8 @@ describe('CasehubTranscript', () => {
   });
 
   it('dispatches confirmation-response on decline click', async () => {
-    const el = await createElement([makeTurn({
-      role: 'avatar', text: 'Confirm', type: 'confirmation',
+    const el = await createElement([makeConfirmation({
       confirmationId: 'c-3', actionDescription: 'Delete record',
-      confirmationStatus: 'pending',
     })]);
     const events: CustomEvent[] = [];
     el.addEventListener('avatar:confirmation-response', (e: CustomEvent) => events.push(e));
@@ -152,8 +155,7 @@ describe('CasehubTranscript', () => {
   });
 
   it('disables buttons when confirmation is not pending', async () => {
-    const el = await createElement([makeTurn({
-      role: 'avatar', text: 'Confirmed', type: 'confirmation',
+    const el = await createElement([makeConfirmation({
       confirmationId: 'c-4', actionDescription: 'Start case',
       confirmationStatus: 'confirmed',
     })]);
@@ -164,8 +166,7 @@ describe('CasehubTranscript', () => {
   });
 
   it('shows expired status on expired confirmation', async () => {
-    const el = await createElement([makeTurn({
-      role: 'avatar', text: 'Expired', type: 'confirmation',
+    const el = await createElement([makeConfirmation({
       confirmationId: 'c-5', actionDescription: 'Approve',
       confirmationStatus: 'expired',
     })]);
@@ -174,10 +175,8 @@ describe('CasehubTranscript', () => {
   });
 
   it('confirmation card has correct ARIA attributes', async () => {
-    const el = await createElement([makeTurn({
-      role: 'avatar', text: 'Confirm', type: 'confirmation',
+    const el = await createElement([makeConfirmation({
       confirmationId: 'c-6', actionDescription: 'Start case #42',
-      confirmationStatus: 'pending',
     })]);
     const card = el.shadowRoot!.querySelector('.turn.confirmation');
     expect(card!.getAttribute('role')).toBe('alertdialog');
@@ -185,8 +184,7 @@ describe('CasehubTranscript', () => {
   });
 
   it('ARIA label reflects confirmed status', async () => {
-    const el = await createElement([makeTurn({
-      role: 'avatar', text: 'Confirm', type: 'confirmation',
+    const el = await createElement([makeConfirmation({
       confirmationId: 'c-7', actionDescription: 'Start case #42',
       confirmationStatus: 'confirmed',
     })]);
@@ -195,8 +193,7 @@ describe('CasehubTranscript', () => {
   });
 
   it('ARIA label reflects declined status', async () => {
-    const el = await createElement([makeTurn({
-      role: 'avatar', text: 'Confirm', type: 'confirmation',
+    const el = await createElement([makeConfirmation({
       confirmationId: 'c-8', actionDescription: 'Start case #42',
       confirmationStatus: 'declined',
     })]);
@@ -205,8 +202,7 @@ describe('CasehubTranscript', () => {
   });
 
   it('ARIA label reflects expired status', async () => {
-    const el = await createElement([makeTurn({
-      role: 'avatar', text: 'Confirm', type: 'confirmation',
+    const el = await createElement([makeConfirmation({
       confirmationId: 'c-9', actionDescription: 'Start case #42',
       confirmationStatus: 'expired',
     })]);
@@ -220,10 +216,9 @@ describe('CasehubTranscript', () => {
 
     it('expires a pending confirmation whose expiresAt has passed', async () => {
       const pastDate = new Date(Date.now() - 1000).toISOString();
-      const el = await createElement([makeTurn({
-        role: 'avatar', text: 'Confirm', type: 'confirmation',
+      const el = await createElement([makeConfirmation({
         confirmationId: 'c-exp-1', actionDescription: 'Approve payment',
-        confirmationStatus: 'pending', expiresAt: pastDate,
+        expiresAt: pastDate,
       })]);
       await vi.advanceTimersByTimeAsync(1000);
       await el.updateComplete;
@@ -237,10 +232,9 @@ describe('CasehubTranscript', () => {
 
     it('does not expire a pending confirmation whose expiresAt is in the future', async () => {
       const futureDate = new Date(Date.now() + 60_000).toISOString();
-      const el = await createElement([makeTurn({
-        role: 'avatar', text: 'Confirm', type: 'confirmation',
+      const el = await createElement([makeConfirmation({
         confirmationId: 'c-exp-2', actionDescription: 'Approve payment',
-        confirmationStatus: 'pending', expiresAt: futureDate,
+        expiresAt: futureDate,
       })]);
       await vi.advanceTimersByTimeAsync(1000);
       await el.updateComplete;
@@ -252,10 +246,9 @@ describe('CasehubTranscript', () => {
 
     it('dispatches avatar:confirmation-expired event on auto-expiry', async () => {
       const pastDate = new Date(Date.now() - 1000).toISOString();
-      const el = await createElement([makeTurn({
-        role: 'avatar', text: 'Confirm', type: 'confirmation',
+      const el = await createElement([makeConfirmation({
         confirmationId: 'c-exp-3', actionDescription: 'Start case',
-        confirmationStatus: 'pending', expiresAt: pastDate,
+        expiresAt: pastDate,
       })]);
       const events: CustomEvent[] = [];
       el.addEventListener('avatar:confirmation-expired', (e: CustomEvent) => events.push(e));
@@ -267,8 +260,7 @@ describe('CasehubTranscript', () => {
 
     it('does not dispatch expired event for already-expired confirmations', async () => {
       const pastDate = new Date(Date.now() - 1000).toISOString();
-      const el = await createElement([makeTurn({
-        role: 'avatar', text: 'Expired', type: 'confirmation',
+      const el = await createElement([makeConfirmation({
         confirmationId: 'c-exp-4', actionDescription: 'Approve',
         confirmationStatus: 'expired', expiresAt: pastDate,
       })]);
@@ -280,10 +272,8 @@ describe('CasehubTranscript', () => {
     });
 
     it('does not expire confirmations without expiresAt', async () => {
-      const el = await createElement([makeTurn({
-        role: 'avatar', text: 'Confirm', type: 'confirmation',
+      const el = await createElement([makeConfirmation({
         confirmationId: 'c-exp-5', actionDescription: 'Approve',
-        confirmationStatus: 'pending',
       })]);
       await vi.advanceTimersByTimeAsync(1000);
       await el.updateComplete;
@@ -296,15 +286,13 @@ describe('CasehubTranscript', () => {
     it('expires multiple pending confirmations in a single tick', async () => {
       const pastDate = new Date(Date.now() - 1000).toISOString();
       const el = await createElement([
-        makeTurn({
-          role: 'avatar', text: 'Confirm', type: 'confirmation',
+        makeConfirmation({
           confirmationId: 'c-multi-1', actionDescription: 'First',
-          confirmationStatus: 'pending', expiresAt: pastDate,
+          expiresAt: pastDate,
         }),
-        makeTurn({
-          role: 'avatar', text: 'Confirm', type: 'confirmation',
+        makeConfirmation({
           confirmationId: 'c-multi-2', actionDescription: 'Second',
-          confirmationStatus: 'pending', expiresAt: pastDate,
+          expiresAt: pastDate,
         }),
       ]);
       const events: CustomEvent[] = [];
@@ -321,10 +309,9 @@ describe('CasehubTranscript', () => {
 
     it('cleans up timer on disconnect', async () => {
       const futureDate = new Date(Date.now() + 500).toISOString();
-      const el = await createElement([makeTurn({
-        role: 'avatar', text: 'Confirm', type: 'confirmation',
+      const el = await createElement([makeConfirmation({
         confirmationId: 'c-exp-6', actionDescription: 'Approve',
-        confirmationStatus: 'pending', expiresAt: futureDate,
+        expiresAt: futureDate,
       })]);
       el.remove();
       await vi.advanceTimersByTimeAsync(2000);

@@ -1,6 +1,6 @@
 import { LitElement, html, css, nothing } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import type { ConversationTurn } from './types.js';
+import type { ConversationTurn, ConfirmationTurn, ToolCallTurn } from './types.js';
 
 @customElement('casehub-transcript')
 export class CasehubTranscript extends LitElement {
@@ -195,7 +195,7 @@ export class CasehubTranscript extends LitElement {
     }));
   }
 
-  private _renderConfirmation(turn: ConversationTurn) {
+  private _renderConfirmation(turn: ConfirmationTurn) {
     const pending = turn.confirmationStatus === 'pending';
     const statusLabel = turn.confirmationStatus === 'confirmed' ? 'Confirmed'
       : turn.confirmationStatus === 'declined' ? 'Declined'
@@ -213,15 +213,15 @@ export class CasehubTranscript extends LitElement {
         ${!pending ? html`<div class="confirmation-status">${statusLabel}</div>` : nothing}
         <div class="confirmation-buttons">
           <button class="confirm" ?disabled=${!pending}
-            @click=${() => this._onConfirmationResponse(turn.confirmationId!, true)}>Confirm</button>
+            @click=${() => this._onConfirmationResponse(turn.confirmationId, true)}>Confirm</button>
           <button class="decline" ?disabled=${!pending}
-            @click=${() => this._onConfirmationResponse(turn.confirmationId!, false)}>Decline</button>
+            @click=${() => this._onConfirmationResponse(turn.confirmationId, false)}>Decline</button>
         </div>
       </div>
     `;
   }
 
-  private _renderToolCall(turn: ConversationTurn) {
+  private _renderToolCall(turn: ToolCallTurn) {
     const hasArgs = turn.toolArgs && Object.keys(turn.toolArgs).length > 0;
     return html`
       <div class="turn tool-call ${turn.status === 'partial' ? 'partial' : ''}"

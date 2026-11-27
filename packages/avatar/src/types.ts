@@ -10,21 +10,34 @@ export interface PlaybackItem {
   timeline: VisemeFrame[] | null;
 }
 
-export interface ConversationTurn {
+interface TurnBase {
   role: 'user' | 'avatar';
   text: string;
   status: 'partial' | 'final';
-  type?: 'message' | 'tool-call' | 'confirmation';
-  toolName?: string;
+}
+
+export interface MessageTurn extends TurnBase {
+  type?: 'message';
+}
+
+export interface ToolCallTurn extends TurnBase {
+  type: 'tool-call';
+  toolName: string;
   toolArgs?: Record<string, unknown>;
   toolResult?: string;
   toolError?: boolean;
-  confirmationId?: string;
-  actionDescription?: string;
+}
+
+export interface ConfirmationTurn extends TurnBase {
+  type: 'confirmation';
+  confirmationId: string;
+  actionDescription: string;
   consequences?: string;
-  confirmationStatus?: 'pending' | 'confirmed' | 'declined' | 'expired';
+  confirmationStatus: 'pending' | 'confirmed' | 'declined' | 'expired';
   expiresAt?: string;
 }
+
+export type ConversationTurn = MessageTurn | ToolCallTurn | ConfirmationTurn;
 
 export interface AvatarComponentConfig {
   wsUrl?: string;
